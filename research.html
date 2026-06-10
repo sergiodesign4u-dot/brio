@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - Product Research</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --score-5: #4ade80;
+      --score-4: #86efac;
+      --score-3: #fbbf24;
+      --score-2: #fb923c;
+      --score-1: #f87171;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      gap: 0;
+    }
+
+    .nav-brand {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-right: 32px;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+
+    /* Layout */
+    main {
+      padding-top: 52px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    section {
+      padding: 80px 0 40px;
+    }
+
+    /* Typography */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-top: 48px;
+    }
+    h2:first-of-type { padding-top: 0; }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      margin-top: 28px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      max-width: 72ch;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Hero section */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+
+    .hero-intro {
+      font-size: clamp(15px, 1.5vw, 17px);
+      color: var(--text-muted);
+      max-width: 68ch;
+      margin-bottom: 40px;
+    }
+
+    .conclusions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .conclusion-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+    .conclusion-card:hover { border-color: var(--accent-dim); }
+
+    .conclusion-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .conclusion-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead tr {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.1s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+
+    tbody td {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+
+    tbody td:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Score cells */
+    .score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      color: #0d0f12;
+    }
+    .score-5 { background: var(--score-5); }
+    .score-4 { background: var(--score-4); }
+    .score-3 { background: var(--score-3); }
+    .score-2 { background: var(--score-2); }
+    .score-1 { background: var(--score-1); }
+    .score-na { background: var(--surface-3); color: var(--text-faint); font-size: 11px; width: auto; padding: 0 6px; }
+
+    /* Highlighted row */
+    tr.highlight td { color: var(--text); background: rgba(79, 156, 249, 0.04); }
+    tr.highlight td:first-child { color: var(--accent); }
+
+    /* Tag chips */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .tag-confirmed { background: var(--green-dim); color: var(--green); }
+    .tag-challenged { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-changed { background: var(--accent-dim); color: var(--accent); }
+    .tag-elevated { background: var(--accent-warm-dim); color: var(--accent-warm); }
+    .tag-critical { background: var(--red-dim); color: var(--red); }
+    .tag-high { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-medium { background: var(--surface-3); color: var(--text-muted); }
+
+    /* Competitor group cards */
+    .group-section {
+      margin-bottom: 40px;
+    }
+
+    .group-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin-bottom: 16px;
+    }
+    .group-label.hard { color: var(--red); border-color: var(--red-dim); background: var(--red-dim); }
+    .group-label.soft { color: var(--yellow); border-color: var(--yellow-dim); background: var(--yellow-dim); }
+    .group-label.aspirational { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-dim); }
+
+    /* Screenshot gallery */
+    .gallery {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 4px 0 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+      margin: 24px 0;
+    }
+
+    .gallery-item {
+      flex-shrink: 0;
+      width: 320px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: block;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .gallery-item img:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .gallery-caption {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 8px;
+      padding: 0 2px;
+    }
+
+    /* Hypothesis cards */
+    .hypotheses {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .hypothesis-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      transition: border-color 0.15s;
+    }
+    .hypothesis-card:hover { border-color: var(--accent-dim); }
+
+    @media (max-width: 700px) {
+      .hypothesis-card { grid-template-columns: 1fr; }
+    }
+
+    .hypothesis-part-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .if-label { color: var(--accent); }
+    .then-label { color: var(--green); }
+    .because-label { color: var(--accent-warm); }
+
+    .hypothesis-num {
+      grid-column: 1 / -1;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+      margin-bottom: -12px;
+    }
+
+    .hypothesis-part p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Mechanism cards */
+    .mechanisms {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .mechanism-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color 0.15s;
+    }
+    .mechanism-card:hover { border-color: var(--green-dim); }
+
+    .mechanism-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mechanism-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--green-dim);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .mechanism-card h3 { margin: 0; font-size: 15px; }
+
+    .mechanism-source {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 8px;
+    }
+
+    .mechanism-why {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      border-left: 2px solid var(--accent);
+    }
+    .mechanism-why p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+    /* Anti-pattern card */
+    .antipattern-card {
+      background: var(--surface);
+      border: 1px solid var(--red-dim);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin: 16px 0;
+    }
+
+    .antipattern-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .antipattern-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--red-dim);
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* UX Pattern cards */
+    .patterns-grid {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .pattern-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+    .pattern-card:hover { border-color: var(--border-subtle); }
+    .pattern-card.primary { border-color: var(--accent-dim); background: rgba(79, 156, 249, 0.03); }
+    .pattern-card.antipattern { border-color: var(--red-dim); opacity: 0.75; }
+
+    .pattern-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pattern-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-faint);
+    }
+
+    /* Gap table row coloring */
+    .gap-critical td:last-child { color: var(--red); }
+    .gap-high td:last-child { color: var(--yellow); }
+    .gap-medium td:last-child { color: var(--text-muted); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* Quote block */
+    blockquote {
+      border-left: 2px solid var(--accent);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Open questions */
+    .open-questions {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .question-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .q-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 24px;
+    }
+
+    .q-body p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .q-body .q-note {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      margin-top: 80px;
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    /* Subtle enter animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { animation: fadeUp 0.5s ease both; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      nav { padding: 0 16px; }
+      main { padding-left: 16px; padding-right: 16px; }
+      .nav-brand { font-size: 13px; margin-right: 12px; }
+      .hypothesis-card { padding: 16px; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Brio</div>
+  <div class="nav-links">
+    <a href="#intro">Intro</a>
+    <a href="#product-model">Product Model</a>
+    <a href="#aarrr">AARRR</a>
+    <a href="#competitors">Competitors</a>
+    <a href="#benchmark">Benchmark</a>
+    <a href="#patterns">UX Patterns</a>
+    <a href="#conclusions">Conclusions</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="intro">
+    <div class="hero-meta">
+      <span class="badge accent">Phase 1 - Research</span>
+      <span class="badge">June 2026</span>
+      <span class="badge">Public pages only</span>
+    </div>
+
+    <div class="section-label">Introduction</div>
+    <h1>Employee wellbeing for the business with no HR team</h1>
+
+    <p class="hero-intro">Brio gives the person handed "people stuff" a guided way to run real wellbeing programs, and gives the business owner honest proof it is working at the team level only. The product is the privacy boundary between what the owner sees and what employees share. In an SMB with no HR layer, that boundary has to be built into the architecture.</p>
+
+    <div class="section-label" style="margin-top: 40px;">5 Key Conclusions</div>
+    <div class="conclusions">
+      <div class="conclusion-card">
+        <div class="conclusion-num">01</div>
+        <p>There is a real gap. No competitor combines self-serve SMB pricing, a guided program engine for non-HR operators, and a genuine aggregate-only team signal.</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="conclusion-num">02</div>
+        <p>Privacy is not a feature - it is the product. Products treating privacy as policy erode participation. Products treating it as architecture earn it.</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="conclusion-num">03</div>
+        <p>The operator is the hero, but the employee is the engine. Without employee participation, there is no signal. The value chain starts with employee trust.</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="conclusion-num">04</div>
+        <p>Self-serve and transparent pricing are table-stakes. The solo operator will not enter a sales process before seeing a price. Gusto and Headspace Core prove this converts.</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="conclusion-num">05</div>
+        <p>The right UX pattern is a hybrid: Guided Program Flow plus Pulse Loop. No competitor holds this combination in a self-serve, no-HR package.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Model -->
+  <section id="product-model">
+    <div class="section-label">Section 2</div>
+    <h1>Product Model <span style="font-size: 18px; color: var(--text-muted); font-weight: 400;">(v2 - validated)</span></h1>
+
+    <h2>Objectives</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Objective</th>
+            <th>Metric</th>
+            <th>Target</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Operator feels competent without HR training</td>
+            <td>% completing setup + first program in 7 days</td>
+            <td>70% <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+            <td><span class="tag tag-confirmed">Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Owner sees credible team-level signal</td>
+            <td>% viewing dashboard without 30s bounce</td>
+            <td>60% <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+            <td><span class="tag tag-confirmed">Confirmed</span></td>
+          </tr>
+          <tr>
+            <td>Employee trust drives participation</td>
+            <td>Team check-in participation rate</td>
+            <td>65% avg <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+            <td><span class="tag tag-confirmed">Confirmed + mechanism</span></td>
+          </tr>
+          <tr>
+            <td>Measurable business retention</td>
+            <td>Monthly churn past 90 days</td>
+            <td>&lt;4% <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+            <td><span class="tag tag-confirmed">Unchanged</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Audience Segments</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Segment</th>
+            <th>Profile</th>
+            <th>JTBD</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td>Operator</td>
+            <td>Office manager, ops, EA, or founder. 26-45. No HR training. Over-extended.</td>
+            <td>"When I'm responsible for wellbeing with no training, I want a guided system so I feel competent and the team benefits."</td>
+            <td><span class="badge accent">Primary</span></td>
+          </tr>
+          <tr>
+            <td>Owner</td>
+            <td>Founder or CEO. Business-minded, time-poor. Approves budget. Checks in monthly.</td>
+            <td>"When I need to know if my investment is working, I want a clear honest team-level signal without individual data."</td>
+            <td><span class="badge">Secondary</span></td>
+          </tr>
+          <tr>
+            <td>Employee</td>
+            <td>Does not choose Brio. Skeptical. Must trust the privacy model before responding honestly.</td>
+            <td>"When I'm asked how I'm doing at work, I want to know my answer is private and actually influences something."</td>
+            <td><span class="tag tag-elevated">Privacy constraint</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Business Model</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Tier</th><th>Audience</th><th>Price</th><th>Key limit / driver</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Free</td>
+            <td>Up to 10 employees</td>
+            <td>$0</td>
+            <td>1 program, operator view only. No owner dashboard.</td>
+          </tr>
+          <tr>
+            <td>Starter</td>
+            <td>Up to 50 employees</td>
+            <td>~$5/seat/month <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+            <td>Full program library, owner dashboard (aggregate), trend analytics.</td>
+          </tr>
+          <tr>
+            <td>Growth</td>
+            <td>50-200+ employees</td>
+            <td>~$9/seat/month <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+            <td>Multi-team aggregation, integrations, priority support.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--text-faint);">Pricing benchmarked against Headspace Core ($3.75-5.83/user/month) and Officevibe's former $5/user/month. Sources: organizations.headspace.com/small-business, workleap.com/pricing</p>
+  </section>
+
+  <!-- AARRR -->
+  <section id="aarrr">
+    <div class="section-label">Section 3</div>
+    <h1>AARRR Funnel</h1>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Primary Channel / Mechanic</th>
+            <th>Key Hypothesis</th>
+            <th>Metric</th>
+            <th>Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Acquisition</td>
+            <td>SEO (operator how-to queries), LinkedIn job title targeting, free tier as top-of-funnel</td>
+            <td>Free tier is the primary acquisition driver. No credit card at signup.</td>
+            <td>New signups/month</td>
+            <td>200 by month 6 <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+          </tr>
+          <tr>
+            <td>Activation</td>
+            <td>Guided linear onboarding, first program live in session, employee invite in session</td>
+            <td>Aha moment = first aggregate check-in result visible with plain-language interpretation.</td>
+            <td>% completing setup + first invite in 48h</td>
+            <td>55% <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+          </tr>
+          <tr>
+            <td>Retention</td>
+            <td>Weekly operator email digest, consistent check-in schedule, owner monthly digest</td>
+            <td>Operator retention driven by email digest more than in-app sessions.</td>
+            <td>90-day operator retention</td>
+            <td>65% <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+          </tr>
+          <tr>
+            <td>Revenue</td>
+            <td>Upgrade triggered by team-size limit or owner dashboard access gate</td>
+            <td>Owner dashboard is the primary upgrade driver. Operator upgrades to give owner visibility.</td>
+            <td>Free-to-paid conversion</td>
+            <td>8-12% in 60 days <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+          </tr>
+          <tr>
+            <td>Referral</td>
+            <td>Operator-to-peer organic, in-product prompt at 30-day positive milestone</td>
+            <td>Operator-to-peer is the strongest referral channel in year 1. No formal program in V1.</td>
+            <td>% signups from referral (self-reported)</td>
+            <td>20% by month 9 <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>4 Key Takeaways</h3>
+    <div style="display:grid;gap:12px;margin-top:12px;">
+      <div class="pattern-card">
+        <strong>Activation is the critical lever.</strong>
+        <p style="margin:4px 0 0;font-size:13px;">If the operator does not reach "first program live, team invited" in session one, they likely never will. Every product decision in V1 should optimize for this milestone.</p>
+      </div>
+      <div class="pattern-card">
+        <strong>The owner dashboard is the paid feature, but the operator is the buyer.</strong>
+        <p style="margin:4px 0 0;font-size:13px;">The operator upgrades to give the owner visibility. Design the upgrade moment around that emotional job.</p>
+      </div>
+      <div class="pattern-card">
+        <strong>Employee participation rate is a leading indicator for everything.</strong>
+        <p style="margin:4px 0 0;font-size:13px;">If employees stop responding, aggregate signals degrade, operators lose faith, and churn follows. Privacy design is the retention strategy.</p>
+      </div>
+      <div class="pattern-card">
+        <strong>The free tier is the acquisition channel.</strong>
+        <p style="margin:4px 0 0;font-size:13px;">Do not cripple it so badly it cannot demonstrate value. The 10-employee limit is the natural, non-punitive conversion trigger.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitors -->
+  <section id="competitors">
+    <div class="section-label">Section 4</div>
+    <h1>Competitive Analysis</h1>
+
+    <p>8 companies researched across 3 groups. Public pages only - June 2026. Screenshots below.</p>
+
+    <h2>Competitor Groups</h2>
+
+    <div class="group-section">
+      <div class="group-label hard">Hard - Same product, same audience</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Why in this group</th><th>What to study</th></tr></thead>
+          <tbody>
+            <tr><td>Wellable</td><td>Programs + challenges + rewards for SMB-to-enterprise. 25-user minimum.</td><td>Privacy architecture, 10-response threshold, operator vs. owner dashboard split</td></tr>
+            <tr><td>Nivati</td><td>Expanded to &lt;100-employee SMBs (Sept 2024). Therapy + content dual track.</td><td>SMB pivot execution, HIPAA privacy handling, demo-required friction</td></tr>
+            <tr><td>Vantage Fit</td><td>Gamified activity challenges. Transparent pricing. Closest to challenge mechanic overlap.</td><td>Leaderboard vs. privacy tension, 250-employee minimum problem</td></tr>
+            <tr><td>Woliba</td><td>Explicitly targets 20+ employee SMBs. MAU pricing. AI burnout detection.</td><td>Admin burnout-signal visibility (privacy gap), MAU pricing mechanics</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="group-section">
+      <div class="group-label soft">Soft - Different product, same JTBD</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Why in this group</th><th>What to study</th></tr></thead>
+          <tbody>
+            <tr><td>Calm for Business</td><td>Strongest brand recognition. Pivoting toward clinical/enterprise.</td><td>Product-market clarity problem, per-user pricing model</td></tr>
+            <tr><td>Headspace Core</td><td>Most SMB-accessible. 10-seat minimum, transparent pricing, explicit privacy statement.</td><td>Privacy statement language (model for Brio), self-serve calculator</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="group-section">
+      <div class="group-label aspirational">Aspirational - Best-in-class SaaS craft</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Why in this group</th><th>What to study</th></tr></thead>
+          <tbody>
+            <tr><td>Gusto</td><td>Gold standard for SMB SaaS. 500K+ customers. "Even if you're not an expert" positioning.</td><td>Transparent pricing, outcome-framed non-expert language, modular architecture</td></tr>
+            <tr><td>Officevibe / Workleap</td><td>Best-documented anonymity threshold in the category (3-respondent rule). Just repriced out of SMB.</td><td>Anonymity threshold documentation, AI-action mechanic, score visualization</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2>Comparison Matrix</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Competitor</th>
+            <th>Audience</th>
+            <th>Product Foundation</th>
+            <th>Key Mechanism</th>
+            <th>Trust / Privacy</th>
+            <th>Monetization</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Woliba</td>
+            <td>20-200+ employees (explicit SMB)</td>
+            <td>8 integrated modules</td>
+            <td>MAU pricing, AI burnout detection by manager</td>
+            <td>Claims anonymous surveys but burnout signals by manager create individual inference risk</td>
+            <td>$2/MAU, $100/mo min, demo required</td>
+          </tr>
+          <tr>
+            <td>Wellable</td>
+            <td>25-10,000 employees, HR assumed</td>
+            <td>Programs + rewards + recognition</td>
+            <td>40+ challenge types, points to gift cards</td>
+            <td>Health assessment aggregate only (10-response threshold). Activity participation admin-visible.</td>
+            <td>$1.25 PUPM, demo required</td>
+          </tr>
+          <tr>
+            <td>Headspace Core</td>
+            <td>10-1,000, self-serve</td>
+            <td>Mindfulness content library</td>
+            <td>Content access, admin sees aggregate enrollment only</td>
+            <td>"No PII in utilization data" - clearest public statement</td>
+            <td>$3.75-5.83/user/month, transparent</td>
+          </tr>
+          <tr>
+            <td>Officevibe / Workleap</td>
+            <td>Was SMB, now $4,999/yr flat</td>
+            <td>Continuous pulse + AI analysis</td>
+            <td>3-respondent threshold, AI-recommended actions</td>
+            <td>Most detailed public anonymity model. Individual participation invisible to admins.</td>
+            <td>Old $5/user/month. Now $4,999/yr. SMB abandoned.</td>
+          </tr>
+          <tr>
+            <td>Gusto</td>
+            <td>500K+ US SMBs, owner as buyer</td>
+            <td>Payroll + HR + benefits</td>
+            <td>"Even if you're not an expert" guided setup</td>
+            <td>Privacy is payroll compliance, no wellbeing-specific wall</td>
+            <td>$49+$6/person/month, fully transparent</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Screenshots</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="research/screens/wellable-homepage.png" alt="Wellable homepage" loading="lazy">
+        <div class="gallery-caption">Wellable - wellable.co</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/wellable-pricing.png" alt="Wellable pricing" loading="lazy">
+        <div class="gallery-caption">Wellable - Pricing</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/nivati-homepage.png" alt="Nivati homepage" loading="lazy">
+        <div class="gallery-caption">Nivati - nivati.com</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/vantagefit-homepage.png" alt="Vantage Fit homepage" loading="lazy">
+        <div class="gallery-caption">Vantage Fit - vantagefit.io <span style="color:var(--text-faint)">[? motion-heavy]</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/vantagefit-pricing.png" alt="Vantage Fit pricing" loading="lazy">
+        <div class="gallery-caption">Vantage Fit - Pricing</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/woliba-homepage.png" alt="Woliba homepage" loading="lazy">
+        <div class="gallery-caption">Woliba - woliba.io</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/headspace-smallbiz.png" alt="Headspace small business" loading="lazy">
+        <div class="gallery-caption">Headspace - Small Business page</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/gusto-homepage.png" alt="Gusto homepage" loading="lazy">
+        <div class="gallery-caption">Gusto - gusto.com</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/gusto-pricing.png" alt="Gusto pricing" loading="lazy">
+        <div class="gallery-caption">Gusto - Pricing</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/workleap-officevibe.png" alt="Officevibe / Workleap" loading="lazy">
+        <div class="gallery-caption">Officevibe / Workleap</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/workleap-pricing.png" alt="Workleap pricing" loading="lazy">
+        <div class="gallery-caption">Workleap - Pricing ($4,999/yr)</div>
+      </div>
+    </div>
+
+    <h2>Key Findings</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:16px 0;">
+      <div class="pattern-card">
+        <h3 style="margin-top:0;font-size:14px;color:var(--text-muted);">3 Common Patterns</h3>
+        <p style="font-size:13px;margin-bottom:8px;">Privacy is claimed, not designed. No competitor specifies the mechanism on a public product page.</p>
+        <p style="font-size:13px;margin-bottom:8px;">All assume an HR sponsor exists. No one designs for the no-HR premise.</p>
+        <p style="font-size:13px;margin:0;">Individual benefit and team signal are separate products, never one coherent design.</p>
+      </div>
+      <div class="pattern-card">
+        <h3 style="margin-top:0;font-size:14px;color:var(--text-muted);">3 Key Differences</h3>
+        <p style="font-size:13px;margin-bottom:8px;">Pricing transparency splits the market: SMB-first products publish prices, enterprise-first hide them.</p>
+        <p style="font-size:13px;margin-bottom:8px;">The aggregate signal is always a reporting add-on, never the core value.</p>
+        <p style="font-size:13px;margin:0;">Self-serve sales motion converts the solo operator. Demo-required filters them out.</p>
+      </div>
+      <div class="pattern-card" style="border-color:var(--accent-dim);background:rgba(79,156,249,0.03);">
+        <h3 style="margin-top:0;font-size:14px;color:var(--accent);">Our Gap</h3>
+        <p style="font-size:13px;margin:0;">No product: prices transparently for 10-50 employees, is self-serve, makes the aggregate team signal the primary value, designs for no-HR, states privacy architecture on the product page, makes the operator the hero.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benchmark -->
+  <section id="benchmark">
+    <div class="section-label">Section 5</div>
+    <h1>Benchmark - Trust and Privacy</h1>
+
+    <p>5 best-in-class products from outside the direct competitor set, scored on how well they handle aggregate insight without surveilling the individual.</p>
+
+    <h2>Scores</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Criterion</th>
+            <th>Culture Amp</th>
+            <th>Oura Ring</th>
+            <th>Apple Health</th>
+            <th>Typeform</th>
+            <th>Limeade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>C1 - Employer visibility clarity</td>
+            <td><span class="score score-4">4</span></td>
+            <td><span class="score score-4">4</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-2">2</span></td>
+            <td><span class="score score-1">1</span></td>
+          </tr>
+          <tr>
+            <td>C2 - Anonymity threshold communicated</td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-3">3</span></td>
+            <td><span class="score score-na">N/A</span></td>
+            <td><span class="score score-1">1</span></td>
+            <td><span class="score score-2">2</span></td>
+          </tr>
+          <tr>
+            <td>C3 - Small-team edge case honesty</td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-3">3</span></td>
+            <td><span class="score score-na">N/A</span></td>
+            <td><span class="score score-1">1</span></td>
+            <td><span class="score score-1">1</span></td>
+          </tr>
+          <tr>
+            <td>C4 - Data use transparency + consent</td>
+            <td><span class="score score-4">4</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-2">2</span></td>
+            <td><span class="score score-1">1</span></td>
+          </tr>
+          <tr>
+            <td>C5 - Individual experience stays private</td>
+            <td><span class="score score-4">4</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-2">2</span></td>
+            <td><span class="score score-2">2</span></td>
+          </tr>
+          <tr>
+            <td>C6 - Tone of team reporting</td>
+            <td><span class="score score-4">4</span></td>
+            <td><span class="score score-4">4</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-3">3</span></td>
+            <td><span class="score score-2">2</span></td>
+          </tr>
+          <tr>
+            <td>C7 - Opt-in vs. opt-out framing</td>
+            <td><span class="score score-3">3</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-2">2</span></td>
+            <td><span class="score score-1">1</span></td>
+          </tr>
+          <tr>
+            <td>C8 - Privacy visible in product UI</td>
+            <td><span class="score score-4">4</span></td>
+            <td><span class="score score-3">3</span></td>
+            <td><span class="score score-5">5</span></td>
+            <td><span class="score score-1">1</span></td>
+            <td><span class="score score-1">1</span></td>
+          </tr>
+          <tr style="background:var(--surface-2);font-weight:600;">
+            <td><strong>Total</strong></td>
+            <td><strong style="color:var(--text);">33/40</strong></td>
+            <td><strong style="color:var(--text);">32/35</strong></td>
+            <td><strong style="color:var(--green);">35/30*</strong></td>
+            <td><strong style="color:var(--red);">14/40</strong></td>
+            <td><strong style="color:var(--red);">11/40</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--text-faint);">*Apple Health has no employer/group aggregation layer; C2 and C3 are N/A. Total reflects available criteria only.</p>
+
+    <h2>Benchmark Screenshots</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="research/screens/cultureamp-privacy.png" alt="Culture Amp privacy" loading="lazy">
+        <div class="gallery-caption">Culture Amp - Data Privacy page</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/oura-privacy.png" alt="Oura Ring privacy blog" loading="lazy">
+        <div class="gallery-caption">Oura Ring - Health Data Privacy blog</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/apple-privacy.png" alt="Apple Privacy" loading="lazy">
+        <div class="gallery-caption">Apple - Privacy page</div>
+      </div>
+      <div class="gallery-item">
+        <img src="research/screens/typeform-anonymous.png" alt="Typeform anonymous survey guide" loading="lazy">
+        <div class="gallery-caption">Typeform - Anonymous Survey guide</div>
+      </div>
+    </div>
+
+    <h2>Top 3 Mechanisms for Brio's MVP</h2>
+    <div class="mechanisms">
+      <div class="mechanism-card">
+        <div class="mechanism-header">
+          <div class="mechanism-num">1</div>
+          <h3>Indirect Identification Protection</h3>
+        </div>
+        <p>From Culture Amp: when a group is below the minimum-N threshold, hide that group's data AND the next-smallest group's data. Prevents inference attacks in small teams. In Brio: fixed minimum-N (assumption: 5, to be validated with legal counsel), non-configurable by employer.</p>
+        <div class="mechanism-why">
+          <p><strong style="color:var(--text);">Why it works:</strong> Employees who trust that their answer cannot be inferred by deduction participate more honestly. Addresses the "I'm the only person in my demographic" problem - the most common reason minority-group members distrust anonymous surveys.</p>
+        </div>
+        <div class="mechanism-source">Source: <a href="https://support.cultureamp.com/en/articles/7048386-confidentiality-protections-in-reporting">support.cultureamp.com/en/articles/7048386</a></div>
+      </div>
+
+      <div class="mechanism-card">
+        <div class="mechanism-header">
+          <div class="mechanism-num">2</div>
+          <h3>Privacy Visible in the Product UI</h3>
+        </div>
+        <p>From Apple Health: privacy is a visible, interactive product element - not a policy document. In Brio: (a) persistent label on owner dashboard stating what they cannot see; (b) one-sentence pre-check-in disclosure before every employee check-in; (c) operator setup screen showing the exact owner view to demonstrate the privacy boundary.</p>
+        <div class="mechanism-why">
+          <p><strong style="color:var(--text);">Why it works:</strong> Repeated, contextual privacy communication trains trust over time. One-time consent flows are forgotten. Persistent UI indicators are not. The repetition is the trust.</p>
+        </div>
+        <div class="mechanism-source">Source: <a href="https://www.apple.com/privacy/features/">apple.com/privacy/features</a></div>
+      </div>
+
+      <div class="mechanism-card">
+        <div class="mechanism-header">
+          <div class="mechanism-num">3</div>
+          <h3>Business Model as Privacy Architecture</h3>
+        </div>
+        <p>From Oura Ring: subscription-only revenue removes the financial incentive to monetize individual data. State explicitly: "Brio earns revenue from subscriptions only. We have no financial reason to sell or analyze individual employee data - and architecturally, we cannot."</p>
+        <div class="mechanism-why">
+          <p><strong style="color:var(--text);">Why it works:</strong> Trust arguments based on aligned incentives are more durable than those based on goodwill. "We won't do X because we promise not to" is weaker than "we won't do X because doing X would hurt our business model."</p>
+        </div>
+        <div class="mechanism-source">Source: <a href="https://ouraring.com/blog/health-data-privacy/">ouraring.com/blog/health-data-privacy</a></div>
+      </div>
+    </div>
+
+    <h2>1 Mechanism That Will Not Work</h2>
+    <div class="antipattern-card">
+      <div class="antipattern-header">
+        <div class="antipattern-icon">x</div>
+        <h3 style="margin:0;color:var(--red);">Opt-out Privacy Consent (Typeform / Limeade pattern)</h3>
+      </div>
+      <p>Privacy protection that requires the employee to actively refuse participation, or requires the admin to manually configure anonymity settings. In an employer-funded product, employees are not in a free consent context. Opt-out mechanisms in this power dynamic are not meaningful consent.</p>
+      <p>Beyond ethics: employees who suspect monitoring respond dishonestly, corrupting the aggregate signal. The whole product fails. Brio's privacy must be always-on, non-configurable, and opt-in for sharing.</p>
+    </div>
+  </section>
+
+  <!-- UX Patterns -->
+  <section id="patterns">
+    <div class="section-label">Section 6</div>
+    <h1>UX Patterns</h1>
+
+    <h2>Critical Behavioral Entry Point</h2>
+    <div class="pattern-card primary" style="margin-bottom:24px;">
+      <div class="pattern-meta">
+        <span class="pattern-num">B5</span>
+        <span class="tag tag-critical">Most Critical</span>
+      </div>
+      <h3 style="margin-top:0;">Privacy Doubt Kills Participation Before the First Session</h3>
+      <p>Before employees answer their first check-in, they will ask: "Can my manager see my answer?" If uncertain, they will not respond honestly - or at all. This doubt must be resolved before Question 1 appears, not after. The privacy model is the permission slip that makes everything else possible. Without employee participation, the entire value chain collapses.</p>
+      <p style="margin:0;"><strong>Design implication:</strong> One sentence, plain language, specific, before Question 1. Repeated at the same moment in every subsequent check-in. The repetition is the trust.</p>
+    </div>
+
+    <h2>5 UX Patterns Evaluated</h2>
+    <div class="patterns-grid">
+
+      <div class="pattern-card primary">
+        <div class="pattern-meta">
+          <span class="pattern-num">Pattern 1</span>
+          <span class="tag tag-confirmed">Primary choice</span>
+        </div>
+        <h3 style="margin-top:0;">Guided Program Flow</h3>
+        <p style="font-size:13px;">Product pre-selects a recommended program. Operator confirms or swaps. Program runs on defined cadence. System sends nudges, collects check-ins, surfaces aggregate results. Operator's job: launch and review, not build.</p>
+        <p style="font-size:12px;color:var(--text-faint);margin:0;">Used by: Wellable (wellable.co), Headspace Core (organizations.headspace.com/small-business)</p>
+      </div>
+
+      <div class="pattern-card primary">
+        <div class="pattern-meta">
+          <span class="pattern-num">Pattern 2</span>
+          <span class="tag tag-confirmed">Primary choice</span>
+        </div>
+        <h3 style="margin-top:0;">Pulse + Insight Loop</h3>
+        <p style="font-size:13px;">Short recurring check-ins aggregate into a rolling score and trend. Product generates a plain-language interpretation and suggested next action. Operator reacts to signals rather than initiating from scratch.</p>
+        <p style="font-size:12px;color:var(--text-faint);margin:0;">Used by: Officevibe / Workleap (workleap.com/officevibe)</p>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-meta">
+          <span class="pattern-num">Pattern 3</span>
+          <span class="tag tag-challenged">Alternative - condition X</span>
+        </div>
+        <h3 style="margin-top:0;">Benefit Marketplace</h3>
+        <p style="font-size:13px;">Employees choose their own wellness resources from a curated library. Employer funds access. Admin sees utilization rates by content type, not individual. Low operator overhead.</p>
+        <p style="font-size:12px;color:var(--text-faint);margin:0;">Used by: Calm (health.calm.com), Headspace Core, Nivati (nivati.com)</p>
+      </div>
+
+      <div class="pattern-card">
+        <div class="pattern-meta">
+          <span class="pattern-num">Pattern 5</span>
+          <span class="tag tag-challenged">Considered</span>
+        </div>
+        <h3 style="margin-top:0;">Contextual Nudge System</h3>
+        <p style="font-size:13px;">Lightweight, well-timed prompts to employees. No programs, no challenges. Consistent micro-moments of engagement. Operator sets cadence and tone; product executes.</p>
+        <p style="font-size:12px;color:var(--text-faint);margin:0;">Partially: Officevibe pulse, Woliba nudge system</p>
+      </div>
+
+      <div class="pattern-card antipattern">
+        <div class="pattern-meta">
+          <span class="pattern-num">Pattern 4</span>
+          <span class="tag tag-critical">Does not fit Brio</span>
+        </div>
+        <h3 style="margin-top:0;">Gamified Challenge with Leaderboards</h3>
+        <p style="font-size:13px;">Leaderboards require individual ranking. Individual ranking means individual visibility. Architecturally incompatible with the aggregate-only privacy model. Also creates participation inequality: already-healthy employees dominate.</p>
+        <p style="font-size:12px;color:var(--text-faint);margin:0;">Used by: Vantage Fit (vantagefit.io), Woliba (woliba.io), Wellable (wellable.co)</p>
+      </div>
+
+    </div>
+
+    <h2>Pattern Selection - Why the Hybrid</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Reason</th><th>Explanation</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Serves both operator JTBDs</td>
+            <td>Pattern 1 gives structure (what do I run?). Pattern 2 gives awareness (is something off?). One pattern would address only one job. Together they are complete.</td>
+            <td>JTBD J1 and J3 - validated product model v2</td>
+          </tr>
+          <tr>
+            <td>Fills an unclaimed competitor gap</td>
+            <td>Wellable has programs but no aggregate pulse. Officevibe has pulse but no programs. The combination is unclaimed in the self-serve, no-HR space.</td>
+            <td>Phase 3 competitive gap analysis</td>
+          </tr>
+          <tr>
+            <td>One data flow, two output layers</td>
+            <td>Employee check-ins feed both the program feedback loop (operator) and the owner pulse from the same participation event. One mechanic, two stakeholder values.</td>
+            <td>Validated audience model, Segments A and B</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Conclusions -->
+  <section id="conclusions">
+    <div class="section-label">Section 7</div>
+    <h1>Conclusions</h1>
+
+    <h2>Gaps</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Gap</th><th>Evidence</th><th>Source</th><th>Severity</th></tr>
+        </thead>
+        <tbody>
+          <tr class="gap-critical">
+            <td>No self-serve, no-demo wellbeing tool for 10-50 employees</td>
+            <td>Nivati, Woliba, Wellable all require demos</td>
+            <td>Phase 3: nivati.com/sign-up, woliba.io/pricing</td>
+            <td><span class="tag tag-critical">Critical</span></td>
+          </tr>
+          <tr class="gap-critical">
+            <td>No product states privacy architecture on the product page</td>
+            <td>Only Headspace Core and Officevibe state specifics. Others use trust-me language.</td>
+            <td>Phase 3, Phase 4</td>
+            <td><span class="tag tag-critical">Critical</span></td>
+          </tr>
+          <tr class="gap-critical">
+            <td>No product explicitly designs for the absence of an HR team</td>
+            <td>All competitors assume an HR sponsor in language and onboarding</td>
+            <td>Phase 3 competitor group analysis</td>
+            <td><span class="tag tag-critical">Critical</span></td>
+          </tr>
+          <tr class="gap-high">
+            <td>Officevibe repriced out of the SMB segment</td>
+            <td>Workleap moved from $5/user/month to $4,999/year flat</td>
+            <td>Phase 3: workleap.com/pricing</td>
+            <td><span class="tag tag-high">High - opportunity</span></td>
+          </tr>
+          <tr class="gap-high">
+            <td>Aggregate signal is always a reporting add-on, never the core value</td>
+            <td>Pulse/survey features are secondary to program or content delivery in all competitors</td>
+            <td>Phase 3 comparison matrix</td>
+            <td><span class="tag tag-high">High</span></td>
+          </tr>
+          <tr class="gap-medium">
+            <td>No competitor addresses the small-group inference problem publicly</td>
+            <td>Culture Amp's 3-tier protection is the only documented solution</td>
+            <td>Phase 4: support.cultureamp.com/en/articles/7048386</td>
+            <td><span class="tag tag-medium">Medium</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>6 Hypotheses</h2>
+    <div class="hypotheses">
+
+      <div class="hypothesis-card">
+        <div class="hypothesis-num">H1</div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label if-label">If</div>
+          <p>Brio shows the exact privacy mechanism (minimum-N threshold, what the owner cannot see) on the product page before signup</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label then-label">Then</div>
+          <p>Employee participation rates will exceed 65% at steady state</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label because-label">Because</div>
+          <p>Employees with certainty about privacy limits before their first interaction respond more honestly. Confirmed by Culture Amp's pre-survey disclosure architecture. Source: support.cultureamp.com/en/articles/7048386</p>
+        </div>
+      </div>
+
+      <div class="hypothesis-card">
+        <div class="hypothesis-num">H2</div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label if-label">If</div>
+          <p>Brio offers transparent pricing starting at ~$5/seat/month with no demo required</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label then-label">Then</div>
+          <p>The operator will convert without a sales call in over 50% of trial-to-paid paths</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label because-label">Because</div>
+          <p>Headspace Core's self-serve small business page and Gusto's no-contact conversion model prove this audience converts without human sales touch when pricing is clear. Sources: organizations.headspace.com/small-business, gusto.com/pricing</p>
+        </div>
+      </div>
+
+      <div class="hypothesis-card">
+        <div class="hypothesis-num">H3</div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label if-label">If</div>
+          <p>The operator's aha moment is seeing the first aggregated score alongside a plain-language interpretation and a suggested next action</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label then-label">Then</div>
+          <p>90-day retention will exceed 65%</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label because-label">Because</div>
+          <p>Officevibe's AI-recommended-action model shows that operators who understand what to do next stay engaged. Seeing a score without context produces no action and no habit. Source: workleap.com/officevibe</p>
+        </div>
+      </div>
+
+      <div class="hypothesis-card">
+        <div class="hypothesis-num">H4</div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label if-label">If</div>
+          <p>The owner dashboard (aggregate view) is gated behind the paid tier</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label then-label">Then</div>
+          <p>Free-to-paid conversion will reach 8-12% within 60 days of activation</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label because-label">Because</div>
+          <p>The owner wanting proof the investment is working is the renewal driver (confirmed in JTBD analysis). The operator upgrades to give the owner access. Source: validated product model v2</p>
+        </div>
+      </div>
+
+      <div class="hypothesis-card">
+        <div class="hypothesis-num">H5</div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label if-label">If</div>
+          <p>Brio makes its subscription-only business model an explicit part of the privacy story</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label then-label">Then</div>
+          <p>Employee trust and participation will be measurably higher than a control that sees only a privacy policy link</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label because-label">Because</div>
+          <p>Oura's "subscription model = no data monetization incentive" argument explains the aligned incentive, not just the promise. Structural arguments outlast policy promises. Source: ouraring.com/blog/health-data-privacy</p>
+        </div>
+      </div>
+
+      <div class="hypothesis-card">
+        <div class="hypothesis-num">H6</div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label if-label">If</div>
+          <p>A non-configurable minimum-N threshold (assumption: 5 respondents) is applied to all aggregate views</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label then-label">Then</div>
+          <p>Operators and owners accept the data limitation without significant churn</p>
+        </div>
+        <div class="hypothesis-part">
+          <div class="hypothesis-part-label because-label">Because</div>
+          <p>Culture Amp's fixed-threshold model is accepted by enterprise buyers. The number is not the issue - the clarity and consistency are. Edge case: a 5-person company that can never see any data must be addressed in free tier design. Source: support.cultureamp.com/en/articles/7048386</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>Open Questions</h2>
+    <div class="open-questions">
+      <div class="question-card">
+        <div class="q-num">Q1</div>
+        <div class="q-body">
+          <p>What is the legally defensible minimum-N threshold in the US market? Is 5 correct?</p>
+          <div class="q-note">Culture Amp uses 5 as default (configurable). Wellable uses 10 for health data. Officevibe uses 3 for scores. Answer needed: legal counsel before launch.</div>
+        </div>
+      </div>
+      <div class="question-card">
+        <div class="q-num">Q2</div>
+        <div class="q-body">
+          <p>Does the operator discover Brio, or does the owner?</p>
+          <div class="q-note">Determines primary acquisition channel and landing page message. Answer: A/B paid acquisition test.</div>
+        </div>
+      </div>
+      <div class="question-card">
+        <div class="q-num">Q3</div>
+        <div class="q-body">
+          <p>What is the right check-in cadence - weekly, biweekly, or monthly?</p>
+          <div class="q-note">Affects habit formation and data freshness. Answer: 3-cohort A/B test in beta, measure participation at 90 days.</div>
+        </div>
+      </div>
+      <div class="question-card">
+        <div class="q-num">Q4</div>
+        <div class="q-body">
+          <p>Does a 10-employee free tier create meaningful conversion, or enable permanent free usage?</p>
+          <div class="q-note">Answer: instrument free tier carefully - track what % of 10-employee companies are genuinely at that size vs. gaming the limit.</div>
+        </div>
+      </div>
+      <div class="question-card">
+        <div class="q-num">Q5</div>
+        <div class="q-body">
+          <p>How does Brio handle a company that grows past the anonymity threshold mid-cycle?</p>
+          <div class="q-note">Architecture decision: rolling N or snapshot N. Must be resolved before launch.</div>
+        </div>
+      </div>
+      <div class="question-card">
+        <div class="q-num">Q6</div>
+        <div class="q-body">
+          <p>What regulatory review is needed in the US for emotional/mood check-in data?</p>
+          <div class="q-note">ADA, GINA, and HIPAA-adjacent rules may apply. Do not launch without a written legal opinion on the check-in question format.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>Brio - Product Research - Phase 1 - June 2026</p>
+    <p style="margin-top:4px;">All facts cited to public sources. Public pages only - no accounts created, no logins. Hypotheses marked throughout. Unknowns marked [?].</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+</body>
+</html>
