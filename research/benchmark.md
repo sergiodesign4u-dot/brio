@@ -70,7 +70,7 @@ The cautionary case. Surveys are described as "anonymous by default" but IP addr
 Source: typeform.com/guides/anonymous-survey
 
 **Limeade / WebMD Health Services (11/40)**
-The anti-pattern. The employer is legally defined as the "data controller," which means the employer - not the product - decides what data flows where. The privacy policy explicitly states that employee data (including sensitive health information) can be disclosed to health plans "at the employer's direction." A 20-person group minimum exists in analytics but is not communicated to employees on any public-facing surface. This is the trust model that erodes employee participation: employees who suspect surveillance stop giving honest responses, which destroys the signal quality the employer was trying to obtain.
+The anti-pattern. The employer is legally defined as the "data controller," which means the employer - not the product - decides what data flows where. The privacy policy explicitly states that employee data (including sensitive health information) can be disclosed to health plans "at the employer's direction." Analytics threshold rules are [? not disclosed on any public page - search results suggest a minimum group size but this could not be verified from a primary source], and regardless, no threshold is communicated to employees on any public-facing surface. This is the trust model that erodes employee participation: employees who suspect surveillance stop giving honest responses, which destroys the signal quality the employer was trying to obtain.
 Source: limeade.com/privacy.aspx
 
 ---
