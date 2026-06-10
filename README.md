@@ -2,7 +2,7 @@
 
 Employee wellbeing SaaS for small businesses with no HR team. Gives the person handed "people stuff" a guided way to run real wellbeing programs, and gives the owner honest proof it is working - at the team level only, never surveilling any individual.
 
-**Live research:** [https://sergiodesign4u.github.io/brio/research.html](https://sergiodesign4u.github.io/brio/research.html) *(available once GitHub Pages is enabled)*
+**Live research:** [https://sergiodesign4u-dot.github.io/brio/research.html](https://sergiodesign4u-dot.github.io/brio/research.html)
 
 ---
 
@@ -10,7 +10,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 
 | Phase | Status |
 |---------------|-------------|
-| Research | In progress |
+| Research | Done (competitive analysis, benchmark, UX patterns, research.html) |
 | Wireframes | Not started |
 | Concept | Not started |
 | Design System | Not started |
