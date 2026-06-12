@@ -618,6 +618,101 @@
 
     .hero { animation: fadeUp 0.5s ease both; }
 
+    /* Lean UX Canvas */
+    .canvas-block {
+      background: var(--surface);
+      border: 1px solid var(--accent-dim);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin: 40px 0;
+    }
+
+    .canvas-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .canvas-title-group h2 {
+      padding-top: 0;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+
+    .canvas-attribution {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin: 0;
+    }
+
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .canvas-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .canvas-grid { grid-template-columns: 1fr; }
+    }
+
+    .canvas-cell {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .canvas-cell.riskiest {
+      border-color: var(--accent-warm);
+      background: var(--accent-warm-dim);
+    }
+
+    .canvas-cell.span-2 {
+      grid-column: span 2;
+    }
+
+    .canvas-cell-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .canvas-cell.riskiest .canvas-cell-label {
+      color: var(--accent-warm);
+    }
+
+    .canvas-cell p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0 0 6px;
+      max-width: none;
+    }
+
+    .canvas-cell p:last-child { margin-bottom: 0; }
+
+    .canvas-cell ul {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .canvas-cell ul li {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .canvas-cell ul li:last-child { margin-bottom: 0; }
+
     /* Responsive */
     @media (max-width: 640px) {
       nav { padding: 0 16px; }
@@ -633,7 +728,8 @@
   <div class="nav-brand">Brio</div>
   <div class="nav-links">
     <a href="#intro">Intro</a>
-    <a href="#product-model">Product Model</a>
+    <a href="#canvas">Lean UX Canvas</a>
+    <a href="#strategy">Strategy</a>
     <a href="#aarrr">AARRR</a>
     <a href="#competitors">Competitors</a>
     <a href="#benchmark">Benchmark</a>
@@ -682,10 +778,95 @@
     </div>
   </section>
 
-  <!-- Product Model -->
-  <section id="product-model">
+  <!-- Lean UX Canvas -->
+  <section id="canvas">
+    <div class="section-label">Executive Summary</div>
+    <h1>Lean UX Canvas</h1>
+    <p>One-page product hypothesis before the details. Read this first, then dive into the sections below for the evidence behind each cell.</p>
+
+    <div class="canvas-block">
+      <div class="canvas-header">
+        <div class="canvas-title-group">
+          <h2>Brio - Lean UX Canvas</h2>
+          <p class="canvas-attribution">Framework: Jeff Gothelf, Lean UX Canvas v2. Populated from Strategy v_refresh and AARRR v_refresh (June 2026).</p>
+        </div>
+      </div>
+
+      <div class="canvas-grid">
+
+        <div class="canvas-cell">
+          <div class="canvas-cell-label">1. Business Problem</div>
+          <p>Small businesses (10 to 200 employees) with no HR team have no credible, self-serve tool to run employee wellbeing. The person handed "people stuff" has no training, no framework, and no way to know if efforts are working. The business owner needs proof the investment is worthwhile but has no HR layer to filter individual data.</p>
+          <p>No competitor combines self-serve SMB pricing, a guided program engine for non-HR operators, and a genuine aggregate-only team signal in one product.</p>
+        </div>
+
+        <div class="canvas-cell">
+          <div class="canvas-cell-label">2. Business Outcomes</div>
+          <ul>
+            <li>70% of operators complete setup and launch a first program within 7 days (hypothesis)</li>
+            <li>65% average team check-in participation rate (hypothesis)</li>
+            <li>8 to 12% free-to-paid conversion within 60 days (hypothesis)</li>
+            <li>Monthly churn below 4% past 90 days (hypothesis)</li>
+          </ul>
+          <p style="margin-top:8px;font-size:12px;color:var(--text-faint);">All targets are hypotheses pending real user data.</p>
+        </div>
+
+        <div class="canvas-cell">
+          <div class="canvas-cell-label">3. Users and Customers</div>
+          <p><strong>Buyer and operator:</strong> Office manager, ops lead, EA, or founder at a 10 to 200 person company. No HR title. Motivated by competence and clarity. Cannot get started with competitors without a demo call.</p>
+          <p><strong>Owner:</strong> Founder or CEO. Time-poor. Approves budget. Checks in monthly for one number and a trend.</p>
+          <p><strong>End user:</strong> Employee. Did not choose Brio. Must trust the privacy model before responding honestly. Individual data never surfaces up the chain.</p>
+        </div>
+
+        <div class="canvas-cell">
+          <div class="canvas-cell-label">4. User Outcomes and Benefits</div>
+          <p><strong>Operator:</strong> Feels competent running wellbeing without HR training. Has a clear next action after every check-in cycle. Is not guessing.</p>
+          <p><strong>Owner:</strong> Sees a credible, honest team-level signal without individual surveillance. Can make confident budget decisions in under 2 minutes per month.</p>
+          <p><strong>Employee:</strong> Participates knowing their individual answer is architecturally private. Feels supported, not monitored.</p>
+        </div>
+
+        <div class="canvas-cell">
+          <div class="canvas-cell-label">5. Solutions (MVP Scope)</div>
+          <ul>
+            <li>Guided program engine: operator picks from a curated library, product runs the cadence</li>
+            <li>Pulse loop: weekly check-in aggregates into a rolling team score with plain-language interpretation</li>
+            <li>Privacy architecture: minimum-N threshold (assumption: 5), non-configurable, with persistent pre-check-in disclosure</li>
+            <li>Owner dashboard: aggregate-only, read-only, gated behind paid tier</li>
+            <li>No demo required. Transparent pricing. Free tier up to 10 employees.</li>
+          </ul>
+        </div>
+
+        <div class="canvas-cell">
+          <div class="canvas-cell-label">6. Hypotheses</div>
+          <p><strong>H1:</strong> Showing the privacy mechanism on the product page before signup drives employee participation above 65%.</p>
+          <p><strong>H2:</strong> Transparent pricing with no demo required converts the operator without a sales call in over 50% of trial-to-paid paths.</p>
+          <p><strong>H3:</strong> Aha moment = first aggregate score plus plain-language interpretation plus a next action. Score alone does not create a habit.</p>
+          <p><strong>H4:</strong> Gating the owner dashboard behind the paid tier drives 8 to 12% free-to-paid conversion within 60 days.</p>
+        </div>
+
+        <div class="canvas-cell riskiest span-2">
+          <div class="canvas-cell-label">7. Riskiest Assumption to Learn First</div>
+          <p><strong>An SMB operator who has never run a formal wellbeing program believes that a self-serve, aggregate-only tool (no HR required, no individual data visible) delivers real team-level wellbeing value worth paying for - AND employees trust the privacy model enough to respond honestly.</strong></p>
+          <p>If either half is false, the product fails. No operator belief means no acquisition. No employee participation means no signal, no owner value, no renewal. Every other hypothesis depends on this one.</p>
+          <p style="font-size:12px;color:var(--text-faint);margin-top:8px;">Source: research/strategy.md, Riskiest Assumption, Option D.</p>
+        </div>
+
+        <div class="canvas-cell span-2">
+          <div class="canvas-cell-label">8. Smallest Test for That Assumption</div>
+          <p>Run a no-product prototype test: send a 1-question wellbeing check-in to a 10 to 15 person team via plain email (no Brio branding). Tell employees explicitly that only the aggregate score will be shared with their manager. Measure actual participation rate vs. stated intent.</p>
+          <p><strong>Pass:</strong> Participation rate above 40% and at least one employee asks a follow-up question about how results will be used - signaling belief in the privacy model.</p>
+          <p><strong>Fail:</strong> Participation below 40% even with a direct invitation and explicit privacy statement. If this fails, the product premise needs rethinking before building anything.</p>
+          <p style="font-size:12px;color:var(--text-faint);margin-top:8px;">This test costs nothing, requires no code, and can run before any design work begins.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Strategy -->
+  <section id="strategy">
     <div class="section-label">Section 2</div>
-    <h1>Product Model <span style="font-size: 18px; color: var(--text-muted); font-weight: 400;">(v2 - validated)</span></h1>
+    <h1>Strategy <span style="font-size: 18px; color: var(--text-muted); font-weight: 400;">(v_refresh - validated)</span></h1>
 
     <h2>Objectives</h2>
     <div class="table-wrap">
@@ -789,13 +970,24 @@
         </tbody>
       </table>
     </div>
-    <p style="font-size:12px;color:var(--text-faint);">Pricing benchmarked against Headspace Core ($3.75-5.83/user/month) and Officevibe's former $5/user/month. Sources: organizations.headspace.com/small-business, workleap.com/pricing</p>
+    <p style="font-size:12px;color:var(--text-faint);">Pricing benchmarked against Headspace Core ($3.75-5.83/user/month) and Officevibe's former $5/user/month. Sources: organizations.headspace.com/small-business, workleap.com/pricing. All figures are hypotheses.</p>
+
+    <h2>Riskiest Assumption</h2>
+    <div class="canvas-cell riskiest" style="margin:16px 0;">
+      <div class="canvas-cell-label">The single assumption this product idea depends on</div>
+      <p><strong>An SMB operator who has never run a formal wellbeing program believes that a self-serve, aggregate-only tool (no HR required, no individual data visible) delivers real team-level wellbeing value worth paying for - AND employees trust the aggregate-only privacy promise enough to respond honestly to regular check-ins.</strong></p>
+      <p>If either half is false, the product fails. No operator belief means no acquisition and no activation. No employee participation means no aggregate signal, no owner value, and no renewal. Every other hypothesis (H1 through H6) depends on this one being true.</p>
+      <p><strong>What proves it:</strong> Operators completing a 30-day free trial with at least 5 employee responses and not churning. Employee participation above 50% in the first 4-week cycle. Operator qualitative feedback citing "useful" within 60 days.</p>
+      <p><strong>What breaks it:</strong> Free tier accounts where the operator activated but zero employees responded after 14 days. Operators canceling citing "not enough data" without ever seeing an aggregate result. Employees expressing persistent belief that their responses were visible to management.</p>
+      <p><strong>Smallest test:</strong> No-product prototype - plain email check-in to a real team, explicit privacy statement, measure participation rate. Pass: above 40%. Fail: below 40% even with direct invitation. No code needed. Run before building anything.</p>
+      <p style="font-size:12px;color:var(--text-faint);margin-top:8px;">Source: research/strategy.md, Riskiest Assumption; research/benchmark.md (Limeade and Typeform anti-patterns); research/competitive-analysis.md (no competitor has solved both halves)</p>
+    </div>
   </section>
 
   <!-- AARRR -->
   <section id="aarrr">
     <div class="section-label">Section 3</div>
-    <h1>AARRR Funnel</h1>
+    <h1>AARRR Funnel <span style="font-size: 18px; color: var(--text-muted); font-weight: 400;">(v_refresh)</span></h1>
 
     <div class="table-wrap">
       <table>
@@ -804,6 +996,7 @@
             <th>Stage</th>
             <th>Primary Channel / Mechanic</th>
             <th>Key Hypothesis</th>
+            <th>MVP Decision</th>
             <th>Metric</th>
             <th>Target</th>
           </tr>
@@ -811,36 +1004,41 @@
         <tbody>
           <tr>
             <td>Acquisition</td>
-            <td>SEO (operator how-to queries), LinkedIn job title targeting, free tier as top-of-funnel</td>
-            <td>Free tier is the primary acquisition driver. No credit card at signup.</td>
+            <td>SEO targeting operator how-to queries (not product comparison pages). LinkedIn job title targeting. Free tier as permanent top-of-funnel.</td>
+            <td>Free tier is the primary acquisition driver. Demo-required friction filters out the solo operator who is the primary buyer.</td>
+            <td>No credit card at signup. Single email field. Operator how-to content, not comparison-site SEO.</td>
             <td>New signups/month</td>
             <td>200 by month 6 <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
           </tr>
           <tr>
             <td>Activation</td>
-            <td>Guided linear onboarding, first program live in session, employee invite in session</td>
-            <td>Aha moment = first aggregate check-in result visible with plain-language interpretation.</td>
+            <td>Guided linear onboarding. First program pre-selected by company size. Privacy disclosure built into employee invite flow before Question 1.</td>
+            <td>Aha moment = first aggregate score plus plain-language interpretation plus a suggested next action. Score alone does not create a habit.</td>
+            <td>Opinionated linear onboarding. No blank-slate setup. Privacy disclosure is not optional, not a modal - one sentence, before Question 1, every time.</td>
             <td>% completing setup + first invite in 48h</td>
             <td>55% <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
           </tr>
           <tr>
             <td>Retention</td>
-            <td>Weekly operator email digest, consistent check-in schedule, owner monthly digest</td>
-            <td>Operator retention driven by email digest more than in-app sessions.</td>
+            <td>Weekly operator email digest. Consistent employee check-in cadence. Persistent pre-check-in privacy disclosure as trust-training mechanism. Owner monthly digest.</td>
+            <td>Operator retention is driven by the weekly digest email. Employee participation above 60% is the leading indicator for operator retention. Repeated privacy disclosure trains employee trust over time.</td>
+            <td>Build weekly operator digest email before in-app notifications. Build persistent pre-check-in privacy disclosure into every check-in, not just onboarding.</td>
             <td>90-day operator retention</td>
             <td>65% <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>Upgrade triggered by team-size limit or owner dashboard access gate</td>
-            <td>Owner dashboard is the primary upgrade driver. Operator upgrades to give owner visibility.</td>
+            <td>Upgrade triggered by team-size limit (more than 10 employees) or owner dashboard access request. Both triggers active.</td>
+            <td>Owner dashboard is the primary upgrade driver. Operator upgrades to give the owner visibility - not because they hit a feature wall.</td>
+            <td>Gate owner dashboard behind paid tier. Keep operator dashboard and one program on free tier to demonstrate real value first.</td>
             <td>Free-to-paid conversion</td>
             <td>8-12% in 60 days <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
           </tr>
           <tr>
             <td>Referral</td>
-            <td>Operator-to-peer organic, in-product prompt at 30-day positive milestone</td>
-            <td>Operator-to-peer is the strongest referral channel in year 1. No formal program in V1.</td>
+            <td>Operator-to-peer organic. In-product prompt at 30-day positive milestone (participation above 50%). No formal referral program in V1.</td>
+            <td>Operator-to-peer referral is the strongest channel in year 1. Owners share to look like caring leaders, not for cash incentives.</td>
+            <td>Single share prompt at 30-day milestone. Track referral source at signup with a dropdown. Referral infrastructure in V2.</td>
             <td>% signups from referral (self-reported)</td>
             <td>20% by month 9 <em style="color:var(--text-faint);font-size:11px">hypothesis</em></td>
           </tr>
@@ -851,20 +1049,20 @@
     <h3>4 Key Takeaways</h3>
     <div style="display:grid;gap:12px;margin-top:12px;">
       <div class="pattern-card">
-        <strong>Activation is the critical lever.</strong>
-        <p style="margin:4px 0 0;font-size:13px;">If the operator does not reach "first program live, team invited" in session one, they likely never will. Every product decision in V1 should optimize for this milestone.</p>
+        <strong>Activation depends on two separate trust events.</strong>
+        <p style="margin:4px 0 0;font-size:13px;">The operator must believe the product is worth launching (their half of the riskiest assumption), AND employees must trust the privacy model enough to respond (the other half). Both must succeed in session one. Every V1 decision optimizes for this double-trust moment.</p>
       </div>
       <div class="pattern-card">
         <strong>The owner dashboard is the paid feature, but the operator is the buyer.</strong>
-        <p style="margin:4px 0 0;font-size:13px;">The operator upgrades to give the owner visibility. Design the upgrade moment around that emotional job.</p>
+        <p style="margin:4px 0 0;font-size:13px;">The operator upgrades to give the owner visibility. Design the upgrade moment around that emotional job - not feature lists or arbitrary limits.</p>
       </div>
       <div class="pattern-card">
         <strong>Employee participation rate is a leading indicator for everything.</strong>
-        <p style="margin:4px 0 0;font-size:13px;">If employees stop responding, aggregate signals degrade, operators lose faith, and churn follows. Privacy design is the retention strategy.</p>
+        <p style="margin:4px 0 0;font-size:13px;">If employees stop responding, aggregate signals degrade, operators lose faith, and churn follows. Repeated privacy disclosure (before every check-in, not just onboarding) is the retention mechanism.</p>
       </div>
       <div class="pattern-card">
         <strong>The free tier is the acquisition channel.</strong>
-        <p style="margin:4px 0 0;font-size:13px;">Do not cripple it so badly it cannot demonstrate value. The 10-employee limit is the natural, non-punitive conversion trigger.</p>
+        <p style="margin:4px 0 0;font-size:13px;">Do not cripple it so badly it cannot demonstrate value. The 10-employee limit is the natural, non-punitive conversion trigger. A free tier that shows nothing meaningful does not convert - it just delays churn.</p>
       </div>
     </div>
   </section>
