@@ -22,7 +22,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 ## Key documents
 
 - [Project Brief](CLAUDE.md)
-- [Product Model](research/product-model.md)
+- [Strategy](research/strategy.md)
 - [AARRR Model](research/aarrr.md)
 - [Competitive Analysis](research/competitive-analysis.md)
 - [Benchmark - Trust and Privacy](research/benchmark.md)
