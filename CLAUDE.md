@@ -172,13 +172,15 @@ Employee wellbeing programs in the US operate near several regulatory areas. Thi
 
 | Phase | Deliverable | Status |
 |-------|-------------|--------|
-| 0 - Brief | CLAUDE.md, repo, folder structure | In progress |
-| 1 - Product Model | research/product-model.md | Planned |
-| 2 - AARRR | research/aarrr.md | Planned |
-| 3 - Competitive Analysis | research/competitive-analysis.md + screens | Planned |
-| 4 - Benchmark | research/benchmark.md + screens | Planned |
-| 4.5 - Revisit Model | research/product-model.md v2 | Planned |
-| 5 - UX Patterns | research/ux-patterns.md | Planned |
-| 6 - Master Synthesis | research/master-research.md | Planned |
-| 6.5 - Quality Gate | research/quality-check.md | Planned |
-| 7 - Research HTML | research.html + GitHub Pages | Planned |
+| 0 - Brief | CLAUDE.md, repo, folder structure | Done |
+| 1 - Product Model | research/strategy.md | Done |
+| 2 - AARRR | research/aarrr.md | Done |
+| 3 - Competitive Analysis | research/competitive-analysis.md | Done |
+| 4 - Benchmark | research/benchmark.md | Done |
+| 4.5 - Revisit Model | research/strategy.md v2 | Done |
+| 5 - UX Patterns | research/ux-patterns.md | Done |
+| 6 - Master Synthesis | research/master-research.md | Done |
+| 6.5 - Quality Gate | research/quality-check.md | Done |
+| 7 - Research HTML | research.html + GitHub Pages | Done |
+| 8 - People and JTBD | research/personas.md, research/jtbd.md, research/live-research.md, personas.html, jtbd.html | Done |
+| 9 - Wireframes | wireframes/ | Not started |

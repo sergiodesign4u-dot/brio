@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - Personas</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar - mobile-first */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 52px;
+    }
+
+    .sidebar-brand {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .sidebar-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: 9px 8px;
+    }
+
+    .sidebar-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--text-muted);
+      border-radius: 1px;
+    }
+
+    .sidebar-body {
+      display: none;
+      padding: 8px 0 16px;
+      border-top: 1px solid var(--border);
+      overflow-y: auto;
+      max-height: calc(100vh - 52px);
+    }
+    .sidebar-body.open { display: block; }
+
+    .nav-group { padding: 0 8px; }
+
+    .nav-group-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 14px 12px 6px;
+    }
+
+    .nav-group-label.active-section { color: var(--accent); }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    a.nav-item:hover {
+      color: var(--text);
+      background: var(--surface-2);
+      text-decoration: none;
+    }
+
+    .nav-item-disabled {
+      color: var(--text-faint);
+      cursor: default;
+    }
+
+    .nav-item-muted {
+      color: var(--text-faint);
+      opacity: 0.5;
+      cursor: default;
+      font-size: 12px;
+    }
+
+    .nav-item-active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .nav-group-next .nav-group-label { opacity: 0.5; }
+
+    /* Sub-nav items */
+    .nav-sub-item {
+      display: block;
+      padding: 5px 12px 5px 24px;
+      font-size: 12px;
+      color: var(--text-faint);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    a.nav-sub-item:hover {
+      color: var(--text-muted);
+      background: var(--surface-2);
+      text-decoration: none;
+    }
+
+    .nav-sub-item.nav-sub-active {
+      color: var(--accent);
+    }
+
+    @media (min-width: 900px) {
+      .sidebar {
+        left: 0;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        width: 220px;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+      }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body {
+        display: block;
+        max-height: none;
+        border-top: none;
+        padding: 4px 0 24px;
+        overflow-y: visible;
+      }
+    }
+
+    /* Layout */
+    main {
+      padding-top: 52px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (min-width: 900px) {
+      main {
+        padding-top: 0;
+        margin-left: 220px;
+        margin-right: 0;
+        max-width: none;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+
+    section { padding: 80px 0 40px; }
+
+    /* Typography */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-top: 48px;
+    }
+    h2:first-of-type { padding-top: 0; }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      margin-top: 28px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      max-width: 72ch;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+
+    .hero-intro {
+      font-size: clamp(15px, 1.5vw, 17px);
+      color: var(--text-muted);
+      max-width: 68ch;
+      margin-bottom: 0;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead tr {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.1s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+
+    tbody td {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+
+    tbody td:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Tag chips */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .tag-confirmed { background: var(--green-dim); color: var(--green); }
+    .tag-challenged { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-changed { background: var(--accent-dim); color: var(--accent); }
+    .tag-elevated { background: var(--accent-warm-dim); color: var(--accent-warm); }
+    .tag-critical { background: var(--red-dim); color: var(--red); }
+    .tag-high { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-medium { background: var(--surface-3); color: var(--text-muted); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* Open questions */
+    .open-questions {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .question-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .q-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 24px;
+    }
+
+    .q-body p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .q-body .q-note {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      margin-top: 80px;
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    /* Subtle enter animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp 0.5s ease both; }
+
+    /* ========================
+       PERSONAS PAGE - SPECIFIC
+       ======================== */
+
+    .persona-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 32px;
+    }
+
+    .persona-card.primary {
+      border-color: var(--accent-dim);
+      background: rgba(79, 156, 249, 0.03);
+    }
+
+    .persona-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .persona-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+
+    .persona-role {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .persona-type-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      flex-shrink: 0;
+    }
+
+    .persona-type-badge.type-primary {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+    }
+
+    .persona-type-badge.type-secondary {
+      background: var(--surface-3);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .persona-type-badge.type-third {
+      background: var(--yellow-dim);
+      color: var(--yellow);
+      border: 1px solid var(--yellow-dim);
+    }
+
+    .persona-context {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      max-width: none;
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .persona-grid { grid-template-columns: 1fr; }
+    }
+
+    .persona-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .persona-section ul {
+      padding-left: 16px;
+    }
+
+    .persona-section li {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .illustrative-quote {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: var(--surface-3);
+      border-radius: var(--radius);
+      border-left: 2px solid var(--text-faint);
+    }
+
+    .illustrative-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 6px;
+    }
+
+    .illustrative-quote p {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* Source line */
+    .persona-source {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Observations */
+    .obs-group {
+      margin-bottom: 32px;
+    }
+
+    .obs-group-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: inline-flex;
+      margin-bottom: 16px;
+    }
+
+    .obs-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+
+    .obs-id {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    .obs-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .obs-cite {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    /* Choice cards */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    @media (max-width: 700px) {
+      .choice-grid { grid-template-columns: 1fr; }
+    }
+
+    .choice-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+
+    .choice-card.chosen {
+      border-color: var(--accent-dim);
+      background: rgba(79, 156, 249, 0.03);
+    }
+
+    .choice-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 6px;
+    }
+
+    .choice-card.chosen .choice-label {
+      color: var(--accent);
+    }
+
+    .choice-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .choice-reason {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .choice-verdict {
+      background: var(--surface);
+      border: 1px solid var(--accent-dim);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-top: 24px;
+    }
+
+    .choice-verdict p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: none;
+    }
+
+    @media (max-width: 640px) {
+      main { padding-left: 16px; padding-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <div class="nav-group-label">Research</div>
+      <a href="research.html#intro" class="nav-item">Intro</a>
+      <a href="research.html#canvas" class="nav-item">Lean UX Canvas</a>
+      <a href="research.html#strategy" class="nav-item">Strategy</a>
+      <a href="research.html#aarrr" class="nav-item">AARRR</a>
+      <a href="research.html#competitors" class="nav-item">Competitors</a>
+      <a href="research.html#benchmark" class="nav-item">Benchmark</a>
+      <a href="research.html#patterns" class="nav-item">UX Patterns</a>
+      <a href="research.html#conclusions" class="nav-item">Conclusions</a>
+      <a href="research.html#live-research" class="nav-item">Live Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">People &amp; JTBD</div>
+      <span class="nav-item nav-item-active">Personas</span>
+      <a href="#observations" class="nav-sub-item" id="sub-observations">Observations</a>
+      <a href="#priya" class="nav-sub-item" id="sub-priya">Priya</a>
+      <a href="#marcus" class="nav-sub-item" id="sub-marcus">Marcus</a>
+      <a href="#yemi" class="nav-sub-item" id="sub-yemi">Yemi</a>
+      <a href="#choice" class="nav-sub-item" id="sub-choice">Choice</a>
+      <a href="#unknowns" class="nav-sub-item" id="sub-unknowns">Unknowns</a>
+      <a href="jtbd.html" class="nav-item">JTBD</a>
+    </div>
+    <div class="nav-group nav-group-next">
+      <div class="nav-group-label">Next</div>
+      <span class="nav-item nav-item-muted">Wireframes</span>
+      <span class="nav-item nav-item-muted">Concept</span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="intro">
+    <div class="hero-meta">
+      <span class="badge accent">Phase 2 - People &amp; JTBD</span>
+      <span class="badge">June 2026</span>
+      <span class="badge">Observation-sourced</span>
+    </div>
+    <div class="section-label">People &amp; JTBD</div>
+    <h1>Personas</h1>
+    <p class="hero-intro">Three personas built from 21 sourced observations across operator, owner, and employee groups. Every claim cites its source. Mood quotes are synthesis only - labeled clearly throughout.</p>
+  </section>
+
+  <!-- Observations -->
+  <section id="observations">
+    <div class="section-label">Raw Inventory</div>
+    <h2>People Observations from Research</h2>
+    <p>Drawn from master-research.md, strategy.md, competitive-analysis.md, ux-patterns.md, and benchmark.md. Personas grow directly from these observations.</p>
+
+    <!-- Operator observations -->
+    <div class="obs-group">
+      <div class="obs-group-label">Operator-Buyer (O1-O8)</div>
+
+      <div class="obs-card">
+        <div class="obs-id">O1 - The role is real and unserved</div>
+        <p class="obs-text">No competitor explicitly designs for the operator who has no HR training. Wellable, Woliba, and Nivati all use language ("dedicated account manager," "wellness coordinator," "program administrator") that assumes an HR professional on the buyer side. The no-HR operator is tolerated, not designed for.</p>
+        <div class="obs-cite">Source: research/competitive-analysis.md, "3 Common Patterns" - Pattern 2</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">O2 - Self-serve is the only viable sales motion for this persona</div>
+        <p class="obs-text">Operators who cannot see a price or try a product without scheduling a sales call do not buy. Nivati, Woliba, and Wellable all require demos. Headspace Core and Gusto prove that the SMB buyer self-activates when friction is removed.</p>
+        <div class="obs-cite">Source: research/competitive-analysis.md, "3 Key Differences" - Sales motion</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">O3 - The operator's primary confidence driver is structured guidance</div>
+        <p class="obs-text">They need the product to tell them what to do next, confirm they did it correctly, and show them it mattered. They do not have the HR background to contextualize a 67% participation rate or a 7.2/10 team score.</p>
+        <div class="obs-cite">Source: research/ux-patterns.md, Patterns B1 and B4</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">O4 - The operator works in bursts, not continuously</div>
+        <p class="obs-text">They engage in short purposeful sessions: a Monday morning check of last week's results, a 5-minute program setup once a month, a quick invite after a new hire joins. They do not "use" the product daily - they rely on it to work in the background and alert them when something needs attention.</p>
+        <div class="obs-cite">Source: research/ux-patterns.md, Pattern B1</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">O5 - Activation requires operator belief AND employee participation</div>
+        <p class="obs-text">The operator must believe the product is worth launching AND employees must respond. If zero employees respond after 14 days, the operator's belief breaks immediately. Both must succeed in session one.</p>
+        <div class="obs-cite">Source: research/strategy.md, Riskiest Assumption; research/aarrr.md, Activation section</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">O6 - The aha moment is score plus interpretation plus next action</div>
+        <p class="obs-text">Seeing a number alone does not create a habit. The Officevibe AI-recommended-action model confirms: operators who understand what to do next stay engaged. A score without context produces no action.</p>
+        <div class="obs-cite">Source: research/competitive-analysis.md, Officevibe key mechanism; research/ux-patterns.md, Pattern B4</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">O7 - The operator upgrades to give the owner visibility</div>
+        <p class="obs-text">The owner dashboard (aggregate team signal) is the paid feature. The emotional driver for upgrade is "I want to show the owner this is working" - not a feature checklist or team-size wall.</p>
+        <div class="obs-cite">Source: research/strategy.md, Business Model; research/aarrr.md, Revenue section</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">O8 - Age range 26 to 45 <span class="tag tag-challenged">[?] Hypothesis</span></div>
+        <p class="obs-text">No competitive data confirms or contradicts this. Consistent with the role profile (office manager, EA, ops coordinator, founder in a small company) but unvalidated.</p>
+        <div class="obs-cite">Source: research/strategy.md, Segment A</div>
+      </div>
+    </div>
+
+    <!-- Owner observations -->
+    <div class="obs-group">
+      <div class="obs-group-label">Owner (W1-W5)</div>
+
+      <div class="obs-card">
+        <div class="obs-id">W1 - The owner checks in, does not operate</div>
+        <p class="obs-text">The owner sees Brio when the operator shares it or when they receive a monthly digest. Their attention span for the dashboard is under 2 minutes. They want one number, a trend, and a plain-language interpretation.</p>
+        <div class="obs-cite">Source: research/ux-patterns.md, Pattern B2</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">W2 - The owner's primary driver is ROI and risk</div>
+        <p class="obs-text">They approve budget, want proof the investment is worthwhile, and want an early warning before someone resigns. They are not curious about product mechanics.</p>
+        <div class="obs-cite">Source: research/strategy.md, Segment B; research/master-research.md, Segments</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">W3 - The owner values the aggregate signal precisely because it does not expose individuals</div>
+        <p class="obs-text">In an SMB with no HR layer, the owner is the boss. If they could see individual data, they would be the surveillance threat. The aggregate-only model protects the product from this structural problem.</p>
+        <div class="obs-cite">Source: research/master-research.md, "Problem" section; research/benchmark.md, Mechanism 2</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">W4 - Owner age range is not known <span class="tag tag-challenged">[?] Hypothesis</span></div>
+        <p class="obs-text">No research data on age range. Consistent with "founder or CEO" but unvalidated.</p>
+        <div class="obs-cite">Source: research/strategy.md, Segment B - marked [?]</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">W5 - Owner-to-owner word of mouth is a late-stage referral channel</div>
+        <p class="obs-text">Owners who see ROI mention it in peer groups (EO, YPO, investor circles). They share to look like caring leaders, not for financial incentives. This is year-1 secondary, not primary.</p>
+        <div class="obs-cite">Source: research/aarrr.md, Referral section</div>
+      </div>
+    </div>
+
+    <!-- Employee observations -->
+    <div class="obs-group">
+      <div class="obs-group-label">Employee (E1-E8)</div>
+
+      <div class="obs-card">
+        <div class="obs-id">E1 - The employee is the engine, not the buyer</div>
+        <p class="obs-text">Without employee participation, there is no aggregate signal. Without signal, the owner has nothing to see. Without owner value, there is no renewal. The value chain starts with employee trust.</p>
+        <div class="obs-cite">Source: research/master-research.md, Key Conclusion 3; research/strategy.md, Segment C</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">E2 - The employee did not choose Brio</div>
+        <p class="obs-text">They were enrolled by their employer. This is a fundamentally different trust context than a product someone chose to use personally. In an employer-funded tool, employees are not in a free consent context.</p>
+        <div class="obs-cite">Source: research/benchmark.md, "Mechanism That Will Not Work"; research/ux-patterns.md, Pattern B3</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">E3 - Privacy doubt kills participation before the first session</div>
+        <p class="obs-text">Before answering the first check-in, employees ask themselves: "Can my manager see my answer?" If uncertain, they do not respond honestly, or do not respond at all. This doubt must be resolved before Question 1 appears.</p>
+        <div class="obs-cite">Source: research/ux-patterns.md, Pattern B5 (MOST CRITICAL); research/benchmark.md, Mechanism 2</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">E4 - The first check-in is the trust-forming moment</div>
+        <p class="obs-text">If the first experience feels invasive (too many questions, unclear who sees what), employees opt out mentally and never engage honestly again. If it feels safe and fast (under 30 seconds, clear privacy statement), a participation habit forms over 3 to 4 weeks.</p>
+        <div class="obs-cite">Source: research/ux-patterns.md, Pattern B3</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">E5 - Pre-check-in disclosure must be specific, not general</div>
+        <p class="obs-text">"Your answer joins the team's anonymous score - [company name] sees only the team total, never your response." One sentence. Plain language. Before Question 1. Repeated at the same moment in every subsequent check-in, not just at onboarding. The repetition is the trust.</p>
+        <div class="obs-cite">Source: research/benchmark.md, Mechanism 2; research/ux-patterns.md, Pattern B5</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">E6 - Privacy by promise fails. Privacy by architecture earns participation.</div>
+        <p class="obs-text">Limeade (11/40 benchmark score) and Typeform (14/40) show that privacy claimed but not architecturally designed erodes trust. Culture Amp (33/40) and Apple Health (35/40) earn trust through structural guarantees.</p>
+        <div class="obs-cite">Source: research/benchmark.md, Benchmark Scores and "Mechanism That Will Not Work"</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">E7 - Opt-out consent mechanisms do not work in this power dynamic</div>
+        <p class="obs-text">Employees in an employer-funded product are not making free choices about consent. Opt-out framing in this context is not meaningful consent. It also corrupts the aggregate signal because employees who suspect monitoring respond dishonestly.</p>
+        <div class="obs-cite">Source: research/benchmark.md, "Mechanism That Will Not Work"</div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-id">E8 - Minimum-N threshold: set at 5 for MVP. Legal validation deferred. <span class="tag tag-confirmed">Closed - founder decision</span></div>
+        <p class="obs-text">MVP decision: N=5 flat, non-configurable by employer. No live count is shown to anyone (operator or employee) during an open cycle. The score appears only after the cycle closes and the minimum-N is met. Closed by founder decision, June 2026 - not by re-research. The legally defensible US threshold (ADA, GINA, EEOC) still requires legal counsel before launch and is deferred.</p>
+        <div class="obs-cite">Source: research/strategy.md Section 5 (D1/D4/D5); research/live-research.md K1 (resolution). Legal deferral: research/master-research.md Open Question Q1.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Priya -->
+  <section id="priya">
+    <div class="section-label">Primary Persona</div>
+    <h2>Priya - The Handed-It Operator</h2>
+    <p>Chosen by diverge-then-converge. The daily driver of the product. Every V1 design decision serves her first.</p>
+
+    <div class="persona-card primary">
+      <div class="persona-header">
+        <div>
+          <div class="persona-name">Priya</div>
+          <div class="persona-role">Operations Coordinator, 22-person marketing consultancy</div>
+        </div>
+        <span class="persona-type-badge type-primary">Primary</span>
+      </div>
+
+      <p class="persona-context">Priya is 31. She has been at the consultancy three years. When the founder decided the team needed "someone to own the people stuff," Priya got the ask - without asking for it. Her actual job is office logistics, vendor management, and onboarding new hires. She now also runs the monthly all-hands, manages the holiday party, and - as of two months ago - is supposed to "run wellbeing programs." She has no HR background. She looked at a few tools and either hit a demo wall or found products that assumed she had a team of HR professionals. Her fear is not the work - it is the uncertainty. She does not know if what she is doing is making a real difference.</p>
+
+      <p class="persona-context"><strong>Context she arrives from:</strong> She Googled "how to run employee wellbeing programs for small businesses." She tried signing up for one competitor and was asked to schedule a demo. She did not schedule it. She is looking for something she can start in an afternoon without having to justify it to anyone first.</p>
+
+      <div class="persona-grid">
+        <div class="persona-section">
+          <div class="persona-section-label">Her jobs</div>
+          <ul>
+            <li>Run structured wellbeing programs without HR knowledge (primary)</li>
+            <li>Know if the team is struggling before someone resigns</li>
+            <li>Feel competent and confident in a role she was given, not trained for</li>
+            <li>Prove to the founder that the people investment is paying off</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">What hurts most today</div>
+          <ul>
+            <li>No self-serve path: every tool requires a demo call or assumes an HR team</li>
+            <li>No plain-language feedback: she cannot interpret 67% participation as good or bad</li>
+            <li>She suspects employees are not filling in surveys honestly</li>
+            <li>No "recommended next action" when the score is low</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">Trust triggers</div>
+          <ul>
+            <li>Sees a price on the page without having to talk to anyone</li>
+            <li>Can try it before committing (free tier, no credit card)</li>
+            <li>Product tells her what to do next, not just what happened</li>
+            <li>Gets a confirmation moment: "you launched a program correctly"</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">What scares her off</div>
+          <ul>
+            <li>Another demo-required product</li>
+            <li>A product that assumes she knows HR terminology</li>
+            <li>A dashboard full of numbers without interpretation</li>
+            <li>Having to explain to employees why their responses are not private</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="illustrative-quote">
+        <div class="illustrative-label">Illustrative - not a sourced quote</div>
+        <p>"I don't have time to become an HR expert. I just need to know what to do and that it's actually working."</p>
+      </div>
+
+      <div class="persona-source">
+        Source: research/strategy.md Segment A (CONFIRMED role profile), research/competitive-analysis.md (CONFIRMED no-HR gap), research/ux-patterns.md B1/B4 (CONFIRMED operator behavioral patterns). Mood quote: synthesis from ux-patterns.md B1/B4 observations - not a real user quote.
+      </div>
+    </div>
+  </section>
+
+  <!-- Marcus -->
+  <section id="marcus">
+    <div class="section-label">Secondary Persona</div>
+    <h2>Marcus - The Checking-In Owner</h2>
+    <p>The budget approver and renewal decision-maker. Not a daily driver - he checks in occasionally for a high-level read.</p>
+
+    <div class="persona-card">
+      <div class="persona-header">
+        <div>
+          <div class="persona-name">Marcus</div>
+          <div class="persona-role">Founder and CEO, same 22-person consultancy</div>
+        </div>
+        <span class="persona-type-badge type-secondary">Secondary</span>
+      </div>
+
+      <p class="persona-context">Marcus is 43. He founded the consultancy Priya works at. He cares deeply about his team - three people left in the past 18 months and each time he was caught off guard. He approved the wellbeing budget because he wants to know if people are happy before they hand in notice. He is not going to learn a new product for this. He wants a number and a trend, once a month, via email.</p>
+
+      <p class="persona-context"><strong>Context he arrives from:</strong> Priya showed him the product, or he received a monthly digest email with the team score. He is not discovering Brio himself in most scenarios. <span class="tag tag-challenged">[?]</span> Whether the owner or operator discovers Brio first is an open question. This persona assumes operator-led discovery, which is the primary hypothesis. See Open Question Q2 in master-research.md.</p>
+
+      <div class="persona-grid">
+        <div class="persona-section">
+          <div class="persona-section-label">His jobs</div>
+          <ul>
+            <li>Know at a glance if the team is doing well or if something is off</li>
+            <li>Make a confident budget decision: is the wellbeing investment worth renewing?</li>
+            <li>See team health without accessing individual employee data</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">What hurts most today</div>
+          <ul>
+            <li>No simple, credible team-level view without asking the operator directly</li>
+            <li>Woliba's burnout signals by manager feel invasive and legally uncomfortable</li>
+            <li>Officevibe was the closest analog but is now $4,999/year flat, pricing him out</li>
+            <li>He does not want a dashboard - he wants the answer to "is the team OK?" in one read</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">Trust triggers</div>
+          <ul>
+            <li>One number, a trend, and a plain-language interpretation</li>
+            <li>The product explicitly tells him what he cannot see and why</li>
+            <li>The monthly digest lands in his email and takes under 2 minutes to absorb</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">What scares him off</div>
+          <ul>
+            <li>Individual employee data surfacing anywhere in the product</li>
+            <li>A complex dashboard that requires training to interpret</li>
+            <li>Privacy language that sounds like marketing copy rather than a structural guarantee</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="illustrative-quote">
+        <div class="illustrative-label">Illustrative - not a sourced quote</div>
+        <p>"I don't need to know who's unhappy. I need to know if the team is doing OK as a whole before I lose another good person."</p>
+      </div>
+
+      <div class="persona-source">
+        Source: research/strategy.md Segment B (CONFIRMED role profile), research/ux-patterns.md B2 (CONFIRMED behavioral pattern), research/competitive-analysis.md Officevibe/Woliba notes. Mood quote: synthesis from master-research.md Segments section and ux-patterns.md B2 - not a real user quote.
+      </div>
+    </div>
+  </section>
+
+  <!-- Yemi -->
+  <section id="yemi">
+    <div class="section-label">Third Party - Not a Buyer</div>
+    <h2>Yemi - The Skeptical Employee</h2>
+    <p>The critical engine of the product. Without her honest participation, there is no aggregate signal - and without signal, neither the operator nor the owner has anything worth paying for.</p>
+
+    <div class="persona-card">
+      <div class="persona-header">
+        <div>
+          <div class="persona-name">Yemi</div>
+          <div class="persona-role">Junior Designer, same 22-person consultancy</div>
+        </div>
+        <span class="persona-type-badge type-third">Third Party</span>
+      </div>
+
+      <p class="persona-context">Yemi is 27. She has seen "wellness theater" at her previous job: company surveys that appeared in the all-hands with "we heard you" but nothing changed. She is not hostile to Brio, but she is not enthusiastic either. Before she fills in the first check-in, she will ask herself: "Who sees this? What happens with it?" If she gets a clear, specific answer to that question before she has to respond, she will answer honestly. If she does not, she will either skip it or put in a non-answer.</p>
+
+      <p class="persona-context"><strong>Context she arrives from:</strong> She received an invite from Priya. The invite said it is anonymous. She has heard that before.</p>
+
+      <div class="persona-grid">
+        <div class="persona-section">
+          <div class="persona-section-label">Her jobs</div>
+          <ul>
+            <li>Know with certainty that her response is private before she responds</li>
+            <li>Spend under 30 seconds on the check-in or she will feel it is not worth the interruption</li>
+            <li>Feel that the company is acting on what she says (otherwise the check-ins are performative)</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">What hurts most today</div>
+          <ul>
+            <li>Has been told surveys are "anonymous" before but in a small team she was probably identifiable anyway</li>
+            <li>Does not trust "anonymous" if the employer controls the platform and the data</li>
+            <li>Feels that wellbeing programs often track performance, not wellbeing</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">Trust triggers</div>
+          <ul>
+            <li>One specific sentence before Question 1: exactly what is shown to the manager, exactly what is not</li>
+            <li>The format protects against inference: her response only appears as part of a team aggregate</li>
+            <li>The company does something visible in response to aggregate feedback over time</li>
+          </ul>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-section-label">What scares her off</div>
+          <ul>
+            <li>Questions that feel like performance review disguised as wellbeing</li>
+            <li>Survey invitation that leads with company branding, not the privacy guarantee</li>
+            <li>Check-ins that take more than 30 seconds</li>
+            <li>Any moment that feels like data collection rather than genuine support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="illustrative-quote">
+        <div class="illustrative-label">Illustrative - not a sourced quote</div>
+        <p>"I'll participate if I actually believe no one can see my answer. But I've been told that before. Show me exactly how it works, not just a promise."</p>
+      </div>
+
+      <div class="persona-source">
+        Source: research/benchmark.md B3/B5 (CONFIRMED behavioral pattern), research/benchmark.md Mechanism 1 and Mechanism 2 (CONFIRMED trust mechanisms), research/benchmark.md "Mechanism That Will Not Work" (CONFIRMED anti-pattern). Mood quote: synthesis from research/benchmark.md anti-pattern analysis and research/ux-patterns.md B3/B5 - not a real user quote.
+      </div>
+    </div>
+  </section>
+
+  <!-- Choice -->
+  <section id="choice">
+    <div class="section-label">Diverge and Converge</div>
+    <h2>Primary Persona Selection</h2>
+    <p>Three options were considered. The choice traces directly to the product's value chain.</p>
+
+    <div class="choice-grid">
+      <div class="choice-card">
+        <div class="choice-label">Option A</div>
+        <div class="choice-title">Operator is primary</div>
+        <p class="choice-reason">She is the buyer, the daily driver, the activation bottleneck, and the person whose behavior most directly determines whether the product has any data to show. Every V1 design decision serves her first.</p>
+      </div>
+
+      <div class="choice-card">
+        <div class="choice-label">Option B</div>
+        <div class="choice-title">Owner is primary</div>
+        <p class="choice-reason">He approves the budget and decides on renewal. Without his conviction, there is no subscription.</p>
+      </div>
+
+      <div class="choice-card">
+        <div class="choice-label">Option C</div>
+        <div class="choice-title">Employee is primary</div>
+        <p class="choice-reason">Without their participation, there is no aggregate signal, which means neither the operator nor the owner sees anything worth paying for.</p>
+      </div>
+    </div>
+
+    <div class="choice-verdict">
+      <p><strong>Chosen: Option A - Operator.</strong> The operator decides to try, activates the product, invites the team, and is the first to experience value (or not). The owner is downstream: they see value only after the operator has set things up. The employee does not choose the product at all. Every design decision that serves the operator's competence and clarity also, indirectly, serves the owner's need for signal - because a competent operator runs programs that generate employee responses.</p>
+      <p style="margin-top: 12px; font-size: 13px; color: var(--text-faint);">Source: research/master-research.md Key Conclusion 3, research/aarrr.md Activation section.</p>
+    </div>
+  </section>
+
+  <!-- Unknowns -->
+  <section id="unknowns">
+    <div class="section-label">Gaps</div>
+    <h2>What We Do Not Know About People</h2>
+    <p>Open unknowns that affect design and product decisions. Some are closed by founder decision; most remain open.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Unknown</th>
+            <th>Why It Matters</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Does the operator or the owner discover Brio first?</td>
+            <td>Determines primary acquisition channel and landing page message</td>
+            <td><span class="tag tag-confirmed">Closed - founder decision</span><br><span style="font-size:11px;color:var(--text-faint);display:block;margin-top:4px;">Default established: operator-first. Landing page hero speaks operator language; owner-trust block on same page. Reversible by paid A/B acquisition test. See research/strategy.md D3.</span></td>
+          </tr>
+          <tr>
+            <td>What percentage of SMB employees honestly participate in anonymous employer surveys?</td>
+            <td>If the answer is low even with privacy architecture, H1 is broken and the product premise needs revision</td>
+            <td><span class="tag tag-challenged">[?]</span></td>
+          </tr>
+          <tr>
+            <td>Does a structural privacy argument (subscription model = no incentive to monetize data) outperform a policy-based one in driving participation?</td>
+            <td>Affects which message is primary on the product page and in employee onboarding</td>
+            <td><span class="tag tag-challenged">[?]</span></td>
+          </tr>
+          <tr>
+            <td>What is the operator's actual daily schedule and digital context when they engage with a wellbeing tool?</td>
+            <td>Affects notification timing, digest cadence, and whether the product needs a native app</td>
+            <td><span class="tag tag-challenged">[?]</span></td>
+          </tr>
+          <tr>
+            <td>How do SMB employees perceive wellbeing programs differently from large-enterprise employees?</td>
+            <td>Large-company research may not apply: in a 15-person team, everyone knows each other, which changes the inference risk and trust calculus</td>
+            <td><span class="tag tag-challenged">[?]</span></td>
+          </tr>
+          <tr>
+            <td>At what point does participation drop naturally (novelty wearing off), and what reverses it?</td>
+            <td>Affects retention design: when to prompt operators, when to refresh program options</td>
+            <td><span class="tag tag-challenged">[?]</span></td>
+          </tr>
+          <tr>
+            <td>Owner age range and digital behavior</td>
+            <td>Affects dashboard design (mobile vs. desktop) and the format of the owner digest</td>
+            <td><span class="tag tag-challenged">[?]</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <p style="font-size: 13px; color: var(--text-faint);">Why three personas, not four: a fourth persona (HR professional at a slightly larger SMB) was considered and discarded. The research confirms that designing for an HR professional shifts the product into the territory of all current competitors. Brio's differentiation is precisely that it does not assume an HR layer. Source: research/competitive-analysis.md, "What Is Missing Across All" - gap 1.</p>
+  </section>
+
+  <footer>
+    <p>Brio - Personas - Phase 2 - June 2026</p>
+    <p style="margin-top:4px;">All observations cited to source documents. Mood quotes are synthesis only - labeled throughout. Unknowns marked [?].</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // IntersectionObserver for sub-link active state
+  var subSections = [
+    { id: 'observations', sub: 'sub-observations' },
+    { id: 'priya', sub: 'sub-priya' },
+    { id: 'marcus', sub: 'sub-marcus' },
+    { id: 'yemi', sub: 'sub-yemi' },
+    { id: 'choice', sub: 'sub-choice' },
+    { id: 'unknowns', sub: 'sub-unknowns' }
+  ];
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) {
+          var el = document.getElementById(s.sub);
+          if (el) el.classList.remove('nav-sub-active');
+        });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) {
+          var el = document.getElementById(match.sub);
+          if (el) el.classList.add('nav-sub-active');
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+
+  subSections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

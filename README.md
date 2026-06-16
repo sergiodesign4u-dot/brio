@@ -4,13 +4,18 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 
 **Live research:** [https://sergiodesign4u-dot.github.io/brio/research.html](https://sergiodesign4u-dot.github.io/brio/research.html)
 
+**Personas:** [https://sergiodesign4u-dot.github.io/brio/personas.html](https://sergiodesign4u-dot.github.io/brio/personas.html)
+
+**Jobs to Be Done:** [https://sergiodesign4u-dot.github.io/brio/jtbd.html](https://sergiodesign4u-dot.github.io/brio/jtbd.html)
+
 ---
 
 ## Project Status
 
 | Phase | Status |
 |---------------|-------------|
-| Research | Done (competitive analysis, benchmark, UX patterns, research.html) |
+| Research | Done (competitive analysis, benchmark, UX patterns, master synthesis, research.html) |
+| People and JTBD | Done (personas, jobs to be done, live research verification, personas.html, jtbd.html) |
 | Wireframes | Not started |
 | Concept | Not started |
 | Design System | Not started |
@@ -28,3 +33,6 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 - [Benchmark - Trust and Privacy](research/benchmark.md)
 - [UX Patterns](research/ux-patterns.md)
 - [Master Research](research/master-research.md)
+- [Personas](research/personas.md)
+- [Jobs to Be Done](research/jtbd.md)
+- [Live Research - Post-Persona Verification](research/live-research.md)

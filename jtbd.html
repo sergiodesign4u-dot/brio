@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - Jobs to Be Done</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar - mobile-first */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 52px;
+    }
+
+    .sidebar-brand {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .sidebar-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: 9px 8px;
+    }
+
+    .sidebar-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--text-muted);
+      border-radius: 1px;
+    }
+
+    .sidebar-body {
+      display: none;
+      padding: 8px 0 16px;
+      border-top: 1px solid var(--border);
+      overflow-y: auto;
+      max-height: calc(100vh - 52px);
+    }
+    .sidebar-body.open { display: block; }
+
+    .nav-group { padding: 0 8px; }
+
+    .nav-group-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 14px 12px 6px;
+    }
+
+    .nav-group-label.active-section { color: var(--accent); }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    a.nav-item:hover {
+      color: var(--text);
+      background: var(--surface-2);
+      text-decoration: none;
+    }
+
+    .nav-item-disabled {
+      color: var(--text-faint);
+      cursor: default;
+    }
+
+    .nav-item-muted {
+      color: var(--text-faint);
+      opacity: 0.5;
+      cursor: default;
+      font-size: 12px;
+    }
+
+    .nav-item-active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .nav-group-next .nav-group-label { opacity: 0.5; }
+
+    /* Sub-nav items */
+    .nav-sub-item {
+      display: block;
+      padding: 5px 12px 5px 24px;
+      font-size: 12px;
+      color: var(--text-faint);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    a.nav-sub-item:hover {
+      color: var(--text-muted);
+      background: var(--surface-2);
+      text-decoration: none;
+    }
+
+    .nav-sub-item.nav-sub-active {
+      color: var(--accent);
+    }
+
+    @media (min-width: 900px) {
+      .sidebar {
+        left: 0;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        width: 220px;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+      }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body {
+        display: block;
+        max-height: none;
+        border-top: none;
+        padding: 4px 0 24px;
+        overflow-y: visible;
+      }
+    }
+
+    /* Layout */
+    main {
+      padding-top: 52px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (min-width: 900px) {
+      main {
+        padding-top: 0;
+        margin-left: 220px;
+        margin-right: 0;
+        max-width: none;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+
+    section { padding: 80px 0 40px; }
+
+    /* Typography */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-top: 48px;
+    }
+    h2:first-of-type { padding-top: 0; }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      margin-top: 28px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      max-width: 72ch;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+
+    .hero-intro {
+      font-size: clamp(15px, 1.5vw, 17px);
+      color: var(--text-muted);
+      max-width: 68ch;
+      margin-bottom: 0;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead tr {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.1s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+
+    tbody td {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+
+    tbody td:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Tag chips */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .tag-confirmed { background: var(--green-dim); color: var(--green); }
+    .tag-challenged { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-changed { background: var(--accent-dim); color: var(--accent); }
+    .tag-elevated { background: var(--accent-warm-dim); color: var(--accent-warm); }
+    .tag-critical { background: var(--red-dim); color: var(--red); }
+    .tag-high { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-medium { background: var(--surface-3); color: var(--text-muted); }
+
+    /* Highlighted row */
+    tr.highlight td { color: var(--text); background: rgba(79, 156, 249, 0.04); }
+    tr.highlight td:first-child { color: var(--accent); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      margin-top: 80px;
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    /* Subtle enter animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp 0.5s ease both; }
+
+    /* ========================
+       JTBD PAGE - SPECIFIC
+       ======================== */
+
+    .job-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .job-card.main-job {
+      border-color: var(--accent-dim);
+      background: rgba(79, 156, 249, 0.03);
+      padding: 32px;
+    }
+
+    .job-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .job-text {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .job-meta {
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    .job-section {
+      margin-bottom: 8px;
+    }
+
+    .job-when,
+    .job-want,
+    .job-sothat {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .job-when strong { color: var(--accent); }
+    .job-want strong { color: var(--green); }
+    .job-sothat strong { color: var(--accent-warm); }
+
+    /* Importance chips */
+    .importance-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .imp-3 { background: var(--accent-dim); color: var(--accent); }
+    .imp-2 { background: var(--yellow-dim); color: var(--yellow); }
+    .imp-1 { background: var(--surface-3); color: var(--text-muted); }
+    .imp-0 { color: var(--text-faint); font-size: 11px; }
+
+    /* Hypothesis section */
+    .hypothesis-section {
+      border: 1px solid var(--yellow-dim);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      background: rgba(251, 191, 36, 0.03);
+      margin-bottom: 24px;
+    }
+
+    .hypothesis-warning {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    /* MVP Core */
+    .mvp-core {
+      background: var(--surface);
+      border: 1px solid var(--accent-dim);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .mvp-core-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .mvp-core ol {
+      padding-left: 20px;
+    }
+
+    .mvp-core li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .mvp-core li strong {
+      color: var(--text);
+    }
+
+    /* Danger items */
+    .danger-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .danger-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .danger-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--yellow);
+      min-width: 20px;
+      flex-shrink: 0;
+    }
+
+    .danger-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .danger-detail {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding-left: 30px;
+      margin: 0;
+      max-width: none;
+    }
+
+    /* Critique question */
+    .targeted-question {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+
+    .targeted-q-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .targeted-q-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .targeted-q-detail {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: none;
+    }
+
+    .targeted-q-source {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-top: 6px;
+    }
+
+    /* Functional jobs grid */
+    .jobs-list {
+      margin: 24px 0;
+    }
+
+    /* Emotional/social section */
+    .emotion-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+
+    .emotion-id {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .emotion-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .emotion-meta {
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    .emotion-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 24px 0 12px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: inline-flex;
+    }
+
+    /* Matrix chip text */
+    .chip-text {
+      font-size: 12px;
+      color: var(--text-faint);
+      display: block;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 640px) {
+      main { padding-left: 16px; padding-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <div class="nav-group-label">Research</div>
+      <a href="research.html#intro" class="nav-item">Intro</a>
+      <a href="research.html#canvas" class="nav-item">Lean UX Canvas</a>
+      <a href="research.html#strategy" class="nav-item">Strategy</a>
+      <a href="research.html#aarrr" class="nav-item">AARRR</a>
+      <a href="research.html#competitors" class="nav-item">Competitors</a>
+      <a href="research.html#benchmark" class="nav-item">Benchmark</a>
+      <a href="research.html#patterns" class="nav-item">UX Patterns</a>
+      <a href="research.html#conclusions" class="nav-item">Conclusions</a>
+      <a href="research.html#live-research" class="nav-item">Live Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">People &amp; JTBD</div>
+      <a href="personas.html" class="nav-item">Personas</a>
+      <span class="nav-item nav-item-active">JTBD</span>
+      <a href="#intro" class="nav-sub-item" id="sub-intro">Intro</a>
+      <a href="#main-job" class="nav-sub-item" id="sub-main-job">Main Job</a>
+      <a href="#functional" class="nav-sub-item" id="sub-functional">Functional</a>
+      <a href="#emotional" class="nav-sub-item" id="sub-emotional">Emotional</a>
+      <a href="#hypotheses" class="nav-sub-item" id="sub-hypotheses">Hypotheses</a>
+      <a href="#matrix" class="nav-sub-item" id="sub-matrix">Matrix</a>
+      <a href="#critique" class="nav-sub-item" id="sub-critique">Critique</a>
+    </div>
+    <div class="nav-group nav-group-next">
+      <div class="nav-group-label">Next</div>
+      <span class="nav-item nav-item-muted">Wireframes</span>
+      <span class="nav-item nav-item-muted">Concept</span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="intro">
+    <div class="hero-meta">
+      <span class="badge accent">Phase 2 - People &amp; JTBD</span>
+      <span class="badge">June 2026</span>
+      <span class="badge">Sourced from personas.md</span>
+    </div>
+    <div class="section-label">People &amp; JTBD</div>
+    <h1>Jobs to Be Done</h1>
+    <p class="hero-intro">The complete job inventory for Brio, built from personas.md and master-research.md. Every job cites its source. Includes the full JTBD matrix, MVP core selection, and a strict critique of what is confirmed versus still hypothesized.</p>
+  </section>
+
+  <!-- Main Job -->
+  <section id="main-job">
+    <div class="section-label">Product-Level Job</div>
+    <h2>Main Job of the Product</h2>
+
+    <div class="job-card main-job">
+      <div class="job-label">Main Job</div>
+      <div class="job-text">When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits.</div>
+
+      <div class="job-when"><strong>When</strong> I am handed responsibility for employee wellbeing with no HR training</div>
+      <div class="job-want"><strong>I want</strong> a guided system that tells me what to run and when</div>
+      <div class="job-sothat"><strong>So that</strong> I feel competent and the team actually benefits</div>
+
+      <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-subtle);">
+        <div class="job-meta">Persona: Priya (Operator, primary)</div>
+        <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Segment A JTBD (CONFIRMED as primary job by research gap analysis). Confirmed by competitive gap: no competitor has built a self-serve, guided wellbeing product for the no-HR operator. Source: research/competitive-analysis.md "What Is Missing Across All."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Functional Jobs -->
+  <section id="functional">
+    <div class="section-label">Functional</div>
+    <h2>Related Functional Jobs</h2>
+    <p>J1 through J6. Each in canonical format: When / I want / So that. Sources cited per job.</p>
+
+    <div class="jobs-list">
+
+      <div class="job-card">
+        <div class="job-label">J1</div>
+        <div class="job-when"><strong>When</strong> I need to show the owner that the people investment is paying off</div>
+        <div class="job-want"><strong>I want</strong> an honest team-level signal I can point to</div>
+        <div class="job-sothat"><strong>So that</strong> the program gets continued support and I feel confident in my work</div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <div class="job-meta">Personas: Priya (Operator, primary driver) - Marcus (Owner, primary driver at renewal)</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Segment B JTBD; research/aarrr.md Revenue section. CONFIRMED via Officevibe numeric score visualization as analogous mechanism. Source: research/competitive-analysis.md, Officevibe comparison entry.</div>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-label">J2</div>
+        <div class="job-when"><strong>When</strong> my team might be struggling</div>
+        <div class="job-want"><strong>I want</strong> to know before someone actually resigns</div>
+        <div class="job-sothat"><strong>So that</strong> I can act before it becomes a crisis</div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <div class="job-meta">Personas: Priya (Operator) - Marcus (Owner, secondary - risk reduction)</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/ux-patterns.md Pattern B1 ("surfaces when something needs attention"); research/master-research.md Key Conclusion 3. CONFIRMED via Officevibe AI-alert model. Source: research/competitive-analysis.md, Officevibe AI analysis entry.</div>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-label">J3</div>
+        <div class="job-when"><strong>When</strong> I am enrolled in a wellbeing program at work</div>
+        <div class="job-want"><strong>I want</strong> to know with certainty that my response is private before I respond</div>
+        <div class="job-sothat"><strong>So that</strong> I can answer honestly without fear of consequences</div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <div class="job-meta">Personas: Yemi (Employee, primary driver) - Priya (Operator, indirect - her program fails if Yemi does not respond honestly)</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/ux-patterns.md Pattern B5 (MOST CRITICAL behavioral pattern); research/benchmark.md Mechanism 2. CONFIRMED via Culture Amp pre-survey disclosure mechanism. Source: research/benchmark.md Mechanism 1.</div>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-label">J4 <span class="tag tag-challenged" style="vertical-align: middle;">[?] Partial hypothesis</span></div>
+        <div class="job-when"><strong>When</strong> I am asked to check in about my wellbeing at work</div>
+        <div class="job-want"><strong>I want</strong> it to take under 30 seconds</div>
+        <div class="job-sothat"><strong>So that</strong> I do not resent the interruption or feel surveilled</div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <div class="job-meta">Persona: Yemi (Employee, primary driver)</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/ux-patterns.md Pattern B3 ("radically simple: one question, one emoji-scale response, one line of privacy context"). CONFIRMED as design implication; no direct quantitative data on 30-second threshold. [?] The specific 30-second number is an assumption from CLAUDE.md MVP scope, not from competitive research.</div>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-label">J5</div>
+        <div class="job-when"><strong>When</strong> I need to make a budget decision about people programs</div>
+        <div class="job-want"><strong>I want</strong> a clear signal of what is working and what is not</div>
+        <div class="job-sothat"><strong>So that</strong> I can say yes or no with confidence</div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <div class="job-meta">Personas: Marcus (Owner, primary driver) - Priya (Operator, secondary - she uses this signal to justify the program to Marcus)</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Objective O2 and Segment B; research/aarrr.md Revenue section. CONFIRMED via Officevibe benchmark: owners respond to numeric clarity with context. Source: research/competitive-analysis.md, Officevibe comparison entry.</div>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-label">J6</div>
+        <div class="job-when"><strong>When</strong> I am setting up an employee wellbeing program for the first time</div>
+        <div class="job-want"><strong>I want</strong> a system that tells me exactly what to do and in what order</div>
+        <div class="job-sothat"><strong>So that</strong> I do not have to invent the process myself</div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <div class="job-meta">Persona: Priya (Operator, primary driver)</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/ux-patterns.md Pattern 1 (Guided Program Flow). CONFIRMED via Headspace Core self-serve model and Gusto's "even if you're not an expert" onboarding posture. Source: research/competitive-analysis.md, Aspirational group.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Emotional and Social Jobs -->
+  <section id="emotional">
+    <div class="section-label">Emotional and Social</div>
+    <h2>Emotional and Social Jobs</h2>
+    <p>The emotional layer underneath the functional jobs. These drive retention and referral, not just activation.</p>
+
+    <div class="emotion-section-title">Emotional Jobs (E1-E3)</div>
+
+    <div class="emotion-card">
+      <div class="emotion-id">E1</div>
+      <div class="emotion-text"><strong>When</strong> I do people work, <strong>I want</strong> to feel like a competent "people person," <strong>so that</strong> I am proud of what I have built even without an HR title.</div>
+      <div class="emotion-meta">Persona: Priya (Operator, primary driver). This is the emotional core of her primary job. Source: research/strategy.md Segment A Motivation ("competence and clarity"); research/ux-patterns.md Pattern B4. CONFIRMED as the emotional job by the research gap: no competitor has designed for this feeling.</div>
+    </div>
+
+    <div class="emotion-card">
+      <div class="emotion-id">E2 <span class="tag tag-challenged">[?]</span></div>
+      <div class="emotion-text"><strong>When</strong> the company shows interest in my wellbeing at work, <strong>I want</strong> to feel genuinely supported rather than monitored, <strong>so that</strong> I trust the platform and continue to engage.</div>
+      <div class="emotion-meta">Persona: Yemi (Employee, primary driver). Source: research/ux-patterns.md Pattern B3; research/benchmark.md Mechanism 2. CONFIRMED behavioral pattern; specific emotional framing is synthesis. [?] Direct employee voice on this distinction (supported vs. monitored) needs validation.</div>
+    </div>
+
+    <div class="emotion-card">
+      <div class="emotion-id">E3 <span class="tag tag-challenged">[?]</span></div>
+      <div class="emotion-text"><strong>When</strong> my team investment is clearly working, <strong>I want</strong> to be able to share that with peers, <strong>so that</strong> I am seen as a leader who builds good culture.</div>
+      <div class="emotion-meta">Personas: Marcus (Owner, secondary driver) - Priya (Operator, secondary driver for peer credibility). Source: research/aarrr.md Referral section ("owners share to look like caring leaders, not for cash incentives"). [?] Hypothesis derived from SMB owner behavior patterns, not from direct research on this product category.</div>
+    </div>
+
+    <div class="emotion-section-title">Social Jobs (S1-S2)</div>
+
+    <div class="emotion-card">
+      <div class="emotion-id">S1 <span class="tag tag-challenged">[?]</span></div>
+      <div class="emotion-text"><strong>When</strong> I find a people-ops approach that works, <strong>I want</strong> to tell other operators in my network about it, <strong>so that</strong> we help each other navigate roles we were not trained for.</div>
+      <div class="emotion-meta">Persona: Priya (Operator, primary driver for referral). Source: research/aarrr.md Referral section ("operator-to-peer is the strongest channel in year 1"). [?] Hypothesis - no data on operator community behavior in this specific market. The assertion is borrowed from adjacent SMB SaaS patterns (Gusto's observed word-of-mouth growth).</div>
+    </div>
+
+    <div class="emotion-card">
+      <div class="emotion-id">S2</div>
+      <div class="emotion-text"><strong>When</strong> I receive a team check-in result that shows something meaningful, <strong>I want</strong> to share it with the owner easily, <strong>so that</strong> the owner is informed without me having to translate the data.</div>
+      <div class="emotion-meta">Persona: Priya (Operator, primary driver for share action). Source: research/aarrr.md Revenue section (operator upgrades to give owner visibility); research/strategy.md Business Model (owner dashboard as upgrade driver). CONFIRMED as the core upgrade emotional driver.</div>
+    </div>
+
+  </section>
+
+  <!-- Hypotheses -->
+  <section id="hypotheses">
+    <div class="section-label">Not Yet Backed by Research</div>
+    <h2>Hypothesis Jobs</h2>
+    <p>Jobs in this section are candidates that could become confirmed if validated in user research. Treat as directional signals, not design requirements.</p>
+
+    <div class="hypothesis-section">
+      <div class="hypothesis-warning">
+        <span>Not yet backed by research</span>
+        <span class="tag tag-challenged">[?] Needs validation</span>
+      </div>
+
+      <div class="job-card" style="margin-bottom:16px;">
+        <div class="job-label">HJ1</div>
+        <div class="job-when"><strong>When</strong> I am a small business owner and the team starts to struggle</div>
+        <div class="job-want"><strong>I want</strong> to be able to show employees I acted on their feedback</div>
+        <div class="job-sothat"><strong>So that</strong> participation rates stay high in future check-in cycles</div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <p style="font-size: 13px; margin: 0; max-width: none;">Why hypothesized: the research confirms that employees respond to visible follow-through (ux-patterns.md B5 implies this) but no competitive product has documented a specific "close the loop" mechanic for SMB operators. If this job is real, it suggests a "you said, we did" communication feature is in scope.</p>
+          <div class="job-meta" style="margin-top:6px;">Source: research/ux-patterns.md Pattern B5 (behavioral implication, not direct evidence). [?] Needs validation.</div>
+        </div>
+      </div>
+
+      <div class="job-card" style="margin-bottom:0;">
+        <div class="job-label">HJ2</div>
+        <div class="job-when"><strong>When</strong> I am an employee and I have responded honestly to a check-in</div>
+        <div class="job-want"><strong>I want</strong> to see some outcome at the team level</div>
+        <div class="job-sothat"><strong>So that</strong> I know my participation mattered</div>
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <p style="font-size: 13px; margin: 0; max-width: none;">Why hypothesized: participation habits decay when employees feel the tool is extractive rather than reciprocal. No competitor has designed a visible "here is what the team said overall" moment for employees. If this job is real, it suggests a lightweight team-level result display for employees (aggregate only, no individual) is needed.</p>
+          <div class="job-meta" style="margin-top:6px;">Source: research/ux-patterns.md Pattern B3 (participation habit forms over 3-4 weeks). [?] Needs validation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Matrix -->
+  <section id="matrix">
+    <div class="section-label">Prioritization</div>
+    <h2>JTBD Matrix</h2>
+    <p>Rows: jobs. Columns: personas plus function and competitive status. Importance 0-3 per cell (3 = critical, 2 = meaningful, 1 = minor, 0 = not applicable). Where importance is unknown: [?] rather than an average.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="min-width:180px;">Job</th>
+            <th>Priya (Operator)</th>
+            <th>Marcus (Owner)</th>
+            <th>Yemi (Employee)</th>
+            <th style="min-width:200px;">Function</th>
+            <th style="min-width:200px;">Competitors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>Main</strong> - Run wellbeing without HR training</td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Existential. Without this, she cannot use the product at all.</span></td>
+            <td><span class="importance-chip imp-1">1</span> <span class="chip-text">Not his job</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Guided program engine, curated library, opinionated linear onboarding</td>
+            <td style="font-size:12px;color:var(--text-muted);">Not closed by any self-serve competitor. Nivati/Woliba/Wellable all require demos or HR sponsors.</td>
+          </tr>
+          <tr>
+            <td><strong>J1</strong> - Prove investment is working</td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Her professional credibility depends on it</span></td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Renewal driver</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Owner dashboard (aggregate-only, paid tier)</td>
+            <td style="font-size:12px;color:var(--text-muted);">Officevibe partially closed this but repriced out of SMB ($4,999/yr).</td>
+          </tr>
+          <tr>
+            <td><strong>J2</strong> - Know if team is struggling early</td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Her early warning job</span></td>
+            <td><span class="importance-chip imp-2">2</span> <span class="chip-text">Risk reduction</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Pulse loop, threshold-based trend alert</td>
+            <td style="font-size:12px;color:var(--text-muted);">Officevibe (3-respondent threshold alerts) partially closed. Not available in self-serve SMB pricing today.</td>
+          </tr>
+          <tr>
+            <td><strong>J3</strong> - Know response is private before responding</td>
+            <td><span class="imp-0">-</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Gate to any honest participation</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Pre-check-in disclosure sentence, minimum-N threshold, non-configurable architecture</td>
+            <td style="font-size:12px;color:var(--text-muted);">Headspace Core ("no PII in utilization data") partial. Culture Amp (enterprise only). No self-serve SMB product closes this fully.</td>
+          </tr>
+          <tr>
+            <td><strong>J4</strong> - Check-in takes under 30 seconds</td>
+            <td><span class="imp-0">-</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Friction reducer</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">1-3 questions, emoji/slider, no account required for first check-in</td>
+            <td style="font-size:12px;color:var(--text-muted);">Generic survey tools (Typeform) technically can, but they fail on J3 (privacy architecture).</td>
+          </tr>
+          <tr>
+            <td><strong>J5</strong> - Make confident budget decisions</td>
+            <td><span class="importance-chip imp-1">1</span> <span class="chip-text">Secondary (she shows the data, Marcus decides)</span></td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Primary driver</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Owner dashboard, trend view, plain-language interpretation</td>
+            <td style="font-size:12px;color:var(--text-muted);">Not closed by any competitor for SMB owners. Enterprise tools exist (Glint, Lattice) but are enterprise-priced.</td>
+          </tr>
+          <tr>
+            <td><strong>J6</strong> - Set up a program without inventing the process</td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Precondition for everything else</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Guided onboarding flow, pre-selected first program by company size</td>
+            <td style="font-size:12px;color:var(--text-muted);">Headspace Core (content auto-delivery). Wellable (curated challenges). Neither is self-serve for no-HR operators.</td>
+          </tr>
+          <tr>
+            <td><strong>E1</strong> - Feel competent as a people person</td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">The emotional core of her job</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Score with interpretation plus next action; confirmation that setup was correct</td>
+            <td style="font-size:12px;color:var(--text-muted);">Not addressed by any competitor.</td>
+          </tr>
+          <tr>
+            <td><strong>E2</strong> - Feel supported not monitored</td>
+            <td><span class="imp-0">-</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Determines response honesty</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Privacy visible in UI (persistent label, pre-check-in sentence, subscription-model explanation)</td>
+            <td style="font-size:12px;color:var(--text-muted);">Apple Health and Oura Ring score highest on this. No wellbeing competitor closes it.</td>
+          </tr>
+          <tr>
+            <td><strong>E3</strong> - Be seen as a caring leader</td>
+            <td><span class="importance-chip imp-1">1</span> <span class="chip-text">Optional</span></td>
+            <td><span class="importance-chip imp-2">2</span> <span class="chip-text">Social motivation for renewal</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Share prompt at 30-day milestone, referral path</td>
+            <td style="font-size:12px;color:var(--text-muted);">Not addressed by any competitor.</td>
+          </tr>
+          <tr>
+            <td><strong>S1</strong> - Tell network what works</td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">Natural operator behavior</span></td>
+            <td><span class="importance-chip imp-1">1</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Single share prompt at 30-day positive milestone</td>
+            <td style="font-size:12px;color:var(--text-muted);">Not addressed.</td>
+          </tr>
+          <tr>
+            <td><strong>S2</strong> - Share result with owner easily</td>
+            <td><span class="importance-chip imp-3">3</span> <span class="chip-text">The upgrade emotional driver</span></td>
+            <td><span class="importance-chip imp-2">2</span> <span class="chip-text">Wants to receive this</span></td>
+            <td><span class="imp-0">-</span></td>
+            <td style="font-size:12px;color:var(--text-muted);">Operator-to-owner share flow, monthly owner digest</td>
+            <td style="font-size:12px;color:var(--text-muted);">Not addressed in self-serve SMB context.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mvp-core">
+      <div class="mvp-core-label">MVP Core - 3 Jobs to Build First</div>
+      <p style="font-size: 13px; color: var(--text-faint); margin-bottom: 16px; max-width: none;">Criteria: importance score 3 for Priya (Operator) AND not closed by any existing self-serve competitor.</p>
+      <ol>
+        <li><strong>Main job: Run wellbeing without HR training.</strong> Operator importance 3. Not closed anywhere in self-serve form. The entire product exists to serve this job.</li>
+        <li><strong>J2: Know if team is struggling early.</strong> Operator importance 3. Officevibe partially closed this but is now $4,999/yr flat - the self-serve SMB gap is open. This is the early-warning job that drives retention.</li>
+        <li><strong>E1: Feel competent as a people person.</strong> Operator importance 3. Not addressed by any competitor. This is the emotional job that drives 90-day retention and referral. Closing this requires every operator-facing touchpoint to carry an interpretive layer (plain-language score context, confirmation of correct setup, suggested next action).</li>
+      </ol>
+      <p style="font-size: 12px; color: var(--text-faint); margin-top: 16px; max-width: none;">Note: J3 (employee privacy) and J4 (30-second check-in) are also MVP-critical, but they serve Yemi (Employee), not Priya directly. They are preconditions for Priya's jobs to function. Without J3 and J4 working, there is no employee participation, which means no aggregate signal, which means the Main job, J1, J2, J5, and E1 all fail. Include them in MVP scope as supporting architecture, not as primary design surfaces.</p>
+    </div>
+  </section>
+
+  <!-- Critique -->
+  <section id="critique">
+    <div class="section-label">Strict Review</div>
+    <h2>Critique</h2>
+    <p>A strict review of claims across personas.md and jtbd.md. Every claim classified, danger list surfaced, 3 targeted questions.</p>
+
+    <h3>Claim Audit</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="min-width:220px;">Claim</th>
+            <th>Status</th>
+            <th style="min-width:220px;">Source / Basis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Operator has no HR training</td>
+            <td><span class="tag tag-confirmed">Confirmed</span></td>
+            <td>research/competitive-analysis.md - all competitors assume HR sponsor; gap explicitly documented</td>
+          </tr>
+          <tr>
+            <td>Operator engages in bursts, not continuously</td>
+            <td><span class="tag tag-confirmed">Confirmed</span></td>
+            <td>research/ux-patterns.md Pattern B1 - direct behavioral pattern</td>
+          </tr>
+          <tr>
+            <td>Operator needs score plus interpretation plus next action for aha moment</td>
+            <td><span class="tag tag-confirmed">Confirmed (mechanism)</span></td>
+            <td>research/competitive-analysis.md Officevibe AI-action mechanic; research/ux-patterns.md B4</td>
+          </tr>
+          <tr>
+            <td>No self-serve competitor targets the no-HR operator</td>
+            <td><span class="tag tag-confirmed">Confirmed</span></td>
+            <td>research/competitive-analysis.md - Nivati/Woliba/Wellable demo requirements cited</td>
+          </tr>
+          <tr>
+            <td>Privacy doubt kills participation before first check-in</td>
+            <td><span class="tag tag-confirmed">Confirmed (mechanism)</span></td>
+            <td>research/benchmark.md Mechanism 2; research/ux-patterns.md B5; Culture Amp disclosure architecture</td>
+          </tr>
+          <tr>
+            <td>Privacy by architecture earns trust; privacy by promise fails</td>
+            <td><span class="tag tag-confirmed">Confirmed</span></td>
+            <td>research/benchmark.md benchmark scores (Limeade 11/40, Typeform 14/40 vs. Culture Amp 33/40, Apple 35/40)</td>
+          </tr>
+          <tr>
+            <td>First check-in is the trust-forming moment</td>
+            <td><span class="tag tag-confirmed">Confirmed (mechanism)</span></td>
+            <td>research/ux-patterns.md B3 - direct behavioral pattern</td>
+          </tr>
+          <tr>
+            <td>Owner checks in under 2 minutes per month</td>
+            <td><span class="tag tag-challenged">Hypothesis</span></td>
+            <td>research/ux-patterns.md B2 - stated as design implication, not validated with owners</td>
+          </tr>
+          <tr>
+            <td>Owner upgrades = operator wanting to show owner the result</td>
+            <td><span class="tag tag-challenged">Hypothesis</span></td>
+            <td>research/strategy.md Business Model reasoning; validated JTBD analysis reasoning - not yet tested with real users</td>
+          </tr>
+          <tr>
+            <td>Employees will participate honestly if architecture is shown (not just promised)</td>
+            <td><span class="tag tag-critical">Hypothesis - Riskiest</span></td>
+            <td>research/benchmark.md confirms mechanism; but no data on participation rates in SMB employer-run tools at steady state</td>
+          </tr>
+          <tr>
+            <td>65% participation rate achievable</td>
+            <td><span class="tag tag-challenged">Hypothesis</span></td>
+            <td>research/strategy.md O3 target - Culture Amp mechanism confirmed but no SMB-specific participation rate data</td>
+          </tr>
+          <tr>
+            <td>Minimum-N threshold of 5 is the right number</td>
+            <td><span class="tag tag-confirmed">Closed (MVP decision)</span></td>
+            <td>Founder decision, June 2026, not by re-research. N=5 flat for MVP; no live count shown during open cycles. Legal validation deferred. See research/strategy.md Section 5 D1/D4/D5.</td>
+          </tr>
+          <tr>
+            <td>Operator is 26 to 45 years old</td>
+            <td><span class="tag tag-high">Hypothesis - unsourced</span></td>
+            <td>research/strategy.md Segment A - marked [?] in source. No data.</td>
+          </tr>
+          <tr>
+            <td>Mood quotes for all 3 personas</td>
+            <td><span class="tag tag-elevated">Invented (synthesis)</span></td>
+            <td>Synthesized from behavioral patterns. Flagged explicitly in personas.md. Not real user quotes.</td>
+          </tr>
+          <tr>
+            <td>Owner age range</td>
+            <td><span class="tag tag-medium">Unknown</span></td>
+            <td>Explicitly marked [?] in source. No data at all.</td>
+          </tr>
+          <tr>
+            <td>Operator or owner discovers Brio first</td>
+            <td><span class="tag tag-confirmed">Closed - founder decision</span></td>
+            <td>Default established: operator-first (June 2026, not by re-research). Landing page speaks operator language; reversible by paid A/B test. See research/strategy.md Section 5 D3.</td>
+          </tr>
+          <tr>
+            <td>SMB employees are more skeptical than enterprise employees of employer surveys</td>
+            <td><span class="tag tag-challenged">Hypothesis</span></td>
+            <td>Reasonable inference from small-team inference risk (everyone knows each other) - no direct data</td>
+          </tr>
+          <tr>
+            <td>Employees participate once, then decide</td>
+            <td><span class="tag tag-confirmed">Confirmed (pattern)</span></td>
+            <td>research/ux-patterns.md B3 - direct behavioral pattern</td>
+          </tr>
+          <tr>
+            <td>Operator-to-peer referral is strongest channel in year 1</td>
+            <td><span class="tag tag-challenged">Hypothesis (borrowed)</span></td>
+            <td>research/aarrr.md notes this is borrowed from adjacent SMB SaaS patterns, not validated for this product</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top: 40px;">Danger List</h3>
+    <p>Hypotheses that block design or product decisions, in priority order. Status updated after Step 6 verification and Step 8 decisions.</p>
+
+    <div class="danger-item">
+      <div class="danger-header">
+        <div class="danger-num">1</div>
+        <div class="danger-title">Employees in an SMB will participate honestly if the privacy architecture is clearly shown</div>
+      </div>
+      <p class="danger-detail">This is half the riskiest assumption. Step 6 CONFIRMED self-censorship is a real risk AND that the mechanism direction (disclosure, threshold, no live count) aligns with documented best practices. Not killed, but not fully resolved until the no-product prototype test runs.</p>
+      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-confirmed">Partially Verified</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">See research/live-research.md C1, C3. Smallest test still required (strategy.md Riskiest Assumption).</span></div>
+    </div>
+
+    <div class="danger-item">
+      <div class="danger-header">
+        <div class="danger-num">2</div>
+        <div class="danger-title">Showing the structural privacy mechanism drives higher participation than a policy link</div>
+      </div>
+      <p class="danger-detail">Affects whether the disclosure format must be architectural and specific, or whether "anonymous" alone is sufficient.</p>
+      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-challenged">Unresolved</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">No controlled study found. Direction is supported (live-research.md C3) but not empirically proven. Carry the architectural disclosure design; validate in beta.</span></div>
+    </div>
+
+    <div class="danger-item">
+      <div class="danger-header">
+        <div class="danger-num">3</div>
+        <div class="danger-title">The operator, not the owner, discovers Brio first</div>
+      </div>
+      <p class="danger-detail">Affects landing page message and activation flow.</p>
+      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-confirmed">Closed - founder decision</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">Operator-first is the working default. Reversible by paid A/B test. strategy.md Section 5 D3.</span></div>
+    </div>
+
+    <div class="danger-item">
+      <div class="danger-header">
+        <div class="danger-num">4</div>
+        <div class="danger-title">Mood quotes / voice of the operator</div>
+      </div>
+      <p class="danger-detail">Copy on every surface is currently synthesized, not from real user voice. Real quotes from r/officemanagement, r/humanresources, r/smallbusiness, LinkedIn ops coordinator posts, and Glassdoor reviews citing "no HR" would sharpen every persona section.</p>
+      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-challenged">Still open</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">First-phase user interviews will close this.</span></div>
+    </div>
+
+    <h3 style="margin-top: 40px;">3 Targeted Questions to Close the Most Important Gaps</h3>
+
+    <div class="targeted-question">
+      <div class="targeted-q-num">Q1</div>
+      <div class="targeted-q-title">Do SMB employees actually participate honestly in employer-run anonymous surveys when they can see a specific privacy mechanism - or do they self-censor regardless?</div>
+      <p class="targeted-q-detail">This is the question that kills or confirms the product premise. The research shows the mechanism works at Culture Amp (enterprise, approx. 1,000+ employees). It does not show whether it works in a 15-person company where the manager sees the same 3 people at lunch every day. The inference risk is fundamentally different at small scale.</p>
+      <div class="targeted-q-source">Where to look: SHRM research on anonymous survey participation, academic literature on social desirability bias in small-group survey contexts, Reddit posts from employees at small companies describing how they respond to work surveys.</div>
+    </div>
+
+    <div class="targeted-question">
+      <div class="targeted-q-num">Q2</div>
+      <div class="targeted-q-title">In practice, does the operator or the owner discover and initiate a wellbeing tool like Brio?</div>
+      <p class="targeted-q-detail">The entire acquisition funnel, landing page message, and activation flow depend on the answer. If the owner initiates (and then hands it to the operator), the landing page should lead with ROI and risk reduction. If the operator initiates (and then sells it up to the owner), the landing page should lead with competence and ease.</p>
+      <div class="targeted-q-source">Where to look: B2B SaaS acquisition pattern research, LinkedIn posts from SMB operators describing how they found HR tools, Reddit - r/smallbusiness for how founders describe assigning people responsibilities.</div>
+    </div>
+
+    <div class="targeted-question">
+      <div class="targeted-q-num">Q3</div>
+      <div class="targeted-q-title">What words do SMB operators actually use to describe the pain of running wellbeing without HR support?</div>
+      <p class="targeted-q-detail">The personas currently use synthesized language. Real quotes would sharpen the copy on every surface that targets Priya. This is not just a copy exercise: the words people use to describe a problem reveal which part of the problem is most salient, which informs feature prioritization.</p>
+      <div class="targeted-q-source">Where to look: Reddit - r/officemanagement, r/humanresources, r/smallbusiness. LinkedIn content from people who recently got handed "people stuff." Glassdoor reviews mentioning "no HR" or "small team."</div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>Brio - Jobs to Be Done - Phase 2 - June 2026</p>
+    <p style="margin-top:4px;">All jobs cited to source documents. Hypotheses marked [?]. Unknowns marked throughout.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // IntersectionObserver for sub-link active state
+  var subSections = [
+    { id: 'intro', sub: 'sub-intro' },
+    { id: 'main-job', sub: 'sub-main-job' },
+    { id: 'functional', sub: 'sub-functional' },
+    { id: 'emotional', sub: 'sub-emotional' },
+    { id: 'hypotheses', sub: 'sub-hypotheses' },
+    { id: 'matrix', sub: 'sub-matrix' },
+    { id: 'critique', sub: 'sub-critique' }
+  ];
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) {
+          var el = document.getElementById(s.sub);
+          if (el) el.classList.remove('nav-sub-active');
+        });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) {
+          var el = document.getElementById(match.sub);
+          if (el) el.classList.add('nav-sub-active');
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+
+  subSections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
