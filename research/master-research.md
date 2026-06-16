@@ -193,6 +193,40 @@ Source: Phase 3 competitive gap analysis, validated product model v2.
 | H5 | Making the business model's subscription-only nature an explicit part of the privacy story | Employee trust and participation rates will be measurably higher than a control group that sees only a privacy policy link | Oura's "subscription model = no data monetization incentive" argument explains the aligned incentive, not just the promise. Structural arguments outlast policy promises. Source: ouraring.com/blog/health-data-privacy; research/benchmark.md, Mechanism 3 |
 | H6 | A non-configurable minimum-N threshold (assumption: 5 respondents) applied to all aggregate views | Operators and owners accept the data limitation without significant churn | Culture Amp's fixed-threshold model is accepted by enterprise buyers. The number is not the issue - the clarity and consistency are. Edge case: a 5-person company that can never see data must be addressed in free tier design. Source: support.cultureamp.com/en/articles/7048386; research/benchmark.md |
 
+---
+
+## 8. Post-Persona Research, June 2026
+
+*Added in Phase: People and JTBD, Step 6. Live sources only. No memory. Full verification artifact: research/live-research.md.*
+
+### Central Claim Tested: Employee Honest Participation in Employer-Run SMB Tools
+
+The riskiest assumption (strategy.md, Option D) depends on employees trusting an employer-run anonymous tool enough to respond honestly. This subsection records what live research found when we tried to kill that claim first.
+
+**What confirmed:**
+
+Employees DO self-censor in employer-run surveys - documented across SHRM, social desirability bias research, and multiple industry sources. SHRM: "When workers distrust anonymity, they tend to answer dishonestly - painting workplace experiences much rosier than they really are." Source: shrm.org/topics-tools/news/employee-relations/employee-engagement-surveys-workers-distrust.
+
+The mechanisms Brio is using to address this (minimum-N threshold, explicit pre-check-in disclosure, no demographic data collection, weekly cadence) align with what SHRM identifies as the documented best practices for increasing survey trust. Source: shrm.org/topics-tools/news/employee-relations/employee-engagement-surveys-workers-distrust.
+
+66% of SMB employees with a formal wellness program report good or thriving overall wellbeing vs. 40% without. 58% of small businesses now have wellness programs, up from 34% in 2021 - the market is growing. Source: wellhub.com/en-us/resources/work-life-wellness-report-2026-smb/ (Wellhub 2026 SMB report, N=3,773 SMB employees).
+
+70-75% of employees are more likely to share honest feedback when explicitly assured of total anonymity. Source: vantagecircle.com/en/blog/anonymous-employee-survey/.
+
+**What added nuance (not killed, but refined):**
+
+RAND baseline wellness program participation is 20-40% (physical wellness challenges, enterprise). Brio's check-in format is simpler and different, so this may not directly apply, but it signals that a 65% launch-day participation rate is optimistic. RAND baseline = 40% is the more defensible initial benchmark. Source: RAND study cited via selectsoftwarereviews.com/blog/employee-wellness-statistics.
+
+Small-team timing-based inference: SHRM documented that even without demographic data, managers in small teams can cross-reference response timing with employee rosters to identify respondents. The minimum-N threshold does not address this. An MVP decision is needed: what information about check-in response counts and timing is visible to the operator, and when? Source: shrm.org/topics-tools/news/employee-relations/how-anonymous-employee-satisfaction-survey.
+
+**What stayed UNRESOLVED:**
+
+- Whether the operator or owner discovers Brio first (Open Question Q2).
+- Whether the structural "subscription = no data incentive" argument measurably outperforms a policy-based privacy claim.
+- Whether Brio's simplified format (no demographic questions) reduces self-censorship vs. traditional engagement surveys.
+
+---
+
 ### Open Questions Table
 
 | # | Question | Why it matters | Where to answer |
