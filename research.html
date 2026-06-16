@@ -48,55 +48,142 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Nav */
-    nav {
+    /* Sidebar navigation - mobile-first */
+    .sidebar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(13, 15, 18, 0.92);
+      background: rgba(13, 15, 18, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      height: 52px;
-      display: flex;
-      align-items: center;
-      padding: 0 32px;
-      gap: 0;
     }
 
-    .nav-brand {
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 52px;
+    }
+
+    .sidebar-brand {
       font-size: 15px;
       font-weight: 700;
       letter-spacing: 0.08em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-right: 32px;
-      flex-shrink: 0;
     }
 
-    .nav-links {
+    .sidebar-toggle {
       display: flex;
-      gap: 2px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: 9px 8px;
     }
-    .nav-links::-webkit-scrollbar { display: none; }
 
-    .nav-links a {
+    .sidebar-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--text-muted);
+      border-radius: 1px;
+    }
+
+    .sidebar-body {
+      display: none;
+      padding: 8px 0 16px;
+      border-top: 1px solid var(--border);
+      overflow-y: auto;
+      max-height: calc(100vh - 52px);
+    }
+    .sidebar-body.open { display: block; }
+
+    .nav-group { padding: 0 8px; }
+
+    .nav-group-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 14px 12px 6px;
+    }
+
+    .nav-group-label.active-section { color: var(--accent); }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      font-size: 13px;
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 6px 10px;
       border-radius: var(--radius-sm);
-      white-space: nowrap;
       transition: color 0.15s, background 0.15s;
     }
-    .nav-links a:hover {
+
+    a.nav-item:hover {
       color: var(--text);
       background: var(--surface-2);
+      text-decoration: none;
+    }
+
+    .nav-item-disabled {
+      color: var(--text-faint);
+      cursor: default;
+    }
+
+    .nav-soon {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 100px;
+      background: var(--surface-3);
+      color: var(--text-faint);
+      border: 1px solid var(--border);
+    }
+
+    .nav-group-next .nav-group-label { opacity: 0.5; }
+
+    .nav-item-muted {
+      color: var(--text-faint);
+      opacity: 0.5;
+      cursor: default;
+      font-size: 12px;
+    }
+
+    @media (min-width: 900px) {
+      .sidebar {
+        left: 0;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        width: 220px;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+      }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body {
+        display: block;
+        max-height: none;
+        border-top: none;
+        padding: 4px 0 24px;
+        overflow-y: visible;
+      }
     }
 
     /* Layout */
@@ -104,8 +191,19 @@
       padding-top: 52px;
       max-width: 1080px;
       margin: 0 auto;
-      padding-left: 32px;
-      padding-right: 32px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (min-width: 900px) {
+      main {
+        padding-top: 0;
+        margin-left: 220px;
+        margin-right: 0;
+        max-width: none;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
     }
 
     section {
@@ -715,28 +813,46 @@
 
     /* Responsive */
     @media (max-width: 640px) {
-      nav { padding: 0 16px; }
       main { padding-left: 16px; padding-right: 16px; }
-      .nav-brand { font-size: 13px; margin-right: 12px; }
       .hypothesis-card { padding: 16px; gap: 16px; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-brand">Brio</div>
-  <div class="nav-links">
-    <a href="#intro">Intro</a>
-    <a href="#canvas">Lean UX Canvas</a>
-    <a href="#strategy">Strategy</a>
-    <a href="#aarrr">AARRR</a>
-    <a href="#competitors">Competitors</a>
-    <a href="#benchmark">Benchmark</a>
-    <a href="#patterns">UX Patterns</a>
-    <a href="#conclusions">Conclusions</a>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
-</nav>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Research</div>
+      <a href="#intro" class="nav-item">Intro</a>
+      <a href="#canvas" class="nav-item">Lean UX Canvas</a>
+      <a href="#strategy" class="nav-item">Strategy</a>
+      <a href="#aarrr" class="nav-item">AARRR</a>
+      <a href="#competitors" class="nav-item">Competitors</a>
+      <a href="#benchmark" class="nav-item">Benchmark</a>
+      <a href="#patterns" class="nav-item">UX Patterns</a>
+      <a href="#conclusions" class="nav-item">Conclusions</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">People &amp; JTBD</div>
+      <span class="nav-item nav-item-disabled">Personas <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-disabled">JTBD <span class="nav-soon">Soon</span></span>
+    </div>
+    <div class="nav-group nav-group-next">
+      <div class="nav-group-label">Next</div>
+      <span class="nav-item nav-item-muted">Wireframes</span>
+      <span class="nav-item nav-item-muted">Concept</span>
+    </div>
+  </div>
+</aside>
 
 <main>
 
@@ -1718,6 +1834,21 @@
   </footer>
 
 </main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 
 </body>
 </html>
