@@ -100,9 +100,9 @@ Source: research/benchmark.md, Benchmark Scores and "Mechanism That Will Not Wor
 Employees in an employer-funded product are not making free choices about consent. Opt-out framing in this context is not meaningful consent. It also corrupts the aggregate signal because employees who suspect monitoring respond dishonestly.
 Source: research/benchmark.md, "Mechanism That Will Not Work."
 
-**E8 - Minimum-N threshold of 5 is an assumption.**
-[?] Culture Amp uses 5 as configurable default. Wellable uses 10 for health assessment data. Officevibe uses 3 for scores. The legally defensible number for Brio's US context is unknown without legal counsel.
-Source: research/master-research.md, Open Questions Q1; research/benchmark.md, Mechanism 1.
+**E8 - Minimum-N threshold: set at 5 for MVP. Legal validation deferred.**
+MVP decision: N=5 flat, non-configurable by employer. No live count is shown to anyone (operator or employee) during an open cycle. The score appears only after the cycle closes and the minimum-N is met. Closed by founder decision, June 2026 - not by re-research. The legally defensible US threshold (ADA, GINA, EEOC) still requires legal counsel before launch and is deferred.
+Source: research/strategy.md Section 5 (D1/D4/D5); research/live-research.md K1 (resolution). Legal deferral: research/master-research.md Open Question Q1.
 
 ---
 
@@ -110,7 +110,7 @@ Source: research/master-research.md, Open Questions Q1; research/benchmark.md, M
 
 | Unknown | Why It Matters |
 |---------|---------------|
-| [?] Does the operator or the owner discover Brio first? | Determines primary acquisition channel and landing page message (operator-facing vs. owner-facing) |
+| DEFAULT ESTABLISHED - operator-first (closed by founder decision, June 2026, not by re-research). Landing page hero speaks operator language; owner-trust block on same page. Reversible by paid A/B acquisition test. See research/strategy.md D3. | Determines primary acquisition channel and landing page message |
 | [?] What percentage of SMB employees honestly participate in anonymous employer surveys? | If the answer is low even with privacy architecture, H1 is broken and the product premise needs revision |
 | [?] Does a structural privacy argument (subscription model = no incentive to monetize data) outperform a policy-based one in driving participation? | Affects which message is primary on the product page and in employee onboarding |
 | [?] What is the operator's actual daily schedule and digital context when they engage with a wellbeing tool? | Affects notification timing, digest cadence, and whether the product needs a native app |

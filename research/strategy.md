@@ -112,3 +112,58 @@ The two halves are linked: operator belief is tested first (at signup and setup)
 Run a no-product prototype test: manually send a 1-question wellbeing check-in to a 10 to 15 person team via a plain email (no Brio branding, just a simple Google Form or Typeform), tell employees explicitly that only the aggregate score will be shared with their manager, and measure actual participation rate vs. stated intent. If participation is below 40% even with a direct human invitation and a clear privacy statement, the assumption is broken and the product premise needs rethinking before building anything.
 
 Source validation: research/benchmark.md confirms privacy by promise fails (Limeade anti-pattern, Typeform cautionary case, 11/40 and 14/40 respectively). research/competitive-analysis.md confirms no competitor has resolved both the operator belief problem (self-serve, no HR) and the employee participation problem (genuine privacy architecture) in one product. The assumption sits at the intersection of both unresolved problems.
+
+**Post-persona verification update (June 2026):** Adversarial verification (research/live-research.md, Step 6) did not kill the riskiest assumption. It strengthened it. Self-censorship in employer-run surveys is real and documented (SHRM). The mechanisms Brio is pursuing - minimum-N threshold, explicit pre-check-in disclosure, no demographic data collection, weekly cadence - all align with documented best practices for building honest participation. The one new architectural implication from the verification (timing-based inference in very small teams) was resolved by founder decision in June 2026. See Section 5 below.
+
+---
+
+## 5. Decisions, Phase People and JTBD, June 2026
+
+*Founder decisions made after adversarial verification in Step 6 (research/live-research.md). These close the open product decisions surfaced in Step 7 and are now locked for MVP.*
+
+---
+
+### Unified Privacy Principle - No Live Count During Open Cycles (Decisions D1, D4, and D5 combined)
+
+**Decision:** Nobody sees a live participation count while a check-in cycle is open. The operator sees an explicit active state ("your check-in is running and collecting responses - results appear after it closes"), designed to be reassuring, not silent. The score, trend, and response count are revealed only after the cycle closes and minimum-N is met. The employee check-in shows zero information about how many others have responded: no "X of Y" and no "X responses received." The minimum-N threshold is set at 5 flat for MVP - not raised for very small teams.
+
+**Rationale:** The live-research.md adversarial verification (Step 6) found that the timing-inference vector in small teams is the key unaddressed risk in the privacy architecture - not the threshold number itself. A manager in a 12-person office who sees "5 of 12 responses received at 2:41pm" can narrow down who responded by cross-referencing with who was on their phone at that time. Removing the live count eliminates this vector entirely. This is cleaner and less punishing than raising the threshold: a higher threshold breaks activation on the free tier (a 10-person team needing 7 responses would need 70% participation just to see any score, which likely never happens in early weeks). The employee-side applies the same principle: any response count visible to employees is an inference vector in a small team and undermines the privacy promise for a weak social-proof gain.
+
+**Product design note for wireframes:** The active-cycle state on the operator dashboard must be a first-class, explicitly designed state. A reassuring message with a visual indicator that the cycle is running, plus a time and date for when results will appear. A blank or empty state reads as a product error and degrades into the "fully blind" experience.
+
+**Copy note for very small teams:** For teams of roughly 12 or fewer, show the operator an honest setup message: "Brio works best from about 8 participants and up. Below that, we hold the result until enough responses come in to keep it anonymous." Sets expectations without changing the threshold.
+
+**CLOSES:** Flag F1 - timing-based inference in small teams (research/live-research.md K1). CLOSES: [?] minimum-N threshold (research/personas.md E8, research/jtbd.md critique table).
+
+**Legal deferral:** The minimum-N threshold of 5 is the MVP default. Whether a higher threshold is legally required in the US market (Open Question Q1 in master-research.md) is deferred to legal counsel before launch. N=5 is operationally standard (cited in SHRM best practices, used by Culture Amp) but not yet legally validated for Brio's specific check-in format.
+
+---
+
+### D2 - Participation Benchmark Communication
+
+**Decision (Option A, with framing correction):** Set the expectation with operators that a strong early start is in the range of comparable wellness programs (adjacent-category reference, not a Brio metric), and frame 65% as the healthy steady state after roughly 90 days. The RAND study baseline of 20 to 40% is NOT a measured Brio benchmark and is not like-for-like with Brio's pulse format (that figure covers physical wellness challenges - step challenges and biometric screenings). It must be presented to operators as an adjacent-category reference with explicit labeling: "comparable wellness programs often start in this range (RAND, cited in research/live-research.md C4)." Do not present it as a Brio metric.
+
+**Aha-moment message shift:** The operator's first-result message changes from "here is your team's score" to "you are building the habit - here is your team's score, and here is how an early month typically compares to a comparable program." This prevents operator churn when initial participation is realistic rather than aspirational.
+
+**CLOSES:** Participation benchmark communication framing is now locked. The 65% steady-state target in O3 remains a hypothesis - unchanged. The aha-moment message design is now set.
+
+---
+
+### D3 - Landing Page Lead
+
+**Decision (Option A, operator-led, reversible):** The landing page hero speaks the operator's language: competence and ease, the ability to run real wellbeing without an HR team. This is the default because the operator is the only persona who self-activates without a sales call. The page includes a secondary block answering the owner's question ("what does the owner see? the aggregate-only dashboard") so the owner can evaluate it when the operator forwards the link.
+
+**This decision is reversible.** If an early paid A/B test of operator-facing vs. owner-facing ad creative shows owner-led conversions outperforming operator-led, switch the hero to owner language. This is the design default, not a permanent position.
+
+**CLOSES (as default):** [?] "Does the operator or owner discover Brio first?" (research/personas.md Unknown table, research/jtbd.md critique table). Operator-first is the design default. Open to revision by acquisition test data. Marked CLOSED as a working decision, not a validated fact.
+
+---
+
+### Deferred Items - Legal and Compliance Scope
+
+Not blockers for MVP design. Blockers before launch.
+
+| Item | Reason for deferral |
+|------|-------------------|
+| Minimum-N threshold legal validation | Whether N=5 is legally defensible in the US under ADA, GINA, and EEOC wellness rules requires legal counsel. MVP defaults to N=5 as operationally standard. Do not launch without legal confirmation. Open Question Q1 from master-research.md. |
+| Regulatory review for emotional and mood check-in data | ADA, GINA, HIPAA-adjacent rules may apply. Open Question Q6. Not a design blocker but a launch blocker. |

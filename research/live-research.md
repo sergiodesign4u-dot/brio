@@ -61,7 +61,7 @@ WHAT: SHRM specifically documented that "supervisors could cross-reference surve
 
 NOTE: This does NOT kill the core premise (architecture-based privacy is better than policy-based privacy). It adds a nuance: the threshold is a necessary but not sufficient element. The product needs to also: (a) never show managers the response timing or count of who has responded until after the cycle closes, (b) communicate that response timing and individual check-in status are never shared with managers - not just the score.
 
-Flag status: See Step 7 - this affects a specific MVP architecture decision.
+**RESOLUTION (founder decision, June 2026):** Flag F1 is closed by Decisions D1, D4, and D5 combined. Nobody sees a live participation count while a check-in cycle is open - not the operator, not the employee. The operator sees an active-state message ("your check-in is running - results appear after it closes"). The score and response count appear only after the cycle closes and minimum-N is met. This eliminates the timing-inference vector entirely. The privacy architecture in research/benchmark.md Mechanism 1 (Indirect Identification Protection) now covers score-data inference AND count/timing inference. Minimum-N stays at 5 flat for MVP. See research/strategy.md Section 5 for full reasoning.
 
 ---
 

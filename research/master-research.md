@@ -191,7 +191,7 @@ Source: Phase 3 competitive gap analysis, validated product model v2.
 | H3 | The operator's aha moment is seeing the first aggregated check-in score alongside a plain-language interpretation AND a suggested next action | 90-day retention will exceed 65% | Officevibe's AI-recommended-action model shows operators who understand what to do next stay engaged. Score alone does not create a habit. Source: workleap.com/officevibe; research/competitive-analysis.md |
 | H4 | Gating the owner dashboard (aggregate view) behind the paid tier drives free-to-paid conversion better than any other feature gate | Free-to-paid conversion will reach 8-12% within 60 days of activation | The owner wanting proof the investment is working is the renewal driver (confirmed in JTBD analysis). The operator upgrades to give the owner access. Source: Strategy v_refresh, Segment B JTBD |
 | H5 | Making the business model's subscription-only nature an explicit part of the privacy story | Employee trust and participation rates will be measurably higher than a control group that sees only a privacy policy link | Oura's "subscription model = no data monetization incentive" argument explains the aligned incentive, not just the promise. Structural arguments outlast policy promises. Source: ouraring.com/blog/health-data-privacy; research/benchmark.md, Mechanism 3 |
-| H6 | A non-configurable minimum-N threshold (assumption: 5 respondents) applied to all aggregate views | Operators and owners accept the data limitation without significant churn | Culture Amp's fixed-threshold model is accepted by enterprise buyers. The number is not the issue - the clarity and consistency are. Edge case: a 5-person company that can never see data must be addressed in free tier design. Source: support.cultureamp.com/en/articles/7048386; research/benchmark.md |
+| H6 | A non-configurable minimum-N threshold (5 respondents) applied to all aggregate views, with no live count visible during open cycles | Operators and owners accept the data limitation without significant churn | Culture Amp's fixed-threshold model is accepted by enterprise buyers. The number is not the issue - the clarity and consistency are. Edge case: a very small team (8-12 people) that may not reach N=5 quickly must see an explicit setup message. **MVP decision: N=5 flat, no live count during open cycle. Closed by founder decision, June 2026. Strategy.md Section 5, D1/D4/D5.** Legal threshold validation deferred. Source: support.cultureamp.com/en/articles/7048386; research/benchmark.md; research/live-research.md C3. |
 
 ---
 
@@ -219,11 +219,13 @@ RAND baseline wellness program participation is 20-40% (physical wellness challe
 
 Small-team timing-based inference: SHRM documented that even without demographic data, managers in small teams can cross-reference response timing with employee rosters to identify respondents. The minimum-N threshold does not address this. An MVP decision is needed: what information about check-in response counts and timing is visible to the operator, and when? Source: shrm.org/topics-tools/news/employee-relations/how-anonymous-employee-satisfaction-survey.
 
-**What stayed UNRESOLVED:**
+**What stayed UNRESOLVED after verification:**
 
 - Whether the operator or owner discovers Brio first (Open Question Q2).
 - Whether the structural "subscription = no data incentive" argument measurably outperforms a policy-based privacy claim.
 - Whether Brio's simplified format (no demographic questions) reduces self-censorship vs. traditional engagement surveys.
+
+**Decisions made after verification (June 2026):** See research/strategy.md Section 5 for full reasoning. Summary: (a) No live count during open cycles - operator sees active state, score revealed only when cycle closes and N met; employee sees zero count information. (b) Participation benchmark: 65% is 90-day steady state; adjacent-category RAND reference (20-40%) must be labeled as such, not as a Brio metric. (c) Landing page leads with operator language by default, owner-trust block on same page; reversible by acquisition test. (d) Minimum-N stays at 5 flat for MVP; legal validation deferred. These decisions close Flag F1 (timing-inference risk in small teams) and establish Q2 as a working default (operator-first).
 
 ---
 
@@ -231,8 +233,8 @@ Small-team timing-based inference: SHRM documented that even without demographic
 
 | # | Question | Why it matters | Where to answer |
 |---|----------|----------------|----------------|
-| Q1 | What is the legally defensible minimum-N threshold for aggregate display in the US market? Is 5 correct? | The wrong threshold either exposes individuals (too low) or makes the product useless for very small teams (too high) | Legal counsel before launch. Note: Culture Amp uses 5 as default (configurable); Wellable uses 10 for health assessment data; Officevibe uses 3 for scores. |
-| Q2 | Does the operator discover Brio, or does the owner? | Determines primary acquisition channel and landing page message | User research or paid acquisition test: run operator-targeted and owner-targeted ads to the same page, measure which converts. |
+| Q1 | What is the legally defensible minimum-N threshold for aggregate display in the US market? Is 5 correct? | The wrong threshold either exposes individuals (too low) or makes the product useless for very small teams (too high) | **DEFERRED TO LEGAL (not an MVP design blocker).** MVP defaults to N=5 as operationally standard (SHRM, Culture Amp). Timing-inference vector addressed by D1 (no live count). Threshold legal validation required before launch. Strategy.md Section 5, Deferred Items. |
+| Q2 | Does the operator discover Brio, or does the owner? | Determines primary acquisition channel and landing page message | **CLOSED AS DEFAULT by founder decision, June 2026.** Operator-first is the design default: landing page hero speaks operator language, owner-trust block on the same page. Reversible if paid A/B test shows owner-led conversions outperforming. Strategy.md Section 5, D3. |
 | Q3 | What is the right cadence for the employee check-in - weekly, biweekly, or monthly? | Cadence determines habit formation and data freshness | A/B test in beta: 3 cohorts at different cadences, measure participation rate and retention at 90 days |
 | Q4 | Does a 10-employee free tier create meaningful conversion, or does it enable permanent free usage that never upgrades? | Defines whether the free tier is an acquisition channel or a churn pool | Instrument the free tier carefully: track what % of 10-employee companies actually have fewer than 10 employees at signup vs. are gaming the limit. |
 | Q5 | How does Brio handle a company that grows past the anonymity threshold during a check-in cycle? | Edge case: a 4-person team answers; a 5th person is hired mid-cycle. Do historic responses become visible? | Architecture decision before launch: rolling N or snapshot N. |

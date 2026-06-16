@@ -180,11 +180,11 @@ Note: J3 (employee privacy) and J4 (30-second check-in) are also MVP-critical, b
 | Owner upgrades = operator wanting to show owner the result | HYPOTHESIS | research/strategy.md Business Model reasoning; validated JTBD analysis reasoning - not yet tested with real users |
 | Employees will participate honestly if architecture is shown (not just promised) | HYPOTHESIS - RISKIEST | research/benchmark.md confirms mechanism; but no data on participation rates in SMB employer-run tools at steady state |
 | 65% participation rate achievable | HYPOTHESIS | research/strategy.md O3 target - Culture Amp mechanism confirmed but no SMB-specific participation rate data |
-| Minimum-N threshold of 5 is the right number | HYPOTHESIS | research/master-research.md Open Question Q1 - Culture Amp uses 5, Wellable uses 10, Officevibe uses 3. No legal confirmation. |
+| Minimum-N threshold of 5 is the right number | CLOSED (MVP decision) - founder decision, June 2026, not by re-research. N=5 flat for MVP; no live count shown during open cycles. Legal validation deferred. See research/strategy.md Section 5 D1/D4/D5. |
 | Operator is 26 to 45 years old | HYPOTHESIS - UNSOURCED | research/strategy.md Segment A - marked [?] in source. No data. |
 | "Mood quotes" for all 3 personas | INVENTED (synthesis) | Synthesized from behavioral patterns. Flagged explicitly in personas.md. Not real user quotes. |
 | Owner age range | UNKNOWN | Explicitly marked [?] in source. No data at all. |
-| Operator or owner discovers Brio first | UNKNOWN | Explicitly marked as Open Question Q2 in master-research.md |
+| Operator or owner discovers Brio first | DEFAULT ESTABLISHED - operator-first (closed by founder decision, June 2026, not by re-research). Landing page speaks operator language; reversible by paid A/B test. See research/strategy.md Section 5 D3. |
 | SMB employees are more skeptical than enterprise employees of employer surveys | HYPOTHESIS | Reasonable inference from small-team inference risk (everyone knows each other) - no direct data |
 | Employees participate once, then decide | CONFIRMED (pattern) | research/ux-patterns.md B3 - direct behavioral pattern |
 | Operator-to-peer referral is strongest channel in year 1 | HYPOTHESIS (borrowed) | research/aarrr.md notes this is borrowed from adjacent SMB SaaS patterns, not validated for this product |
@@ -193,14 +193,14 @@ Note: J3 (employee privacy) and J4 (30-second check-in) are also MVP-critical, b
 
 ### Danger List - Hypotheses That Block Design or Product Decisions
 
-*Priority order: most consequential first.*
+*Priority order: most consequential first. Status updated after Step 6 verification and Step 8 decisions.*
 
-| # | Hypothesis at Risk | What Depends On It | Where to Verify |
+| # | Hypothesis at Risk | What Depends On It | Status |
 |---|-------------------|--------------------|--------------------|
-| 1 | Employees in an SMB (no HR buffer, small teams, everyone knows each other) will participate honestly in an employer-run anonymous survey if the privacy architecture is clearly shown | This is half the riskiest assumption. If false: H1 breaks, the aggregate signal never forms, the owner sees nothing, and the product fails before it has users. The whole pulse loop, owner dashboard, and retention model collapse. | Run the no-product prototype test (email check-in to a real 10-15 person team, explicit privacy statement, measure actual participation). Reddit - r/antiwork, r/jobs, r/remotework for real employee voice. Academic literature on honest survey participation under employer observation. |
-| 2 | Showing the structural privacy mechanism (architecture, not policy) drives meaningfully higher participation than a privacy policy link | Affects: whether the privacy disclosure format on the product page and in check-ins must be architectural/specific, or whether a standard "anonymous" label is sufficient | Search for controlled studies on anonymous survey trust. Look for HCI research on privacy disclosure design. Verify whether Culture Amp has any published data on pre-survey disclosure impact. |
-| 3 | The operator, not the owner, discovers Brio first | Affects: which persona the landing page speaks to first, which JTBD leads the acquisition message, whether the primary conversion trigger is competence (operator) or ROI (owner) | Reddit - r/officemanagement, r/humanresources for how operators search for tools. Check what queries SMB operators actually type vs. what owners type. Look for any SMB SaaS acquisition data showing B2B discovery patterns. |
-| 4 | Mood quotes / voice of the operator | Affects: copy on every marketing and product surface. Currently invented from research synthesis. Real quotes from real people in this role would sharpen every persona section. | Reddit - r/officemanagement, r/smallbusiness, r/humanresources. LinkedIn posts from people with "office manager" or "ops coordinator" titles. Glassdoor reviews for companies in the 10-50 person range. |
+| 1 | Employees in an SMB will participate honestly if the privacy architecture is clearly shown | This is half the riskiest assumption. Step 6 CONFIRMED self-censorship is a real risk AND that the mechanism direction (disclosure + threshold + no live count) aligns with documented best practices. Not killed, but not fully resolved until the no-product prototype test runs. | PARTIALLY VERIFIED - see research/live-research.md C1, C3. Smallest test still required (strategy.md Riskiest Assumption). |
+| 2 | Showing the structural privacy mechanism drives higher participation than a policy link | Affects whether the disclosure format must be architectural and specific, or whether "anonymous" alone is sufficient | UNRESOLVED. No controlled study found. Direction is supported (live-research.md C3) but not empirically proven. Carry the architectural disclosure design; validate in beta. |
+| 3 | The operator, not the owner, discovers Brio first | Affects landing page message and activation flow | CLOSED AS DEFAULT by founder decision, June 2026. Operator-first is the working default. Reversible by paid A/B test. strategy.md Section 5 D3. |
+| 4 | Mood quotes / voice of the operator | Copy on every surface is currently synthesized, not from real user voice | STILL OPEN. Real quotes from r/officemanagement, r/humanresources, r/smallbusiness, LinkedIn ops coordinator posts, Glassdoor reviews citing "no HR" would sharpen every persona section. First-phase user interviews will close this. |
 
 ---
 
