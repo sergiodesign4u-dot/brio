@@ -1,5 +1,7 @@
 # Product Model
 
+> **Superseded, kept for history.** This is the pre-Lean-UX-Canvas product model (v1 and v2). It was migrated into research/strategy.md and is now carried by research/docs/lean-ux-canvas.md and research/docs/research.md. Retained for history only; not a canonical deliverable.
+
 ---
 
 ## Changelog

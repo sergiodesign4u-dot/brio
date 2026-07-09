@@ -7,7 +7,7 @@
 | Version | Date | Summary |
 |---------|------|---------|
 | v1 | Phase 2 | Pre-research hypotheses. All targets marked as low confidence. |
-| v_refresh | Phase 7 re-run | Refreshed against research/competitive-analysis.md and research/benchmark.md. Aligned with Strategy v_refresh (same segments, business model, riskiest assumption). Acquisition SEO sharpened. Activation aha moment sharpened. Privacy disclosure added as Retention mechanism. Sources cited for each adjustment. Targets remain hypotheses. |
+| v_refresh | Phase 7 re-run | Refreshed against research/docs/competitors.md and research/docs/benchmark.md. Aligned with Strategy v_refresh (same segments, business model, riskiest assumption). Acquisition SEO sharpened. Activation aha moment sharpened. Privacy disclosure added as Retention mechanism. Sources cited for each adjustment. Targets remain hypotheses. |
 
 ---
 
@@ -15,9 +15,9 @@
 
 **Channels and mechanics**
 
-- SEO / content: target long-tail "operator how-to" queries ("how to run employee wellness program small business", "office manager wellbeing ideas no HR"). NOT product comparison queries - those are dominated by G2 and Capterra review sites where Brio has no footprint yet. Source: research/competitive-analysis.md - Awareness channel note, Phase 4.5 update.
-- LinkedIn: paid targeting by job title (office manager, operations coordinator, EA, founder) at companies 10 to 200 employees. Direct-to-operator message. Confirmed viable by Gusto's use of this channel for a similar persona. Source: research/competitive-analysis.md, Aspirational group - gusto.com.
-- Free tier as permanent top-of-funnel: the free plan is not a time-limited trial. It demonstrates real value before asking for a credit card. The team-size limit (10 employees) is the conversion trigger. Source: research/competitive-analysis.md - Headspace Core self-serve model.
+- SEO / content: target long-tail "operator how-to" queries ("how to run employee wellness program small business", "office manager wellbeing ideas no HR"). NOT product comparison queries - those are dominated by G2 and Capterra review sites where Brio has no footprint yet. Source: research/docs/competitors.md - Awareness channel note, Phase 4.5 update.
+- LinkedIn: paid targeting by job title (office manager, operations coordinator, EA, founder) at companies 10 to 200 employees. Direct-to-operator message. Confirmed viable by Gusto's use of this channel for a similar persona. Source: research/docs/competitors.md, Aspirational group - gusto.com.
+- Free tier as permanent top-of-funnel: the free plan is not a time-limited trial. It demonstrates real value before asking for a credit card. The team-size limit (10 employees) is the conversion trigger. Source: research/docs/competitors.md - Headspace Core self-serve model.
 - Founder / owner word of mouth: owners who see ROI tell other owners at peer groups (EO, YPO, investor circles). Secondary channel, later phase.
 
 **Choices considered for primary channel - diverge then converge:**
@@ -25,9 +25,9 @@ Content marketing targeting "operator how-to" queries (chosen) vs. paid LinkedIn
 
 **Hypotheses**
 
-1. The free tier will be the primary acquisition driver in the first 12 months. Operators who cannot see a price or try a product without talking to a salesperson will not buy. Headspace Core and Gusto prove this audience self-activates when friction is removed. Source: research/competitive-analysis.md, Key Differences - Sales motion.
+1. The free tier will be the primary acquisition driver in the first 12 months. Operators who cannot see a price or try a product without talking to a salesperson will not buy. Headspace Core and Gusto prove this audience self-activates when friction is removed. Source: research/docs/competitors.md, Key Differences - Sales motion.
 2. Long-tail SEO around "no HR" and "small business wellbeing" has low competition and high intent from the operator persona. [? to validate with keyword research before launch]
-3. The operator is the discovery persona (finds Brio) and the decision persona (signs up without needing internal buy-in at 10-50 person companies). [? whether the owner discovers first - open question Q2 from master-research.md]
+3. The operator is the discovery persona (finds Brio) and the decision persona (signs up without needing internal buy-in at 10-50 person companies). [? whether the owner discovers first - open question Q2 from research/docs/research.md]
 
 **Unknowns**
 
@@ -49,15 +49,15 @@ Content marketing targeting "operator how-to" queries (chosen) vs. paid LinkedIn
 
 - Guided linear onboarding: operator enters company name, invites team, picks first program - all in one flow under 5 minutes. No blank-slate setup. No menu of options.
 - First program pre-selected based on company size - operator confirms or swaps. Reduces decision paralysis for a non-expert buyer.
-- Privacy disclosure built into employee onboarding: before the first check-in question, one sentence in plain language ("your answer joins the team's anonymous score - [company name] sees only the team total, never your response"). This is not optional, not a modal, not a policy link. Source: research/benchmark.md, Mechanism 2 - Apple Health pattern; research/ux-patterns.md, Pattern B5.
-- Aha moment design: first aggregate result appears alongside a plain-language interpretation and a suggested next action ("4 people responded. Team score: 7.2/10. This is a strong start - consider launching the next module this week."). Source: research/competitive-analysis.md - Officevibe AI-recommended-action mechanic (workleap.com/officevibe).
+- Privacy disclosure built into employee onboarding: before the first check-in question, one sentence in plain language ("your answer joins the team's anonymous score - [company name] sees only the team total, never your response"). This is not optional, not a modal, not a policy link. Source: research/docs/benchmark.md, Mechanism 2 - Apple Health pattern; research/docs/ux-patterns.md, Pattern B5.
+- Aha moment design: first aggregate result appears alongside a plain-language interpretation and a suggested next action ("4 people responded. Team score: 7.2/10. This is a strong start - consider launching the next module this week."). Source: research/docs/competitors.md - Officevibe AI-recommended-action mechanic (workleap.com/officevibe).
 - Employee onboarding: no account required for the first check-in. Magic link or simple join code.
 
 **Hypotheses**
 
-1. The operator's aha moment is seeing the first aggregated check-in score alongside a plain-language interpretation AND a suggested next action - not just the number. A score without context produces no action and no habit. Source: research/competitive-analysis.md - Officevibe pattern; research/ux-patterns.md, Pattern B4.
-2. The privacy disclosure before the first check-in is the critical activation gate for employees. If employees feel uncertain about who can see their answer, they will not respond honestly - or will not respond at all. Without employee responses, the aha moment cannot happen. Source: research/benchmark.md, Mechanism 2; research/ux-patterns.md, Pattern B5.
-3. Time-to-first-program under 5 minutes is achievable and is the critical activation threshold for operators. Confirmed by Headspace Core's self-serve model and Gusto's guided setup pattern. Source: research/competitive-analysis.md.
+1. The operator's aha moment is seeing the first aggregated check-in score alongside a plain-language interpretation AND a suggested next action - not just the number. A score without context produces no action and no habit. Source: research/docs/competitors.md - Officevibe pattern; research/docs/ux-patterns.md, Pattern B4.
+2. The privacy disclosure before the first check-in is the critical activation gate for employees. If employees feel uncertain about who can see their answer, they will not respond honestly - or will not respond at all. Without employee responses, the aha moment cannot happen. Source: research/docs/benchmark.md, Mechanism 2; research/docs/ux-patterns.md, Pattern B5.
+3. Time-to-first-program under 5 minutes is achievable and is the critical activation threshold for operators. Confirmed by Headspace Core's self-serve model and Gusto's guided setup pattern. Source: research/docs/competitors.md.
 
 **Unknowns**
 
@@ -77,17 +77,17 @@ Content marketing targeting "operator how-to" queries (chosen) vs. paid LinkedIn
 
 **Channels and mechanics**
 
-- Operator habit: weekly email digest summarizing team participation rate and aggregate score with plain-language interpretation. This is the primary operator touchpoint - the operator does not need to log in daily. Source: research/ux-patterns.md, Pattern B1 (operator works in bursts, not continuously).
-- Employee habit: consistent check-in schedule (same day, same time each week). Routine reduces friction more than feature depth. Participation habit forms over 3 to 4 weeks if the experience is safe and fast. Source: research/ux-patterns.md, Pattern B3.
-- Privacy disclosure as retention mechanism: repeated contextual privacy communication before every check-in trains employee trust over time. One-time consent flows are forgotten. Persistent repetition at the same moment is the mechanism. Source: research/benchmark.md, Mechanism 2 - Apple Health pattern (apple.com/privacy/features).
-- Owner digest: monthly email with team health trend and program highlights. Designed for mobile reading. Read-only single-screen experience. Source: research/ux-patterns.md, Pattern B2.
+- Operator habit: weekly email digest summarizing team participation rate and aggregate score with plain-language interpretation. This is the primary operator touchpoint - the operator does not need to log in daily. Source: research/docs/ux-patterns.md, Pattern B1 (operator works in bursts, not continuously).
+- Employee habit: consistent check-in schedule (same day, same time each week). Routine reduces friction more than feature depth. Participation habit forms over 3 to 4 weeks if the experience is safe and fast. Source: research/docs/ux-patterns.md, Pattern B3.
+- Privacy disclosure as retention mechanism: repeated contextual privacy communication before every check-in trains employee trust over time. One-time consent flows are forgotten. Persistent repetition at the same moment is the mechanism. Source: research/docs/benchmark.md, Mechanism 2 - Apple Health pattern (apple.com/privacy/features).
+- Owner digest: monthly email with team health trend and program highlights. Designed for mobile reading. Read-only single-screen experience. Source: research/docs/ux-patterns.md, Pattern B2.
 - In-product nudges for operators: when participation drops below the threshold, operator gets a gentle prompt ("Only 3 responses this week - try sending a reminder to the team").
 
 **Hypotheses**
 
-1. Operator retention is driven by the weekly digest email more than by daily in-app sessions. Operators are time-poor and log in when prompted. Source: research/ux-patterns.md, Pattern B1.
+1. Operator retention is driven by the weekly digest email more than by daily in-app sessions. Operators are time-poor and log in when prompted. Source: research/docs/ux-patterns.md, Pattern B1.
 2. Employee participation rate above 60% is the leading indicator for operator retention. If employees stop responding, aggregate signals degrade, operators lose faith in the product, and churn follows. The riskiest assumption (employee trust and participation) is the retention lever. Source: research/strategy.md, Riskiest Assumption.
-3. The owner monthly digest is the primary driver of paid plan renewal decisions. The owner needs one number, a trend, and a plain-language interpretation - under 2 minutes. Source: research/ux-patterns.md, Pattern B2.
+3. The owner monthly digest is the primary driver of paid plan renewal decisions. The owner needs one number, a trend, and a plain-language interpretation - under 2 minutes. Source: research/docs/ux-patterns.md, Pattern B2.
 
 **Unknowns**
 
@@ -108,7 +108,7 @@ Content marketing targeting "operator how-to" queries (chosen) vs. paid LinkedIn
 **Channels and mechanics**
 
 - Free-to-paid conversion: triggered naturally when account hits free tier limits (more than 10 employees, or operator wants owner dashboard access). No random upgrade prompts.
-- Owner dashboard gate: the aggregate owner view is the primary paid feature. Operator upgrades to give the owner access - this is the emotional driver of the upgrade decision, not a feature checklist. Source: research/ux-patterns.md; validated JTBD analysis, Segment B.
+- Owner dashboard gate: the aggregate owner view is the primary paid feature. Operator upgrades to give the owner access - this is the emotional driver of the upgrade decision, not a feature checklist. Source: research/docs/ux-patterns.md; validated JTBD analysis, Segment B.
 - Annual vs. monthly billing: offer a discount for annual billing (assumption: 15 to 20% off) to improve cash flow predictability and reduce churn.
 - Expansion: as company grows past 50 employees, move to Growth tier automatically with an upgrade prompt framed around team scale, not product features.
 
@@ -117,9 +117,9 @@ Option 1: team-size limit only (more than 10 employees). Option 2: owner dashboa
 
 **Hypotheses**
 
-1. The owner dashboard (aggregate team signal) is the primary paid feature. Operators upgrade to give the owner visibility, not because they need more features for themselves. Source: research/competitive-analysis.md - Officevibe score visualization as owner value anchor; validated JTBD analysis.
-2. Per-seat pricing works better than flat-fee for this segment because it scales naturally with company growth and aligns cost to value delivered. Source: research/competitive-analysis.md - Woliba MAU pricing note; Headspace Core per-seat model.
-3. A free tier with a real team-size limit (10 employees) will convert at a higher rate than a time-limited trial, because it allows operators to demonstrate value before hitting the wall. Source: research/competitive-analysis.md - Headspace Core as closest analog.
+1. The owner dashboard (aggregate team signal) is the primary paid feature. Operators upgrade to give the owner visibility, not because they need more features for themselves. Source: research/docs/competitors.md - Officevibe score visualization as owner value anchor; validated JTBD analysis.
+2. Per-seat pricing works better than flat-fee for this segment because it scales naturally with company growth and aligns cost to value delivered. Source: research/docs/competitors.md - Woliba MAU pricing note; Headspace Core per-seat model.
+3. A free tier with a real team-size limit (10 employees) will convert at a higher rate than a time-limited trial, because it allows operators to demonstrate value before hitting the wall. Source: research/docs/competitors.md - Headspace Core as closest analog.
 
 **Unknowns**
 
@@ -184,6 +184,6 @@ Option 1: team-size limit only (more than 10 employees). Option 2: owner dashboa
 
 2. **The owner dashboard is the paid feature, but the operator is the buyer.** The operator upgrades to give the owner visibility. Design the upgrade moment around that emotional job - not around feature lists, storage limits, or arbitrary trial expiry.
 
-3. **Employee participation rate is the leading indicator for everything.** If employees stop responding, aggregate signals degrade, operators lose faith, and churn follows. Privacy design (persistent disclosure, non-configurable minimum-N, business model as trust argument) is not a compliance layer - it is the retention strategy. Source: research/benchmark.md.
+3. **Employee participation rate is the leading indicator for everything.** If employees stop responding, aggregate signals degrade, operators lose faith, and churn follows. Privacy design (persistent disclosure, non-configurable minimum-N, business model as trust argument) is not a compliance layer - it is the retention strategy. Source: research/docs/benchmark.md.
 
 4. **The free tier is the acquisition channel.** Do not cripple it so badly it cannot demonstrate real value. The 10-employee limit is the natural, non-punitive conversion trigger - not an artificial feature wall. A free tier that shows nothing meaningful does not convert; it just delays churn.

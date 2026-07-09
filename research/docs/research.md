@@ -1,19 +1,19 @@
-# Master Research - Brio
+# Research - Brio
 
-*Single source of truth. Built from validated v2 product model.*
+*Single source of truth for the Brio product. Synthesis of Foundation Research (Stage 1), extended with a post-persona re-research subsection (Stage 2). Every claim carries a source; unknowns are marked [?].*
 
 ---
 
 ## 1. Introduction
 
 ### Purpose
-This document synthesizes all research phases into a single, citable source of truth for the Brio product design process. It is the foundation for wireframes, concept, and design system work.
+This document synthesizes Foundation Research into a single, citable source of truth for the Brio product design process. It is the foundation for information architecture, wireframes, concept, and design system work.
 
 ### Problem
 Small businesses (10 to 200 employees) with no HR team have no credible tool to run employee wellbeing. The person handed "people stuff" - an office manager, ops lead, or founder - has no training, no framework, and no way to know if their efforts are working. The business owner needs proof the investment is worthwhile but has no HR layer to filter individual data. In this context, the product itself must be the privacy boundary between what the owner can see and what employees share.
 
 ### Approach
-7 research phases: product brief, product model (v1 and v2), AARRR model, competitive analysis (8 companies, 3 groups), trust and privacy benchmark (5 products), UX pattern analysis (5 patterns, 5 behavioral patterns). Web research conducted June 2026. Public pages only; no accounts created, no logins.
+Foundation Research produced six documents: competitors (research/docs/competitors.md), trust and privacy benchmark (research/docs/benchmark.md), Lean UX Canvas v2 (research/docs/lean-ux-canvas.md), AARRR funnel (research/docs/aarrr.md), UX patterns (research/docs/ux-patterns.md), and this synthesis. Competitive analysis covers 8 companies in 3 groups; the benchmark covers 5 products across categories. Web research conducted June 2026. Public pages only; no accounts created, no logins.
 
 ### 5 Key Conclusions
 
@@ -27,38 +27,45 @@ Small businesses (10 to 200 employees) with no HR team have no credible tool to 
 
 5. **The UX pattern is a hybrid.** Guided Program Flow + Pulse Loop, serving the operator's need for structure (what do I run?) and the owner's need for signal (is the team OK?). No competitor holds this combination in a self-serve, no-HR-required package.
 
+### What Research Changed in the Brief
+
+- **Confirmed:** the core premise of the brief (CLAUDE.md) holds. Privacy as structural architecture, not a feature, is validated as the differentiator, and the operator-as-hero, aggregate-only stance survived competitive and benchmark scrutiny. Source: research/docs/competitors.md, research/docs/benchmark.md.
+- **Sharpened:** the MVP privacy mechanism moved from "minimum-N threshold" alone to "minimum-N of 5 plus no live response count during open cycles," after the post-persona re-research surfaced a timing-inference vector in small teams. Source: Post-Persona Re-Research (below); research/strategy.md Section 5.
+- **Narrowed:** the rough MVP scope from the brief is now anchored to the Lean UX Canvas solutions and, in Stage 2, to a small set of core jobs. Pricing, minimum-N, and participation targets remain hypotheses, not facts.
+- **Not refuted:** no finding killed a load-bearing assumption from the brief. The riskiest assumption was stress-tested and strengthened, not broken. Source: Post-Persona Re-Research (below).
+
 ---
 
-## 2. Strategy (v_refresh - validated)
+## 2. Strategy
 
-*Migrated from research/product-model.md (kept in place for history). Full detail: research/strategy.md.*
+*This is the Lean UX Canvas (research/docs/lean-ux-canvas.md) expanded into detail: the same strategy, at more depth. The diverge-then-converge trace for the riskiest assumption and the June 2026 founder decision log live in research/strategy.md (retained for history).*
 
 ### Objectives
 
 | Objective | Metric | Target | Verdict |
 |-----------|--------|--------|---------|
-| Operator feels competent without HR training | % completing setup + first program in 7 days | 70% (hypothesis) | CONFIRMED - Gusto "even if you're not an expert" positioning (gusto.com), Headspace Core self-serve model (organizations.headspace.com/small-business). Source: research/competitive-analysis.md, Aspirational group |
-| Owner sees credible team-level signal | % viewing dashboard without 30s bounce | 60% (hypothesis) | CONFIRMED - Officevibe numeric score visualization (workleap.com/officevibe). Signal must be honest, not vanity. Source: research/competitive-analysis.md, Hard group |
-| Employee trust drives participation | Team check-in participation rate | 65% average (hypothesis) | CONFIRMED with mechanism - Culture Amp pre-survey disclosure and minimum-N threshold (support.cultureamp.com/en/articles/7048386). Source: research/benchmark.md |
-| Measurable business retention | Monthly churn past 90 days | Below 4% (hypothesis) | UNCHANGED - Officevibe SMB abandonment ($4,999/yr flat) confirms retention is sticky when value is clear. Source: research/competitive-analysis.md |
+| Operator feels competent without HR training | % completing setup + first program in 7 days | 70% (hypothesis) | CONFIRMED - Gusto "even if you're not an expert" positioning (gusto.com), Headspace Core self-serve model (organizations.headspace.com/small-business). Source: research/docs/competitors.md, Aspirational group |
+| Owner sees credible team-level signal | % viewing dashboard without 30s bounce | 60% (hypothesis) | CONFIRMED - Officevibe numeric score visualization (workleap.com/officevibe). Signal must be honest, not vanity. Source: research/docs/competitors.md, Hard group |
+| Employee trust drives participation | Team check-in participation rate | 65% average (hypothesis) | CONFIRMED with mechanism - Culture Amp pre-survey disclosure and minimum-N threshold (support.cultureamp.com/en/articles/7048386). Source: research/docs/benchmark.md |
+| Measurable business retention | Monthly churn past 90 days | Below 4% (hypothesis) | UNCHANGED - Officevibe SMB abandonment ($4,999/yr flat) confirms retention is sticky when value is clear. Source: research/docs/competitors.md |
 
 ### Segments
 
-**Operator (Primary - buyer and daily user):** Office manager, ops coordinator, EA, or founder at 10 to 200 person company with no HR. 26 to 45. JTBD: "When I am responsible for employee wellbeing with no training, I want a guided system that tells me what to do and when, so that I feel competent and the team benefits." Pain sharpened: no self-serve path exists (Nivati, Woliba, Wellable all require demos - nivati.com/sign-up, woliba.io/pricing). Source: research/competitive-analysis.md.
+**Operator (Primary - buyer and daily user):** Office manager, ops coordinator, EA, or founder at 10 to 200 person company with no HR. 26 to 45. JTBD: "When I am responsible for employee wellbeing with no training, I want a guided system that tells me what to do and when, so that I feel competent and the team benefits." Pain sharpened: no self-serve path exists (Nivati, Woliba, Wellable all require demos - nivati.com/sign-up, woliba.io/pricing). Source: research/docs/competitors.md.
 
 **Owner (Secondary - approver and ROI judge):** Founder, CEO, or managing partner. Business-minded, time-poor, approves budget. JTBD: "When I need to know if my team investment is working, I want a clear honest team-level signal without individual data, so that I can make confident budget decisions." Checks in monthly in under 2 minutes. The operator upgrades Brio specifically to give the owner visibility - the owner dashboard is the paid feature.
 
-**Employee (End user - the engine, not the buyer):** Does not choose Brio. Must be given a credible reason to participate honestly. Privacy architecture is non-configurable: individual data never surfaces up the chain. Minimum-N threshold of 5 respondents (assumption, to be validated with legal counsel) applies to all aggregate views. Pre-check-in disclosure is one sentence, plain language, before Question 1, every check-in. Elevated to architectural requirement. Source: research/benchmark.md - support.cultureamp.com/en/articles/7048386; apple.com/privacy/features.
+**Employee (End user - the engine, not the buyer):** Does not choose Brio. Must be given a credible reason to participate honestly. Privacy architecture is non-configurable: individual data never surfaces up the chain. Minimum-N threshold of 5 respondents (assumption, to be validated with legal counsel) applies to all aggregate views. Pre-check-in disclosure is one sentence, plain language, before Question 1, every check-in. Elevated to architectural requirement. Source: research/docs/benchmark.md - support.cultureamp.com/en/articles/7048386; apple.com/privacy/features.
 
 ### Business Model
 
-SaaS subscription, per-seat pricing. Subscription-only revenue - no data monetization. Free tier up to 10 employees (1 program, operator-only view, no owner dashboard). Paid Starter ~$5/seat/month up to 50 employees (full program library, owner dashboard, trend analytics). Growth tier ~$9/seat/month for 50 to 200+ employees (multi-team, integrations, priority support). Free tier is the acquisition channel, not a crippled product - team-size limit is the non-punitive conversion trigger. Transparent published pricing is non-negotiable. Source: research/competitive-analysis.md - Headspace Core ($3.75 to $5.83/user/month), Officevibe former $5/user/month, Key Differences - Pricing transparency.
+SaaS subscription, per-seat pricing. Subscription-only revenue - no data monetization. Free tier up to 10 employees (1 program, operator-only view, no owner dashboard). Paid Starter ~$5/seat/month up to 50 employees (full program library, owner dashboard, trend analytics). Growth tier ~$9/seat/month for 50 to 200+ employees (multi-team, integrations, priority support). Free tier is the acquisition channel, not a crippled product - team-size limit is the non-punitive conversion trigger. Transparent published pricing is non-negotiable. Source: research/docs/competitors.md - Headspace Core ($3.75 to $5.83/user/month), Officevibe former $5/user/month, Key Differences - Pricing transparency.
 
 ### Riskiest Assumption
 
 **An SMB operator who has never run a formal wellbeing program believes that a self-serve, aggregate-only tool (no HR required, no individual data visible) delivers real team-level wellbeing value worth paying for - AND employees trust the aggregate-only privacy promise enough to respond honestly.**
 
-Why riskiest: If either half is false, the product fails. No operator belief means no acquisition. No employee participation means no aggregate signal, no owner value, no renewal. This is a risk to existence, not to growth. No competitor has resolved both halves. Source: research/benchmark.md (Limeade and Typeform anti-patterns show privacy by promise fails); research/competitive-analysis.md (gap analysis confirms no competitor holds this combination).
+Why riskiest: If either half is false, the product fails. No operator belief means no acquisition. No employee participation means no aggregate signal, no owner value, no renewal. This is a risk to existence, not to growth. No competitor has resolved both halves. Source: research/docs/benchmark.md (Limeade and Typeform anti-patterns show privacy by promise fails); research/docs/competitors.md (gap analysis confirms no competitor holds this combination).
 
 Smallest test: plain email check-in to a real 10 to 15 person team, explicit privacy statement, measure participation rate. Pass: above 40%. Fail: below 40% even with a direct invitation. Costs nothing. Run before building anything.
 
@@ -66,13 +73,13 @@ Smallest test: plain email check-in to a real 10 to 15 person team, explicit pri
 
 ## 3. AARRR Funnel (v_refresh)
 
-*Full detail: research/aarrr.md. Updated to align with Strategy v_refresh.*
+*Full detail: research/docs/aarrr.md. Updated to align with Strategy v_refresh.*
 
 | Stage | Channel / Mechanic | Key Hypothesis | MVP Decision | Primary Metric | Target |
 |-------|-------------------|----------------|--------------|----------------|--------|
-| Acquisition | SEO targeting operator how-to queries (not comparison pages - dominated by G2/Capterra). LinkedIn job title targeting. Free tier as permanent top-of-funnel. | Free tier is the primary driver. Demo-required friction filters out the solo operator. Source: research/competitive-analysis.md - Key Differences, Sales motion | No credit card at signup. Single email field. Operator how-to content, not comparison-site SEO. | New signups/month | 200 by month 6 (hypothesis) |
-| Activation | Guided linear onboarding. First program pre-selected by company size. Privacy disclosure built into employee flow before Question 1. | Aha moment = first aggregate score plus plain-language interpretation plus a suggested next action. Score alone does not create a habit. Source: research/competitive-analysis.md - Officevibe AI-action mechanic; research/benchmark.md - Mechanism 2 | Opinionated linear onboarding. Privacy disclosure is not optional - one sentence, before Question 1, every time. | % completing setup + first invite in 48h | 55% (hypothesis) |
-| Retention | Weekly operator digest email. Consistent employee check-in cadence. Persistent pre-check-in privacy disclosure as trust-training mechanism. Owner monthly digest. | Operator retention driven by email digest more than in-app. Employee participation above 60% is the leading indicator for operator retention. Repeated privacy disclosure trains trust over time. Source: research/benchmark.md - Mechanism 2, Apple Health; research/ux-patterns.md B1, B3 | Build weekly email digest before in-app notifications. Privacy disclosure in every check-in, not just onboarding. | 90-day operator retention | 65% (hypothesis) |
+| Acquisition | SEO targeting operator how-to queries (not comparison pages - dominated by G2/Capterra). LinkedIn job title targeting. Free tier as permanent top-of-funnel. | Free tier is the primary driver. Demo-required friction filters out the solo operator. Source: research/docs/competitors.md - Key Differences, Sales motion | No credit card at signup. Single email field. Operator how-to content, not comparison-site SEO. | New signups/month | 200 by month 6 (hypothesis) |
+| Activation | Guided linear onboarding. First program pre-selected by company size. Privacy disclosure built into employee flow before Question 1. | Aha moment = first aggregate score plus plain-language interpretation plus a suggested next action. Score alone does not create a habit. Source: research/docs/competitors.md - Officevibe AI-action mechanic; research/docs/benchmark.md - Mechanism 2 | Opinionated linear onboarding. Privacy disclosure is not optional - one sentence, before Question 1, every time. | % completing setup + first invite in 48h | 55% (hypothesis) |
+| Retention | Weekly operator digest email. Consistent employee check-in cadence. Persistent pre-check-in privacy disclosure as trust-training mechanism. Owner monthly digest. | Operator retention driven by email digest more than in-app. Employee participation above 60% is the leading indicator for operator retention. Repeated privacy disclosure trains trust over time. Source: research/docs/benchmark.md - Mechanism 2, Apple Health; research/docs/ux-patterns.md B1, B3 | Build weekly email digest before in-app notifications. Privacy disclosure in every check-in, not just onboarding. | 90-day operator retention | 65% (hypothesis) |
 | Revenue | Upgrade triggered by team-size limit (more than 10 employees) or owner dashboard access request. Both triggers active. | Owner dashboard is the primary paid feature. Operator upgrades to give the owner visibility, not because of a feature wall. Source: validated JTBD Segment B | Gate owner dashboard behind paid tier. Keep operator dashboard + one program free to demonstrate value first. | Free-to-paid conversion rate | 8-12% in 60 days (hypothesis) |
 | Referral | Operator-to-peer organic. In-product prompt at 30-day positive milestone (participation above 50%). | Operator-to-peer is strongest channel year 1. Owners share to look like caring leaders. | Single share prompt at 30-day milestone. Track referral source at signup with dropdown. No formal referral program in V1. | % signups from referral (self-reported) | 20% by month 9 (hypothesis) |
 
@@ -186,18 +193,29 @@ Source: Phase 3 competitive gap analysis, validated product model v2.
 
 | # | If | Then | Because |
 |---|----|----|---------|
-| H1 **[RISKIEST - failure kills the idea]** | Brio shows the exact privacy mechanism (minimum-N threshold, what the owner cannot see) on the product page before signup - and repeats it before every check-in | Employee participation rates will exceed 65% at steady state | Employees with certainty about privacy limits before their first interaction respond more honestly. Culture Amp's pre-survey disclosure architecture confirms the mechanism. Limeade and Typeform show that privacy by promise without architecture destroys participation. Source: support.cultureamp.com/en/articles/7048386; research/benchmark.md |
-| H2 | Brio offers transparent pricing starting at ~$5/seat/month with no demo required | The operator will convert without a sales call in over 50% of trial-to-paid paths | Headspace Core's self-serve small business page and Gusto's no-contact conversion model prove this audience converts without human sales touch when pricing is clear. Source: organizations.headspace.com/small-business, gusto.com/pricing; research/competitive-analysis.md |
-| H3 | The operator's aha moment is seeing the first aggregated check-in score alongside a plain-language interpretation AND a suggested next action | 90-day retention will exceed 65% | Officevibe's AI-recommended-action model shows operators who understand what to do next stay engaged. Score alone does not create a habit. Source: workleap.com/officevibe; research/competitive-analysis.md |
+| H1 **[RISKIEST - failure kills the idea]** | Brio shows the exact privacy mechanism (minimum-N threshold, what the owner cannot see) on the product page before signup - and repeats it before every check-in | Employee participation rates will exceed 65% at steady state | Employees with certainty about privacy limits before their first interaction respond more honestly. Culture Amp's pre-survey disclosure architecture confirms the mechanism. Limeade and Typeform show that privacy by promise without architecture destroys participation. Source: support.cultureamp.com/en/articles/7048386; research/docs/benchmark.md |
+| H2 | Brio offers transparent pricing starting at ~$5/seat/month with no demo required | The operator will convert without a sales call in over 50% of trial-to-paid paths | Headspace Core's self-serve small business page and Gusto's no-contact conversion model prove this audience converts without human sales touch when pricing is clear. Source: organizations.headspace.com/small-business, gusto.com/pricing; research/docs/competitors.md |
+| H3 | The operator's aha moment is seeing the first aggregated check-in score alongside a plain-language interpretation AND a suggested next action | 90-day retention will exceed 65% | Officevibe's AI-recommended-action model shows operators who understand what to do next stay engaged. Score alone does not create a habit. Source: workleap.com/officevibe; research/docs/competitors.md |
 | H4 | Gating the owner dashboard (aggregate view) behind the paid tier drives free-to-paid conversion better than any other feature gate | Free-to-paid conversion will reach 8-12% within 60 days of activation | The owner wanting proof the investment is working is the renewal driver (confirmed in JTBD analysis). The operator upgrades to give the owner access. Source: Strategy v_refresh, Segment B JTBD |
-| H5 | Making the business model's subscription-only nature an explicit part of the privacy story | Employee trust and participation rates will be measurably higher than a control group that sees only a privacy policy link | Oura's "subscription model = no data monetization incentive" argument explains the aligned incentive, not just the promise. Structural arguments outlast policy promises. Source: ouraring.com/blog/health-data-privacy; research/benchmark.md, Mechanism 3 |
-| H6 | A non-configurable minimum-N threshold (5 respondents) applied to all aggregate views, with no live count visible during open cycles | Operators and owners accept the data limitation without significant churn | Culture Amp's fixed-threshold model is accepted by enterprise buyers. The number is not the issue - the clarity and consistency are. Edge case: a very small team (8-12 people) that may not reach N=5 quickly must see an explicit setup message. **MVP decision: N=5 flat, no live count during open cycle. Closed by founder decision, June 2026. Strategy.md Section 5, D1/D4/D5.** Legal threshold validation deferred. Source: support.cultureamp.com/en/articles/7048386; research/benchmark.md; research/live-research.md C3. |
+| H5 | Making the business model's subscription-only nature an explicit part of the privacy story | Employee trust and participation rates will be measurably higher than a control group that sees only a privacy policy link | Oura's "subscription model = no data monetization incentive" argument explains the aligned incentive, not just the promise. Structural arguments outlast policy promises. Source: ouraring.com/blog/health-data-privacy; research/docs/benchmark.md, Mechanism 3 |
+| H6 | A non-configurable minimum-N threshold (5 respondents) applied to all aggregate views, with no live count visible during open cycles | Operators and owners accept the data limitation without significant churn | Culture Amp's fixed-threshold model is accepted by enterprise buyers. The number is not the issue - the clarity and consistency are. Edge case: a very small team (8-12 people) that may not reach N=5 quickly must see an explicit setup message. **MVP decision: N=5 flat, no live count during open cycle. Closed by founder decision, June 2026. Strategy.md Section 5, D1/D4/D5.** Legal threshold validation deferred. Source: support.cultureamp.com/en/articles/7048386; research/docs/benchmark.md; research/live-research.md C3. |
+
+### Open Questions Table
+
+| # | Question | Why it matters | Where to answer |
+|---|----------|----------------|----------------|
+| Q1 | What is the legally defensible minimum-N threshold for aggregate display in the US market? Is 5 correct? | The wrong threshold either exposes individuals (too low) or makes the product useless for very small teams (too high) | **DEFERRED TO LEGAL (not an MVP design blocker).** MVP defaults to N=5 as operationally standard (SHRM, Culture Amp). Timing-inference vector addressed by D1 (no live count). Threshold legal validation required before launch. research/strategy.md Section 5, Deferred Items. |
+| Q2 | Does the operator discover Brio, or does the owner? | Determines primary acquisition channel and landing page message | **CLOSED AS DEFAULT by founder decision, June 2026.** Operator-first is the design default: landing page hero speaks operator language, owner-trust block on the same page. Reversible if paid A/B test shows owner-led conversions outperforming. research/strategy.md Section 5, D3. |
+| Q3 | What is the right cadence for the employee check-in - weekly, biweekly, or monthly? | Cadence determines habit formation and data freshness | A/B test in beta: 3 cohorts at different cadences, measure participation rate and retention at 90 days |
+| Q4 | Does a 10-employee free tier create meaningful conversion, or does it enable permanent free usage that never upgrades? | Defines whether the free tier is an acquisition channel or a churn pool | Instrument the free tier carefully: track what % of 10-employee companies actually have fewer than 10 employees at signup vs. are gaming the limit. |
+| Q5 | How does Brio handle a company that grows past the anonymity threshold during a check-in cycle? | Edge case: a 4-person team answers; a 5th person is hired mid-cycle. Do historic responses become visible? | Architecture decision before launch: rolling N or snapshot N. |
+| Q6 | What regulatory review is needed before launch in the US for wellness check-in data? | ADA, GINA, and HIPAA-adjacent rules may apply. Brio does not collect clinical data but emotional/mood check-ins are a grey area. | Legal counsel. Do not launch without a written opinion on the check-in question format. |
 
 ---
 
-## 8. Post-Persona Research, June 2026
+## Post-Persona Re-Research (Stage 2)
 
-*Added in Phase: People and JTBD, Step 6. Live sources only. No memory. Full verification artifact: research/live-research.md.*
+*Folded in from the Stage 2 live re-research. Live sources only, no memory; sources cited inline. Detailed evidence log: research/live-research.md.*
 
 ### Central Claim Tested: Employee Honest Participation in Employer-Run SMB Tools
 
@@ -227,15 +245,4 @@ Small-team timing-based inference: SHRM documented that even without demographic
 
 **Decisions made after verification (June 2026):** See research/strategy.md Section 5 for full reasoning. Summary: (a) No live count during open cycles - operator sees active state, score revealed only when cycle closes and N met; employee sees zero count information. (b) Participation benchmark: 65% is 90-day steady state; adjacent-category RAND reference (20-40%) must be labeled as such, not as a Brio metric. (c) Landing page leads with operator language by default, owner-trust block on same page; reversible by acquisition test. (d) Minimum-N stays at 5 flat for MVP; legal validation deferred. These decisions close Flag F1 (timing-inference risk in small teams) and establish Q2 as a working default (operator-first).
 
----
-
-### Open Questions Table
-
-| # | Question | Why it matters | Where to answer |
-|---|----------|----------------|----------------|
-| Q1 | What is the legally defensible minimum-N threshold for aggregate display in the US market? Is 5 correct? | The wrong threshold either exposes individuals (too low) or makes the product useless for very small teams (too high) | **DEFERRED TO LEGAL (not an MVP design blocker).** MVP defaults to N=5 as operationally standard (SHRM, Culture Amp). Timing-inference vector addressed by D1 (no live count). Threshold legal validation required before launch. Strategy.md Section 5, Deferred Items. |
-| Q2 | Does the operator discover Brio, or does the owner? | Determines primary acquisition channel and landing page message | **CLOSED AS DEFAULT by founder decision, June 2026.** Operator-first is the design default: landing page hero speaks operator language, owner-trust block on the same page. Reversible if paid A/B test shows owner-led conversions outperforming. Strategy.md Section 5, D3. |
-| Q3 | What is the right cadence for the employee check-in - weekly, biweekly, or monthly? | Cadence determines habit formation and data freshness | A/B test in beta: 3 cohorts at different cadences, measure participation rate and retention at 90 days |
-| Q4 | Does a 10-employee free tier create meaningful conversion, or does it enable permanent free usage that never upgrades? | Defines whether the free tier is an acquisition channel or a churn pool | Instrument the free tier carefully: track what % of 10-employee companies actually have fewer than 10 employees at signup vs. are gaming the limit. |
-| Q5 | How does Brio handle a company that grows past the anonymity threshold during a check-in cycle? | Edge case: a 4-person team answers; a 5th person is hired mid-cycle. Do historic responses become visible? | Architecture decision before launch: rolling N or snapshot N. |
-| Q6 | What regulatory review is needed before launch in the US for wellness check-in data? | ADA, GINA, and HIPAA-adjacent rules may apply. Brio does not collect clinical data but emotional/mood check-ins are a grey area. | Legal counsel. Do not launch without a written opinion on the check-in question format. |
+*End of synthesis. The Stage 2 post-persona re-research follows as an appendix.*

@@ -2,37 +2,49 @@
 
 Employee wellbeing SaaS for small businesses with no HR team. Gives the person handed "people stuff" a guided way to run real wellbeing programs, and gives the owner honest proof it is working - at the team level only, never surveilling any individual.
 
-**Live research:** [https://sergiodesign4u-dot.github.io/brio/research.html](https://sergiodesign4u-dot.github.io/brio/research.html)
+## Live pages
 
-**Personas:** [https://sergiodesign4u-dot.github.io/brio/personas.html](https://sergiodesign4u-dot.github.io/brio/personas.html)
-
-**Jobs to Be Done:** [https://sergiodesign4u-dot.github.io/brio/jtbd.html](https://sergiodesign4u-dot.github.io/brio/jtbd.html)
+- **Foundation Research:** https://sergiodesign4u-dot.github.io/brio/research/research.html
+- **Personas:** https://sergiodesign4u-dot.github.io/brio/user-research/personas.html
+- **Jobs to Be Done:** https://sergiodesign4u-dot.github.io/brio/user-research/jtbd.html
 
 ---
 
 ## Project Status
 
-| Phase | Status |
-|---------------|-------------|
-| Research | Done (competitive analysis, benchmark, UX patterns, master synthesis, research.html) |
-| People and JTBD | Done (personas, jobs to be done, live research verification, personas.html, jtbd.html) |
+| Stage | Status |
+|-------|--------|
+| Foundation Research | Done (competitors, benchmark, Lean UX Canvas, AARRR, UX patterns, research synthesis, research.html) |
+| User Research (Personas + JTBD) | Done (personas, jobs to be done, JTBD matrix, MVP core, personas.html, jtbd.html) |
+| Information Architecture (Basic + Detailed) | Next |
 | Wireframes | Not started |
+| Voice | Not started |
 | Concept | Not started |
+| UI + Visual | Not started |
+| Tokens + Components | Not started |
 | Design System | Not started |
-| Components | Not started |
+| Responsive | Not started |
+| Animation | Not started |
 | Handoff | Not started |
+
+---
+
+## People
+
+Primary persona is Priya, the operator handed "people stuff" with no HR training. Secondary is Marcus (owner, ROI judge, drives renewal); the end user is Yemi (employee, the participation engine). The MVP core is three jobs: run wellbeing without HR training, know if the team is struggling early, and feel competent as a people person. Full detail in user-research/docs/personas.md and user-research/docs/jtbd.md.
 
 ---
 
 ## Key documents
 
 - [Project Brief](CLAUDE.md)
-- [Strategy](research/strategy.md)
-- [AARRR Model](research/aarrr.md)
-- [Competitive Analysis](research/competitive-analysis.md)
-- [Benchmark - Trust and Privacy](research/benchmark.md)
-- [UX Patterns](research/ux-patterns.md)
-- [Master Research](research/master-research.md)
-- [Personas](research/personas.md)
-- [Jobs to Be Done](research/jtbd.md)
-- [Live Research - Post-Persona Verification](research/live-research.md)
+- [Lean UX Canvas](research/docs/lean-ux-canvas.md)
+- [Research synthesis](research/docs/research.md)
+- [AARRR Model](research/docs/aarrr.md)
+- [Competitors](research/docs/competitors.md)
+- [Benchmark - Trust and Privacy](research/docs/benchmark.md)
+- [UX Patterns](research/docs/ux-patterns.md)
+- [Personas](user-research/docs/personas.md)
+- [Jobs to Be Done](user-research/docs/jtbd.md)
+
+Supporting history (superseded, kept for provenance): research/strategy.md, research/product-model.md, research/quality-check.md, research/live-research.md.

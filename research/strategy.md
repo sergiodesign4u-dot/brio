@@ -1,5 +1,7 @@
 # Strategy
 
+> **Superseded, kept for history.** The canonical Foundation Research strategy now lives in the Lean UX Canvas (research/docs/lean-ux-canvas.md) and the synthesis in research/docs/research.md. This file is retained only for its diverge-then-converge trace of the riskiest assumption (Section 4) and the founder decision log (Section 5), which those files cite. It is not itself a canonical deliverable.
+
 ---
 
 ## Changelog

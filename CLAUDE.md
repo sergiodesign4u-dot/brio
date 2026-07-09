@@ -10,31 +10,26 @@ Brio is a responsive web SaaS that gives a small business with no HR team a simp
 
 ---
 
-## Jobs to be Done
+## People and Jobs
 
-### Candidate jobs scored
+*Condensed context for downstream stages. Full detail: user-research/docs/personas.md and user-research/docs/jtbd.md.*
 
-| # | Job | Frequency | Intensity | WTP | Score | Role |
-|---|-----|-----------|-----------|-----|-------|------|
-| J1 | Run structured wellbeing programs without HR knowledge | High | High | High | 9/9 | Operator |
-| J2 | Prove to the owner that people investment is paying off | Medium | High | High | 8/9 | Operator + Owner |
-| J3 | Know if the team is struggling before it becomes a crisis | Medium | High | High | 8/9 | Owner |
-| J4 | Give employees a low-friction way to signal how they feel | High | Medium | Medium | 7/9 | Operator |
-| J5 | Stay compliant and not accidentally expose employee data | Low | High | High | 7/9 | Owner |
-| J6 | Feel like a competent "people person" without a title or training | High | High | Medium | 7/9 | Operator |
+**Primary persona - Priya (Operator, hero user).** Office manager, ops coordinator, EA, or founder at a 10 to 200 person company with no HR. Low-to-medium confidence: knows the people, not the methodology. She is the buyer, the daily driver, and the activation bottleneck. Age 26 to 45 [? no data]. Secondary persona: Marcus (Owner), approver and ROI judge, drives renewal. End user: Yemi (Employee), not the buyer but the engine; without honest participation there is no signal.
 
-### Primary job
+**Main job of the product:** When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits.
 
-**J1 - Run structured wellbeing programs without HR knowledge**
-"When I am handed responsibility for employee wellbeing with no training or title, I want a guided system that tells me what to run and when, so that I can feel competent and actually improve how the team feels at work."
+**MVP core - the 3 jobs to build first** (important for Priya AND not closed by any self-serve competitor; from the JTBD matrix):
+1. Main job - run wellbeing without HR training (guided program engine, curated library, opinionated onboarding).
+2. J2 - know if the team is struggling early (pulse loop, threshold trend alert). The retention driver.
+3. E1 - feel competent as a people person (every operator touchpoint carries an interpretive layer: plain-language score, setup confirmation, suggested next action).
 
-### Secondary jobs
+Supporting architecture (serve Yemi; preconditions for the above; in MVP scope but not primary design surfaces): J3 - certainty of privacy before responding; J4 - check-in under 30 seconds.
 
-**J2 - Prove the investment is paying off**
-"When the owner asks me whether our wellbeing efforts are working, I want a clear, honest team-level signal I can show them, so that the program gets continued funding and I feel confident in my work."
+**Riskiest assumption (value risk, kills the idea if false):** an SMB operator believes a self-serve, aggregate-only tool (no HR, no individual data ever visible) delivers real team-level value worth paying for, AND employees trust the privacy promise enough to answer honestly. Post-persona re-research strengthened it, did not kill it. Detail: research/docs/lean-ux-canvas.md block 7.
 
-**J3 - Know if the team is struggling before it becomes a crisis**
-"When I am responsible for a team of people I care about, I want an early warning that something is off at the team level, so that I can act before a good person walks out the door."
+**Strategic dimension we must win (benchmark):** employee trust in the aggregate-only privacy model, made visible in the product UI rather than promised in a policy. Detail: research/docs/benchmark.md.
+
+**Chosen UX pattern:** Guided Program Flow + Pulse Loop (hybrid) - one data flow serves the operator's need for structure and the owner's need for signal. Detail: research/docs/ux-patterns.md.
 
 ---
 
@@ -68,25 +63,32 @@ Participates in programs and check-ins. Their individual responses must never be
 
 ## MVP Feature Scope
 
-### Programs and habits engine
+*Narrowed to the MVP core jobs above (Main, J2, E1) plus their supporting architecture (J3, J4). Items that close no core job are deferred, per the cut list in user-research/docs/jtbd.md.*
+
+### Programs and check-in engine (serves Main, J6, and Yemi)
 
 - Curated wellbeing program library (mental health, physical, financial, social) - operator picks, system runs
-- Light challenges (team-level, opt-in, non-competitive or gently competitive)
+- Guided, opinionated onboarding: first program pre-selected by company size, setup under 5 minutes
 - Gentle nudges (scheduled reminders, optional check-in prompts)
-- Low-effort check-ins (1 to 3 questions, emoji/slider response, takes under 30 seconds)
+- Low-effort employee check-in (1 to 3 questions, emoji/slider, under 30 seconds, no account for the first check-in)
 
-### Pulse layer (aggregate only)
+### Pulse layer, aggregate only (serves J2, J1, J5)
 
 - Team-level wellbeing score (rolling aggregate, never per-individual)
-- Trend over time (week over week, month over month)
-- Participation rate (what share of the team completed something - not who)
-- Simple alert if aggregate score drops meaningfully (threshold-based)
+- Trend over time and participation rate (what share of the team completed something - not who)
+- Threshold alert when the aggregate drops meaningfully (the early-warning job)
+- Owner dashboard (aggregate only) is the primary paid feature; the operator upgrades to give the owner visibility
 
-### Privacy mechanism (non-negotiable)
+### Privacy mechanism (structural, non-negotiable; serves J3, E2)
 
-- Minimum anonymity threshold: aggregate scores only shown when N >= defined minimum (assumption: N >= 5, to be validated with a legal/privacy review)
-- No named responses, no individual timeline, no drill-down
-- Clear UI communication of what the owner can and cannot see
+- Minimum-N aggregate: no score shown until N >= 5 (MVP default; legal validation deferred)
+- No live response count during an open cycle, for operator or employee, to close the small-team timing-inference vector (founder decision D1, June 2026, research/strategy.md Section 5)
+- Persistent pre-check-in privacy disclosure before Question 1, every cycle. No named responses, no individual timeline, no drill-down
+- Clear UI statement of what the owner can and cannot see
+
+### Deferred to V2 (close no core job)
+
+Individual leaderboards and rankings (incompatible with J3), drill-down analytics, Slack and calendar integrations, formal referral program with cash incentives, custom program builder, team challenges. Source: user-research/docs/jtbd.md cut list.
 
 ---
 
@@ -115,7 +117,7 @@ Participates in programs and check-ins. Their individual responses must never be
 - Integrations (Slack, calendar)
 - Priority support
 
-*All pricing figures are hypotheses. Validation against competitor pricing is in Phase 3.*
+*All pricing figures are hypotheses, benchmarked against competitor pricing in research/docs/competitors.md and the Lean UX Canvas (research/docs/lean-ux-canvas.md).*
 
 ---
 
@@ -170,17 +172,19 @@ Employee wellbeing programs in the US operate near several regulatory areas. Thi
 
 ## Timeline
 
-| Phase | Deliverable | Status |
+| Stage | Deliverable | Status |
 |-------|-------------|--------|
-| 0 - Brief | CLAUDE.md, repo, folder structure | Done |
-| 1 - Product Model | research/strategy.md | Done |
-| 2 - AARRR | research/aarrr.md | Done |
-| 3 - Competitive Analysis | research/competitive-analysis.md | Done |
-| 4 - Benchmark | research/benchmark.md | Done |
-| 4.5 - Revisit Model | research/strategy.md v2 | Done |
-| 5 - UX Patterns | research/ux-patterns.md | Done |
-| 6 - Master Synthesis | research/master-research.md | Done |
-| 6.5 - Quality Gate | research/quality-check.md | Done |
-| 7 - Research HTML | research.html + GitHub Pages | Done |
-| 8 - People and JTBD | research/personas.md, research/jtbd.md, research/live-research.md, personas.html, jtbd.html | Done |
-| 9 - Wireframes | wireframes/ | Not started |
+| Foundation Research | research/docs/ (competitors, benchmark, lean-ux-canvas, aarrr, ux-patterns, research) + research/research.html | Done |
+| User Research (Personas + JTBD) | user-research/docs/ (personas, jtbd) + user-research/personas.html + user-research/jtbd.html | Done |
+| Information Architecture (Basic + Detailed) | ia/ | Next |
+| Wireframes | wireframes/ | Not started |
+| Voice | voice/ | Not started |
+| Concept | concept/ | Not started |
+| UI + Visual | ui-visual/ | Not started |
+| Tokens + Components | tokens-components/ | Not started |
+| Design System | design-system/ | Not started |
+| Responsive | responsive/ | Not started |
+| Animation | animation/ | Not started |
+| Handoff | handoff/ | Not started |
+
+*Supporting history (not canonical deliverables): research/strategy.md, research/product-model.md, research/quality-check.md, research/live-research.md.*

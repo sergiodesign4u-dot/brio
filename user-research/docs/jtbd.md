@@ -1,6 +1,6 @@
 # Jobs to Be Done
 
-*Phase: People and JTBD. Built from personas.md and master-research.md. Every job cites its source.*
+*Phase: People and JTBD. Built from personas.md and research/docs/research.md. Every job cites its source.*
 
 ---
 
@@ -9,7 +9,7 @@
 **When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits.**
 
 Persona: Priya (Operator, primary).
-Source: research/strategy.md Segment A JTBD (CONFIRMED as primary job by research gap analysis). Confirmed by competitive gap: no competitor has built a self-serve, guided wellbeing product for the no-HR operator. Source: research/competitive-analysis.md "What Is Missing Across All."
+Source: research/strategy.md Segment A JTBD (CONFIRMED as primary job by research gap analysis). Confirmed by competitive gap: no competitor has built a self-serve, guided wellbeing product for the no-HR operator. Source: research/docs/competitors.md "What Is Missing Across All."
 
 ---
 
@@ -18,42 +18,42 @@ Source: research/strategy.md Segment A JTBD (CONFIRMED as primary job by researc
 **J1 - When I need to show the owner that the people investment is paying off, I want an honest team-level signal I can point to, so that the program gets continued support and I feel confident in my work.**
 
 Persona: Priya (Operator, primary driver). Marcus (Owner, primary driver at renewal).
-Source: research/strategy.md Segment B JTBD; research/aarrr.md Revenue section (owner dashboard as paid upgrade driver). CONFIRMED via Officevibe numeric score visualization as analogous mechanism. Source: research/competitive-analysis.md, Officevibe comparison entry.
+Source: research/strategy.md Segment B JTBD; research/docs/aarrr.md Revenue section (owner dashboard as paid upgrade driver). CONFIRMED via Officevibe numeric score visualization as analogous mechanism. Source: research/docs/competitors.md, Officevibe comparison entry.
 
 ---
 
 **J2 - When my team might be struggling, I want to know before someone actually resigns, so that I can act before it becomes a crisis.**
 
 Persona: Priya (Operator). Marcus (Owner, secondary - risk reduction).
-Source: research/ux-patterns.md Pattern B1 ("surfaces when something needs attention"); research/master-research.md Key Conclusion 3 (operator needs early warning). JTBD J3 from CLAUDE.md. CONFIRMED via Officevibe AI-alert model as analogous mechanism. Source: research/competitive-analysis.md, Officevibe AI analysis entry.
+Source: research/docs/ux-patterns.md Pattern B1 ("surfaces when something needs attention"); research/docs/research.md Key Conclusion 3 (operator needs early warning). JTBD J3 from CLAUDE.md. CONFIRMED via Officevibe AI-alert model as analogous mechanism. Source: research/docs/competitors.md, Officevibe AI analysis entry.
 
 ---
 
 **J3 - When I am enrolled in a wellbeing program at work, I want to know with certainty that my response is private before I respond, so that I can answer honestly without fear of consequences.**
 
 Persona: Yemi (Employee, primary driver). Priya (Operator, indirect - her program fails if Yemi does not respond honestly).
-Source: research/ux-patterns.md Pattern B5 (MOST CRITICAL behavioral pattern); research/benchmark.md Mechanism 2. CONFIRMED via Culture Amp pre-survey disclosure mechanism. Source: research/benchmark.md Mechanism 1, support.cultureamp.com/en/articles/7048386.
+Source: research/docs/ux-patterns.md Pattern B5 (MOST CRITICAL behavioral pattern); research/docs/benchmark.md Mechanism 2. CONFIRMED via Culture Amp pre-survey disclosure mechanism. Source: research/docs/benchmark.md Mechanism 1, support.cultureamp.com/en/articles/7048386.
 
 ---
 
 **J4 - When I am asked to check in about my wellbeing at work, I want it to take under 30 seconds, so that I do not resent the interruption or feel surveilled.**
 
 Persona: Yemi (Employee, primary driver).
-Source: research/ux-patterns.md Pattern B3 ("radically simple: one question, one emoji-scale response, one line of privacy context"). CONFIRMED as design implication; no direct quantitative data on 30-second threshold. [?] The specific 30-second number is an assumption from CLAUDE.md MVP scope, not from competitive research.
+Source: research/docs/ux-patterns.md Pattern B3 ("radically simple: one question, one emoji-scale response, one line of privacy context"). CONFIRMED as design implication; no direct quantitative data on 30-second threshold. [?] The specific 30-second number is an assumption from CLAUDE.md MVP scope, not from competitive research.
 
 ---
 
 **J5 - When I need to make a budget decision about people programs, I want a clear signal of what is working and what is not, so that I can say yes or no with confidence.**
 
 Persona: Marcus (Owner, primary driver). Priya (Operator, secondary - she uses this signal to justify the program to Marcus).
-Source: research/strategy.md Objective O2 and Segment B; research/aarrr.md Revenue section. CONFIRMED via Officevibe benchmark: owners respond to numeric clarity with context. Source: research/competitive-analysis.md, Officevibe comparison entry.
+Source: research/strategy.md Objective O2 and Segment B; research/docs/aarrr.md Revenue section. CONFIRMED via Officevibe benchmark: owners respond to numeric clarity with context. Source: research/docs/competitors.md, Officevibe comparison entry.
 
 ---
 
 **J6 - When I am setting up an employee wellbeing program for the first time, I want a system that tells me exactly what to do and in what order, so that I do not have to invent the process myself.**
 
 Persona: Priya (Operator, primary driver).
-Source: research/ux-patterns.md Pattern 1 (Guided Program Flow) - "the operator's job is to launch and review, not to build." CONFIRMED via Headspace Core self-serve model and Gusto's "even if you're not an expert" onboarding posture. Source: research/competitive-analysis.md, Aspirational group.
+Source: research/docs/ux-patterns.md Pattern 1 (Guided Program Flow) - "the operator's job is to launch and review, not to build." CONFIRMED via Headspace Core self-serve model and Gusto's "even if you're not an expert" onboarding posture. Source: research/docs/competitors.md, Aspirational group.
 
 ---
 
@@ -62,21 +62,21 @@ Source: research/ux-patterns.md Pattern 1 (Guided Program Flow) - "the operator'
 **E1 - When I do people work, I want to feel like a competent "people person," so that I am proud of what I have built even without an HR title.**
 
 Persona: Priya (Operator, primary driver). This is the emotional core of her primary job.
-Source: research/strategy.md Segment A Motivation ("competence and clarity"); research/ux-patterns.md Pattern B4 (operator needs confirmation, not just data). CONFIRMED as the emotional job by the research gap: no competitor has designed for this feeling.
+Source: research/strategy.md Segment A Motivation ("competence and clarity"); research/docs/ux-patterns.md Pattern B4 (operator needs confirmation, not just data). CONFIRMED as the emotional job by the research gap: no competitor has designed for this feeling.
 
 ---
 
 **E2 - When the company shows interest in my wellbeing at work, I want to feel genuinely supported rather than monitored, so that I trust the platform and continue to engage.**
 
 Persona: Yemi (Employee, primary driver).
-Source: research/ux-patterns.md Pattern B3 ("if it feels invasive, employees opt out mentally and never engage honestly again"); research/benchmark.md Mechanism 2 (privacy visible in UI as the trust mechanism). CONFIRMED behavioral pattern; specific emotional framing is synthesis. [?] Direct employee voice on this distinction (supported vs. monitored) needs validation.
+Source: research/docs/ux-patterns.md Pattern B3 ("if it feels invasive, employees opt out mentally and never engage honestly again"); research/docs/benchmark.md Mechanism 2 (privacy visible in UI as the trust mechanism). CONFIRMED behavioral pattern; specific emotional framing is synthesis. [?] Direct employee voice on this distinction (supported vs. monitored) needs validation.
 
 ---
 
 **E3 - When my team investment is clearly working, I want to be able to share that with peers, so that I am seen as a leader who builds good culture.**
 
 Persona: Marcus (Owner, secondary driver). Priya (Operator, secondary driver for peer credibility).
-Source: research/aarrr.md Referral section ("owners share to look like caring leaders, not for cash incentives"). [?] This is a hypothesis derived from SMB owner behavior patterns, not from direct research on this product category.
+Source: research/docs/aarrr.md Referral section ("owners share to look like caring leaders, not for cash incentives"). [?] This is a hypothesis derived from SMB owner behavior patterns, not from direct research on this product category.
 
 ---
 
@@ -85,14 +85,14 @@ Source: research/aarrr.md Referral section ("owners share to look like caring le
 **S1 - When I find a people-ops approach that works, I want to tell other operators in my network about it, so that we help each other navigate roles we were not trained for.**
 
 Persona: Priya (Operator, primary driver for referral).
-Source: research/aarrr.md Referral section ("operator-to-peer is the strongest channel in year 1"). [?] Hypothesis - no data on operator community behavior in this specific market. The assertion is borrowed from adjacent SMB SaaS patterns (Gusto's observed word-of-mouth growth).
+Source: research/docs/aarrr.md Referral section ("operator-to-peer is the strongest channel in year 1"). [?] Hypothesis - no data on operator community behavior in this specific market. The assertion is borrowed from adjacent SMB SaaS patterns (Gusto's observed word-of-mouth growth).
 
 ---
 
 **S2 - When I receive a team check-in result that shows something meaningful, I want to share it with the owner easily, so that the owner is informed without me having to translate the data.**
 
 Persona: Priya (Operator, primary driver for share action).
-Source: research/aarrr.md Revenue section (operator upgrades to give owner visibility); research/strategy.md Business Model (owner dashboard as upgrade driver). CONFIRMED as the core upgrade emotional driver.
+Source: research/docs/aarrr.md Revenue section (operator upgrades to give owner visibility); research/strategy.md Business Model (owner dashboard as upgrade driver). CONFIRMED as the core upgrade emotional driver.
 
 ---
 
@@ -103,12 +103,12 @@ Source: research/aarrr.md Revenue section (operator upgrades to give owner visib
 **HJ1 - When I am a small business owner and the team starts to struggle, I want to be able to show employees I acted on their feedback, so that participation rates stay high in future check-in cycles.**
 
 Why hypothesized: The research confirms that employees respond to visible follow-through (ux-patterns.md B5 implies this) but no competitive product has documented a specific "close the loop" mechanic for SMB operators. If this job is real, it suggests a "you said, we did" communication feature is in scope.
-Source: research/ux-patterns.md Pattern B5 (behavioral implication, not direct evidence). [?] Needs validation.
+Source: research/docs/ux-patterns.md Pattern B5 (behavioral implication, not direct evidence). [?] Needs validation.
 
 **HJ2 - When I am an employee and I have responded honestly to a check-in, I want to see some outcome at the team level, so that I know my participation mattered.**
 
 Why hypothesized: Participation habits decay when employees feel the tool is extractive rather than reciprocal. No competitor has designed a visible "here is what the team said overall" moment for employees. If this job is real, it suggests a lightweight team-level result display for employees (aggregate only, no individual) is needed.
-Source: research/ux-patterns.md Pattern B3 (participation habit forms over 3-4 weeks). [?] Needs validation.
+Source: research/docs/ux-patterns.md Pattern B3 (participation habit forms over 3-4 weeks). [?] Needs validation.
 
 ---
 
@@ -151,10 +151,10 @@ Note: J3 (employee privacy) and J4 (30-second check-in) are also MVP-critical, b
 
 | Function | Why Cut |
 |----------|---------|
-| Individual leaderboards and rankings | Closes no job for Priya or Yemi. Architecturally incompatible with J3 (privacy). Source: research/ux-patterns.md Pattern 4. |
+| Individual leaderboards and rankings | Closes no job for Priya or Yemi. Architecturally incompatible with J3 (privacy). Source: research/docs/ux-patterns.md Pattern 4. |
 | Complex analytics dashboard with drill-down | Closes J5 for Marcus at the cost of J3 for Yemi. Overclosure. The owner dashboard should be simple read-only, not explorable. |
 | Integrations (Slack, calendar) in V1 | J6 (guided setup) does not require integrations. V2 candidate after participation habit is established. Source: research/strategy.md Business Model, Growth tier. |
-| Formal referral program with cash incentives | S1 is driven by organic operator-to-peer behavior, not cash. Cash referral programs are misaligned with S1's motivation and the persona type. Source: research/aarrr.md Referral section. |
+| Formal referral program with cash incentives | S1 is driven by organic operator-to-peer behavior, not cash. Cash referral programs are misaligned with S1's motivation and the persona type. Source: research/docs/aarrr.md Referral section. |
 | Custom program builder | Closes no job better than the curated library. The Main job specifies "tells me what to run" - not "lets me design what to run." Custom building is Pattern 3 (Benefit Marketplace), a V2 option under Condition X. |
 
 ---
@@ -169,16 +169,16 @@ Note: J3 (employee privacy) and J4 (30-second check-in) are also MVP-critical, b
 
 | Claim | Status | Source / Basis |
 |-------|--------|----------------|
-| Operator has no HR training | CONFIRMED | research/competitive-analysis.md - all competitors assume HR sponsor; gap explicitly documented |
-| Operator engages in bursts, not continuously | CONFIRMED | research/ux-patterns.md Pattern B1 - direct behavioral pattern |
-| Operator needs score plus interpretation plus next action for aha moment | CONFIRMED (mechanism) | research/competitive-analysis.md Officevibe AI-action mechanic; research/ux-patterns.md B4 |
-| No self-serve competitor targets the no-HR operator | CONFIRMED | research/competitive-analysis.md - Nivati/Woliba/Wellable demo requirements cited |
-| Privacy doubt kills participation before first check-in | CONFIRMED (mechanism) | research/benchmark.md Mechanism 2; research/ux-patterns.md B5; Culture Amp disclosure architecture |
-| Privacy by architecture earns trust; privacy by promise fails | CONFIRMED | research/benchmark.md benchmark scores (Limeade 11/40, Typeform 14/40 vs. Culture Amp 33/40, Apple 35/30) |
-| First check-in is the trust-forming moment | CONFIRMED (mechanism) | research/ux-patterns.md B3 - direct behavioral pattern |
-| Owner checks in under 2 minutes per month | HYPOTHESIS | research/ux-patterns.md B2 - stated as design implication, not validated with owners |
+| Operator has no HR training | CONFIRMED | research/docs/competitors.md - all competitors assume HR sponsor; gap explicitly documented |
+| Operator engages in bursts, not continuously | CONFIRMED | research/docs/ux-patterns.md Pattern B1 - direct behavioral pattern |
+| Operator needs score plus interpretation plus next action for aha moment | CONFIRMED (mechanism) | research/docs/competitors.md Officevibe AI-action mechanic; research/docs/ux-patterns.md B4 |
+| No self-serve competitor targets the no-HR operator | CONFIRMED | research/docs/competitors.md - Nivati/Woliba/Wellable demo requirements cited |
+| Privacy doubt kills participation before first check-in | CONFIRMED (mechanism) | research/docs/benchmark.md Mechanism 2; research/docs/ux-patterns.md B5; Culture Amp disclosure architecture |
+| Privacy by architecture earns trust; privacy by promise fails | CONFIRMED | research/docs/benchmark.md benchmark scores (Limeade 11/40, Typeform 14/40 vs. Culture Amp 33/40, Apple 35/30) |
+| First check-in is the trust-forming moment | CONFIRMED (mechanism) | research/docs/ux-patterns.md B3 - direct behavioral pattern |
+| Owner checks in under 2 minutes per month | HYPOTHESIS | research/docs/ux-patterns.md B2 - stated as design implication, not validated with owners |
 | Owner upgrades = operator wanting to show owner the result | HYPOTHESIS | research/strategy.md Business Model reasoning; validated JTBD analysis reasoning - not yet tested with real users |
-| Employees will participate honestly if architecture is shown (not just promised) | HYPOTHESIS - RISKIEST | research/benchmark.md confirms mechanism; but no data on participation rates in SMB employer-run tools at steady state |
+| Employees will participate honestly if architecture is shown (not just promised) | HYPOTHESIS - RISKIEST | research/docs/benchmark.md confirms mechanism; but no data on participation rates in SMB employer-run tools at steady state |
 | 65% participation rate achievable | HYPOTHESIS | research/strategy.md O3 target - Culture Amp mechanism confirmed but no SMB-specific participation rate data |
 | Minimum-N threshold of 5 is the right number | CLOSED (MVP decision) - founder decision, June 2026, not by re-research. N=5 flat for MVP; no live count shown during open cycles. Legal validation deferred. See research/strategy.md Section 5 D1/D4/D5. |
 | Operator is 26 to 45 years old | HYPOTHESIS - UNSOURCED | research/strategy.md Segment A - marked [?] in source. No data. |
@@ -186,8 +186,8 @@ Note: J3 (employee privacy) and J4 (30-second check-in) are also MVP-critical, b
 | Owner age range | UNKNOWN | Explicitly marked [?] in source. No data at all. |
 | Operator or owner discovers Brio first | DEFAULT ESTABLISHED - operator-first (closed by founder decision, June 2026, not by re-research). Landing page speaks operator language; reversible by paid A/B test. See research/strategy.md Section 5 D3. |
 | SMB employees are more skeptical than enterprise employees of employer surveys | HYPOTHESIS | Reasonable inference from small-team inference risk (everyone knows each other) - no direct data |
-| Employees participate once, then decide | CONFIRMED (pattern) | research/ux-patterns.md B3 - direct behavioral pattern |
-| Operator-to-peer referral is strongest channel in year 1 | HYPOTHESIS (borrowed) | research/aarrr.md notes this is borrowed from adjacent SMB SaaS patterns, not validated for this product |
+| Employees participate once, then decide | CONFIRMED (pattern) | research/docs/ux-patterns.md B3 - direct behavioral pattern |
+| Operator-to-peer referral is strongest channel in year 1 | HYPOTHESIS (borrowed) | research/docs/aarrr.md notes this is borrowed from adjacent SMB SaaS patterns, not validated for this product |
 
 ---
 

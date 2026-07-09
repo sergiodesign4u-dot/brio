@@ -668,19 +668,10 @@
   </div>
   <div class="sidebar-body" id="sidebarBody">
     <div class="nav-group">
-      <div class="nav-group-label">Research</div>
-      <a href="research.html#intro" class="nav-item">Intro</a>
-      <a href="research.html#canvas" class="nav-item">Lean UX Canvas</a>
-      <a href="research.html#strategy" class="nav-item">Strategy</a>
-      <a href="research.html#aarrr" class="nav-item">AARRR</a>
-      <a href="research.html#competitors" class="nav-item">Competitors</a>
-      <a href="research.html#benchmark" class="nav-item">Benchmark</a>
-      <a href="research.html#patterns" class="nav-item">UX Patterns</a>
-      <a href="research.html#conclusions" class="nav-item">Conclusions</a>
-      <a href="research.html#live-research" class="nav-item">Live Research</a>
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
     </div>
     <div class="nav-group">
-      <div class="nav-group-label active-section">People &amp; JTBD</div>
+      <div class="nav-group-label active-section">User Research</div>
       <a href="personas.html" class="nav-item">Personas</a>
       <span class="nav-item nav-item-active">JTBD</span>
       <a href="#intro" class="nav-sub-item" id="sub-intro">Intro</a>
@@ -692,9 +683,17 @@
       <a href="#critique" class="nav-sub-item" id="sub-critique">Critique</a>
     </div>
     <div class="nav-group nav-group-next">
-      <div class="nav-group-label">Next</div>
-      <span class="nav-item nav-item-muted">Wireframes</span>
-      <span class="nav-item nav-item-muted">Concept</span>
+      <div class="nav-group-label">Roadmap</div>
+      <span class="nav-item">Information Architecture <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
     </div>
   </div>
 </aside>
@@ -706,11 +705,11 @@
     <div class="hero-meta">
       <span class="badge accent">Phase 2 - People &amp; JTBD</span>
       <span class="badge">June 2026</span>
-      <span class="badge">Sourced from personas.md</span>
+      <span class="badge">Sourced from user-research/docs/personas.md</span>
     </div>
     <div class="section-label">People &amp; JTBD</div>
     <h1>Jobs to Be Done</h1>
-    <p class="hero-intro">The complete job inventory for Brio, built from personas.md and master-research.md. Every job cites its source. Includes the full JTBD matrix, MVP core selection, and a strict critique of what is confirmed versus still hypothesized.</p>
+    <p class="hero-intro">The complete job inventory for Brio, built from user-research/docs/personas.md and research/docs/research.md. Every job cites its source. Includes the full JTBD matrix, MVP core selection, and a strict critique of what is confirmed versus still hypothesized.</p>
   </section>
 
   <!-- Main Job -->
@@ -728,7 +727,7 @@
 
       <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-subtle);">
         <div class="job-meta">Persona: Priya (Operator, primary)</div>
-        <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Segment A JTBD (CONFIRMED as primary job by research gap analysis). Confirmed by competitive gap: no competitor has built a self-serve, guided wellbeing product for the no-HR operator. Source: research/competitive-analysis.md "What Is Missing Across All."</div>
+        <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Segment A JTBD (CONFIRMED as primary job by research gap analysis). Confirmed by competitive gap: no competitor has built a self-serve, guided wellbeing product for the no-HR operator. Source: research/docs/competitors.md "What Is Missing Across All."</div>
       </div>
     </div>
   </section>
@@ -748,7 +747,7 @@
         <div class="job-sothat"><strong>So that</strong> the program gets continued support and I feel confident in my work</div>
         <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
           <div class="job-meta">Personas: Priya (Operator, primary driver) - Marcus (Owner, primary driver at renewal)</div>
-          <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Segment B JTBD; research/aarrr.md Revenue section. CONFIRMED via Officevibe numeric score visualization as analogous mechanism. Source: research/competitive-analysis.md, Officevibe comparison entry.</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Segment B JTBD; research/docs/aarrr.md Revenue section. CONFIRMED via Officevibe numeric score visualization as analogous mechanism. Source: research/docs/competitors.md, Officevibe comparison entry.</div>
         </div>
       </div>
 
@@ -759,7 +758,7 @@
         <div class="job-sothat"><strong>So that</strong> I can act before it becomes a crisis</div>
         <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
           <div class="job-meta">Personas: Priya (Operator) - Marcus (Owner, secondary - risk reduction)</div>
-          <div class="job-meta" style="margin-top: 4px;">Source: research/ux-patterns.md Pattern B1 ("surfaces when something needs attention"); research/master-research.md Key Conclusion 3. CONFIRMED via Officevibe AI-alert model. Source: research/competitive-analysis.md, Officevibe AI analysis entry.</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/docs/ux-patterns.md Pattern B1 ("surfaces when something needs attention"); research/docs/research.md Key Conclusion 3. CONFIRMED via Officevibe AI-alert model. Source: research/docs/competitors.md, Officevibe AI analysis entry.</div>
         </div>
       </div>
 
@@ -770,7 +769,7 @@
         <div class="job-sothat"><strong>So that</strong> I can answer honestly without fear of consequences</div>
         <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
           <div class="job-meta">Personas: Yemi (Employee, primary driver) - Priya (Operator, indirect - her program fails if Yemi does not respond honestly)</div>
-          <div class="job-meta" style="margin-top: 4px;">Source: research/ux-patterns.md Pattern B5 (MOST CRITICAL behavioral pattern); research/benchmark.md Mechanism 2. CONFIRMED via Culture Amp pre-survey disclosure mechanism. Source: research/benchmark.md Mechanism 1.</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/docs/ux-patterns.md Pattern B5 (MOST CRITICAL behavioral pattern); research/docs/benchmark.md Mechanism 2. CONFIRMED via Culture Amp pre-survey disclosure mechanism. Source: research/docs/benchmark.md Mechanism 1.</div>
         </div>
       </div>
 
@@ -781,7 +780,7 @@
         <div class="job-sothat"><strong>So that</strong> I do not resent the interruption or feel surveilled</div>
         <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
           <div class="job-meta">Persona: Yemi (Employee, primary driver)</div>
-          <div class="job-meta" style="margin-top: 4px;">Source: research/ux-patterns.md Pattern B3 ("radically simple: one question, one emoji-scale response, one line of privacy context"). CONFIRMED as design implication; no direct quantitative data on 30-second threshold. [?] The specific 30-second number is an assumption from CLAUDE.md MVP scope, not from competitive research.</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/docs/ux-patterns.md Pattern B3 ("radically simple: one question, one emoji-scale response, one line of privacy context"). CONFIRMED as design implication; no direct quantitative data on 30-second threshold. [?] The specific 30-second number is an assumption from CLAUDE.md MVP scope, not from competitive research.</div>
         </div>
       </div>
 
@@ -792,7 +791,7 @@
         <div class="job-sothat"><strong>So that</strong> I can say yes or no with confidence</div>
         <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
           <div class="job-meta">Personas: Marcus (Owner, primary driver) - Priya (Operator, secondary - she uses this signal to justify the program to Marcus)</div>
-          <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Objective O2 and Segment B; research/aarrr.md Revenue section. CONFIRMED via Officevibe benchmark: owners respond to numeric clarity with context. Source: research/competitive-analysis.md, Officevibe comparison entry.</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/strategy.md Objective O2 and Segment B; research/docs/aarrr.md Revenue section. CONFIRMED via Officevibe benchmark: owners respond to numeric clarity with context. Source: research/docs/competitors.md, Officevibe comparison entry.</div>
         </div>
       </div>
 
@@ -803,7 +802,7 @@
         <div class="job-sothat"><strong>So that</strong> I do not have to invent the process myself</div>
         <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
           <div class="job-meta">Persona: Priya (Operator, primary driver)</div>
-          <div class="job-meta" style="margin-top: 4px;">Source: research/ux-patterns.md Pattern 1 (Guided Program Flow). CONFIRMED via Headspace Core self-serve model and Gusto's "even if you're not an expert" onboarding posture. Source: research/competitive-analysis.md, Aspirational group.</div>
+          <div class="job-meta" style="margin-top: 4px;">Source: research/docs/ux-patterns.md Pattern 1 (Guided Program Flow). CONFIRMED via Headspace Core self-serve model and Gusto's "even if you're not an expert" onboarding posture. Source: research/docs/competitors.md, Aspirational group.</div>
         </div>
       </div>
 
@@ -821,19 +820,19 @@
     <div class="emotion-card">
       <div class="emotion-id">E1</div>
       <div class="emotion-text"><strong>When</strong> I do people work, <strong>I want</strong> to feel like a competent "people person," <strong>so that</strong> I am proud of what I have built even without an HR title.</div>
-      <div class="emotion-meta">Persona: Priya (Operator, primary driver). This is the emotional core of her primary job. Source: research/strategy.md Segment A Motivation ("competence and clarity"); research/ux-patterns.md Pattern B4. CONFIRMED as the emotional job by the research gap: no competitor has designed for this feeling.</div>
+      <div class="emotion-meta">Persona: Priya (Operator, primary driver). This is the emotional core of her primary job. Source: research/strategy.md Segment A Motivation ("competence and clarity"); research/docs/ux-patterns.md Pattern B4. CONFIRMED as the emotional job by the research gap: no competitor has designed for this feeling.</div>
     </div>
 
     <div class="emotion-card">
       <div class="emotion-id">E2 <span class="tag tag-challenged">[?]</span></div>
       <div class="emotion-text"><strong>When</strong> the company shows interest in my wellbeing at work, <strong>I want</strong> to feel genuinely supported rather than monitored, <strong>so that</strong> I trust the platform and continue to engage.</div>
-      <div class="emotion-meta">Persona: Yemi (Employee, primary driver). Source: research/ux-patterns.md Pattern B3; research/benchmark.md Mechanism 2. CONFIRMED behavioral pattern; specific emotional framing is synthesis. [?] Direct employee voice on this distinction (supported vs. monitored) needs validation.</div>
+      <div class="emotion-meta">Persona: Yemi (Employee, primary driver). Source: research/docs/ux-patterns.md Pattern B3; research/docs/benchmark.md Mechanism 2. CONFIRMED behavioral pattern; specific emotional framing is synthesis. [?] Direct employee voice on this distinction (supported vs. monitored) needs validation.</div>
     </div>
 
     <div class="emotion-card">
       <div class="emotion-id">E3 <span class="tag tag-challenged">[?]</span></div>
       <div class="emotion-text"><strong>When</strong> my team investment is clearly working, <strong>I want</strong> to be able to share that with peers, <strong>so that</strong> I am seen as a leader who builds good culture.</div>
-      <div class="emotion-meta">Personas: Marcus (Owner, secondary driver) - Priya (Operator, secondary driver for peer credibility). Source: research/aarrr.md Referral section ("owners share to look like caring leaders, not for cash incentives"). [?] Hypothesis derived from SMB owner behavior patterns, not from direct research on this product category.</div>
+      <div class="emotion-meta">Personas: Marcus (Owner, secondary driver) - Priya (Operator, secondary driver for peer credibility). Source: research/docs/aarrr.md Referral section ("owners share to look like caring leaders, not for cash incentives"). [?] Hypothesis derived from SMB owner behavior patterns, not from direct research on this product category.</div>
     </div>
 
     <div class="emotion-section-title">Social Jobs (S1-S2)</div>
@@ -841,13 +840,13 @@
     <div class="emotion-card">
       <div class="emotion-id">S1 <span class="tag tag-challenged">[?]</span></div>
       <div class="emotion-text"><strong>When</strong> I find a people-ops approach that works, <strong>I want</strong> to tell other operators in my network about it, <strong>so that</strong> we help each other navigate roles we were not trained for.</div>
-      <div class="emotion-meta">Persona: Priya (Operator, primary driver for referral). Source: research/aarrr.md Referral section ("operator-to-peer is the strongest channel in year 1"). [?] Hypothesis - no data on operator community behavior in this specific market. The assertion is borrowed from adjacent SMB SaaS patterns (Gusto's observed word-of-mouth growth).</div>
+      <div class="emotion-meta">Persona: Priya (Operator, primary driver for referral). Source: research/docs/aarrr.md Referral section ("operator-to-peer is the strongest channel in year 1"). [?] Hypothesis - no data on operator community behavior in this specific market. The assertion is borrowed from adjacent SMB SaaS patterns (Gusto's observed word-of-mouth growth).</div>
     </div>
 
     <div class="emotion-card">
       <div class="emotion-id">S2</div>
       <div class="emotion-text"><strong>When</strong> I receive a team check-in result that shows something meaningful, <strong>I want</strong> to share it with the owner easily, <strong>so that</strong> the owner is informed without me having to translate the data.</div>
-      <div class="emotion-meta">Persona: Priya (Operator, primary driver for share action). Source: research/aarrr.md Revenue section (operator upgrades to give owner visibility); research/strategy.md Business Model (owner dashboard as upgrade driver). CONFIRMED as the core upgrade emotional driver.</div>
+      <div class="emotion-meta">Persona: Priya (Operator, primary driver for share action). Source: research/docs/aarrr.md Revenue section (operator upgrades to give owner visibility); research/strategy.md Business Model (owner dashboard as upgrade driver). CONFIRMED as the core upgrade emotional driver.</div>
     </div>
 
   </section>
@@ -870,8 +869,8 @@
         <div class="job-want"><strong>I want</strong> to be able to show employees I acted on their feedback</div>
         <div class="job-sothat"><strong>So that</strong> participation rates stay high in future check-in cycles</div>
         <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
-          <p style="font-size: 13px; margin: 0; max-width: none;">Why hypothesized: the research confirms that employees respond to visible follow-through (ux-patterns.md B5 implies this) but no competitive product has documented a specific "close the loop" mechanic for SMB operators. If this job is real, it suggests a "you said, we did" communication feature is in scope.</p>
-          <div class="job-meta" style="margin-top:6px;">Source: research/ux-patterns.md Pattern B5 (behavioral implication, not direct evidence). [?] Needs validation.</div>
+          <p style="font-size: 13px; margin: 0; max-width: none;">Why hypothesized: the research confirms that employees respond to visible follow-through (research/docs/ux-patterns.md B5 implies this) but no competitive product has documented a specific "close the loop" mechanic for SMB operators. If this job is real, it suggests a "you said, we did" communication feature is in scope.</p>
+          <div class="job-meta" style="margin-top:6px;">Source: research/docs/ux-patterns.md Pattern B5 (behavioral implication, not direct evidence). [?] Needs validation.</div>
         </div>
       </div>
 
@@ -882,7 +881,7 @@
         <div class="job-sothat"><strong>So that</strong> I know my participation mattered</div>
         <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
           <p style="font-size: 13px; margin: 0; max-width: none;">Why hypothesized: participation habits decay when employees feel the tool is extractive rather than reciprocal. No competitor has designed a visible "here is what the team said overall" moment for employees. If this job is real, it suggests a lightweight team-level result display for employees (aggregate only, no individual) is needed.</p>
-          <div class="job-meta" style="margin-top:6px;">Source: research/ux-patterns.md Pattern B3 (participation habit forms over 3-4 weeks). [?] Needs validation.</div>
+          <div class="job-meta" style="margin-top:6px;">Source: research/docs/ux-patterns.md Pattern B3 (participation habit forms over 3-4 weeks). [?] Needs validation.</div>
         </div>
       </div>
     </div>
@@ -1023,7 +1022,7 @@
   <section id="critique">
     <div class="section-label">Strict Review</div>
     <h2>Critique</h2>
-    <p>A strict review of claims across personas.md and jtbd.md. Every claim classified, danger list surfaced, 3 targeted questions.</p>
+    <p>A strict review of claims across user-research/docs/personas.md and user-research/docs/jtbd.md. Every claim classified, danger list surfaced, 3 targeted questions.</p>
 
     <h3>Claim Audit</h3>
 
@@ -1040,42 +1039,42 @@
           <tr>
             <td>Operator has no HR training</td>
             <td><span class="tag tag-confirmed">Confirmed</span></td>
-            <td>research/competitive-analysis.md - all competitors assume HR sponsor; gap explicitly documented</td>
+            <td>research/docs/competitors.md - all competitors assume HR sponsor; gap explicitly documented</td>
           </tr>
           <tr>
             <td>Operator engages in bursts, not continuously</td>
             <td><span class="tag tag-confirmed">Confirmed</span></td>
-            <td>research/ux-patterns.md Pattern B1 - direct behavioral pattern</td>
+            <td>research/docs/ux-patterns.md Pattern B1 - direct behavioral pattern</td>
           </tr>
           <tr>
             <td>Operator needs score plus interpretation plus next action for aha moment</td>
             <td><span class="tag tag-confirmed">Confirmed (mechanism)</span></td>
-            <td>research/competitive-analysis.md Officevibe AI-action mechanic; research/ux-patterns.md B4</td>
+            <td>research/docs/competitors.md Officevibe AI-action mechanic; research/docs/ux-patterns.md B4</td>
           </tr>
           <tr>
             <td>No self-serve competitor targets the no-HR operator</td>
             <td><span class="tag tag-confirmed">Confirmed</span></td>
-            <td>research/competitive-analysis.md - Nivati/Woliba/Wellable demo requirements cited</td>
+            <td>research/docs/competitors.md - Nivati/Woliba/Wellable demo requirements cited</td>
           </tr>
           <tr>
             <td>Privacy doubt kills participation before first check-in</td>
             <td><span class="tag tag-confirmed">Confirmed (mechanism)</span></td>
-            <td>research/benchmark.md Mechanism 2; research/ux-patterns.md B5; Culture Amp disclosure architecture</td>
+            <td>research/docs/benchmark.md Mechanism 2; research/docs/ux-patterns.md B5; Culture Amp disclosure architecture</td>
           </tr>
           <tr>
             <td>Privacy by architecture earns trust; privacy by promise fails</td>
             <td><span class="tag tag-confirmed">Confirmed</span></td>
-            <td>research/benchmark.md benchmark scores (Limeade 11/40, Typeform 14/40 vs. Culture Amp 33/40, Apple 35/40)</td>
+            <td>research/docs/benchmark.md benchmark scores (Limeade 11/40, Typeform 14/40 vs. Culture Amp 33/40, Apple 35/40)</td>
           </tr>
           <tr>
             <td>First check-in is the trust-forming moment</td>
             <td><span class="tag tag-confirmed">Confirmed (mechanism)</span></td>
-            <td>research/ux-patterns.md B3 - direct behavioral pattern</td>
+            <td>research/docs/ux-patterns.md B3 - direct behavioral pattern</td>
           </tr>
           <tr>
             <td>Owner checks in under 2 minutes per month</td>
             <td><span class="tag tag-challenged">Hypothesis</span></td>
-            <td>research/ux-patterns.md B2 - stated as design implication, not validated with owners</td>
+            <td>research/docs/ux-patterns.md B2 - stated as design implication, not validated with owners</td>
           </tr>
           <tr>
             <td>Owner upgrades = operator wanting to show owner the result</td>
@@ -1085,7 +1084,7 @@
           <tr>
             <td>Employees will participate honestly if architecture is shown (not just promised)</td>
             <td><span class="tag tag-critical">Hypothesis - Riskiest</span></td>
-            <td>research/benchmark.md confirms mechanism; but no data on participation rates in SMB employer-run tools at steady state</td>
+            <td>research/docs/benchmark.md confirms mechanism; but no data on participation rates in SMB employer-run tools at steady state</td>
           </tr>
           <tr>
             <td>65% participation rate achievable</td>
@@ -1105,7 +1104,7 @@
           <tr>
             <td>Mood quotes for all 3 personas</td>
             <td><span class="tag tag-elevated">Invented (synthesis)</span></td>
-            <td>Synthesized from behavioral patterns. Flagged explicitly in personas.md. Not real user quotes.</td>
+            <td>Synthesized from behavioral patterns. Flagged explicitly in user-research/docs/personas.md. Not real user quotes.</td>
           </tr>
           <tr>
             <td>Owner age range</td>
@@ -1125,12 +1124,12 @@
           <tr>
             <td>Employees participate once, then decide</td>
             <td><span class="tag tag-confirmed">Confirmed (pattern)</span></td>
-            <td>research/ux-patterns.md B3 - direct behavioral pattern</td>
+            <td>research/docs/ux-patterns.md B3 - direct behavioral pattern</td>
           </tr>
           <tr>
             <td>Operator-to-peer referral is strongest channel in year 1</td>
             <td><span class="tag tag-challenged">Hypothesis (borrowed)</span></td>
-            <td>research/aarrr.md notes this is borrowed from adjacent SMB SaaS patterns, not validated for this product</td>
+            <td>research/docs/aarrr.md notes this is borrowed from adjacent SMB SaaS patterns, not validated for this product</td>
           </tr>
         </tbody>
       </table>
@@ -1145,7 +1144,7 @@
         <div class="danger-title">Employees in an SMB will participate honestly if the privacy architecture is clearly shown</div>
       </div>
       <p class="danger-detail">This is half the riskiest assumption. Step 6 CONFIRMED self-censorship is a real risk AND that the mechanism direction (disclosure, threshold, no live count) aligns with documented best practices. Not killed, but not fully resolved until the no-product prototype test runs.</p>
-      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-confirmed">Partially Verified</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">See research/live-research.md C1, C3. Smallest test still required (strategy.md Riskiest Assumption).</span></div>
+      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-confirmed">Partially Verified</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">See research/live-research.md C1, C3. Smallest test still required (research/strategy.md Riskiest Assumption).</span></div>
     </div>
 
     <div class="danger-item">
@@ -1154,7 +1153,7 @@
         <div class="danger-title">Showing the structural privacy mechanism drives higher participation than a policy link</div>
       </div>
       <p class="danger-detail">Affects whether the disclosure format must be architectural and specific, or whether "anonymous" alone is sufficient.</p>
-      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-challenged">Unresolved</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">No controlled study found. Direction is supported (live-research.md C3) but not empirically proven. Carry the architectural disclosure design; validate in beta.</span></div>
+      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-challenged">Unresolved</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">No controlled study found. Direction is supported (research/live-research.md C3) but not empirically proven. Carry the architectural disclosure design; validate in beta.</span></div>
     </div>
 
     <div class="danger-item">
@@ -1163,7 +1162,7 @@
         <div class="danger-title">The operator, not the owner, discovers Brio first</div>
       </div>
       <p class="danger-detail">Affects landing page message and activation flow.</p>
-      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-confirmed">Closed - founder decision</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">Operator-first is the working default. Reversible by paid A/B test. strategy.md Section 5 D3.</span></div>
+      <div style="margin-top:8px;padding-left:30px;"><span class="tag tag-confirmed">Closed - founder decision</span> <span style="font-size:12px;color:var(--text-faint);margin-left:8px;">Operator-first is the working default. Reversible by paid A/B test. research/strategy.md Section 5 D3.</span></div>
     </div>
 
     <div class="danger-item">

@@ -1,0 +1,5 @@
+# OS
+.DS_Store
+
+# Playwright MCP scratch output (screenshots, console/page dumps)
+.playwright-mcp/
