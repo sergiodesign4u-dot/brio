@@ -37,6 +37,18 @@ Supporting architecture (serve Yemi; preconditions for the above; in MVP scope b
 
 ---
 
+## Information Architecture
+
+*Standing decisions for the IA Detail Layer (course part 03b) and every stage after. Full detail: ia/docs/sitemap.md, ia/docs/flows.md, and the per-page sources in ia/docs/pages/.*
+
+**Platform stance (fixed): mobile-first, fully responsive desktop to mobile, mobile base 360px.** Block priority and the first screen are reasoned from mobile first; desktop is designed deliberately, not as an afterthought. The operator dashboard stays desktop-first in daily use, but every node is specified from the 360px baseline up.
+
+**Two IA layers.** Global layer (part a, Base Layer, done): the screen map, user flows, traceability matrix, and navigation model that answer "where can the user go." Per-page layer (part b, Detail Layer, this stage): each screen gets a full specification of blocks, states, components, and SEO that answers "what is on each page and how it behaves." Nothing appears for the first time inside a wireframe; the wireframe renders a finished structure, it does not invent one.
+
+**SEO ahead, three layers, one per phase.** The structural SEO layer (URL/slug, H1/H2, breadcrumbs, schema.org, index vs noindex, internal linking, target and segment landing pages) is defined here, now, because it IS information architecture. On the wireframe (stage 04) we only validate that each SEO block has a visible place. In production we finalize copy and real query volumes. Private and transactional zones (auth, account, the employee check-in) are noindex, no schema. All mockups this stage are black and white, wireframe level; color, brand, and imagery arrive at Concept (stage 06).
+
+---
+
 ## Target Audience
 
 ### Operator (hero user - primary)
