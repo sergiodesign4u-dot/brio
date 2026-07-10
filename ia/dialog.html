@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Detail: Dialog / modal shell (0.5)</title>
+  <style>
+    :root {
+      --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
+      --border: #252a33; --border-subtle: #1e232c; --text: #e8eaf0; --text-muted: #8b909c; --text-faint: #555b68;
+      --accent: #4f9cf9; --accent-dim: #1d3a5f; --accent-warm: #f4a261; --accent-warm-dim: #3d2810;
+      --green: #4ade80; --green-dim: #14532d; --red: #f87171; --red-dim: #450a0a; --yellow: #fbbf24; --yellow-dim: #451a03;
+      --radius: 8px; --radius-lg: 12px; --radius-sm: 4px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .sidebar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13, 15, 18, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 36px; height: 36px; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px; }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
+    .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-node { padding-left: 20px; font-size: 12px; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ul li { margin-bottom: 6px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.ok { border-color: var(--green-dim); }
+    .src { font-size: 12px; color: var(--text-faint); margin-top: 10px; }
+
+    /* ===== Black-and-white wireframe kit ===== */
+    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
+    .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
+    .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
+
+    .wf-stage { position: relative; overflow: hidden; background: #141414; border: 1px solid #3a3a3a; border-radius: 10px; padding: 14px; min-height: 240px; }
+    .wf-behind { color: #3d3d3d; font-size: 11px; line-height: 1.9; user-select: none; }
+    .wf-behind .bar { height: 9px; background: #232323; border-radius: 3px; margin: 7px 0; }
+    .wf-behind .bar.s { width: 50%; }
+    .wf-dialog { position: relative; z-index: 2; border: 1px solid #6a6a6a; border-radius: 8px; background: #1c1c1c; width: 280px; max-width: 100%; margin: 14px auto; box-shadow: 0 0 0 2000px rgba(0,0,0,0.5); }
+    .wf-dhead { display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border-bottom: 1px solid #333; color: #fff; font-size: 13px; font-weight: 700; }
+    .wf-dhead .x { color: #9a9a9a; font-weight: 400; }
+    .wf-dbody { padding: 14px; color: #b8b8b8; font-size: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .wf-dbody .field { border: 1px solid #444; border-radius: 5px; padding: 8px; color: #8f8f8f; }
+    .wf-dfoot { display: flex; gap: 10px; justify-content: flex-end; padding: 12px 14px; border-top: 1px solid #333; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 7px 12px; font-size: 11px; color: #e6e6e6; }
+    .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-anno { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .wf-anno span { font-size: 9.5px; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; padding: 2px 6px; font-family: ui-monospace, monospace; }
+
+    .wf-sheetphone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 10px; background: #0c0c0c; position: relative; overflow: hidden; min-height: 300px; display: flex; flex-direction: column; }
+    .wf-sheet-behind { color: #333; font-size: 10px; padding: 6px; }
+    .wf-sheet-behind .bar { height: 8px; background: #202020; border-radius: 3px; margin: 6px 0; }
+    .wf-sheet { margin-top: auto; border: 1px solid #6a6a6a; border-top-left-radius: 12px; border-top-right-radius: 12px; background: #1c1c1c; box-shadow: 0 -6px 0 2000px rgba(0,0,0,0.5); position: relative; z-index: 2; }
+    .wf-grip { width: 34px; height: 4px; background: #555; border-radius: 3px; margin: 8px auto; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+      <a href="ia-base.html" class="nav-item">Base Layer</a>
+      <span class="nav-item nav-item-active">Detail Layer</span>
+      <div class="nav-group-label sub">Structure</div>
+      <a href="navigation.html" class="nav-item nav-node">Navigation (0.1)</a>
+      <a href="footer.html" class="nav-item nav-node">Footer (0.2)</a>
+      <a href="privacy-disclosure.html" class="nav-item nav-node">Privacy disclosure (0.3)</a>
+      <a href="program-card.html" class="nav-item nav-node">Program card (0.4)</a>
+      <span class="nav-item nav-item-active nav-node">Dialog shell (0.5)</span>
+      <a href="#anatomy" class="nav-sub-item" id="sub-anatomy">Anatomy</a>
+      <a href="#variants" class="nav-sub-item" id="sub-variants">Variants</a>
+      <a href="#states" class="nav-sub-item" id="sub-states">States</a>
+      <a href="#mockup" class="nav-sub-item" id="sub-mockup">Wireframe</a>
+      <a href="#a11y" class="nav-sub-item" id="sub-a11y">A11y contract</a>
+      <span class="nav-item nav-item-muted" style="margin-top:6px;">More nodes at Step 8</span>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Detail Layer</span>
+      <span class="badge">Node 0.5</span>
+      <span class="badge">Global component</span>
+      <span class="badge">B/W wireframe</span>
+    </div>
+    <div class="crumb">IA / Detail Layer / Structure / Dialog / modal shell (0.5)</div>
+    <h1>Dialog / modal shell</h1>
+    <p class="hero-intro">One accessible modal contract, defined once, reused by every dialog in the product: resend invite (6.1), upgrade (7.2), cookie consent (11.3), and destructive confirmations. Each instance fills the body and actions; all inherit the same chrome and the same focus and keyboard behavior. No H1. Source of truth: ia/docs/pages/dialog.md.</p>
+  </section>
+
+  <!-- Anatomy -->
+  <section id="anatomy">
+    <div class="section-label">The shell</div>
+    <h2>Anatomy</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Part</th><th>Behavior</th></tr></thead>
+        <tbody>
+          <tr><td>Overlay / backdrop</td><td>dims the page and makes the background inert (no interaction behind it)</td></tr>
+          <tr><td>Container</td><td><code>role="dialog"</code>, <code>aria-modal="true"</code>; centered on desktop, bottom sheet on mobile</td></tr>
+          <tr><td>Header</td><td>title (the accessible name via <code>aria-labelledby</code>) plus a close (X) control</td></tr>
+          <tr><td>Body</td><td>the variant's content slot (form fields, options, a confirm message)</td></tr>
+          <tr><td>Footer</td><td>actions: one primary and one secondary or cancel</td></tr>
+          <tr><td>Dismiss paths</td><td>close (X), Escape, and a backdrop click (except where a variant blocks it)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Variants -->
+  <section id="variants">
+    <div class="section-label">Over the same shell</div>
+    <h2>Variants</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Variant</th><th>Instance</th><th>Body and actions</th></tr></thead>
+        <tbody>
+          <tr><td>Form</td><td>6.1 Resend or manage invite</td><td>resend to selected, copy link, regenerate code; primary Send, secondary Close</td></tr>
+          <tr><td>Decision</td><td>7.2 Upgrade or paywall</td><td>tier, seats, price; primary Upgrade, secondary "Stay free" (a recoverable exit, F3 DE3)</td></tr>
+          <tr><td>Confirm (destructive)</td><td>end a program, revoke a code, delete an account</td><td>short message; primary destructive, secondary Cancel, and Cancel holds the initial focus</td></tr>
+          <tr><td>Non-modal banner</td><td>11.3 Cookie consent</td><td>borrows the chrome but is NOT a focus trap: a <code>role="region"</code> banner, because blocking the page for consent is user-hostile and Reject must be as easy as Accept. Legal grounding at Step 6</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States</h2>
+    <ul>
+      <li><strong>Default (open):</strong> header, body, footer.</li>
+      <li><strong>Loading:</strong> an action is in progress (payment, invite send); the primary button shows a busy state and is disabled, the dialog stays open.</li>
+      <li><strong>Error:</strong> the action failed; an inline message appears in the body, actions return to enabled (for example 7.3 Payment failed inside 7.2).</li>
+      <li><strong>Success:</strong> a brief confirmation, then the dialog closes and returns focus.</li>
+    </ul>
+  </section>
+
+  <!-- Wireframe -->
+  <section id="mockup">
+    <div class="section-label">Black and white, wireframe level</div>
+    <h2>Wireframe</h2>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop is a centered modal over the dimmed, inert page; mobile is a bottom sheet.</p>
+
+    <div class="wf-row">
+      <div style="flex:1;min-width:300px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, decision variant (7.2 Upgrade)</div>
+        <div class="wf-stage">
+          <div class="wf-behind"><div class="bar"></div><div class="bar s"></div><div class="bar"></div><div class="bar s"></div><div class="bar"></div></div>
+          <div class="wf-dialog">
+            <div class="wf-dhead"><span>Upgrade to share with your owner</span><span class="x">X</span></div>
+            <div class="wf-dbody">
+              <div class="field">Plan: Starter</div>
+              <div class="field">Seats: 12</div>
+              <div class="field">Price: shown per seat / month</div>
+            </div>
+            <div class="wf-dfoot"><span class="wf-b">Stay free</span><span class="wf-b solid">Upgrade</span></div>
+          </div>
+        </div>
+        <div class="wf-anno"><span>role="dialog"</span><span>aria-modal="true"</span><span>focus -&gt; first field</span><span>Esc closes</span><span>bg inert + dimmed</span></div>
+      </div>
+
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet (confirm)</div>
+        <div class="wf-sheetphone">
+          <div class="wf-sheet-behind"><div class="bar"></div><div class="bar"></div><div class="bar" style="width:60%;"></div></div>
+          <div class="wf-sheet">
+            <div class="wf-grip"></div>
+            <div class="wf-dhead"><span>End this program?</span><span class="x">X</span></div>
+            <div class="wf-dbody">Members stop receiving check-ins. You can reactivate later.</div>
+            <div class="wf-dfoot"><span class="wf-b solid">Cancel</span><span class="wf-b">End program</span></div>
+          </div>
+        </div>
+        <div class="wf-note">confirm: focus starts on Cancel; drag or Esc dismisses.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A11y contract -->
+  <section id="a11y">
+    <div class="section-label">Grounded in WAI-ARIA APG</div>
+    <h2>Accessibility contract</h2>
+    <ul>
+      <li><code>role="dialog"</code> and <code>aria-modal="true"</code> on the container.</li>
+      <li>Labelled by the visible title with <code>aria-labelledby</code> (or <code>aria-label</code> when there is no title); <code>aria-describedby</code> only for a simple single-message body.</li>
+      <li><strong>On open:</strong> focus moves to the first focusable element inside (or the container). For a destructive confirm, focus goes to Cancel.</li>
+      <li><strong>Focus trap:</strong> Tab and Shift+Tab cycle within the dialog; focus cannot leave without closing.</li>
+      <li><strong>On close:</strong> focus returns to the element that opened the dialog.</li>
+      <li><strong>Escape</strong> closes; a backdrop click closes too, unless a variant blocks accidental loss (an in-progress payment).</li>
+      <li><strong>Background</strong> is inert and visually dimmed; no interaction reaches it.</li>
+      <li><strong>SEO:</strong> dialogs open on interaction and are not indexable; the shell is an interaction and a11y contract, not an SEO surface.</li>
+    </ul>
+    <p class="src">Source: WAI-ARIA Authoring Practices, Dialog (Modal) pattern, <a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">w3.org/WAI/ARIA/apg</a>.</p>
+    <div class="callout ok"><strong>Canonical reuse.</strong> Defined once here, reused by 6.1, 7.2, 11.3, and every confirmation. Change the contract here and it holds everywhere. Next global component: <strong>0.6 Canonical lists</strong>, then the pages begin (Home, 0.0).</div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Detail Layer - Node 0.5 Dialog / modal shell - July 2026</p>
+    <p style="margin-top:4px;">One modal contract for every dialog. Grounded in the WAI-ARIA APG dialog pattern. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/dialog.md.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item').forEach(function(link) {
+    link.addEventListener('click', function() { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+  });
+
+  var subSections = [
+    { id: 'anatomy', sub: 'sub-anatomy' },
+    { id: 'variants', sub: 'sub-variants' },
+    { id: 'states', sub: 'sub-states' },
+    { id: 'mockup', sub: 'sub-mockup' },
+    { id: 'a11y', sub: 'sub-a11y' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) { var el = document.getElementById(s.sub); if (el) el.classList.remove('nav-sub-active'); });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) { var el = document.getElementById(match.sub); if (el) el.classList.add('nav-sub-active'); }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) { var el = document.getElementById(s.id); if (el) observer.observe(el); });
+</script>
+
+</body>
+</html>

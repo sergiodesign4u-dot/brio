@@ -66,6 +66,10 @@ INCLUDES: canonical privacy spine (aggregate only · minimum-N=5 · no live coun
 INCLUDES: title · category (from 0.6) · cadence and duration · short description · "recommended for your size" tag · status badge (draft / active / ended, manage only) · questions count · primary action (Select / Confirm / Manage). States: default, recommended, active, draft, ended, skeleton. Full spec: ia/docs/pages/program-card.md
 → 5.1 Program detail (the whole card is one link); rendered by 3.1, 5.0, 5.1 (copies, propagate on change)
 
+**0.5 Dialog / modal shell** · dialog (global, canonical shell) · supporting; one accessible modal contract
+INCLUDES: overlay (inert, dimmed backdrop) · container (role="dialog", aria-modal) · header (title = accessible name, close X) · body slot · footer (primary + secondary or cancel) · dismiss (X / Esc / backdrop). Variants: form (6.1), decision (7.2), destructive confirm, non-modal banner (11.3). States: default, loading, error, success. Full spec: ia/docs/pages/dialog.md
+→ reused by 6.1, 7.2, 11.3, and every confirmation; focus trap, focus returns to opener on close
+
 ### Cluster 1 - Public marketing and acquisition  [pub]
 
 **1.0 Pricing** · page · item 1 (transparent price, no demo)
