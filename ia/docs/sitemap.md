@@ -62,6 +62,10 @@ INCLUDES: canonical privacy spine (aggregate only · minimum-N=5 · no live coun
 → rendered by 10.1, 8.2, 3.1, 4.0, 9.1, 1.1 (variants, not copies)
 [global component discovered at Step 3; 0.4 Program card, 0.5 Dialog shell, 0.6 Canonical lists follow]
 
+**0.4 Program card** · section (global, canonical element) · Main + J6 + item 2
+INCLUDES: title · category (from 0.6) · cadence and duration · short description · "recommended for your size" tag · status badge (draft / active / ended, manage only) · questions count · primary action (Select / Confirm / Manage). States: default, recommended, active, draft, ended, skeleton. Full spec: ia/docs/pages/program-card.md
+→ 5.1 Program detail (the whole card is one link); rendered by 3.1, 5.0, 5.1 (copies, propagate on change)
+
 ### Cluster 1 - Public marketing and acquisition  [pub]
 
 **1.0 Pricing** · page · item 1 (transparent price, no demo)
