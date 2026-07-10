@@ -70,6 +70,11 @@ INCLUDES: title · category (from 0.6) · cadence and duration · short descript
 INCLUDES: overlay (inert, dimmed backdrop) · container (role="dialog", aria-modal) · header (title = accessible name, close X) · body slot · footer (primary + secondary or cancel) · dismiss (X / Esc / backdrop). Variants: form (6.1), decision (7.2), destructive confirm, non-modal banner (11.3). States: default, loading, error, success. Full spec: ia/docs/pages/dialog.md
 → reused by 6.1, 7.2, 11.3, and every confirmation; focus trap, focus returns to opener on close
 
+**0.6 Canonical lists** · section (global reference) · supporting; single source for repeated values
+INCLUDES: program categories (mental health / physical / financial / social) · plan tiers (Free / Starter / Growth, prices [?]) · company-size buckets (cut points [?]) · input types (emoji / slider) · cadence (weekly) · statuses (program draft/active/ended, cycle open/closed). Full spec: ia/docs/pages/canonical-lists.md
+→ consumed by 0.4, 5.0, 1.5 (categories); 1.0, 7.2, 8.1 (tiers); 3.0, 0.4 (sizes); 5.2, 10.2 (inputs). Change here, propagate to consumers
+[global components exhausted at Step 3; pages begin at Step 4 with Home 0.0]
+
 ### Cluster 1 - Public marketing and acquisition  [pub]
 
 **1.0 Pricing** · page · item 1 (transparent price, no demo)
