@@ -39,63 +39,228 @@
 
 ---
 
-## Screens
+## Screen map (detailed nodes)
 
-*Hierarchy of screens derived from the entities and jobs above, not from a competitor menu. Every node cites the job it serves. A node with no job is an [ORPHAN]. States (empty / error / loading) are states of a screen, not screens, so they live in flows.md, not here. Surface tags: [pub] public, [P] operator (Priya, primary), [O] owner (Marcus, secondary), [E] employee (Yemi, third-party).*
+*Detailed node map derived from the Entities and jobs above. This replaces the Base Layer screen tree, it does not duplicate it. Each node is a card: number X.Y (X = cluster, Y = node or state within it), name, type (page | dialog | state | flow | section), INCLUDES (blocks and components on it), transitions (arrows to the next nodes), and the persona or job it serves. Dialogs and states are first-class nodes, not footnotes. The map grows as the phase proceeds: the footer (0.2, Step 3) and the system cluster (11, Step 6) register more nodes. Surface tags: [pub] public, [P] operator (Priya, primary), [O] owner (Marcus, secondary), [E] employee (Yemi, third-party). Full per-node specs live in ia/docs/pages/. Flow references F1..F4 point at ia/docs/flows.md.*
 
-```
-Brio
-│
-├─ PUBLIC / PRE-AUTH                              [pub · operator acquisition, Priya primary]
-│  ├─ Landing / home ............ (Main + item 1: self-serve start, operator language)
-│  ├─ Pricing .................... (item 1: transparent price, no demo)
-│  ├─ Sign up .................... (item 1: self-serve signup, no credit card)
-│  └─ Log in (email + magic link)  (supporting: return access, gates Main / J1 / J2 / E1)
-│
-├─ OPERATOR APP                                   [P · Priya, primary, desktop-first]
-│  ├─ Onboarding (guided first-run flow) ......... (J6 + Main + item 2)
-│  │  ├─ Company setup (name, size) ..... (J6: size drives the pre-selected program)
-│  │  ├─ First program confirm (pre-selected by size) . (Main + J6 + item 2)
-│  │  └─ Invite team (join link / code) . (Main + item 3)
-│  ├─ Dashboard (home) ........................... (E1 + J1 + J2: score + interpretation + next action, the aha)
-│  │  └─ Team pulse detail (score, trend, participation, interpretation, next action) . (J1 + J2 + E1 + items 5, 6)
-│  │     └─ Threshold alert detail ...... (J2 + item 7: early warning)
-│  ├─ Programs ................................... (Main + J6)
-│  │  ├─ Program library (browse + pick) . (Main + J6 + item 2)
-│  │  └─ Program detail / manage ......... (Main + item 2)
-│  │     └─ Check-in setup (questions, cadence) . (J2 + J4 + item 3)
-│  ├─ Team ....................................... (Main + item 3)
-│  │  └─ Team roster (invited members, join link / code, participation aggregate) . (Main + item 3 + item 10)
-│  ├─ Share with owner ........................... (J1 + J5 + S2 + item 8)
-│  │  └─ Invite owner + upgrade .......... (S2 + item 8: paid unlock)
-│  └─ Settings ................................... (supporting)
-│     ├─ Plan / subscription ............. (item 1 + item 8 + business model)
-│     ├─ Privacy center ("what the owner can and cannot see") . (J3 + E2 + item 4: operator-facing proof)
-│     ├─ Notifications (reminders, digest cadence) . (J4 + items 9, 10)
-│     └─ Account settings ................ (supporting: gates operator jobs)
-│
-├─ OWNER SURFACE                                  [O · Marcus, secondary, aggregate-only, under 2 min]
-│  ├─ Owner dashboard (one number, trend, plain-language) . (J1 + J5 + item 8)
-│  │  └─ "What I can and cannot see" ..... (E2 owner comfort + item 4: owner-facing privacy)
-│  └─ Monthly owner digest (email → view)  (S2 + item 8 + W1: under 2 min)
-│
-└─ EMPLOYEE SURFACE                               [E · Yemi, third-party, mobile, near-anonymous, under 30s]
-   └─ Check-in (via invite link / join code) ..... (J3 + J4 + E2 + item 3)
-      ├─ Pre-Q1 privacy disclosure (persistent, before Question 1) . (J3 + E2 + item 4)
-      ├─ Questions (1 to 3, emoji / slider) . (J4 + item 3)
-      └─ Check-in complete / thank-you ..... (J4 + E2: closure, no individual data shown)
-```
+### Cluster 0 - Global shell and home  [pub / all]
 
-**Orphan check:** every node cites a job, so no [ORPHAN] in the tree. Two nodes are tagged **supporting** rather than orphan because they gate the operator's jobs, not close their own: Log in and Account settings (standard app infrastructure). Flagged openly so the Step 6 critique can re-test them.
+**0.0 Landing (marketing home)** · page · Main + item 1
+INCLUDES: 0.1 nav · hero (aggregate-only privacy value prop) · how-it-works (3 steps) · trust strip (privacy promise made visible) · pricing teaser · primary CTA "Start free" · secondary "Log in" · 0.2 footer
+→ 2.0 Sign up (F1) · 1.0 Pricing · 2.1 Log in
 
-**Parked (would be [ORPHAN] / [?] if added now, so deliberately NOT nodes):**
-- Employee "see team result" after check-in, traces only to HJ2 [?], backlog item 12 (LATER).
-- Referral / share-to-network, S1 / E3 [?].
-- Custom nudge scheduling, LATER / paid (item 11).
+**0.1 Navigation (header + mobile tabs)** · section (global) · structural, gates every operator job [Step 2]
+INCLUDES: brand · 4 job tabs (Dashboard, Programs, Team, Owner) · Settings utility · auth and role variants (guest / operator / owner-view / employee-none) · mobile bottom tabs (base 360px)
+→ 4.0 Dashboard · 5.0 Programs · 6.0 Team · 7.0 Owner · 8.0 Settings
 
-**Primary vs secondary:** the operator app plus public acquisition is the primary surface (Priya). The owner surface is secondary (Marcus, aggregate-only). The employee surface is third-party (Yemi, near-anonymous, mobile). Depth is kept minimal (deepest branch is 3 levels); the deliberate depth decisions and tap-count to the main job are in the Navigation section.
+**0.2 Footer** · section (global) · structural, second internal-linking plane [Step 3]
+INCLUDES: defined at Step 3 (trust strip, service and legal columns, SEO link block, bottom row)
+→ registers its destinations in this map at Step 3
 
-**Screen states (Step 6 MS4):** the program-management screens (Program library, Program detail, Check-in setup) carry states not drawn in this base layer: Program library has a first-run empty ("no active program yet, pick one"), and each needs loading and error states. The full per-screen state design (empty / error / loading, plus header / footer / SEO) is the job of Stage 3b (Detail layer), flagged here so it is not lost.
+### Cluster 1 - Public marketing and acquisition  [pub]
+
+**1.0 Pricing** · page · item 1 (transparent price, no demo)
+INCLUDES: 0.1 nav · tier table (Free / Starter / Growth) · "owner dashboard = paid" callout · subscription-as-privacy note · FAQ teaser · CTA "Start free" · 0.2 footer
+→ 2.0 Sign up · 0.0 Landing
+
+*Footer (Step 3) may register more public pages here (privacy explainer, about, contact, legal, FAQ). Not invented before the footer promises them.*
+
+### Cluster 2 - Authentication  [pub to P]
+
+**2.0 Sign up** · page · item 1 (self-serve, no credit card)
+INCLUDES: email + password · magic-link option · privacy and terms links · CTA "Create account"
+→ 3.0 Company setup (F1) · 2.2 Magic-link sent · 2.1 Log in
+
+**2.1 Log in** (email + magic link) · page · supporting (return access, gates Main / J1 / J2 / E1)
+INCLUDES: email + password · magic-link option · forgot-password
+→ 4.0 Dashboard · 2.2 Magic-link sent · 2.3 Invalid or expired link
+
+**2.2 Magic-link sent** · state · supporting
+INCLUDES: "check your email" confirmation · resend · open-mail hint
+→ 4.0 Dashboard (on valid link) · 2.3 (if expired)
+
+**2.3 Invalid or expired link** · state (error) · supporting, never a dead-end
+INCLUDES: explanation · "request a new link" CTA
+→ 2.1 Log in
+
+### Cluster 3 - Onboarding, guided first-run wizard  [P]
+
+*Linear, time-budgeted under 5 minutes. Sequential flow depth, not navigational depth. Runs once, not reachable from global nav afterward.*
+
+**3.0 Company setup** (name, size) · page (wizard step 1) · J6 (size drives the pre-selected program)
+INCLUDES: company name · company-size selector · progress "step 1 of 3"
+→ 3.1 First program confirm (F1)
+
+**3.1 First program confirm** (pre-selected by size) · page (wizard step 2) · Main + J6 + item 2
+INCLUDES: loading (pre-select by size, F1 Load1) · recommended program card (canonical program card, Step 3) · what it runs · interpretive line · "confirm" or "pick another (to 5.0)" · progress "step 2 of 3"
+→ 3.2 Invite team · 5.0 Program library (change choice)
+
+**3.2 Invite team** (join link / code) · page (wizard step 3) · Main + item 3
+INCLUDES: join link + copy · join code · email-invite field · privacy note (roster is not linked to answers) · progress "step 3 of 3" · "finish, go to Dashboard"
+→ 4.0 Dashboard · 3.3 (on send failure)
+
+**3.3 Invite-send error** · state (error) · never a dead-end (F1 MS3)
+INCLUDES: which invites failed · retry · skip for now (link and code still work)
+→ 3.2 Invite team
+
+### Cluster 4 - Dashboard and pulse, operator home  [P]
+
+**4.0 Dashboard** (operator home) · page · E1 + J1 + J2 (the aha, 1 tap from login)
+INCLUDES: 0.1 nav · plain-language pulse score + interpretation + suggested next action · trend spark · participation rate (share, not who) · threshold-alert banner (contextual, DX1) · privacy-proof mini element (DX2) · states 4.3 empty and 4.4 loading
+→ 4.1 Team pulse detail · 4.2 Threshold alert detail · 7.0 Share with owner (contextual on a positive milestone, F3)
+
+**4.1 Team pulse detail** · page · J1 + J2 + E1
+INCLUDES: score + number · trend over time · participation rate · interpretation + next action · minimum-N state
+→ 7.0 Share with owner · 5.2 Check-in setup
+
+**4.2 Threshold alert detail** · page · J2 (early warning, reached 1-tap contextual and via notification deep-link, DX1)
+INCLUDES: what dropped · plain-language reading · suggested next action · link to the relevant program
+→ 5.1 Program detail · 4.1 Team pulse detail
+
+**4.3 Pre-minimum-N empty** (score not ready) · state (empty) · J3 and E2 privacy math
+INCLUDES: "waiting for at least 5 responses" · no live count · nudge-team CTA (to 6.0)
+→ 6.0 Team roster
+
+**4.4 Cycle open, no live count** · state (loading) · J3 (no timing inference)
+INCLUDES: "cycle open, results appear after it closes" · no running tally
+→ 4.0 Dashboard
+
+### Cluster 5 - Programs  [P]
+
+**5.0 Program library** (browse + pick) · page (listing) · Main + J6 + item 2
+INCLUDES: 0.1 nav · facet set (category: mental health, physical, financial, social) (canonical facets, Step 3) · "recommended for your size" tag · canonical program-card grid (Step 3) · state 5.3 first-run empty
+→ 5.1 Program detail
+
+**5.1 Program detail / manage** · page · Main + item 2
+INCLUDES: title · category · cadence and duration · status (draft / active / ended) · the check-in questions it carries · manage actions (activate / end) · "set up check-in (to 5.2)"
+→ 5.2 Check-in setup
+
+**5.2 Check-in setup** (questions, cadence) · page · J2 + J4 + item 3
+INCLUDES: pick 1 to 3 questions · emoji or slider type · cadence (weekly) · minimum-N=5 note · no-live-count note · save
+→ 4.1 Team pulse detail
+
+**5.3 Library first-run empty** (no active program) · state (empty) · never a dead-end (MS4)
+INCLUDES: "no active program yet, pick one" · recommended-for-size shortcut
+→ 5.1 Program detail
+
+### Cluster 6 - Team  [P]
+
+**6.0 Team roster** (members, join link / code, participation aggregate) · page · Main + item 3 + item 10
+INCLUDES: 0.1 nav · invited-members list (invite identity only, never linked to answers) · join link + code · team size · aggregate participation rate (share, not who) · resend or manage (to 6.1)
+→ 6.1 Resend or manage invite · 4.0 Dashboard
+
+**6.1 Resend or manage invite** · dialog
+INCLUDES: resend to selected · revoke or regenerate code · copy link
+→ 6.0 Team roster
+
+### Cluster 7 - Owner share and upgrade, operator-facing  [P]
+
+**7.0 Share with owner** · page / section · J1 + J5 + S2 (fires from a positive milestone, F3)
+INCLUDES: what the owner will see (aggregate-only preview) · "invite owner" · gate: on a paid plan? to 7.1
+→ 7.1 Invite owner + upgrade · 9.0 Owner dashboard (once live)
+
+**7.1 Invite owner + upgrade** · page · S2 + item 8 (paid unlock)
+INCLUDES: owner email · plan comparison (owner dashboard = paid) · 7.2 upgrade dialog · confirmation "invite sent"
+→ 7.2 Upgrade or paywall · 9.2 Monthly owner digest
+
+**7.2 Upgrade / paywall** · dialog · item 8 and business model
+INCLUDES: tier · seats · price · payment · "stay free" (back)
+→ 7.3 (on failure) · 7.0 (recoverable exit, F3 DE3)
+
+**7.3 Payment failed** · state (error) · recoverable, not a trap (F3 DE3)
+INCLUDES: reason · retry · "stay on the free tier, retry later"
+→ 7.2 Upgrade · 4.0 Dashboard
+
+### Cluster 8 - Settings, operator utility  [P] (noindex)
+
+**8.0 Settings (shell)** · page (shell) · supporting, one shell whose section list mirrors nav
+INCLUDES: 0.1 nav · section list (Plan, Privacy center, Notifications, Account)
+→ 8.1 · 8.2 · 8.3 · 8.4
+
+**8.1 Plan / subscription** · section · item 1 + item 8
+INCLUDES: current tier · seats and usage · change plan (to 7.2) · invoices
+→ 7.2 Upgrade or paywall
+
+**8.2 Privacy center** ("what the owner can and cannot see") · section · J3 + E2 + item 4 (operator-facing proof)
+INCLUDES: canonical privacy-disclosure component (Step 3) · minimum-N=5 statement · no-live-count · owner can and cannot see panel · subscription-as-privacy statement
+→ 8.0 Settings
+
+**8.3 Notifications** (reminders, digest cadence) · section · J4 + items 9, 10
+INCLUDES: check-in reminder toggle and cadence · weekly operator digest · monthly owner digest · threshold-alert delivery
+→ 8.0 Settings
+
+**8.4 Account settings** · section · supporting (identity and password)
+INCLUDES: name · email · password · magic-link · sign out · delete account (GDPR erasure)
+→ 8.0 Settings
+
+### Cluster 9 - Owner surface, aggregate-only, secondary  [O] (under 2 min, one read)
+
+**9.0 Owner dashboard** (one number, trend, plain-language) · page · J1 + J5 + item 8
+INCLUDES: single pulse number · trend · plain-language reading · 9.1 "what I can and cannot see" · state 9.3 empty · no nav tabs by design
+→ 9.1 · re-entry from 9.2 digest
+
+**9.1 "What I can and cannot see"** · section (on 9.0) · E2 owner comfort + item 4
+INCLUDES: canonical privacy-disclosure component (Step 3), owner variant (aggregate-only, no individuals, no drill-down)
+→ 9.0 Owner dashboard
+
+**9.2 Monthly owner digest** (email to view) · page · S2 + item 8 + W1 (under 2 min)
+INCLUDES: month score + trend · one-line reading · link to 9.0
+→ 9.0 Owner dashboard
+
+**9.3 Owner score-not-ready empty** · state (empty) · MS2
+INCLUDES: "score not available yet, the privacy minimum of 5 is not met" · no individual data
+→ 9.0 Owner dashboard
+
+### Cluster 10 - Employee check-in, near-anonymous, third-party, mobile  [E] (linear, under 30s, no account for the first check-in)
+
+**10.0 Check-in entry** (via invite link / join code) · flow entry · J3 + J4
+INCLUDES: minimal top bar (no nav) · "your answers are anonymous" pre-header · link validity check
+→ 10.1 Pre-Q1 disclosure (F2) · 10.4 (expired) · 10.5 (already submitted)
+
+**10.1 Pre-Q1 privacy disclosure** · section (persistent, before Question 1) · J3 + E2 + item 4
+INCLUDES: canonical privacy-disclosure component (Step 3), employee variant · "no named responses, no individual timeline" · "see exactly what your manager sees" expander (F2 DE2 recovery) · continue
+→ 10.2 Questions · back (leave)
+
+**10.2 Questions** (1 to 3, emoji / slider) · page · J4 + item 3
+INCLUDES: 1 to 3 questions · emoji or slider · progress · submit · loading (F2 Submit)
+→ 10.3 Check-in complete · 10.6 (submit error)
+
+**10.3 Check-in complete / thank-you** · page · J4 + E2 (closure, no individual data)
+INCLUDES: thank-you · reassurance (the answer joined the aggregate) · no score shown to the employee (unless HJ2 [?], parked)
+→ end
+
+**10.4 Invite link expired** · state (error) · never a dead-end (F2)
+INCLUDES: "link expired, ask your operator to resend" · no personal data
+→ operator resend path
+
+**10.5 Already submitted this cycle** · state · MS1
+INCLUDES: "you have already checked in this cycle, thank-you" · no duplicate, no individual data
+→ end
+
+**10.6 Submit error** · state (error) · never a dead-end (F2)
+INCLUDES: "submit failed, retry" · answers preserved
+→ 10.2 Questions
+
+### Cluster 11 - System and global nodes  [all] (fleshed at Step 6, grounded in law)
+
+**11.0 404 Not found** · page · full page (nav + footer) with search and quick links, HTTP 404 + noindex, never a soft-404 [Step 6]
+**11.1 500 Server error** · page · minimal, backend-independent [Step 6]
+**11.2 Maintenance** (503 + Retry-After) · page [Step 6]
+**11.3 Cookie consent** · dialog (banner component) · grounded in real law via web fetch [Step 6]
+**11.4 Toast / inline notification** · section (component) · aria-live, no SEO impact [Step 6]
+**11.5 Global search** · likely N/A for Brio [?] · the small curated library uses browse + facets (in 5.0), not a search index; confirmed or closed at Step 6
+
+### Map notes
+
+**Orphan and supporting (full audit in Traceability):** two nodes close no job of their own but gate every operator job, kept as supporting infrastructure: 2.1 Log in and 8.4 Account. One orphan job, S1 (tell network), has no node and is parked to backlog [?]. No other orphan.
+
+**Parked (deliberately NOT nodes yet):** employee "see team result" after check-in (HJ2 [?], backlog item 12, LATER); referral or share-to-network (S1 / E3 [?]); custom nudge scheduling (LATER / paid, item 11).
+
+**Depth stays within budget:** the recurring main-job value (pulse + next action) is 1 tap from login (4.0 is home); the deepest core action (5.2 Check-in setup) is 3 taps (Programs, Program detail, Check-in setup). Detail in the Navigation section.
+
+**Global components to register at Step 3** (discover-as-you-go): the canonical program card (used in 3.1, 5.0), the library facet set (5.0), the privacy-disclosure component (8.2, 9.1, 10.1), and the dialog set (6.1, 7.2, 11.3). Each is defined once as its own node and referenced, never re-specified per page.
+
+**Numbering bridge to Traceability** (base-layer screen numbers 1..26 stay unchanged): 1=0.0, 2=1.0, 3=2.0, 4=2.1, 5=3.0, 6=3.1, 7=3.2, 8=4.0, 9=4.1, 10=4.2, 11=5.0, 12=5.1, 13=5.2, 14=6.0, 15=7.0, 16=7.1, 17=8.1, 18=8.2, 19=8.3, 20=8.4, 21=9.0, 22=9.2, 23=10.0, 24=10.1, 25=10.2, 26=10.3. The new sub-nodes (2.2, 2.3, 3.3, 4.3, 4.4, 5.3, 6.1, 7.2, 7.3, 8.0, 9.1, 9.3, 10.4, 10.5, 10.6, and cluster 11) are states, dialogs, and global components introduced by the Detail Layer; each inherits its parent's job coverage.
 
 ---
 
