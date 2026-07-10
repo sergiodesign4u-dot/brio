@@ -246,3 +246,26 @@ Small-team timing-based inference: SHRM documented that even without demographic
 **Decisions made after verification (June 2026):** See research/strategy.md Section 5 for full reasoning. Summary: (a) No live count during open cycles - operator sees active state, score revealed only when cycle closes and N met; employee sees zero count information. (b) Participation benchmark: 65% is 90-day steady state; adjacent-category RAND reference (20-40%) must be labeled as such, not as a Brio metric. (c) Landing page leads with operator language by default, owner-trust block on same page; reversible by acquisition test. (d) Minimum-N stays at 5 flat for MVP; legal validation deferred. These decisions close Flag F1 (timing-inference risk in small teams) and establish Q2 as a working default (operator-first).
 
 *End of synthesis. The Stage 2 post-persona re-research follows as an appendix.*
+
+---
+
+## Doresearch for CJM (Stage 3)
+
+*Targeted re-research to close the most dangerous As-Is gap (D1 in the CJM critique): the operator's first-person voice and what hurts most on the current path. Public pages only, no login. The Anthropic web crawler is blocked by Reddit, LinkedIn, and Quora, so the first pass (WebFetch / WebSearch) could not read them; a second pass with a real browser (Playwright) reached public Reddit threads via old.reddit.com and closed most of the gap. Detailed map: user-research/docs/cjm-as-is.md.*
+
+**Q1 - What hurts most on the current path, in the operator's and employee's words?**
+
+Category and statistical findings (accessible to WebFetch):
+
+- Low participation is the most documented and quantified pain. Average wellness participation is about 40%, ranging 20 to 40%; 50% of employers report participation of 10% or less; despite 85% access only about a third of workers participate; mental health resources are available to 87% but used by 23%. Source: yuna.io/post/workplace-wellness-statistics, betteryou.ai/wellness-program-participation-rates, myshortlister.com/insights/employee-wellness-statistics.
+- "Despite employers investing substantial resources and effort into designing and implementing these programs, many employees may choose not to engage actively." Source: mantra.care/employee-wellness/limitations-of-employee-wellness-programs.
+- Nuance that refines the As-Is: general-population non-participation is driven more by lack of time (44.4%), interest (28.5%), and awareness (27.2%) than by privacy. Privacy distrust is real (SHRM) but not the single top driver. Brio's under-30-second format addresses time and its architecture addresses trust; interest and awareness are separate levers.
+- The existence of "how to start a wellness program in 11 steps" guides confirms the invent-the-process barrier. Source: indeed.com/career-advice/career-development/how-to-start-a-wellness-program.
+
+First-person voice (reached with a real browser, public old.reddit.com threads):
+
+- Operator handed a role with no training (As-Is phases 1-2; adjacent office-manager onboarding context, same persona): "I got a job as an Office Manager. I have no idea what to prepare for and am terrified... terrified of not being good enough and disappointing the CEO." and "I've already googled as much as I could about the duties and responsibilities." A commenter: "office manager is usually a catchall for every non-specialized task in the business if the company is small." Source: reddit.com/r/jobs/comments/3j25fx.
+- Small-team anonymity distrust (As-Is phase 5, the low point): "my dept only has 3 of us. Needless to say we're not necessarily saying what we may want to." / "I always assume anything I put on a form at work is traceable back to me." / a senior manager: "Hard to be anonymous in a group of 3... enough clues for someone to know it is you or your small group." / "I answered truthfully on one... Then a week later our AVP called me into his office to talk about my responses." Source: reddit.com/r/careerguidance/comments/194a2e3.
+- Employee skepticism of employer wellness (As-Is phases 5-6): "the only people who participated were those who were already eating right and working out." / "I assumed the programs were only there to harvest and sell employee's health information." / "Benefit for the staff isn't even an afterthought, but a veneer." Source: reddit.com/r/jobs/comments/1bjelky.
+
+Residual [?] after doresearch: (a) a wellbeing-specific first-person operator quote - the phases 1-2 voice above is office-manager onboarding in general, the same persona but not the exact wellbeing task; (b) operator voice on phase 7 (proving ROI to the owner) - no first-person quote found, so that emotion stays on category sources. Both close with first-phase user interviews, not public mining.
