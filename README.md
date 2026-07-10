@@ -16,7 +16,8 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 |-------|--------|
 | Foundation Research | Done (competitors, benchmark, Lean UX Canvas, AARRR, UX patterns, research synthesis, research.html) |
 | User Research (Personas + JTBD) | Done (personas, jobs to be done, JTBD matrix, MVP core, personas.html, jtbd.html) |
-| Information Architecture (Basic + Detailed) | Next |
+| CJM (As-Is + To-Be) | Not started |
+| Information Architecture (Basic + Detailed) | Not started |
 | Wireframes | Not started |
 | Voice | Not started |
 | Concept | Not started |

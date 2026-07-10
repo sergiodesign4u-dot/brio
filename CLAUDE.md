@@ -176,7 +176,8 @@ Employee wellbeing programs in the US operate near several regulatory areas. Thi
 |-------|-------------|--------|
 | Foundation Research | research/docs/ (competitors, benchmark, lean-ux-canvas, aarrr, ux-patterns, research) + research/research.html | Done |
 | User Research (Personas + JTBD) | user-research/docs/ (personas, jtbd) + user-research/personas.html + user-research/jtbd.html | Done |
-| Information Architecture (Basic + Detailed) | ia/ | Next |
+| CJM (As-Is + To-Be) | cjm/ | Not started |
+| Information Architecture (Basic + Detailed) | ia/ | Not started |
 | Wireframes | wireframes/ | Not started |
 | Voice | voice/ | Not started |
 | Concept | concept/ | Not started |
