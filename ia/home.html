@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Detail: Home (0.0)</title>
+  <style>
+    :root {
+      --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
+      --border: #252a33; --border-subtle: #1e232c; --text: #e8eaf0; --text-muted: #8b909c; --text-faint: #555b68;
+      --accent: #4f9cf9; --accent-dim: #1d3a5f; --accent-warm: #f4a261; --accent-warm-dim: #3d2810;
+      --green: #4ade80; --green-dim: #14532d; --red: #f87171; --red-dim: #450a0a; --yellow: #fbbf24; --yellow-dim: #451a03;
+      --radius: 8px; --radius-lg: 12px; --radius-sm: 4px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .sidebar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13, 15, 18, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 36px; height: 36px; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px; }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
+    .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-node { padding-left: 20px; font-size: 12px; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ul li { margin-bottom: 6px; }
+    ol { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ol li { margin-bottom: 6px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.ok { border-color: var(--green-dim); }
+    .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
+
+    /* SEO ready-copy block */
+    .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
+    .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
+    .seo-row:last-child { border-bottom: none; }
+    .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
+    .seo-v code { font-size: 12px; }
+    .count { color: var(--text-faint); font-size: 11px; font-family: ui-monospace, monospace; }
+    .seo-text { background: var(--surface-2); border-left: 2px solid var(--accent); border-radius: 4px; padding: 12px 16px; color: var(--text-muted); font-size: 13.5px; margin: 12px 0; }
+
+    /* ===== Black-and-white wireframe kit ===== */
+    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
+    .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
+    .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+
+    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; }
+    .wf-nav .sp { margin-left: auto; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
+    .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
+    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
+    .wf-hl.s { width: 55%; height: 12px; }
+    .wf-3 { display: flex; gap: 10px; flex-wrap: wrap; }
+    .wf-3 .cell { flex: 1; min-width: 90px; border: 1px solid #333; border-radius: 6px; padding: 10px; color: #9a9a9a; font-size: 11px; }
+    .wf-strip2 { text-align: center; font-size: 11px; color: #e0e0e0; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; }
+    .wf-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wf-chip { border: 1px solid #444; border-radius: 4px; padding: 4px 9px; font-size: 10.5px; color: #9a9a9a; }
+    .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
+    .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phone .wf-sec { padding: 12px 10px; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+      <a href="ia-base.html" class="nav-item">Base Layer</a>
+      <span class="nav-item nav-item-active">Detail Layer</span>
+      <div class="nav-group-label sub">Structure</div>
+      <a href="navigation.html" class="nav-item nav-node">Navigation (0.1)</a>
+      <a href="footer.html" class="nav-item nav-node">Footer (0.2)</a>
+      <a href="privacy-disclosure.html" class="nav-item nav-node">Privacy disclosure (0.3)</a>
+      <a href="program-card.html" class="nav-item nav-node">Program card (0.4)</a>
+      <a href="dialog.html" class="nav-item nav-node">Dialog shell (0.5)</a>
+      <a href="canonical-lists.html" class="nav-item nav-node">Canonical lists (0.6)</a>
+      <div class="nav-group-label sub">Pages</div>
+      <span class="nav-item nav-item-active nav-node">Home (0.0)</span>
+      <a href="#template" class="nav-sub-item" id="sub-template">Page template</a>
+      <a href="#blocks" class="nav-sub-item" id="sub-blocks">Blocks</a>
+      <a href="#states" class="nav-sub-item" id="sub-states">States + CTA</a>
+      <a href="#mockup" class="nav-sub-item" id="sub-mockup">Wireframe</a>
+      <a href="#seo" class="nav-sub-item" id="sub-seo">SEO A-E</a>
+      <span class="nav-item nav-item-muted" style="margin-top:6px;">More pages at Step 5</span>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Detail Layer</span>
+      <span class="badge">Node 0.0</span>
+      <span class="badge">Page, exemplar</span>
+      <span class="badge">B/W wireframe</span>
+    </div>
+    <div class="crumb">IA / Detail Layer / Pages / Home (0.0) &middot; URL: /</div>
+    <h1>Home</h1>
+    <p class="hero-intro">The front door and the return door, and the exemplar for every page that follows. It leads the primary persona to her main job in one clear step and gives a returning operator a fast way back in. Serves Main and item 1 (self-serve start). Indexed. Source of truth: ia/docs/pages/home.md.</p>
+  </section>
+
+  <!-- Page template -->
+  <section id="template">
+    <div class="section-label">The planks</div>
+    <h2>Per-page IA template</h2>
+    <p>Every page node follows this order. Home is the first page built to it; the rest follow at Step 5.</p>
+    <ol>
+      <li>Page name, type, node number, surface</li>
+      <li>Purpose (one line) and the job(s) it serves</li>
+      <li>URL / slug and breadcrumbs</li>
+      <li>Content blocks, mobile-first priority (block 1 is the first screen)</li>
+      <li>Components used (from the library) and variants</li>
+      <li>States (guest / logged-in / role / empty / loading / error)</li>
+      <li>Filters or facets (listing pages only)</li>
+      <li>Primary CTA (one clear next step)</li>
+      <li>Adaptive notes (mobile stack, then desktop)</li>
+      <li>SEO block A to E (indexed) or a noindex note (private)</li>
+    </ol>
+  </section>
+
+  <!-- Blocks -->
+  <section id="blocks">
+    <div class="section-label">Mobile-first priority</div>
+    <h2>Content blocks</h2>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
+    <ol>
+      <li><strong>Nav + hero</strong> (0.1 guest/logged-in): H1, one-line subhead, primary CTA, secondary link to how privacy works (1.1).</li>
+      <li><strong>State strip</strong>: CTA and greeting change by auth state (Start free vs Go to your dashboard).</li>
+      <li><strong>How it works</strong> (3 steps): pick a program, invite the team, read the team pulse (mirrors F1).</li>
+      <li><strong>Privacy proof</strong> (0.3 public variant): "Aggregate-only. We never show individual responses," link to 1.1.</li>
+      <li><strong>Programs preview</strong>: the four categories (0.6), linking to the library or a 1.5 landing.</li>
+      <li><strong>Pricing teaser</strong>: free to start, owner dashboard is paid, link to 1.0.</li>
+      <li><strong>FAQ teaser</strong>: privacy, setup, billing, link to 1.4.</li>
+      <li><strong>Final CTA band</strong>: Start free.</li>
+      <li><strong>Footer</strong> (0.2 full).</li>
+    </ol>
+    <div class="callout">Social proof (logos, testimonials) is <span class="hyp">?</span>, not invented; a placeholder block is reserved and left empty until there is real proof.</div>
+    <p><strong>Components used:</strong> 0.1 Navigation (guest / logged-in), 0.3 Privacy-disclosure (public trust-strip variant), 0.4 Program card (optional preview), 0.2 Footer, 0.6 Canonical lists.</p>
+  </section>
+
+  <!-- States + CTA -->
+  <section id="states">
+    <div class="section-label">Auth-dependent</div>
+    <h2>States and primary CTA</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>Hero</th><th>Primary CTA</th></tr></thead>
+        <tbody>
+          <tr><td>Guest (default)</td><td>full marketing hero</td><td>Start free (to 2.0 Sign up)</td></tr>
+          <tr><td>Logged-in operator</td><td>"Welcome back"</td><td>Go to your dashboard (to 4.0)</td></tr>
+          <tr><td>Logged-in owner (rare here)</td><td>brief</td><td>Owner dashboard (to 9.0)</td></tr>
+          <tr><td>Loading / error</td><td>static page; only the auth check is async</td><td>defaults to the guest view until resolved</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Wireframe -->
+  <section id="mockup">
+    <div class="section-label">Black and white, wireframe level</div>
+    <h2>Wireframe</h2>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the full page; mobile shows the same blocks stacked from the 360px baseline.</p>
+
+    <div class="wf-row">
+      <div style="flex:1;min-width:300px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, guest state</div>
+        <div class="wf-page">
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Pricing</span><span class="sp"></span><span class="wf-b">Log in</span><span class="wf-b solid">Start free</span></div>
+          <div class="wf-sec">
+            <div class="lbl">1 &middot; hero (H1)</div>
+            <div class="wf-hl"></div><div class="wf-hl s"></div>
+            <div style="margin-top:10px;"><span class="wf-b solid">Start free</span> <span class="wf-plain">See how privacy works</span></div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">3 &middot; how it works (H2)</div>
+            <div class="wf-3"><div class="cell">Pick a program</div><div class="cell">Invite the team</div><div class="cell">Read the team pulse</div></div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">4 &middot; privacy proof (0.3)</div>
+            <div class="wf-strip2">Aggregate-only. We never show individual responses.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">5 &middot; programs preview (0.6)</div>
+            <div class="wf-chips"><span class="wf-chip">Mental health</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">6 &middot; pricing teaser &middot; 7 &middot; FAQ</div>
+            <div class="wf-3"><div class="cell">Free to start &middot; owner dashboard is paid</div><div class="cell">FAQ: privacy, setup, billing</div></div>
+          </div>
+          <div class="wf-sec wf-band"><span class="wf-b solid">Start free</span></div>
+          <div class="wf-foot-mini"><span>Product</span><span>Company</span><span>Resources</span><span>Legal</span><span>Popular (SEO)</span></div>
+        </div>
+        <div class="wf-note">LCP is the hero heading text, not an image.</div>
+      </div>
+
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
+        <div class="wf-phone">
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-b solid">Start free</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>hero</div><div class="wf-hl"></div><div class="wf-hl s"></div><div style="margin-top:8px;"><span class="wf-b solid">Start free</span></div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>how it works</div><div class="cell" style="border:1px solid #333;border-radius:6px;padding:8px;color:#9a9a9a;font-size:11px;">Pick, invite, read</div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>privacy proof</div><div class="wf-strip2">Aggregate-only. No individual responses.</div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">5</span>programs</div><div class="wf-chips"><span class="wf-chip">Mental</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div></div>
+          <div class="wf-sec wf-band"><span class="wf-b solid">Start free</span></div>
+          <div class="wf-foot-mini"><span>Footer (accordions)</span></div>
+        </div>
+        <div class="wf-note">same blocks, single column, thumb-reachable CTA.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO A-E -->
+  <section id="seo">
+    <div class="section-label">Structure SEO, ready copy</div>
+    <h2>SEO block A to E</h2>
+    <p>Home is indexed. Copy is ready, not "fill later"; final query volumes are deferred to production <span class="hyp">?</span>.</p>
+
+    <h3>A. Meta tags</h3>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">title</span><span class="seo-v"><code>Employee wellbeing for teams with no HR | Brio</code> <span class="count">46 / 60</span></span></div>
+      <div class="seo-row"><span class="seo-k">description</span><span class="seo-v"><code>Run real employee wellbeing at a small company with no HR. Brio gives the owner honest team-level proof and never shows any individual's answers.</code> <span class="count">145 / 155</span></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v"><code>https://[production-domain]/</code> <span class="hyp">? domain</span></span></div>
+      <div class="seo-row"><span class="seo-k">hreflang</span><span class="seo-v">en-US (primary), en-GB (UK) <span class="hyp">?</span></span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>index, follow</code></span></div>
+      <div class="seo-row"><span class="seo-k">open graph</span><span class="seo-v">og:title, og:description, og:type=website, og:url, og:image <span class="hyp">? asset at Concept</span></span></div>
+      <div class="seo-row"><span class="seo-k">twitter</span><span class="seo-v"><code>summary_large_image</code></span></div>
+    </div>
+
+    <h3>B. Heading structure</h3>
+    <p>Exactly one H1, then H2s in block order.</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">H1</span><span class="seo-v"><code>Employee wellbeing for teams with no HR</code></span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">How Brio works</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Your team's privacy is the product</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Programs for every kind of wellbeing</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Start free, upgrade when you are ready</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Questions people ask</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Start in five minutes</span></div>
+    </div>
+
+    <h3>C. Ready SEO text</h3>
+    <div class="seo-text">Brio is employee wellbeing software for small companies that have no HR team. Whoever got handed people work, an office manager, an ops lead, or the founder, gets a guided way to run real wellbeing programs. The owner gets honest proof it is working at the team level. Individual answers are never shown to anyone, because the privacy boundary is the product, not a setting you can switch off.</div>
+
+    <h3>D. Structured data (schema.org)</h3>
+    <ul>
+      <li><code>Organization</code>: name Brio, url, logo <span class="hyp">? asset at Concept</span></li>
+      <li><code>SoftwareApplication</code>: name Brio, applicationCategory BusinessApplication, operatingSystem Web, offers the free tier at price 0; paid tiers <span class="hyp">?</span></li>
+      <li>No <code>SearchAction</code> (Brio has no site search)</li>
+    </ul>
+
+    <h3>E. Optimization checklist</h3>
+    <ul>
+      <li>exactly one H1</li>
+      <li>LCP is the hero heading text, not an image</li>
+      <li>nav and footer links are crawlable <code>&lt;a&gt;</code></li>
+      <li>canonical and hreflang set</li>
+      <li>copy is real text, never baked into images</li>
+      <li>Core Web Vitals budget respected; final query volumes deferred to production <span class="hyp">?</span></li>
+    </ul>
+
+    <div class="callout ok"><strong>Exemplar set.</strong> Home reuses 0.1, 0.2, 0.3, 0.4, 0.6 and invents nothing. It also defines the per-page template above. Next page: <strong>5.0 Program library</strong> (the first listing), per persona-priority order.</div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Detail Layer - Node 0.0 Home - July 2026</p>
+    <p style="margin-top:4px;">The exemplar page: mobile-first blocks, auth-dependent CTA, full A to E SEO with ready copy. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/home.md.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item').forEach(function(link) {
+    link.addEventListener('click', function() { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+  });
+
+  var subSections = [
+    { id: 'template', sub: 'sub-template' },
+    { id: 'blocks', sub: 'sub-blocks' },
+    { id: 'states', sub: 'sub-states' },
+    { id: 'mockup', sub: 'sub-mockup' },
+    { id: 'seo', sub: 'sub-seo' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) { var el = document.getElementById(s.sub); if (el) el.classList.remove('nav-sub-active'); });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) { var el = document.getElementById(match.sub); if (el) el.classList.add('nav-sub-active'); }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) { var el = document.getElementById(s.id); if (el) observer.observe(el); });
+</script>
+
+</body>
+</html>

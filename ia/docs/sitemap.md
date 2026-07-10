@@ -45,9 +45,9 @@
 
 ### Cluster 0 - Global shell and home  [pub / all]
 
-**0.0 Landing (marketing home)** · page · Main + item 1
-INCLUDES: 0.1 nav · hero (aggregate-only privacy value prop) · how-it-works (3 steps) · trust strip (privacy promise made visible) · pricing teaser · primary CTA "Start free" · secondary "Log in" · 0.2 footer
-→ 2.0 Sign up (F1) · 1.0 Pricing · 2.1 Log in
+**0.0 Home (marketing home)** · page · Main + item 1; the per-page template exemplar
+INCLUDES: 0.1 nav · hero (privacy-first H1 + state-dependent CTA) · how-it-works (3 steps, mirrors F1) · privacy proof (0.3 public variant) · programs preview (0.6 categories) · pricing teaser (1.0) · FAQ teaser (1.4) · final CTA · 0.2 footer. States: guest / logged-in operator / owner. Full A-E SEO (indexed). Full spec: ia/docs/pages/home.md
+→ 2.0 Sign up (F1) · 4.0 Dashboard (returning operator) · 1.0 Pricing · 1.1 Security and privacy · 2.1 Log in
 
 **0.1 Navigation (header + mobile tabs)** · section (global) · structural, gates every operator job [Step 2]
 INCLUDES: brand · 4 job tabs (Dashboard, Programs, Team, Owner) · Settings utility · auth and role variants (guest / operator / owner-view / employee-none) · mobile bottom tabs (base 360px)
