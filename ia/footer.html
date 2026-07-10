@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Detail: Footer (0.2)</title>
+  <style>
+    :root {
+      --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
+      --border: #252a33; --border-subtle: #1e232c; --text: #e8eaf0; --text-muted: #8b909c; --text-faint: #555b68;
+      --accent: #4f9cf9; --accent-dim: #1d3a5f; --accent-warm: #f4a261; --accent-warm-dim: #3d2810;
+      --green: #4ade80; --green-dim: #14532d; --red: #f87171; --red-dim: #450a0a; --yellow: #fbbf24; --yellow-dim: #451a03;
+      --radius: 8px; --radius-lg: 12px; --radius-sm: 4px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .sidebar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13, 15, 18, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 36px; height: 36px; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px; }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
+    .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-node { padding-left: 20px; font-size: 12px; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ul li { margin-bottom: 6px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.ok { border-color: var(--green-dim); }
+    .src { font-size: 12px; color: var(--text-faint); margin-top: 10px; }
+    .src a { color: var(--text-muted); }
+
+    /* ===== Black-and-white wireframe kit (no color, no brand) ===== */
+    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
+    .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
+    .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
+
+    .wf-foot { background: #141414; border: 1px solid #3a3a3a; border-radius: 8px; padding: 16px; }
+    .wf-strip { text-align: center; font-size: 11px; color: #e0e0e0; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; margin-bottom: 14px; letter-spacing: 0.02em; }
+    .wf-cols { display: flex; gap: 26px; flex-wrap: wrap; }
+    .wf-col { min-width: 120px; }
+    .wf-col h5 { color: #fff; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; font-weight: 700; }
+    .wf-col .l { display: block; color: #a2a2a2; font-size: 11.5px; padding: 3px 0; }
+    .wf-seo { border-top: 1px solid #2c2c2c; margin-top: 16px; padding-top: 12px; }
+    .wf-seo .lbl { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .wf-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wf-chip { border: 1px solid #444; border-radius: 4px; padding: 3px 8px; font-size: 10.5px; color: #9a9a9a; }
+    .wf-bottomrow { border-top: 1px solid #2c2c2c; margin-top: 16px; padding-top: 12px; display: flex; gap: 14px; color: #888; font-size: 10.5px; flex-wrap: wrap; align-items: center; }
+    .wf-bottomrow .sq { width: 14px; height: 14px; border: 1px solid #555; border-radius: 3px; display: inline-block; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 10px; background: #0c0c0c; }
+    .wf-acc { border: 1px solid #333; border-radius: 6px; padding: 11px 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; color: #cfcfcf; font-size: 12px; }
+    .wf-acc .plus { color: #fff; font-weight: 700; }
+    .wf-acc.open { flex-direction: column; align-items: stretch; gap: 6px; }
+    .wf-acc.open .row { display: flex; justify-content: space-between; color: #fff; }
+    .wf-acc .l { color: #a2a2a2; font-size: 11px; padding: 2px 0; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+      <a href="ia-base.html" class="nav-item">Base Layer</a>
+      <span class="nav-item nav-item-active">Detail Layer</span>
+      <div class="nav-group-label sub">Structure</div>
+      <a href="navigation.html" class="nav-item nav-node">Navigation (0.1)</a>
+      <span class="nav-item nav-item-active nav-node">Footer (0.2)</span>
+      <a href="#anatomy" class="nav-sub-item" id="sub-anatomy">Anatomy</a>
+      <a href="#registered" class="nav-sub-item" id="sub-registered">Registered nodes</a>
+      <a href="#variants" class="nav-sub-item" id="sub-variants">By surface</a>
+      <a href="#mockup" class="nav-sub-item" id="sub-mockup">Wireframe</a>
+      <a href="#seo" class="nav-sub-item" id="sub-seo">SEO + a11y</a>
+      <span class="nav-item nav-item-muted" style="margin-top:6px;">More nodes at Step 8</span>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Detail Layer</span>
+      <span class="badge">Node 0.2</span>
+      <span class="badge">Structure</span>
+      <span class="badge">B/W wireframe</span>
+    </div>
+    <div class="crumb">IA / Detail Layer / Structure / Footer (0.2)</div>
+    <h1>Footer</h1>
+    <p class="hero-intro">The second global structural node and the second internal-linking plane after Navigation. Full on public and marketing pages, reduced in the operator app, absent on the owner and employee surfaces. It closes no job of its own; it repeats the privacy trust signal on every page and carries the crawlable SEO and legal links. No H1. Source of truth: ia/docs/pages/footer.md.</p>
+  </section>
+
+  <!-- Anatomy -->
+  <section id="anatomy">
+    <div class="section-label">Structure</div>
+    <h2>Anatomy</h2>
+    <p>Top to bottom, four parts. Each link is a real destination, registered as a node so the map and the footer cannot drift.</p>
+    <ul>
+      <li><strong>Trust strip</strong> (above the footer, every page): one line, "Aggregate-only wellbeing. We never show individual responses." The privacy promise restated in the UI, not in a policy (the benchmark differentiator).</li>
+      <li><strong>Columns:</strong> Product (How it works, Pricing 1.0, Security and privacy 1.1), Company (About 1.2, Contact 1.3), Resources (Help and FAQ 1.4, Programs overview), Legal (Privacy Policy, Terms, Cookie Policy 1.6, Cookie settings 11.3).</li>
+      <li><strong>SEO popular-links block:</strong> crawlable links to priority pages, the second linking plane. Structure fixed; exact list [?] pending keyword research. Points at the 1.5 landing template.</li>
+      <li><strong>Bottom row:</strong> copyright, cookie settings, social (LinkedIn [?]). No compliance badges (SOC 2, GDPR): [?] pending legal review, not claimed before it.</li>
+    </ul>
+  </section>
+
+  <!-- Registered nodes -->
+  <section id="registered">
+    <div class="section-label">Discover as you go</div>
+    <h2>Destinations registered as nodes</h2>
+    <p>The footer promised directions, so each is now a node in sitemap.md, not a dangling link. This keeps the map and the footer from diverging.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Destination</th><th>Node</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Security and privacy explainer</td><td>1.1</td><td>Brio's differentiator, public</td></tr>
+          <tr><td>About</td><td>1.2</td><td>marketing</td></tr>
+          <tr><td>Contact and support</td><td>1.3</td><td></td></tr>
+          <tr><td>Help and FAQ</td><td>1.4</td><td>also an SEO surface</td></tr>
+          <tr><td>Category or segment landing</td><td>1.5</td><td>one canonical template, exact list [?]</td></tr>
+          <tr><td>Privacy Policy, Terms, Cookie Policy</td><td>1.6</td><td>shared legal template (TEMPLATE MAP)</td></tr>
+          <tr><td>Cookie settings</td><td>11.3</td><td>re-opens the consent banner</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- By surface -->
+  <section id="variants">
+    <div class="section-label">Where it shows</div>
+    <h2>Footer by surface</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Surface</th><th>Footer</th></tr></thead>
+        <tbody>
+          <tr><td>Public and marketing (0.0, 1.x)</td><td>full footer: trust strip, 4 columns, SEO block, bottom row</td></tr>
+          <tr><td>Operator app (4.x to 8.x)</td><td>minimal: copyright, Support (1.3), Privacy center (8.2). No SEO block (the app is a noindex zone)</td></tr>
+          <tr><td>Owner surface (9.x)</td><td>none (single aggregate read, under 2 minutes)</td></tr>
+          <tr><td>Employee check-in (10.x)</td><td>none (linear flow; the anonymity line lives in the top bar, node 0.1)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Wireframe -->
+  <section id="mockup">
+    <div class="section-label">Black and white, wireframe level</div>
+    <h2>Wireframe</h2>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the full public footer; mobile shows the collapsed accordions from the 360px baseline.</p>
+
+    <h3>Desktop, full public footer</h3>
+    <div class="wf-frame">
+      <div class="wf-cap">Public and marketing</div>
+      <div class="wf-foot">
+        <div class="wf-strip">Aggregate-only wellbeing. We never show individual responses.</div>
+        <div class="wf-cols">
+          <div class="wf-col"><h5>Product</h5><span class="l">How it works</span><span class="l">Pricing</span><span class="l">Security and privacy</span></div>
+          <div class="wf-col"><h5>Company</h5><span class="l">About</span><span class="l">Contact and support</span></div>
+          <div class="wf-col"><h5>Resources</h5><span class="l">Help and FAQ</span><span class="l">Programs overview</span></div>
+          <div class="wf-col"><h5>Legal</h5><span class="l">Privacy Policy</span><span class="l">Terms of Service</span><span class="l">Cookie Policy</span><span class="l">Cookie settings</span></div>
+        </div>
+        <div class="wf-seo">
+          <div class="lbl">Popular (SEO links, exact list [?])</div>
+          <div class="wf-chips">
+            <span class="wf-chip">Mental health check-ins</span>
+            <span class="wf-chip">Physical wellbeing</span>
+            <span class="wf-chip">Financial wellbeing</span>
+            <span class="wf-chip">Social wellbeing</span>
+            <span class="wf-chip">Wellbeing for companies without HR</span>
+            <span class="wf-chip">Team wellbeing under 50</span>
+          </div>
+        </div>
+        <div class="wf-bottomrow"><span>2026 Brio</span><span>Cookie settings</span><span class="sq"></span><span>LinkedIn [?]</span><span style="margin-left:auto;">no SOC 2 / GDPR badge [?] until legal review</span></div>
+      </div>
+      <div class="wf-note">Real crawlable links; second internal-linking plane.</div>
+    </div>
+
+    <h3>Mobile, base 360px, accordions</h3>
+    <div class="wf-row">
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Collapsed (default)</div>
+        <div class="wf-phone">
+          <div class="wf-strip">Aggregate-only. We never show individual responses.</div>
+          <div class="wf-acc"><span>Product</span><span class="plus">+</span></div>
+          <div class="wf-acc"><span>Company</span><span class="plus">+</span></div>
+          <div class="wf-acc"><span>Resources</span><span class="plus">+</span></div>
+          <div class="wf-acc"><span>Legal</span><span class="plus">+</span></div>
+          <div class="wf-acc"><span>Popular (SEO)</span><span class="plus">+</span></div>
+          <div class="wf-bottomrow" style="border:none;padding-top:10px;"><span>2026 Brio</span><span>Cookie settings</span><span class="sq"></span></div>
+        </div>
+        <div class="wf-note">collapsed, but present in the DOM, so crawlable.</div>
+      </div>
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">One accordion open</div>
+        <div class="wf-phone">
+          <div class="wf-strip">Aggregate-only. We never show individual responses.</div>
+          <div class="wf-acc open">
+            <div class="row"><span>Legal</span><span class="plus">-</span></div>
+            <span class="l">Privacy Policy</span>
+            <span class="l">Terms of Service</span>
+            <span class="l">Cookie Policy</span>
+            <span class="l">Cookie settings</span>
+          </div>
+          <div class="wf-acc"><span>Popular (SEO)</span><span class="plus">+</span></div>
+          <div class="wf-bottomrow" style="border:none;padding-top:10px;"><span>2026 Brio</span></div>
+        </div>
+        <div class="wf-note">tap expands in place; links exist in the DOM either way.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO + a11y -->
+  <section id="seo">
+    <div class="section-label">Structure SEO and a11y</div>
+    <h2>SEO and accessibility</h2>
+    <ul>
+      <li>No H1; semantic <code>&lt;footer&gt;</code> (contentinfo landmark).</li>
+      <li>Second internal-linking plane: all links are real crawlable <code>&lt;a&gt;</code>, not script-driven.</li>
+      <li><strong>Mobile accordions render collapsed but stay in the initial DOM</strong>, so their links remain crawlable. Google indexes content hidden in collapsed accordions and tabs when it is in the server-rendered HTML, not injected after load.</li>
+      <li>The SEO popular-links block is structure only; final copy and real query volumes are deferred to production ([?]).</li>
+      <li>Cookie settings re-opens the consent UI (11.3); the legal pages (1.6) are indexable.</li>
+    </ul>
+    <p class="src">Sources: Google indexing of collapsed and tabbed content (Illyes 2016; Mueller 2020), summarized at
+      <a href="https://www.searchenginejournal.com/ranking-factors/tabbed-content/">Search Engine Journal</a> and
+      <a href="https://www.oneupweb.com/blog/seo-for-accordion-content/">Oneupweb</a>.
+    </p>
+    <div class="callout ok"><strong>Canonical reuse.</strong> Defined once here and referenced by every public and marketing node. The trust strip is the same one line everywhere; the legal set (1.6) is one shared template rendering three documents. Change the footer here, propagate to all copies. Paired global component: <strong>0.1 Navigation</strong>. Next: the global-component discovery pass (program card, facet set, privacy-disclosure component, dialog set), then the pages.</div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Detail Layer - Node 0.2 Footer - July 2026</p>
+    <p style="margin-top:4px;">Structural node. Mobile accordions stay in the DOM for crawlability (Illyes 2016, Mueller 2020). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/footer.md.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item').forEach(function(link) {
+    link.addEventListener('click', function() { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+  });
+
+  var subSections = [
+    { id: 'anatomy', sub: 'sub-anatomy' },
+    { id: 'registered', sub: 'sub-registered' },
+    { id: 'variants', sub: 'sub-variants' },
+    { id: 'mockup', sub: 'sub-mockup' },
+    { id: 'seo', sub: 'sub-seo' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) { var el = document.getElementById(s.sub); if (el) el.classList.remove('nav-sub-active'); });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) { var el = document.getElementById(match.sub); if (el) el.classList.add('nav-sub-active'); }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) { var el = document.getElementById(s.id); if (el) observer.observe(el); });
+</script>
+
+</body>
+</html>

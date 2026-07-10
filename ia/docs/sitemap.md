@@ -53,9 +53,9 @@ INCLUDES: 0.1 nav · hero (aggregate-only privacy value prop) · how-it-works (3
 INCLUDES: brand · 4 job tabs (Dashboard, Programs, Team, Owner) · Settings utility · auth and role variants (guest / operator / owner-view / employee-none) · mobile bottom tabs (base 360px)
 → 4.0 Dashboard · 5.0 Programs · 6.0 Team · 7.0 Owner · 8.0 Settings
 
-**0.2 Footer** · section (global) · structural, second internal-linking plane [Step 3]
-INCLUDES: defined at Step 3 (trust strip, service and legal columns, SEO link block, bottom row)
-→ registers its destinations in this map at Step 3
+**0.2 Footer** · section (global) · structural, second internal-linking plane
+INCLUDES: trust strip (aggregate-only privacy line) · columns (Product, Company, Resources, Legal) · SEO popular-links block · bottom row (copyright, cookie settings, social). Mobile: columns and SEO block collapse into accordions, present in the DOM (crawlable). Full spec: ia/docs/pages/footer.md
+→ 1.0 Pricing · 1.1 Security and privacy · 1.2 About · 1.3 Contact · 1.4 Help · 1.5 Category or segment landing · 1.6 Legal · 11.3 Cookie settings
 
 ### Cluster 1 - Public marketing and acquisition  [pub]
 
@@ -63,7 +63,34 @@ INCLUDES: defined at Step 3 (trust strip, service and legal columns, SEO link bl
 INCLUDES: 0.1 nav · tier table (Free / Starter / Growth) · "owner dashboard = paid" callout · subscription-as-privacy note · FAQ teaser · CTA "Start free" · 0.2 footer
 → 2.0 Sign up · 0.0 Landing
 
-*Footer (Step 3) may register more public pages here (privacy explainer, about, contact, legal, FAQ). Not invented before the footer promises them.*
+**1.1 Security and privacy** (public explainer) · page · Main + benchmark differentiator + J3 and E2 trust
+INCLUDES: 0.1 nav · how the aggregate-only model works · minimum-N=5 · no live count · what the owner can and cannot see · subscription-as-privacy · FAQ · CTA "Start free" · 0.2 footer
+→ 2.0 Sign up · 1.6 Legal (Privacy Policy)
+[registered from the footer at Step 3; this is Brio's differentiator made public]
+
+**1.2 About** · page · supporting (marketing)
+INCLUDES: 0.1 nav · mission (wellbeing without surveillance) · team · contact link · 0.2 footer
+→ 1.3 Contact
+
+**1.3 Contact / Support** · page · supporting
+INCLUDES: 0.1 nav · support email or form · help link · response-time note · 0.2 footer
+→ 1.4 Help
+
+**1.4 Help / FAQ** · page · supporting (also an SEO surface)
+INCLUDES: 0.1 nav · FAQ groups (setup, privacy, billing) · search within help [?] · contact fallback · 0.2 footer
+→ 1.3 Contact
+
+**1.5 Category / segment landing** (SEO template) · page (listing template) · Main (acquisition)
+INCLUDES: 0.1 nav · canonical landing template · H1 per target · program-category or segment copy · CTA "Start free" · internal links · 0.2 footer
+→ 2.0 Sign up
+[SEO block structure is fixed; the exact list of categories and segments is [?] pending keyword research. One canonical template, not N hand-built pages. Serves the existing Main job; it is an IA mechanism, not a new job.]
+
+**1.6 Legal documents** (Privacy Policy, Terms of Service, Cookie Policy) · page (shared legal template) · compliance
+INCLUDES: one legal-document template rendering each doc · last-updated · "cookie settings" re-opens 11.3
+→ 11.3 Cookie consent (settings)
+[shared template, handled as a TEMPLATE MAP at Step 5; content is legal copy, [?] pending legal review]
+
+*Nodes 1.1 to 1.6 were registered from the footer (0.2) at Step 3, per discover-as-you-go. Social links (LinkedIn) are [?], not yet a node. Compliance badges (SOC 2, GDPR) are [?] pending legal review, deliberately not shown.*
 
 ### Cluster 2 - Authentication  [pub to P]
 
@@ -260,7 +287,7 @@ INCLUDES: "submit failed, retry" · answers preserved
 
 **Global components to register at Step 3** (discover-as-you-go): the canonical program card (used in 3.1, 5.0), the library facet set (5.0), the privacy-disclosure component (8.2, 9.1, 10.1), and the dialog set (6.1, 7.2, 11.3). Each is defined once as its own node and referenced, never re-specified per page.
 
-**Numbering bridge to Traceability** (base-layer screen numbers 1..26 stay unchanged): 1=0.0, 2=1.0, 3=2.0, 4=2.1, 5=3.0, 6=3.1, 7=3.2, 8=4.0, 9=4.1, 10=4.2, 11=5.0, 12=5.1, 13=5.2, 14=6.0, 15=7.0, 16=7.1, 17=8.1, 18=8.2, 19=8.3, 20=8.4, 21=9.0, 22=9.2, 23=10.0, 24=10.1, 25=10.2, 26=10.3. The new sub-nodes (2.2, 2.3, 3.3, 4.3, 4.4, 5.3, 6.1, 7.2, 7.3, 8.0, 9.1, 9.3, 10.4, 10.5, 10.6, and cluster 11) are states, dialogs, and global components introduced by the Detail Layer; each inherits its parent's job coverage.
+**Numbering bridge to Traceability** (base-layer screen numbers 1..26 stay unchanged): 1=0.0, 2=1.0, 3=2.0, 4=2.1, 5=3.0, 6=3.1, 7=3.2, 8=4.0, 9=4.1, 10=4.2, 11=5.0, 12=5.1, 13=5.2, 14=6.0, 15=7.0, 16=7.1, 17=8.1, 18=8.2, 19=8.3, 20=8.4, 21=9.0, 22=9.2, 23=10.0, 24=10.1, 25=10.2, 26=10.3. The new sub-nodes (2.2, 2.3, 3.3, 4.3, 4.4, 5.3, 6.1, 7.2, 7.3, 8.0, 9.1, 9.3, 10.4, 10.5, 10.6, and cluster 11) are states, dialogs, and global components introduced by the Detail Layer; each inherits its parent's job coverage. Cluster 1 also grew: 1.1 to 1.6 are public pages registered from the footer (0.2) at Step 3, serving the existing Main and trust jobs, not new jobs.
 
 ---
 
