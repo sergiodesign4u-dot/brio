@@ -7,6 +7,8 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 - **Foundation Research:** https://sergiodesign4u-dot.github.io/brio/research/research.html
 - **Personas:** https://sergiodesign4u-dot.github.io/brio/user-research/personas.html
 - **Jobs to Be Done:** https://sergiodesign4u-dot.github.io/brio/user-research/jtbd.html
+- **CJM As-Is:** https://sergiodesign4u-dot.github.io/brio/user-research/cjm-as-is.html
+- **CJM To-Be:** https://sergiodesign4u-dot.github.io/brio/user-research/cjm-to-be.html
 
 ---
 
@@ -16,7 +18,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 |-------|--------|
 | Foundation Research | Done (competitors, benchmark, Lean UX Canvas, AARRR, UX patterns, research synthesis, research.html) |
 | User Research (Personas + JTBD) | Done (personas, jobs to be done, JTBD matrix, MVP core, personas.html, jtbd.html) |
-| CJM (As-Is + To-Be) | Not started |
+| CJM (As-Is + To-Be) | Done (customer journey map As-Is + To-Be, emotional curve, backlog, cjm-as-is.html, cjm-to-be.html) |
 | Information Architecture (Basic + Detailed) | Not started |
 | Wireframes | Not started |
 | Voice | Not started |
@@ -47,5 +49,7 @@ Primary persona is Priya, the operator handed "people stuff" with no HR training
 - [UX Patterns](research/docs/ux-patterns.md)
 - [Personas](user-research/docs/personas.md)
 - [Jobs to Be Done](user-research/docs/jtbd.md)
+- [CJM As-Is](user-research/docs/cjm-as-is.md)
+- [CJM To-Be](user-research/docs/cjm-to-be.md)
 
 Supporting history (superseded, kept for provenance): research/strategy.md, research/product-model.md, research/quality-check.md, research/live-research.md.

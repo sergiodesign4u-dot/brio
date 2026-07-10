@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - CJM As-Is</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar - mobile-first */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px; height: 52px;
+    }
+    .sidebar-brand {
+      font-size: 15px; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--accent); text-transform: uppercase;
+    }
+    .sidebar-toggle {
+      display: flex; flex-direction: column; justify-content: center; gap: 4px;
+      width: 36px; height: 36px; background: none;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      cursor: pointer; padding: 9px 8px;
+    }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body {
+      display: none; padding: 8px 0 16px; border-top: 1px solid var(--border);
+      overflow-y: auto; max-height: calc(100vh - 52px);
+    }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-faint); padding: 14px 12px 6px;
+    }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-item {
+      display: flex; align-items: center; gap: 6px; padding: 7px 12px;
+      font-size: 13px; color: var(--text-muted); text-decoration: none;
+      border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s;
+    }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-soon {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border);
+      color: var(--text-faint); margin-left: auto;
+    }
+    .nav-sub-item {
+      display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint);
+      text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s;
+    }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar {
+        left: 0; right: auto; top: 0; bottom: 0; width: 220px;
+        border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto;
+      }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    /* Layout */
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) {
+      main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; }
+    }
+    section { padding: 80px 0 40px; }
+
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px;
+      background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border);
+    }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    /* Tag chips */
+    .tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .tag-confirmed { background: var(--green-dim); color: var(--green); }
+    .tag-challenged { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-changed { background: var(--accent-dim); color: var(--accent); }
+    .tag-critical { background: var(--red-dim); color: var(--red); }
+
+    .divider { height: 1px; background: var(--border); margin: 48px 0; }
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .hero { animation: fadeUp 0.5s ease both; }
+
+    /* ========================
+       CJM PAGE - SPECIFIC
+       ======================== */
+    .focus-card {
+      background: rgba(79, 156, 249, 0.03); border: 1px solid var(--accent-dim);
+      border-radius: var(--radius-lg); padding: 22px 24px; margin: 24px 0;
+    }
+    .focus-card .fc-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .focus-card .fc-job { font-size: 15px; color: var(--text); font-style: italic; margin: 8px 0; max-width: none; }
+    .focus-card .fc-src { font-size: 12px; color: var(--text-faint); margin-top: 8px; }
+
+    .phase-track { display: flex; gap: 14px; overflow-x: auto; padding: 8px 0 20px; scroll-snap-type: x proximity; }
+    .phase-card {
+      min-width: 262px; max-width: 262px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 16px 18px; scroll-snap-align: start; display: flex; flex-direction: column;
+    }
+    .phase-num { font-size: 11px; font-weight: 700; color: var(--text-faint); letter-spacing: 0.06em; margin-bottom: 2px; }
+    .phase-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .phase-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); margin-top: 10px; margin-bottom: 2px; }
+    .phase-val { font-size: 12.5px; color: var(--text-muted); }
+    .emo { font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 100px; display: inline-block; }
+    .emo-neg { background: var(--red-dim); color: var(--red); }
+    .emo-pos { background: var(--green-dim); color: var(--green); }
+    .trace-chip { font-size: 11px; font-weight: 600; color: var(--accent-warm); background: var(--accent-warm-dim); padding: 3px 9px; border-radius: 100px; display: inline-block; margin-top: 4px; }
+
+    .curve-wrap { overflow-x: auto; margin: 20px 0 8px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
+    .curve-wrap svg { display: block; min-width: 640px; }
+    .curve-wrap svg text { fill: var(--text-faint); font-size: 11px; }
+    .curve-wrap svg text.axis { fill: var(--text-faint); font-size: 10px; }
+    .legend { display: flex; gap: 18px; font-size: 11px; color: var(--text-faint); margin-top: 12px; flex-wrap: wrap; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+
+    .quote-card { background: var(--surface); border-left: 2px solid var(--accent-dim); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 10px; }
+    .quote-card p { font-style: italic; font-size: 13px; margin: 0 0 4px; color: var(--text-muted); max-width: none; }
+    .quote-src { font-size: 11px; color: var(--text-faint); }
+
+    .gz-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; display: flex; gap: 16px; margin-bottom: 12px; }
+    .gz-id { font-size: 12px; font-weight: 700; color: var(--accent); min-width: 34px; }
+    .gz-body { font-size: 13.5px; }
+    .gz-body .gz-note { font-size: 12px; color: var(--text-faint); margin-top: 4px; }
+
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+
+    @media (max-width: 640px) { main { padding-left: 16px; padding-right: 16px; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">User Research</div>
+      <a href="personas.html" class="nav-item">Personas</a>
+      <a href="jtbd.html" class="nav-item">JTBD</a>
+      <span class="nav-item nav-item-active">CJM As-Is</span>
+      <a href="#focus" class="nav-sub-item" id="sub-focus">Focus</a>
+      <a href="#path" class="nav-sub-item" id="sub-path">As-Is Path</a>
+      <a href="#curve" class="nav-sub-item" id="sub-curve">Emotional Curve</a>
+      <a href="#zones" class="nav-sub-item" id="sub-zones">Growth Zones</a>
+      <a href="cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item">Information Architecture <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- Hero / Focus -->
+  <section class="hero" id="focus">
+    <div class="hero-meta">
+      <span class="badge accent">CJM - As-Is</span>
+      <span class="badge">July 2026</span>
+      <span class="badge">Source-per-emotion</span>
+    </div>
+    <div class="section-label">Customer Journey Map</div>
+    <h1>As-Is: the current path</h1>
+    <p class="hero-intro">How Priya runs employee wellbeing today, with the tools that exist, before Brio. The honesty rule here is research: every emotion and barrier stands on a real signal, and where none exists it stays [?], not a drawn face.</p>
+
+    <div class="focus-card">
+      <div class="fc-label">Focus</div>
+      <p style="margin:0;"><strong>Priya, the Handed-It Operator</strong> (primary persona) x her main job.</p>
+      <p class="fc-job">"When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits."</p>
+      <div class="fc-src">Source: user-research/docs/personas.md, user-research/docs/jtbd.md (Main Job).</div>
+    </div>
+  </section>
+
+  <!-- As-Is Path -->
+  <section id="path">
+    <div class="section-label">Timeline</div>
+    <h2>As-Is Path</h2>
+    <p>Seven phases drawn from Priya's real path to this job, not a generic Awareness-to-Retention funnel. Scroll the track sideways. Emotions and barriers are mined from public sources; the curve below plots them.</p>
+
+    <div class="phase-track">
+      <div class="phase-card">
+        <div class="phase-num">PHASE 1</div>
+        <div class="phase-name">Handed it</div>
+        <div class="phase-lbl">Goal</div><div class="phase-val">Understand what she now owns (Main + E1)</div>
+        <div class="phase-lbl">Emotion</div><div class="phase-val"><span class="emo emo-neg">negative 3</span></div>
+        <div class="phase-lbl">Barrier</div><div class="phase-val">Role assigned by default, not by design; no framework, no training</div>
+        <div class="phase-lbl">Touchpoints</div><div class="phase-val">Founder conversation (1:1, Slack, all-hands)</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 2</div>
+        <div class="phase-name">Self-education</div>
+        <div class="phase-lbl">Goal</div><div class="phase-val">Learn what running wellbeing involves (J6)</div>
+        <div class="phase-lbl">Emotion</div><div class="phase-val"><span class="emo emo-neg">negative 3</span></div>
+        <div class="phase-lbl">Barrier</div><div class="phase-val">Advice assumes HR knowledge; no SMB-with-no-HR playbook</div>
+        <div class="phase-lbl">Touchpoints</div><div class="phase-val">Google search, blog and how-to articles</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 3</div>
+        <div class="phase-name">Tool search</div>
+        <div class="phase-lbl">Goal</div><div class="phase-val">Find a self-serve tool she can start in an afternoon</div>
+        <div class="phase-lbl">Emotion</div><div class="phase-val"><span class="emo emo-neg">negative 4</span></div>
+        <div class="phase-lbl">Barrier</div><div class="phase-val">Demo wall, no transparent pricing, tools assume HR</div>
+        <div class="phase-lbl">Touchpoints</div><div class="phase-val">Competitor sites, [?] G2 / Capterra</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 4</div>
+        <div class="phase-name">Improvise</div>
+        <div class="phase-lbl">Goal</div><div class="phase-val">Launch something without a guided engine (Main / J6)</div>
+        <div class="phase-lbl">Emotion</div><div class="phase-val"><span class="emo emo-neg">negative 3</span></div>
+        <div class="phase-lbl">Barrier</div><div class="phase-val">No guided engine; invents the process; setup friction</div>
+        <div class="phase-lbl">Touchpoints</div><div class="phase-val">[?] Google Forms / Typeform, Slack, spreadsheet</div>
+      </div>
+      <div class="phase-card" style="border-color: var(--red-dim);">
+        <div class="phase-num">PHASE 5</div>
+        <div class="phase-name">Invite and wait</div>
+        <div class="phase-lbl">Goal</div><div class="phase-val">Get honest employee responses (J3 / J4)</div>
+        <div class="phase-lbl">Emotion</div><div class="phase-val"><span class="emo emo-neg">negative 4 - low point</span></div>
+        <div class="phase-lbl">Barrier</div><div class="phase-val">Employees distrust "anonymous," small-team inference; cannot reassure them</div>
+        <div class="phase-lbl">Touchpoints</div><div class="phase-val">Email / Slack invite, survey tool</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 6</div>
+        <div class="phase-name">Read and interpret</div>
+        <div class="phase-lbl">Goal</div><div class="phase-val">Know if the team is OK and if it worked (J2 + E1)</div>
+        <div class="phase-lbl">Emotion</div><div class="phase-val"><span class="emo emo-neg">negative 3</span></div>
+        <div class="phase-lbl">Barrier</div><div class="phase-val">No plain-language read, no next action; only the already-well self-select in</div>
+        <div class="phase-lbl">Touchpoints</div><div class="phase-val">Survey-tool dashboard, spreadsheet</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">PHASE 7</div>
+        <div class="phase-name">Report to owner</div>
+        <div class="phase-lbl">Goal</div><div class="phase-val">Prove the people investment is paying off (J1 / J5)</div>
+        <div class="phase-lbl">Emotion</div><div class="phase-val"><span class="emo emo-neg">negative 3</span></div>
+        <div class="phase-lbl">Barrier</div><div class="phase-val">No honest team-level signal; must translate to finance language</div>
+        <div class="phase-lbl">Touchpoints</div><div class="phase-val">Manual summary, meeting or email with founder</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emotional Curve -->
+  <section id="curve">
+    <div class="section-label">Synthesis</div>
+    <h2>Emotional Curve</h2>
+    <p>The whole As-Is journey is net-negative, with no positive peak - that absence is the opportunity. Point style shows source confidence: a filled dot is first-person voice, a ring is a competitor-review proxy, a dashed ring is category source only (verbatim quote still [?]).</p>
+
+    <div class="curve-wrap">
+      <svg viewBox="0 0 760 300" role="img" aria-label="As-Is emotional curve by phase">
+        <!-- neutral line -->
+        <line x1="30" y1="150" x2="740" y2="150" stroke="#252a33" stroke-width="1" stroke-dasharray="3 4"/>
+        <text class="axis" x="30" y="144">neutral 0</text>
+        <text class="axis" x="30" y="250">-4</text>
+        <!-- curve -->
+        <polyline points="40,222 153,222 266,246 379,222 492,246 605,222 718,222" fill="none" stroke="#f87171" stroke-width="2.5"/>
+        <!-- points: first-person = filled, proxy = ring, category = dashed ring -->
+        <circle cx="40" cy="222" r="6" fill="#f87171"/>
+        <circle cx="153" cy="222" r="6" fill="#f87171"/>
+        <circle cx="266" cy="246" r="6" fill="#0d0f12" stroke="#f87171" stroke-width="2.5"/>
+        <circle cx="379" cy="222" r="6" fill="#0d0f12" stroke="#f87171" stroke-width="2.5"/>
+        <circle cx="492" cy="246" r="7" fill="#f87171"/>
+        <circle cx="605" cy="222" r="6" fill="#f87171"/>
+        <circle cx="718" cy="222" r="6" fill="#0d0f12" stroke="#f87171" stroke-width="2.5" stroke-dasharray="3 3"/>
+        <!-- low-point marker -->
+        <text x="492" y="272" text-anchor="middle" fill="#f87171" font-weight="700">low point</text>
+        <!-- phase labels -->
+        <text x="40" y="292" text-anchor="middle">1 Handed</text>
+        <text x="153" y="292" text-anchor="middle">2 Self-ed</text>
+        <text x="266" y="292" text-anchor="middle">3 Tool</text>
+        <text x="379" y="292" text-anchor="middle">4 Improvise</text>
+        <text x="492" y="292" text-anchor="middle">5 Invite</text>
+        <text x="605" y="292" text-anchor="middle">6 Read</text>
+        <text x="718" y="292" text-anchor="middle">7 Report</text>
+      </svg>
+      <div class="legend">
+        <span><span class="dot" style="background:#f87171;"></span> First-person voice (phases 1, 2, 5, 6)</span>
+        <span><span class="dot" style="background:#0d0f12;border:2px solid #f87171;"></span> Review proxy (phases 3, 4)</span>
+        <span><span class="dot" style="background:#0d0f12;border:2px dashed #f87171;"></span> Category only, quote [?] (phase 7)</span>
+      </div>
+    </div>
+
+    <h3>Voices behind the curve</h3>
+    <div class="quote-card">
+      <p>"I have no idea what to prepare for and am terrified... terrified of not being good enough and disappointing the CEO."</p>
+      <div class="quote-src">Phase 1 - operator handed a role, adjacent office-manager onboarding. Source: reddit.com/r/jobs/comments/3j25fx</div>
+    </div>
+    <div class="quote-card" style="border-left-color: var(--red-dim);">
+      <p>"my dept only has 3 of us... we're not necessarily saying what we may want to." / "I always assume anything I put on a form at work is traceable back to me."</p>
+      <div class="quote-src">Phase 5, the low point - small-team anonymity distrust. Source: reddit.com/r/careerguidance/comments/194a2e3</div>
+    </div>
+    <div class="quote-card" style="border-left-color: var(--red-dim);">
+      <p>"I assumed the programs were only there to harvest and sell employee's health information." / "Benefit for the staff isn't even an afterthought, but a veneer."</p>
+      <div class="quote-src">Phases 5-6 - employee skepticism of employer wellness. Source: reddit.com/r/jobs/comments/1bjelky</div>
+    </div>
+    <div class="quote-card">
+      <p>"The challenge reporting... the report output... could be amped up."</p>
+      <div class="quote-src">Phase 6 - weak reporting in a real tool. Source: Aubrey L. (HR Generalist), capterra.com/p/217589/Woliba/reviews</div>
+    </div>
+
+    <div class="callout"><strong>Method note.</strong> The Anthropic crawler is blocked by Reddit, LinkedIn, and Quora, so WebFetch could not read them. A Playwright real browser reached public old.reddit.com threads and closed most of the operator-voice gap. Residual [?]: a wellbeing-specific operator quote and phase 7 (proving ROI to the owner) - for user interviews. Full log: research/docs/research.md, "Doresearch for CJM."</div>
+  </section>
+
+  <!-- Growth Zones -->
+  <section id="zones">
+    <div class="section-label">Where we win</div>
+    <h2>Growth Zones</h2>
+    <p>Five places where today hurts most and where Brio can win the competition. Each ties to a barrier above and a research gap. No solutions here - these are the candidates the To-Be map must close.</p>
+
+    <div class="gz-card">
+      <div class="gz-id">GZ1</div>
+      <div class="gz-body"><strong>Trust gate on participation</strong> (deepest low, best sourced). Employees distrust "anonymous," small-team inference; the operator cannot reassure them.
+        <div class="gz-note">Gap: "no competitor addresses the small-group inference problem publicly" (only Culture Amp); privacy by architecture. Phase 5.</div>
+      </div>
+    </div>
+    <div class="gz-card">
+      <div class="gz-id">GZ2</div>
+      <div class="gz-body"><strong>Demo wall, no self-serve entry.</strong> Demo required, no transparent pricing; filters out the solo operator.
+        <div class="gz-note">Gap: "no self-serve, no-demo-required tool for 10-50 employees" (Critical). Phase 3.</div>
+      </div>
+    </div>
+    <div class="gz-card">
+      <div class="gz-id">GZ3</div>
+      <div class="gz-body"><strong>No interpretation and no next action.</strong> Raw numbers, no plain language, weak reporting.
+        <div class="gz-note">Gap: "aggregate signal always a reporting add-on"; aha = score plus interpretation plus next action (O6). Phase 6.</div>
+      </div>
+    </div>
+    <div class="gz-card">
+      <div class="gz-id">GZ4</div>
+      <div class="gz-body"><strong>No guided path, "invent the process."</strong> Accidental HR, no framework and no curated library; tools assume HR.
+        <div class="gz-note">Gap: "no product explicitly designs for the absence of an HR team" (Critical); J6. Phases 1, 2, 4.</div>
+      </div>
+    </div>
+    <div class="gz-card">
+      <div class="gz-id">GZ5</div>
+      <div class="gz-body"><strong>No honest signal to prove ROI upward.</strong> No team-level signal for the owner; ROI cannot be measured.
+        <div class="gz-note">Gap: "aggregate team signal always an add-on, never core value"; J1 / J5. Phase 7.</div>
+      </div>
+    </div>
+
+    <div class="callout">Multi-driver nuance (doresearch Q1): non-participation is driven by time (44%), interest (28%), and awareness (27%) more than by privacy alone. Privacy stays Brio's differentiator on GZ1, but low participation is multi-driver - the To-Be step 3 hits time and trust, while interest and awareness are separate levers.</div>
+
+    <div class="divider"></div>
+    <p style="font-size:13px;color:var(--text-faint);">The full claim audit, danger list, and risk register live on the <a href="cjm-to-be.html#critique">To-Be page, Critique and Risks</a>. Source docs: user-research/docs/cjm-as-is.md, cjm-to-be.md.</p>
+  </section>
+
+  <footer>
+    <p>Brio - CJM As-Is - Stage 3 - July 2026</p>
+    <p style="margin-top:4px;">Every emotion and barrier cites a source; unknowns marked [?]. As-Is is an honest mirror - no solutions here.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var subSections = [
+    { id: 'focus', sub: 'sub-focus' },
+    { id: 'path', sub: 'sub-path' },
+    { id: 'curve', sub: 'sub-curve' },
+    { id: 'zones', sub: 'sub-zones' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) {
+          var el = document.getElementById(s.sub);
+          if (el) el.classList.remove('nav-sub-active');
+        });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) {
+          var el = document.getElementById(match.sub);
+          if (el) el.classList.add('nav-sub-active');
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
