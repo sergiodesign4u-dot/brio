@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Base Layer</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar - mobile-first */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle {
+      display: flex; flex-direction: column; justify-content: center; gap: 4px;
+      width: 36px; height: 36px; background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px;
+    }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-item {
+      display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px;
+      color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s;
+    }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    .tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+    .tag-confirmed { background: var(--green-dim); color: var(--green); }
+    .tag-challenged { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-changed { background: var(--accent-dim); color: var(--accent); }
+    .tag-elevated { background: var(--accent-warm-dim); color: var(--accent-warm); }
+    .tag-muted { background: var(--surface-3); color: var(--text-faint); }
+
+    .divider { height: 1px; background: var(--border); margin: 48px 0; }
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    .focus-card { background: rgba(79, 156, 249, 0.03); border: 1px solid var(--accent-dim); border-radius: var(--radius-lg); padding: 22px 24px; margin: 24px 0; }
+    .focus-card .fc-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .focus-card .fc-job { font-size: 15px; color: var(--text); font-style: italic; margin: 8px 0; max-width: none; }
+    .focus-card .fc-src { font-size: 12px; color: var(--text-faint); margin-top: 8px; }
+
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.warn { border-color: var(--yellow-dim); }
+    .callout.ok { border-color: var(--green-dim); }
+
+    /* Sitemap tree */
+    .tree { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; line-height: 1.75; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; overflow-x: auto; white-space: pre; margin: 20px 0; }
+    .tree b { color: var(--text); font-weight: 600; }
+    .tree .surf { color: var(--accent); font-weight: 700; }
+    .tree .job { color: var(--accent-warm); }
+    .tree .sup { color: var(--text-faint); }
+
+    /* Flow legend + mermaid */
+    .legend { display: flex; gap: 18px; font-size: 12px; color: var(--text-faint); margin: 12px 0 6px; flex-wrap: wrap; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend .dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+    .mermaid-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin: 14px 0 6px; }
+    .mermaid-wrap .mermaid { min-width: 520px; text-align: center; }
+    .flow-note { font-size: 12.5px; color: var(--text-muted); margin: 4px 0 28px; }
+    .flow-note b { color: var(--text); }
+
+    /* Traceability matrix */
+    .matrix-table td:not(:first-child), .matrix-table th:not(:first-child) { text-align: center; padding: 10px 8px; white-space: nowrap; }
+    .matrix-table td:first-child { white-space: nowrap; }
+    .matrix-table td.hit { color: var(--accent); font-weight: 700; }
+    .matrix-table tr.row-orphan td { background: rgba(244, 162, 97, 0.06); }
+    .matrix-table tr.row-orphan td:first-child { color: var(--accent-warm); border-left: 2px solid var(--accent-warm); }
+    .matrix-table th.col-orphan { color: var(--red); }
+
+    .deflist { display: grid; gap: 12px; margin: 16px 0; }
+    .def-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; display: flex; gap: 16px; }
+    .def-card.warn { border-color: var(--accent-warm-dim); }
+    .def-id { font-size: 12px; font-weight: 700; color: var(--accent-warm); min-width: 74px; flex-shrink: 0; }
+    .def-body { font-size: 13px; }
+    .def-body .def-note { font-size: 12px; color: var(--text-faint); margin-top: 4px; }
+
+    @media (max-width: 640px) { main { padding-left: 16px; padding-right: 16px; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+      <span class="nav-item nav-item-active">Base Layer</span>
+      <a href="#sitemap" class="nav-sub-item" id="sub-sitemap">Global Sitemap</a>
+      <a href="#flows" class="nav-sub-item" id="sub-flows">User Flows</a>
+      <a href="#matrix" class="nav-sub-item" id="sub-matrix">Traceability Matrix</a>
+      <a href="#nav" class="nav-sub-item" id="sub-nav">Navigation Model</a>
+      <span class="nav-item nav-item-muted">Detail Layer <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Base Layer</span>
+      <span class="badge">July 2026</span>
+      <span class="badge">Structure from jobs</span>
+    </div>
+    <div class="section-label">Information Architecture</div>
+    <h1>Base Layer: the structure of Brio</h1>
+    <p class="hero-intro">The concept layer of the IA: what screens exist, how they group, and how a person moves between them. Every screen serves a job from the JTBD. A screen with no job is an orphan; a job with no screen is a hole. The traceability matrix catches both. Structure is derived from jobs, not copied from a competitor menu.</p>
+
+    <div class="focus-card">
+      <div class="fc-label">Focus</div>
+      <p style="margin:0;"><strong>Priya, the Handed-It Operator</strong> (primary persona) x her main job. Three surfaces: the operator app (primary), the owner view (secondary, aggregate-only), the employee check-in (third-party, near-anonymous).</p>
+      <p class="fc-job">"When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits."</p>
+      <div class="fc-src">Source: user-research/docs/personas.md, jtbd.md, cjm-to-be.md (traced backlog). Detail: ia/docs/sitemap.md, flows.md.</div>
+    </div>
+  </section>
+
+  <!-- Global Sitemap -->
+  <section id="sitemap">
+    <div class="section-label">Structure</div>
+    <h2>Global Sitemap</h2>
+    <p>Screen hierarchy derived from the product entities and jobs. Each node carries the job it closes; states (empty / error / loading) are states of a screen, not screens, so they live in the flows. Surface tags: [pub] public, [P] operator (Priya, primary), [O] owner (Marcus, secondary), [E] employee (Yemi, third-party).</p>
+
+<pre class="tree"><span class="surf">Brio</span>
+&#9474;
+&#9500;&#9472; <span class="surf">PUBLIC / PRE-AUTH</span>                              [pub - operator acquisition]
+&#9474;  &#9500;&#9472; Landing / home ............ <span class="job">(Main + item 1: self-serve start)</span>
+&#9474;  &#9500;&#9472; Pricing .................... <span class="job">(item 1: transparent price, no demo)</span>
+&#9474;  &#9500;&#9472; Sign up .................... <span class="job">(item 1: signup, no credit card)</span>
+&#9474;  &#9492;&#9472; Log in (email + magic link)  <span class="sup">(supporting: return access, gates jobs)</span>
+&#9474;
+&#9500;&#9472; <span class="surf">OPERATOR APP</span>                                   [P - Priya, primary, desktop-first]
+&#9474;  &#9500;&#9472; Onboarding (guided first-run) ........... <span class="job">(J6 + Main + item 2)</span>
+&#9474;  &#9474;  &#9500;&#9472; Company setup (name, size) ..... <span class="job">(J6: size drives program)</span>
+&#9474;  &#9474;  &#9500;&#9472; First program confirm .......... <span class="job">(Main + J6 + item 2)</span>
+&#9474;  &#9474;  &#9492;&#9472; Invite team (join link / code) . <span class="job">(Main + item 3)</span>
+&#9474;  &#9500;&#9472; Dashboard (home) ........................ <span class="job">(E1 + J1 + J2: the aha)</span>
+&#9474;  &#9474;  &#9492;&#9472; Team pulse detail .............. <span class="job">(J1 + J2 + E1 + items 5, 6)</span>
+&#9474;  &#9474;     &#9492;&#9472; Threshold alert detail ...... <span class="job">(J2 + item 7)</span>
+&#9474;  &#9500;&#9472; Programs ................................ <span class="job">(Main + J6)</span>
+&#9474;  &#9474;  &#9500;&#9472; Program library (browse + pick) . <span class="job">(Main + J6 + item 2)</span>
+&#9474;  &#9474;  &#9492;&#9472; Program detail / manage ......... <span class="job">(Main + item 2)</span>
+&#9474;  &#9474;     &#9492;&#9472; Check-in setup .............. <span class="job">(J2 + J4 + item 3)</span>
+&#9474;  &#9500;&#9472; Team .................................... <span class="job">(Main + item 3)</span>
+&#9474;  &#9474;  &#9492;&#9472; Team roster (invited, participation) . <span class="job">(Main + item 3 + item 10)</span>
+&#9474;  &#9500;&#9472; Share with owner ........................ <span class="job">(J1 + J5 + S2 + item 8)</span>
+&#9474;  &#9474;  &#9492;&#9472; Invite owner + upgrade .......... <span class="job">(S2 + item 8: paid unlock)</span>
+&#9474;  &#9492;&#9472; Settings ................................ <span class="sup">(supporting)</span>
+&#9474;     &#9500;&#9472; Plan / subscription ............. <span class="job">(item 1 + item 8)</span>
+&#9474;     &#9500;&#9472; Privacy center .................. <span class="job">(J3 + E2 + item 4: operator proof)</span>
+&#9474;     &#9500;&#9472; Notifications ................... <span class="job">(J4 + items 9, 10)</span>
+&#9474;     &#9492;&#9472; Account ......................... <span class="sup">(supporting: gates operator jobs)</span>
+&#9474;
+&#9500;&#9472; <span class="surf">OWNER SURFACE</span>                                  [O - Marcus, aggregate-only, under 2 min]
+&#9474;  &#9500;&#9472; Owner dashboard (one number, trend) ..... <span class="job">(J1 + J5 + item 8)</span>
+&#9474;  &#9474;  &#9492;&#9472; "What I can and cannot see" ..... <span class="job">(E2 comfort + item 4)</span>
+&#9474;  &#9492;&#9472; Monthly owner digest (email &#8594; view)  <span class="job">(S2 + item 8 + W1)</span>
+&#9474;
+&#9492;&#9472; <span class="surf">EMPLOYEE SURFACE</span>                               [E - Yemi, near-anonymous, under 30s]
+   &#9492;&#9472; Check-in (via invite link / join code) ... <span class="job">(J3 + J4 + E2 + item 3)</span>
+      &#9500;&#9472; Pre-Q1 privacy disclosure ........ <span class="job">(J3 + E2 + item 4)</span>
+      &#9500;&#9472; Questions (1 to 3, emoji / slider) . <span class="job">(J4 + item 3)</span>
+      &#9492;&#9472; Check-in complete / thank-you .... <span class="job">(J4 + E2: no individual data)</span>
+</pre>
+
+    <div class="callout ok"><strong>No orphan in the tree:</strong> every node cites a job. Two nodes are supporting infrastructure (Log in, Account), they gate the operator's jobs rather than close their own, kept and flagged. <strong>Parked (deliberately not nodes):</strong> employee "see team result" (HJ2 [?]), referral / share-to-network (S1, E3 [?]), custom nudge scheduling (LATER, paid). <strong>Not invented</strong> (competitor menu, no job): leaderboards, drill-down analytics, custom program builder (Stage 2 cut list).</div>
+  </section>
+
+  <!-- User Flows -->
+  <section id="flows">
+    <div class="section-label">Routes</div>
+    <h2>User Flows</h2>
+    <p>The main job plus three related jobs, each proving the route: steps, decision diamonds, states, and both ends, success and dead-end. Color is semantic.</p>
+
+    <div class="legend">
+      <span><span class="dot" style="background:#3fb56b;"></span> Success: happy-path ends and the arrows that reach them</span>
+      <span><span class="dot" style="background:#e5484d;"></span> Dead-end: no path to the goal</span>
+      <span><span class="dot" style="background:#5a5a5a;"></span> Neutral: steps, decisions, loading / empty, recoverable error</span>
+    </div>
+
+    <div class="callout"><strong>Step 6 critique applied.</strong> Dead-end exits added (sub-N explainer, employee "see what your manager sees" detour, recoverable free-tier exit, digest re-surface of an ignored alert) and missing states added (already-submitted, owner "score not ready", invite-send error).</div>
+
+    <h3>Flow 1 - Main job (Priya): run wellbeing without HR training</h3>
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    Start(["Priya: handed wellbeing, no HR training"]) --> Landing["Landing / home"]
+    Landing --> Signup["Sign up"]
+    Signup --> Onboard["Onboarding: company setup"]
+    Onboard --> Load1["Loading: pre-select program by size"]
+    Load1 --> Confirm["First program confirm"]
+    Confirm --> Invite["Invite team: join link / code"]
+    Invite --> SendOk{"Invites sent?"}
+    SendOk -->|send failed| InviteErr["Error: invite send failed, retry"]
+    InviteErr --> Invite
+    SendOk -->|yes| Dash["Dashboard: waiting for check-ins"]
+    Dash --> Enough{"Cycle closed, N of 5 met?"}
+    Enough -->|still open| Waiting["Loading: cycle open, no live count"]
+    Waiting --> Enough
+    Enough -->|under 5 at close| EmptyN["Empty: too few responses, nudge team"]
+    EmptyN --> Roster["Team roster: resend invite"]
+    Roster --> Dash
+    Enough -->|team too small| TooSmall["Team below minimum-N: privacy math explained"]
+    TooSmall --> Grow{"Can invite more to reach 5?"}
+    Grow -->|yes| Roster
+    Grow -->|no| DeadN["Dead: under minimum-N, no team signal possible"]
+    Enough -->|yes| Pulse["Team pulse: score + interpretation + next action"]
+    Pulse --> Win(["Job closed: team read and next action"])
+    classDef success fill:#12351f,stroke:#3fb56b,color:#eafff9;
+    classDef dead fill:#3a1618,stroke:#e5484d,color:#ffd7d7;
+    classDef neutral fill:#1b1b1b,stroke:#5a5a5a,color:#dddddd;
+    class Start,Win success;
+    class DeadN dead;
+    class Landing,Signup,Onboard,Load1,Confirm,Invite,SendOk,InviteErr,Dash,Enough,Waiting,EmptyN,Roster,TooSmall,Grow,Pulse neutral;
+    linkStyle 0,1,2,3,4,5,6,9,10,20,21 stroke:#3fb56b,stroke-width:2px;</pre>
+    </div>
+    <p class="flow-note"><b>Decisions:</b> invites sent? cycle closed and N of 5 met? can invite more? <b>States:</b> loading, empty, invite-send error. <b>Dead-end:</b> a team structurally under minimum-N cannot get an aggregate signal (the honest limit of an aggregate-only model). <b>Recovers:</b> under-5-at-close nudges and loops back.</p>
+
+    <h3>Flow 2 - J3 + J4 (Yemi): private, under-30s check-in</h3>
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    Start(["Yemi: invite received, is it private?"]) --> Open["Check-in via invite link / join code"]
+    Open --> Valid{"Invite link valid?"}
+    Valid -->|expired| Expired["Error: invite expired, ask operator to resend"]
+    Valid -->|ok| Dup{"Already checked in this cycle?"}
+    Dup -->|yes| Already["Already submitted this cycle, thank-you"]
+    Dup -->|no| Disc["Pre-Q1 privacy disclosure"]
+    Disc --> Believe{"Do I believe my answer stays private?"}
+    Believe -->|not sure| Learn["See exactly what your manager sees"]
+    Learn --> Believe
+    Believe -->|no| DeadSkip["Dead: skips or non-answer, trust lost"]
+    Believe -->|yes| Q["Questions: 1 to 3, emoji / slider"]
+    Q --> Submit["Loading: submitting response"]
+    Submit --> Ok{"Submitted?"}
+    Ok -->|network error| Err["Error: submit failed, retry"]
+    Err --> Q
+    Ok -->|yes| Done["Check-in complete: thank-you, no individual data"]
+    Done --> Win(["Job closed: honest response joined the team aggregate"])
+    classDef success fill:#12351f,stroke:#3fb56b,color:#eafff9;
+    classDef dead fill:#3a1618,stroke:#e5484d,color:#ffd7d7;
+    classDef neutral fill:#1b1b1b,stroke:#5a5a5a,color:#dddddd;
+    class Start,Win success;
+    class DeadSkip dead;
+    class Open,Valid,Expired,Dup,Already,Disc,Believe,Learn,Q,Submit,Ok,Err,Done neutral;
+    linkStyle 0,1,3,5,6,10,11,12,15,16 stroke:#3fb56b,stroke-width:2px;</pre>
+    </div>
+    <p class="flow-note"><b>Decisions:</b> invite valid? already checked in? believe it stays private? submitted? <b>States:</b> error (expired, submit failed), loading, already-submitted. <b>Recovery:</b> an unsure employee opens "see exactly what your manager sees" and returns. <b>Dead-end:</b> disbelief in privacy, trust lost, no in-flow path back to an honest answer.</p>
+
+    <h3>Flow 3 - J1 + J5 + S2 (Priya to Marcus): prove it works, share and upgrade</h3>
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    Start(["Priya: wants to show the owner it works"]) --> Milestone["Dashboard: positive pulse milestone"]
+    Milestone --> Share["Share with owner"]
+    Share --> Gate{"On a paid plan?"}
+    Gate -->|no| Upgrade["Invite owner + upgrade"]
+    Upgrade --> Pay{"Upgrade completed?"}
+    Pay -->|payment failed| PayErr["Error: payment failed, retry or stay free"]
+    PayErr --> Upgrade
+    Pay -->|not now| StayFree["Stay on free tier, retry later"]
+    StayFree --> Milestone
+    Pay -->|yes| Sent["Confirmation: owner invite sent"]
+    Gate -->|yes| Sent
+    Sent --> Wait["Loading: waiting for owner to open"]
+    Wait --> Seen{"Owner opened dashboard or digest?"}
+    Seen -->|not yet| Nudge2["Empty: owner has not opened, resend digest"]
+    Nudge2 --> Wait
+    Seen -->|never opens| DeadUnseen["Dead: owner never opens, share never lands"]
+    Seen -->|yes| OwnerDash["Owner dashboard: one number, trend, what I cannot see"]
+    OwnerDash --> Ready{"Team score ready, N of 5 met?"}
+    Ready -->|no| OwnerEmpty["Empty: score not available yet, privacy minimum not met"]
+    Ready -->|yes| Win(["Job closed: owner sees an honest signal, renewal confidence"])
+    classDef success fill:#12351f,stroke:#3fb56b,color:#eafff9;
+    classDef dead fill:#3a1618,stroke:#e5484d,color:#ffd7d7;
+    classDef neutral fill:#1b1b1b,stroke:#5a5a5a,color:#dddddd;
+    class Start,Win success;
+    class DeadUnseen dead;
+    class Milestone,Share,Gate,Upgrade,Pay,PayErr,StayFree,Sent,Wait,Seen,Nudge2,OwnerDash,Ready,OwnerEmpty neutral;
+    linkStyle 0,1,2,10,11,12,16,17,19 stroke:#3fb56b,stroke-width:2px;</pre>
+    </div>
+    <p class="flow-note"><b>Decisions:</b> on a paid plan? upgrade completed? owner opened it? score ready? <b>States:</b> payment error, loading, two empties (owner not opened; score not ready under minimum-N). <b>Recoverable exit:</b> declining the upgrade stays on free tier and retries later. <b>Dead-end:</b> owner never opens despite resends, the share never lands.</p>
+
+    <h3>Flow 4 - J2 (Priya): know if the team is struggling early</h3>
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    Start(["Brio: a pulse cycle closes"]) --> Compute["Loading: compute aggregate, check N of 5"]
+    Compute --> N{"N of 5 met?"}
+    N -->|no| Hold["Empty: too few responses, no score, no alert"]
+    Hold --> Wait2["Wait for next cycle"]
+    Wait2 --> Start
+    N -->|yes| Trend{"Aggregate dropped past threshold?"}
+    Trend -->|no| Steady["Dashboard: steady, no action needed"]
+    Steady --> OkEnd(["Job closed: reassured, nothing needed"])
+    Trend -->|yes| Alert["Threshold alert detail"]
+    Alert --> Act{"Operator acts?"}
+    Act -->|ignores once| Digest["Weekly digest re-surfaces the alert"]
+    Digest --> Alert
+    Act -->|keeps ignoring| DeadMiss["Dead: alert ignored, someone resigns"]
+    Act -->|yes| NextAction["Team pulse: suggested next action"]
+    NextAction --> Win(["Job closed: acted before a resignation"])
+    classDef success fill:#12351f,stroke:#3fb56b,color:#eafff9;
+    classDef dead fill:#3a1618,stroke:#e5484d,color:#ffd7d7;
+    classDef neutral fill:#1b1b1b,stroke:#5a5a5a,color:#dddddd;
+    class Start,OkEnd,Win success;
+    class DeadMiss dead;
+    class Compute,N,Hold,Wait2,Trend,Steady,Alert,Act,Digest,NextAction neutral;
+    linkStyle 0,1,5,6,7,8,9,13,14 stroke:#3fb56b,stroke-width:2px;</pre>
+    </div>
+    <p class="flow-note"><b>Decisions:</b> N of 5 met? dropped past threshold? operator acts? <b>States:</b> loading, empty (no score, no alert). <b>Escalation:</b> a single ignore does not equal a resignation, the weekly digest re-surfaces the alert. <b>Two success ends</b> (both close J2): steady equals reassured, and alert-then-acted. <b>Dead-end:</b> alert kept ignored, someone resigns.</p>
+  </section>
+
+  <!-- Traceability Matrix -->
+  <section id="matrix">
+    <div class="section-label">Coverage</div>
+    <h2>Traceability Matrix</h2>
+    <p>Screens (rows) by jobs (columns). A tick means the screen participates in closing that job. An empty row is an orphan screen; an empty column is an orphan job. Both are defects, surfaced and resolved below.</p>
+
+    <div class="table-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>Screen</th>
+            <th>Main</th><th>J1</th><th>J2</th><th>J3</th><th>J4</th><th>J5</th><th>J6</th><th>E1</th><th>E2</th><th>E3</th><th class="col-orphan">S1</th><th>S2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1 Landing</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>2 Pricing</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>3 Sign up</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr class="row-orphan"><td>4 Log in</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>5 Company setup</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>6 First program confirm</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>7 Invite team</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>8 Dashboard</td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>9 Team pulse detail</td><td></td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>10 Threshold alert detail</td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>11 Program library</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>12 Program detail / manage</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>13 Check-in setup</td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>14 Team roster</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>15 Share with owner</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>16 Invite owner + upgrade</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>17 Plan / subscription</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>18 Privacy center</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td></tr>
+          <tr><td>19 Notifications</td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr class="row-orphan"><td>20 Account</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>21 Owner dashboard</td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>22 Monthly owner digest</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>23 Check-in</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td></tr>
+          <tr><td>24 Pre-Q1 disclosure</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td></tr>
+          <tr><td>25 Questions</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>26 Check-in complete</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Orphan screens (empty rows)</h3>
+    <div class="deflist">
+      <div class="def-card warn"><div class="def-id">4 Log in<br>20 Account</div><div class="def-body">Close no job on their own. <strong>Resolution: keep, reclassify as supporting infrastructure.</strong> They gate every operator job; removing them removes access to all job-closing screens. The one honest exception to "no empty row," not cut.</div></div>
+    </div>
+
+    <h3>Orphan jobs (empty columns)</h3>
+    <div class="deflist">
+      <div class="def-card warn"><div class="def-id">S1</div><div class="def-body">Tell network what works has no MVP screen. <strong>Resolution: backlog / [?].</strong> S1 is a [?] hypothesis; the referral surface is parked (Stage 2 cut list bans cash referral, organic operator-to-peer is out of MVP scope). Validate S1 first, then a lightweight share surface post-MVP. Intentional hole.
+        <div class="def-note">Thin coverage (not a hole to fill in MVP): E3 (caring leader) is covered only by Owner dashboard / digest as shareable proof, a [?] hypothesis. Hypothesis jobs HJ1 and HJ2 are deliberately parked (HJ2 = backlog item 12 LATER).</div>
+      </div>
+    </div>
+
+    <div class="callout ok"><strong>Net:</strong> one real orphan job (S1, to backlog), zero orphan screens to cut (two supporting-infrastructure rows kept), no MVP job left uncovered.</div>
+  </section>
+
+  <!-- Navigation Model -->
+  <section id="nav">
+    <div class="section-label">Movement</div>
+    <h2>Navigation Model</h2>
+    <p>Global navigation is the shortest path for the primary persona to her main job, not "what to put in a menu." Each global item is an entry into a job-cluster. The owner and employee surfaces have no multi-tab nav by design.</p>
+
+    <h3>Global navigation (operator app)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Global item</th><th>Job-cluster behind it</th><th>Why global</th></tr></thead>
+        <tbody>
+          <tr><td>Dashboard (home)</td><td>E1 + J1 + J2: the pulse signal (score + interpretation + next action)</td><td>The recurring aha and the reason she logs in. Post-login home</td></tr>
+          <tr><td>Programs</td><td>Main + J6: run wellbeing (library, pick, manage)</td><td>The core "what do I run" job, entered repeatedly</td></tr>
+          <tr><td>Team</td><td>Main + item 3: invite + participation (aggregate)</td><td>Entered on every new hire, the invite / roster surface</td></tr>
+          <tr><td>Owner</td><td>J1 + J5 + S2 + item 8: prove it works + upgrade</td><td>Top-3 operator job by importance and the paid-conversion path</td></tr>
+          <tr><td>Settings <span class="tag tag-muted">utility</span></td><td>supporting + item 4: Plan, Privacy center, Notifications, Account</td><td>Utility cluster, corner entry, not a job tab</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12.5px;color:var(--text-faint);">Trade-off: "Owner" is only ~monthly-frequency and could be a contextual "Share this result" action instead. It is kept global because the owner dashboard is the paid feature and J1 / J5 / S2 score 3 for Priya. Reversible if usage shows it is rarely a fresh entry.</p>
+
+    <h3>Depth: taps to the main job for Priya</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Path to a job-cluster</th><th>Taps</th><th>Within 3?</th></tr></thead>
+        <tbody>
+          <tr><td>Returning operator, pulse signal + next action (recurring main-job value)</td><td>1 (Dashboard is the post-login home)</td><td><span class="tag tag-confirmed">Yes</span></td></tr>
+          <tr><td>Run / adjust a program (Main + J6)</td><td>Programs (1), Program detail (2), Check-in setup (3)</td><td><span class="tag tag-confirmed">Yes, 3 at deepest</span></td></tr>
+          <tr><td>Invite team / roster (item 3)</td><td>Team (1), roster on the same screen</td><td><span class="tag tag-confirmed">Yes</span></td></tr>
+          <tr><td>Prove it works / invite owner (J1 + J5 + S2)</td><td>Owner (1), Invite owner + upgrade (2)</td><td><span class="tag tag-confirmed">Yes</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><strong>One intentional exception, not a violation:</strong> the first-run guided onboarding is a linear wizard (company setup, first program confirm, invite team). This is sequential flow depth, not navigational depth. It is J6 itself ("tells me exactly what to do and in what order"), budgeted by time (under 5 minutes), runs once, and is not reachable from global nav afterward.</div>
+
+    <h3>Global / contextual / deep</h3>
+    <p><strong>Global (always visible):</strong> the 4 job tabs (Dashboard, Programs, Team, Owner) plus Settings utility. Owner surface = single dashboard; employee surface = no nav.</p>
+    <p><strong>Contextual (inside a flow):</strong> "Share this result with your owner" (on a positive milestone), "Set up check-in" (inside a program), "Resend invite" (inside roster), threshold-alert banner (on the Dashboard when it fires), pre-Q1 privacy disclosure (inside the check-in), upgrade prompt (on a free-tier limit).</p>
+    <p><strong>Deep (rare):</strong> Plan / subscription change, Privacy center detail, Notification cadence, Account, and the one-time onboarding wizard.</p>
+
+    <h3>Step 6 depth fixes</h3>
+    <div class="deflist">
+      <div class="def-card"><div class="def-id">DX1</div><div class="def-body"><strong>Threshold alert reach.</strong> Reached in 1 tap as a contextual Dashboard banner and a notification deep-link, not only 3-deep via nav. The urgent early-warning job (J2) is not buried.</div></div>
+      <div class="def-card"><div class="def-id">DX2</div><div class="def-body"><strong>Privacy proof visibility.</strong> The operator-facing privacy proof is not only 2 taps deep in Settings, a summary is also surfaced at the onboarding confirmation and on the Dashboard, so item 4 ("visible to the operator as proof") is met without a deep hunt.</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Base Layer - July 2026</p>
+    <p style="margin-top:4px;">Every screen serves a job from the JTBD; no silent node, all unattached marked [ORPHAN]. Dead-ends and missing states fixed in the flows; main job within three taps. Detail layer (per-page headers, footers, blocks, states, SEO) is next.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose', flowchart: { htmlLabels: true, curve: 'basis' } });
+</script>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var subSections = [
+    { id: 'sitemap', sub: 'sub-sitemap' },
+    { id: 'flows', sub: 'sub-flows' },
+    { id: 'matrix', sub: 'sub-matrix' },
+    { id: 'nav', sub: 'sub-nav' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) {
+          var el = document.getElementById(s.sub);
+          if (el) el.classList.remove('nav-sub-active');
+        });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) {
+          var el = document.getElementById(match.sub);
+          if (el) el.classList.add('nav-sub-active');
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

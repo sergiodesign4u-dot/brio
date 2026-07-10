@@ -269,3 +269,10 @@ First-person voice (reached with a real browser, public old.reddit.com threads):
 - Employee skepticism of employer wellness (As-Is phases 5-6): "the only people who participated were those who were already eating right and working out." / "I assumed the programs were only there to harvest and sell employee's health information." / "Benefit for the staff isn't even an afterthought, but a veneer." Source: reddit.com/r/jobs/comments/1bjelky.
 
 Residual [?] after doresearch: (a) a wellbeing-specific first-person operator quote - the phases 1-2 voice above is office-manager onboarding in general, the same persona but not the exact wellbeing task; (b) operator voice on phase 7 (proving ROI to the owner) - no first-person quote found, so that emotion stays on category sources. Both close with first-phase user interviews, not public mining.
+
+## IA route assumptions (Stage 4)
+
+The IA base layer is a structural exercise derived from the existing jobs, not new web research, but it surfaced two route-level assumptions that no data yet confirms. They are flagged here so they are not lost, and both close with usability testing, not public mining.
+
+- **Navigation model is unvalidated.** The operator global nav (Dashboard, Programs, Team, Owner + Settings) and the tap-count claim (main-job value in 1 tap, deepest core action in 3) assume the operator's mental model matches this grouping. No usability data confirms the grouping or that "Owner" deserves a permanent tab rather than a contextual share action. Validate in a first click-through / tree test. Source: ia/docs/sitemap.md Navigation.
+- **Sub-minimum-N very small teams have no full path.** A team structurally under the minimum-N of 5 (e.g. a 4-person company, or a ~15-person team where fewer than 5 respond) can never see an aggregate score, so the score-dependent jobs (J1, J2, owner) cannot complete. The IA adds an informed explainer and an invite-more path, but whether a program-only, no-score mode is acceptable to that operator is an open product question. Ties to the H2 participation floor already flagged in cjm-to-be.md. Source: ia/docs/flows.md Flow 1 (DeadN).
