@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Detail: Privacy-disclosure component (0.3)</title>
+  <style>
+    :root {
+      --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
+      --border: #252a33; --border-subtle: #1e232c; --text: #e8eaf0; --text-muted: #8b909c; --text-faint: #555b68;
+      --accent: #4f9cf9; --accent-dim: #1d3a5f; --accent-warm: #f4a261; --accent-warm-dim: #3d2810;
+      --green: #4ade80; --green-dim: #14532d; --red: #f87171; --red-dim: #450a0a; --yellow: #fbbf24; --yellow-dim: #451a03;
+      --radius: 8px; --radius-lg: 12px; --radius-sm: 4px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .sidebar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13, 15, 18, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 36px; height: 36px; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px; }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
+    .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-node { padding-left: 20px; font-size: 12px; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ul li { margin-bottom: 6px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.ok { border-color: var(--green-dim); }
+    .src { font-size: 12px; color: var(--text-faint); margin-top: 10px; }
+
+    /* ===== Black-and-white wireframe kit ===== */
+    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
+    .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
+    .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+
+    .wf-disc { background: #141414; border: 1px solid #3a3a3a; border-radius: 8px; padding: 16px; }
+    .wf-disc h4 { color: #fff; font-size: 13px; margin-bottom: 12px; font-weight: 700; }
+    .wf-claim { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; color: #c4c4c4; font-size: 12px; }
+    .wf-claim .ic { width: 15px; height: 15px; border: 1px solid #6a6a6a; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+    .wf-cc { display: flex; gap: 12px; margin-top: 12px; }
+    .wf-cc .cc { flex: 1; border: 1px solid #333; border-radius: 6px; padding: 10px; }
+    .wf-cc .cc h6 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; margin-bottom: 6px; }
+    .wf-cc .cc .l { display: block; color: #a2a2a2; font-size: 11px; padding: 2px 0; }
+    .wf-cc .cc.can { border-style: solid; }
+    .wf-cc .cc.cannot { border-style: dashed; }
+    .wf-exp { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 10px; margin-top: 12px; color: #cfcfcf; font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; }
+    .wf-cta { margin-top: 12px; text-align: center; border: 1px solid #e6e6e6; background: #e6e6e6; color: #111; border-radius: 6px; padding: 8px; font-size: 12px; font-weight: 600; }
+    .wf-belowN { border: 1px dashed #6a6a6a; border-radius: 6px; padding: 10px; margin-top: 10px; color: #d8d8d8; font-size: 11.5px; }
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 12px; background: #0c0c0c; }
+    .wf-topbar { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #333; border-radius: 8px; color: #cfcfcf; font-size: 12px; margin-bottom: 10px; }
+    .wf-anon { text-align: center; font-size: 10px; color: #cfcfcf; padding: 5px; border: 1px dashed #4a4a4a; border-radius: 6px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+      <a href="ia-base.html" class="nav-item">Base Layer</a>
+      <span class="nav-item nav-item-active">Detail Layer</span>
+      <div class="nav-group-label sub">Structure</div>
+      <a href="navigation.html" class="nav-item nav-node">Navigation (0.1)</a>
+      <a href="footer.html" class="nav-item nav-node">Footer (0.2)</a>
+      <span class="nav-item nav-item-active nav-node">Privacy disclosure (0.3)</span>
+      <a href="#spine" class="nav-sub-item" id="sub-spine">Privacy spine</a>
+      <a href="#variants" class="nav-sub-item" id="sub-variants">Role variants</a>
+      <a href="#anatomy" class="nav-sub-item" id="sub-anatomy">Anatomy + states</a>
+      <a href="#mockup" class="nav-sub-item" id="sub-mockup">Wireframe</a>
+      <a href="#seo" class="nav-sub-item" id="sub-seo">SEO + a11y</a>
+      <span class="nav-item nav-item-muted" style="margin-top:6px;">More nodes at Step 8</span>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Detail Layer</span>
+      <span class="badge">Node 0.3</span>
+      <span class="badge">Global component</span>
+      <span class="badge">B/W wireframe</span>
+    </div>
+    <div class="crumb">IA / Detail Layer / Structure / Privacy-disclosure component (0.3)</div>
+    <h1>Privacy-disclosure component</h1>
+    <p class="hero-intro">The differentiator made into UI. In an SMB there is no HR layer between the boss and personal data, so the privacy boundary is shown in the product, not promised in a policy. One canonical set of claims, rendered in role variants on the employee, operator, owner, and public surfaces. It is the trust gate for honest participation (H2, still [?]). No H1. Source of truth: ia/docs/pages/privacy-disclosure.md.</p>
+  </section>
+
+  <!-- Privacy spine -->
+  <section id="spine">
+    <div class="section-label">One promise, everywhere</div>
+    <h2>Canonical privacy spine</h2>
+    <p>The same five claims appear in every instance. The wording is [?] pending final UX and legal copy; the claims are fixed.</p>
+    <ul>
+      <li><strong>Aggregate only.</strong> No named responses, ever. No individual timeline, no drill-down.</li>
+      <li><strong>Minimum-N of 5.</strong> No score until at least 5 people respond (indirect-identification protection, benchmarked to Culture Amp).</li>
+      <li><strong>No live count during an open cycle.</strong> No running tally for operator or employee while a cycle is open, closing the small-team timing-inference vector (founder decision D1).</li>
+      <li><strong>Subscription as privacy.</strong> The owner pays for aggregate insight; the model is aligned with never exposing individual data, stated plainly.</li>
+      <li><strong>What the owner can and cannot see</strong>, listed explicitly.</li>
+    </ul>
+    <p class="src">Source: research/strategy.md Section 5 (D1, no live count), research/docs/benchmark.md (minimum-N, indirect identification), user-research/docs/cjm-to-be.md (privacy bundle), CLAUDE.md privacy mechanism.</p>
+  </section>
+
+  <!-- Role variants -->
+  <section id="variants">
+    <div class="section-label">Same spine, per role</div>
+    <h2>Role variants</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Variant</th><th>Where</th><th>Framing</th><th>What is different</th></tr></thead>
+        <tbody>
+          <tr><td>Employee (pre-Q1)</td><td>10.1, before Question 1, every cycle</td><td>reassurance, "your answer"</td><td>leads with "no one sees your individual response"; joins an aggregate of at least 5; results only after the cycle closes; "see what your manager sees" expander</td></tr>
+          <tr><td>Operator (proof)</td><td>8.2 Privacy center; summary at 3.1 and on 4.0 (DX2)</td><td>proof, "what you can and cannot see"</td><td>you see the aggregate and participation rate, never who answered what; no drill-down</td></tr>
+          <tr><td>Owner (comfort)</td><td>9.1, on the owner dashboard</td><td>comfort, "what you can and cannot see"</td><td>one number and a trend, aggregate only; no individuals, answers, or sub-group below N</td></tr>
+          <tr><td>Public (explainer)</td><td>1.1 Security and privacy, indexable</td><td>marketing, third-person</td><td>a fuller, crawlable version; the only indexable instance</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Anatomy + states -->
+  <section id="anatomy">
+    <div class="section-label">Parts and behavior</div>
+    <h2>Anatomy and states</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Element</th><th>Behavior</th></tr></thead>
+        <tbody>
+          <tr><td>Component heading</td><td>plain-language title, not an H1</td></tr>
+          <tr><td>Claim list</td><td>the five claims, each an icon plus one plain sentence</td></tr>
+          <tr><td>Can / cannot panel</td><td>two columns, role-framed</td></tr>
+          <tr><td>"See what your manager sees"</td><td>disclosure button (employee only), expands an aggregate-only mock</td></tr>
+          <tr><td>Below-minimum-N note</td><td>swaps the score claim for "results need at least 5 people" when the team is under N (ties to 4.3, 9.3, F1 sub-N path)</td></tr>
+          <tr><td>Action</td><td>Continue (employee) / Close (operator, owner)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>States:</strong> default (five claims + panel); expanded (employee, shows the aggregate-only preview so the promise is shown not just told); below-minimum-N (the score claim becomes the "at least 5 people" explanation, no live count still enforced, the honest limit surfaced not hidden).</p>
+  </section>
+
+  <!-- Wireframe -->
+  <section id="mockup">
+    <div class="section-label">Black and white, wireframe level</div>
+    <h2>Wireframe</h2>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The employee variant shown on mobile (where it is first seen, before Question 1); the operator and owner variants shown as desktop panels.</p>
+
+    <div class="wf-row">
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Employee (pre-Q1), mobile 360px</div>
+        <div class="wf-phone">
+          <div class="wf-topbar"><span class="wf-logo">Brio</span></div>
+          <div class="wf-anon">your answers are anonymous</div>
+          <div class="wf-disc">
+            <h4>Before you answer</h4>
+            <div class="wf-claim"><span class="ic"></span><span>No one sees your individual response, ever.</span></div>
+            <div class="wf-claim"><span class="ic"></span><span>Your answer joins an aggregate of at least 5 people.</span></div>
+            <div class="wf-claim"><span class="ic"></span><span>No running count while the cycle is open.</span></div>
+            <div class="wf-claim"><span class="ic"></span><span>Results appear only after the cycle closes.</span></div>
+            <div class="wf-exp"><span>See exactly what your manager sees</span><span>+</span></div>
+            <div class="wf-cta">Continue</div>
+          </div>
+        </div>
+        <div class="wf-note">the trust gate, before Question 1, every cycle.</div>
+      </div>
+
+      <div style="flex:1;min-width:280px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Operator (proof), desktop panel</div>
+        <div class="wf-frame" style="margin:0;">
+          <div class="wf-disc">
+            <h4>What you can and cannot see</h4>
+            <div class="wf-cc">
+              <div class="cc can"><h6>You can see</h6><span class="l">Team score</span><span class="l">Trend over time</span><span class="l">Participation rate (share)</span></div>
+              <div class="cc cannot"><h6>You cannot see</h6><span class="l">Any individual</span><span class="l">Any single answer</span><span class="l">Any sub-group below 5</span></div>
+            </div>
+            <div class="wf-belowN">Below 5 responses: "Results need at least 5 people." No live count.</div>
+          </div>
+        </div>
+        <div class="wf-note">8.2 Privacy center; summarized at 3.1 onboarding + on 4.0 dashboard (DX2).</div>
+
+        <div class="wf-cap" style="margin:18px 0 8px;">Owner (comfort), desktop panel</div>
+        <div class="wf-frame" style="margin:0;">
+          <div class="wf-disc">
+            <h4>What I can and cannot see</h4>
+            <div class="wf-cc">
+              <div class="cc can"><h6>I can see</h6><span class="l">One number</span><span class="l">A trend</span></div>
+              <div class="cc cannot"><h6>I cannot see</h6><span class="l">Individuals</span><span class="l">Answers</span><span class="l">Sub-groups below 5</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">9.1, on the owner dashboard.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO + a11y -->
+  <section id="seo">
+    <div class="section-label">Structure SEO and a11y</div>
+    <h2>SEO and accessibility</h2>
+    <ul>
+      <li>No H1; it is a component, not a page.</li>
+      <li>On the employee, operator, and owner surfaces it is content in <strong>noindex zones</strong>, so not an SEO surface there. The public <strong>1.1 Security and privacy</strong> page renders the indexable version of the same content; the two must not drift.</li>
+      <li>The expander is a disclosure widget: a <code>&lt;button aria-expanded&gt;</code> toggling a labelled region.</li>
+      <li>The can / cannot panel uses semantic lists; the whole component is keyboard reachable and screen-reader legible.</li>
+    </ul>
+    <div class="callout ok"><strong>Canonical reuse.</strong> Defined once here. Rendered by 10.1 (employee), 8.2 + 3.1 + 4.0 (operator), 9.1 (owner), 1.1 (public). Change the spine here, propagate to all five. Single source of the privacy-promise content. Next global component: <strong>0.4 Program card</strong>.</div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Detail Layer - Node 0.3 Privacy-disclosure component - July 2026</p>
+    <p style="margin-top:4px;">The product is the privacy boundary, shown in the UI not promised in a policy. Grounded in founder decision D1, minimum-N, and the benchmark. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/privacy-disclosure.md.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item').forEach(function(link) {
+    link.addEventListener('click', function() { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+  });
+
+  var subSections = [
+    { id: 'spine', sub: 'sub-spine' },
+    { id: 'variants', sub: 'sub-variants' },
+    { id: 'anatomy', sub: 'sub-anatomy' },
+    { id: 'mockup', sub: 'sub-mockup' },
+    { id: 'seo', sub: 'sub-seo' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) { var el = document.getElementById(s.sub); if (el) el.classList.remove('nav-sub-active'); });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) { var el = document.getElementById(match.sub); if (el) el.classList.add('nav-sub-active'); }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) { var el = document.getElementById(s.id); if (el) observer.observe(el); });
+</script>
+
+</body>
+</html>
