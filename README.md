@@ -36,6 +36,8 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 
 Primary persona is Priya, the operator handed "people stuff" with no HR training. Secondary is Marcus (owner, ROI judge, drives renewal); the end user is Yemi (employee, the participation engine). The MVP core is three jobs: run wellbeing without HR training, know if the team is struggling early, and feel competent as a people person. Full detail in user-research/docs/personas.md and user-research/docs/jtbd.md.
 
+The CJM (As-Is + To-Be) maps Priya's journey end to end: the deepest As-Is low is distrust of anonymity in a small team (the trust gate), which the To-Be path closes with the privacy bundle - visible disclosure, minimum-N of 5, and no live response count. It refines the MVP into a traced backlog of 7 core plus 3 supporting features. Detail in user-research/docs/cjm-as-is.md and user-research/docs/cjm-to-be.md.
+
 ---
 
 ## Key documents

@@ -25,6 +25,8 @@ Brio is a responsive web SaaS that gives a small business with no HR team a simp
 
 Supporting architecture (serve Yemi; preconditions for the above; in MVP scope but not primary design surfaces): J3 - certainty of privacy before responding; J4 - check-in under 30 seconds.
 
+**Refined by CJM (Stage 3) into a traced backlog (one version, not a fork):** 7 MVP-core features - self-serve start, guided onboarding, low-effort check-in, privacy bundle (pre-check-in disclosure + minimum-N of 5 + no live count + subscription-as-privacy statement), interpretive layer, aggregate score and trend, owner dashboard and share - plus 3 supporting (threshold alert, weekly digest, basic reminder). Every feature traces to an As-Is barrier or a job; no orphan; the Stage 2 cut list stays cut. The privacy bundle's success signal is H2 (participation at or above 65%), still [?] - the riskiest assumption, closed by the First Test, not by design. In the roadmap CJM is a separate status row, but its two pages live under the User Research group (now 4 pages: Personas, JTBD, CJM As-Is, CJM To-Be). Detail: user-research/docs/cjm-as-is.md and cjm-to-be.md.
+
 **Riskiest assumption (value risk, kills the idea if false):** an SMB operator believes a self-serve, aggregate-only tool (no HR, no individual data ever visible) delivers real team-level value worth paying for, AND employees trust the privacy promise enough to answer honestly. Post-persona re-research strengthened it, did not kill it. Detail: research/docs/lean-ux-canvas.md block 7.
 
 **Strategic dimension we must win (benchmark):** employee trust in the aggregate-only privacy model, made visible in the product UI rather than promised in a policy. Detail: research/docs/benchmark.md.
@@ -176,7 +178,7 @@ Employee wellbeing programs in the US operate near several regulatory areas. Thi
 |-------|-------------|--------|
 | Foundation Research | research/docs/ (competitors, benchmark, lean-ux-canvas, aarrr, ux-patterns, research) + research/research.html | Done |
 | User Research (Personas + JTBD) | user-research/docs/ (personas, jtbd) + user-research/personas.html + user-research/jtbd.html | Done |
-| CJM (As-Is + To-Be) | cjm/ | Not started |
+| CJM (As-Is + To-Be) | user-research/docs/ (cjm-as-is, cjm-to-be) + user-research/cjm-as-is.html + cjm-to-be.html | Done |
 | Information Architecture (Basic + Detailed) | ia/ | Not started |
 | Wireframes | wireframes/ | Not started |
 | Voice | voice/ | Not started |
