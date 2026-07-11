@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Check-in entry (10.0)</title>
+  <title>Brio - IA Detail: Questions (10.2)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -107,26 +107,52 @@
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
     .wf-b.sm { padding: 4px 9px; font-size: 10px; }
     .wf-b.block { display: block; }
+    .wf-b.ghost { color: #9a9a9a; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
     /* employee check-in surface (mobile, no nav, near-anonymous) */
-    .wf-checkbar { padding: 11px 12px; border-bottom: 1px solid #2c2c2c; text-align: center; }
+    .wf-checkbar { padding: 9px 12px 8px; border-bottom: 1px solid #2c2c2c; text-align: center; }
     .wf-checkbar .co { color: #8a8a8a; font-size: 9px; font-family: ui-monospace, monospace; }
-    .wf-checkbody { padding: 16px 12px; }
-    .wf-anon { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 11px; color: #fff; border: 1px solid #6a6a6a; border-radius: 6px; padding: 9px; margin-bottom: 16px; text-align: center; }
-    .wf-anon .lk { font-size: 12px; }
-    .wf-invtitle { color: #fff; font-size: 16px; font-weight: 800; text-align: center; }
-    .wf-invsub { color: #9a9a9a; font-size: 11px; text-align: center; margin: 6px 0 18px; line-height: 1.5; }
-    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin: 14px 0 5px; }
-    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px 11px; color: #6a6a6a; font-size: 12px; margin-bottom: 10px; }
-    .wf-code { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.24em; font-family: ui-monospace, monospace; }
-    .wf-divider { display: flex; align-items: center; gap: 10px; margin: 16px 0 6px; }
-    .wf-divider::before, .wf-divider::after { content: ""; flex: 1; height: 1px; background: #2c2c2c; }
-    .wf-divider span { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.1em; font-family: ui-monospace, monospace; }
+    .wf-minianon { display: inline-flex; align-items: center; gap: 4px; font-size: 8px; color: #9a9a9a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-top: 3px; }
+    .wf-checkbody { padding: 15px 14px 16px; }
+
+    /* progress */
+    .wf-prog { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.09em; font-family: ui-monospace, monospace; text-align: center; margin-bottom: 4px; }
+    .wf-dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 16px; }
+    .wf-dots i { width: 20px; height: 3px; border-radius: 2px; background: #333; display: block; }
+    .wf-dots i.on { background: #e6e6e6; }
+    .wf-dots i.done { background: #6a6a6a; }
+
+    /* the question */
+    .wf-q { color: #fff; font-size: 16px; font-weight: 700; text-align: center; line-height: 1.4; margin-bottom: 18px; }
+
+    /* emoji scale (grayscale, structural, not colored glyphs) */
+    .wf-emoji { display: flex; justify-content: space-between; gap: 6px; margin-bottom: 8px; }
+    .wf-emoji .op { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .wf-emoji .dot { width: 42px; height: 42px; border: 1px solid #6a6a6a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #cfcfcf; }
+    .wf-emoji .op.on .dot { background: #e6e6e6; color: #111; border-color: #e6e6e6; }
+    .wf-emoji .op .lb { font-size: 8px; color: #7a7a7a; }
+    .wf-scaleends { display: flex; justify-content: space-between; font-size: 8px; color: #7a7a7a; text-transform: uppercase; letter-spacing: 0.06em; font-family: ui-monospace, monospace; margin-bottom: 4px; }
+
+    /* slider */
+    .wf-sliderwrap { padding: 4px 2px 2px; }
+    .wf-track { position: relative; height: 6px; background: #2c2c2c; border-radius: 3px; margin: 26px 0 6px; }
+    .wf-track .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 70%; background: #6a6a6a; border-radius: 3px 0 0 3px; }
+    .wf-track .knob { position: absolute; top: 50%; left: 70%; transform: translate(-50%, -50%); width: 20px; height: 20px; border-radius: 50%; background: #e6e6e6; border: 1px solid #e6e6e6; }
+    .wf-track .val { position: absolute; left: 70%; top: -24px; transform: translateX(-50%); font-size: 12px; font-weight: 700; color: #fff; }
+
+    /* nav row + submitting */
+    .wf-navrow { display: flex; gap: 8px; margin-top: 18px; }
+    .wf-navrow .wf-b { flex: 1; }
+    .wf-navrow .wf-b.grow2 { flex: 2; }
+    .wf-submitting { text-align: center; padding: 26px 0; }
+    .wf-spin { width: 30px; height: 30px; border: 3px solid #333; border-top-color: #e6e6e6; border-radius: 50%; margin: 0 auto 12px; }
+    .wf-sendtxt { color: #cfcfcf; font-size: 12px; }
 
     .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
+    .wf-deskcard { max-width: 440px; margin: 0 auto; border: 1px solid #3a3a3a; border-radius: 12px; overflow: hidden; background: #0c0c0c; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
@@ -188,9 +214,9 @@
       <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
       <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
       <a href="owner-digest.html" class="nav-sub-item">Monthly digest</a>
-      <a href="checkin-entry.html" class="nav-sub-item nav-sub-active">Check-in entry</a>
+      <a href="checkin-entry.html" class="nav-sub-item">Check-in entry</a>
       <a href="checkin-privacy.html" class="nav-sub-item">Pre-Q1 privacy</a>
-      <a href="checkin-questions.html" class="nav-sub-item">Questions</a>
+      <a href="checkin-questions.html" class="nav-sub-item nav-sub-active">Questions</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -211,117 +237,197 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 10.0</span>
+      <span class="badge">Node 10.2</span>
       <span class="badge">Employee flow (mobile)</span>
-      <span class="badge privacy">Anonymous &middot; opens flow F2</span>
+      <span class="badge privacy">Under 30 seconds &middot; F2</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Check-in entry (10.0) &middot; URL: /c/{invite-token}</div>
-    <h1>Check-in entry</h1>
-    <p class="hero-intro">The employee's first screen: open the check-in from an invite link or a join code, and earn trust before asking for anything. The first thing shown is that answers are anonymous; the link is validated and the flow routes onward. Deliberately tiny and calm: no account, no navigation. For Yemi the employee (a third-party persona). This is the trust-critical surface where the riskiest assumption (H2, honest participation) is won. Serves J3 and J4; opens flow F2. Private token-gated surface, so noindex. Source of truth: ia/docs/pages/checkin-entry.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Questions (10.2) &middot; URL: /c/{invite-token} (questions step)</div>
+    <h1>Questions</h1>
+    <p class="hero-intro">The body of the check-in: the employee answers the 1 to 3 questions the operator configured, in under 30 seconds, with quick emoji or slider taps and nothing to type. This is the employee-side render of 5.2 Check-in setup (the same curated questions and answer types). One question per screen, a progress indicator, then Submit. A failed submit goes to 10.6 with answers preserved, never a dead-end. For Yemi the employee. Serves J4 and item 3; on flow F2. Private token-gated surface, so noindex. Source of truth: ia/docs/pages/checkin-questions.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on a phone, the expected device. Order reasoned from the 360px baseline up. Trust is earned before anything is asked (Principle 3).</p>
+    <p>One question per screen keeps each step tiny and each answer considered (Principle 5, low effort). The privacy promise is not repeated here (it is 10.1); only a small persistent "Anonymous" anchor remains, so trust carries through every question.</p>
     <ol>
-      <li><strong>Minimal top bar</strong>: the Brio mark and the company name ("for Acme"), no navigation and no account controls.</li>
-      <li><strong>Anonymity pre-header</strong>: "Your answers are anonymous", shown first and prominently, before anything is asked. The trust anchor (J3).</li>
-      <li><strong>Invitation context</strong>: one line ("a quick wellbeing check-in, under 30 seconds"), so effort is understood up front (J4).</li>
-      <li><strong>Start</strong>: the primary action, to 10.1 Pre-Q1 disclosure.</li>
-      <li><strong>Join-code alternative</strong>: for an employee without a link, a small "have a code?" field and Continue, the same forward path.</li>
+      <li><strong>Minimal top bar with an anonymity anchor</strong>: the Brio mark and the company name, plus a small "Anonymous" reminder.</li>
+      <li><strong>Progress</strong>: "Question 1 of 3" (or dots), so effort is bounded and the end is visible (J4). A one-question free-tier check-in shows a single step.</li>
+      <li><strong>The question</strong>: one question per screen, its text the focus.</li>
+      <li><strong>The answer input</strong>: emoji scale or slider, whichever the operator chose in 5.2. Quick taps, nothing to type.</li>
+      <li><strong>Move on</strong>: Next to the following question, Back to the previous one; on the last question the primary becomes Submit.</li>
     </ol>
-    <p><strong>Components used:</strong> a minimal check-in top bar (no nav, distinct from the operator app and the owner surface) and standard inputs for the code field. The full privacy disclosure is the next screen (10.1), not here. No new global.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Validity check and routing</div>
-    <h2>States and primary CTA</h2>
-    <p>The link or the code is the access; there is no login, by design, so the first check-in stays under 30 seconds and near-anonymous.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Valid link</td><td>the anonymity pre-header, the invitation context</td><td>Start (to 10.1)</td></tr>
-          <tr><td>Join-code entry</td><td>the code field and Continue</td><td>valid to 10.1; invalid shows an inline message</td></tr>
-          <tr><td>Loading (validity check)</td><td>a brief checking state while the token is validated</td><td>route on result</td></tr>
-          <tr><td>Expired or invalid link</td><td>-</td><td>to 10.4 Invite link expired (never a dead-end, F2)</td></tr>
-          <tr><td>Already submitted this cycle</td><td>-</td><td>to 10.5 Already submitted (no duplicate, no individual data)</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p><strong>Components used:</strong> the 10.0 / 10.1 check-in chrome (no nav, no account). The emoji scale and the slider are thin page-specific controls; their types come from 0.6 Canonical lists and mirror 5.2. No new global is invented; the privacy content itself lives at 10.1.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A phone-first surface with no navigation; the anonymity statement is the first thing, before any question. Two entry paths: an invite link and a join code. The desktop version centers the same narrow card and never becomes an app.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). One question per screen on a phone. Two answer types are shown (emoji scale and slider), then the submitting state. The emoji scale is drawn in grayscale as bordered options, never carried by color. The desktop version centers the same one-question card.</p>
 
     <div class="wf-row">
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, via invite link (primary)</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, Question 1 (emoji type)</div>
         <div class="wf-phone">
           <div class="wf-phoneinner">
-            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div></div>
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
             <div class="wf-checkbody">
-              <div class="wf-anon"><span class="lk">&#128274;</span><span>Your answers are anonymous.</span></div>
-              <div class="wf-invtitle">A quick wellbeing check-in</div>
-              <div class="wf-invsub">Acme wants to know how the team is doing. It takes under 30 seconds.</div>
-              <span class="wf-b solid block">Start</span>
+              <div class="wf-prog">Question 1 of 3</div>
+              <div class="wf-dots"><i class="on"></i><i></i><i></i></div>
+              <div class="wf-q">How has your week at work felt?</div>
+              <div class="wf-emoji">
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">1</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">2</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">3</span></div>
+                <div class="op on"><span class="dot">&#9679;</span><span class="lb">4</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">5</span></div>
+              </div>
+              <div class="wf-scaleends"><span>Struggling</span><span>Great</span></div>
+              <div class="wf-navrow"><span class="wf-b solid block grow2">Next</span></div>
             </div>
           </div>
         </div>
-        <div class="wf-note">no nav, no account &middot; anonymity is the FIRST thing shown (J3) &middot; effort set up front (under 30s) &middot; Start to 10.1.</div>
+        <div class="wf-note">emoji scale from 5.2 &middot; grayscale, selected = filled (not color) &middot; end labels &middot; Next to Q2 &middot; anonymity anchor persists in the bar.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, via join code</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, Question 2 (slider type)</div>
         <div class="wf-phone">
           <div class="wf-phoneinner">
-            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">enter a code</div></div>
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
             <div class="wf-checkbody">
-              <div class="wf-anon"><span class="lk">&#128274;</span><span>Your answers are anonymous.</span></div>
-              <div class="wf-invtitle" style="font-size:15px;">Have a check-in code?</div>
-              <div class="wf-lbl"><span class="wf-bnum">5</span>your code</div>
-              <div class="wf-input"><span class="wf-code">ABC-123</span></div>
-              <span class="wf-b solid block">Continue</span>
-              <div class="wf-divider"><span>or</span></div>
-              <div class="wf-plain" style="text-align:center;">open the link from your invite</div>
+              <div class="wf-prog">Question 2 of 3</div>
+              <div class="wf-dots"><i class="done"></i><i class="on"></i><i></i></div>
+              <div class="wf-q">How manageable was your workload?</div>
+              <div class="wf-sliderwrap">
+                <div class="wf-track"><span class="val">7</span><span class="fill"></span><span class="knob"></span></div>
+                <div class="wf-scaleends"><span>Too much</span><span>Just right</span></div>
+              </div>
+              <div class="wf-navrow"><span class="wf-b ghost block">Back</span><span class="wf-b solid block grow2">Next</span></div>
             </div>
           </div>
         </div>
-        <div class="wf-note">alternative entry &middot; same anonymity anchor &middot; valid code to 10.1, invalid shows inline &middot; expired to 10.4, already-in to 10.5.</div>
+        <div class="wf-note">slider from 5.2 &middot; end labels + live value &middot; Back keeps the Q1 answer &middot; Next to Q3 (last = Submit).</div>
+      </div>
+
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, submitting (F2 Submit)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody">
+              <div class="wf-prog">Question 3 of 3</div>
+              <div class="wf-dots"><i class="done"></i><i class="done"></i><i class="on"></i></div>
+              <div class="wf-submitting">
+                <div class="wf-spin"></div>
+                <div class="wf-sendtxt">Sending your answers...</div>
+              </div>
+              <div class="wf-navrow"><span class="wf-b block" style="opacity:0.4;">Submit</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">brief sending state after Submit &middot; no double submit &middot; success to 10.3, failure to 10.6 (answers preserved).</div>
       </div>
     </div>
+
+    <div class="wf-row" style="margin-top:8px;">
+      <div style="flex:1; min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop / wide, centered card (last question = Submit)</div>
+        <div class="wf-frame" style="margin-top:0;">
+          <div class="wf-deskcard">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody" style="padding:20px 26px 22px;">
+              <div class="wf-prog">Question 3 of 3</div>
+              <div class="wf-dots"><i class="done"></i><i class="done"></i><i class="on"></i></div>
+              <div class="wf-q" style="font-size:18px;">Did you feel supported by your team this week?</div>
+              <div class="wf-emoji" style="max-width:320px; margin-left:auto; margin-right:auto;">
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">1</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">2</span></div>
+                <div class="op on"><span class="dot">&#9679;</span><span class="lb">3</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">4</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">5</span></div>
+              </div>
+              <div class="wf-scaleends" style="max-width:320px; margin-left:auto; margin-right:auto;"><span>Not really</span><span>Fully</span></div>
+              <div class="wf-navrow" style="max-width:340px; margin-left:auto; margin-right:auto;"><span class="wf-b ghost block">Back</span><span class="wf-b solid block grow2">Submit</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">same one-question card centered &middot; last question shows Submit (to 10.3) &middot; never becomes an app on a large screen.</div>
+      </div>
+
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, one-question check-in (free tier)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody">
+              <div class="wf-prog">One quick question</div>
+              <div class="wf-dots"><i class="on"></i></div>
+              <div class="wf-q">How has your week at work felt?</div>
+              <div class="wf-emoji">
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">1</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">2</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">3</span></div>
+                <div class="op on"><span class="dot">&#9679;</span><span class="lb">4</span></div>
+                <div class="op"><span class="dot">&#9679;</span><span class="lb">5</span></div>
+              </div>
+              <div class="wf-scaleends"><span>Struggling</span><span>Great</span></div>
+              <div class="wf-navrow"><span class="wf-b solid block grow2">Submit</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">free tier = weekly, one question &middot; Submit directly, no multi-step progress &middot; still under 30s.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States and primary CTA</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Question (emoji)</td><td>the question, a row of emoji options, progress</td><td>Next (or Submit on the last)</td></tr>
+          <tr><td>Question (slider)</td><td>the question, a slider with end labels and a live value</td><td>Next (or Submit)</td></tr>
+          <tr><td>One-question (free tier)</td><td>a single question, no multi-step progress</td><td>Submit directly</td></tr>
+          <tr><td>In progress</td><td>progress advances; Back returns without losing the answer</td><td>Back / Next</td></tr>
+          <tr><td>Submitting (loading)</td><td>a brief sending state, no double submit (F2 Submit)</td><td>route on result</td></tr>
+          <tr><td>Submit error</td><td>-</td><td>to 10.6 Submit error, answers preserved (never a dead-end)</td></tr>
+          <tr><td>Success</td><td>-</td><td>to 10.3 Check-in complete</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Primary CTA:</strong> Next while there are more questions; Submit on the last (or only) question, to 10.3 on success and 10.6 on failure. Back is the in-flow secondary. No account step and no other navigation, by design.</p>
   </section>
 
   <!-- SEO (noindex) -->
   <section id="seo">
     <div class="section-label">Private token-gated surface</div>
     <h2>SEO block (noindex)</h2>
-    <p>Check-in entry is a private, token-gated employee surface. It is not indexed and carries no schema. It is a transactional zone, per the platform SEO stance.</p>
+    <p>Questions is a private, token-gated employee surface. It is not indexed and carries no schema. It is a transactional zone, per the platform SEO stance.</p>
     <div class="seo-block">
       <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (token-gated, personal)</span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; entry URL is <code>/c/{invite-token}</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; flow URL is <code>/c/{invite-token}</code></span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 (the invitation heading) for the accessible document outline</li>
-      <li>the anonymity statement is text, not an image, and is not carried by color alone</li>
-      <li>the join-code field is a labelled input; Start and Continue are labelled controls</li>
+      <li>exactly one H1 per screen (the current question) for the accessible document outline</li>
+      <li>the emoji options and the slider are labelled form controls with a group label, never carried by color alone</li>
+      <li>the progress is a live region ("Question 2 of 3"); Next, Back, and Submit are labelled controls</li>
       <li>tap targets at least 44px; the flow works without an account</li>
     </ul>
-    <div class="callout ok"><strong>Trust first.</strong> Check-in entry opens the employee flow F2 and puts the anonymity promise first, before any question, which is the concrete expression of Principle 3 (earn trust before asking for data). It invents nothing global; the full disclosure is the next screen. This cluster is the trust-critical surface where H2 (honest participation at or above 65%) is won. Next: <strong>10.1 Pre-Q1 privacy disclosure</strong> (the persistent employee-variant 0.3 disclosure with the "see exactly what your manager sees" recovery).</div>
+    <div class="callout ok"><strong>Quick taps, nothing to type.</strong> Questions renders on the employee side exactly what the operator set up in 5.2 (the same 1 to 3 curated questions and answer types), keeping the job to under 30 seconds (Principle 5). It reuses the 10.0 / 10.1 check-in chrome and invents nothing global; the privacy promise is not repeated (that is 10.1), only the small anchor remains. A failed submit routes to 10.6 with answers preserved, never a dead-end. Next: <strong>10.3 Check-in complete</strong> (the thank-you and closure, no individual score shown to the employee).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 10.0 Check-in entry - July 2026</p>
-    <p style="margin-top:4px;">The employee's first screen: an invite-link or join-code entry with the anonymity promise shown first, no account and no navigation, then Start into the pre-Q1 disclosure (10.1). Expired links route to 10.4 and already-submitted to 10.5, never a dead-end. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/checkin-entry.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 10.2 Questions - July 2026</p>
+    <p style="margin-top:4px;">The body of the employee check-in: 1 to 3 curated questions rendered from 5.2, one per screen, answered with quick emoji or slider taps under 30 seconds, with a persistent anonymity anchor and no account. Submit goes to 10.3 on success and 10.6 (answers preserved) on failure, never a dead-end. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/checkin-questions.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
