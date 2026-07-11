@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Dialog / modal shell (0.5)</title>
+  <title>Brio - IA Detail: Check-in entry (10.0)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -26,7 +26,6 @@
     .nav-group { padding: 0 8px; }
     .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
     .nav-group-label.active-section { color: var(--accent); }
-    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
     .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
@@ -35,11 +34,6 @@
     .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-    .nav-item-active { color: var(--accent); font-weight: 600; }
-    .nav-node { padding-left: 20px; font-size: 12px; }
     .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
     .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
@@ -67,12 +61,15 @@
     a:hover { text-decoration: underline; }
     ul { color: var(--text-muted); margin: 0 0 14px 20px; }
     ul li { margin-bottom: 6px; }
+    ol { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ol li { margin-bottom: 6px; }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
 
     .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -91,34 +88,46 @@
     .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
     .callout strong { color: var(--text); }
     .callout.ok { border-color: var(--green-dim); }
-    .src { font-size: 12px; color: var(--text-faint); margin-top: 10px; }
+    .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
+
+    .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
+    .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
+    .seo-row:last-child { border-bottom: none; }
+    .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
+    .seo-v code { font-size: 12px; }
 
     /* ===== Black-and-white wireframe kit ===== */
     .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
-
-    .wf-stage { position: relative; overflow: hidden; background: #141414; border: 1px solid #3a3a3a; border-radius: 10px; padding: 14px; min-height: 240px; }
-    .wf-behind { color: #3d3d3d; font-size: 11px; line-height: 1.9; user-select: none; }
-    .wf-behind .bar { height: 9px; background: #232323; border-radius: 3px; margin: 7px 0; }
-    .wf-behind .bar.s { width: 50%; }
-    .wf-dialog { position: relative; z-index: 2; border: 1px solid #6a6a6a; border-radius: 8px; background: #1c1c1c; width: 280px; max-width: 100%; margin: 14px auto; box-shadow: 0 0 0 2000px rgba(0,0,0,0.5); }
-    .wf-dhead { display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border-bottom: 1px solid #333; color: #fff; font-size: 13px; font-weight: 700; }
-    .wf-dhead .x { color: #9a9a9a; font-weight: 400; }
-    .wf-dbody { padding: 14px; color: #b8b8b8; font-size: 12px; display: flex; flex-direction: column; gap: 8px; }
-    .wf-dbody .field { border: 1px solid #444; border-radius: 5px; padding: 8px; color: #8f8f8f; }
-    .wf-dfoot { display: flex; gap: 10px; justify-content: flex-end; padding: 12px 14px; border-top: 1px solid #333; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 7px 12px; font-size: 11px; color: #e6e6e6; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-anno { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-    .wf-anno span { font-size: 9.5px; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; padding: 2px 6px; font-family: ui-monospace, monospace; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
+    .wf-b.block { display: block; }
+    .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    .wf-sheetphone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 10px; background: #0c0c0c; position: relative; overflow: hidden; min-height: 300px; display: flex; flex-direction: column; }
-    .wf-sheet-behind { color: #333; font-size: 10px; padding: 6px; }
-    .wf-sheet-behind .bar { height: 8px; background: #202020; border-radius: 3px; margin: 6px 0; }
-    .wf-sheet { margin-top: auto; border: 1px solid #6a6a6a; border-top-left-radius: 12px; border-top-right-radius: 12px; background: #1c1c1c; box-shadow: 0 -6px 0 2000px rgba(0,0,0,0.5); position: relative; z-index: 2; }
-    .wf-grip { width: 34px; height: 4px; background: #555; border-radius: 3px; margin: 8px auto; }
+    /* employee check-in surface (mobile, no nav, near-anonymous) */
+    .wf-checkbar { padding: 11px 12px; border-bottom: 1px solid #2c2c2c; text-align: center; }
+    .wf-checkbar .co { color: #8a8a8a; font-size: 9px; font-family: ui-monospace, monospace; }
+    .wf-checkbody { padding: 16px 12px; }
+    .wf-anon { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 11px; color: #fff; border: 1px solid #6a6a6a; border-radius: 6px; padding: 9px; margin-bottom: 16px; text-align: center; }
+    .wf-anon .lk { font-size: 12px; }
+    .wf-invtitle { color: #fff; font-size: 16px; font-weight: 800; text-align: center; }
+    .wf-invsub { color: #9a9a9a; font-size: 11px; text-align: center; margin: 6px 0 18px; line-height: 1.5; }
+    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin: 14px 0 5px; }
+    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px 11px; color: #6a6a6a; font-size: 12px; margin-bottom: 10px; }
+    .wf-code { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.24em; font-family: ui-monospace, monospace; }
+    .wf-divider { display: flex; align-items: center; gap: 10px; margin: 16px 0 6px; }
+    .wf-divider::before, .wf-divider::after { content: ""; flex: 1; height: 1px; background: #2c2c2c; }
+    .wf-divider span { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.1em; font-family: ui-monospace, monospace; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
@@ -153,7 +162,7 @@
       <a href="footer.html" class="nav-sub-item">Footer</a>
       <a href="privacy-disclosure.html" class="nav-sub-item">Privacy disclosure</a>
       <a href="program-card.html" class="nav-sub-item">Program card</a>
-      <a href="dialog.html" class="nav-sub-item nav-sub-active">Dialog</a>
+      <a href="dialog.html" class="nav-sub-item">Dialog</a>
       <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
       <div class="nav-subhead-sm">Pages</div>
       <a href="home.html" class="nav-sub-item">Home</a>
@@ -179,7 +188,7 @@
       <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
       <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
       <a href="owner-digest.html" class="nav-sub-item">Monthly digest</a>
-      <a href="checkin-entry.html" class="nav-sub-item">Check-in entry</a>
+      <a href="checkin-entry.html" class="nav-sub-item nav-sub-active">Check-in entry</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -200,124 +209,117 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 0.5</span>
-      <span class="badge">Global component</span>
-      <span class="badge">B/W wireframe</span>
+      <span class="badge">Node 10.0</span>
+      <span class="badge">Employee flow (mobile)</span>
+      <span class="badge privacy">Anonymous &middot; opens flow F2</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Structure / Dialog / modal shell (0.5)</div>
-    <h1>Dialog / modal shell</h1>
-    <p class="hero-intro">One accessible modal contract, defined once, reused by every dialog in the product: resend invite (6.1), upgrade (7.2), cookie consent (11.3), and destructive confirmations. Each instance fills the body and actions; all inherit the same chrome and the same focus and keyboard behavior. No H1. Source of truth: ia/docs/pages/dialog.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Check-in entry (10.0) &middot; URL: /c/{invite-token}</div>
+    <h1>Check-in entry</h1>
+    <p class="hero-intro">The employee's first screen: open the check-in from an invite link or a join code, and earn trust before asking for anything. The first thing shown is that answers are anonymous; the link is validated and the flow routes onward. Deliberately tiny and calm: no account, no navigation. For Yemi the employee (a third-party persona). This is the trust-critical surface where the riskiest assumption (H2, honest participation) is won. Serves J3 and J4; opens flow F2. Private token-gated surface, so noindex. Source of truth: ia/docs/pages/checkin-entry.md.</p>
   </section>
 
-  <!-- Anatomy -->
-  <section id="anatomy">
-    <div class="section-label">The shell</div>
-    <h2>Anatomy</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Part</th><th>Behavior</th></tr></thead>
-        <tbody>
-          <tr><td>Overlay / backdrop</td><td>dims the page and makes the background inert (no interaction behind it)</td></tr>
-          <tr><td>Container</td><td><code>role="dialog"</code>, <code>aria-modal="true"</code>; centered on desktop, bottom sheet on mobile</td></tr>
-          <tr><td>Header</td><td>title (the accessible name via <code>aria-labelledby</code>) plus a close (X) control</td></tr>
-          <tr><td>Body</td><td>the variant's content slot (form fields, options, a confirm message)</td></tr>
-          <tr><td>Footer</td><td>actions: one primary and one secondary or cancel</td></tr>
-          <tr><td>Dismiss paths</td><td>close (X), Escape, and a backdrop click (except where a variant blocks it)</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Variants -->
-  <section id="variants">
-    <div class="section-label">Over the same shell</div>
-    <h2>Variants</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Variant</th><th>Instance</th><th>Body and actions</th></tr></thead>
-        <tbody>
-          <tr><td>Form</td><td>6.1 Resend or manage invite</td><td>resend to selected, copy link, regenerate code; primary Send, secondary Close</td></tr>
-          <tr><td>Decision</td><td>7.2 Upgrade or paywall</td><td>tier, seats, price; primary Upgrade, secondary "Stay free" (a recoverable exit, F3 DE3)</td></tr>
-          <tr><td>Confirm (destructive)</td><td>end a program, revoke a code, delete an account</td><td>short message; primary destructive, secondary Cancel, and Cancel holds the initial focus</td></tr>
-          <tr><td>Non-modal banner</td><td>11.3 Cookie consent</td><td>borrows the chrome but is NOT a focus trap: a <code>role="region"</code> banner, because blocking the page for consent is user-hostile and Reject must be as easy as Accept. Legal grounding at Step 6</td></tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- Blocks -->
+  <section id="blocks">
+    <div class="section-label">Mobile-first priority</div>
+    <h2>Content blocks</h2>
+    <p>Block 1 is the first screen on a phone, the expected device. Order reasoned from the 360px baseline up. Trust is earned before anything is asked (Principle 3).</p>
+    <ol>
+      <li><strong>Minimal top bar</strong>: the Brio mark and the company name ("for Acme"), no navigation and no account controls.</li>
+      <li><strong>Anonymity pre-header</strong>: "Your answers are anonymous", shown first and prominently, before anything is asked. The trust anchor (J3).</li>
+      <li><strong>Invitation context</strong>: one line ("a quick wellbeing check-in, under 30 seconds"), so effort is understood up front (J4).</li>
+      <li><strong>Start</strong>: the primary action, to 10.1 Pre-Q1 disclosure.</li>
+      <li><strong>Join-code alternative</strong>: for an employee without a link, a small "have a code?" field and Continue, the same forward path.</li>
+    </ol>
+    <p><strong>Components used:</strong> a minimal check-in top bar (no nav, distinct from the operator app and the owner surface) and standard inputs for the code field. The full privacy disclosure is the next screen (10.1), not here. No new global.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">Behavior</div>
-    <h2>States</h2>
-    <ul>
-      <li><strong>Default (open):</strong> header, body, footer.</li>
-      <li><strong>Loading:</strong> an action is in progress (payment, invite send); the primary button shows a busy state and is disabled, the dialog stays open.</li>
-      <li><strong>Error:</strong> the action failed; an inline message appears in the body, actions return to enabled (for example 7.3 Payment failed inside 7.2).</li>
-      <li><strong>Success:</strong> a brief confirmation, then the dialog closes and returns focus.</li>
-    </ul>
+    <div class="section-label">Validity check and routing</div>
+    <h2>States and primary CTA</h2>
+    <p>The link or the code is the access; there is no login, by design, so the first check-in stays under 30 seconds and near-anonymous.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Valid link</td><td>the anonymity pre-header, the invitation context</td><td>Start (to 10.1)</td></tr>
+          <tr><td>Join-code entry</td><td>the code field and Continue</td><td>valid to 10.1; invalid shows an inline message</td></tr>
+          <tr><td>Loading (validity check)</td><td>a brief checking state while the token is validated</td><td>route on result</td></tr>
+          <tr><td>Expired or invalid link</td><td>-</td><td>to 10.4 Invite link expired (never a dead-end, F2)</td></tr>
+          <tr><td>Already submitted this cycle</td><td>-</td><td>to 10.5 Already submitted (no duplicate, no individual data)</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop is a centered modal over the dimmed, inert page; mobile is a bottom sheet.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A phone-first surface with no navigation; the anonymity statement is the first thing, before any question. Two entry paths: an invite link and a join code. The desktop version centers the same narrow card and never becomes an app.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:300px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, decision variant (7.2 Upgrade)</div>
-        <div class="wf-stage">
-          <div class="wf-behind"><div class="bar"></div><div class="bar s"></div><div class="bar"></div><div class="bar s"></div><div class="bar"></div></div>
-          <div class="wf-dialog">
-            <div class="wf-dhead"><span>Upgrade to share with your owner</span><span class="x">X</span></div>
-            <div class="wf-dbody">
-              <div class="field">Plan: Starter</div>
-              <div class="field">Seats: 12</div>
-              <div class="field">Price: shown per seat / month</div>
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, via invite link (primary)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div></div>
+            <div class="wf-checkbody">
+              <div class="wf-anon"><span class="lk">&#128274;</span><span>Your answers are anonymous.</span></div>
+              <div class="wf-invtitle">A quick wellbeing check-in</div>
+              <div class="wf-invsub">Acme wants to know how the team is doing. It takes under 30 seconds.</div>
+              <span class="wf-b solid block">Start</span>
             </div>
-            <div class="wf-dfoot"><span class="wf-b">Stay free</span><span class="wf-b solid">Upgrade</span></div>
           </div>
         </div>
-        <div class="wf-anno"><span>role="dialog"</span><span>aria-modal="true"</span><span>focus -&gt; first field</span><span>Esc closes</span><span>bg inert + dimmed</span></div>
+        <div class="wf-note">no nav, no account &middot; anonymity is the FIRST thing shown (J3) &middot; effort set up front (under 30s) &middot; Start to 10.1.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet (confirm)</div>
-        <div class="wf-sheetphone">
-          <div class="wf-sheet-behind"><div class="bar"></div><div class="bar"></div><div class="bar" style="width:60%;"></div></div>
-          <div class="wf-sheet">
-            <div class="wf-grip"></div>
-            <div class="wf-dhead"><span>End this program?</span><span class="x">X</span></div>
-            <div class="wf-dbody">Members stop receiving check-ins. You can reactivate later.</div>
-            <div class="wf-dfoot"><span class="wf-b solid">Cancel</span><span class="wf-b">End program</span></div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, via join code</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">enter a code</div></div>
+            <div class="wf-checkbody">
+              <div class="wf-anon"><span class="lk">&#128274;</span><span>Your answers are anonymous.</span></div>
+              <div class="wf-invtitle" style="font-size:15px;">Have a check-in code?</div>
+              <div class="wf-lbl"><span class="wf-bnum">5</span>your code</div>
+              <div class="wf-input"><span class="wf-code">ABC-123</span></div>
+              <span class="wf-b solid block">Continue</span>
+              <div class="wf-divider"><span>or</span></div>
+              <div class="wf-plain" style="text-align:center;">open the link from your invite</div>
+            </div>
           </div>
         </div>
-        <div class="wf-note">confirm: focus starts on Cancel; drag or Esc dismisses.</div>
+        <div class="wf-note">alternative entry &middot; same anonymity anchor &middot; valid code to 10.1, invalid shows inline &middot; expired to 10.4, already-in to 10.5.</div>
       </div>
     </div>
   </section>
 
-  <!-- A11y contract -->
-  <section id="a11y">
-    <div class="section-label">Grounded in WAI-ARIA APG</div>
-    <h2>Accessibility contract</h2>
+  <!-- SEO (noindex) -->
+  <section id="seo">
+    <div class="section-label">Private token-gated surface</div>
+    <h2>SEO block (noindex)</h2>
+    <p>Check-in entry is a private, token-gated employee surface. It is not indexed and carries no schema. It is a transactional zone, per the platform SEO stance.</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (token-gated, personal)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; entry URL is <code>/c/{invite-token}</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
+    </div>
+    <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li><code>role="dialog"</code> and <code>aria-modal="true"</code> on the container.</li>
-      <li>Labelled by the visible title with <code>aria-labelledby</code> (or <code>aria-label</code> when there is no title); <code>aria-describedby</code> only for a simple single-message body.</li>
-      <li><strong>On open:</strong> focus moves to the first focusable element inside (or the container). For a destructive confirm, focus goes to Cancel.</li>
-      <li><strong>Focus trap:</strong> Tab and Shift+Tab cycle within the dialog; focus cannot leave without closing.</li>
-      <li><strong>On close:</strong> focus returns to the element that opened the dialog.</li>
-      <li><strong>Escape</strong> closes; a backdrop click closes too, unless a variant blocks accidental loss (an in-progress payment).</li>
-      <li><strong>Background</strong> is inert and visually dimmed; no interaction reaches it.</li>
-      <li><strong>SEO:</strong> dialogs open on interaction and are not indexable; the shell is an interaction and a11y contract, not an SEO surface.</li>
+      <li>exactly one H1 (the invitation heading) for the accessible document outline</li>
+      <li>the anonymity statement is text, not an image, and is not carried by color alone</li>
+      <li>the join-code field is a labelled input; Start and Continue are labelled controls</li>
+      <li>tap targets at least 44px; the flow works without an account</li>
     </ul>
-    <p class="src">Source: WAI-ARIA Authoring Practices, Dialog (Modal) pattern, <a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">w3.org/WAI/ARIA/apg</a>.</p>
-    <div class="callout ok"><strong>Canonical reuse.</strong> Defined once here, reused by 6.1, 7.2, 11.3, and every confirmation. Change the contract here and it holds everywhere. Next global component: <strong>0.6 Canonical lists</strong>, then the pages begin (Home, 0.0).</div>
+    <div class="callout ok"><strong>Trust first.</strong> Check-in entry opens the employee flow F2 and puts the anonymity promise first, before any question, which is the concrete expression of Principle 3 (earn trust before asking for data). It invents nothing global; the full disclosure is the next screen. This cluster is the trust-critical surface where H2 (honest participation at or above 65%) is won. Next: <strong>10.1 Pre-Q1 privacy disclosure</strong> (the persistent employee-variant 0.3 disclosure with the "see exactly what your manager sees" recovery).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 0.5 Dialog / modal shell - July 2026</p>
-    <p style="margin-top:4px;">One modal contract for every dialog. Grounded in the WAI-ARIA APG dialog pattern. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/dialog.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 10.0 Check-in entry - July 2026</p>
+    <p style="margin-top:4px;">The employee's first screen: an invite-link or join-code entry with the anonymity promise shown first, no account and no navigation, then Start into the pre-Q1 disclosure (10.1). Expired links route to 10.4 and already-submitted to 10.5, never a dead-end. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/checkin-entry.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
@@ -330,27 +332,9 @@
     var open = sbody.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
-  sbody.querySelectorAll('a.nav-item, a.nav-sub-item').forEach(function(link) {
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link').forEach(function(link) {
     link.addEventListener('click', function() { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
   });
-
-  var subSections = [
-    { id: 'anatomy', sub: 'sub-anatomy' },
-    { id: 'variants', sub: 'sub-variants' },
-    { id: 'states', sub: 'sub-states' },
-    { id: 'mockup', sub: 'sub-mockup' },
-    { id: 'a11y', sub: 'sub-a11y' }
-  ];
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        subSections.forEach(function(s) { var el = document.getElementById(s.sub); if (el) el.classList.remove('nav-sub-active'); });
-        var match = subSections.find(function(s) { return s.id === entry.target.id; });
-        if (match) { var el = document.getElementById(match.sub); if (el) el.classList.add('nav-sub-active'); }
-      }
-    });
-  }, { rootMargin: '-15% 0px -75% 0px' });
-  subSections.forEach(function(s) { var el = document.getElementById(s.id); if (el) observer.observe(el); });
 </script>
 
 </body>
