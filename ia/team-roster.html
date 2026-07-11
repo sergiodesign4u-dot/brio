@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Program library (5.0)</title>
+  <title>Brio - IA Detail: Team roster (6.0)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -26,7 +26,6 @@
     .nav-group { padding: 0 8px; }
     .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
     .nav-group-label.active-section { color: var(--accent); }
-    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
     .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
@@ -35,11 +34,6 @@
     .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-    .nav-item-active { color: var(--accent); font-weight: 600; }
-    .nav-node { padding-left: 20px; font-size: 12px; }
     .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
     .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
@@ -75,6 +69,7 @@
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -95,14 +90,12 @@
     .callout.ok { border-color: var(--green-dim); }
     .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
 
-    /* SEO / note block */
     .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
     .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
     .seo-row:last-child { border-bottom: none; }
     .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
     .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
     .seo-v code { font-size: 12px; }
-    .count { color: var(--text-faint); font-size: 11px; font-family: ui-monospace, monospace; }
 
     /* ===== Black-and-white wireframe kit ===== */
     .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
@@ -118,36 +111,42 @@
     .wf-tab.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
     .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
-    .wf-hl.s { width: 55%; height: 12px; }
-    .wf-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-    .wf-chip { border: 1px solid #444; border-radius: 4px; padding: 4px 9px; font-size: 10.5px; color: #9a9a9a; white-space: nowrap; }
-    .wf-chip.on { border-color: #fff; color: #fff; }
-    .wf-scroll { display: flex; gap: 8px; overflow-x: auto; }
-    .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
     .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
     .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
 
-    /* canonical program card (0.4), reused in the grid */
-    .wf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-    .wf-card { border: 1px solid #3a3a3a; border-radius: 8px; padding: 12px; background: #141414; display: flex; flex-direction: column; gap: 6px; min-height: 146px; }
-    .wf-card .cat { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #8a8a8a; }
-    .wf-card .t { color: #fff; font-size: 13px; font-weight: 700; line-height: 1.25; }
-    .wf-card .meta { color: #9a9a9a; font-size: 11px; }
-    .wf-card .desc { color: #a2a2a2; font-size: 11px; }
-    .wf-card .act { margin-top: auto; border: 1px solid #7a7a7a; border-radius: 5px; padding: 7px; text-align: center; font-size: 11px; color: #e6e6e6; }
-    .wf-card .act.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-badge { display: inline-block; border: 1px solid #555; border-radius: 4px; padding: 1px 6px; font-size: 9px; color: #cfcfcf; text-transform: uppercase; letter-spacing: 0.04em; }
-    .wf-badge.rec { border-color: #fff; color: #fff; }
-    .wf-skel .ln { height: 9px; background: #242424; border-radius: 3px; margin: 5px 0; }
-    .wf-skel .ln.s { width: 55%; }
-    .wf-empty { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 18px 14px; text-align: center; color: #cfcfcf; font-size: 12px; }
-    .wf-empty .sub { color: #9a9a9a; font-size: 11px; margin: 6px 0 10px; }
+    /* invite block */
+    .wf-field { display: flex; align-items: center; gap: 8px; border: 1px solid #3a3a3a; border-radius: 6px; padding: 7px 10px; margin-bottom: 8px; }
+    .wf-field .val { color: #cfcfcf; font-size: 11px; font-family: ui-monospace, monospace; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .wf-field .val.ph { color: #6a6a6a; }
+    .wf-code { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.14em; font-family: ui-monospace, monospace; }
+    .wf-metric { color: #fff; font-size: 13px; font-weight: 700; }
+    .wf-metric span { color: #9a9a9a; font-weight: 400; font-size: 11px; }
+    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; margin-top: 8px; }
+
+    /* member rows */
+    .wf-mrow { display: flex; align-items: center; gap: 10px; border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px 10px; margin-bottom: 6px; }
+    .wf-mrow .who { color: #cfcfcf; font-size: 11px; flex: 1; }
+    .wf-mrow .status { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid #444; border-radius: 3px; padding: 1px 6px; color: #9a9a9a; }
+    .wf-mrow .status.joined { border-color: #7a7a7a; color: #e0e0e0; }
+
+    /* privacy wall */
+    .wf-wall { border: 1px solid #5a5a5a; border-radius: 8px; padding: 12px; background: #121212; }
+    .wf-wall .ph { color: #fff; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+    .wf-wall .two { display: flex; gap: 10px; }
+    .wf-wall .col { flex: 1; border: 1px solid #333; border-radius: 6px; padding: 8px; font-size: 10.5px; color: #b6b6b6; }
+    .wf-wall .col .h { color: #fff; font-size: 10px; font-weight: 700; margin-bottom: 3px; }
+    .wf-wall .col.no { border-style: dashed; }
+    @media (max-width: 420px) { .wf-wall .two { flex-direction: column; } }
+
+    .wf-state { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 16px; text-align: center; color: #cfcfcf; font-size: 12px; }
+    .wf-state .n { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+    .wf-state .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 10px; }
   </style>
 </head>
 <body>
@@ -186,13 +185,13 @@
       <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
       <div class="nav-subhead-sm">Pages</div>
       <a href="home.html" class="nav-sub-item">Home</a>
-      <a href="program-library.html" class="nav-sub-item nav-sub-active">Program library</a>
+      <a href="program-library.html" class="nav-sub-item">Program library</a>
       <a href="program-detail.html" class="nav-sub-item">Program detail</a>
       <a href="check-in-setup.html" class="nav-sub-item">Check-in setup</a>
       <a href="dashboard.html" class="nav-sub-item">Dashboard</a>
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
-      <a href="team-roster.html" class="nav-sub-item">Team roster</a>
+      <a href="team-roster.html" class="nav-sub-item nav-sub-active">Team roster</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -213,25 +212,13 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 5.0</span>
-      <span class="badge">Page, listing</span>
-      <span class="badge">B/W wireframe</span>
+      <span class="badge">Node 6.0</span>
+      <span class="badge">Page</span>
+      <span class="badge privacy">Roster is not answers</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Program library (5.0) &middot; URL: /app/programs</div>
-    <h1>Program library</h1>
-    <p class="hero-intro">The operator browses the curated library and picks a program to run, with the size-matched recommendation pinned so a non-expert is guided, not dropped into a catalog. This is the first listing, so it also sets the listing template. Serves Main, J6, and item 2 (self-serve start). Inside the operator app, so noindex. Source of truth: ia/docs/pages/program-library.md.</p>
-  </section>
-
-  <!-- Listing template -->
-  <section id="template">
-    <div class="section-label">The planks a listing adds</div>
-    <h2>Listing template</h2>
-    <p>A listing adds three planks to the per-page template from Home (0.0). Program library is the first built to it; 5.1 and any later grid follow the same shape.</p>
-    <ol>
-      <li><strong>Facet set defined in-node.</strong> Filter values live with the listing unless they are big enough to be a canonical global. Brio's set is thin (one dimension, category), so it is defined here and cross-referenced, not lifted into 0.6.</li>
-      <li><strong>The grid reuses a canonical card.</strong> The cells are 0.4 Program card. The listing arranges and filters cards; it never restyles them.</li>
-      <li><strong>Empty and loading are first-class states.</strong> Here that is 5.3 first-run empty (a registered node) and the 0.4 skeleton. Neither is ever a dead-end (MS4).</li>
-    </ol>
+    <div class="crumb">IA / Detail Layer / Pages / Team roster (6.0) &middot; URL: /app/team</div>
+    <h1>Team roster</h1>
+    <p class="hero-intro">The operator invites the team, sees who is in, and reads how much of the team takes part, all without ever learning who answered. The roster knows who is on the team because the operator invited them; it is never linked to who answered a check-in. Serves the main job and inviting the team. Inside the operator app, so noindex. Source of truth: ia/docs/pages/team-roster.md.</p>
   </section>
 
   <!-- Blocks -->
@@ -240,50 +227,47 @@
     <h2>Content blocks</h2>
     <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
     <ol>
-      <li><strong>Nav + page header</strong> (0.1 operator, Programs tab active): H1 "Programs", one-line subhead "Pick a program. Brio runs it and reads the team pulse for you."</li>
-      <li><strong>Recommended-for-your-size card</strong> (0.4 recommended state, pinned): the guided shortcut that closes choice paralysis. The page's primary action.</li>
-      <li><strong>Facet bar</strong> (category): All plus the four categories (0.6). Thin, single dimension. See Facets below.</li>
-      <li><strong>Program-card grid</strong> (0.4 canonical): the rest of the library as default cards; programs the operator already runs carry status badges.</li>
-      <li><strong>Empty state</strong> (5.3, first run): shown in place of the grid before anything is picked; recommended shortcut plus browse hint. Never a dead-end.</li>
-      <li><strong>App shell footer</strong> (minimal): a privacy link (1.1) and a help link, not the public marketing footer (0.2).</li>
+      <li><strong>Nav + header</strong> (0.1 operator, Team active): H1 "Your team", subhead with team size.</li>
+      <li><strong>Invite block</strong>: the join link with a copy control, the join code, and an email-invite field. Same mechanism as 3.2, standalone here.</li>
+      <li><strong>Team size + participation</strong>: invited and joined counts, and the participation rate as a share ("72% answered"), never who; follows the D1 no-live-count rule.</li>
+      <li><strong>Members list</strong>: invited members with name or email and a status (invited or joined), each with resend or manage (to 6.1). Invite identity only, never connected to answers.</li>
+      <li><strong>Privacy boundary callout</strong>: the wall between roster identity and answer identity (see below).</li>
+      <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation (operator logged-in, Programs active), 0.4 Program card (recommended / default / active / draft / ended / skeleton), 0.6 Canonical lists (categories, size buckets). No new component; the facet set is in-node, not a global.</p>
+    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (condensed), 0.5 Dialog (via the 6.1 manage dialog). The invite block and members list are thin in-node elements. No new global invented.</p>
   </section>
 
-  <!-- Facets -->
-  <section id="facets">
-    <div class="section-label">Listing only</div>
-    <h2>Filters and facets</h2>
-    <p>One facet, defined here because the set is thin and used mainly on this page. It filters which 0.4 cards show; it never changes a card.</p>
+  <!-- The wall -->
+  <section id="wall">
+    <div class="section-label">The make-or-break boundary</div>
+    <h2>Roster identity is not answer identity</h2>
+    <p>Two kinds of "who" exist on this page, and only one is ever visible.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Facet</th><th>Values</th><th>Behavior</th></tr></thead>
+        <thead><tr><th>Kind of "who"</th><th>Visible?</th><th>What it is</th></tr></thead>
         <tbody>
-          <tr><td>Category (single-select)</td><td>All (default), Mental health, Physical, Financial, Social (from 0.6)</td><td>client-side narrowing over a small curated set; reflected as <code>?category=</code> for the back button; canonical stays <code>/app/programs</code></td></tr>
+          <tr><td>Roster identity</td><td>Yes</td><td>who is on the team; the operator invited them, so name or email and an invited/joined status show</td></tr>
+          <tr><td>Answer identity</td><td>Never</td><td>who answered a check-in, and what they said; never shown, never linked to the roster, cannot be derived</td></tr>
         </tbody>
       </table>
     </div>
-    <ul>
-      <li>The recommended pin stays first only under <strong>All</strong>; within a filtered category the size-recommended program, if present, sorts first.</li>
-      <li><strong>No search, no pagination, no sort control</strong> in the MVP. Browse plus one facet is enough for a small curated library, which is the concrete reason <strong>11.5 Global search is likely N/A</strong> (confirmed or closed at Step 6). A future sort is deferred <span class="hyp">?</span>, not built.</li>
-      <li><strong>Zero result</strong> in a category shows "Nothing here yet, see all programs" that clears the facet back to All. Never a dead-end.</li>
-    </ul>
+    <p>The members list and the participation rate sit on the same page but are never joined. The operator can see that a person is on the team and that 72% of the team answered, but never that that person answered, or what they said.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">By auth, data, and role</div>
-    <h2>States</h2>
+    <div class="section-label">Data, privacy math, and role</div>
+    <h2>States and primary CTA</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Never a dead-end</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
         <tbody>
-          <tr><td>Guest (not authed)</td><td>redirect to 2.1 Log in, return here after</td><td>returns to /app/programs</td></tr>
-          <tr><td>Operator, first run</td><td>5.3 empty in place of the grid: recommended shortcut + browse hint</td><td>shortcut to 5.1</td></tr>
-          <tr><td>Operator, active (default)</td><td>recommended pinned first, then the grid; running programs show status badges</td><td>every card to 5.1</td></tr>
-          <tr><td>Loading</td><td>0.4 skeleton cards until the library resolves</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not load programs, retry" + link to 4.0 Dashboard</td><td>retry or Dashboard (MS4)</td></tr>
-          <tr><td>Owner role</td><td>redirect to 9.0 Owner dashboard</td><td>owners do not manage programs</td></tr>
+          <tr><td>Default (has members)</td><td>invite block, participation share, members list with statuses</td><td>Invite (copy link / send)</td></tr>
+          <tr><td>Empty (first run)</td><td>just the invite block, "Invite your team to get started"</td><td>Copy join link</td></tr>
+          <tr><td>Pending invites</td><td>members show invited status</td><td>Resend (to 6.1)</td></tr>
+          <tr><td>Open cycle (D1)</td><td>participation shows "results after the cycle closes", no live count</td><td>-</td></tr>
+          <tr><td>Loading / Error</td><td>skeleton / "Could not load your team, retry"</td><td>retry or back to 4.0 (MS4)</td></tr>
+          <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
         </tbody>
       </table>
     </div>
@@ -293,100 +277,77 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The grid collapses from multi-column on desktop to one column at the 360px baseline. Cards are the canonical 0.4 element, arranged here, not restyled.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The invite block and participation lead; the members list follows. All collapses to one column at the 360px baseline.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, operator, active state</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, default</div>
         <div class="wf-page">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab on">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab on">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
           <div class="wf-sec">
             <div class="lbl">1 &middot; header (H1)</div>
-            <div class="wf-hl"></div><div class="wf-hl s"></div>
+            <div class="wf-metric">Your team <span>&middot; 12 invited, 9 joined</span></div>
           </div>
           <div class="wf-sec">
-            <div class="lbl">3 &middot; facet bar (category)</div>
-            <div class="wf-chips"><span class="wf-chip on">All</span><span class="wf-chip">Mental health</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div>
+            <div class="lbl">2 &middot; invite block</div>
+            <div class="wf-field"><span class="val">app.brio.co/join/ab12cd</span><span class="wf-b sm">Copy link</span></div>
+            <div class="wf-field"><span class="wf-plain">Join code</span><span class="wf-code">AB12CD</span></div>
+            <div class="wf-field"><span class="val ph">teammate@company.com</span><span class="wf-b sm solid">Send</span></div>
           </div>
           <div class="wf-sec">
-            <div class="lbl">2 + 4 &middot; recommended pinned, then grid (0.4)</div>
-            <div class="wf-grid">
-              <div class="wf-card">
-                <span class="wf-badge rec">Recommended for your size</span>
-                <span class="cat">Mental health</span>
-                <span class="t">Weekly mood check-in</span>
-                <span class="meta">weekly, 4 weeks &middot; 1 question</span>
-                <span class="desc">A light pulse on how the team feels.</span>
-                <span class="act solid">Select</span>
-              </div>
-              <div class="wf-card">
-                <span class="cat">Physical</span>
-                <span class="t">Move more, together</span>
-                <span class="meta">weekly, 6 weeks &middot; 2 questions</span>
-                <span class="desc">Small movement goals, no individual tracking.</span>
-                <span class="act">Select</span>
-              </div>
-              <div class="wf-card">
-                <span class="wf-badge">Active</span>
-                <span class="cat">Financial</span>
-                <span class="t">Money basics</span>
-                <span class="meta">next cycle in 3 days &middot; 2 questions</span>
-                <span class="desc">Confidence with everyday finances.</span>
-                <span class="act">Manage</span>
-              </div>
-              <div class="wf-card">
-                <span class="wf-badge">Draft</span>
-                <span class="cat">Social</span>
-                <span class="t">Team connection</span>
-                <span class="meta">not started &middot; 1 question</span>
-                <span class="desc">Belonging and small rituals.</span>
-                <span class="act">Finish setup</span>
-              </div>
-              <div class="wf-card">
-                <span class="wf-badge">Ended</span>
-                <span class="cat">Mental health</span>
-                <span class="t">Stress reset</span>
-                <span class="meta">completed &middot; 3 questions</span>
-                <span class="desc">A short reset when things get heavy.</span>
-                <span class="act">View results</span>
-              </div>
-              <div class="wf-card wf-skel">
-                <div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="ln s"></div>
-                <div class="ln" style="margin-top:auto;"></div>
+            <div class="lbl">3 &middot; participation (aggregate)</div>
+            <div class="wf-metric">72% <span>of the team answered this cycle</span></div>
+            <div class="wf-strip2">A share of the whole team. Never who answered.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">4 &middot; members (invite identity only)</div>
+            <div class="wf-mrow"><span class="who">Yemi O.</span><span class="status joined">Joined</span><span class="wf-b sm">Manage</span></div>
+            <div class="wf-mrow"><span class="who">Sam R.</span><span class="status joined">Joined</span><span class="wf-b sm">Manage</span></div>
+            <div class="wf-mrow"><span class="who">dev@company.com</span><span class="status">Invited</span><span class="wf-b sm">Resend</span></div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">5 &middot; privacy boundary</div>
+            <div class="wf-wall">
+              <div class="ph">The wall</div>
+              <div class="two">
+                <div class="col"><div class="h">On the team</div>who you invited (shown)</div>
+                <div class="col no"><div class="h">Who answered</div>never shown, never linked</div>
               </div>
             </div>
           </div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">one link per card to 5.1 &middot; status + recommended are text, not color-only &middot; targets min 44px.</div>
+        <div class="wf-note">members = who you invited &middot; participation = a share, never who &middot; the two are never joined &middot; targets min 44px.</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Programs</span></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>facets (scroll)</div><div class="wf-scroll"><span class="wf-chip on">All</span><span class="wf-chip">Mental</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>recommended (pinned)</div>
-            <div class="wf-card"><span class="wf-badge rec">Recommended for your size</span><span class="cat">Mental health</span><span class="t">Weekly mood check-in</span><span class="meta">weekly, 4 weeks &middot; 1 question</span><span class="act solid">Select</span></div>
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Team</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-metric">Your team <span>12 / 9</span></div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>invite</div>
+            <div class="wf-field"><span class="val">.../join/ab12cd</span><span class="wf-b sm">Copy</span></div>
+            <div class="wf-field"><span class="wf-plain">Code</span><span class="wf-code">AB12CD</span></div>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>grid, single column</div>
-            <div class="wf-card"><span class="cat">Physical</span><span class="t">Move more, together</span><span class="meta">weekly, 6 weeks &middot; 2 questions</span><span class="act">Select</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>participation</div><div class="wf-metric">72% <span>answered</span></div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>members</div>
+            <div class="wf-mrow"><span class="who">Yemi O.</span><span class="status joined">Joined</span></div>
+            <div class="wf-mrow"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
           </div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, facets scroll horizontally.</div>
+        <div class="wf-note">same blocks, single column, copy-link high.</div>
       </div>
     </div>
 
     <div class="wf-frame" style="margin-top:22px;">
-      <div class="wf-cap">State 5.3 &middot; first-run empty (never a dead-end)</div>
-      <div class="wf-empty">
-        No active program yet.
-        <div class="sub">Start with the one we recommend for your size.</div>
-        <span class="wf-b solid">Select recommended</span> <span class="wf-plain">or browse by category</span>
+      <div class="wf-cap">Open cycle &middot; participation follows D1 (no live count)</div>
+      <div class="wf-state">
+        <div class="n">Results appear after the cycle closes</div>
+        <div class="sub">No running count of who has answered, for anyone, while the cycle is open.</div>
+        <span class="wf-plain">consistent with 4.4 on the dashboard</span>
       </div>
-      <div class="wf-note">the empty state replaces the grid, it does not blank the page; the shortcut goes to 5.1.</div>
+      <div class="wf-note">the roster respects no-live-count too; the share only appears after close at minimum-N.</div>
     </div>
   </section>
 
@@ -394,27 +355,26 @@
   <section id="seo">
     <div class="section-label">Private app zone</div>
     <h2>SEO block (noindex)</h2>
-    <p>Program library is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Team roster is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
     <div class="seo-block">
       <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/programs</code>, facet as <code>?category=</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/team</code></span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 ("Programs") for the accessible document outline</li>
-      <li>the facet controls are labeled controls, not color-only</li>
-      <li>every card is one in-app <code>&lt;a&gt;</code> to 5.1 with the title as its accessible name</li>
-      <li>the recommended tag and status badges are text, not color alone; tap targets at least 44px</li>
-      <li>if a public "programs overview" or a 1.5 category landing ever renders these cards, that page is indexable and gets its own A-E SEO and schema decision at its own node, not here</li>
+      <li>exactly one H1 ("Your team") for the accessible document outline</li>
+      <li>the join code and link are selectable text with labeled copy controls</li>
+      <li>the members list is a real list with a status per row in text, not color-only</li>
+      <li>the participation share has a text label; tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Listing template set.</strong> Program library reuses 0.1, 0.4, and 0.6 and invents nothing but the thin in-node facet set. Next page: <strong>5.1 Program detail / manage</strong> (the card opened into a full page), per the persona-priority order.</div>
+    <div class="callout ok"><strong>Reuse only, wall intact.</strong> Team roster reuses 0.1, 0.3, and 0.5 (via 6.1) and invents nothing global; the invite block and members list are thin in-node elements. It respects the D1 no-live-count rule and keeps roster identity and answer identity strictly apart. Next: <strong>6.1 Resend or manage invite</strong> (the small 0.5 dialog), then cluster 3, the onboarding wizard.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 5.0 Program library - July 2026</p>
-    <p style="margin-top:4px;">The first listing: in-node facet set, a grid of canonical 0.4 cards, first-run empty (5.3) and skeleton states, noindex app zone. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/program-library.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 6.0 Team roster - July 2026</p>
+    <p style="margin-top:4px;">Invite the team, see who is in, read participation as a share, all without learning who answered. The roster is invite identity only, never linked to check-in answers, and participation follows the D1 no-live-count rule. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/team-roster.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
