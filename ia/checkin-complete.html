@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Threshold alert detail (4.2)</title>
+  <title>Brio - IA Detail: Check-in complete (10.3)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -103,51 +103,37 @@
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
-
-    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; }
-    .wf-nav .sp { margin-left: auto; }
-    .wf-tab { font-size: 11px; color: #9a9a9a; }
-    .wf-tab.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
-    .wf-crumb { padding: 8px 14px; font-size: 10px; color: #7a7a7a; border-bottom: 1px solid #1f1f1f; font-family: ui-monospace, monospace; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
+    .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
-    .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
-    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
-    .wf-phone .wf-sec { padding: 12px 10px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
+
+    /* employee check-in surface (mobile, no nav, near-anonymous) */
+    .wf-checkbar { padding: 9px 12px 8px; border-bottom: 1px solid #2c2c2c; text-align: center; }
+    .wf-checkbar .co { color: #8a8a8a; font-size: 9px; font-family: ui-monospace, monospace; }
+    .wf-minianon { display: inline-flex; align-items: center; gap: 4px; font-size: 8px; color: #9a9a9a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-top: 3px; }
+    .wf-checkbody { padding: 22px 16px 20px; text-align: center; }
+
+    /* confirmation badge (done) */
+    .wf-donecheck { width: 52px; height: 52px; border: 1px solid #6a6a6a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #e6e6e6; margin: 0 auto 14px; }
+    .wf-thanks { color: #fff; font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .wf-sub { color: #9a9a9a; font-size: 11px; line-height: 1.55; margin-bottom: 16px; }
+
+    /* aggregate reassurance line (ties to 10.1) */
+    .wf-aggline { display: flex; align-items: flex-start; gap: 8px; text-align: left; border: 1px solid #333; border-radius: 8px; padding: 10px 11px; margin-bottom: 14px; }
+    .wf-aggline .lk { flex: 0 0 auto; font-size: 13px; }
+    .wf-aggline .tx { font-size: 10.5px; color: #b8b8b8; line-height: 1.5; }
+    .wf-aggline .tx b { color: #fff; font-weight: 700; }
+
+    .wf-closehint { font-size: 10px; color: #6a6a6a; font-family: ui-monospace, monospace; margin-bottom: 12px; }
+    .wf-privlink { font-size: 10.5px; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
+    .wf-deskcard { max-width: 440px; margin: 0 auto; border: 1px solid #3a3a3a; border-radius: 12px; overflow: hidden; background: #0c0c0c; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
-
-    /* two-column body */
-    .wf-2col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; }
-    .wf-2col > div { border-bottom: 1px solid #1f1f1f; }
-    .wf-2col > div:first-child { border-right: 1px solid #1f1f1f; }
-    @media (max-width: 560px) { .wf-2col { grid-template-columns: 1fr; } .wf-2col > div:first-child { border-right: none; } }
-
-    /* what dropped */
-    .wf-drop { border: 1px solid #4a4a4a; border-radius: 8px; padding: 12px; background: #131313; }
-    .wf-delta { color: #fff; font-size: 15px; font-weight: 800; }
-    .wf-delta .arw { color: #cfcfcf; margin: 0 4px; }
-    .wf-delta .to { color: #e6e6e6; }
-    .wf-period { color: #9a9a9a; font-size: 10.5px; font-family: ui-monospace, monospace; margin-top: 2px; }
-    .wf-spark { display: flex; align-items: flex-end; gap: 5px; height: 40px; margin: 10px 0 4px; }
-    .wf-spark .bar { width: 11px; background: #3a3a3a; border-radius: 2px 2px 0 0; }
-    .wf-spark .bar.low { background: #6a6a6a; }
-    .wf-read { color: #b6b6b6; font-size: 12px; margin-top: 10px; }
-    .wf-read strong { color: #fff; }
-
-    /* action panel */
-    .wf-stack { display: flex; flex-direction: column; gap: 8px; }
-    .wf-link { border: 1px solid #333; border-radius: 6px; padding: 8px 10px; color: #cfcfcf; font-size: 11px; }
-    .wf-link .cat { font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: #8a8a8a; display: block; }
-    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; }
-
-    /* state mini */
-    .wf-state { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 16px; text-align: center; color: #cfcfcf; font-size: 12px; }
-    .wf-state .n { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
-    .wf-state .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 10px; }
   </style>
 </head>
 <body>
@@ -191,7 +177,7 @@
       <a href="check-in-setup.html" class="nav-sub-item">Check-in setup</a>
       <a href="dashboard.html" class="nav-sub-item">Dashboard</a>
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
-      <a href="threshold-alert.html" class="nav-sub-item nav-sub-active">Threshold alert</a>
+      <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
       <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
@@ -211,7 +197,7 @@
       <a href="checkin-entry.html" class="nav-sub-item">Check-in entry</a>
       <a href="checkin-privacy.html" class="nav-sub-item">Pre-Q1 privacy</a>
       <a href="checkin-questions.html" class="nav-sub-item">Questions</a>
-      <a href="checkin-complete.html" class="nav-sub-item">Check-in complete</a>
+      <a href="checkin-complete.html" class="nav-sub-item nav-sub-active">Check-in complete</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -232,153 +218,122 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 4.2</span>
-      <span class="badge">Page</span>
-      <span class="badge privacy">Team-level, never who</span>
+      <span class="badge">Node 10.3</span>
+      <span class="badge">Employee flow (mobile)</span>
+      <span class="badge privacy">Closure &middot; ends F2</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Threshold alert (4.2) &middot; URL: /app/alerts/:id</div>
-    <h1>Threshold alert detail</h1>
-    <p class="hero-intro">When the aggregate drops meaningfully, this tells the operator plainly what changed, what it means, and the one thing to do next, so a struggle is caught early (J2). It is honest about a real dip yet calm, and strictly team-level, never pointing at a person. Serves J2 and E1. Inside the operator app, so noindex. Source of truth: ia/docs/pages/threshold-alert.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Check-in complete (10.3) &middot; URL: /c/{invite-token} (complete step)</div>
+    <h1>Check-in complete / thank-you</h1>
+    <p class="hero-intro">The terminal screen of the employee check-in: confirm the answer landed, reassure that it joined the team's aggregate and is never seen on its own, and end calmly with no account push and nothing more to do. It closes the trust loop that 10.1 opened. No individual score is ever shown to the employee. For Yemi the employee. Serves J4 and E2; ends flow F2. Private token-gated surface, so noindex. Source of truth: ia/docs/pages/checkin-complete.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
+    <p>A calm ending, centered and short. The persistent anonymity anchor is carried to the last screen so the promise is the last thing as well as the first (Principle 3).</p>
     <ol>
-      <li><strong>Nav + header</strong> (0.1 operator, Dashboard active): H1 "What changed". Back to 4.0.</li>
-      <li><strong>What dropped</strong>: the specific aggregate move, plainly, "from Steady to Low over the last two cycles," with a small down-trend indicator. Aggregate only, never who.</li>
-      <li><strong>Plain-language reading</strong> (E1): what it means, calm, no jargon; a team-level dip, not a person, and explicitly not a diagnosis of anyone.</li>
-      <li><strong>Suggested next action</strong>: one concrete step, the primary CTA, usually See the program (to 5.1) or Review the full pulse (to 4.1).</li>
-      <li><strong>Link to the relevant program</strong>: a compact reference to the program tied to this signal, to 5.1.</li>
-      <li><strong>Privacy reassurance</strong> (0.3 condensed): a team-level signal that never names an individual, to 1.1.</li>
-      <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
+      <li><strong>Minimal top bar with the anonymity anchor</strong>: the Brio mark, the company name, and the small "Anonymous" reminder.</li>
+      <li><strong>Confirmation</strong>: a check badge and a plain "Thanks, you're done" heading. Closure that the short task is complete (J4).</li>
+      <li><strong>Reassurance</strong>: one line that the answer joined the team's aggregate and is not seen on its own (ties back to the 10.1 promise). This is where E2 is honored at the end.</li>
+      <li><strong>No individual score, by design</strong>: the employee is not shown a personal score. Results are team-level only. (An employee-facing aggregate result, HJ2, is <strong>[?]</strong> parked.)</li>
+      <li><strong>Calm end</strong>: a quiet "you can close this" hint; no account prompt, no upsell. An optional "how your privacy is protected" link to the public 1.1 page is the only outbound path.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (condensed). The what-dropped indicator and reading reuse the in-node pulse elements from 4.0 and 4.1. No new global invented.</p>
-  </section>
-
-  <!-- Honest but calm -->
-  <section id="honest">
-    <div class="section-label">Two principles meet here</div>
-    <h2>Honest, calm, and never individual</h2>
-    <p>Principle 4 (honest signals over flattering ones) means the alert says plainly the team dipped, it does not soften a real decline. The privacy boundary means it stays strictly aggregate, reporting a team-level move and pointing at a program to act on, never at a person, and saying so. The reading is calm and action-oriented, so the operator acts rather than panics or goes looking for who.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Signal, privacy math, and role</div>
-    <h2>States and primary CTA</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Next action</th></tr></thead>
-        <tbody>
-          <tr><td>Active alert (default)</td><td>what dropped + reading + program link</td><td>See the program (to 5.1)</td></tr>
-          <tr><td>Recovered / stale</td><td>"This has since recovered"; record kept</td><td>Review current pulse (to 4.1)</td></tr>
-          <tr><td>Below minimum-N</td><td>never reached; no alert fires under 5 responses (dashboard shows 4.3)</td><td>-</td></tr>
-          <tr><td>Loading / Error / not found</td><td>skeleton / "Could not load this alert"</td><td>back to 4.0 (MS4)</td></tr>
-          <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p><strong>Components used:</strong> the 10.0 to 10.2 check-in chrome (no nav, no account) and a simple confirmation badge (the 2.2 confirmation idea, redrawn). No new global; the privacy content is not repeated (that is 10.1), only the short aggregate reassurance and the persistent anchor remain.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). What dropped and the reading lead; the action and program link sit beside them on desktop and stack below at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A short centered confirmation on a phone, with the aggregate reassurance and a calm end. There is no forward button, by design: the task is done and the natural end is to close the tab. The desktop version centers the same narrow card.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, active alert</div>
-        <div class="wf-page">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab on">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
-          <div class="wf-crumb">Dashboard / Alert</div>
-          <div class="wf-2col">
-            <div>
-              <div class="wf-sec">
-                <div class="lbl">2 &middot; what dropped (aggregate)</div>
-                <div class="wf-drop">
-                  <div class="wf-delta">Steady <span class="arw">&darr;</span> <span class="to">Low</span></div>
-                  <div class="wf-period">over the last 2 cycles</div>
-                  <div class="wf-spark"><span class="bar" style="height:64%"></span><span class="bar" style="height:60%"></span><span class="bar" style="height:48%"></span><span class="bar low" style="height:36%"></span><span class="bar low" style="height:30%"></span></div>
-                  <div class="wf-read"><strong>What it means.</strong> A meaningful team-level dip, worth a look. This is not a diagnosis of any person.</div>
-                </div>
-              </div>
-              <div class="wf-sec">
-                <div class="lbl">6 &middot; privacy reassurance (0.3)</div>
-                <div class="wf-strip2">A team-level signal. It never names or points at an individual.</div>
-              </div>
-            </div>
-            <div>
-              <div class="wf-sec">
-                <div class="lbl">4 + 5 &middot; next action + program</div>
-                <div class="wf-stack">
-                  <span class="wf-b solid">See the program</span>
-                  <div class="wf-link"><span class="cat">Mental health</span>Weekly mood check-in</div>
-                  <span class="wf-b">Review the full pulse</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
-        </div>
-        <div class="wf-note">the move is stated in text (from, to, period), not color or icon alone &middot; points at a program, never a person &middot; targets min 44px.</div>
-      </div>
-
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, complete (default)</div>
         <div class="wf-phone">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Alert</span></div>
-          <div class="wf-crumb">Dashboard / Alert</div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>what dropped</div>
-            <div class="wf-drop"><div class="wf-delta">Steady <span class="arw">&darr;</span> <span class="to">Low</span></div><div class="wf-period">last 2 cycles</div><div class="wf-read"><strong>Means:</strong> a team-level dip, not any person.</div></div>
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody">
+              <div class="wf-donecheck">&#10003;</div>
+              <div class="wf-thanks">Thanks, you're done</div>
+              <div class="wf-sub">That took under a minute. See you next check-in.</div>
+              <div class="wf-aggline">
+                <span class="lk">&#128274;</span>
+                <span class="tx"><b>Your answer joined the team's aggregate.</b> No one sees it on its own, and there is no individual score.</span>
+              </div>
+              <div class="wf-closehint">You can close this tab now.</div>
+              <a class="wf-link wf-privlink">How your privacy is protected</a>
+            </div>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>next action</div><span class="wf-b solid">See the program</span></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">5</span>program</div><div class="wf-link"><span class="cat">Mental health</span>Weekly mood check-in</div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">6</span>privacy</div><div class="wf-strip2">Team-level, never who.</div></div>
-          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, action high.</div>
+        <div class="wf-note">no forward button by design &middot; aggregate reassurance ties back to 10.1 &middot; no individual score &middot; optional link to public 1.1 &middot; anonymity anchor to the last screen.</div>
       </div>
-    </div>
 
-    <div class="wf-frame" style="margin-top:22px;">
-      <div class="wf-cap">Recovered state &middot; honest record, not hidden</div>
-      <div class="wf-state">
-        <div class="n">This has since recovered</div>
-        <div class="sub">The team pulse is back to Steady. The alert is kept on the record.</div>
-        <span class="wf-b solid">Review current pulse</span>
+      <div style="flex:1; min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop / wide, centered card (never an app)</div>
+        <div class="wf-frame" style="margin-top:0;">
+          <div class="wf-deskcard">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody" style="padding:30px 28px 26px;">
+              <div class="wf-donecheck" style="width:58px; height:58px; font-size:25px;">&#10003;</div>
+              <div class="wf-thanks" style="font-size:20px;">Thanks, you're done</div>
+              <div class="wf-sub">That took under a minute. See you next check-in.</div>
+              <div class="wf-aggline" style="max-width:340px; margin-left:auto; margin-right:auto;">
+                <span class="lk">&#128274;</span>
+                <span class="tx"><b>Your answer joined the team's aggregate.</b> No one sees it on its own, and there is no individual score.</span>
+              </div>
+              <div class="wf-closehint">You can close this tab now.</div>
+              <a class="wf-link wf-privlink">How your privacy is protected</a>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">same calm closure centered &middot; the surface never becomes an app on a large screen &middot; terminal node, no forward.</div>
       </div>
-      <div class="wf-note">Principle 4: the record stays honest either way; routes to 4.1.</div>
     </div>
+    <div class="callout"><strong>Same for every team size.</strong> Because the employee is never shown a score, minimum-N does not change this screen. There is no error state here either: a failed submit routes to 10.6 from 10.2, so arriving at 10.3 always means the answer landed. The HJ2 employee-facing result is <strong>[?]</strong> parked; if ever greenlit it would surface here, still aggregate, never individual.</div>
+  </section>
+
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States and primary CTA</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Default (complete)</td><td>confirmation, aggregate reassurance, calm end</td><td>none (close the tab); optional link to 1.1</td></tr>
+          <tr><td>HJ2 employee result [? parked]</td><td>a possible future team aggregate shown to the employee, still aggregate, never individual</td><td>parked, not built in the MVP</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Primary CTA:</strong> none, by design. The task is done; the natural end is to close the tab. The only affordance is an optional quiet link to the public 1.1 Security and privacy page. No account step, no upsell, no forward button, which keeps the ending honest and low-pressure.</p>
   </section>
 
   <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
+    <div class="section-label">Private token-gated surface</div>
     <h2>SEO block (noindex)</h2>
-    <p>Threshold alert detail is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Check-in complete is a private, token-gated employee surface. It is not indexed and carries no schema. It is a transactional zone, per the platform SEO stance.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/alerts/:id</code></span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (token-gated, personal)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; flow URL is <code>/c/{invite-token}</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 ("What changed") for the accessible document outline</li>
-      <li>the what-dropped move is stated in text (from, to, and the period), not by color or an icon alone</li>
-      <li>the next action is a labeled control; the program link carries its accessible name</li>
-      <li>tap targets at least 44px</li>
+      <li>exactly one H1 (the thank-you heading) for the accessible document outline</li>
+      <li>the confirmation is conveyed by text and a mark, never by color alone</li>
+      <li>the optional privacy link is a labelled control; tap targets at least 44px</li>
+      <li>the flow works without an account</li>
     </ul>
-    <div class="callout ok"><strong>Cluster 4 closed.</strong> Threshold alert detail reuses 0.1 and 0.3 and invents nothing global; it respects minimum-N (no alert below 5) and stays strictly aggregate. Cluster 4 is complete (4.0, 4.1, 4.2; states 4.3 and 4.4 live inside 4.0). Next: cluster 6, <strong>6.0 Team roster</strong> (invite, roster, participation, all aggregate).</div>
+    <div class="callout ok"><strong>Closing the trust loop.</strong> Check-in complete ends flow F2 the way 10.1 opened it: the answer landed, it joined the aggregate, and it is never seen on its own, said plainly one last time. It reuses the 10.0 to 10.2 chrome and a confirmation badge, invents nothing global, and shows no individual score, by design. This completes the employee happy path (10.0 entry, 10.1 disclosure, 10.2 questions, 10.3 complete). Next: the recovery states <strong>10.4 Invite link expired</strong>, <strong>10.5 Already submitted</strong>, and <strong>10.6 Submit error</strong>, which keep the employee flow from ever dead-ending.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 4.2 Threshold alert detail - July 2026</p>
-    <p style="margin-top:4px;">The early-warning surface (J2): what dropped, a plain-language reading, one next action, and a link to the relevant program. Honest about a real dip, calm, and strictly team-level, never who. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/threshold-alert.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 10.3 Check-in complete / thank-you - July 2026</p>
+    <p style="margin-top:4px;">The terminal screen of the employee check-in: a calm confirmation that the answer landed and joined the team's aggregate, never seen on its own and with no individual score, then a quiet end with no account push. Reuses the 10.0 to 10.2 check-in chrome; no forward step, by design. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/checkin-complete.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
