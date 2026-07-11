@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Resend or manage invite (6.1)</title>
+  <title>Brio - IA Detail: Payment failed (7.3)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -102,36 +102,36 @@
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; text-align: center; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.danger { border-color: #9a5a5a; color: #e2b3b3; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
     .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* dialog over an inert, dimmed roster */
-    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; }
-    .wf-under { padding: 12px 14px; filter: blur(1px); opacity: 0.4; pointer-events: none; }
-    .wf-under .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-under .ln.s { width: 55%; }
-    .wf-under .mrow { display: flex; gap: 8px; align-items: center; border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px; margin-bottom: 6px; }
-    .wf-under .mrow .who { flex: 1; color: #8a8a8a; font-size: 11px; }
+    /* ===== 0.5 dialog / modal shell (canonical, from 6.1 / 7.2) ===== */
+    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; min-height: 420px; }
     .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
     .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .wf-modal { width: 300px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+    .wf-modal { width: 320px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
+    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 12px; }
     .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
-    .wf-member { border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px 10px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-    .wf-member .who { color: #cfcfcf; font-size: 11px; flex: 1; }
-    .wf-member .status { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid #444; border-radius: 3px; padding: 1px 6px; color: #9a9a9a; }
-    .wf-acts { display: flex; flex-direction: column; gap: 8px; }
-    .wf-priv { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px 10px; color: #9a9a9a; font-size: 10px; margin-top: 10px; }
-
-    /* mobile bottom sheet */
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; position: relative; overflow: hidden; min-height: 300px; }
-    .wf-phone .top { padding: 10px; filter: blur(1px); opacity: 0.4; }
-    .wf-phone .top .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
     .wf-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #101010; border-top: 1px solid #4a4a4a; border-radius: 14px 14px 0 0; padding: 14px; }
     .wf-sheet .grab { width: 34px; height: 4px; background: #3a3a3a; border-radius: 3px; margin: 0 auto 10px; }
+    .wf-scrimghost { padding: 12px 14px; }
+    .wf-ghostbar { display: flex; align-items: center; gap: 10px; opacity: 0.4; }
+    .wf-ghostbar .wf-tab { font-size: 10px; color: #8a8a8a; }
+
+    /* attention mark + explanation (reused from 2.3) */
+    .wf-confirm { text-align: center; }
+    .wf-check { width: 46px; height: 46px; border: 1px solid #7a7a7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 4px auto 12px; color: #fff; font-size: 20px; }
+    .wf-check.attn { border-style: dashed; border-color: #9a9a9a; font-weight: 800; }
+    .wf-reason { color: #fff; font-size: 13px; font-weight: 700; }
+    .wf-expl { font-size: 10.5px; color: #9a9a9a; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 9px; margin: 10px 0 14px; line-height: 1.5; }
+
+    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 0; background: #0c0c0c; overflow: hidden; position: relative; min-height: 420px; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
@@ -177,7 +177,7 @@
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
-      <a href="manage-invite.html" class="nav-sub-item nav-sub-active">Manage invite</a>
+      <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
@@ -189,7 +189,7 @@
       <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
       <a href="invite-owner.html" class="nav-sub-item">Invite owner + upgrade</a>
       <a href="upgrade.html" class="nav-sub-item">Upgrade / paywall</a>
-      <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
+      <a href="payment-failed.html" class="nav-sub-item nav-sub-active">Payment failed</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -210,137 +210,125 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 6.1</span>
-      <span class="badge">Dialog (0.5)</span>
-      <span class="badge privacy">Roster, not answers</span>
+      <span class="badge">Node 7.3</span>
+      <span class="badge">State (error)</span>
+      <span class="badge privacy">Recoverable &middot; closes cluster 7</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Manage invite (6.1) &middot; dialog, opened from 6.0</div>
-    <h1>Resend or manage invite</h1>
-    <p class="hero-intro">A small dialog on the canonical 0.5 shell, opened from a member row in the roster (6.0). The operator resends an invite, copies its link, or revokes it, without leaving the roster. It is roster-identity administration only; it never touches answer identity. Inside the operator app, so noindex. Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Payment failed (7.3) &middot; error state of the 7.2 modal</div>
+    <h1>Payment failed</h1>
+    <p class="hero-intro">When a card is declined during the upgrade, say plainly what happened, reassure that no charge was made and the team stays on the free plan, and offer two clear ways forward: try again, or stay free and retry later. A failed payment must never trap the operator or lose their place. It is the error body of the 7.2 dialog (recoverable, F3 DE3) and closes cluster 7. Inside the operator app, so noindex. Source of truth: ia/docs/pages/payment-failed.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
-    <div class="section-label">Dialog anatomy</div>
+    <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
+    <p>Block 1 is the first thing in the dialog. Order reasoned from the 360px baseline up. It is recoverable: retry and stay-free are both always present.</p>
     <ol>
-      <li><strong>Title</strong>: "Manage invite" plus the member's name or email, with a close control.</li>
-      <li><strong>Member summary</strong>: name or email and status (invited or joined). Roster identity only.</li>
-      <li><strong>Actions, by status</strong>: pending shows Resend, Copy link, Revoke; joined shows Remove from team.</li>
-      <li><strong>Privacy note</strong>: next to a destructive action, that this affects the roster, never answers.</li>
-      <li><strong>Dismiss</strong>: Cancel or close; Esc also closes.</li>
+      <li><strong>Dialog title and close</strong>: "Payment did not go through" with a close control. Close equals staying on the free tier: a no-charge exit to 4.0.</li>
+      <li><strong>Attention mark</strong>: the same attention badge as 2.3 (an exclamation, not a check), so error reads from success without color.</li>
+      <li><strong>Reason</strong>: a plain, non-blaming reason ("your card was declined"), so the operator knows what to fix.</li>
+      <li><strong>Reassurance</strong>: "you have not been charged, and your team stays on the free plan."</li>
+      <li><strong>Primary and recoverable exit</strong>: "Try again" (to 7.2) as the primary; "Stay on the free tier, retry later" (to 4.0) as the always-present recoverable exit.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.5 Dialog / modal shell (this node is an instance of it). No new component; 6.1 is the already-registered 0.5 consumer that 6.0 opens.</p>
-  </section>
-
-  <!-- Privacy -->
-  <section id="privacy">
-    <div class="section-label">What managing an invite touches</div>
-    <h2>This manages the roster, not answers</h2>
-    <p>Managing or revoking an invite is roster-identity administration, which is allowed. It never reveals or touches answer identity. Removing a joined member affects future participation only; their past contributions were only ever aggregate and were never stored as an identifiable individual record, so there is nothing individual to expose or delete. The dialog states this plainly next to the destructive action.</p>
+    <p><strong>Components used:</strong> the canonical 0.5 Dialog / modal shell (this is the error body of the 7.2 instance, not a second dialog), the 2.3 attention mark and explanation, and standard buttons. No new global; not a separate 0.5 consumer.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">By invite status</div>
-    <h2>Variants and states</h2>
+    <div class="section-label">Retry, stay free, and exit</div>
+    <h2>States and primary CTA</h2>
+    <p>Never a trap (F3 DE3): a declined card always offers a retry and a no-penalty way back to the free tier.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Pending invite (default)</td><td>member + status invited</td><td>Resend invite</td></tr>
-          <tr><td>Joined member</td><td>member + status joined</td><td>Remove from team (destructive)</td></tr>
-          <tr><td>Revoke / remove confirm</td><td>inline "Revoke this invite?" inside the same dialog</td><td>Confirm / Cancel</td></tr>
-          <tr><td>Sending</td><td>the action shows a sending state; dialog stays open</td><td>-</td></tr>
-          <tr><td>Success</td><td>"Invite resent"; dialog closes or updates the row</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not resend, retry"; dialog stays open</td><td>retry (MS4)</td></tr>
+          <tr><td>Default (declined)</td><td>attention mark, reason, no-charge reassurance</td><td>Try again / Stay on the free tier</td></tr>
+          <tr><td>Try again</td><td>the payment step, ready to re-enter or use a different card</td><td>to 7.2 Upgrade</td></tr>
+          <tr><td>Stay on the free tier</td><td>the free plan continues; invite the owner later from 7.0</td><td>to 4.0 Dashboard</td></tr>
+          <tr><td>Close / Esc / scrim click</td><td>dismiss with no charge</td><td>to 4.0 Dashboard (recoverable exit, F3 DE3)</td></tr>
+          <tr><td>Repeated failure</td><td>still recoverable; the reason updates</td><td>Try again / Stay on the free tier</td></tr>
         </tbody>
       </table>
     </div>
+    <div class="callout"><strong>0.5 a11y contract:</strong> <code>role="dialog"</code>, <code>aria-modal="true"</code>, labelled by the title; focus trapped; Esc closes (equals Stay on the free tier, to 4.0); background inert; focus returns to the opener. Error and reason in text and a mark, not color alone.</div>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The dialog is a 0.5 instance: a centered modal over an inert, dimmed roster on desktop, and a bottom sheet on mobile.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The same modal as 7.2, now an error body with an attention mark (not a check), a plain reason, a no-charge reassurance, and two ways forward; mobile is a bottom sheet.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:300px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, pending invite (over an inert roster)</div>
-        <div class="wf-modal-scrim" style="min-height:300px;">
-          <div class="wf-under">
-            <div class="ln"></div><div class="ln s"></div>
-            <div class="mrow"><span class="who">Yemi O.</span><span class="wf-plain">Joined</span></div>
-            <div class="mrow"><span class="who">dev@company.com</span><span class="wf-plain">Invited</span></div>
+      <div style="flex:1;min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, error over the dimmed 7.1</div>
+        <div class="wf-modal-scrim">
+          <div class="wf-scrimghost">
+            <div class="wf-ghostbar"><span class="wf-logo">Brio</span><span style="margin-left:auto;"></span><span class="wf-tab">Owner</span></div>
+            <div class="wf-plain" style="opacity:0.4;margin-top:10px;">Invite your owner (behind the dialog)</div>
           </div>
           <div class="wf-scrim-fill"></div>
           <div class="wf-modal-wrap">
-            <div class="wf-modal" role="dialog" aria-modal="true">
-              <div class="mtitle">Manage invite <span class="x">&times;</span></div>
-              <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-              <div class="wf-acts">
-                <span class="wf-b solid block">Resend invite</span>
-                <span class="wf-b block">Copy invite link</span>
-                <span class="wf-b danger block">Revoke invite</span>
+            <div class="wf-modal" role="dialog" aria-modal="true" aria-label="Payment did not go through">
+              <div class="mtitle">Payment did not go through <span class="x">x</span></div>
+              <div class="wf-confirm">
+                <div class="wf-check attn">!</div>
+                <div class="wf-reason">Your card was declined</div>
               </div>
-              <div class="wf-priv">Managing an invite touches the roster, never answers.</div>
+              <div class="wf-expl">You have not been charged, and your team stays on the free plan. Try again or use a different card.</div>
+              <span class="wf-b solid block">Try again</span>
+              <div class="wf-plain" style="text-align:center;margin-top:10px;"><span class="wf-link">Stay on the free tier, retry later</span></div>
             </div>
           </div>
         </div>
-        <div class="wf-note">0.5 contract: role="dialog", aria-modal, focus trap, Esc closes, background inert, focus returns to the opener.</div>
+        <div class="wf-note">attention mark (not a check) = error without color &middot; plain reason &middot; no-charge reassurance &middot; retry to 7.2, stay-free to 4.0 &middot; never a trap.</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet</div>
         <div class="wf-phone">
-          <div class="top"><div class="ln"></div><div class="ln s"></div><div class="ln"></div></div>
+          <div class="wf-scrim-fill"></div>
           <div class="wf-sheet">
             <div class="grab"></div>
-            <div class="mtitle" style="display:flex;align-items:center;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px;">Manage invite</div>
-            <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-            <div class="wf-acts">
-              <span class="wf-b solid block">Resend invite</span>
-              <span class="wf-b block">Copy invite link</span>
-              <span class="wf-b danger block">Revoke invite</span>
+            <div class="mtitle" style="display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px;">Payment did not go through <span class="x" style="margin-left:auto;color:#9a9a9a;border:1px solid #444;border-radius:4px;width:20px;height:20px;text-align:center;line-height:18px;font-size:12px;">x</span></div>
+            <div class="wf-confirm">
+              <div class="wf-check attn">!</div>
+              <div class="wf-reason" style="font-size:12px;">Your card was declined</div>
             </div>
+            <div class="wf-expl"><span class="wf-bnum">4</span>Not charged. You stay on the free plan.</div>
+            <span class="wf-b solid block">Try again</span>
+            <div class="wf-plain" style="text-align:center;margin-top:10px;"><span class="wf-link">Stay on the free tier</span></div>
           </div>
         </div>
-        <div class="wf-note">same actions, full-width sheet, comfortable targets.</div>
+        <div class="wf-note">bottom sheet &middot; same order &middot; stay-free always in view.</div>
       </div>
-    </div>
-
-    <div class="wf-frame" style="margin-top:22px;max-width:360px;">
-      <div class="wf-cap">Inline revoke confirm (no stacked modal)</div>
-      <div class="wf-modal" style="width:auto;">
-        <div class="mtitle">Revoke this invite?</div>
-        <div class="wf-plain" style="margin-bottom:12px;">The link and code stop working for this person. You can re-invite later.</div>
-        <div class="wf-acts" style="flex-direction:row;justify-content:flex-end;">
-          <span class="wf-b">Cancel</span>
-          <span class="wf-b danger">Revoke</span>
-        </div>
-      </div>
-      <div class="wf-note">the confirm replaces the actions inside the same 6.1 dialog; reversible (re-invite).</div>
     </div>
   </section>
 
-  <!-- a11y / noindex -->
+  <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
-    <h2>Accessibility contract and noindex</h2>
-    <p>A dialog, not a page: no URL of its own, noindex, no schema, no SEO block. It inherits the 0.5 accessibility contract.</p>
+    <div class="section-label">Operator app modal error</div>
+    <h2>SEO block (noindex)</h2>
+    <p>Payment failed is a modal error state inside the authenticated operator app. It is not indexed and carries no schema. The in-app findability and dialog a11y rules still apply.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">role</span><span class="seo-v"><code>dialog</code>, <code>aria-modal="true"</code>, labelled by the title</span></div>
-      <div class="seo-row"><span class="seo-k">focus</span><span class="seo-v">moves into the dialog on open, trapped; returns to the opener on close</span></div>
-      <div class="seo-row"><span class="seo-k">dismiss</span><span class="seo-v">Esc closes; background is inert</span></div>
-      <div class="seo-row"><span class="seo-k">targets</span><span class="seo-v">destructive confirm is keyboard reachable and labelled; tap targets at least 44px</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (no standalone URL; the error state of the 7.2 modal)</span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
-    <div class="callout ok"><strong>Cluster 6 closed.</strong> Resend or manage invite is a pure 0.5 instance; it invents nothing and keeps roster identity separate from answer identity. Cluster 6 Team is complete (6.0 roster, 6.1 manage). Next: cluster 3, the onboarding wizard (3.0 to 3.3), the guided first run.</div>
+    <h3>In-app findability (not SEO, still specified)</h3>
+    <ul>
+      <li>the dialog has an accessible name (the title) and the 0.5 a11y contract</li>
+      <li>the error and the reason are conveyed in text and an attention mark, not by color alone</li>
+      <li>Try again and Stay on the free tier are labelled controls</li>
+      <li>the exit is reachable by keyboard (Esc) and pointer; tap targets at least 44px</li>
+    </ul>
+    <div class="callout ok"><strong>Cluster 7 closed.</strong> Payment failed is the error state of the 7.2 dialog and reuses the 2.3 attention mark; it invents nothing global and is not a separate 0.5 consumer. It guarantees the upgrade path never traps (F3 DE3): a declined card always offers a retry and a no-penalty way back to the free tier. Cluster 7 Owner share and upgrade is complete (7.0, 7.1, 7.2, 7.3). Next cluster: <strong>9 Owner surface</strong> (9.0 Owner dashboard, aggregate-only).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 6.1 Resend or manage invite - July 2026</p>
-    <p style="margin-top:4px;">A 0.5 dialog opened from the roster: resend, copy link, or revoke an invite, with an inline destructive confirm and a note that this touches the roster, never answers. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 7.3 Payment failed - July 2026</p>
+    <p style="margin-top:4px;">The recoverable failure of the upgrade: a plain reason, a no-charge reassurance, and two ways forward (Try again to 7.2, Stay on the free tier to 4.0), rendered as the error body of the 7.2 dialog with the 2.3 attention mark. Never a trap (F3 DE3). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/payment-failed.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
