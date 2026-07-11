@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Sign up (2.0)</title>
+  <title>Brio - IA Detail: Log in (2.1)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -110,13 +110,15 @@
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* auth page shell */
+    /* auth page shell (shared with 2.0 Sign up) */
     .wf-authpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
     .wf-topbar { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #2c2c2c; }
     .wf-auth { max-width: 360px; margin: 0 auto; padding: 26px 20px; }
     .wf-auth .wh { color: #fff; font-size: 19px; font-weight: 800; }
     .wf-auth .sub { color: #9a9a9a; font-size: 11px; margin: 5px 0 18px; }
     .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 5px; }
+    .wf-lblrow { display: flex; align-items: baseline; justify-content: space-between; }
+    .wf-lblrow .wf-link { font-size: 9.5px; }
     .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px 11px; margin-bottom: 12px; color: #6a6a6a; font-size: 12px; }
     .wf-or { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
     .wf-or::before, .wf-or::after { content: ""; flex: 1; height: 1px; background: #2c2c2c; }
@@ -178,8 +180,8 @@
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
       <a href="invite-send-error.html" class="nav-sub-item">Invite-send error</a>
-      <a href="signup.html" class="nav-sub-item nav-sub-active">Sign up</a>
-      <a href="login.html" class="nav-sub-item">Log in</a>
+      <a href="signup.html" class="nav-sub-item">Sign up</a>
+      <a href="login.html" class="nav-sub-item nav-sub-active">Log in</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -200,48 +202,49 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 2.0</span>
+      <span class="badge">Node 2.1</span>
       <span class="badge">Public / pre-auth</span>
-      <span class="badge privacy">Starts flow F1</span>
+      <span class="badge privacy">Gate to the app</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Sign up (2.0) &middot; URL: /signup</div>
-    <h1>Sign up</h1>
-    <p class="hero-intro">The self-serve front door. An operator arriving from the Landing, Pricing, or a segment page creates a Brio account in seconds, with no credit card, and goes straight into onboarding. A focused conversion surface: minimal chrome, one clear action, one honest trust cue. Serves item 1 (self-serve start) and Main; it starts the main flow F1. Public but transactional, so the form is noindex. Source of truth: ia/docs/pages/signup.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Log in (2.1) &middot; URL: /login</div>
+    <h1>Log in</h1>
+    <p class="hero-intro">Return access. Log in is a supporting page, not an acquisition surface, but it gates every recurring job (Main, read the pulse, catch a decline early, feel competent), so it must be fast, forgiving, and never a dead-end. Email + password or magic link, with a forgot-password path. Reuses the auth-page shell from 2.0. Public but transactional, so the form is noindex. Source of truth: ia/docs/pages/login.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. This is a conversion page, so the chrome is deliberately minimal: a pre-auth header, not the four job tabs (those are post-auth).</p>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. The chrome mirrors 2.0 so the two auth pages read as one system.</p>
     <ol>
-      <li><strong>Pre-auth header</strong>: the Brio mark and a single "Log in" link (a reduced 0.1 variant, no job tabs).</li>
-      <li><strong>Heading and value line</strong>: "Create your Brio account" plus one benefit line ("Start free. No credit card."). Reinforces item 1.</li>
-      <li><strong>Sign-up form</strong>: a labelled email field and a labelled password field, primary CTA "Create account". The shortest credible form.</li>
-      <li><strong>Magic-link option</strong>: "Email me a link instead" (passwordless), to 2.2 Magic-link sent. Equal-weight, since passwordless suits a non-technical operator.</li>
-      <li><strong>Legal microcopy</strong>: "By creating an account you agree to our Terms and Privacy Policy", linking to 1.6.</li>
-      <li><strong>Privacy trust cue</strong>: one condensed 0.3 line ("team-level, aggregate signals, never individual data") where it first matters.</li>
-      <li><strong>Log-in link</strong>: "Already have an account? Log in", to 2.1.</li>
+      <li><strong>Pre-auth header</strong>: the Brio mark and a single "Sign up" link (the mirror of 2.0's header), no job tabs.</li>
+      <li><strong>Heading</strong>: a short welcome-back line ("Log in to Brio").</li>
+      <li><strong>Log-in form</strong>: a labelled email field and a labelled password field, with "Forgot password?" by the password, primary CTA "Log in".</li>
+      <li><strong>Magic-link option</strong>: "Email me a link instead" (passwordless), to 2.2 Magic-link sent. Sidesteps a forgotten password entirely.</li>
+      <li><strong>Sign-up link</strong>: "New to Brio? Create an account", to 2.0, so a person on the wrong page is never stuck.</li>
       <li><strong>Footer</strong>: 0.2 footer, public variant (condensed).</li>
     </ol>
-    <p><strong>Components used:</strong> a reduced 0.1 (pre-auth header), 0.2 (public footer), 0.3 (condensed trust line), links to 1.6. Standard form inputs, no new global. <strong>SSO</strong> (Google, Microsoft) is a paid feature, so it is deliberately absent from self-serve sign-up.</p>
+    <p><strong>Components used:</strong> a reduced 0.1 (pre-auth header), 0.2 (public footer), and the auth-page shell from 2.0. No new global. The condensed 0.3 trust line from 2.0 is deliberately omitted (a returning operator needs speed, not re-selling). <strong>SSO</strong> is a paid feature, absent from standard log-in.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">Validation, submit, and role</div>
+    <div class="section-label">Validation, recovery, and role</div>
     <h2>States and primary CTA</h2>
+    <p>Forgiveness is the theme: wrong credentials and a forgotten password both have a clear, non-dead-end path.</p>
     <div class="table-wrap">
       <table>
         <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Default</td><td>empty email and password, Create account, magic-link option, trust line</td><td>Create account (to 3.0)</td></tr>
-          <tr><td>Field validation</td><td>inline text messages for an invalid email or a too-short password (not color alone)</td><td>correct in place</td></tr>
-          <tr><td>Email already registered</td><td>"this email already has an account" with a direct Log in action</td><td>to 2.1 Log in (never a dead-end)</td></tr>
-          <tr><td>Submitting</td><td>Create account shows in-progress; fields lock to prevent double submit</td><td>-</td></tr>
-          <tr><td>Success (password path)</td><td>account created; main flow F1 begins</td><td>to 3.0 Company setup</td></tr>
+          <tr><td>Default</td><td>empty email and password, Forgot password, Log in, magic-link option</td><td>Log in (to 4.0)</td></tr>
+          <tr><td>Field validation</td><td>inline text for an invalid email (not color alone)</td><td>correct in place</td></tr>
+          <tr><td>Wrong credentials</td><td>one generic message ("email or password is incorrect"), does not reveal which field</td><td>retry / Forgot password (never a dead-end)</td></tr>
+          <tr><td>Submitting</td><td>Log in shows in-progress; fields lock to prevent double submit</td><td>-</td></tr>
+          <tr><td>Success</td><td>into the app</td><td>4.0 Dashboard (onboarded) / 3.0 (resume onboarding)</td></tr>
           <tr><td>Magic-link path</td><td>"Email me a link instead" sends the link</td><td>to 2.2 Magic-link sent</td></tr>
-          <tr><td>Already authenticated</td><td>redirect</td><td>4.0 Dashboard (onboarded) / 3.0 (not yet)</td></tr>
+          <tr><td>Forgot password</td><td>reset request (enter email, send reset link); confirmation reuses the 2.2 pattern</td><td>reset email sent; reset-entry screen is [?] (Step 6)</td></tr>
+          <tr><td>Stale magic / reset link</td><td>expired or already-used link</td><td>to 2.3 Invalid or expired link</td></tr>
+          <tr><td>Already authenticated</td><td>redirect</td><td>4.0 Dashboard</td></tr>
         </tbody>
       </table>
     </div>
@@ -251,51 +254,47 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A centered, narrow card with a minimal pre-auth header and one primary action; the same content stacks full width at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The same centered card and shell as 2.0, with Forgot password by the password field and a "Sign up" mirror in the header; the same content stacks full width at the 360px baseline.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, centered sign-up card</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, centered log-in card</div>
         <div class="wf-authpage">
           <div class="wf-topbar">
             <span class="wf-logo">Brio</span>
-            <span class="wf-link">Log in</span>
+            <span class="wf-link">Sign up</span>
           </div>
           <div class="wf-auth">
-            <div class="wh">Create your Brio account</div>
-            <div class="sub">Start free. No credit card. Set up your first program in minutes.</div>
+            <div class="wh">Log in to Brio</div>
+            <div class="sub">Welcome back. Pick up where you left off.</div>
             <div class="wf-lbl">Work email</div>
             <div class="wf-input">you@company.com</div>
-            <div class="wf-lbl">Password</div>
-            <div class="wf-input">At least 8 characters</div>
-            <span class="wf-b solid block">Create account</span>
+            <div class="wf-lblrow"><span class="wf-lbl">Password</span><span class="wf-link">Forgot password?</span></div>
+            <div class="wf-input">Your password</div>
+            <span class="wf-b solid block">Log in</span>
             <div class="wf-or"><span>or</span></div>
             <span class="wf-b block">Email me a link instead</span>
-            <div class="wf-legal">By creating an account you agree to our <span class="wf-link">Terms</span> and <span class="wf-link">Privacy Policy</span>.</div>
-            <div class="wf-trust">Brio only ever shows team-level, aggregate signals. Never individual data.</div>
-            <div class="wf-alt">Already have an account? <span class="wf-link">Log in</span></div>
+            <div class="wf-alt">New to Brio? <span class="wf-link">Create an account</span></div>
           </div>
         </div>
-        <div class="wf-note">minimal header (no job tabs) &middot; email + password or magic link &middot; no credit card, no SSO (paid) &middot; trust line at first commitment &middot; success to 3.0 (F1 begins).</div>
+        <div class="wf-note">mirrors 2.0 shell &middot; Forgot password by the field &middot; magic link sidesteps a lost password &middot; wrong credentials stays generic &middot; success to 4.0 (or resume 3.0).</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="wf-topbar" style="padding:9px 10px;"><span class="wf-logo">Brio</span><span class="wf-link">Log in</span></div>
+          <div class="wf-topbar" style="padding:9px 10px;"><span class="wf-logo">Brio</span><span class="wf-link">Sign up</span></div>
           <div class="wf-auth" style="padding:18px 12px;">
-            <div class="wh" style="font-size:17px;">Create your account</div>
-            <div class="sub" style="margin-bottom:14px;">Start free. No credit card.</div>
+            <div class="wh" style="font-size:17px;">Log in to Brio</div>
+            <div class="sub" style="margin-bottom:14px;">Welcome back.</div>
             <div class="wf-lbl"><span class="wf-bnum">3</span>email</div>
             <div class="wf-input">you@company.com</div>
-            <div class="wf-lbl">password</div>
-            <div class="wf-input">8+ characters</div>
-            <span class="wf-b solid block">Create account</span>
+            <div class="wf-lblrow"><span class="wf-lbl">password</span><span class="wf-link">Forgot?</span></div>
+            <div class="wf-input">Your password</div>
+            <span class="wf-b solid block">Log in</span>
             <div class="wf-or"><span>or</span></div>
             <span class="wf-b block">Email me a link</span>
-            <div class="wf-legal">Terms &middot; Privacy Policy</div>
-            <div class="wf-trust">Aggregate only. Never individual data.</div>
-            <div class="wf-alt">Have an account? <span class="wf-link">Log in</span></div>
+            <div class="wf-alt">New here? <span class="wf-link">Create an account</span></div>
           </div>
         </div>
         <div class="wf-note">same blocks, single column, full-width fields.</div>
@@ -305,13 +304,12 @@
 
   <!-- SEO (noindex, follow) -->
   <section id="seo">
-    <div class="section-label">Public funnel, transactional form</div>
+    <div class="section-label">Public but functional, return access</div>
     <h2>SEO block (noindex, follow)</h2>
-    <p>Sign up sits in the public funnel, but the form itself is not indexed. This is a deliberate decision, and it differs from the deep app zones (which are noindex, nofollow): here <code>follow</code> is kept so equity flows to the legal pages and Log in.</p>
+    <p>Log in is a public but purely functional return-access page. It carries no acquisition value and is not indexed, the same treatment as 2.0 and different from the deep app zones (noindex, nofollow).</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, follow</code> (thin, transactional; duplicated in intent by the marketing pages)</span></div>
-      <div class="seo-row"><span class="seo-k">acquisition SEO</span><span class="seo-v">lives on the indexed pages that funnel here: 1.0 Landing, 1.x Pricing, 1.5 segment / category landings, each with its own H1, schema, and target queries</span></div>
-      <div class="seo-row"><span class="seo-k">branded queries</span><span class="seo-v">"Brio sign up" is captured by Landing / Home, which links to this form</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, follow</code> (thin, transactional; follow keeps equity flowing to Sign up and legal)</span></div>
+      <div class="seo-row"><span class="seo-k">nav queries</span><span class="seo-v">"Brio login" is navigational, best served by Home / Landing which links here; the form need not rank</span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none on the form</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
@@ -319,15 +317,15 @@
     <ul>
       <li>exactly one H1 (the heading) for the accessible document outline</li>
       <li>email and password are labelled inputs with visible labels</li>
-      <li>errors are conveyed in text, not by color alone</li>
-      <li>the primary and secondary actions are labelled buttons; tap targets at least 44px</li>
+      <li>the wrong-credentials message is conveyed in text, not by color alone</li>
+      <li>Forgot password, Log in, and the magic-link option are labelled controls; tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Flow F1 starts here.</strong> Sign up reuses a reduced 0.1 (pre-auth header), 0.2 (public footer), and a condensed 0.3 trust line, and links to 1.6; it invents nothing global. It is the self-serve expression of item 1: no credit card, straight into onboarding. Next: <strong>2.1 Log in</strong> (return access), then the 2.2 Magic-link sent and 2.3 Invalid or expired link states.</div>
+    <div class="callout ok"><strong>The recurring gate.</strong> Log in reuses the auth-page shell from 2.0, a reduced 0.1, and the 0.2 public footer; it invents nothing global. It is fast, forgiving (wrong credentials and forgotten passwords both have a clear path), and never a dead-end. Next: <strong>2.2 Magic-link sent</strong> (the "check your email" state, shared by the magic-link and password-reset paths), then <strong>2.3 Invalid or expired link</strong>, which closes cluster 2.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 2.0 Sign up - July 2026</p>
-    <p style="margin-top:4px;">The self-serve front door: email + password or magic link, no credit card, no SSO (paid), with a first-commitment privacy trust line, then straight into onboarding (3.0, flow F1 begins). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/signup.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 2.1 Log in - July 2026</p>
+    <p style="margin-top:4px;">Return access: email + password or magic link, with a forgot-password path and a generic wrong-credentials message, reusing the 2.0 auth-page shell. Success routes to the Dashboard or resumes onboarding. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/login.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
