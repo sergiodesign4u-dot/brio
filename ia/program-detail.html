@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Program library (5.0)</title>
+  <title>Brio - IA Detail: Program detail / manage (5.1)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -26,7 +26,6 @@
     .nav-group { padding: 0 8px; }
     .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
     .nav-group-label.active-section { color: var(--accent); }
-    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
     .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
@@ -35,11 +34,6 @@
     .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-    .nav-item-active { color: var(--accent); font-weight: 600; }
-    .nav-node { padding-left: 20px; font-size: 12px; }
     .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
     .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
@@ -95,14 +89,12 @@
     .callout.ok { border-color: var(--green-dim); }
     .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
 
-    /* SEO / note block */
     .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
     .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
     .seo-row:last-child { border-bottom: none; }
     .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
     .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
     .seo-v code { font-size: 12px; }
-    .count { color: var(--text-faint); font-size: 11px; font-family: ui-monospace, monospace; }
 
     /* ===== Black-and-white wireframe kit ===== */
     .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
@@ -116,38 +108,45 @@
     .wf-nav .sp { margin-left: auto; }
     .wf-tab { font-size: 11px; color: #9a9a9a; }
     .wf-tab.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
+    .wf-crumb { padding: 8px 14px; font-size: 10px; color: #7a7a7a; border-bottom: 1px solid #1f1f1f; font-family: ui-monospace, monospace; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.danger { border-color: #9a5a5a; color: #e2b3b3; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
     .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
     .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
     .wf-hl.s { width: 55%; height: 12px; }
-    .wf-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-    .wf-chip { border: 1px solid #444; border-radius: 4px; padding: 4px 9px; font-size: 10.5px; color: #9a9a9a; white-space: nowrap; }
-    .wf-chip.on { border-color: #fff; color: #fff; }
-    .wf-scroll { display: flex; gap: 8px; overflow-x: auto; }
     .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
     .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
     .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
 
-    /* canonical program card (0.4), reused in the grid */
-    .wf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-    .wf-card { border: 1px solid #3a3a3a; border-radius: 8px; padding: 12px; background: #141414; display: flex; flex-direction: column; gap: 6px; min-height: 146px; }
+    /* 0.4 card, header-summary form */
+    .wf-card { border: 1px solid #3a3a3a; border-radius: 8px; padding: 12px; background: #141414; display: flex; flex-direction: column; gap: 6px; }
     .wf-card .cat { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #8a8a8a; }
-    .wf-card .t { color: #fff; font-size: 13px; font-weight: 700; line-height: 1.25; }
+    .wf-card .t { color: #fff; font-size: 14px; font-weight: 700; line-height: 1.25; }
     .wf-card .meta { color: #9a9a9a; font-size: 11px; }
-    .wf-card .desc { color: #a2a2a2; font-size: 11px; }
-    .wf-card .act { margin-top: auto; border: 1px solid #7a7a7a; border-radius: 5px; padding: 7px; text-align: center; font-size: 11px; color: #e6e6e6; }
-    .wf-card .act.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-badge { display: inline-block; border: 1px solid #555; border-radius: 4px; padding: 1px 6px; font-size: 9px; color: #cfcfcf; text-transform: uppercase; letter-spacing: 0.04em; }
-    .wf-badge.rec { border-color: #fff; color: #fff; }
-    .wf-skel .ln { height: 9px; background: #242424; border-radius: 3px; margin: 5px 0; }
-    .wf-skel .ln.s { width: 55%; }
-    .wf-empty { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 18px 14px; text-align: center; color: #cfcfcf; font-size: 12px; }
-    .wf-empty .sub { color: #9a9a9a; font-size: 11px; margin: 6px 0 10px; }
+    .wf-badge { display: inline-block; border: 1px solid #555; border-radius: 4px; padding: 1px 6px; font-size: 9px; color: #cfcfcf; text-transform: uppercase; letter-spacing: 0.04em; align-self: flex-start; }
+
+    /* two-column manage layout */
+    .wf-2col { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0; }
+    .wf-2col > div { border-bottom: 1px solid #1f1f1f; }
+    .wf-2col > div:first-child { border-right: 1px solid #1f1f1f; }
+    @media (max-width: 560px) { .wf-2col { grid-template-columns: 1fr; } .wf-2col > div:first-child { border-right: none; } }
+    .wf-q { border: 1px solid #333; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; color: #a2a2a2; font-size: 11px; }
+    .wf-q .qt { color: #cfcfcf; }
+    .wf-q .tag { font-size: 9px; color: #8a8a8a; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-left: 6px; }
+    .wf-strip2 { text-align: center; font-size: 11px; color: #e0e0e0; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; }
+    .wf-stack { display: flex; flex-direction: column; gap: 8px; }
+
+    /* 0.5 dialog, End confirm mini */
+    .wf-modal-scrim { background: repeating-linear-gradient(45deg, #151515, #151515 6px, #101010 6px, #101010 12px); border: 1px solid #333; border-radius: 8px; padding: 22px; display: flex; justify-content: center; }
+    .wf-modal { width: 260px; max-width: 100%; background: #0c0c0c; border: 1px solid #4a4a4a; border-radius: 8px; padding: 14px; }
+    .wf-modal .mt { color: #fff; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+    .wf-modal .mb { color: #9a9a9a; font-size: 11px; margin-bottom: 12px; }
+    .wf-modal .ma { display: flex; gap: 8px; justify-content: flex-end; }
   </style>
 </head>
 <body>
@@ -186,8 +185,8 @@
       <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
       <div class="nav-subhead-sm">Pages</div>
       <a href="home.html" class="nav-sub-item">Home</a>
-      <a href="program-library.html" class="nav-sub-item nav-sub-active">Program library</a>
-      <a href="program-detail.html" class="nav-sub-item">Program detail</a>
+      <a href="program-library.html" class="nav-sub-item">Program library</a>
+      <a href="program-detail.html" class="nav-sub-item nav-sub-active">Program detail</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -208,25 +207,13 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 5.0</span>
-      <span class="badge">Page, listing</span>
+      <span class="badge">Node 5.1</span>
+      <span class="badge">Page</span>
       <span class="badge">B/W wireframe</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Program library (5.0) &middot; URL: /app/programs</div>
-    <h1>Program library</h1>
-    <p class="hero-intro">The operator browses the curated library and picks a program to run, with the size-matched recommendation pinned so a non-expert is guided, not dropped into a catalog. This is the first listing, so it also sets the listing template. Serves Main, J6, and item 2 (self-serve start). Inside the operator app, so noindex. Source of truth: ia/docs/pages/program-library.md.</p>
-  </section>
-
-  <!-- Listing template -->
-  <section id="template">
-    <div class="section-label">The planks a listing adds</div>
-    <h2>Listing template</h2>
-    <p>A listing adds three planks to the per-page template from Home (0.0). Program library is the first built to it; 5.1 and any later grid follow the same shape.</p>
-    <ol>
-      <li><strong>Facet set defined in-node.</strong> Filter values live with the listing unless they are big enough to be a canonical global. Brio's set is thin (one dimension, category), so it is defined here and cross-referenced, not lifted into 0.6.</li>
-      <li><strong>The grid reuses a canonical card.</strong> The cells are 0.4 Program card. The listing arranges and filters cards; it never restyles them.</li>
-      <li><strong>Empty and loading are first-class states.</strong> Here that is 5.3 first-run empty (a registered node) and the 0.4 skeleton. Neither is ever a dead-end (MS4).</li>
-    </ol>
+    <div class="crumb">IA / Detail Layer / Pages / Program detail (5.1) &middot; URL: /app/programs/:slug</div>
+    <h1>Program detail / manage</h1>
+    <p class="hero-intro">The single program opened into a full page, where the operator reads what it runs and manages its lifecycle (finish setup, activate, end). The 0.4 card becomes the header, then expands into management. Serves Main and item 2. Inside the operator app, so noindex. Source of truth: ia/docs/pages/program-detail.md.</p>
   </section>
 
   <!-- Blocks -->
@@ -235,50 +222,33 @@
     <h2>Content blocks</h2>
     <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
     <ol>
-      <li><strong>Nav + page header</strong> (0.1 operator, Programs tab active): H1 "Programs", one-line subhead "Pick a program. Brio runs it and reads the team pulse for you."</li>
-      <li><strong>Recommended-for-your-size card</strong> (0.4 recommended state, pinned): the guided shortcut that closes choice paralysis. The page's primary action.</li>
-      <li><strong>Facet bar</strong> (category): All plus the four categories (0.6). Thin, single dimension. See Facets below.</li>
-      <li><strong>Program-card grid</strong> (0.4 canonical): the rest of the library as default cards; programs the operator already runs carry status badges.</li>
-      <li><strong>Empty state</strong> (5.3, first run): shown in place of the grid before anything is picked; recommended shortcut plus browse hint. Never a dead-end.</li>
-      <li><strong>App shell footer</strong> (minimal): a privacy link (1.1) and a help link, not the public marketing footer (0.2).</li>
+      <li><strong>Nav + header card</strong> (0.1 operator, Programs active; 0.4 in header-summary form): category, title, cadence and duration, status badge. Back to 5.0.</li>
+      <li><strong>Status and primary action band</strong>: the one clear next step, which changes by status. Kept high so the non-expert always sees what to do.</li>
+      <li><strong>Overview / what it runs</strong>: one short paragraph, cadence, duration, category. Plain language.</li>
+      <li><strong>Check-in questions it carries</strong>: the 1 to 3 questions read-only, each with its type (emoji or slider); editing is 5.2, via "Edit check-in".</li>
+      <li><strong>Privacy reminder</strong> (0.3 operator variant, condensed): "You see aggregate only, never who answered." Reuse, not a new component.</li>
+      <li><strong>Manage actions</strong>: activate (draft to active), end (active to ended, opens the 0.5 confirm dialog), edit check-in (to 5.2).</li>
+      <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation (operator logged-in, Programs active), 0.4 Program card (recommended / default / active / draft / ended / skeleton), 0.6 Canonical lists (categories, size buckets). No new component; the facet set is in-node, not a global.</p>
+    <p><strong>Components used:</strong> 0.1 Navigation, 0.4 Program card (header-summary, status variants), 0.3 Privacy-disclosure (operator, condensed), 0.5 Dialog (End confirm), 0.6 Canonical lists. No new component; 5.1 becomes a new consumer of 0.5.</p>
   </section>
 
-  <!-- Facets -->
-  <section id="facets">
-    <div class="section-label">Listing only</div>
-    <h2>Filters and facets</h2>
-    <p>One facet, defined here because the set is thin and used mainly on this page. It filters which 0.4 cards show; it never changes a card.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Facet</th><th>Values</th><th>Behavior</th></tr></thead>
-        <tbody>
-          <tr><td>Category (single-select)</td><td>All (default), Mental health, Physical, Financial, Social (from 0.6)</td><td>client-side narrowing over a small curated set; reflected as <code>?category=</code> for the back button; canonical stays <code>/app/programs</code></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <ul>
-      <li>The recommended pin stays first only under <strong>All</strong>; within a filtered category the size-recommended program, if present, sorts first.</li>
-      <li><strong>No search, no pagination, no sort control</strong> in the MVP. Browse plus one facet is enough for a small curated library, which is the concrete reason <strong>11.5 Global search is likely N/A</strong> (confirmed or closed at Step 6). A future sort is deferred <span class="hyp">?</span>, not built.</li>
-      <li><strong>Zero result</strong> in a category shows "Nothing here yet, see all programs" that clears the facet back to All. Never a dead-end.</li>
-    </ul>
-  </section>
-
-  <!-- States -->
+  <!-- States + CTA -->
   <section id="states">
-    <div class="section-label">By auth, data, and role</div>
-    <h2>States</h2>
+    <div class="section-label">By status, auth, and role</div>
+    <h2>States and primary CTA</h2>
+    <p>The through-line action is Set up check-in to 5.2 (the node's forward transition); it takes the right shape per status.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Never a dead-end</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
         <tbody>
-          <tr><td>Guest (not authed)</td><td>redirect to 2.1 Log in, return here after</td><td>returns to /app/programs</td></tr>
-          <tr><td>Operator, first run</td><td>5.3 empty in place of the grid: recommended shortcut + browse hint</td><td>shortcut to 5.1</td></tr>
-          <tr><td>Operator, active (default)</td><td>recommended pinned first, then the grid; running programs show status badges</td><td>every card to 5.1</td></tr>
-          <tr><td>Loading</td><td>0.4 skeleton cards until the library resolves</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not load programs, retry" + link to 4.0 Dashboard</td><td>retry or Dashboard (MS4)</td></tr>
-          <tr><td>Owner role</td><td>redirect to 9.0 Owner dashboard</td><td>owners do not manage programs</td></tr>
+          <tr><td>Draft</td><td>check-in not finished; Activate disabled until configured</td><td>Finish setup (to 5.2)</td></tr>
+          <tr><td>Active (running)</td><td>next cycle date; results read on the dashboard, never per-person here</td><td>Edit check-in (to 5.2); End program (0.5 confirm)</td></tr>
+          <tr><td>Ended</td><td>completed</td><td>View results (to 4.1); Reactivate</td></tr>
+          <tr><td>Loading</td><td>skeleton header and body</td><td>-</td></tr>
+          <tr><td>Error</td><td>"Could not load this program, retry"</td><td>retry or back to 5.0 (MS4)</td></tr>
+          <tr><td>Not found (bad slug)</td><td>"Program not found"</td><td>back to 5.0 (MS4)</td></tr>
+          <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
         </tbody>
       </table>
     </div>
@@ -288,100 +258,84 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The grid collapses from multi-column on desktop to one column at the 360px baseline. Cards are the canonical 0.4 element, arranged here, not restyled.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The header card spans full width; below it a two-column split on desktop (overview and questions on the left, a manage panel on the right) collapses to one column at the 360px baseline.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, operator, active state</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, active state</div>
         <div class="wf-page">
           <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab on">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
+          <div class="wf-crumb">Programs / Weekly mood check-in</div>
           <div class="wf-sec">
-            <div class="lbl">1 &middot; header (H1)</div>
-            <div class="wf-hl"></div><div class="wf-hl s"></div>
+            <div class="lbl">1 &middot; header card (0.4 summary)</div>
+            <div class="wf-card">
+              <span class="wf-badge">Active</span>
+              <span class="cat">Mental health</span>
+              <span class="t">Weekly mood check-in</span>
+              <span class="meta">weekly, 4 weeks &middot; next cycle in 3 days</span>
+            </div>
           </div>
-          <div class="wf-sec">
-            <div class="lbl">3 &middot; facet bar (category)</div>
-            <div class="wf-chips"><span class="wf-chip on">All</span><span class="wf-chip">Mental health</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">2 + 4 &middot; recommended pinned, then grid (0.4)</div>
-            <div class="wf-grid">
-              <div class="wf-card">
-                <span class="wf-badge rec">Recommended for your size</span>
-                <span class="cat">Mental health</span>
-                <span class="t">Weekly mood check-in</span>
-                <span class="meta">weekly, 4 weeks &middot; 1 question</span>
-                <span class="desc">A light pulse on how the team feels.</span>
-                <span class="act solid">Select</span>
+          <div class="wf-2col">
+            <div>
+              <div class="wf-sec">
+                <div class="lbl">3 &middot; overview</div>
+                <div class="wf-hl"></div><div class="wf-hl s"></div>
               </div>
-              <div class="wf-card">
-                <span class="cat">Physical</span>
-                <span class="t">Move more, together</span>
-                <span class="meta">weekly, 6 weeks &middot; 2 questions</span>
-                <span class="desc">Small movement goals, no individual tracking.</span>
-                <span class="act">Select</span>
+              <div class="wf-sec">
+                <div class="lbl">4 &middot; check-in questions (read-only)</div>
+                <div class="wf-q"><span class="qt">How has the team felt this week?</span><span class="tag">emoji</span></div>
+                <div class="wf-q"><span class="qt">Workload this week?</span><span class="tag">slider</span></div>
+                <div class="wf-plain">Edit check-in (to 5.2)</div>
               </div>
-              <div class="wf-card">
-                <span class="wf-badge">Active</span>
-                <span class="cat">Financial</span>
-                <span class="t">Money basics</span>
-                <span class="meta">next cycle in 3 days &middot; 2 questions</span>
-                <span class="desc">Confidence with everyday finances.</span>
-                <span class="act">Manage</span>
+              <div class="wf-sec">
+                <div class="lbl">5 &middot; privacy reminder (0.3)</div>
+                <div class="wf-strip2">You see aggregate only, never who answered.</div>
               </div>
-              <div class="wf-card">
-                <span class="wf-badge">Draft</span>
-                <span class="cat">Social</span>
-                <span class="t">Team connection</span>
-                <span class="meta">not started &middot; 1 question</span>
-                <span class="desc">Belonging and small rituals.</span>
-                <span class="act">Finish setup</span>
-              </div>
-              <div class="wf-card">
-                <span class="wf-badge">Ended</span>
-                <span class="cat">Mental health</span>
-                <span class="t">Stress reset</span>
-                <span class="meta">completed &middot; 3 questions</span>
-                <span class="desc">A short reset when things get heavy.</span>
-                <span class="act">View results</span>
-              </div>
-              <div class="wf-card wf-skel">
-                <div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="ln s"></div>
-                <div class="ln" style="margin-top:auto;"></div>
+            </div>
+            <div>
+              <div class="wf-sec">
+                <div class="lbl">2 + 6 &middot; status + manage</div>
+                <div class="wf-stack">
+                  <span class="wf-b solid">Edit check-in</span>
+                  <span class="wf-b">View team pulse</span>
+                  <span class="wf-b danger">End program</span>
+                </div>
               </div>
             </div>
           </div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">one link per card to 5.1 &middot; status + recommended are text, not color-only &middot; targets min 44px.</div>
+        <div class="wf-note">status + questions are text, not color-only &middot; End program confirms via 0.5 &middot; targets min 44px.</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
           <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Programs</span></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>facets (scroll)</div><div class="wf-scroll"><span class="wf-chip on">All</span><span class="wf-chip">Mental</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>recommended (pinned)</div>
-            <div class="wf-card"><span class="wf-badge rec">Recommended for your size</span><span class="cat">Mental health</span><span class="t">Weekly mood check-in</span><span class="meta">weekly, 4 weeks &middot; 1 question</span><span class="act solid">Select</span></div>
+          <div class="wf-crumb">Programs / Weekly mood check-in</div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header card</div>
+            <div class="wf-card"><span class="wf-badge">Active</span><span class="cat">Mental health</span><span class="t">Weekly mood check-in</span><span class="meta">weekly, 4 weeks</span></div>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>grid, single column</div>
-            <div class="wf-card"><span class="cat">Physical</span><span class="t">Move more, together</span><span class="meta">weekly, 6 weeks &middot; 2 questions</span><span class="act">Select</span></div>
-          </div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>primary action</div><span class="wf-b solid">Edit check-in</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>questions</div><div class="wf-q"><span class="qt">Team mood?</span><span class="tag">emoji</span></div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">5</span>privacy</div><div class="wf-strip2">Aggregate only, never who answered.</div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">6</span>manage</div><span class="wf-b danger">End program</span></div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, facets scroll horizontally.</div>
+        <div class="wf-note">same blocks, single column, primary action high.</div>
       </div>
     </div>
 
     <div class="wf-frame" style="margin-top:22px;">
-      <div class="wf-cap">State 5.3 &middot; first-run empty (never a dead-end)</div>
-      <div class="wf-empty">
-        No active program yet.
-        <div class="sub">Start with the one we recommend for your size.</div>
-        <span class="wf-b solid">Select recommended</span> <span class="wf-plain">or browse by category</span>
+      <div class="wf-cap">End program &middot; 0.5 confirm dialog (destructive action)</div>
+      <div class="wf-modal-scrim">
+        <div class="wf-modal">
+          <div class="mt">End this program?</div>
+          <div class="mb">The team stops getting check-ins. Past results stay on the dashboard. You can reactivate later.</div>
+          <div class="ma"><span class="wf-b">Cancel</span><span class="wf-b danger">End program</span></div>
+        </div>
       </div>
-      <div class="wf-note">the empty state replaces the grid, it does not blank the page; the shortcut goes to 5.1.</div>
+      <div class="wf-note">reuses 0.5: role="dialog", focus trap, Esc closes, background inert &middot; ending is reversible (reactivate), phrased plainly.</div>
     </div>
   </section>
 
@@ -389,27 +343,26 @@
   <section id="seo">
     <div class="section-label">Private app zone</div>
     <h2>SEO block (noindex)</h2>
-    <p>Program library is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Program detail is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
     <div class="seo-block">
       <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/programs</code>, facet as <code>?category=</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/programs/:slug</code></span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 ("Programs") for the accessible document outline</li>
-      <li>the facet controls are labeled controls, not color-only</li>
-      <li>every card is one in-app <code>&lt;a&gt;</code> to 5.1 with the title as its accessible name</li>
-      <li>the recommended tag and status badges are text, not color alone; tap targets at least 44px</li>
-      <li>if a public "programs overview" or a 1.5 category landing ever renders these cards, that page is indexable and gets its own A-E SEO and schema decision at its own node, not here</li>
+      <li>exactly one H1 (the program name) for the accessible document outline</li>
+      <li>status badge and questions are text, not color-only</li>
+      <li>manage actions are labeled controls; the End confirm follows the 0.5 dialog a11y contract (focus trap, Esc, inert background)</li>
+      <li>tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Listing template set.</strong> Program library reuses 0.1, 0.4, and 0.6 and invents nothing but the thin in-node facet set. Next page: <strong>5.1 Program detail / manage</strong> (the card opened into a full page), per the persona-priority order.</div>
+    <div class="callout ok"><strong>Reuse only.</strong> Program detail reuses 0.1, 0.4, 0.3, 0.5, and 0.6 and invents nothing; it adds 5.1 as a new consumer of the 0.5 dialog (End confirm). Next page: <strong>5.2 Check-in setup</strong> (pick 1 to 3 questions, cadence, the minimum-N and no-live-count notes).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 5.0 Program library - July 2026</p>
-    <p style="margin-top:4px;">The first listing: in-node facet set, a grid of canonical 0.4 cards, first-run empty (5.3) and skeleton states, noindex app zone. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/program-library.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 5.1 Program detail / manage - July 2026</p>
+    <p style="margin-top:4px;">The card opened into a full page: header summary, status-driven primary action, read-only questions, privacy reminder, and lifecycle management with a 0.5 End confirm. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/program-detail.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 

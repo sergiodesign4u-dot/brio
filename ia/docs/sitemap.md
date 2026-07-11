@@ -68,7 +68,7 @@ INCLUDES: title · category (from 0.6) · cadence and duration · short descript
 
 **0.5 Dialog / modal shell** · dialog (global, canonical shell) · supporting; one accessible modal contract
 INCLUDES: overlay (inert, dimmed backdrop) · container (role="dialog", aria-modal) · header (title = accessible name, close X) · body slot · footer (primary + secondary or cancel) · dismiss (X / Esc / backdrop). Variants: form (6.1), decision (7.2), destructive confirm, non-modal banner (11.3). States: default, loading, error, success. Full spec: ia/docs/pages/dialog.md
-→ reused by 6.1, 7.2, 11.3, and every confirmation; focus trap, focus returns to opener on close
+→ reused by 5.1 (End program confirm), 6.1, 7.2, 11.3, and every confirmation; focus trap, focus returns to opener on close
 
 **0.6 Canonical lists** · section (global reference) · supporting; single source for repeated values
 INCLUDES: program categories (mental health / physical / financial / social) · plan tiers (Free / Starter / Growth, prices [?]) · company-size buckets (cut points [?]) · input types (emoji / slider) · cadence (weekly) · statuses (program draft/active/ended, cycle open/closed). Full spec: ia/docs/pages/canonical-lists.md
@@ -303,7 +303,7 @@ INCLUDES: "submit failed, retry" · answers preserved
 
 **Depth stays within budget:** the recurring main-job value (pulse + next action) is 1 tap from login (4.0 is home); the deepest core action (5.2 Check-in setup) is 3 taps (Programs, Program detail, Check-in setup). Detail in the Navigation section.
 
-**Global components discovered at Step 3** (cluster 0, each defined once and referenced, never re-specified per page): 0.3 Privacy-disclosure component (rendered by 10.1, 8.2, 3.1, 4.0, 9.1, 1.1), 0.4 Program card (3.1, 5.0, 5.1), 0.5 Dialog / modal shell (6.1, 7.2, 11.3), 0.6 Canonical lists (program categories, plan tiers, company-size buckets). The library facet set is NOT a standalone global (thin, used mainly by 5.0); it is defined inside 5.0 and cross-referenced. Brio has no catalog tree, so there is no taxonomy or category-matrix node.
+**Global components discovered at Step 3** (cluster 0, each defined once and referenced, never re-specified per page): 0.3 Privacy-disclosure component (rendered by 10.1, 8.2, 3.1, 4.0, 9.1, 1.1), 0.4 Program card (3.1, 5.0, 5.1), 0.5 Dialog / modal shell (5.1, 6.1, 7.2, 11.3), 0.6 Canonical lists (program categories, plan tiers, company-size buckets). The library facet set is NOT a standalone global (thin, used mainly by 5.0); it is defined inside 5.0 and cross-referenced. Brio has no catalog tree, so there is no taxonomy or category-matrix node.
 
 **Numbering bridge to Traceability** (base-layer screen numbers 1..26 stay unchanged): 1=0.0, 2=1.0, 3=2.0, 4=2.1, 5=3.0, 6=3.1, 7=3.2, 8=4.0, 9=4.1, 10=4.2, 11=5.0, 12=5.1, 13=5.2, 14=6.0, 15=7.0, 16=7.1, 17=8.1, 18=8.2, 19=8.3, 20=8.4, 21=9.0, 22=9.2, 23=10.0, 24=10.1, 25=10.2, 26=10.3. The new sub-nodes (2.2, 2.3, 3.3, 4.3, 4.4, 5.3, 6.1, 7.2, 7.3, 8.0, 9.1, 9.3, 10.4, 10.5, 10.6, and cluster 11) are states, dialogs, and global components introduced by the Detail Layer; each inherits its parent's job coverage. Cluster 1 also grew: 1.1 to 1.6 are public pages registered from the footer (0.2) at Step 3, serving the existing Main and trust jobs, not new jobs.
 
