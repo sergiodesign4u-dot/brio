@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Program detail / manage (5.1)</title>
+  <title>Brio - IA Detail: Team pulse detail (4.1)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -69,6 +69,7 @@
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -111,42 +112,42 @@
     .wf-crumb { padding: 8px 14px; font-size: 10px; color: #7a7a7a; border-bottom: 1px solid #1f1f1f; font-family: ui-monospace, monospace; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.danger { border-color: #9a5a5a; color: #e2b3b3; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
     .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
-    .wf-hl.s { width: 55%; height: 12px; }
-    .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
     .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
     .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
 
-    /* 0.4 card, header-summary form */
-    .wf-card { border: 1px solid #3a3a3a; border-radius: 8px; padding: 12px; background: #141414; display: flex; flex-direction: column; gap: 6px; }
-    .wf-card .cat { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #8a8a8a; }
-    .wf-card .t { color: #fff; font-size: 14px; font-weight: 700; line-height: 1.25; }
-    .wf-card .meta { color: #9a9a9a; font-size: 11px; }
-    .wf-badge { display: inline-block; border: 1px solid #555; border-radius: 4px; padding: 1px 6px; font-size: 9px; color: #cfcfcf; text-transform: uppercase; letter-spacing: 0.04em; align-self: flex-start; }
-
-    /* two-column manage layout */
-    .wf-2col { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0; }
+    /* two-column body */
+    .wf-2col { display: grid; grid-template-columns: 1fr 1.2fr; gap: 0; }
     .wf-2col > div { border-bottom: 1px solid #1f1f1f; }
     .wf-2col > div:first-child { border-right: 1px solid #1f1f1f; }
     @media (max-width: 560px) { .wf-2col { grid-template-columns: 1fr; } .wf-2col > div:first-child { border-right: none; } }
-    .wf-q { border: 1px solid #333; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; color: #a2a2a2; font-size: 11px; }
-    .wf-q .qt { color: #cfcfcf; }
-    .wf-q .tag { font-size: 9px; color: #8a8a8a; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-left: 6px; }
-    .wf-strip2 { text-align: center; font-size: 11px; color: #e0e0e0; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; }
-    .wf-stack { display: flex; flex-direction: column; gap: 8px; }
 
-    /* 0.5 dialog, End confirm mini */
-    .wf-modal-scrim { background: repeating-linear-gradient(45deg, #151515, #151515 6px, #101010 6px, #101010 12px); border: 1px solid #333; border-radius: 8px; padding: 22px; display: flex; justify-content: center; }
-    .wf-modal { width: 260px; max-width: 100%; background: #0c0c0c; border: 1px solid #4a4a4a; border-radius: 8px; padding: 14px; }
-    .wf-modal .mt { color: #fff; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
-    .wf-modal .mb { color: #9a9a9a; font-size: 11px; margin-bottom: 12px; }
-    .wf-modal .ma { display: flex; gap: 8px; justify-content: flex-end; }
+    /* score read (E1) */
+    .wf-pulse { border: 1px solid #4a4a4a; border-radius: 8px; padding: 14px; background: #131313; }
+    .wf-pulse .read { font-size: 24px; font-weight: 800; color: #fff; line-height: 1.1; }
+    .wf-pulse .num { font-family: ui-monospace, monospace; color: #cfcfcf; font-size: 12px; margin-top: 2px; }
+    .wf-pulse .interp { color: #b6b6b6; font-size: 12px; margin: 8px 0 12px; }
+    .wf-pulse .act-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .wf-pulse .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* trend + participation */
+    .wf-spark { display: flex; align-items: flex-end; gap: 5px; height: 64px; margin-bottom: 8px; }
+    .wf-spark .bar { width: 12px; background: #3a3a3a; border-radius: 2px 2px 0 0; }
+    .wf-spark .bar.hi { background: #cfcfcf; }
+    .wf-spark .bar.low { background: #6a6a6a; }
+    .wf-axis { display: flex; justify-content: space-between; font-size: 8.5px; color: #6a6a6a; font-family: ui-monospace, monospace; }
+    .wf-metric { color: #fff; font-size: 13px; font-weight: 700; margin-top: 10px; }
+    .wf-metric span { color: #9a9a9a; font-weight: 400; font-size: 11px; }
+    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; margin-top: 10px; }
+
+    /* minimum-N state */
+    .wf-state { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 16px; text-align: center; color: #cfcfcf; font-size: 12px; }
+    .wf-state .n { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+    .wf-state .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 10px; }
   </style>
 </head>
 <body>
@@ -186,10 +187,10 @@
       <div class="nav-subhead-sm">Pages</div>
       <a href="home.html" class="nav-sub-item">Home</a>
       <a href="program-library.html" class="nav-sub-item">Program library</a>
-      <a href="program-detail.html" class="nav-sub-item nav-sub-active">Program detail</a>
+      <a href="program-detail.html" class="nav-sub-item">Program detail</a>
       <a href="check-in-setup.html" class="nav-sub-item">Check-in setup</a>
       <a href="dashboard.html" class="nav-sub-item">Dashboard</a>
-      <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
+      <a href="team-pulse.html" class="nav-sub-item nav-sub-active">Team pulse</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -210,13 +211,13 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 5.1</span>
+      <span class="badge">Node 4.1</span>
       <span class="badge">Page</span>
-      <span class="badge">B/W wireframe</span>
+      <span class="badge privacy">Aggregate only</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Program detail (5.1) &middot; URL: /app/programs/:slug</div>
-    <h1>Program detail / manage</h1>
-    <p class="hero-intro">The single program opened into a full page, where the operator reads what it runs and manages its lifecycle (finish setup, activate, end). The 0.4 card becomes the header, then expands into management. Serves Main and item 2. Inside the operator app, so noindex. Source of truth: ia/docs/pages/program-detail.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Team pulse (4.1) &middot; URL: /app/pulse</div>
+    <h1>Team pulse detail</h1>
+    <p class="hero-intro">The full read behind the dashboard card: the score and its number, the trend over time, and the participation rate, always aggregate, with the same plain-language interpretation and next action (E1). Serves J1, J2, and E1. Inside the operator app, so noindex. Source of truth: ia/docs/pages/team-pulse.md.</p>
   </section>
 
   <!-- Blocks -->
@@ -225,32 +226,31 @@
     <h2>Content blocks</h2>
     <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
     <ol>
-      <li><strong>Nav + header card</strong> (0.1 operator, Programs active; 0.4 in header-summary form): category, title, cadence and duration, status badge. Back to 5.0.</li>
-      <li><strong>Status and primary action band</strong>: the one clear next step, which changes by status. Kept high so the non-expert always sees what to do.</li>
-      <li><strong>Overview / what it runs</strong>: one short paragraph, cadence, duration, category. Plain language.</li>
-      <li><strong>Check-in questions it carries</strong>: the 1 to 3 questions read-only, each with its type (emoji or slider); editing is 5.2, via "Edit check-in".</li>
-      <li><strong>Privacy reminder</strong> (0.3 operator variant, condensed): "You see aggregate only, never who answered." Reuse, not a new component.</li>
-      <li><strong>Manage actions</strong>: activate (draft to active), end (active to ended, opens the 0.5 confirm dialog), edit check-in (to 5.2).</li>
+      <li><strong>Nav + header</strong> (0.1 operator, Dashboard active): H1 "Team pulse", subhead naming the program and period. Back to 4.0.</li>
+      <li><strong>Score, number, and reading</strong>: the interpretive layer in full, the plain-language reading plus the number behind it (a team wellbeing index <span class="hyp">? scale</span>), one line of interpretation, one suggested next action. The number is shown here, unlike the dashboard card.</li>
+      <li><strong>Trend over time</strong>: a larger chart than the dashboard spark, the aggregate across recent closed cycles, so a decline shows early (J2). One value per cycle, never per person.</li>
+      <li><strong>Participation rate</strong>: the share who answered this cycle and its trend, never who.</li>
+      <li><strong>Minimum-N state</strong>: under 5 answers, the score area is replaced by "Waiting for at least 5 responses," no live count; past cycles still render. Same D1 math as 4.3.</li>
+      <li><strong>Actions</strong>: Share with your owner (to 7.0), the primary forward, and Adjust check-in (to 5.2).</li>
+      <li><strong>Privacy-proof mini</strong> (0.3 condensed): "Aggregate only. You never see who answered," to 1.1.</li>
       <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation, 0.4 Program card (header-summary, status variants), 0.3 Privacy-disclosure (operator, condensed), 0.5 Dialog (End confirm), 0.6 Canonical lists. No new component; 5.1 becomes a new consumer of 0.5.</p>
+    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (condensed). The score read, trend chart, and participation metric are the same thin in-node elements from 4.0, shown fuller. No new global invented.</p>
   </section>
 
-  <!-- States + CTA -->
+  <!-- States -->
   <section id="states">
-    <div class="section-label">By status, auth, and role</div>
+    <div class="section-label">Data, privacy math, and role</div>
     <h2>States and primary CTA</h2>
-    <p>The through-line action is Set up check-in to 5.2 (the node's forward transition); it takes the right shape per status.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Next action</th></tr></thead>
         <tbody>
-          <tr><td>Draft</td><td>check-in not finished; Activate disabled until configured</td><td>Finish setup (to 5.2)</td></tr>
-          <tr><td>Active (running)</td><td>next cycle date; results read on the dashboard, never per-person here</td><td>Edit check-in (to 5.2); End program (0.5 confirm)</td></tr>
-          <tr><td>Ended</td><td>completed</td><td>View results (to 4.1); Reactivate</td></tr>
-          <tr><td>Loading</td><td>skeleton header and body</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not load this program, retry"</td><td>retry or back to 5.0 (MS4)</td></tr>
-          <tr><td>Not found (bad slug)</td><td>"Program not found"</td><td>back to 5.0 (MS4)</td></tr>
+          <tr><td>Default (N of 5+ met)</td><td>score + number + interpretation; trend and participation</td><td>Share with owner (to 7.0)</td></tr>
+          <tr><td>Minimum-N not met</td><td>"Waiting for at least 5 responses", no live count; past cycles still show</td><td>Nudge the team (to 6.0)</td></tr>
+          <tr><td>Cycle open (4.4 logic)</td><td>current cycle "results after it closes", no tally; closed cycles show</td><td>-</td></tr>
+          <tr><td>No data yet (first run)</td><td>guidance instead of an empty chart</td><td>Pick a program (5.0) / Invite (6.0)</td></tr>
+          <tr><td>Loading / Error</td><td>skeleton / "Could not load, retry"</td><td>retry or back to 4.0 (MS4)</td></tr>
           <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
         </tbody>
       </table>
@@ -261,84 +261,73 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The header card spans full width; below it a two-column split on desktop (overview and questions on the left, a manage panel on the right) collapses to one column at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The score read leads; the trend chart is prominent beside it on desktop and stacks below at the 360px baseline.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, active state</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, default (N met)</div>
         <div class="wf-page">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab on">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
-          <div class="wf-crumb">Programs / Weekly mood check-in</div>
-          <div class="wf-sec">
-            <div class="lbl">1 &middot; header card (0.4 summary)</div>
-            <div class="wf-card">
-              <span class="wf-badge">Active</span>
-              <span class="cat">Mental health</span>
-              <span class="t">Weekly mood check-in</span>
-              <span class="meta">weekly, 4 weeks &middot; next cycle in 3 days</span>
-            </div>
-          </div>
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab on">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
+          <div class="wf-crumb">Dashboard / Team pulse</div>
           <div class="wf-2col">
             <div>
               <div class="wf-sec">
-                <div class="lbl">3 &middot; overview</div>
-                <div class="wf-hl"></div><div class="wf-hl s"></div>
+                <div class="lbl">2 &middot; score + number + reading (E1)</div>
+                <div class="wf-pulse">
+                  <div class="read">Steady</div>
+                  <div class="num">7.4 / 10 &middot; index [?]</div>
+                  <div class="interp">Holding steady this week, in line with last.</div>
+                  <div class="act-lbl">Actions</div>
+                  <div class="acts"><span class="wf-b solid">Share with owner</span><span class="wf-b">Adjust check-in</span></div>
+                </div>
               </div>
               <div class="wf-sec">
-                <div class="lbl">4 &middot; check-in questions (read-only)</div>
-                <div class="wf-q"><span class="qt">How has the team felt this week?</span><span class="tag">emoji</span></div>
-                <div class="wf-q"><span class="qt">Workload this week?</span><span class="tag">slider</span></div>
-                <div class="wf-plain">Edit check-in (to 5.2)</div>
-              </div>
-              <div class="wf-sec">
-                <div class="lbl">5 &middot; privacy reminder (0.3)</div>
-                <div class="wf-strip2">You see aggregate only, never who answered.</div>
+                <div class="lbl">4 &middot; participation</div>
+                <div class="wf-metric">72% <span>of the team answered this cycle</span></div>
+                <div class="wf-strip2">Aggregate only. You never see who answered.</div>
               </div>
             </div>
             <div>
               <div class="wf-sec">
-                <div class="lbl">2 + 6 &middot; status + manage</div>
-                <div class="wf-stack">
-                  <span class="wf-b solid">Edit check-in</span>
-                  <span class="wf-b">View team pulse</span>
-                  <span class="wf-b danger">End program</span>
+                <div class="lbl">3 &middot; trend over time (per cycle)</div>
+                <div class="wf-spark">
+                  <span class="bar" style="height:50%"></span><span class="bar" style="height:62%"></span><span class="bar low" style="height:44%"></span><span class="bar" style="height:58%"></span><span class="bar" style="height:64%"></span><span class="bar" style="height:60%"></span><span class="bar hi" style="height:66%"></span><span class="bar hi" style="height:64%"></span>
                 </div>
+                <div class="wf-axis"><span>8 wks ago</span><span>now</span></div>
               </div>
             </div>
           </div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">status + questions are text, not color-only &middot; End program confirms via 0.5 &middot; targets min 44px.</div>
+        <div class="wf-note">number shown here (dashboard shows the word only) &middot; trend is per closed cycle, aggregate &middot; targets min 44px.</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Programs</span></div>
-          <div class="wf-crumb">Programs / Weekly mood check-in</div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header card</div>
-            <div class="wf-card"><span class="wf-badge">Active</span><span class="cat">Mental health</span><span class="t">Weekly mood check-in</span><span class="meta">weekly, 4 weeks</span></div>
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Pulse</span></div>
+          <div class="wf-crumb">Dashboard / Team pulse</div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>score + reading</div>
+            <div class="wf-pulse"><div class="read">Steady</div><div class="num">7.4 / 10 [?]</div><div class="interp">Holding steady.</div><div class="acts"><span class="wf-b solid">Share with owner</span></div></div>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>primary action</div><span class="wf-b solid">Edit check-in</span></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>questions</div><div class="wf-q"><span class="qt">Team mood?</span><span class="tag">emoji</span></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">5</span>privacy</div><div class="wf-strip2">Aggregate only, never who answered.</div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">6</span>manage</div><span class="wf-b danger">End program</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>trend</div>
+            <div class="wf-spark"><span class="bar" style="height:50%"></span><span class="bar" style="height:62%"></span><span class="bar low" style="height:44%"></span><span class="bar" style="height:60%"></span><span class="bar hi" style="height:64%"></span></div>
+          </div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>participation</div><div class="wf-metric">72% <span>answered</span></div></div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, primary action high.</div>
+        <div class="wf-note">same blocks, single column, chart fits width.</div>
       </div>
     </div>
 
     <div class="wf-frame" style="margin-top:22px;">
-      <div class="wf-cap">End program &middot; 0.5 confirm dialog (destructive action)</div>
-      <div class="wf-modal-scrim">
-        <div class="wf-modal">
-          <div class="mt">End this program?</div>
-          <div class="mb">The team stops getting check-ins. Past results stay on the dashboard. You can reactivate later.</div>
-          <div class="ma"><span class="wf-b">Cancel</span><span class="wf-b danger">End program</span></div>
-        </div>
+      <div class="wf-cap">Minimum-N state &middot; score not ready (D1 in the detail)</div>
+      <div class="wf-state">
+        <div class="n">Waiting for at least 5 responses</div>
+        <div class="sub">No score yet, and no live count while the cycle is open. Past cycles still show in the trend.</div>
+        <span class="wf-b solid">Nudge the team</span>
       </div>
-      <div class="wf-note">reuses 0.5: role="dialog", focus trap, Esc closes, background inert &middot; ending is reversible (reactivate), phrased plainly.</div>
+      <div class="wf-note">the score area is replaced, the trend keeps prior closed cycles; never a dead-end, routes to 6.0.</div>
     </div>
   </section>
 
@@ -346,26 +335,26 @@
   <section id="seo">
     <div class="section-label">Private app zone</div>
     <h2>SEO block (noindex)</h2>
-    <p>Program detail is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Team pulse detail is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
     <div class="seo-block">
       <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/programs/:slug</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/pulse</code></span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 (the program name) for the accessible document outline</li>
-      <li>status badge and questions are text, not color-only</li>
-      <li>manage actions are labeled controls; the End confirm follows the 0.5 dialog a11y contract (focus trap, Esc, inert background)</li>
+      <li>exactly one H1 ("Team pulse") for the accessible document outline</li>
+      <li>the score reading and number are text, not color-only</li>
+      <li>the trend chart has a text equivalent (direction and the latest values)</li>
       <li>tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Reuse only.</strong> Program detail reuses 0.1, 0.4, 0.3, 0.5, and 0.6 and invents nothing; it adds 5.1 as a new consumer of the 0.5 dialog (End confirm). Next page: <strong>5.2 Check-in setup</strong> (pick 1 to 3 questions, cadence, the minimum-N and no-live-count notes).</div>
+    <div class="callout ok"><strong>Full read, reuse only.</strong> Team pulse detail reuses 0.1 and 0.3 and invents nothing global; the score read, trend, and participation are the same in-node elements as 4.0. It carries the minimum-N state (D1) in the detail. Next: <strong>4.2 Threshold alert detail</strong> (what dropped, a plain reading, a next action, and a link to the program), which closes cluster 4.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 5.1 Program detail / manage - July 2026</p>
-    <p style="margin-top:4px;">The card opened into a full page: header summary, status-driven primary action, read-only questions, privacy reminder, and lifecycle management with a 0.5 End confirm. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/program-detail.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 4.1 Team pulse detail - July 2026</p>
+    <p style="margin-top:4px;">The full read behind the card: score and number, trend over time, participation as a share, interpretation and next action (E1), and the minimum-N state where D1 shows. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/team-pulse.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
