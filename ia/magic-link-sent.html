@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Invite-send error (3.3)</title>
+  <title>Brio - IA Detail: Magic-link sent (2.2)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -107,36 +107,28 @@
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
     .wf-b.sm { padding: 4px 9px; font-size: 10px; }
     .wf-b.block { display: block; }
+    .wf-b.disabled { color: #5a5a5a; border-color: #3a3a3a; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* wizard shell */
-    .wf-wizpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-wizhead { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; }
-    .wf-prog { margin-left: auto; display: flex; align-items: center; gap: 6px; }
-    .wf-prog .seg { width: 22px; height: 4px; border-radius: 2px; background: #333; }
-    .wf-prog .seg.on { background: #e6e6e6; }
-    .wf-prog .txt { font-size: 9px; color: #8a8a8a; font-family: ui-monospace, monospace; margin-left: 4px; }
-    .wf-wiz { max-width: 360px; margin: 0 auto; padding: 22px 18px; }
-    .wf-wiz .wh { color: #fff; font-size: 18px; font-weight: 800; }
-    .wf-wiz .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 16px; }
-    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 6px; }
-    .wf-micro { color: #8a8a8a; font-size: 10px; }
+    /* auth page shell (shared with 2.0 / 2.1) */
+    .wf-authpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-topbar { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-auth { max-width: 360px; margin: 0 auto; padding: 26px 20px; }
+    .wf-auth .wh { color: #fff; font-size: 19px; font-weight: 800; }
+    .wf-auth .sub { color: #9a9a9a; font-size: 11px; margin: 5px 0 18px; }
+    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 5px; }
+    .wf-or { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
+    .wf-or::before, .wf-or::after { content: ""; flex: 1; height: 1px; background: #2c2c2c; }
+    .wf-or span { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.1em; font-family: ui-monospace, monospace; }
+    .wf-alt { text-align: center; font-size: 11px; color: #9a9a9a; margin-top: 16px; }
 
-    /* invite element (shared with 6.0) */
-    .wf-field { display: flex; align-items: center; gap: 8px; border: 1px solid #3a3a3a; border-radius: 6px; padding: 7px 10px; margin-bottom: 8px; }
-    .wf-field .val { color: #cfcfcf; font-size: 11px; font-family: ui-monospace, monospace; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .wf-field .val.ph { color: #6a6a6a; }
-    .wf-code { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.14em; font-family: ui-monospace, monospace; }
-    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; margin: 4px 0 14px; }
-
-    /* in-node inline-error panel (3.3, stays in-node) */
-    .wf-alert { border: 1px solid #6a6a6a; border-radius: 6px; padding: 12px; margin-bottom: 14px; background: #0e0e0e; }
-    .wf-alert .at { color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 3px; }
-    .wf-alert .asub { color: #9a9a9a; font-size: 10px; margin-bottom: 10px; }
-    .wf-erow { display: flex; align-items: center; gap: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 6px 9px; margin-bottom: 6px; }
-    .wf-erow .em { flex: 1; font-family: ui-monospace, monospace; font-size: 11px; color: #cfcfcf; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .wf-tag { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid #7a7a7a; border-radius: 3px; padding: 1px 5px; color: #bbb; font-family: ui-monospace, monospace; white-space: nowrap; }
-    .wf-okstrip { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px solid #4a4a4a; border-radius: 6px; margin: 12px 0 14px; }
+    /* confirmation (2.2) */
+    .wf-confirm { text-align: center; }
+    .wf-check { width: 46px; height: 46px; border: 1px solid #7a7a7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: #fff; font-size: 20px; }
+    .wf-addr { display: inline-block; font-family: ui-monospace, monospace; font-size: 11px; color: #fff; border-bottom: 1px dashed #6a6a6a; padding-bottom: 1px; }
+    .wf-hint { font-size: 10px; color: #8a8a8a; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px; margin: 14px 0; }
+    .wf-resend { font-size: 11px; color: #9a9a9a; margin-top: 6px; }
 
     .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
@@ -189,10 +181,10 @@
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
-      <a href="invite-send-error.html" class="nav-sub-item nav-sub-active">Invite-send error</a>
+      <a href="invite-send-error.html" class="nav-sub-item">Invite-send error</a>
       <a href="signup.html" class="nav-sub-item">Sign up</a>
       <a href="login.html" class="nav-sub-item">Log in</a>
-      <a href="magic-link-sent.html" class="nav-sub-item">Magic-link sent</a>
+      <a href="magic-link-sent.html" class="nav-sub-item nav-sub-active">Magic-link sent</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -213,46 +205,45 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 3.3</span>
-      <span class="badge">State (error)</span>
-      <span class="badge privacy">Never a dead-end (F1 MS3)</span>
+      <span class="badge">Node 2.2</span>
+      <span class="badge">State (supporting)</span>
+      <span class="badge privacy">Serves 3 paths</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Invite-send error (3.3) &middot; within wizard step 3 &middot; URL: /app/onboarding/invite</div>
-    <h1>Invite-send error</h1>
-    <p class="hero-intro">The error surface behind a failed email send in onboarding step 3. It names which invites did not go out, lets the operator fix and retry, and always keeps a way forward: the join link and code are unaffected, so a bad email can never block onboarding. It inherits 3.2's job coverage and closes cluster 3. Inside the operator app, so noindex. Source of truth: ia/docs/pages/invite-send-error.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Magic-link sent (2.2) &middot; URL: /auth/check-email</div>
+    <h1>Magic-link sent</h1>
+    <p class="hero-intro">A "check your email" confirmation that holds the operator calmly while they go to their inbox. A small, honest waiting state: reassure, show where the link went so a typo is caught, and offer a low-friction resend. The forward action lives in the email. One state serves three paths: the magic-link option on Sign up and Log in, and the forgot-password reset. Transient and transactional, so noindex. Source of truth: ia/docs/pages/magic-link-sent.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first thing the operator reads on mobile. Order reasoned from the 360px baseline up. This is a state of wizard step 3, not a new screen, so the wizard shell and "Step 3 of 3" stay.</p>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. This is a waiting state, so the on-screen job is deliberately small.</p>
     <ol>
-      <li><strong>Error summary</strong>: a plain, non-alarming line stating how many invites did not send ("2 of 3 invites did not send"). No blame, no jargon.</li>
-      <li><strong>Failed list</strong>: the specific addresses that failed, each with a short reason hint and a per-row retry. A typo can be seen and fixed in place.</li>
-      <li><strong>Retry action</strong>: Retry failed (retries all still-failing rows). The primary corrective action.</li>
-      <li><strong>Reassurance (link and code still work)</strong>: the join link and code shown again with copy and a one-line note that they are unaffected. The guarantee onboarding is never blocked.</li>
-      <li><strong>Skip for now</strong>: a clearly visible way to dismiss the error and return to 3.2, where Finish still completes onboarding to 4.0. Failed people can be invited later from 6.0.</li>
+      <li><strong>Pre-auth header</strong>: the Brio mark and a "Back to log in" link (a reduced 0.1 variant, no job tabs).</li>
+      <li><strong>Confirmation mark and heading</strong>: a simple black-and-white confirmation badge and "Check your email". Calm, done, not alarming.</li>
+      <li><strong>Body with the target address</strong>: "We sent a link to you@company.com. Open it to continue." Showing the address lets the operator catch a typo.</li>
+      <li><strong>Open-mail hint</strong>: a helper to open the mail app, plus the link's expiry ("expires in about 15 minutes"), so expectations are set before it lapses to 2.3.</li>
+      <li><strong>Resend</strong>: "Didn't get it? Resend" with a short cooldown, and "Use a different email" back to 2.0 or 2.1.</li>
     </ol>
-    <p><strong>Components used:</strong> the in-node invite element from 6.0 / 3.2 (link and code, here as the still-works reassurance), the wizard shell from 3.0, and an in-node inline-error panel. No new global invented; the error panel stays in-node until a second consumer justifies promoting it.</p>
+    <p><strong>Components used:</strong> a reduced 0.1 (pre-auth header), the auth-page shell from 2.0, and a simple confirmation badge. No new global. <strong>Adaptive copy:</strong> the same structure serves the reset path; only the verb changes ("log in" versus "reset your password").</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">Retry, skip, and role</div>
-    <h2>States and primary CTA</h2>
-    <p>The never-a-dead-end rule is concrete here: Skip for now is available in every state, so a bad address can never trap the operator (main flow F1, milestone MS3).</p>
+    <div class="section-label">Waiting, resend, and outcome</div>
+    <h2>States and primary action</h2>
+    <p>There is no forward button by design: the primary action is the link in the email. The screen only reassures and helps recover a lost email.</p>
     <div class="table-wrap">
       <table>
         <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Default (error shown)</td><td>summary, failed list with per-row retry, still-works link and code</td><td>Retry failed / Skip for now (to 3.2)</td></tr>
-          <tr><td>Retrying</td><td>retried rows show a sending state; Skip stays available throughout</td><td>-</td></tr>
-          <tr><td>Retry success</td><td>cleared rows leave the list; when empty, back to 3.2 default</td><td>to 3.2 Invite team</td></tr>
-          <tr><td>Retry fails again</td><td>the row stays with its reason hint; Skip is still there</td><td>Retry / Skip for now</td></tr>
-          <tr><td>Skip for now</td><td>link and code still work; Finish in 3.2 completes onboarding</td><td>to 3.2 (then 4.0 Dashboard)</td></tr>
-          <tr><td>Back</td><td>to step 3 default</td><td>to 3.2 Invite team</td></tr>
-          <tr><td>Already onboarded / Guest</td><td>redirect</td><td>4.0 Dashboard / 2.1 Log in</td></tr>
+          <tr><td>Default (link sent)</td><td>confirmation, target address, open-mail hint + expiry</td><td>Resend / Use a different email</td></tr>
+          <tr><td>Resend cooldown</td><td>Resend disabled with a short countdown (prevents repeat sends)</td><td>wait, then Resend</td></tr>
+          <tr><td>Resent</td><td>a brief "sent again" acknowledgement; cooldown restarts</td><td>-</td></tr>
+          <tr><td>Valid link clicked</td><td>the operator lands authenticated (elsewhere)</td><td>4.0 Dashboard (or 3.0 / reset-entry [?])</td></tr>
+          <tr><td>Expired or used link</td><td>the link is stale</td><td>to 2.3 Invalid or expired link</td></tr>
+          <tr><td>Already authenticated</td><td>redirect</td><td>4.0 Dashboard</td></tr>
         </tbody>
       </table>
     </div>
@@ -262,84 +253,76 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The failure is conveyed in text and a labelled tag, not by color. The same wizard shell as 3.2 carries an inline-error panel above the still-works link and code; the same content stacks in one column at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The same centered card and shell as 2.0 and 2.1, here a confirmation with the target address, an expiry hint, and a resend; the same content stacks at the 360px baseline.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, wizard step 3, send error</div>
-        <div class="wf-wizpage">
-          <div class="wf-wizhead">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, check-your-email confirmation</div>
+        <div class="wf-authpage">
+          <div class="wf-topbar">
             <span class="wf-logo">Brio</span>
-            <span class="wf-prog"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="txt">Step 3 of 3</span></span>
+            <span class="wf-link">Back to log in</span>
           </div>
-          <div class="wf-wiz">
-            <div class="wh">Some invites did not send</div>
-            <div class="sub">2 of 3 invites did not go out. You can fix and retry, or skip for now.</div>
-            <div class="wf-alert">
-              <div class="at">Did not send</div>
-              <div class="asub">These addresses could not be delivered.</div>
-              <div class="wf-erow"><span class="em">teamate@company.co</span><span class="wf-tag">Failed</span><span class="wf-b sm">Retry</span></div>
-              <div class="wf-erow"><span class="em">j.diaz@compnay.com</span><span class="wf-tag">Failed</span><span class="wf-b sm">Retry</span></div>
-              <span class="wf-b solid block" style="margin-top:8px;">Retry failed</span>
+          <div class="wf-auth">
+            <div class="wf-confirm">
+              <div class="wf-check">&#10003;</div>
+              <div class="wh">Check your email</div>
+              <div class="sub" style="margin-bottom:14px;">We sent a link to <span class="wf-addr">you@company.com</span>. Open it to log in.</div>
             </div>
-            <div class="wf-okstrip">Your join link and code still work. Share them anytime.</div>
-            <div class="wf-lbl">Join link</div>
-            <div class="wf-field"><span class="val">app.brio.co/join/ab12cd</span><span class="wf-b sm">Copy link</span></div>
-            <div class="wf-lbl">Join code</div>
-            <div class="wf-field"><span class="wf-plain">Code</span><span class="wf-code">AB12CD</span></div>
-            <div class="wf-micro" style="text-align:center;margin-top:12px;">Skip for now</div>
+            <div class="wf-hint">Open your email app. The link expires in about 15 minutes.</div>
+            <span class="wf-b block">Open email app</span>
+            <div class="wf-resend" style="text-align:center;">Didn't get it? <span class="wf-link">Resend</span></div>
+            <div class="wf-alt">Wrong address? <span class="wf-link">Use a different email</span></div>
           </div>
         </div>
-        <div class="wf-note">failure in text + tag, no color &middot; per-row retry to fix a typo &middot; link and code unaffected &middot; Skip for now always present (never a dead-end).</div>
+        <div class="wf-note">no forward button (link is in the email) &middot; shows target address to catch a typo &middot; expiry stated in text &middot; resend has a cooldown &middot; expired link to 2.3.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, resend on cooldown</div>
         <div class="wf-phone">
-          <div class="wf-wizhead"><span class="wf-logo">Brio</span><span class="wf-prog"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></span></div>
-          <div class="wf-wiz" style="padding:16px 10px;">
-            <div class="wh" style="font-size:16px;">Some invites did not send</div>
-            <div class="wf-alert" style="margin-top:10px;">
-              <div class="at" style="font-size:12px;"><span class="wf-bnum">2</span>Did not send</div>
-              <div class="wf-erow"><span class="em">teamate@company.co</span><span class="wf-b sm">Retry</span></div>
-              <div class="wf-erow"><span class="em">j.diaz@compnay.com</span><span class="wf-b sm">Retry</span></div>
-              <span class="wf-b solid block" style="margin-top:8px;">Retry failed</span>
+          <div class="wf-topbar" style="padding:9px 10px;"><span class="wf-logo">Brio</span><span class="wf-link">Back</span></div>
+          <div class="wf-auth" style="padding:18px 12px;">
+            <div class="wf-confirm">
+              <div class="wf-check">&#10003;</div>
+              <div class="wh" style="font-size:17px;">Check your email</div>
+              <div class="sub" style="margin-bottom:12px;">Link sent to <span class="wf-addr">you@company.com</span>.</div>
             </div>
-            <div class="wf-okstrip">Link and code still work.</div>
-            <div class="wf-lbl">code</div>
-            <div class="wf-field"><span class="wf-code">AB12CD</span><span class="wf-b sm">Copy</span></div>
-            <div class="wf-micro" style="text-align:center;margin-top:10px;">Skip for now</div>
+            <div class="wf-hint"><span class="wf-bnum">4</span>Expires in ~15 min.</div>
+            <span class="wf-b block">Open email app</span>
+            <div class="wf-resend" style="text-align:center;">Resend in 0:24</div>
+            <div class="wf-alt">Wrong address? <span class="wf-link">Change</span></div>
           </div>
         </div>
-        <div class="wf-note">same blocks, single column, Skip for now kept in view.</div>
+        <div class="wf-note">cooldown shown in text (Resend in 0:24), never color-only.</div>
       </div>
     </div>
   </section>
 
-  <!-- SEO (noindex) -->
+  <!-- SEO (noindex, nofollow) -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
-    <h2>SEO block (noindex)</h2>
-    <p>Invite-send error is a transactional, authenticated wizard state. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <div class="section-label">Transient transactional state</div>
+    <h2>SEO block (noindex, nofollow)</h2>
+    <p>Magic-link sent is a transient, transactional state reached only after a request. It is not indexed and has nothing to crawl. Unlike the 2.0 and 2.1 forms (which keep follow for outbound equity), this is a dead-end waiting state.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/onboarding/invite</code> (error surfaced inline)</span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (transactional wizard state)</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (transient state, no meaningful outbound links)</span></div>
+      <div class="seo-row"><span class="seo-k">reached by</span><span class="seo-v">a POST from 2.0 / 2.1, not a browse target; not linked from marketing pages</span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
-    <h3>In-app findability (not SEO, still specified)</h3>
+    <h3>In-app findability (still specified)</h3>
     <ul>
-      <li>exactly one H1 (the error heading) for the accessible document outline</li>
-      <li>the failed addresses and the join code and link are selectable text with labelled controls</li>
-      <li>the error is conveyed in text and a labelled tag, not by color alone</li>
-      <li>each retry and copy control is a labelled button; tap targets at least 44px</li>
+      <li>exactly one H1 (the heading) for the accessible document outline</li>
+      <li>the target email address is selectable text</li>
+      <li>the expiry and the resend cooldown are stated in text, not implied by color</li>
+      <li>Resend and Use a different email are labelled controls; tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Cluster 3 closed.</strong> Invite-send error reuses the in-node invite element from 6.0 and the wizard shell; the inline-error panel stays in-node. It guarantees main flow F1 never dead-ends at MS3: a failed email cannot block onboarding, because the link and code always work and Skip for now always finishes. Next cluster: <strong>2 Auth</strong> (Sign up, Log in, Magic-link sent, Invalid or expired link).</div>
+    <div class="callout ok"><strong>One state, three paths.</strong> Magic-link sent reuses the auth-page shell from 2.0 and a reduced 0.1; it invents nothing global, and the single state serves the sign-up magic link, the log-in magic link, and the password reset. It is deliberately a small, honest waiting screen: the forward action is the email link, and an expired link routes cleanly to 2.3. Next: <strong>2.3 Invalid or expired link</strong>, the error partner of this state, which closes cluster 2.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 3.3 Invite-send error - July 2026</p>
-    <p style="margin-top:4px;">The error state of wizard step 3: which email invites failed, retry or fix in place, with the join link and code unaffected and Skip for now always available, so onboarding is never a dead-end. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/invite-send-error.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 2.2 Magic-link sent - July 2026</p>
+    <p style="margin-top:4px;">A "check your email" waiting state shared by the magic-link and password-reset paths: confirmation, the target address to catch a typo, an expiry hint, and a resend with a cooldown, reusing the 2.0 auth-page shell. The forward action is the email link; an expired link routes to 2.3. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/magic-link-sent.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
