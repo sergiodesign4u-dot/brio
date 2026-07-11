@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Team roster (6.0)</title>
+  <title>Brio - IA Detail: Invite owner + upgrade (7.1)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -103,50 +103,43 @@
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
-
-    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; }
-    .wf-nav .sp { margin-left: auto; }
-    .wf-tab { font-size: 11px; color: #9a9a9a; }
-    .wf-tab.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
     .wf-b.sm { padding: 4px 9px; font-size: 10px; }
+    .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
-    .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
-    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
+
+    /* operator app chrome (0.1 nav; shared with 7.0) */
+    .wf-appwrap { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-appbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+    .wf-tab { font-size: 10px; color: #8a8a8a; padding: 3px 8px; border-radius: 4px; }
+    .wf-tab.on { color: #fff; border: 1px solid #6a6a6a; }
+    .wf-appbody { padding: 16px; }
+    .wf-h { color: #fff; font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 5px; }
+    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px 11px; margin-bottom: 12px; color: #6a6a6a; font-size: 12px; }
+
+    /* plan comparison (0.6 tiers) */
+    .wf-plans { display: flex; gap: 8px; margin-bottom: 10px; }
+    .wf-plan { flex: 1; border: 1px solid #3a3a3a; border-radius: 8px; padding: 11px; }
+    .wf-plan.on { border-color: #e6e6e6; }
+    .wf-plan .pn { font-size: 11px; color: #fff; font-weight: 700; }
+    .wf-plan .pp { font-size: 10px; color: #9a9a9a; margin: 2px 0 8px; }
+    .wf-plan .prow { font-size: 10px; color: #cfcfcf; display: flex; gap: 6px; margin-bottom: 4px; align-items: flex-start; }
+    .wf-plan .prow .mk { width: 12px; text-align: center; flex-shrink: 0; font-weight: 700; color: #fff; }
+    .wf-plan .prow.no { color: #7a7a7a; }
+    .wf-tagline { display: inline-block; font-size: 8px; color: #9a9a9a; border: 1px solid #4a4a4a; border-radius: 3px; padding: 0 5px; margin-left: 6px; font-family: ui-monospace, monospace; letter-spacing: 0.04em; text-transform: uppercase; }
+    .wf-mini { font-size: 10px; color: #9a9a9a; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 7px 9px; margin: 4px 0 12px; }
+
+    /* confirmation (reuses 2.2 layout) */
+    .wf-confirm { text-align: center; }
+    .wf-check { width: 46px; height: 46px; border: 1px solid #7a7a7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: #fff; font-size: 20px; }
+    .wf-addr { display: inline-block; font-family: ui-monospace, monospace; font-size: 11px; color: #fff; }
+
     .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
-    .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
-
-    /* invite block */
-    .wf-field { display: flex; align-items: center; gap: 8px; border: 1px solid #3a3a3a; border-radius: 6px; padding: 7px 10px; margin-bottom: 8px; }
-    .wf-field .val { color: #cfcfcf; font-size: 11px; font-family: ui-monospace, monospace; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .wf-field .val.ph { color: #6a6a6a; }
-    .wf-code { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.14em; font-family: ui-monospace, monospace; }
-    .wf-metric { color: #fff; font-size: 13px; font-weight: 700; }
-    .wf-metric span { color: #9a9a9a; font-weight: 400; font-size: 11px; }
-    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; margin-top: 8px; }
-
-    /* member rows */
-    .wf-mrow { display: flex; align-items: center; gap: 10px; border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px 10px; margin-bottom: 6px; }
-    .wf-mrow .who { color: #cfcfcf; font-size: 11px; flex: 1; }
-    .wf-mrow .status { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid #444; border-radius: 3px; padding: 1px 6px; color: #9a9a9a; }
-    .wf-mrow .status.joined { border-color: #7a7a7a; color: #e0e0e0; }
-
-    /* privacy wall */
-    .wf-wall { border: 1px solid #5a5a5a; border-radius: 8px; padding: 12px; background: #121212; }
-    .wf-wall .ph { color: #fff; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
-    .wf-wall .two { display: flex; gap: 10px; }
-    .wf-wall .col { flex: 1; border: 1px solid #333; border-radius: 6px; padding: 8px; font-size: 10.5px; color: #b6b6b6; }
-    .wf-wall .col .h { color: #fff; font-size: 10px; font-weight: 700; margin-bottom: 3px; }
-    .wf-wall .col.no { border-style: dashed; }
-    @media (max-width: 420px) { .wf-wall .two { flex-direction: column; } }
-
-    .wf-state { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 16px; text-align: center; color: #cfcfcf; font-size: 12px; }
-    .wf-state .n { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
-    .wf-state .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 10px; }
   </style>
 </head>
 <body>
@@ -191,7 +184,7 @@
       <a href="dashboard.html" class="nav-sub-item">Dashboard</a>
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
-      <a href="team-roster.html" class="nav-sub-item nav-sub-active">Team roster</a>
+      <a href="team-roster.html" class="nav-sub-item">Team roster</a>
       <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
@@ -202,7 +195,7 @@
       <a href="magic-link-sent.html" class="nav-sub-item">Magic-link sent</a>
       <a href="link-expired.html" class="nav-sub-item">Invalid or expired link</a>
       <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
-      <a href="invite-owner.html" class="nav-sub-item">Invite owner + upgrade</a>
+      <a href="invite-owner.html" class="nav-sub-item nav-sub-active">Invite owner + upgrade</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -223,62 +216,46 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 6.0</span>
-      <span class="badge">Page</span>
-      <span class="badge privacy">Roster is not answers</span>
+      <span class="badge">Node 7.1</span>
+      <span class="badge">Owner tab</span>
+      <span class="badge privacy">Paid unlock &middot; item 8</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Team roster (6.0) &middot; URL: /app/team</div>
-    <h1>Team roster</h1>
-    <p class="hero-intro">The operator invites the team, sees who is in, and reads how much of the team takes part, all without ever learning who answered. The roster knows who is on the team because the operator invited them; it is never linked to who answered a check-in. Serves the main job and inviting the team. Inside the operator app, so noindex. Source of truth: ia/docs/pages/team-roster.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Invite owner + upgrade (7.1) &middot; URL: /app/owner/invite</div>
+    <h1>Invite owner + upgrade</h1>
+    <p class="hero-intro">Turn the intent from 7.0 into a real invite. The operator enters the owner's email, sees plainly that the owner dashboard is a paid feature, and either upgrades (free plan) or sends the invite directly (paid plan). The privacy boundary was set on 7.0, so here the reminder is condensed and the focus is the email, the plan, and the unlock. Serves S2 and item 8 (the paid unlock). Inside the operator app, so noindex. Source of truth: ia/docs/pages/invite-owner.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. The paywall is never a surprise: 7.0 and the plan comparison both state the owner dashboard is paid before the action.</p>
     <ol>
-      <li><strong>Nav + header</strong> (0.1 operator, Team active): H1 "Your team", subhead with team size.</li>
-      <li><strong>Invite block</strong>: the join link with a copy control, the join code, and an email-invite field. Same mechanism as 3.2, standalone here.</li>
-      <li><strong>Team size + participation</strong>: invited and joined counts, and the participation rate as a share ("72% answered"), never who; follows the D1 no-live-count rule.</li>
-      <li><strong>Members list</strong>: invited members with name or email and a status (invited or joined), each with resend or manage (to 6.1). Invite identity only, never connected to answers.</li>
-      <li><strong>Privacy boundary callout</strong>: the wall between roster identity and answer identity (see below).</li>
-      <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
+      <li><strong>0.1 Navigation</strong>: the operator app nav with the Owner tab active.</li>
+      <li><strong>Heading</strong>: "Invite your owner".</li>
+      <li><strong>Owner email field</strong>: a labelled email field (and an optional owner name), so the invite reaches the right person.</li>
+      <li><strong>Plan comparison</strong>: a compact free-versus-Starter comparison with the owner dashboard as the paid unlock (0.6 tiers). Pricing is a hypothesis, benchmarked.</li>
+      <li><strong>Condensed privacy reminder</strong>: one 0.3 line ("your owner sees aggregate only, never individual data"), continuity with 7.0.</li>
+      <li><strong>Primary action (plan-dependent)</strong>: free = "Upgrade and invite" (opens 7.2); paid = "Send invite". On success, the "invite sent" confirmation.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (condensed), 0.5 Dialog (via the 6.1 manage dialog). The invite block and members list are thin in-node elements. No new global invented.</p>
-  </section>
-
-  <!-- The wall -->
-  <section id="wall">
-    <div class="section-label">The make-or-break boundary</div>
-    <h2>Roster identity is not answer identity</h2>
-    <p>Two kinds of "who" exist on this page, and only one is ever visible.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Kind of "who"</th><th>Visible?</th><th>What it is</th></tr></thead>
-        <tbody>
-          <tr><td>Roster identity</td><td>Yes</td><td>who is on the team; the operator invited them, so name or email and an invited/joined status show</td></tr>
-          <tr><td>Answer identity</td><td>Never</td><td>who answered a check-in, and what they said; never shown, never linked to the roster, cannot be derived</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p>The members list and the participation rate sit on the same page but are never joined. The operator can see that a person is on the team and that 72% of the team answered, but never that that person answered, or what they said.</p>
+    <p><strong>Components used:</strong> 0.1 (Owner tab), the 0.6 plan tiers, a condensed 0.3 reminder, the 7.2 Upgrade dialog (opened from the primary on the free plan), and the 2.2 confirmation layout (the "invite sent" success). No new global.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">Data, privacy math, and role</div>
+    <div class="section-label">Plan gate, unlock, and confirmation</div>
     <h2>States and primary CTA</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Default (has members)</td><td>invite block, participation share, members list with statuses</td><td>Invite (copy link / send)</td></tr>
-          <tr><td>Empty (first run)</td><td>just the invite block, "Invite your team to get started"</td><td>Copy join link</td></tr>
-          <tr><td>Pending invites</td><td>members show invited status</td><td>Resend (to 6.1)</td></tr>
-          <tr><td>Open cycle (D1)</td><td>participation shows "results after the cycle closes", no live count</td><td>-</td></tr>
-          <tr><td>Loading / Error</td><td>skeleton / "Could not load your team, retry"</td><td>retry or back to 4.0 (MS4)</td></tr>
-          <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
+          <tr><td>Default, free plan</td><td>email, plan comparison (owner dashboard = paid), privacy reminder</td><td>Upgrade and invite (opens 7.2)</td></tr>
+          <tr><td>Default, paid plan</td><td>email field, no upgrade needed</td><td>Send invite</td></tr>
+          <tr><td>Email validation</td><td>inline text for an invalid email (not color alone)</td><td>correct in place</td></tr>
+          <tr><td>Upgrade dialog open</td><td>the 7.2 Upgrade or paywall dialog</td><td>7.3 on failure; recoverable exit returns here (F3 DE3)</td></tr>
+          <tr><td>Sending</td><td>the primary shows in-progress; field locks</td><td>-</td></tr>
+          <tr><td>Confirmation (invite sent)</td><td>"your owner will get a link"</td><td>preview 9.2 digest / open 9.0 Owner dashboard</td></tr>
+          <tr><td>Owner already has access</td><td>the owner's status</td><td>manage or revoke</td></tr>
         </tbody>
       </table>
     </div>
@@ -288,104 +265,86 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The invite block and participation lead; the members list follows. All collapses to one column at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The email and the plan comparison sit together, with the owner dashboard marked as the paid unlock; mobile shows the "invite sent" confirmation. The paid / not-paid split is carried by labels and marks, not color.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, default</div>
-        <div class="wf-page">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab on">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
-          <div class="wf-sec">
-            <div class="lbl">1 &middot; header (H1)</div>
-            <div class="wf-metric">Your team <span>&middot; 12 invited, 9 joined</span></div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, free plan (upgrade unlocks the owner dashboard)</div>
+        <div class="wf-appwrap">
+          <div class="wf-appbar">
+            <span class="wf-logo">Brio</span>
+            <span class="wf-tabs"><span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab on">Owner</span></span>
           </div>
-          <div class="wf-sec">
-            <div class="lbl">2 &middot; invite block</div>
-            <div class="wf-field"><span class="val">app.brio.co/join/ab12cd</span><span class="wf-b sm">Copy link</span></div>
-            <div class="wf-field"><span class="wf-plain">Join code</span><span class="wf-code">AB12CD</span></div>
-            <div class="wf-field"><span class="val ph">teammate@company.com</span><span class="wf-b sm solid">Send</span></div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">3 &middot; participation (aggregate)</div>
-            <div class="wf-metric">72% <span>of the team answered this cycle</span></div>
-            <div class="wf-strip2">A share of the whole team. Never who answered.</div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">4 &middot; members (invite identity only)</div>
-            <div class="wf-mrow"><span class="who">Yemi O.</span><span class="status joined">Joined</span><span class="wf-b sm">Manage</span></div>
-            <div class="wf-mrow"><span class="who">Sam R.</span><span class="status joined">Joined</span><span class="wf-b sm">Manage</span></div>
-            <div class="wf-mrow"><span class="who">dev@company.com</span><span class="status">Invited</span><span class="wf-b sm">Resend</span></div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">5 &middot; privacy boundary</div>
-            <div class="wf-wall">
-              <div class="ph">The wall</div>
-              <div class="two">
-                <div class="col"><div class="h">On the team</div>who you invited (shown)</div>
-                <div class="col no"><div class="h">Who answered</div>never shown, never linked</div>
+          <div class="wf-appbody">
+            <div class="wf-h">Invite your owner</div>
+            <div class="wf-lbl">Owner email</div>
+            <div class="wf-input">owner@company.com</div>
+            <div class="wf-lbl">Plan</div>
+            <div class="wf-plans">
+              <div class="wf-plan">
+                <div class="pn">Free <span class="wf-tagline">Current</span></div>
+                <div class="pp">Up to 10 people</div>
+                <div class="prow"><span class="mk">+</span><span>Team pulse for you</span></div>
+                <div class="prow no"><span class="mk">x</span><span>Owner dashboard</span></div>
+              </div>
+              <div class="wf-plan on">
+                <div class="pn">Starter</div>
+                <div class="pp">$4 to 6 / seat / mo <span class="hyp">Hypothesis</span></div>
+                <div class="prow"><span class="mk">+</span><span>Full pulse and trends</span></div>
+                <div class="prow"><span class="mk">+</span><span>Owner dashboard (aggregate)</span></div>
               </div>
             </div>
+            <div class="wf-mini">Your owner sees aggregate only, never individual data.</div>
+            <span class="wf-b solid block">Upgrade and invite</span>
+            <div class="wf-plain" style="text-align:center;margin-top:8px;">Owner dashboard unlocks on Starter. Opens the upgrade next.</div>
           </div>
-          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">members = who you invited &middot; participation = a share, never who &middot; the two are never joined &middot; targets min 44px.</div>
+        <div class="wf-note">owner dashboard marked as the paid unlock &middot; pricing flagged Hypothesis &middot; paywall never a surprise &middot; free plan primary opens 7.2.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, invite-sent confirmation</div>
         <div class="wf-phone">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Team</span></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-metric">Your team <span>12 / 9</span></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>invite</div>
-            <div class="wf-field"><span class="val">.../join/ab12cd</span><span class="wf-b sm">Copy</span></div>
-            <div class="wf-field"><span class="wf-plain">Code</span><span class="wf-code">AB12CD</span></div>
+          <div class="wf-appbar" style="padding:8px 10px;"><span class="wf-logo">Brio</span><span class="wf-tabs"><span class="wf-tab on">Owner</span></span></div>
+          <div class="wf-appbody" style="padding:16px 12px;">
+            <div class="wf-confirm">
+              <div class="wf-check">&#10003;</div>
+              <div class="wf-h" style="font-size:16px;margin-bottom:4px;">Invite sent</div>
+              <div class="wf-plain" style="margin-bottom:14px;">We sent a link to <span class="wf-addr">owner@company.com</span>.</div>
+            </div>
+            <span class="wf-b block">See what your owner gets</span>
+            <span class="wf-b solid block" style="margin-top:8px;">Open owner dashboard</span>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>participation</div><div class="wf-metric">72% <span>answered</span></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>members</div>
-            <div class="wf-mrow"><span class="who">Yemi O.</span><span class="status joined">Joined</span></div>
-            <div class="wf-mrow"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-          </div>
-          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, copy-link high.</div>
+        <div class="wf-note">confirmation reuses the 2.2 layout &middot; preview 9.2 digest &middot; open 9.0.</div>
       </div>
-    </div>
-
-    <div class="wf-frame" style="margin-top:22px;">
-      <div class="wf-cap">Open cycle &middot; participation follows D1 (no live count)</div>
-      <div class="wf-state">
-        <div class="n">Results appear after the cycle closes</div>
-        <div class="sub">No running count of who has answered, for anyone, while the cycle is open.</div>
-        <span class="wf-plain">consistent with 4.4 on the dashboard</span>
-      </div>
-      <div class="wf-note">the roster respects no-live-count too; the share only appears after close at minimum-N.</div>
     </div>
   </section>
 
   <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
+    <div class="section-label">Operator app zone</div>
     <h2>SEO block (noindex)</h2>
-    <p>Team roster is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Invite owner and upgrade is inside the authenticated operator app. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/team</code></span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (deep app zone, like Dashboard, Team, and Share)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/owner/invite</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 ("Your team") for the accessible document outline</li>
-      <li>the join code and link are selectable text with labeled copy controls</li>
-      <li>the members list is a real list with a status per row in text, not color-only</li>
-      <li>the participation share has a text label; tap targets at least 44px</li>
+      <li>exactly one H1 (the heading) for the accessible document outline</li>
+      <li>the email field is a labelled input; the plan comparison is a real list, not an image, and prices are text</li>
+      <li>the primary control states when it leads to an upgrade</li>
+      <li>the confirmation is conveyed in text and a mark, not by color alone; tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Reuse only, wall intact.</strong> Team roster reuses 0.1, 0.3, and 0.5 (via 6.1) and invents nothing global; the invite block and members list are thin in-node elements. It respects the D1 no-live-count rule and keeps roster identity and answer identity strictly apart. Next: <strong>6.1 Resend or manage invite</strong> (the small 0.5 dialog), then cluster 3, the onboarding wizard.</div>
+    <div class="callout ok"><strong>The business model, in the product.</strong> Invite owner and upgrade reuses 0.1, the 0.6 plan tiers, a condensed 0.3 reminder, the 7.2 Upgrade dialog, and the 2.2 confirmation layout; it invents nothing global. It is the paid unlock of flow F3: the operator upgrades to give the owner an aggregate-only dashboard, with the paywall never a surprise. Next: <strong>7.2 Upgrade or paywall</strong> (the dialog, a 0.5 instance), then <strong>7.3 Payment failed</strong> (recoverable, not a trap), which closes cluster 7.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 6.0 Team roster - July 2026</p>
-    <p style="margin-top:4px;">Invite the team, see who is in, read participation as a share, all without learning who answered. The roster is invite identity only, never linked to check-in answers, and participation follows the D1 no-live-count rule. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/team-roster.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 7.1 Invite owner + upgrade - July 2026</p>
+    <p style="margin-top:4px;">The paid unlock: the operator enters the owner's email, sees the owner dashboard marked as a paid feature in a free-versus-Starter comparison, and upgrades (free plan, opens 7.2) or sends the invite directly (paid), ending in an invite-sent confirmation. Pricing is a hypothesis. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/invite-owner.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
