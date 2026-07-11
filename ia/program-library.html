@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Detail: Program library (5.0)</title>
+  <style>
+    :root {
+      --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
+      --border: #252a33; --border-subtle: #1e232c; --text: #e8eaf0; --text-muted: #8b909c; --text-faint: #555b68;
+      --accent: #4f9cf9; --accent-dim: #1d3a5f; --accent-warm: #f4a261; --accent-warm-dim: #3d2810;
+      --green: #4ade80; --green-dim: #14532d; --red: #f87171; --red-dim: #450a0a; --yellow: #fbbf24; --yellow-dim: #451a03;
+      --radius: 8px; --radius-lg: 12px; --radius-sm: 4px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .sidebar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13, 15, 18, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 36px; height: 36px; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px; }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
+    .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
+    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
+    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
+    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub2-item.nav-sub-active { color: var(--accent); }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-node { padding-left: 20px; font-size: 12px; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ul li { margin-bottom: 6px; }
+    ol { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ol li { margin-bottom: 6px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.ok { border-color: var(--green-dim); }
+    .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
+
+    /* SEO / note block */
+    .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
+    .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
+    .seo-row:last-child { border-bottom: none; }
+    .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
+    .seo-v code { font-size: 12px; }
+    .count { color: var(--text-faint); font-size: 11px; font-family: ui-monospace, monospace; }
+
+    /* ===== Black-and-white wireframe kit ===== */
+    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
+    .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
+    .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+
+    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; }
+    .wf-nav .sp { margin-left: auto; }
+    .wf-tab { font-size: 11px; color: #9a9a9a; }
+    .wf-tab.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
+    .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
+    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
+    .wf-hl.s { width: 55%; height: 12px; }
+    .wf-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wf-chip { border: 1px solid #444; border-radius: 4px; padding: 4px 9px; font-size: 10.5px; color: #9a9a9a; white-space: nowrap; }
+    .wf-chip.on { border-color: #fff; color: #fff; }
+    .wf-scroll { display: flex; gap: 8px; overflow-x: auto; }
+    .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
+    .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phone .wf-sec { padding: 12px 10px; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
+
+    /* canonical program card (0.4), reused in the grid */
+    .wf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .wf-card { border: 1px solid #3a3a3a; border-radius: 8px; padding: 12px; background: #141414; display: flex; flex-direction: column; gap: 6px; min-height: 146px; }
+    .wf-card .cat { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #8a8a8a; }
+    .wf-card .t { color: #fff; font-size: 13px; font-weight: 700; line-height: 1.25; }
+    .wf-card .meta { color: #9a9a9a; font-size: 11px; }
+    .wf-card .desc { color: #a2a2a2; font-size: 11px; }
+    .wf-card .act { margin-top: auto; border: 1px solid #7a7a7a; border-radius: 5px; padding: 7px; text-align: center; font-size: 11px; color: #e6e6e6; }
+    .wf-card .act.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-badge { display: inline-block; border: 1px solid #555; border-radius: 4px; padding: 1px 6px; font-size: 9px; color: #cfcfcf; text-transform: uppercase; letter-spacing: 0.04em; }
+    .wf-badge.rec { border-color: #fff; color: #fff; }
+    .wf-skel .ln { height: 9px; background: #242424; border-radius: 3px; margin: 5px 0; }
+    .wf-skel .ln.s { width: 55%; }
+    .wf-empty { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 18px 14px; text-align: center; color: #cfcfcf; font-size: 12px; }
+    .wf-empty .sub { color: #9a9a9a; font-size: 11px; margin: 6px 0 10px; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+
+      <div class="nav-subhead">Base Layer</div>
+      <a href="flows.html" class="nav-sub-link">Flows</a>
+      <a href="concept.html" class="nav-sub-link">Concept map</a>
+
+      <div class="nav-subhead">Detail Layer</div>
+      <a href="sitemap.html" class="nav-sub-link">Sitemap</a>
+      <div class="nav-subhead-sm">Structure</div>
+      <a href="navigation.html" class="nav-sub-item">Navigation</a>
+      <a href="footer.html" class="nav-sub-item">Footer</a>
+      <a href="privacy-disclosure.html" class="nav-sub-item">Privacy disclosure</a>
+      <a href="program-card.html" class="nav-sub-item">Program card</a>
+      <a href="dialog.html" class="nav-sub-item">Dialog</a>
+      <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
+      <div class="nav-subhead-sm">Pages</div>
+      <a href="home.html" class="nav-sub-item">Home</a>
+      <a href="program-library.html" class="nav-sub-item nav-sub-active">Program library</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Detail Layer</span>
+      <span class="badge">Node 5.0</span>
+      <span class="badge">Page, listing</span>
+      <span class="badge">B/W wireframe</span>
+    </div>
+    <div class="crumb">IA / Detail Layer / Pages / Program library (5.0) &middot; URL: /app/programs</div>
+    <h1>Program library</h1>
+    <p class="hero-intro">The operator browses the curated library and picks a program to run, with the size-matched recommendation pinned so a non-expert is guided, not dropped into a catalog. This is the first listing, so it also sets the listing template. Serves Main, J6, and item 2 (self-serve start). Inside the operator app, so noindex. Source of truth: ia/docs/pages/program-library.md.</p>
+  </section>
+
+  <!-- Listing template -->
+  <section id="template">
+    <div class="section-label">The planks a listing adds</div>
+    <h2>Listing template</h2>
+    <p>A listing adds three planks to the per-page template from Home (0.0). Program library is the first built to it; 5.1 and any later grid follow the same shape.</p>
+    <ol>
+      <li><strong>Facet set defined in-node.</strong> Filter values live with the listing unless they are big enough to be a canonical global. Brio's set is thin (one dimension, category), so it is defined here and cross-referenced, not lifted into 0.6.</li>
+      <li><strong>The grid reuses a canonical card.</strong> The cells are 0.4 Program card. The listing arranges and filters cards; it never restyles them.</li>
+      <li><strong>Empty and loading are first-class states.</strong> Here that is 5.3 first-run empty (a registered node) and the 0.4 skeleton. Neither is ever a dead-end (MS4).</li>
+    </ol>
+  </section>
+
+  <!-- Blocks -->
+  <section id="blocks">
+    <div class="section-label">Mobile-first priority</div>
+    <h2>Content blocks</h2>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
+    <ol>
+      <li><strong>Nav + page header</strong> (0.1 operator, Programs tab active): H1 "Programs", one-line subhead "Pick a program. Brio runs it and reads the team pulse for you."</li>
+      <li><strong>Recommended-for-your-size card</strong> (0.4 recommended state, pinned): the guided shortcut that closes choice paralysis. The page's primary action.</li>
+      <li><strong>Facet bar</strong> (category): All plus the four categories (0.6). Thin, single dimension. See Facets below.</li>
+      <li><strong>Program-card grid</strong> (0.4 canonical): the rest of the library as default cards; programs the operator already runs carry status badges.</li>
+      <li><strong>Empty state</strong> (5.3, first run): shown in place of the grid before anything is picked; recommended shortcut plus browse hint. Never a dead-end.</li>
+      <li><strong>App shell footer</strong> (minimal): a privacy link (1.1) and a help link, not the public marketing footer (0.2).</li>
+    </ol>
+    <p><strong>Components used:</strong> 0.1 Navigation (operator logged-in, Programs active), 0.4 Program card (recommended / default / active / draft / ended / skeleton), 0.6 Canonical lists (categories, size buckets). No new component; the facet set is in-node, not a global.</p>
+  </section>
+
+  <!-- Facets -->
+  <section id="facets">
+    <div class="section-label">Listing only</div>
+    <h2>Filters and facets</h2>
+    <p>One facet, defined here because the set is thin and used mainly on this page. It filters which 0.4 cards show; it never changes a card.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Facet</th><th>Values</th><th>Behavior</th></tr></thead>
+        <tbody>
+          <tr><td>Category (single-select)</td><td>All (default), Mental health, Physical, Financial, Social (from 0.6)</td><td>client-side narrowing over a small curated set; reflected as <code>?category=</code> for the back button; canonical stays <code>/app/programs</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>The recommended pin stays first only under <strong>All</strong>; within a filtered category the size-recommended program, if present, sorts first.</li>
+      <li><strong>No search, no pagination, no sort control</strong> in the MVP. Browse plus one facet is enough for a small curated library, which is the concrete reason <strong>11.5 Global search is likely N/A</strong> (confirmed or closed at Step 6). A future sort is deferred <span class="hyp">?</span>, not built.</li>
+      <li><strong>Zero result</strong> in a category shows "Nothing here yet, see all programs" that clears the facet back to All. Never a dead-end.</li>
+    </ul>
+  </section>
+
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">By auth, data, and role</div>
+    <h2>States</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Never a dead-end</th></tr></thead>
+        <tbody>
+          <tr><td>Guest (not authed)</td><td>redirect to 2.1 Log in, return here after</td><td>returns to /app/programs</td></tr>
+          <tr><td>Operator, first run</td><td>5.3 empty in place of the grid: recommended shortcut + browse hint</td><td>shortcut to 5.1</td></tr>
+          <tr><td>Operator, active (default)</td><td>recommended pinned first, then the grid; running programs show status badges</td><td>every card to 5.1</td></tr>
+          <tr><td>Loading</td><td>0.4 skeleton cards until the library resolves</td><td>-</td></tr>
+          <tr><td>Error</td><td>"Could not load programs, retry" + link to 4.0 Dashboard</td><td>retry or Dashboard (MS4)</td></tr>
+          <tr><td>Owner role</td><td>redirect to 9.0 Owner dashboard</td><td>owners do not manage programs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Wireframe -->
+  <section id="mockup">
+    <div class="section-label">Black and white, wireframe level</div>
+    <h2>Wireframe</h2>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The grid collapses from multi-column on desktop to one column at the 360px baseline. Cards are the canonical 0.4 element, arranged here, not restyled.</p>
+
+    <div class="wf-row">
+      <div style="flex:1;min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, operator, active state</div>
+        <div class="wf-page">
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab on">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
+          <div class="wf-sec">
+            <div class="lbl">1 &middot; header (H1)</div>
+            <div class="wf-hl"></div><div class="wf-hl s"></div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">3 &middot; facet bar (category)</div>
+            <div class="wf-chips"><span class="wf-chip on">All</span><span class="wf-chip">Mental health</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">2 + 4 &middot; recommended pinned, then grid (0.4)</div>
+            <div class="wf-grid">
+              <div class="wf-card">
+                <span class="wf-badge rec">Recommended for your size</span>
+                <span class="cat">Mental health</span>
+                <span class="t">Weekly mood check-in</span>
+                <span class="meta">weekly, 4 weeks &middot; 1 question</span>
+                <span class="desc">A light pulse on how the team feels.</span>
+                <span class="act solid">Select</span>
+              </div>
+              <div class="wf-card">
+                <span class="cat">Physical</span>
+                <span class="t">Move more, together</span>
+                <span class="meta">weekly, 6 weeks &middot; 2 questions</span>
+                <span class="desc">Small movement goals, no individual tracking.</span>
+                <span class="act">Select</span>
+              </div>
+              <div class="wf-card">
+                <span class="wf-badge">Active</span>
+                <span class="cat">Financial</span>
+                <span class="t">Money basics</span>
+                <span class="meta">next cycle in 3 days &middot; 2 questions</span>
+                <span class="desc">Confidence with everyday finances.</span>
+                <span class="act">Manage</span>
+              </div>
+              <div class="wf-card">
+                <span class="wf-badge">Draft</span>
+                <span class="cat">Social</span>
+                <span class="t">Team connection</span>
+                <span class="meta">not started &middot; 1 question</span>
+                <span class="desc">Belonging and small rituals.</span>
+                <span class="act">Finish setup</span>
+              </div>
+              <div class="wf-card">
+                <span class="wf-badge">Ended</span>
+                <span class="cat">Mental health</span>
+                <span class="t">Stress reset</span>
+                <span class="meta">completed &middot; 3 questions</span>
+                <span class="desc">A short reset when things get heavy.</span>
+                <span class="act">View results</span>
+              </div>
+              <div class="wf-card wf-skel">
+                <div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="ln s"></div>
+                <div class="ln" style="margin-top:auto;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
+        </div>
+        <div class="wf-note">one link per card to 5.1 &middot; status + recommended are text, not color-only &middot; targets min 44px.</div>
+      </div>
+
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
+        <div class="wf-phone">
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Programs</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>facets (scroll)</div><div class="wf-scroll"><span class="wf-chip on">All</span><span class="wf-chip">Mental</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>recommended (pinned)</div>
+            <div class="wf-card"><span class="wf-badge rec">Recommended for your size</span><span class="cat">Mental health</span><span class="t">Weekly mood check-in</span><span class="meta">weekly, 4 weeks &middot; 1 question</span><span class="act solid">Select</span></div>
+          </div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>grid, single column</div>
+            <div class="wf-card"><span class="cat">Physical</span><span class="t">Move more, together</span><span class="meta">weekly, 6 weeks &middot; 2 questions</span><span class="act">Select</span></div>
+          </div>
+          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
+        </div>
+        <div class="wf-note">same blocks, single column, facets scroll horizontally.</div>
+      </div>
+    </div>
+
+    <div class="wf-frame" style="margin-top:22px;">
+      <div class="wf-cap">State 5.3 &middot; first-run empty (never a dead-end)</div>
+      <div class="wf-empty">
+        No active program yet.
+        <div class="sub">Start with the one we recommend for your size.</div>
+        <span class="wf-b solid">Select recommended</span> <span class="wf-plain">or browse by category</span>
+      </div>
+      <div class="wf-note">the empty state replaces the grid, it does not blank the page; the shortcut goes to 5.1.</div>
+    </div>
+  </section>
+
+  <!-- SEO (noindex) -->
+  <section id="seo">
+    <div class="section-label">Private app zone</div>
+    <h2>SEO block (noindex)</h2>
+    <p>Program library is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/programs</code>, facet as <code>?category=</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
+    </div>
+    <h3>In-app findability (not SEO, still specified)</h3>
+    <ul>
+      <li>exactly one H1 ("Programs") for the accessible document outline</li>
+      <li>the facet controls are labeled controls, not color-only</li>
+      <li>every card is one in-app <code>&lt;a&gt;</code> to 5.1 with the title as its accessible name</li>
+      <li>the recommended tag and status badges are text, not color alone; tap targets at least 44px</li>
+      <li>if a public "programs overview" or a 1.5 category landing ever renders these cards, that page is indexable and gets its own A-E SEO and schema decision at its own node, not here</li>
+    </ul>
+    <div class="callout ok"><strong>Listing template set.</strong> Program library reuses 0.1, 0.4, and 0.6 and invents nothing but the thin in-node facet set. Next page: <strong>5.1 Program detail / manage</strong> (the card opened into a full page), per the persona-priority order.</div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Detail Layer - Node 5.0 Program library - July 2026</p>
+    <p style="margin-top:4px;">The first listing: in-node facet set, a grid of canonical 0.4 cards, first-run empty (5.3) and skeleton states, noindex app zone. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/program-library.md.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link').forEach(function(link) {
+    link.addEventListener('click', function() { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+  });
+</script>
+
+</body>
+</html>

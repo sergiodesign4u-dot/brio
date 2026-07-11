@@ -173,7 +173,7 @@ INCLUDES: "cycle open, results appear after it closes" · no running tally
 ### Cluster 5 - Programs  [P]
 
 **5.0 Program library** (browse + pick) · page (listing) · Main + J6 + item 2
-INCLUDES: 0.1 nav · facet set (category: mental health, physical, financial, social) (canonical facets, Step 3) · "recommended for your size" tag · canonical program-card grid (Step 3) · state 5.3 first-run empty
+INCLUDES: 0.1 nav · facet set (category: mental health, physical, financial, social) (defined in-node, Step 5) · "recommended for your size" tag · canonical program-card grid (0.4) · loading skeleton (0.4) · state 5.3 first-run empty
 → 5.1 Program detail
 
 **5.1 Program detail / manage** · page · Main + item 2
