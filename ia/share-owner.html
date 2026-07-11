@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Team pulse detail (4.1)</title>
+  <title>Brio - IA Detail: Share with owner (7.0)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -103,51 +103,41 @@
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
-
-    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; }
-    .wf-nav .sp { margin-left: auto; }
-    .wf-tab { font-size: 11px; color: #9a9a9a; }
-    .wf-tab.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
-    .wf-crumb { padding: 8px 14px; font-size: 10px; color: #7a7a7a; border-bottom: 1px solid #1f1f1f; font-family: ui-monospace, monospace; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
+    .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
-    .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
-    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* operator app chrome (0.1 nav) */
+    .wf-appwrap { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-appbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+    .wf-tab { font-size: 10px; color: #8a8a8a; padding: 3px 8px; border-radius: 4px; }
+    .wf-tab.on { color: #fff; border: 1px solid #6a6a6a; }
+    .wf-appbody { padding: 16px; }
+    .wf-ctx { font-size: 10px; color: #cfcfcf; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 7px 9px; margin-bottom: 12px; }
+    .wf-h { color: #fff; font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+
+    /* aggregate-only preview (reuses the pulse element from 4.0 / 4.1) */
+    .wf-preview { border: 1px solid #6a6a6a; border-radius: 8px; padding: 14px; margin-bottom: 12px; }
+    .wf-preview .lab { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-num { font-size: 30px; font-weight: 800; color: #fff; line-height: 1; }
+    .wf-interp { font-size: 11px; color: #cfcfcf; margin-top: 4px; }
+    .wf-spark { display: flex; align-items: flex-end; gap: 3px; height: 34px; margin: 12px 0 8px; }
+    .wf-spark .bar { width: 8px; background: #4a4a4a; border-radius: 2px 2px 0 0; }
+    .wf-metric { font-size: 10px; color: #8a8a8a; }
+
+    /* sees / never-sees boundary (0.3 owner variant) */
+    .wf-see { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .wf-see .st { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 7px; }
+    .wf-seerow { display: flex; gap: 8px; font-size: 11px; color: #cfcfcf; margin-bottom: 5px; align-items: flex-start; }
+    .wf-seerow .mk { width: 14px; text-align: center; color: #fff; font-weight: 700; flex-shrink: 0; }
+    .wf-seerow.no { color: #9a9a9a; }
+    .wf-gate { font-size: 10px; color: #9a9a9a; margin: 4px 0 12px; }
+
     .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
-    .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
-
-    /* two-column body */
-    .wf-2col { display: grid; grid-template-columns: 1fr 1.2fr; gap: 0; }
-    .wf-2col > div { border-bottom: 1px solid #1f1f1f; }
-    .wf-2col > div:first-child { border-right: 1px solid #1f1f1f; }
-    @media (max-width: 560px) { .wf-2col { grid-template-columns: 1fr; } .wf-2col > div:first-child { border-right: none; } }
-
-    /* score read (E1) */
-    .wf-pulse { border: 1px solid #4a4a4a; border-radius: 8px; padding: 14px; background: #131313; }
-    .wf-pulse .read { font-size: 24px; font-weight: 800; color: #fff; line-height: 1.1; }
-    .wf-pulse .num { font-family: ui-monospace, monospace; color: #cfcfcf; font-size: 12px; margin-top: 2px; }
-    .wf-pulse .interp { color: #b6b6b6; font-size: 12px; margin: 8px 0 12px; }
-    .wf-pulse .act-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-    .wf-pulse .acts { display: flex; gap: 8px; flex-wrap: wrap; }
-
-    /* trend + participation */
-    .wf-spark { display: flex; align-items: flex-end; gap: 5px; height: 64px; margin-bottom: 8px; }
-    .wf-spark .bar { width: 12px; background: #3a3a3a; border-radius: 2px 2px 0 0; }
-    .wf-spark .bar.hi { background: #cfcfcf; }
-    .wf-spark .bar.low { background: #6a6a6a; }
-    .wf-axis { display: flex; justify-content: space-between; font-size: 8.5px; color: #6a6a6a; font-family: ui-monospace, monospace; }
-    .wf-metric { color: #fff; font-size: 13px; font-weight: 700; margin-top: 10px; }
-    .wf-metric span { color: #9a9a9a; font-weight: 400; font-size: 11px; }
-    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; margin-top: 10px; }
-
-    /* minimum-N state */
-    .wf-state { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 16px; text-align: center; color: #cfcfcf; font-size: 12px; }
-    .wf-state .n { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
-    .wf-state .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 10px; }
   </style>
 </head>
 <body>
@@ -190,7 +180,7 @@
       <a href="program-detail.html" class="nav-sub-item">Program detail</a>
       <a href="check-in-setup.html" class="nav-sub-item">Check-in setup</a>
       <a href="dashboard.html" class="nav-sub-item">Dashboard</a>
-      <a href="team-pulse.html" class="nav-sub-item nav-sub-active">Team pulse</a>
+      <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
       <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
@@ -202,7 +192,7 @@
       <a href="login.html" class="nav-sub-item">Log in</a>
       <a href="magic-link-sent.html" class="nav-sub-item">Magic-link sent</a>
       <a href="link-expired.html" class="nav-sub-item">Invalid or expired link</a>
-      <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
+      <a href="share-owner.html" class="nav-sub-item nav-sub-active">Share with owner</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -223,47 +213,43 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 4.1</span>
-      <span class="badge">Page</span>
-      <span class="badge privacy">Aggregate only</span>
+      <span class="badge">Node 7.0</span>
+      <span class="badge">Owner tab</span>
+      <span class="badge privacy">Aggregate-only &middot; flow F3</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Team pulse (4.1) &middot; URL: /app/pulse</div>
-    <h1>Team pulse detail</h1>
-    <p class="hero-intro">The full read behind the dashboard card: the score and its number, the trend over time, and the participation rate, always aggregate, with the same plain-language interpretation and next action (E1). Serves J1, J2, and E1. Inside the operator app, so noindex. Source of truth: ia/docs/pages/team-pulse.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Share with owner (7.0) &middot; URL: /app/owner</div>
+    <h1>Share with owner</h1>
+    <p class="hero-intro">The operator's share moment. Give the owner a high-level, aggregate-only read of team wellbeing, and make the privacy boundary unmistakable before anyone is invited: the operator sees exactly what the owner will and will not see, then invites. Because the owner dashboard is a paid feature, the invite gates on the plan (paid invites directly, free routes to the upgrade). Serves J1, J5, S2; fires from a positive milestone on the Dashboard (F3). Inside the operator app, so noindex. Source of truth: ia/docs/pages/share-owner.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. The privacy boundary appears before any invite, never after.</p>
     <ol>
-      <li><strong>Nav + header</strong> (0.1 operator, Dashboard active): H1 "Team pulse", subhead naming the program and period. Back to 4.0.</li>
-      <li><strong>Score, number, and reading</strong>: the interpretive layer in full, the plain-language reading plus the number behind it (a team wellbeing index <span class="hyp">? scale</span>), one line of interpretation, one suggested next action. The number is shown here, unlike the dashboard card.</li>
-      <li><strong>Trend over time</strong>: a larger chart than the dashboard spark, the aggregate across recent closed cycles, so a decline shows early (J2). One value per cycle, never per person.</li>
-      <li><strong>Participation rate</strong>: the share who answered this cycle and its trend, never who.</li>
-      <li><strong>Minimum-N state</strong>: under 5 answers, the score area is replaced by "Waiting for at least 5 responses," no live count; past cycles still render. Same D1 math as 4.3.</li>
-      <li><strong>Actions</strong>: Share with your owner (to 7.0), the primary forward, and Adjust check-in (to 5.2).</li>
-      <li><strong>Privacy-proof mini</strong> (0.3 condensed): "Aggregate only. You never see who answered," to 1.1.</li>
-      <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
+      <li><strong>0.1 Navigation</strong>: the operator app nav with the Owner tab active.</li>
+      <li><strong>Heading and context</strong>: "Give your owner the big picture", plus a contextual line when reached from a positive milestone.</li>
+      <li><strong>What your owner will see (aggregate-only preview)</strong>: the exact owner view, team score, trend, and participation as a share, reusing the pulse element from 4.0 / 4.1.</li>
+      <li><strong>The privacy boundary (sees / never sees)</strong>: the 0.3 owner variant as two plain lists. Sees the aggregate; never sees individual responses, names, who answered, or any drill-down.</li>
+      <li><strong>Invite your owner (primary, with the plan gate)</strong>: paid proceeds to invite (owner email) toward 9.0; free routes to 7.1 for the paid unlock. The paid nature is stated honestly here.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (condensed). The score read, trend chart, and participation metric are the same thin in-node elements from 4.0, shown fuller. No new global invented.</p>
+    <p><strong>Components used:</strong> 0.1 (Owner tab active), 0.3 owner-facing variant (the sees / never-sees boundary), and the pulse preview from 4.0 / 4.1. No new global; the boundary is a 0.3 variant.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">Data, privacy math, and role</div>
+    <div class="section-label">Plan gate, owner status, and role</div>
     <h2>States and primary CTA</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Next action</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Default (N of 5+ met)</td><td>score + number + interpretation; trend and participation</td><td>Share with owner (to 7.0)</td></tr>
-          <tr><td>Minimum-N not met</td><td>"Waiting for at least 5 responses", no live count; past cycles still show</td><td>Nudge the team (to 6.0)</td></tr>
-          <tr><td>Cycle open (4.4 logic)</td><td>current cycle "results after it closes", no tally; closed cycles show</td><td>-</td></tr>
-          <tr><td>No data yet (first run)</td><td>guidance instead of an empty chart</td><td>Pick a program (5.0) / Invite (6.0)</td></tr>
-          <tr><td>Loading / Error</td><td>skeleton / "Could not load, retry"</td><td>retry or back to 4.0 (MS4)</td></tr>
-          <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
+          <tr><td>Default, free plan</td><td>preview, sees / never-sees boundary, paid nature stated</td><td>Invite your owner to 7.1 (upgrade)</td></tr>
+          <tr><td>Default, paid plan</td><td>the same preview and boundary</td><td>Invite your owner (owner email) toward 9.0</td></tr>
+          <tr><td>Owner already invited or live</td><td>the owner's access status</td><td>open 9.0 Owner dashboard / manage or revoke</td></tr>
+          <tr><td>Pre-minimum-N (no aggregate)</td><td>the same "waiting for 5" state the owner would see</td><td>share allowed; owner sees only the wait until N is met</td></tr>
+          <tr><td>Reached from a milestone</td><td>the contextual positive-moment line above the preview</td><td>-</td></tr>
         </tbody>
       </table>
     </div>
@@ -273,100 +259,93 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The score read leads; the trend chart is prominent beside it on desktop and stacks below at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The operator sees the owner's exact view and the privacy boundary together, then invites; the sees / never-sees split is carried by labels and marks, not color. The same content stacks in one column at the 360px baseline.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, default (N met)</div>
-        <div class="wf-page">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab on">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
-          <div class="wf-crumb">Dashboard / Team pulse</div>
-          <div class="wf-2col">
-            <div>
-              <div class="wf-sec">
-                <div class="lbl">2 &middot; score + number + reading (E1)</div>
-                <div class="wf-pulse">
-                  <div class="read">Steady</div>
-                  <div class="num">7.4 / 10 &middot; index [?]</div>
-                  <div class="interp">Holding steady this week, in line with last.</div>
-                  <div class="act-lbl">Actions</div>
-                  <div class="acts"><span class="wf-b solid">Share with owner</span><span class="wf-b">Adjust check-in</span></div>
-                </div>
-              </div>
-              <div class="wf-sec">
-                <div class="lbl">4 &middot; participation</div>
-                <div class="wf-metric">72% <span>of the team answered this cycle</span></div>
-                <div class="wf-strip2">Aggregate only. You never see who answered.</div>
-              </div>
-            </div>
-            <div>
-              <div class="wf-sec">
-                <div class="lbl">3 &middot; trend over time (per cycle)</div>
-                <div class="wf-spark">
-                  <span class="bar" style="height:50%"></span><span class="bar" style="height:62%"></span><span class="bar low" style="height:44%"></span><span class="bar" style="height:58%"></span><span class="bar" style="height:64%"></span><span class="bar" style="height:60%"></span><span class="bar hi" style="height:66%"></span><span class="bar hi" style="height:64%"></span>
-                </div>
-                <div class="wf-axis"><span>8 wks ago</span><span>now</span></div>
-              </div>
-            </div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, free plan (invite routes to upgrade)</div>
+        <div class="wf-appwrap">
+          <div class="wf-appbar">
+            <span class="wf-logo">Brio</span>
+            <span class="wf-tabs"><span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab on">Owner</span></span>
           </div>
-          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
+          <div class="wf-appbody">
+            <div class="wf-ctx">Your team's pulse is trending up. A good moment to loop in your owner.</div>
+            <div class="wf-h">Give your owner the big picture</div>
+            <div class="wf-preview">
+              <div class="lab">What your owner will see</div>
+              <div class="wf-num">Steady</div>
+              <div class="wf-interp">Team wellbeing is holding steady this month.</div>
+              <div class="wf-spark"><span class="bar" style="height:40%"></span><span class="bar" style="height:55%"></span><span class="bar" style="height:50%"></span><span class="bar" style="height:65%"></span><span class="bar" style="height:70%"></span></div>
+              <div class="wf-metric">Trend over 5 cycles &middot; participation 72% (share of the team, not who)</div>
+            </div>
+            <div class="wf-see">
+              <div class="st">Your owner sees</div>
+              <div class="wf-seerow"><span class="mk">+</span><span>Team wellbeing score</span></div>
+              <div class="wf-seerow"><span class="mk">+</span><span>Trend over time</span></div>
+              <div class="wf-seerow"><span class="mk">+</span><span>Participation as a share of the team</span></div>
+              <div class="st" style="margin-top:11px;">Your owner never sees</div>
+              <div class="wf-seerow no"><span class="mk">x</span><span>Individual responses</span></div>
+              <div class="wf-seerow no"><span class="mk">x</span><span>Names or who answered</span></div>
+              <div class="wf-seerow no"><span class="mk">x</span><span>Any drill-down to a person</span></div>
+            </div>
+            <div class="wf-gate">Owner dashboard is on the paid plan. You upgrade to give your owner visibility.</div>
+            <span class="wf-b solid block">Invite your owner</span>
+          </div>
         </div>
-        <div class="wf-note">number shown here (dashboard shows the word only) &middot; trend is per closed cycle, aggregate &middot; targets min 44px.</div>
+        <div class="wf-note">owner's exact view shown first &middot; sees / never-sees carried by labels + marks, not color &middot; paid nature stated before invite &middot; free plan invite to 7.1.</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Pulse</span></div>
-          <div class="wf-crumb">Dashboard / Team pulse</div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>score + reading</div>
-            <div class="wf-pulse"><div class="read">Steady</div><div class="num">7.4 / 10 [?]</div><div class="interp">Holding steady.</div><div class="acts"><span class="wf-b solid">Share with owner</span></div></div>
+          <div class="wf-appbar" style="padding:8px 10px;"><span class="wf-logo">Brio</span><span class="wf-tabs"><span class="wf-tab on">Owner</span></span></div>
+          <div class="wf-appbody" style="padding:12px 10px;">
+            <div class="wf-h" style="font-size:15px;">Share with your owner</div>
+            <div class="wf-preview">
+              <div class="lab"><span class="wf-bnum">3</span>owner will see</div>
+              <div class="wf-num" style="font-size:24px;">Steady</div>
+              <div class="wf-metric" style="margin-top:6px;">Trend + participation 72%</div>
+            </div>
+            <div class="wf-see">
+              <div class="st">sees</div>
+              <div class="wf-seerow"><span class="mk">+</span><span>Score, trend, participation share</span></div>
+              <div class="st" style="margin-top:9px;">never sees</div>
+              <div class="wf-seerow no"><span class="mk">x</span><span>Responses, names, who answered</span></div>
+            </div>
+            <div class="wf-gate">Owner dashboard is paid.</div>
+            <span class="wf-b solid block">Invite your owner</span>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>trend</div>
-            <div class="wf-spark"><span class="bar" style="height:50%"></span><span class="bar" style="height:62%"></span><span class="bar low" style="height:44%"></span><span class="bar" style="height:60%"></span><span class="bar hi" style="height:64%"></span></div>
-          </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>participation</div><div class="wf-metric">72% <span>answered</span></div></div>
-          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, chart fits width.</div>
+        <div class="wf-note">same blocks, single column, boundary kept in view.</div>
       </div>
-    </div>
-
-    <div class="wf-frame" style="margin-top:22px;">
-      <div class="wf-cap">Minimum-N state &middot; score not ready (D1 in the detail)</div>
-      <div class="wf-state">
-        <div class="n">Waiting for at least 5 responses</div>
-        <div class="sub">No score yet, and no live count while the cycle is open. Past cycles still show in the trend.</div>
-        <span class="wf-b solid">Nudge the team</span>
-      </div>
-      <div class="wf-note">the score area is replaced, the trend keeps prior closed cycles; never a dead-end, routes to 6.0.</div>
     </div>
   </section>
 
   <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
+    <div class="section-label">Operator app zone</div>
     <h2>SEO block (noindex)</h2>
-    <p>Team pulse detail is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Share with owner is inside the authenticated operator app. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/pulse</code></span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (deep app zone, like Dashboard and Team)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/owner</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 ("Team pulse") for the accessible document outline</li>
-      <li>the score reading and number are text, not color-only</li>
-      <li>the trend chart has a text equivalent (direction and the latest values)</li>
-      <li>tap targets at least 44px</li>
+      <li>exactly one H1 (the heading) for the accessible document outline</li>
+      <li>the sees / never-sees boundary is conveyed in text and labels, not by color alone</li>
+      <li>the preview values are selectable text; participation is stated as a share, never as who</li>
+      <li>Invite your owner is a labelled primary control that states when it leads to an upgrade; tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Full read, reuse only.</strong> Team pulse detail reuses 0.1 and 0.3 and invents nothing global; the score read, trend, and participation are the same in-node elements as 4.0. It carries the minimum-N state (D1) in the detail. Next: <strong>4.2 Threshold alert detail</strong> (what dropped, a plain reading, a next action, and a link to the program), which closes cluster 4.</div>
+    <div class="callout ok"><strong>Trust shown, not promised.</strong> Share with owner reuses 0.1, the 0.3 owner-facing privacy variant, and the pulse preview from 4.0 / 4.1; it invents nothing global. It is the paid-visibility moment of flow F3, and it makes the aggregate-only promise visible in the product exactly where trust is spent: before the owner is invited, not in a policy afterward. Next: <strong>7.1 Invite owner + upgrade</strong> (the owner email and the paid unlock), then the 7.2 Upgrade dialog and the 7.3 Payment failed state.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 4.1 Team pulse detail - July 2026</p>
-    <p style="margin-top:4px;">The full read behind the card: score and number, trend over time, participation as a share, interpretation and next action (E1), and the minimum-N state where D1 shows. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/team-pulse.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 7.0 Share with owner - July 2026</p>
+    <p style="margin-top:4px;">The operator's share moment: an aggregate-only preview of the owner's exact view, a plain sees / never-sees privacy boundary shown before any invite, and Invite your owner gated on the plan (paid invites directly toward 9.0, free routes to the 7.1 upgrade). Fires from a positive milestone on the Dashboard (F3). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/share-owner.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
