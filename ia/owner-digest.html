@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Upgrade / paywall (7.2)</title>
+  <title>Brio - IA Detail: Monthly owner digest (9.2)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -110,35 +110,29 @@
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* ===== 0.5 dialog / modal shell (canonical, from 6.1) ===== */
-    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; min-height: 560px; }
-    .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
-    .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .wf-modal { width: 320px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 12px; }
-    .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
-    .wf-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #101010; border-top: 1px solid #4a4a4a; border-radius: 14px 14px 0 0; padding: 14px; }
-    .wf-sheet .grab { width: 34px; height: 4px; background: #3a3a3a; border-radius: 3px; margin: 0 auto 10px; }
+    /* email template (distinct from app chrome) */
+    .wf-email { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; max-width: 420px; }
+    .wf-emailhead { padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-emailhead .subj { color: #fff; font-size: 12px; font-weight: 700; }
+    .wf-emailhead .from { color: #8a8a8a; font-size: 10px; font-family: ui-monospace, monospace; }
+    .wf-emailbody { padding: 18px 16px; }
+    .wf-greet { color: #cfcfcf; font-size: 11px; margin-bottom: 12px; }
 
-    /* upgrade content */
-    .wf-scrimghost { padding: 12px 14px; }
-    .wf-ghostbar { display: flex; align-items: center; gap: 10px; opacity: 0.4; }
-    .wf-ghostbar .wf-tab { font-size: 10px; color: #8a8a8a; }
-    .wf-tier { border: 1px solid #e6e6e6; border-radius: 7px; padding: 9px 11px; margin-bottom: 10px; }
-    .wf-tier .tn { color: #fff; font-size: 12px; font-weight: 700; }
-    .wf-tier .ti { color: #cfcfcf; font-size: 10px; }
-    .wf-line { display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: #cfcfcf; padding: 6px 0; border-bottom: 1px solid #242424; }
-    .wf-line .sub { color: #8a8a8a; font-size: 9px; }
-    .wf-seats { display: flex; align-items: center; gap: 6px; }
-    .wf-step { width: 20px; height: 20px; border: 1px solid #6a6a6a; border-radius: 4px; text-align: center; line-height: 18px; color: #e6e6e6; font-size: 12px; }
-    .wf-total { display: flex; align-items: baseline; justify-content: space-between; margin: 10px 0 12px; }
-    .wf-total .amt { color: #fff; font-size: 20px; font-weight: 800; }
-    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin: 8px 0 5px; }
-    .wf-pay { display: flex; gap: 6px; }
-    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 9px 10px; color: #6a6a6a; font-size: 11px; }
-    .wf-input.f { flex: 1; }
+    /* pulse read (reuses the pulse element from 9.0) */
+    .wf-read { border: 1px solid #6a6a6a; border-radius: 8px; padding: 16px; margin-bottom: 12px; text-align: center; }
+    .wf-read .lab { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-num { font-size: 30px; font-weight: 800; color: #fff; line-height: 1; }
+    .wf-interp { font-size: 11.5px; color: #cfcfcf; margin-top: 6px; }
+    .wf-spark { display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 34px; margin: 12px 0 8px; }
+    .wf-spark .bar { width: 9px; background: #4a4a4a; border-radius: 2px 2px 0 0; }
+    .wf-metric { font-size: 10px; color: #8a8a8a; }
+    .wf-trendline { font-size: 10.5px; color: #cfcfcf; text-align: center; margin: 2px 0 12px; }
 
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 0; background: #0c0c0c; overflow: hidden; position: relative; min-height: 460px; }
+    .wf-privline { text-align: center; font-size: 10px; color: #cfcfcf; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px; margin-bottom: 14px; }
+    .wf-emailfoot { border-top: 1px solid #2c2c2c; padding: 10px 16px; font-size: 9px; color: #6a6a6a; text-align: center; font-family: ui-monospace, monospace; }
+    .wf-emailfoot .wf-link { font-size: 9px; }
+
+    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
@@ -196,10 +190,10 @@
       <a href="link-expired.html" class="nav-sub-item">Invalid or expired link</a>
       <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
       <a href="invite-owner.html" class="nav-sub-item">Invite owner + upgrade</a>
-      <a href="upgrade.html" class="nav-sub-item nav-sub-active">Upgrade / paywall</a>
+      <a href="upgrade.html" class="nav-sub-item">Upgrade / paywall</a>
       <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
       <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
-      <a href="owner-digest.html" class="nav-sub-item">Monthly digest</a>
+      <a href="owner-digest.html" class="nav-sub-item nav-sub-active">Monthly digest</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -220,135 +214,126 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 7.2</span>
-      <span class="badge">Dialog (0.5)</span>
-      <span class="badge privacy">Recoverable &middot; F3 DE3</span>
+      <span class="badge">Node 9.2</span>
+      <span class="badge">Owner email</span>
+      <span class="badge privacy">Under 2 min &middot; closes cluster 9</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Upgrade / paywall (7.2) &middot; modal over /app/owner/invite</div>
-    <h1>Upgrade / paywall</h1>
-    <p class="hero-intro">Take the payment that unlocks the owner dashboard, in a focused modal over 7.1. The operator confirms the tier, sees the seats and the price from team size, enters payment, and upgrades. Because it is a paywall, "Stay on Free" is always present, so the operator is never trapped and never charged by surprise. A pure 0.5 Dialog instance; item 8 and the business model. Inside the operator app, so noindex. Source of truth: ia/docs/pages/upgrade.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Monthly owner digest (9.2) &middot; email &middot; view-in-browser: /owner/digest/{token}</div>
+    <h1>Monthly owner digest</h1>
+    <p class="hero-intro">The owner's monthly touch, delivered. The email carries the month's score, the trend, and one honest sentence, so the owner gets the value in their inbox in under two minutes, with a single link to open the full dashboard (9.0). It is the retention loop for the owner (W1) and a quiet reminder the tool is working (J5, S2). Aggregate-only, never individual. Email is not crawled; the view-in-browser is a private token-gated page. This node closes cluster 9. Source of truth: ia/docs/pages/owner-digest.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first thing in the dialog. Order reasoned from the 360px baseline up. The recoverable exit is always visible, never hidden.</p>
+    <p>Block 1 is the first screen on a phone, where most email is read. The email delivers the value on its own; the link is the path to the full read.</p>
     <ol>
-      <li><strong>Dialog title and close</strong>: "Upgrade to Starter" with a close control. Close equals Stay on Free: a no-charge exit.</li>
-      <li><strong>Tier</strong>: the Starter tier and the line that matters here, the owner dashboard is included (0.6 tiers).</li>
-      <li><strong>Seats</strong>: prefilled from the current team size, with the per-seat price. Per-seat pricing, so seats drive the total.</li>
-      <li><strong>Price</strong>: the computed monthly total (seats times per-seat), billed monthly. Pricing is a hypothesis, benchmarked.</li>
-      <li><strong>Payment</strong>: a card block (card number, expiry, security code). The structural place for the payment-provider element.</li>
-      <li><strong>Primary and recoverable exit</strong>: "Upgrade now" (pay) as the primary; "Stay on Free" as the always-present exit back to 7.0. On failure, to 7.3.</li>
+      <li><strong>Email header</strong>: the sender and a plain subject ("Your Acme team wellbeing, June").</li>
+      <li><strong>The month's read</strong>: the score and one honest sentence. The value, delivered.</li>
+      <li><strong>Trend</strong>: the direction versus recent months, at a glance.</li>
+      <li><strong>Participation</strong>: as a share of the team, never who.</li>
+      <li><strong>Condensed privacy line</strong>: one 0.3 line ("you only ever see the team aggregate"), so the promise travels with the email.</li>
+      <li><strong>Primary action</strong>: "Open your dashboard" to 9.0, the single link.</li>
+      <li><strong>Email footer</strong>: sent monthly, manage frequency or unsubscribe, view in browser.</li>
     </ol>
-    <p><strong>Components used:</strong> the canonical 0.5 Dialog / modal shell (scrim, centered modal on desktop, bottom sheet on mobile, full a11y contract), the 0.6 Starter tier, and standard payment inputs. No new global; this is a 0.5 instance, registered as a 0.5 consumer.</p>
+    <p><strong>Components used:</strong> an email template layout (distinct from the app chrome), the pulse read reused from 9.0, a condensed 0.3 privacy line, and one primary link to 9.0. No new global; the email delivers the same aggregate-only read.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">Payment, recovery, and exit</div>
-    <h2>States and primary CTA</h2>
-    <p>Honest paywall: the price is shown before payment, the exit is never hidden, and a failure recovers to 7.3 rather than trapping.</p>
+    <div class="section-label">Delivered, honest, and respectful</div>
+    <h2>States and primary action</h2>
     <div class="table-wrap">
       <table>
         <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Default</td><td>tier, seats (from team size), computed price, payment block</td><td>Upgrade now / Stay on Free</td></tr>
-          <tr><td>Seats changed</td><td>the price total recomputes from the new seat count</td><td>-</td></tr>
-          <tr><td>Processing payment</td><td>Upgrade now in-progress; inputs lock; exit stays available</td><td>-</td></tr>
-          <tr><td>Success</td><td>dialog closes, upgrade applied, invite proceeds</td><td>toward 9.0 Owner dashboard</td></tr>
-          <tr><td>Failure</td><td>recoverable, not a hard stop</td><td>to 7.3 Payment failed</td></tr>
-          <tr><td>Stay on Free / close / Esc / scrim</td><td>dismiss with no charge</td><td>to 7.0 (recoverable exit, F3 DE3)</td></tr>
+          <tr><td>Default (minimum-N met)</td><td>month score, honest sentence, trend, participation share, privacy line</td><td>Open your dashboard (to 9.0)</td></tr>
+          <tr><td>Minimum-N not met</td><td>"not enough responses yet for a score this month", no partial number, no individual data</td><td>still links to 9.0 (email form of 9.3)</td></tr>
+          <tr><td>Trending down (honest signal)</td><td>the same layout with a plainly worded drop, never softened</td><td>Open your dashboard</td></tr>
+          <tr><td>Manage frequency / unsubscribe</td><td>footer links to change cadence or stop</td><td>respected immediately</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout"><strong>0.5 a11y contract:</strong> <code>role="dialog"</code>, <code>aria-modal="true"</code>, labelled by the title; focus moves in and is trapped; Esc closes (equals Stay on Free); the background (7.1) is inert; on close, focus returns to the opener. Price and errors are in text, not color alone.</div>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A centered modal over the dimmed 7.1 on desktop, a bottom sheet on mobile; the price is shown before payment and the recoverable exit is always present.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). An email that stands on its own: the month's read, an honest sentence, the trend, participation as a share, a privacy line, and one link. Single column, the same on phone and in webmail.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, modal over the dimmed 7.1</div>
-        <div class="wf-modal-scrim">
-          <div class="wf-scrimghost">
-            <div class="wf-ghostbar"><span class="wf-logo">Brio</span><span style="margin-left:auto;"></span><span class="wf-tab">Owner</span></div>
-            <div class="wf-plain" style="opacity:0.4;margin-top:10px;">Invite your owner (behind the dialog)</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Webmail, single-column email</div>
+        <div class="wf-email">
+          <div class="wf-emailhead">
+            <div class="from">Brio &middot; noreply@brio.co</div>
+            <div class="subj">Your Acme team wellbeing, June</div>
           </div>
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-modal-wrap">
-            <div class="wf-modal" role="dialog" aria-modal="true" aria-label="Upgrade to Starter">
-              <div class="mtitle">Upgrade to Starter <span class="x">x</span></div>
-              <div class="wf-tier">
-                <div class="tn">Starter</div>
-                <div class="ti">Full pulse and trends, plus the owner dashboard (aggregate only).</div>
-              </div>
-              <div class="wf-line"><span>Seats <span class="sub">from your team size</span></span><span class="wf-seats"><span class="wf-step">-</span><span>12</span><span class="wf-step">+</span></span></div>
-              <div class="wf-line"><span>Per seat <span class="sub">billed monthly</span></span><span>$5 / mo <span class="hyp">Hyp</span></span></div>
-              <div class="wf-total"><span class="wf-plain">Total</span><span class="amt">$60 / mo</span></div>
-              <div class="wf-lbl">Card number</div>
-              <div class="wf-input">1234 1234 1234 1234</div>
-              <div class="wf-pay" style="margin-top:8px;">
-                <div class="wf-input f">MM / YY</div>
-                <div class="wf-input f">CVC</div>
-              </div>
-              <span class="wf-b solid block" style="margin-top:14px;">Upgrade now</span>
-              <div class="wf-plain" style="text-align:center;margin-top:9px;"><span class="wf-link">Stay on Free</span></div>
+          <div class="wf-emailbody">
+            <div class="wf-greet">Hi Marcus, here is this month's read.</div>
+            <div class="wf-read">
+              <div class="lab">June, team wellbeing</div>
+              <div class="wf-num">Steady</div>
+              <div class="wf-interp">Holding steady, no sign anyone is at risk of leaving.</div>
+              <div class="wf-spark"><span class="bar" style="height:48%"></span><span class="bar" style="height:56%"></span><span class="bar" style="height:52%"></span><span class="bar" style="height:64%"></span><span class="bar" style="height:70%"></span></div>
+              <div class="wf-metric">Participation 74% (share of the team, not who)</div>
             </div>
+            <div class="wf-trendline">Up a little from May.</div>
+            <div class="wf-privline">You only ever see the team aggregate, never individual data.</div>
+            <span class="wf-b solid block">Open your dashboard</span>
           </div>
+          <div class="wf-emailfoot">Sent monthly &middot; <span class="wf-link">manage emails</span> &middot; <span class="wf-link">view in browser</span></div>
         </div>
-        <div class="wf-note">price shown before payment &middot; seats from team size &middot; pricing flagged Hyp &middot; Stay on Free always present (no charge, to 7.0) &middot; failure to 7.3.</div>
+        <div class="wf-note">delivers value with no click &middot; one honest sentence &middot; participation as a share &middot; privacy line travels with the email &middot; one link to 9.0.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, minimum-N not met</div>
         <div class="wf-phone">
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-sheet">
-            <div class="grab"></div>
-            <div class="mtitle" style="display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:700;margin-bottom:12px;">Upgrade to Starter <span class="x" style="margin-left:auto;color:#9a9a9a;border:1px solid #444;border-radius:4px;width:20px;height:20px;text-align:center;line-height:18px;font-size:12px;">x</span></div>
-            <div class="wf-tier"><div class="tn">Starter</div><div class="ti">Owner dashboard (aggregate only) included.</div></div>
-            <div class="wf-line"><span>Seats</span><span class="wf-seats"><span class="wf-step">-</span><span>12</span><span class="wf-step">+</span></span></div>
-            <div class="wf-total"><span class="wf-plain"><span class="wf-bnum">4</span>Total</span><span class="amt">$60 / mo <span class="hyp">Hyp</span></span></div>
-            <div class="wf-lbl">Card</div>
-            <div class="wf-input">1234 1234 1234 1234</div>
-            <span class="wf-b solid block" style="margin-top:12px;">Upgrade now</span>
-            <div class="wf-plain" style="text-align:center;margin-top:9px;"><span class="wf-link">Stay on Free</span></div>
+          <div class="wf-email" style="max-width:none;">
+            <div class="wf-emailhead" style="padding:8px 10px;"><div class="from">Brio</div><div class="subj" style="font-size:11px;">Your team wellbeing, June</div></div>
+            <div class="wf-emailbody" style="padding:14px 10px;">
+              <div class="wf-greet"><span class="wf-bnum">2</span>Hi Marcus,</div>
+              <div class="wf-read">
+                <div class="wf-num" style="font-size:16px;">No score yet</div>
+                <div class="wf-interp" style="margin-top:8px;">Not enough responses this month for a score. A minimum of 5 protects everyone's privacy.</div>
+              </div>
+              <div class="wf-privline">No individual data, ever.</div>
+              <span class="wf-b solid block">Open your dashboard</span>
+            </div>
+            <div class="wf-emailfoot" style="padding:9px 10px;">Sent monthly &middot; <span class="wf-link">manage</span></div>
           </div>
         </div>
-        <div class="wf-note">bottom sheet with grab handle &middot; same order &middot; exit always in view.</div>
+        <div class="wf-note">email form of 9.3 &middot; no partial number &middot; still invites the owner in.</div>
       </div>
     </div>
   </section>
 
   <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Operator app modal</div>
+    <div class="section-label">Email, private view-in-browser</div>
     <h2>SEO block (noindex)</h2>
-    <p>Upgrade or paywall is a modal inside the authenticated operator app. It is not indexed and carries no schema. The in-app findability and dialog a11y rules still apply.</p>
+    <p>The digest is an email; email is not crawled. The view-in-browser version is a private, token-gated page.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (no standalone URL; a modal over 7.1)</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> on the view-in-browser (token-gated, personal)</span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
-    <h3>In-app findability (not SEO, still specified)</h3>
+    <h3>Email findability (not SEO, still specified)</h3>
     <ul>
-      <li>the dialog has an accessible name (the title) and the 0.5 a11y contract (role, aria-modal, focus trap, Esc, inert background, focus return)</li>
-      <li>the price and any error are conveyed in text, not by color alone</li>
-      <li>the payment inputs are labelled; Upgrade now and Stay on Free are labelled controls</li>
-      <li>the exit is reachable by keyboard (Esc) and pointer; tap targets at least 44px</li>
+      <li>a meaningful subject line and preview text; a plain-text alternative</li>
+      <li>semantic headings in the HTML email; the score, trend, and participation are text, not an image</li>
+      <li>participation is stated as a share, never as who; a missing score states its reason in text</li>
+      <li>table-based layout with inline styles, readable in light and dark clients, no meaning by color alone; tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>An honest paywall.</strong> Upgrade or paywall is a pure 0.5 Dialog instance (registered as a 0.5 consumer) and reuses the 0.6 Starter tier; it invents nothing global. The price is shown before payment, the exit is always present, and a failure recovers to 7.3 rather than trapping. Next: <strong>7.3 Payment failed</strong> (the recoverable error state), which closes cluster 7.</div>
+    <div class="callout ok"><strong>Cluster 9 closed.</strong> Monthly owner digest reuses the pulse read from 9.0 and a condensed 0.3 privacy line; it invents nothing global and delivers the same aggregate-only read to the inbox. It is the owner's monthly habit (W1): honest, under two minutes, with one link to the full dashboard. Cluster 9 Owner surface is complete (9.0 with 9.1 and 9.3, 9.2). Next cluster: <strong>10 Employee check-in</strong> (the near-anonymous, under-30-second linear flow).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 7.2 Upgrade / paywall - July 2026</p>
-    <p style="margin-top:4px;">A pure 0.5 Dialog instance: tier, seats from team size, the computed price shown before payment, a card block, and an always-present "Stay on Free" recoverable exit to 7.0; a failure recovers to 7.3. Pricing is a hypothesis. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/upgrade.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 9.2 Monthly owner digest - July 2026</p>
+    <p style="margin-top:4px;">The owner's monthly email: the month's score, an honest one-line reading, a trend, participation as a share, a condensed privacy line, and one link to the full dashboard (9.0). The email form of the 9.3 empty state states the minimum-N reason plainly. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/owner-digest.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
