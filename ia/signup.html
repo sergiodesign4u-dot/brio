@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Resend or manage invite (6.1)</title>
+  <title>Brio - IA Detail: Sign up (2.0)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -102,36 +102,32 @@
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; text-align: center; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.danger { border-color: #9a5a5a; color: #e2b3b3; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
     .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* dialog over an inert, dimmed roster */
-    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; }
-    .wf-under { padding: 12px 14px; filter: blur(1px); opacity: 0.4; pointer-events: none; }
-    .wf-under .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-under .ln.s { width: 55%; }
-    .wf-under .mrow { display: flex; gap: 8px; align-items: center; border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px; margin-bottom: 6px; }
-    .wf-under .mrow .who { flex: 1; color: #8a8a8a; font-size: 11px; }
-    .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
-    .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .wf-modal { width: 300px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
-    .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
-    .wf-member { border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px 10px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-    .wf-member .who { color: #cfcfcf; font-size: 11px; flex: 1; }
-    .wf-member .status { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid #444; border-radius: 3px; padding: 1px 6px; color: #9a9a9a; }
-    .wf-acts { display: flex; flex-direction: column; gap: 8px; }
-    .wf-priv { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px 10px; color: #9a9a9a; font-size: 10px; margin-top: 10px; }
+    /* auth page shell */
+    .wf-authpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-topbar { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-auth { max-width: 360px; margin: 0 auto; padding: 26px 20px; }
+    .wf-auth .wh { color: #fff; font-size: 19px; font-weight: 800; }
+    .wf-auth .sub { color: #9a9a9a; font-size: 11px; margin: 5px 0 18px; }
+    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 5px; }
+    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px 11px; margin-bottom: 12px; color: #6a6a6a; font-size: 12px; }
+    .wf-or { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
+    .wf-or::before, .wf-or::after { content: ""; flex: 1; height: 1px; background: #2c2c2c; }
+    .wf-or span { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.1em; font-family: ui-monospace, monospace; }
+    .wf-legal { font-size: 9.5px; color: #8a8a8a; text-align: center; margin-top: 12px; line-height: 1.5; }
+    .wf-legal .wf-link { font-size: 9.5px; }
+    .wf-trust { text-align: center; font-size: 10px; color: #cfcfcf; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px; margin-top: 14px; }
+    .wf-alt { text-align: center; font-size: 11px; color: #9a9a9a; margin-top: 16px; }
 
-    /* mobile bottom sheet */
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; position: relative; overflow: hidden; min-height: 300px; }
-    .wf-phone .top { padding: 10px; filter: blur(1px); opacity: 0.4; }
-    .wf-phone .top .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #101010; border-top: 1px solid #4a4a4a; border-radius: 14px 14px 0 0; padding: 14px; }
-    .wf-sheet .grab { width: 34px; height: 4px; background: #3a3a3a; border-radius: 3px; margin: 0 auto 10px; }
+    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
@@ -177,12 +173,12 @@
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
-      <a href="manage-invite.html" class="nav-sub-item nav-sub-active">Manage invite</a>
+      <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
       <a href="invite-send-error.html" class="nav-sub-item">Invite-send error</a>
-      <a href="signup.html" class="nav-sub-item">Sign up</a>
+      <a href="signup.html" class="nav-sub-item nav-sub-active">Sign up</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -203,50 +199,48 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 6.1</span>
-      <span class="badge">Dialog (0.5)</span>
-      <span class="badge privacy">Roster, not answers</span>
+      <span class="badge">Node 2.0</span>
+      <span class="badge">Public / pre-auth</span>
+      <span class="badge privacy">Starts flow F1</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Manage invite (6.1) &middot; dialog, opened from 6.0</div>
-    <h1>Resend or manage invite</h1>
-    <p class="hero-intro">A small dialog on the canonical 0.5 shell, opened from a member row in the roster (6.0). The operator resends an invite, copies its link, or revokes it, without leaving the roster. It is roster-identity administration only; it never touches answer identity. Inside the operator app, so noindex. Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Sign up (2.0) &middot; URL: /signup</div>
+    <h1>Sign up</h1>
+    <p class="hero-intro">The self-serve front door. An operator arriving from the Landing, Pricing, or a segment page creates a Brio account in seconds, with no credit card, and goes straight into onboarding. A focused conversion surface: minimal chrome, one clear action, one honest trust cue. Serves item 1 (self-serve start) and Main; it starts the main flow F1. Public but transactional, so the form is noindex. Source of truth: ia/docs/pages/signup.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
-    <div class="section-label">Dialog anatomy</div>
+    <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. This is a conversion page, so the chrome is deliberately minimal: a pre-auth header, not the four job tabs (those are post-auth).</p>
     <ol>
-      <li><strong>Title</strong>: "Manage invite" plus the member's name or email, with a close control.</li>
-      <li><strong>Member summary</strong>: name or email and status (invited or joined). Roster identity only.</li>
-      <li><strong>Actions, by status</strong>: pending shows Resend, Copy link, Revoke; joined shows Remove from team.</li>
-      <li><strong>Privacy note</strong>: next to a destructive action, that this affects the roster, never answers.</li>
-      <li><strong>Dismiss</strong>: Cancel or close; Esc also closes.</li>
+      <li><strong>Pre-auth header</strong>: the Brio mark and a single "Log in" link (a reduced 0.1 variant, no job tabs).</li>
+      <li><strong>Heading and value line</strong>: "Create your Brio account" plus one benefit line ("Start free. No credit card."). Reinforces item 1.</li>
+      <li><strong>Sign-up form</strong>: a labelled email field and a labelled password field, primary CTA "Create account". The shortest credible form.</li>
+      <li><strong>Magic-link option</strong>: "Email me a link instead" (passwordless), to 2.2 Magic-link sent. Equal-weight, since passwordless suits a non-technical operator.</li>
+      <li><strong>Legal microcopy</strong>: "By creating an account you agree to our Terms and Privacy Policy", linking to 1.6.</li>
+      <li><strong>Privacy trust cue</strong>: one condensed 0.3 line ("team-level, aggregate signals, never individual data") where it first matters.</li>
+      <li><strong>Log-in link</strong>: "Already have an account? Log in", to 2.1.</li>
+      <li><strong>Footer</strong>: 0.2 footer, public variant (condensed).</li>
     </ol>
-    <p><strong>Components used:</strong> 0.5 Dialog / modal shell (this node is an instance of it). No new component; 6.1 is the already-registered 0.5 consumer that 6.0 opens.</p>
-  </section>
-
-  <!-- Privacy -->
-  <section id="privacy">
-    <div class="section-label">What managing an invite touches</div>
-    <h2>This manages the roster, not answers</h2>
-    <p>Managing or revoking an invite is roster-identity administration, which is allowed. It never reveals or touches answer identity. Removing a joined member affects future participation only; their past contributions were only ever aggregate and were never stored as an identifiable individual record, so there is nothing individual to expose or delete. The dialog states this plainly next to the destructive action.</p>
+    <p><strong>Components used:</strong> a reduced 0.1 (pre-auth header), 0.2 (public footer), 0.3 (condensed trust line), links to 1.6. Standard form inputs, no new global. <strong>SSO</strong> (Google, Microsoft) is a paid feature, so it is deliberately absent from self-serve sign-up.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">By invite status</div>
-    <h2>Variants and states</h2>
+    <div class="section-label">Validation, submit, and role</div>
+    <h2>States and primary CTA</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Pending invite (default)</td><td>member + status invited</td><td>Resend invite</td></tr>
-          <tr><td>Joined member</td><td>member + status joined</td><td>Remove from team (destructive)</td></tr>
-          <tr><td>Revoke / remove confirm</td><td>inline "Revoke this invite?" inside the same dialog</td><td>Confirm / Cancel</td></tr>
-          <tr><td>Sending</td><td>the action shows a sending state; dialog stays open</td><td>-</td></tr>
-          <tr><td>Success</td><td>"Invite resent"; dialog closes or updates the row</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not resend, retry"; dialog stays open</td><td>retry (MS4)</td></tr>
+          <tr><td>Default</td><td>empty email and password, Create account, magic-link option, trust line</td><td>Create account (to 3.0)</td></tr>
+          <tr><td>Field validation</td><td>inline text messages for an invalid email or a too-short password (not color alone)</td><td>correct in place</td></tr>
+          <tr><td>Email already registered</td><td>"this email already has an account" with a direct Log in action</td><td>to 2.1 Log in (never a dead-end)</td></tr>
+          <tr><td>Submitting</td><td>Create account shows in-progress; fields lock to prevent double submit</td><td>-</td></tr>
+          <tr><td>Success (password path)</td><td>account created; main flow F1 begins</td><td>to 3.0 Company setup</td></tr>
+          <tr><td>Magic-link path</td><td>"Email me a link instead" sends the link</td><td>to 2.2 Magic-link sent</td></tr>
+          <tr><td>Already authenticated</td><td>redirect</td><td>4.0 Dashboard (onboarded) / 3.0 (not yet)</td></tr>
         </tbody>
       </table>
     </div>
@@ -256,84 +250,83 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The dialog is a 0.5 instance: a centered modal over an inert, dimmed roster on desktop, and a bottom sheet on mobile.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A centered, narrow card with a minimal pre-auth header and one primary action; the same content stacks full width at the 360px baseline.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:300px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, pending invite (over an inert roster)</div>
-        <div class="wf-modal-scrim" style="min-height:300px;">
-          <div class="wf-under">
-            <div class="ln"></div><div class="ln s"></div>
-            <div class="mrow"><span class="who">Yemi O.</span><span class="wf-plain">Joined</span></div>
-            <div class="mrow"><span class="who">dev@company.com</span><span class="wf-plain">Invited</span></div>
+      <div style="flex:1;min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, centered sign-up card</div>
+        <div class="wf-authpage">
+          <div class="wf-topbar">
+            <span class="wf-logo">Brio</span>
+            <span class="wf-link">Log in</span>
           </div>
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-modal-wrap">
-            <div class="wf-modal" role="dialog" aria-modal="true">
-              <div class="mtitle">Manage invite <span class="x">&times;</span></div>
-              <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-              <div class="wf-acts">
-                <span class="wf-b solid block">Resend invite</span>
-                <span class="wf-b block">Copy invite link</span>
-                <span class="wf-b danger block">Revoke invite</span>
-              </div>
-              <div class="wf-priv">Managing an invite touches the roster, never answers.</div>
-            </div>
+          <div class="wf-auth">
+            <div class="wh">Create your Brio account</div>
+            <div class="sub">Start free. No credit card. Set up your first program in minutes.</div>
+            <div class="wf-lbl">Work email</div>
+            <div class="wf-input">you@company.com</div>
+            <div class="wf-lbl">Password</div>
+            <div class="wf-input">At least 8 characters</div>
+            <span class="wf-b solid block">Create account</span>
+            <div class="wf-or"><span>or</span></div>
+            <span class="wf-b block">Email me a link instead</span>
+            <div class="wf-legal">By creating an account you agree to our <span class="wf-link">Terms</span> and <span class="wf-link">Privacy Policy</span>.</div>
+            <div class="wf-trust">Brio only ever shows team-level, aggregate signals. Never individual data.</div>
+            <div class="wf-alt">Already have an account? <span class="wf-link">Log in</span></div>
           </div>
         </div>
-        <div class="wf-note">0.5 contract: role="dialog", aria-modal, focus trap, Esc closes, background inert, focus returns to the opener.</div>
+        <div class="wf-note">minimal header (no job tabs) &middot; email + password or magic link &middot; no credit card, no SSO (paid) &middot; trust line at first commitment &middot; success to 3.0 (F1 begins).</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="top"><div class="ln"></div><div class="ln s"></div><div class="ln"></div></div>
-          <div class="wf-sheet">
-            <div class="grab"></div>
-            <div class="mtitle" style="display:flex;align-items:center;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px;">Manage invite</div>
-            <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-            <div class="wf-acts">
-              <span class="wf-b solid block">Resend invite</span>
-              <span class="wf-b block">Copy invite link</span>
-              <span class="wf-b danger block">Revoke invite</span>
-            </div>
+          <div class="wf-topbar" style="padding:9px 10px;"><span class="wf-logo">Brio</span><span class="wf-link">Log in</span></div>
+          <div class="wf-auth" style="padding:18px 12px;">
+            <div class="wh" style="font-size:17px;">Create your account</div>
+            <div class="sub" style="margin-bottom:14px;">Start free. No credit card.</div>
+            <div class="wf-lbl"><span class="wf-bnum">3</span>email</div>
+            <div class="wf-input">you@company.com</div>
+            <div class="wf-lbl">password</div>
+            <div class="wf-input">8+ characters</div>
+            <span class="wf-b solid block">Create account</span>
+            <div class="wf-or"><span>or</span></div>
+            <span class="wf-b block">Email me a link</span>
+            <div class="wf-legal">Terms &middot; Privacy Policy</div>
+            <div class="wf-trust">Aggregate only. Never individual data.</div>
+            <div class="wf-alt">Have an account? <span class="wf-link">Log in</span></div>
           </div>
         </div>
-        <div class="wf-note">same actions, full-width sheet, comfortable targets.</div>
+        <div class="wf-note">same blocks, single column, full-width fields.</div>
       </div>
-    </div>
-
-    <div class="wf-frame" style="margin-top:22px;max-width:360px;">
-      <div class="wf-cap">Inline revoke confirm (no stacked modal)</div>
-      <div class="wf-modal" style="width:auto;">
-        <div class="mtitle">Revoke this invite?</div>
-        <div class="wf-plain" style="margin-bottom:12px;">The link and code stop working for this person. You can re-invite later.</div>
-        <div class="wf-acts" style="flex-direction:row;justify-content:flex-end;">
-          <span class="wf-b">Cancel</span>
-          <span class="wf-b danger">Revoke</span>
-        </div>
-      </div>
-      <div class="wf-note">the confirm replaces the actions inside the same 6.1 dialog; reversible (re-invite).</div>
     </div>
   </section>
 
-  <!-- a11y / noindex -->
+  <!-- SEO (noindex, follow) -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
-    <h2>Accessibility contract and noindex</h2>
-    <p>A dialog, not a page: no URL of its own, noindex, no schema, no SEO block. It inherits the 0.5 accessibility contract.</p>
+    <div class="section-label">Public funnel, transactional form</div>
+    <h2>SEO block (noindex, follow)</h2>
+    <p>Sign up sits in the public funnel, but the form itself is not indexed. This is a deliberate decision, and it differs from the deep app zones (which are noindex, nofollow): here <code>follow</code> is kept so equity flows to the legal pages and Log in.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">role</span><span class="seo-v"><code>dialog</code>, <code>aria-modal="true"</code>, labelled by the title</span></div>
-      <div class="seo-row"><span class="seo-k">focus</span><span class="seo-v">moves into the dialog on open, trapped; returns to the opener on close</span></div>
-      <div class="seo-row"><span class="seo-k">dismiss</span><span class="seo-v">Esc closes; background is inert</span></div>
-      <div class="seo-row"><span class="seo-k">targets</span><span class="seo-v">destructive confirm is keyboard reachable and labelled; tap targets at least 44px</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, follow</code> (thin, transactional; duplicated in intent by the marketing pages)</span></div>
+      <div class="seo-row"><span class="seo-k">acquisition SEO</span><span class="seo-v">lives on the indexed pages that funnel here: 1.0 Landing, 1.x Pricing, 1.5 segment / category landings, each with its own H1, schema, and target queries</span></div>
+      <div class="seo-row"><span class="seo-k">branded queries</span><span class="seo-v">"Brio sign up" is captured by Landing / Home, which links to this form</span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none on the form</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
-    <div class="callout ok"><strong>Cluster 6 closed.</strong> Resend or manage invite is a pure 0.5 instance; it invents nothing and keeps roster identity separate from answer identity. Cluster 6 Team is complete (6.0 roster, 6.1 manage). Next: cluster 3, the onboarding wizard (3.0 to 3.3), the guided first run.</div>
+    <h3>In-app findability (still specified)</h3>
+    <ul>
+      <li>exactly one H1 (the heading) for the accessible document outline</li>
+      <li>email and password are labelled inputs with visible labels</li>
+      <li>errors are conveyed in text, not by color alone</li>
+      <li>the primary and secondary actions are labelled buttons; tap targets at least 44px</li>
+    </ul>
+    <div class="callout ok"><strong>Flow F1 starts here.</strong> Sign up reuses a reduced 0.1 (pre-auth header), 0.2 (public footer), and a condensed 0.3 trust line, and links to 1.6; it invents nothing global. It is the self-serve expression of item 1: no credit card, straight into onboarding. Next: <strong>2.1 Log in</strong> (return access), then the 2.2 Magic-link sent and 2.3 Invalid or expired link states.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 6.1 Resend or manage invite - July 2026</p>
-    <p style="margin-top:4px;">A 0.5 dialog opened from the roster: resend, copy link, or revoke an invite, with an inline destructive confirm and a note that this touches the roster, never answers. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 2.0 Sign up - July 2026</p>
+    <p style="margin-top:4px;">The self-serve front door: email + password or magic link, no credit card, no SSO (paid), with a first-commitment privacy trust line, then straight into onboarding (3.0, flow F1 begins). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/signup.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
