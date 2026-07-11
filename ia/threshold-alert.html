@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Check-in setup (5.2)</title>
+  <title>Brio - IA Detail: Threshold alert detail (4.2)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -112,44 +112,42 @@
     .wf-crumb { padding: 8px 14px; font-size: 10px; color: #7a7a7a; border-bottom: 1px solid #1f1f1f; font-family: ui-monospace, monospace; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.disabled { border-style: dashed; color: #6a6a6a; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
     .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
-    .wf-hl.s { width: 55%; height: 12px; }
     .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
     .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
 
-    /* two-column form */
-    .wf-2col { display: grid; grid-template-columns: 1.5fr 1fr; gap: 0; }
+    /* two-column body */
+    .wf-2col { display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; }
     .wf-2col > div { border-bottom: 1px solid #1f1f1f; }
     .wf-2col > div:first-child { border-right: 1px solid #1f1f1f; }
     @media (max-width: 560px) { .wf-2col { grid-template-columns: 1fr; } .wf-2col > div:first-child { border-right: none; } }
 
-    /* question option rows */
-    .wf-opt { display: flex; align-items: center; gap: 10px; border: 1px solid #333; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; }
-    .wf-opt .box { width: 16px; height: 16px; border: 1px solid #7a7a7a; border-radius: 3px; flex-shrink: 0; }
-    .wf-opt .box.on { background: #e6e6e6; border-color: #e6e6e6; }
-    .wf-opt .qt { color: #cfcfcf; font-size: 11px; flex: 1; }
-    .wf-opt.off .qt { color: #7a7a7a; }
-    .wf-toggle { display: flex; border: 1px solid #444; border-radius: 5px; overflow: hidden; flex-shrink: 0; }
-    .wf-toggle span { font-size: 9.5px; padding: 3px 7px; color: #9a9a9a; }
-    .wf-toggle span.on { background: #cfcfcf; color: #111; }
-    .wf-count { font-size: 10px; color: #cfcfcf; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-chip { border: 1px solid #444; border-radius: 4px; padding: 4px 9px; font-size: 10.5px; color: #9a9a9a; }
-    .wf-chip.on { border-color: #fff; color: #fff; }
+    /* what dropped */
+    .wf-drop { border: 1px solid #4a4a4a; border-radius: 8px; padding: 12px; background: #131313; }
+    .wf-delta { color: #fff; font-size: 15px; font-weight: 800; }
+    .wf-delta .arw { color: #cfcfcf; margin: 0 4px; }
+    .wf-delta .to { color: #e6e6e6; }
+    .wf-period { color: #9a9a9a; font-size: 10.5px; font-family: ui-monospace, monospace; margin-top: 2px; }
+    .wf-spark { display: flex; align-items: flex-end; gap: 5px; height: 40px; margin: 10px 0 4px; }
+    .wf-spark .bar { width: 11px; background: #3a3a3a; border-radius: 2px 2px 0 0; }
+    .wf-spark .bar.low { background: #6a6a6a; }
+    .wf-read { color: #b6b6b6; font-size: 12px; margin-top: 10px; }
+    .wf-read strong { color: #fff; }
 
-    /* privacy mechanics block (D1) */
-    .wf-priv { border: 1px solid #5a5a5a; border-radius: 8px; padding: 12px; background: #121212; }
-    .wf-priv .ph { display: flex; align-items: center; gap: 6px; color: #fff; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
-    .wf-priv .lock { font-size: 8.5px; color: #cfcfcf; border: 1px solid #6a6a6a; border-radius: 3px; padding: 0 5px; text-transform: uppercase; letter-spacing: 0.06em; }
-    .wf-priv .row { display: flex; gap: 8px; margin-bottom: 8px; color: #b6b6b6; font-size: 11px; }
-    .wf-priv .row:last-child { margin-bottom: 0; }
-    .wf-priv .n { color: #fff; font-weight: 700; font-family: ui-monospace, monospace; flex-shrink: 0; }
-    .wf-prev { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 10px; color: #cfcfcf; font-size: 11px; text-align: center; }
+    /* action panel */
+    .wf-stack { display: flex; flex-direction: column; gap: 8px; }
+    .wf-link { border: 1px solid #333; border-radius: 6px; padding: 8px 10px; color: #cfcfcf; font-size: 11px; }
+    .wf-link .cat { font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: #8a8a8a; display: block; }
+    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; }
+
+    /* state mini */
+    .wf-state { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 16px; text-align: center; color: #cfcfcf; font-size: 12px; }
+    .wf-state .n { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+    .wf-state .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 10px; }
   </style>
 </head>
 <body>
@@ -190,10 +188,10 @@
       <a href="home.html" class="nav-sub-item">Home</a>
       <a href="program-library.html" class="nav-sub-item">Program library</a>
       <a href="program-detail.html" class="nav-sub-item">Program detail</a>
-      <a href="check-in-setup.html" class="nav-sub-item nav-sub-active">Check-in setup</a>
+      <a href="check-in-setup.html" class="nav-sub-item">Check-in setup</a>
       <a href="dashboard.html" class="nav-sub-item">Dashboard</a>
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
-      <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
+      <a href="threshold-alert.html" class="nav-sub-item nav-sub-active">Threshold alert</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -214,13 +212,13 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 5.2</span>
+      <span class="badge">Node 4.2</span>
       <span class="badge">Page</span>
-      <span class="badge privacy">D1 privacy in UI</span>
+      <span class="badge privacy">Team-level, never who</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Check-in setup (5.2) &middot; URL: /app/programs/:slug/check-in</div>
-    <h1>Check-in setup</h1>
-    <p class="hero-intro">The operator picks the 1 to 3 questions the team sees, each question's type, and the cadence. This is the first page where founder decision D1 becomes visible in the product: minimum-N of 5 and no live count are stated as fixed guarantees, not settings. Serves J2, J4, and item 3. Inside the operator app, so noindex. Source of truth: ia/docs/pages/check-in-setup.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Threshold alert (4.2) &middot; URL: /app/alerts/:id</div>
+    <h1>Threshold alert detail</h1>
+    <p class="hero-intro">When the aggregate drops meaningfully, this tells the operator plainly what changed, what it means, and the one thing to do next, so a struggle is caught early (J2). It is honest about a real dip yet calm, and strictly team-level, never pointing at a person. Serves J2 and E1. Inside the operator app, so noindex. Source of truth: ia/docs/pages/threshold-alert.md.</p>
   </section>
 
   <!-- Blocks -->
@@ -229,127 +227,111 @@
     <h2>Content blocks</h2>
     <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
     <ol>
-      <li><strong>Nav + header</strong> (0.1 operator, Programs active): H1 "Set up the check-in", subhead naming the program. Back to 5.1.</li>
-      <li><strong>Question picker</strong>: a short curated list for the category; select 1 to 3, with a live "N of 3 selected" counter; each selected question gets a type control, emoji or slider. Curated, not free-text, to keep the employee check-in low-effort. The item 3 / J4 surface.</li>
-      <li><strong>Cadence</strong>: weekly in the MVP (free tier is weekly, one question); optional send day; heavier cadences deferred <span class="hyp">?</span>.</li>
-      <li><strong>Privacy mechanics (D1)</strong>: two fixed statements, not toggles. Minimum-N of 5: no score until at least 5 answer. No live count: no running tally while a cycle is open, for anyone. Closes the small-team timing-inference vector (D1, research/strategy.md Section 5).</li>
-      <li><strong>Employee preview</strong>: what the team will see, a short near-anonymous check-in under 30 seconds with the privacy note before Q1 (links to the 10.x surface, 0.3 employee variant). Reinforces J3.</li>
-      <li><strong>Save band</strong>: Save writes the config and activates a draft program, then to 4.1 Team pulse detail; back to 5.1.</li>
+      <li><strong>Nav + header</strong> (0.1 operator, Dashboard active): H1 "What changed". Back to 4.0.</li>
+      <li><strong>What dropped</strong>: the specific aggregate move, plainly, "from Steady to Low over the last two cycles," with a small down-trend indicator. Aggregate only, never who.</li>
+      <li><strong>Plain-language reading</strong> (E1): what it means, calm, no jargon; a team-level dip, not a person, and explicitly not a diagnosis of anyone.</li>
+      <li><strong>Suggested next action</strong>: one concrete step, the primary CTA, usually See the program (to 5.1) or Review the full pulse (to 4.1).</li>
+      <li><strong>Link to the relevant program</strong>: a compact reference to the program tied to this signal, to 5.1.</li>
+      <li><strong>Privacy reassurance</strong> (0.3 condensed): a team-level signal that never names an individual, to 1.1.</li>
       <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (operator variant for D1, employee variant in the preview), 0.6 Canonical lists (answer types, cadence). The question picker and cadence control are thin page-specific form controls, not globals. No new global invented.</p>
+    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (condensed). The what-dropped indicator and reading reuse the in-node pulse elements from 4.0 and 4.1. No new global invented.</p>
   </section>
 
-  <!-- Privacy is structural -->
-  <section id="privacy">
-    <div class="section-label">Why it is stated, not toggled</div>
-    <h2>The D1 mechanics are fixed</h2>
-    <p>Design Principle 1: privacy is the product, not a setting you can switch off. So the two D1 guarantees appear here as plain statements the operator reads and can stand behind, never as controls the operator (or owner) could weaken.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Mechanic</th><th>What it says</th><th>Why</th></tr></thead>
-        <tbody>
-          <tr><td>Minimum-N of 5</td><td>"No score appears until at least 5 people have answered."</td><td>protects against identifying anyone in a small team (MVP default, legal validation deferred)</td></tr>
-          <tr><td>No live count</td><td>"While a cycle is open, no one sees a running count of who has answered."</td><td>closes the small-team timing-inference vector (founder decision D1, June 2026)</td></tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- Honest but calm -->
+  <section id="honest">
+    <div class="section-label">Two principles meet here</div>
+    <h2>Honest, calm, and never individual</h2>
+    <p>Principle 4 (honest signals over flattering ones) means the alert says plainly the team dipped, it does not soften a real decline. The privacy boundary means it stays strictly aggregate, reporting a team-level move and pointing at a program to act on, never at a person, and saying so. The reading is calm and action-oriented, so the operator acts rather than panics or goes looking for who.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">By entry, validation, and role</div>
+    <div class="section-label">Signal, privacy math, and role</div>
     <h2>States and primary CTA</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Save</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Next action</th></tr></thead>
         <tbody>
-          <tr><td>New setup (draft program)</td><td>nothing selected yet</td><td>disabled until at least 1 question chosen</td></tr>
-          <tr><td>Edit (active program)</td><td>pre-filled current questions, types, cadence</td><td>updates the next cycle, not the open one</td></tr>
-          <tr><td>Validation</td><td>at least 1, at most 3; a 4th is blocked with a hint; a type is required per question</td><td>enabled when valid</td></tr>
-          <tr><td>Loading</td><td>skeleton form</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not save, retry"; form stays filled</td><td>retry (MS4)</td></tr>
+          <tr><td>Active alert (default)</td><td>what dropped + reading + program link</td><td>See the program (to 5.1)</td></tr>
+          <tr><td>Recovered / stale</td><td>"This has since recovered"; record kept</td><td>Review current pulse (to 4.1)</td></tr>
+          <tr><td>Below minimum-N</td><td>never reached; no alert fires under 5 responses (dashboard shows 4.3)</td><td>-</td></tr>
+          <tr><td>Loading / Error / not found</td><td>skeleton / "Could not load this alert"</td><td>back to 4.0 (MS4)</td></tr>
           <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Primary CTA: Save the check-in to 4.1 Team pulse detail (where results appear once minimum-N is met); back to 5.1 as the secondary path.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A two-column form on desktop (picker and cadence left, privacy mechanics and preview right) collapses to one column at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). What dropped and the reading lead; the action and program link sit beside them on desktop and stack below at the 360px baseline.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, new setup</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, active alert</div>
         <div class="wf-page">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab on">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
-          <div class="wf-crumb">Programs / Weekly mood check-in / Check-in</div>
-          <div class="wf-sec">
-            <div class="lbl">1 &middot; header (H1)</div>
-            <div class="wf-hl"></div><div class="wf-hl s"></div>
-          </div>
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab on">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
+          <div class="wf-crumb">Dashboard / Alert</div>
           <div class="wf-2col">
             <div>
               <div class="wf-sec">
-                <div class="lbl">2 &middot; question picker (1 to 3)</div>
-                <div class="wf-count">2 of 3 selected</div>
-                <div class="wf-opt"><span class="box on"></span><span class="qt">How has the team felt this week?</span><span class="wf-toggle"><span class="on">emoji</span><span>slider</span></span></div>
-                <div class="wf-opt"><span class="box on"></span><span class="qt">How manageable was your workload?</span><span class="wf-toggle"><span>emoji</span><span class="on">slider</span></span></div>
-                <div class="wf-opt off"><span class="box"></span><span class="qt">Did you feel supported this week?</span><span class="wf-toggle"><span>emoji</span><span>slider</span></span></div>
+                <div class="lbl">2 &middot; what dropped (aggregate)</div>
+                <div class="wf-drop">
+                  <div class="wf-delta">Steady <span class="arw">&darr;</span> <span class="to">Low</span></div>
+                  <div class="wf-period">over the last 2 cycles</div>
+                  <div class="wf-spark"><span class="bar" style="height:64%"></span><span class="bar" style="height:60%"></span><span class="bar" style="height:48%"></span><span class="bar low" style="height:36%"></span><span class="bar low" style="height:30%"></span></div>
+                  <div class="wf-read"><strong>What it means.</strong> A meaningful team-level dip, worth a look. This is not a diagnosis of any person.</div>
+                </div>
               </div>
               <div class="wf-sec">
-                <div class="lbl">3 &middot; cadence</div>
-                <div class="wf-chips" style="display:flex;gap:8px;"><span class="wf-chip on">Weekly</span><span class="wf-plain">send day: Mon</span></div>
-              </div>
-              <div class="wf-sec">
-                <div class="lbl">6 &middot; save</div>
-                <span class="wf-b solid">Save check-in</span> <span class="wf-plain">to 4.1 team pulse</span>
+                <div class="lbl">6 &middot; privacy reassurance (0.3)</div>
+                <div class="wf-strip2">A team-level signal. It never names or points at an individual.</div>
               </div>
             </div>
             <div>
               <div class="wf-sec">
-                <div class="lbl">4 &middot; privacy mechanics (D1)</div>
-                <div class="wf-priv">
-                  <div class="ph">Your team's privacy <span class="lock">Structural</span></div>
-                  <div class="row"><span class="n">N&ge;5</span><span>No score appears until at least 5 people answer.</span></div>
-                  <div class="row"><span class="n">0</span><span>No live count while a cycle is open, for anyone.</span></div>
+                <div class="lbl">4 + 5 &middot; next action + program</div>
+                <div class="wf-stack">
+                  <span class="wf-b solid">See the program</span>
+                  <div class="wf-link"><span class="cat">Mental health</span>Weekly mood check-in</div>
+                  <span class="wf-b">Review the full pulse</span>
                 </div>
-              </div>
-              <div class="wf-sec">
-                <div class="lbl">5 &middot; employee preview</div>
-                <div class="wf-prev">Team sees a 30-second check-in, privacy note first.<br><span class="wf-plain">preview the employee view (10.x)</span></div>
               </div>
             </div>
           </div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">privacy statements are text, fixed, never toggles &middot; Save disabled until 1 question chosen &middot; targets min 44px.</div>
+        <div class="wf-note">the move is stated in text (from, to, period), not color or icon alone &middot; points at a program, never a person &middot; targets min 44px.</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Programs</span></div>
-          <div class="wf-crumb">... / Check-in</div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-hl"></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>questions</div>
-            <div class="wf-count">2 of 3</div>
-            <div class="wf-opt"><span class="box on"></span><span class="qt">Team mood?</span><span class="wf-toggle"><span class="on">emoji</span></span></div>
-            <div class="wf-opt off"><span class="box"></span><span class="qt">Supported?</span></div>
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Alert</span></div>
+          <div class="wf-crumb">Dashboard / Alert</div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>what dropped</div>
+            <div class="wf-drop"><div class="wf-delta">Steady <span class="arw">&darr;</span> <span class="to">Low</span></div><div class="wf-period">last 2 cycles</div><div class="wf-read"><strong>Means:</strong> a team-level dip, not any person.</div></div>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>cadence</div><span class="wf-chip on">Weekly</span></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>privacy (D1)</div>
-            <div class="wf-priv"><div class="ph">Privacy <span class="lock">Fixed</span></div><div class="row"><span class="n">N&ge;5</span><span>score only after 5 answer</span></div><div class="row"><span class="n">0</span><span>no live count</span></div></div>
-          </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">6</span>save</div><span class="wf-b solid">Save check-in</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>next action</div><span class="wf-b solid">See the program</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">5</span>program</div><div class="wf-link"><span class="cat">Mental health</span>Weekly mood check-in</div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">6</span>privacy</div><div class="wf-strip2">Team-level, never who.</div></div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, privacy block stays prominent.</div>
+        <div class="wf-note">same blocks, single column, action high.</div>
       </div>
+    </div>
+
+    <div class="wf-frame" style="margin-top:22px;">
+      <div class="wf-cap">Recovered state &middot; honest record, not hidden</div>
+      <div class="wf-state">
+        <div class="n">This has since recovered</div>
+        <div class="sub">The team pulse is back to Steady. The alert is kept on the record.</div>
+        <span class="wf-b solid">Review current pulse</span>
+      </div>
+      <div class="wf-note">Principle 4: the record stays honest either way; routes to 4.1.</div>
     </div>
   </section>
 
@@ -357,26 +339,26 @@
   <section id="seo">
     <div class="section-label">Private app zone</div>
     <h2>SEO block (noindex)</h2>
-    <p>Check-in setup is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Threshold alert detail is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
     <div class="seo-block">
       <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/programs/:slug/check-in</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/alerts/:id</code></span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 ("Set up the check-in") for the accessible document outline</li>
-      <li>the question checkboxes and type controls are labeled form controls under a group label</li>
-      <li>the "N of 3 selected" counter is a live region</li>
-      <li>the privacy statements are plain text, not color-only; tap targets at least 44px</li>
+      <li>exactly one H1 ("What changed") for the accessible document outline</li>
+      <li>the what-dropped move is stated in text (from, to, and the period), not by color or an icon alone</li>
+      <li>the next action is a labeled control; the program link carries its accessible name</li>
+      <li>tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Cluster 5 closed.</strong> Check-in setup reuses 0.1, 0.3, and 0.6 and invents nothing global; the picker and cadence are thin page controls. This is where D1's privacy mechanics first appear in the UI. Next: cluster 4, <strong>4.0 Dashboard</strong> then 4.1 Team pulse detail, where those mechanics pay off as the aggregate signal.</div>
+    <div class="callout ok"><strong>Cluster 4 closed.</strong> Threshold alert detail reuses 0.1 and 0.3 and invents nothing global; it respects minimum-N (no alert below 5) and stays strictly aggregate. Cluster 4 is complete (4.0, 4.1, 4.2; states 4.3 and 4.4 live inside 4.0). Next: cluster 6, <strong>6.0 Team roster</strong> (invite, roster, participation, all aggregate).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 5.2 Check-in setup - July 2026</p>
-    <p style="margin-top:4px;">Pick 1 to 3 questions with emoji or slider types, weekly cadence, and the fixed D1 privacy guarantees (minimum-N of 5, no live count) stated in the UI. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/check-in-setup.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 4.2 Threshold alert detail - July 2026</p>
+    <p style="margin-top:4px;">The early-warning surface (J2): what dropped, a plain-language reading, one next action, and a link to the relevant program. Honest about a real dip, calm, and strictly team-level, never who. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/threshold-alert.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
