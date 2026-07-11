@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Privacy-disclosure component (0.3)</title>
+  <title>Brio - IA Detail: Company setup (3.0)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -26,7 +26,6 @@
     .nav-group { padding: 0 8px; }
     .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
     .nav-group-label.active-section { color: var(--accent); }
-    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
     .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
@@ -35,11 +34,6 @@
     .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-    .nav-item-active { color: var(--accent); font-weight: 600; }
-    .nav-node { padding-left: 20px; font-size: 12px; }
     .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
     .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
@@ -67,12 +61,15 @@
     a:hover { text-decoration: underline; }
     ul { color: var(--text-muted); margin: 0 0 14px 20px; }
     ul li { margin-bottom: 6px; }
+    ol { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ol li { margin-bottom: 6px; }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
 
     .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -91,7 +88,14 @@
     .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
     .callout strong { color: var(--text); }
     .callout.ok { border-color: var(--green-dim); }
-    .src { font-size: 12px; color: var(--text-faint); margin-top: 10px; }
+    .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
+
+    .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
+    .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
+    .seo-row:last-child { border-bottom: none; }
+    .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
+    .seo-v code { font-size: 12px; }
 
     /* ===== Black-and-white wireframe kit ===== */
     .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
@@ -99,23 +103,32 @@
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
+    .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.block { display: block; }
+    .wf-b.disabled { border-style: dashed; color: #6a6a6a; }
+    .wf-plain { color: #9a9a9a; font-size: 11px; }
 
-    .wf-disc { background: #141414; border: 1px solid #3a3a3a; border-radius: 8px; padding: 16px; }
-    .wf-disc h4 { color: #fff; font-size: 13px; margin-bottom: 12px; font-weight: 700; }
-    .wf-claim { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; color: #c4c4c4; font-size: 12px; }
-    .wf-claim .ic { width: 15px; height: 15px; border: 1px solid #6a6a6a; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
-    .wf-cc { display: flex; gap: 12px; margin-top: 12px; }
-    .wf-cc .cc { flex: 1; border: 1px solid #333; border-radius: 6px; padding: 10px; }
-    .wf-cc .cc h6 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; margin-bottom: 6px; }
-    .wf-cc .cc .l { display: block; color: #a2a2a2; font-size: 11px; padding: 2px 0; }
-    .wf-cc .cc.can { border-style: solid; }
-    .wf-cc .cc.cannot { border-style: dashed; }
-    .wf-exp { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 10px; margin-top: 12px; color: #cfcfcf; font-size: 11.5px; display: flex; justify-content: space-between; align-items: center; }
-    .wf-cta { margin-top: 12px; text-align: center; border: 1px solid #e6e6e6; background: #e6e6e6; color: #111; border-radius: 6px; padding: 8px; font-size: 12px; font-weight: 600; }
-    .wf-belowN { border: 1px dashed #6a6a6a; border-radius: 6px; padding: 10px; margin-top: 10px; color: #d8d8d8; font-size: 11.5px; }
-    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 12px; background: #0c0c0c; }
-    .wf-topbar { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #333; border-radius: 8px; color: #cfcfcf; font-size: 12px; margin-bottom: 10px; }
-    .wf-anon { text-align: center; font-size: 10px; color: #cfcfcf; padding: 5px; border: 1px dashed #4a4a4a; border-radius: 6px; margin-bottom: 10px; }
+    /* wizard shell */
+    .wf-wizpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-wizhead { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-prog { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+    .wf-prog .seg { width: 22px; height: 4px; border-radius: 2px; background: #333; }
+    .wf-prog .seg.on { background: #e6e6e6; }
+    .wf-prog .txt { font-size: 9px; color: #8a8a8a; font-family: ui-monospace, monospace; margin-left: 4px; }
+    .wf-wiz { max-width: 360px; margin: 0 auto; padding: 22px 18px; }
+    .wf-wiz .wh { color: #fff; font-size: 18px; font-weight: 800; }
+    .wf-wiz .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 16px; }
+    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 6px; }
+    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 9px 10px; color: #cfcfcf; font-size: 11px; margin-bottom: 16px; }
+    .wf-input.ph { color: #6a6a6a; }
+    .wf-sizes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .wf-size { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px; text-align: center; color: #9a9a9a; font-size: 11px; }
+    .wf-size.on { border-color: #fff; color: #fff; background: #161616; }
+    .wf-micro { color: #8a8a8a; font-size: 10px; margin: 6px 0 16px; }
+
+    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
@@ -148,7 +161,7 @@
       <div class="nav-subhead-sm">Structure</div>
       <a href="navigation.html" class="nav-sub-item">Navigation</a>
       <a href="footer.html" class="nav-sub-item">Footer</a>
-      <a href="privacy-disclosure.html" class="nav-sub-item nav-sub-active">Privacy disclosure</a>
+      <a href="privacy-disclosure.html" class="nav-sub-item">Privacy disclosure</a>
       <a href="program-card.html" class="nav-sub-item">Program card</a>
       <a href="dialog.html" class="nav-sub-item">Dialog</a>
       <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
@@ -162,7 +175,7 @@
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
       <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
-      <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
+      <a href="onboarding-company.html" class="nav-sub-item nav-sub-active">Company setup</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -183,137 +196,134 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 0.3</span>
-      <span class="badge">Global component</span>
+      <span class="badge">Node 3.0</span>
+      <span class="badge">Wizard step 1 of 3</span>
       <span class="badge">B/W wireframe</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Structure / Privacy-disclosure component (0.3)</div>
-    <h1>Privacy-disclosure component</h1>
-    <p class="hero-intro">The differentiator made into UI. In an SMB there is no HR layer between the boss and personal data, so the privacy boundary is shown in the product, not promised in a policy. One canonical set of claims, rendered in role variants on the employee, operator, owner, and public surfaces. It is the trust gate for honest participation (H2, still [?]). No H1. Source of truth: ia/docs/pages/privacy-disclosure.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Company setup (3.0) &middot; URL: /app/onboarding/company</div>
+    <h1>Company setup</h1>
+    <p class="hero-intro">The first step of the guided first run: name the company and pick its size, because the size pre-selects a fitting first program on the next step. The onboarding is a linear, one-time wizard under five minutes, sequential depth, not navigational depth. Serves J6 and the opinionated onboarding. Inside the operator app, so noindex. Source of truth: ia/docs/pages/onboarding-company.md.</p>
   </section>
 
-  <!-- Privacy spine -->
-  <section id="spine">
-    <div class="section-label">One promise, everywhere</div>
-    <h2>Canonical privacy spine</h2>
-    <p>The same five claims appear in every instance. The wording is [?] pending final UX and legal copy; the claims are fixed.</p>
-    <ul>
-      <li><strong>Aggregate only.</strong> No named responses, ever. No individual timeline, no drill-down.</li>
-      <li><strong>Minimum-N of 5.</strong> No score until at least 5 people respond (indirect-identification protection, benchmarked to Culture Amp).</li>
-      <li><strong>No live count during an open cycle.</strong> No running tally for operator or employee while a cycle is open, closing the small-team timing-inference vector (founder decision D1).</li>
-      <li><strong>Subscription as privacy.</strong> The owner pays for aggregate insight; the model is aligned with never exposing individual data, stated plainly.</li>
-      <li><strong>What the owner can and cannot see</strong>, listed explicitly.</li>
-    </ul>
-    <p class="src">Source: research/strategy.md Section 5 (D1, no live count), research/docs/benchmark.md (minimum-N, indirect identification), user-research/docs/cjm-to-be.md (privacy bundle), CLAUDE.md privacy mechanism.</p>
+  <!-- Wizard shell -->
+  <section id="shell">
+    <div class="section-label">Defined here, reused by 3.0 to 3.2</div>
+    <h2>The wizard shell</h2>
+    <p>The onboarding steps share a minimal chrome, defined in-node because it is thin and used only by cluster 3: a slim header with the Brio mark and a "Step N of 3" progress indicator, a single centered column, and one primary action per step. It deliberately omits the operator app's four job tabs, so the first run is a focused line, not a place to wander. This is "sequential depth, not navigational depth" made concrete.</p>
   </section>
 
-  <!-- Role variants -->
-  <section id="variants">
-    <div class="section-label">Same spine, per role</div>
-    <h2>Role variants</h2>
+  <!-- Blocks -->
+  <section id="blocks">
+    <div class="section-label">Mobile-first priority</div>
+    <h2>Content blocks</h2>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
+    <ol>
+      <li><strong>Wizard header</strong>: the Brio mark and the "Step 1 of 3" progress indicator.</li>
+      <li><strong>Welcome</strong>: a short, warm line with the time budget ("Let's set up wellbeing for your team. It takes about five minutes.").</li>
+      <li><strong>Company name</strong>: a single text field.</li>
+      <li><strong>Company-size selector</strong>: the size buckets from 0.6. The pivotal input; it pre-selects the first program on 3.1.</li>
+      <li><strong>Why we ask</strong>: one micro-line, "Your size helps us pick a first program that fits."</li>
+      <li><strong>Primary action</strong>: Continue, to 3.1.</li>
+    </ol>
+    <p><strong>Components used:</strong> 0.6 Canonical lists (company-size buckets). The wizard shell, company-name field, and size selector are thin in-node elements. No new global invented.</p>
+  </section>
+
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Validation, entry, and role</div>
+    <h2>States and primary CTA</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Variant</th><th>Where</th><th>Framing</th><th>What is different</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Continue</th></tr></thead>
         <tbody>
-          <tr><td>Employee (pre-Q1)</td><td>10.1, before Question 1, every cycle</td><td>reassurance, "your answer"</td><td>leads with "no one sees your individual response"; joins an aggregate of at least 5; results only after the cycle closes; "see what your manager sees" expander</td></tr>
-          <tr><td>Operator (proof)</td><td>8.2 Privacy center; summary at 3.1 and on 4.0 (DX2)</td><td>proof, "what you can and cannot see"</td><td>you see the aggregate and participation rate, never who answered what; no drill-down</td></tr>
-          <tr><td>Owner (comfort)</td><td>9.1, on the owner dashboard</td><td>comfort, "what you can and cannot see"</td><td>one number and a trend, aggregate only; no individuals, answers, or sub-group below N</td></tr>
-          <tr><td>Public (explainer)</td><td>1.1 Security and privacy, indexable</td><td>marketing, third-person</td><td>a fuller, crawlable version; the only indexable instance</td></tr>
+          <tr><td>Default (step 1)</td><td>empty name, no size selected</td><td>disabled until name entered and size chosen</td></tr>
+          <tr><td>Validation</td><td>name required; size required (drives pre-selection)</td><td>enabled when valid</td></tr>
+          <tr><td>Saving</td><td>Continue shows a saving state, then advances</td><td>-</td></tr>
+          <tr><td>Error</td><td>"Could not save, retry"; values kept</td><td>retry (MS4)</td></tr>
+          <tr><td>Already onboarded</td><td>the wizard runs once</td><td>redirect to 4.0 Dashboard</td></tr>
+          <tr><td>Guest</td><td>post-signup only</td><td>redirect to 2.1 Log in</td></tr>
         </tbody>
       </table>
     </div>
-  </section>
-
-  <!-- Anatomy + states -->
-  <section id="anatomy">
-    <div class="section-label">Parts and behavior</div>
-    <h2>Anatomy and states</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Element</th><th>Behavior</th></tr></thead>
-        <tbody>
-          <tr><td>Component heading</td><td>plain-language title, not an H1</td></tr>
-          <tr><td>Claim list</td><td>the five claims, each an icon plus one plain sentence</td></tr>
-          <tr><td>Can / cannot panel</td><td>two columns, role-framed</td></tr>
-          <tr><td>"See what your manager sees"</td><td>disclosure button (employee only), expands an aggregate-only mock</td></tr>
-          <tr><td>Below-minimum-N note</td><td>swaps the score claim for "results need at least 5 people" when the team is under N (ties to 4.3, 9.3, F1 sub-N path)</td></tr>
-          <tr><td>Action</td><td>Continue (employee) / Close (operator, owner)</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><strong>States:</strong> default (five claims + panel); expanded (employee, shows the aggregate-only preview so the promise is shown not just told); below-minimum-N (the score claim becomes the "at least 5 people" explanation, no live count still enforced, the honest limit surfaced not hidden).</p>
+    <p>No back on step 1: this is the first step, so the operator moves forward. Primary CTA: Continue, to 3.1.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The employee variant shown on mobile (where it is first seen, before Question 1); the operator and owner variants shown as desktop panels.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A centered, narrow wizard, no global tabs; the same content stacks in one column at the 360px baseline.</p>
 
     <div class="wf-row">
-      <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Employee (pre-Q1), mobile 360px</div>
-        <div class="wf-phone">
-          <div class="wf-topbar"><span class="wf-logo">Brio</span></div>
-          <div class="wf-anon">your answers are anonymous</div>
-          <div class="wf-disc">
-            <h4>Before you answer</h4>
-            <div class="wf-claim"><span class="ic"></span><span>No one sees your individual response, ever.</span></div>
-            <div class="wf-claim"><span class="ic"></span><span>Your answer joins an aggregate of at least 5 people.</span></div>
-            <div class="wf-claim"><span class="ic"></span><span>No running count while the cycle is open.</span></div>
-            <div class="wf-claim"><span class="ic"></span><span>Results appear only after the cycle closes.</span></div>
-            <div class="wf-exp"><span>See exactly what your manager sees</span><span>+</span></div>
-            <div class="wf-cta">Continue</div>
+      <div style="flex:1;min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, wizard step 1</div>
+        <div class="wf-wizpage">
+          <div class="wf-wizhead">
+            <span class="wf-logo">Brio</span>
+            <span class="wf-prog"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="txt">Step 1 of 3</span></span>
+          </div>
+          <div class="wf-wiz">
+            <div class="wh">Welcome to Brio</div>
+            <div class="sub">Let's set up wellbeing for your team. About five minutes.</div>
+            <div class="wf-lbl">Company name</div>
+            <div class="wf-input ph">Acme Co.</div>
+            <div class="wf-lbl">How big is your team?</div>
+            <div class="wf-sizes">
+              <div class="wf-size">Up to 10</div>
+              <div class="wf-size on">11 to 50</div>
+              <div class="wf-size">51 to 200</div>
+              <div class="wf-size">200+</div>
+            </div>
+            <div class="wf-micro">Your size helps us pick a first program that fits.</div>
+            <span class="wf-b solid block">Continue</span>
           </div>
         </div>
-        <div class="wf-note">the trust gate, before Question 1, every cycle.</div>
+        <div class="wf-note">no job tabs, one centered column, one action &middot; Continue disabled until name + size &middot; size drives the 3.1 pre-select.</div>
       </div>
 
-      <div style="flex:1;min-width:280px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Operator (proof), desktop panel</div>
-        <div class="wf-frame" style="margin:0;">
-          <div class="wf-disc">
-            <h4>What you can and cannot see</h4>
-            <div class="wf-cc">
-              <div class="cc can"><h6>You can see</h6><span class="l">Team score</span><span class="l">Trend over time</span><span class="l">Participation rate (share)</span></div>
-              <div class="cc cannot"><h6>You cannot see</h6><span class="l">Any individual</span><span class="l">Any single answer</span><span class="l">Any sub-group below 5</span></div>
-            </div>
-            <div class="wf-belowN">Below 5 responses: "Results need at least 5 people." No live count.</div>
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
+        <div class="wf-phone">
+          <div class="wf-wizhead"><span class="wf-logo">Brio</span><span class="wf-prog"><span class="seg on"></span><span class="seg"></span><span class="seg"></span></span></div>
+          <div class="wf-wiz" style="padding:16px 10px;">
+            <div class="wh" style="font-size:16px;">Welcome to Brio</div>
+            <div class="sub">Setup takes about 5 min.</div>
+            <div class="wf-lbl"><span class="wf-bnum">3</span>company name</div>
+            <div class="wf-input ph">Acme Co.</div>
+            <div class="wf-lbl"><span class="wf-bnum">4</span>team size</div>
+            <div class="wf-sizes"><div class="wf-size">Up to 10</div><div class="wf-size on">11-50</div><div class="wf-size">51-200</div><div class="wf-size">200+</div></div>
+            <span class="wf-b solid block" style="margin-top:12px;">Continue</span>
           </div>
         </div>
-        <div class="wf-note">8.2 Privacy center; summarized at 3.1 onboarding + on 4.0 dashboard (DX2).</div>
-
-        <div class="wf-cap" style="margin:18px 0 8px;">Owner (comfort), desktop panel</div>
-        <div class="wf-frame" style="margin:0;">
-          <div class="wf-disc">
-            <h4>What I can and cannot see</h4>
-            <div class="wf-cc">
-              <div class="cc can"><h6>I can see</h6><span class="l">One number</span><span class="l">A trend</span></div>
-              <div class="cc cannot"><h6>I cannot see</h6><span class="l">Individuals</span><span class="l">Answers</span><span class="l">Sub-groups below 5</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="wf-note">9.1, on the owner dashboard.</div>
+        <div class="wf-note">same blocks, single column, focused first run.</div>
       </div>
     </div>
   </section>
 
-  <!-- SEO + a11y -->
+  <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Structure SEO and a11y</div>
-    <h2>SEO and accessibility</h2>
+    <div class="section-label">Private app zone</div>
+    <h2>SEO block (noindex)</h2>
+    <p>Company setup is a transactional, authenticated wizard step. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/onboarding/company</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (transactional wizard)</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
+    </div>
+    <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>No H1; it is a component, not a page.</li>
-      <li>On the employee, operator, and owner surfaces it is content in <strong>noindex zones</strong>, so not an SEO surface there. The public <strong>1.1 Security and privacy</strong> page renders the indexable version of the same content; the two must not drift.</li>
-      <li>The expander is a disclosure widget: a <code>&lt;button aria-expanded&gt;</code> toggling a labelled region.</li>
-      <li>The can / cannot panel uses semantic lists; the whole component is keyboard reachable and screen-reader legible.</li>
+      <li>exactly one H1 (the welcome heading) for the accessible document outline</li>
+      <li>the size selector is a labelled radio group, not color-only</li>
+      <li>the progress indicator states "Step 1 of 3" in text</li>
+      <li>tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Canonical reuse.</strong> Defined once here. Rendered by 10.1 (employee), 8.2 + 3.1 + 4.0 (operator), 9.1 (owner), 1.1 (public). Change the spine here, propagate to all five. Single source of the privacy-promise content. Next global component: <strong>0.4 Program card</strong>.</div>
+    <div class="callout ok"><strong>Wizard shell set.</strong> Company setup reuses 0.6 and defines the thin wizard shell used across 3.0 to 3.2; it invents nothing global. The size chosen here drives the pre-selection next. Next: <strong>3.1 First program confirm</strong> (the recommended 0.4 card pre-selected by size), wizard step 2 of 3.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 0.3 Privacy-disclosure component - July 2026</p>
-    <p style="margin-top:4px;">The product is the privacy boundary, shown in the UI not promised in a policy. Grounded in founder decision D1, minimum-N, and the benchmark. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/privacy-disclosure.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 3.0 Company setup - July 2026</p>
+    <p style="margin-top:4px;">Wizard step 1: name the company and pick its size in a focused, centered flow with no global tabs; the size pre-selects the first program on the next step. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/onboarding-company.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
@@ -326,27 +336,9 @@
     var open = sbody.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
-  sbody.querySelectorAll('a.nav-item, a.nav-sub-item').forEach(function(link) {
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link').forEach(function(link) {
     link.addEventListener('click', function() { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
   });
-
-  var subSections = [
-    { id: 'spine', sub: 'sub-spine' },
-    { id: 'variants', sub: 'sub-variants' },
-    { id: 'anatomy', sub: 'sub-anatomy' },
-    { id: 'mockup', sub: 'sub-mockup' },
-    { id: 'seo', sub: 'sub-seo' }
-  ];
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        subSections.forEach(function(s) { var el = document.getElementById(s.sub); if (el) el.classList.remove('nav-sub-active'); });
-        var match = subSections.find(function(s) { return s.id === entry.target.id; });
-        if (match) { var el = document.getElementById(match.sub); if (el) el.classList.add('nav-sub-active'); }
-      }
-    });
-  }, { rootMargin: '-15% 0px -75% 0px' });
-  subSections.forEach(function(s) { var el = document.getElementById(s.id); if (el) observer.observe(el); });
 </script>
 
 </body>
