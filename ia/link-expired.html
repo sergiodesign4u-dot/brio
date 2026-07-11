@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Resend or manage invite (6.1)</title>
+  <title>Brio - IA Detail: Invalid or expired link (2.3)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -102,36 +102,30 @@
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; text-align: center; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.danger { border-color: #9a5a5a; color: #e2b3b3; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
     .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* dialog over an inert, dimmed roster */
-    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; }
-    .wf-under { padding: 12px 14px; filter: blur(1px); opacity: 0.4; pointer-events: none; }
-    .wf-under .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-under .ln.s { width: 55%; }
-    .wf-under .mrow { display: flex; gap: 8px; align-items: center; border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px; margin-bottom: 6px; }
-    .wf-under .mrow .who { flex: 1; color: #8a8a8a; font-size: 11px; }
-    .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
-    .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .wf-modal { width: 300px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
-    .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
-    .wf-member { border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px 10px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-    .wf-member .who { color: #cfcfcf; font-size: 11px; flex: 1; }
-    .wf-member .status { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid #444; border-radius: 3px; padding: 1px 6px; color: #9a9a9a; }
-    .wf-acts { display: flex; flex-direction: column; gap: 8px; }
-    .wf-priv { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px 10px; color: #9a9a9a; font-size: 10px; margin-top: 10px; }
+    /* auth page shell (shared with 2.0 / 2.1 / 2.2) */
+    .wf-authpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-topbar { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-auth { max-width: 360px; margin: 0 auto; padding: 26px 20px; }
+    .wf-auth .wh { color: #fff; font-size: 19px; font-weight: 800; }
+    .wf-auth .sub { color: #9a9a9a; font-size: 11px; margin: 5px 0 18px; }
+    .wf-alt { text-align: center; font-size: 11px; color: #9a9a9a; margin-top: 16px; }
 
-    /* mobile bottom sheet */
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; position: relative; overflow: hidden; min-height: 300px; }
-    .wf-phone .top { padding: 10px; filter: blur(1px); opacity: 0.4; }
-    .wf-phone .top .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #101010; border-top: 1px solid #4a4a4a; border-radius: 14px 14px 0 0; padding: 14px; }
-    .wf-sheet .grab { width: 34px; height: 4px; background: #3a3a3a; border-radius: 3px; margin: 0 auto 10px; }
+    /* confirmation layout (shared with 2.2); attention variant for the error */
+    .wf-confirm { text-align: center; }
+    .wf-check { width: 46px; height: 46px; border: 1px solid #7a7a7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: #fff; font-size: 20px; }
+    .wf-check.attn { border-style: dashed; border-color: #9a9a9a; font-weight: 800; }
+    .wf-expl { font-size: 10.5px; color: #9a9a9a; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 10px; margin: 4px 0 16px; line-height: 1.5; }
+
+    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
@@ -177,7 +171,7 @@
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
-      <a href="manage-invite.html" class="nav-sub-item nav-sub-active">Manage invite</a>
+      <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
@@ -185,7 +179,7 @@
       <a href="signup.html" class="nav-sub-item">Sign up</a>
       <a href="login.html" class="nav-sub-item">Log in</a>
       <a href="magic-link-sent.html" class="nav-sub-item">Magic-link sent</a>
-      <a href="link-expired.html" class="nav-sub-item">Invalid or expired link</a>
+      <a href="link-expired.html" class="nav-sub-item nav-sub-active">Invalid or expired link</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -206,50 +200,43 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 6.1</span>
-      <span class="badge">Dialog (0.5)</span>
-      <span class="badge privacy">Roster, not answers</span>
+      <span class="badge">Node 2.3</span>
+      <span class="badge">State (error)</span>
+      <span class="badge privacy">Never a dead-end &middot; closes cluster 2</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Manage invite (6.1) &middot; dialog, opened from 6.0</div>
-    <h1>Resend or manage invite</h1>
-    <p class="hero-intro">A small dialog on the canonical 0.5 shell, opened from a member row in the roster (6.0). The operator resends an invite, copies its link, or revokes it, without leaving the roster. It is roster-identity administration only; it never touches answer identity. Inside the operator app, so noindex. Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Invalid or expired link (2.3) &middot; URL: /auth/link-expired</div>
+    <h1>Invalid or expired link</h1>
+    <p class="hero-intro">The error partner of 2.2. When an operator clicks a magic or reset link that has expired or was already used, this state explains plainly what happened, reassures that the account is fine, and offers a one-tap way to get a fresh link. A stale link is never a wall. It reuses the auth-page shell and the 2.2 confirmation layout with an attention mark. It closes cluster 2. Transient and transactional, so noindex. Source of truth: ia/docs/pages/link-expired.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
-    <div class="section-label">Dialog anatomy</div>
+    <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
+    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. The whole point of this state is that it is never a dead-end.</p>
     <ol>
-      <li><strong>Title</strong>: "Manage invite" plus the member's name or email, with a close control.</li>
-      <li><strong>Member summary</strong>: name or email and status (invited or joined). Roster identity only.</li>
-      <li><strong>Actions, by status</strong>: pending shows Resend, Copy link, Revoke; joined shows Remove from team.</li>
-      <li><strong>Privacy note</strong>: next to a destructive action, that this affects the roster, never answers.</li>
-      <li><strong>Dismiss</strong>: Cancel or close; Esc also closes.</li>
+      <li><strong>Pre-auth header</strong>: the Brio mark and a "Back to log in" link (a reduced 0.1 variant, no job tabs).</li>
+      <li><strong>Attention mark and heading</strong>: a black-and-white attention badge (an exclamation, not a check, so success and error are told apart without color) and "This link has expired".</li>
+      <li><strong>Explanation</strong>: a short, non-blaming reason ("sign-in links expire after about 15 minutes and can be used only once") plus reassurance that the account is fine.</li>
+      <li><strong>Primary action</strong>: "Request a new link", to 2.1 Log in. One tap out of the error.</li>
+      <li><strong>Secondary help</strong>: a quiet "Still stuck? Contact support" line, so even the edge case has somewhere to go.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.5 Dialog / modal shell (this node is an instance of it). No new component; 6.1 is the already-registered 0.5 consumer that 6.0 opens.</p>
-  </section>
-
-  <!-- Privacy -->
-  <section id="privacy">
-    <div class="section-label">What managing an invite touches</div>
-    <h2>This manages the roster, not answers</h2>
-    <p>Managing or revoking an invite is roster-identity administration, which is allowed. It never reveals or touches answer identity. Removing a joined member affects future participation only; their past contributions were only ever aggregate and were never stored as an identifiable individual record, so there is nothing individual to expose or delete. The dialog states this plainly next to the destructive action.</p>
+    <p><strong>Components used:</strong> a reduced 0.1 (pre-auth header), the auth-page shell from 2.0, and the 2.2 confirmation layout with an attention mark. No new global. <strong>Adaptive copy:</strong> the same structure serves the reset path; only the noun changes ("sign-in link" versus "password-reset link").</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">By invite status</div>
-    <h2>Variants and states</h2>
+    <div class="section-label">Error, recovery, and role</div>
+    <h2>States and primary CTA</h2>
+    <p>Never a dead-end: an expired link always has a one-tap route to a fresh one. This is the auth cluster's version of the F1 no-dead-end rule.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Pending invite (default)</td><td>member + status invited</td><td>Resend invite</td></tr>
-          <tr><td>Joined member</td><td>member + status joined</td><td>Remove from team (destructive)</td></tr>
-          <tr><td>Revoke / remove confirm</td><td>inline "Revoke this invite?" inside the same dialog</td><td>Confirm / Cancel</td></tr>
-          <tr><td>Sending</td><td>the action shows a sending state; dialog stays open</td><td>-</td></tr>
-          <tr><td>Success</td><td>"Invite resent"; dialog closes or updates the row</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not resend, retry"; dialog stays open</td><td>retry (MS4)</td></tr>
+          <tr><td>Default (expired or used)</td><td>attention mark, explanation, support line</td><td>Request a new link (to 2.1)</td></tr>
+          <tr><td>Requesting</td><td>Request a new link shows an in-progress state</td><td>-</td></tr>
+          <tr><td>New link requested</td><td>re-enter email, receive a fresh link</td><td>to 2.1 Log in, then 2.2 Magic-link sent</td></tr>
+          <tr><td>Already authenticated</td><td>link consumed in another tab; no error shown</td><td>redirect to 4.0 Dashboard</td></tr>
         </tbody>
       </table>
     </div>
@@ -259,84 +246,74 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The dialog is a 0.5 instance: a centered modal over an inert, dimmed roster on desktop, and a bottom sheet on mobile.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The same centered card and shell as 2.2, with an attention mark (an exclamation, not a check) so error is told from success without color, a plain explanation, and a single recovery action; the same content stacks at the 360px baseline.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:300px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, pending invite (over an inert roster)</div>
-        <div class="wf-modal-scrim" style="min-height:300px;">
-          <div class="wf-under">
-            <div class="ln"></div><div class="ln s"></div>
-            <div class="mrow"><span class="who">Yemi O.</span><span class="wf-plain">Joined</span></div>
-            <div class="mrow"><span class="who">dev@company.com</span><span class="wf-plain">Invited</span></div>
+      <div style="flex:1;min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, expired-link error</div>
+        <div class="wf-authpage">
+          <div class="wf-topbar">
+            <span class="wf-logo">Brio</span>
+            <span class="wf-link">Back to log in</span>
           </div>
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-modal-wrap">
-            <div class="wf-modal" role="dialog" aria-modal="true">
-              <div class="mtitle">Manage invite <span class="x">&times;</span></div>
-              <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-              <div class="wf-acts">
-                <span class="wf-b solid block">Resend invite</span>
-                <span class="wf-b block">Copy invite link</span>
-                <span class="wf-b danger block">Revoke invite</span>
-              </div>
-              <div class="wf-priv">Managing an invite touches the roster, never answers.</div>
+          <div class="wf-auth">
+            <div class="wf-confirm">
+              <div class="wf-check attn">!</div>
+              <div class="wh">This link has expired</div>
+              <div class="sub" style="margin-bottom:14px;">It happens. Your account is fine, nothing was lost.</div>
             </div>
+            <div class="wf-expl">For your security, sign-in links expire after about 15 minutes and can be used only once.</div>
+            <span class="wf-b solid block">Request a new link</span>
+            <div class="wf-alt">Still stuck? <span class="wf-link">Contact support</span></div>
           </div>
         </div>
-        <div class="wf-note">0.5 contract: role="dialog", aria-modal, focus trap, Esc closes, background inert, focus returns to the opener.</div>
+        <div class="wf-note">attention mark (not a check) = error without color &middot; plain non-blaming reason &middot; account-is-fine reassurance &middot; one-tap recovery to 2.1 &middot; never a dead-end.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="top"><div class="ln"></div><div class="ln s"></div><div class="ln"></div></div>
-          <div class="wf-sheet">
-            <div class="grab"></div>
-            <div class="mtitle" style="display:flex;align-items:center;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px;">Manage invite</div>
-            <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-            <div class="wf-acts">
-              <span class="wf-b solid block">Resend invite</span>
-              <span class="wf-b block">Copy invite link</span>
-              <span class="wf-b danger block">Revoke invite</span>
+          <div class="wf-topbar" style="padding:9px 10px;"><span class="wf-logo">Brio</span><span class="wf-link">Back</span></div>
+          <div class="wf-auth" style="padding:18px 12px;">
+            <div class="wf-confirm">
+              <div class="wf-check attn">!</div>
+              <div class="wh" style="font-size:17px;">Link has expired</div>
+              <div class="sub" style="margin-bottom:12px;">Your account is fine.</div>
             </div>
+            <div class="wf-expl"><span class="wf-bnum">3</span>Links expire after ~15 min and work once.</div>
+            <span class="wf-b solid block">Request a new link</span>
+            <div class="wf-alt">Stuck? <span class="wf-link">Contact support</span></div>
           </div>
         </div>
-        <div class="wf-note">same actions, full-width sheet, comfortable targets.</div>
+        <div class="wf-note">same blocks, single column, one recovery action.</div>
       </div>
-    </div>
-
-    <div class="wf-frame" style="margin-top:22px;max-width:360px;">
-      <div class="wf-cap">Inline revoke confirm (no stacked modal)</div>
-      <div class="wf-modal" style="width:auto;">
-        <div class="mtitle">Revoke this invite?</div>
-        <div class="wf-plain" style="margin-bottom:12px;">The link and code stop working for this person. You can re-invite later.</div>
-        <div class="wf-acts" style="flex-direction:row;justify-content:flex-end;">
-          <span class="wf-b">Cancel</span>
-          <span class="wf-b danger">Revoke</span>
-        </div>
-      </div>
-      <div class="wf-note">the confirm replaces the actions inside the same 6.1 dialog; reversible (re-invite).</div>
     </div>
   </section>
 
-  <!-- a11y / noindex -->
+  <!-- SEO (noindex, nofollow) -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
-    <h2>Accessibility contract and noindex</h2>
-    <p>A dialog, not a page: no URL of its own, noindex, no schema, no SEO block. It inherits the 0.5 accessibility contract.</p>
+    <div class="section-label">Transient error state</div>
+    <h2>SEO block (noindex, nofollow)</h2>
+    <p>Invalid or expired link is a transient error state reached only by clicking a stale link. It is not indexed and has nothing to crawl, the same treatment as 2.2.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">role</span><span class="seo-v"><code>dialog</code>, <code>aria-modal="true"</code>, labelled by the title</span></div>
-      <div class="seo-row"><span class="seo-k">focus</span><span class="seo-v">moves into the dialog on open, trapped; returns to the opener on close</span></div>
-      <div class="seo-row"><span class="seo-k">dismiss</span><span class="seo-v">Esc closes; background is inert</span></div>
-      <div class="seo-row"><span class="seo-k">targets</span><span class="seo-v">destructive confirm is keyboard reachable and labelled; tap targets at least 44px</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (transient error state; unlike the 2.0 / 2.1 forms, which keep follow)</span></div>
+      <div class="seo-row"><span class="seo-k">reached by</span><span class="seo-v">clicking an expired or already-used magic / reset link; not a browse target</span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
-    <div class="callout ok"><strong>Cluster 6 closed.</strong> Resend or manage invite is a pure 0.5 instance; it invents nothing and keeps roster identity separate from answer identity. Cluster 6 Team is complete (6.0 roster, 6.1 manage). Next: cluster 3, the onboarding wizard (3.0 to 3.3), the guided first run.</div>
+    <h3>In-app findability (still specified)</h3>
+    <ul>
+      <li>exactly one H1 (the heading) for the accessible document outline</li>
+      <li>the error is conveyed in text and an attention mark, not by color alone</li>
+      <li>Request a new link and the support line are labelled controls</li>
+      <li>tap targets at least 44px</li>
+    </ul>
+    <div class="callout ok"><strong>Cluster 2 closed.</strong> Invalid or expired link reuses the auth-page shell from 2.0 and the confirmation layout from 2.2 (with an attention mark); it invents nothing global. It is the error partner of 2.2 and the guarantee that the auth cluster never dead-ends: any stale link has a one-tap route to a fresh one. Cluster 2 Authentication is complete (2.0 Sign up, 2.1 Log in, 2.2 Magic-link sent, 2.3 Invalid or expired link). Next cluster: <strong>7 Owner share</strong> (7.0 Share with owner).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 6.1 Resend or manage invite - July 2026</p>
-    <p style="margin-top:4px;">A 0.5 dialog opened from the roster: resend, copy link, or revoke an invite, with an inline destructive confirm and a note that this touches the roster, never answers. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 2.3 Invalid or expired link - July 2026</p>
+    <p style="margin-top:4px;">The error partner of 2.2: a stale magic or reset link is explained plainly, the account is reassured to be fine, and a single one-tap action requests a fresh link (to 2.1). An attention mark tells error from success without color. Reuses the 2.0 auth-page shell and the 2.2 confirmation layout. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/link-expired.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
