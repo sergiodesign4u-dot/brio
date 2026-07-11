@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Program library (5.0)</title>
+  <title>Brio - IA Detail: Check-in setup (5.2)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -26,7 +26,6 @@
     .nav-group { padding: 0 8px; }
     .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
     .nav-group-label.active-section { color: var(--accent); }
-    .nav-group-label.sub { padding: 10px 12px 4px 20px; font-size: 9px; }
     .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
@@ -35,11 +34,6 @@
     .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-    .nav-item-active { color: var(--accent); font-weight: 600; }
-    .nav-node { padding-left: 20px; font-size: 12px; }
     .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
     .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
@@ -75,6 +69,7 @@
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -95,14 +90,12 @@
     .callout.ok { border-color: var(--green-dim); }
     .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
 
-    /* SEO / note block */
     .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
     .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
     .seo-row:last-child { border-bottom: none; }
     .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
     .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
     .seo-v code { font-size: 12px; }
-    .count { color: var(--text-faint); font-size: 11px; font-family: ui-monospace, monospace; }
 
     /* ===== Black-and-white wireframe kit ===== */
     .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
@@ -116,38 +109,47 @@
     .wf-nav .sp { margin-left: auto; }
     .wf-tab { font-size: 11px; color: #9a9a9a; }
     .wf-tab.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
+    .wf-crumb { padding: 8px 14px; font-size: 10px; color: #7a7a7a; border-bottom: 1px solid #1f1f1f; font-family: ui-monospace, monospace; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.disabled { border-style: dashed; color: #6a6a6a; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
     .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
     .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
     .wf-hl.s { width: 55%; height: 12px; }
-    .wf-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-    .wf-chip { border: 1px solid #444; border-radius: 4px; padding: 4px 9px; font-size: 10.5px; color: #9a9a9a; white-space: nowrap; }
-    .wf-chip.on { border-color: #fff; color: #fff; }
-    .wf-scroll { display: flex; gap: 8px; overflow-x: auto; }
-    .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
     .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
     .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
 
-    /* canonical program card (0.4), reused in the grid */
-    .wf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-    .wf-card { border: 1px solid #3a3a3a; border-radius: 8px; padding: 12px; background: #141414; display: flex; flex-direction: column; gap: 6px; min-height: 146px; }
-    .wf-card .cat { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #8a8a8a; }
-    .wf-card .t { color: #fff; font-size: 13px; font-weight: 700; line-height: 1.25; }
-    .wf-card .meta { color: #9a9a9a; font-size: 11px; }
-    .wf-card .desc { color: #a2a2a2; font-size: 11px; }
-    .wf-card .act { margin-top: auto; border: 1px solid #7a7a7a; border-radius: 5px; padding: 7px; text-align: center; font-size: 11px; color: #e6e6e6; }
-    .wf-card .act.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-badge { display: inline-block; border: 1px solid #555; border-radius: 4px; padding: 1px 6px; font-size: 9px; color: #cfcfcf; text-transform: uppercase; letter-spacing: 0.04em; }
-    .wf-badge.rec { border-color: #fff; color: #fff; }
-    .wf-skel .ln { height: 9px; background: #242424; border-radius: 3px; margin: 5px 0; }
-    .wf-skel .ln.s { width: 55%; }
-    .wf-empty { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 18px 14px; text-align: center; color: #cfcfcf; font-size: 12px; }
-    .wf-empty .sub { color: #9a9a9a; font-size: 11px; margin: 6px 0 10px; }
+    /* two-column form */
+    .wf-2col { display: grid; grid-template-columns: 1.5fr 1fr; gap: 0; }
+    .wf-2col > div { border-bottom: 1px solid #1f1f1f; }
+    .wf-2col > div:first-child { border-right: 1px solid #1f1f1f; }
+    @media (max-width: 560px) { .wf-2col { grid-template-columns: 1fr; } .wf-2col > div:first-child { border-right: none; } }
+
+    /* question option rows */
+    .wf-opt { display: flex; align-items: center; gap: 10px; border: 1px solid #333; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; }
+    .wf-opt .box { width: 16px; height: 16px; border: 1px solid #7a7a7a; border-radius: 3px; flex-shrink: 0; }
+    .wf-opt .box.on { background: #e6e6e6; border-color: #e6e6e6; }
+    .wf-opt .qt { color: #cfcfcf; font-size: 11px; flex: 1; }
+    .wf-opt.off .qt { color: #7a7a7a; }
+    .wf-toggle { display: flex; border: 1px solid #444; border-radius: 5px; overflow: hidden; flex-shrink: 0; }
+    .wf-toggle span { font-size: 9.5px; padding: 3px 7px; color: #9a9a9a; }
+    .wf-toggle span.on { background: #cfcfcf; color: #111; }
+    .wf-count { font-size: 10px; color: #cfcfcf; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-chip { border: 1px solid #444; border-radius: 4px; padding: 4px 9px; font-size: 10.5px; color: #9a9a9a; }
+    .wf-chip.on { border-color: #fff; color: #fff; }
+
+    /* privacy mechanics block (D1) */
+    .wf-priv { border: 1px solid #5a5a5a; border-radius: 8px; padding: 12px; background: #121212; }
+    .wf-priv .ph { display: flex; align-items: center; gap: 6px; color: #fff; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+    .wf-priv .lock { font-size: 8.5px; color: #cfcfcf; border: 1px solid #6a6a6a; border-radius: 3px; padding: 0 5px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .wf-priv .row { display: flex; gap: 8px; margin-bottom: 8px; color: #b6b6b6; font-size: 11px; }
+    .wf-priv .row:last-child { margin-bottom: 0; }
+    .wf-priv .n { color: #fff; font-weight: 700; font-family: ui-monospace, monospace; flex-shrink: 0; }
+    .wf-prev { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 10px; color: #cfcfcf; font-size: 11px; text-align: center; }
   </style>
 </head>
 <body>
@@ -186,9 +188,9 @@
       <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
       <div class="nav-subhead-sm">Pages</div>
       <a href="home.html" class="nav-sub-item">Home</a>
-      <a href="program-library.html" class="nav-sub-item nav-sub-active">Program library</a>
+      <a href="program-library.html" class="nav-sub-item">Program library</a>
       <a href="program-detail.html" class="nav-sub-item">Program detail</a>
-      <a href="check-in-setup.html" class="nav-sub-item">Check-in setup</a>
+      <a href="check-in-setup.html" class="nav-sub-item nav-sub-active">Check-in setup</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -209,25 +211,13 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 5.0</span>
-      <span class="badge">Page, listing</span>
-      <span class="badge">B/W wireframe</span>
+      <span class="badge">Node 5.2</span>
+      <span class="badge">Page</span>
+      <span class="badge privacy">D1 privacy in UI</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Program library (5.0) &middot; URL: /app/programs</div>
-    <h1>Program library</h1>
-    <p class="hero-intro">The operator browses the curated library and picks a program to run, with the size-matched recommendation pinned so a non-expert is guided, not dropped into a catalog. This is the first listing, so it also sets the listing template. Serves Main, J6, and item 2 (self-serve start). Inside the operator app, so noindex. Source of truth: ia/docs/pages/program-library.md.</p>
-  </section>
-
-  <!-- Listing template -->
-  <section id="template">
-    <div class="section-label">The planks a listing adds</div>
-    <h2>Listing template</h2>
-    <p>A listing adds three planks to the per-page template from Home (0.0). Program library is the first built to it; 5.1 and any later grid follow the same shape.</p>
-    <ol>
-      <li><strong>Facet set defined in-node.</strong> Filter values live with the listing unless they are big enough to be a canonical global. Brio's set is thin (one dimension, category), so it is defined here and cross-referenced, not lifted into 0.6.</li>
-      <li><strong>The grid reuses a canonical card.</strong> The cells are 0.4 Program card. The listing arranges and filters cards; it never restyles them.</li>
-      <li><strong>Empty and loading are first-class states.</strong> Here that is 5.3 first-run empty (a registered node) and the 0.4 skeleton. Neither is ever a dead-end (MS4).</li>
-    </ol>
+    <div class="crumb">IA / Detail Layer / Pages / Check-in setup (5.2) &middot; URL: /app/programs/:slug/check-in</div>
+    <h1>Check-in setup</h1>
+    <p class="hero-intro">The operator picks the 1 to 3 questions the team sees, each question's type, and the cadence. This is the first page where founder decision D1 becomes visible in the product: minimum-N of 5 and no live count are stated as fixed guarantees, not settings. Serves J2, J4, and item 3. Inside the operator app, so noindex. Source of truth: ia/docs/pages/check-in-setup.md.</p>
   </section>
 
   <!-- Blocks -->
@@ -236,153 +226,127 @@
     <h2>Content blocks</h2>
     <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
     <ol>
-      <li><strong>Nav + page header</strong> (0.1 operator, Programs tab active): H1 "Programs", one-line subhead "Pick a program. Brio runs it and reads the team pulse for you."</li>
-      <li><strong>Recommended-for-your-size card</strong> (0.4 recommended state, pinned): the guided shortcut that closes choice paralysis. The page's primary action.</li>
-      <li><strong>Facet bar</strong> (category): All plus the four categories (0.6). Thin, single dimension. See Facets below.</li>
-      <li><strong>Program-card grid</strong> (0.4 canonical): the rest of the library as default cards; programs the operator already runs carry status badges.</li>
-      <li><strong>Empty state</strong> (5.3, first run): shown in place of the grid before anything is picked; recommended shortcut plus browse hint. Never a dead-end.</li>
-      <li><strong>App shell footer</strong> (minimal): a privacy link (1.1) and a help link, not the public marketing footer (0.2).</li>
+      <li><strong>Nav + header</strong> (0.1 operator, Programs active): H1 "Set up the check-in", subhead naming the program. Back to 5.1.</li>
+      <li><strong>Question picker</strong>: a short curated list for the category; select 1 to 3, with a live "N of 3 selected" counter; each selected question gets a type control, emoji or slider. Curated, not free-text, to keep the employee check-in low-effort. The item 3 / J4 surface.</li>
+      <li><strong>Cadence</strong>: weekly in the MVP (free tier is weekly, one question); optional send day; heavier cadences deferred <span class="hyp">?</span>.</li>
+      <li><strong>Privacy mechanics (D1)</strong>: two fixed statements, not toggles. Minimum-N of 5: no score until at least 5 answer. No live count: no running tally while a cycle is open, for anyone. Closes the small-team timing-inference vector (D1, research/strategy.md Section 5).</li>
+      <li><strong>Employee preview</strong>: what the team will see, a short near-anonymous check-in under 30 seconds with the privacy note before Q1 (links to the 10.x surface, 0.3 employee variant). Reinforces J3.</li>
+      <li><strong>Save band</strong>: Save writes the config and activates a draft program, then to 4.1 Team pulse detail; back to 5.1.</li>
+      <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation (operator logged-in, Programs active), 0.4 Program card (recommended / default / active / draft / ended / skeleton), 0.6 Canonical lists (categories, size buckets). No new component; the facet set is in-node, not a global.</p>
+    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (operator variant for D1, employee variant in the preview), 0.6 Canonical lists (answer types, cadence). The question picker and cadence control are thin page-specific form controls, not globals. No new global invented.</p>
   </section>
 
-  <!-- Facets -->
-  <section id="facets">
-    <div class="section-label">Listing only</div>
-    <h2>Filters and facets</h2>
-    <p>One facet, defined here because the set is thin and used mainly on this page. It filters which 0.4 cards show; it never changes a card.</p>
+  <!-- Privacy is structural -->
+  <section id="privacy">
+    <div class="section-label">Why it is stated, not toggled</div>
+    <h2>The D1 mechanics are fixed</h2>
+    <p>Design Principle 1: privacy is the product, not a setting you can switch off. So the two D1 guarantees appear here as plain statements the operator reads and can stand behind, never as controls the operator (or owner) could weaken.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Facet</th><th>Values</th><th>Behavior</th></tr></thead>
+        <thead><tr><th>Mechanic</th><th>What it says</th><th>Why</th></tr></thead>
         <tbody>
-          <tr><td>Category (single-select)</td><td>All (default), Mental health, Physical, Financial, Social (from 0.6)</td><td>client-side narrowing over a small curated set; reflected as <code>?category=</code> for the back button; canonical stays <code>/app/programs</code></td></tr>
+          <tr><td>Minimum-N of 5</td><td>"No score appears until at least 5 people have answered."</td><td>protects against identifying anyone in a small team (MVP default, legal validation deferred)</td></tr>
+          <tr><td>No live count</td><td>"While a cycle is open, no one sees a running count of who has answered."</td><td>closes the small-team timing-inference vector (founder decision D1, June 2026)</td></tr>
         </tbody>
       </table>
     </div>
-    <ul>
-      <li>The recommended pin stays first only under <strong>All</strong>; within a filtered category the size-recommended program, if present, sorts first.</li>
-      <li><strong>No search, no pagination, no sort control</strong> in the MVP. Browse plus one facet is enough for a small curated library, which is the concrete reason <strong>11.5 Global search is likely N/A</strong> (confirmed or closed at Step 6). A future sort is deferred <span class="hyp">?</span>, not built.</li>
-      <li><strong>Zero result</strong> in a category shows "Nothing here yet, see all programs" that clears the facet back to All. Never a dead-end.</li>
-    </ul>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">By auth, data, and role</div>
-    <h2>States</h2>
+    <div class="section-label">By entry, validation, and role</div>
+    <h2>States and primary CTA</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Never a dead-end</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Save</th></tr></thead>
         <tbody>
-          <tr><td>Guest (not authed)</td><td>redirect to 2.1 Log in, return here after</td><td>returns to /app/programs</td></tr>
-          <tr><td>Operator, first run</td><td>5.3 empty in place of the grid: recommended shortcut + browse hint</td><td>shortcut to 5.1</td></tr>
-          <tr><td>Operator, active (default)</td><td>recommended pinned first, then the grid; running programs show status badges</td><td>every card to 5.1</td></tr>
-          <tr><td>Loading</td><td>0.4 skeleton cards until the library resolves</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not load programs, retry" + link to 4.0 Dashboard</td><td>retry or Dashboard (MS4)</td></tr>
-          <tr><td>Owner role</td><td>redirect to 9.0 Owner dashboard</td><td>owners do not manage programs</td></tr>
+          <tr><td>New setup (draft program)</td><td>nothing selected yet</td><td>disabled until at least 1 question chosen</td></tr>
+          <tr><td>Edit (active program)</td><td>pre-filled current questions, types, cadence</td><td>updates the next cycle, not the open one</td></tr>
+          <tr><td>Validation</td><td>at least 1, at most 3; a 4th is blocked with a hint; a type is required per question</td><td>enabled when valid</td></tr>
+          <tr><td>Loading</td><td>skeleton form</td><td>-</td></tr>
+          <tr><td>Error</td><td>"Could not save, retry"; form stays filled</td><td>retry (MS4)</td></tr>
+          <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
         </tbody>
       </table>
     </div>
+    <p>Primary CTA: Save the check-in to 4.1 Team pulse detail (where results appear once minimum-N is met); back to 5.1 as the secondary path.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The grid collapses from multi-column on desktop to one column at the 360px baseline. Cards are the canonical 0.4 element, arranged here, not restyled.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A two-column form on desktop (picker and cadence left, privacy mechanics and preview right) collapses to one column at the 360px baseline.</p>
 
     <div class="wf-row">
       <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, operator, active state</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, new setup</div>
         <div class="wf-page">
           <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab on">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
+          <div class="wf-crumb">Programs / Weekly mood check-in / Check-in</div>
           <div class="wf-sec">
             <div class="lbl">1 &middot; header (H1)</div>
             <div class="wf-hl"></div><div class="wf-hl s"></div>
           </div>
-          <div class="wf-sec">
-            <div class="lbl">3 &middot; facet bar (category)</div>
-            <div class="wf-chips"><span class="wf-chip on">All</span><span class="wf-chip">Mental health</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">2 + 4 &middot; recommended pinned, then grid (0.4)</div>
-            <div class="wf-grid">
-              <div class="wf-card">
-                <span class="wf-badge rec">Recommended for your size</span>
-                <span class="cat">Mental health</span>
-                <span class="t">Weekly mood check-in</span>
-                <span class="meta">weekly, 4 weeks &middot; 1 question</span>
-                <span class="desc">A light pulse on how the team feels.</span>
-                <span class="act solid">Select</span>
+          <div class="wf-2col">
+            <div>
+              <div class="wf-sec">
+                <div class="lbl">2 &middot; question picker (1 to 3)</div>
+                <div class="wf-count">2 of 3 selected</div>
+                <div class="wf-opt"><span class="box on"></span><span class="qt">How has the team felt this week?</span><span class="wf-toggle"><span class="on">emoji</span><span>slider</span></span></div>
+                <div class="wf-opt"><span class="box on"></span><span class="qt">How manageable was your workload?</span><span class="wf-toggle"><span>emoji</span><span class="on">slider</span></span></div>
+                <div class="wf-opt off"><span class="box"></span><span class="qt">Did you feel supported this week?</span><span class="wf-toggle"><span>emoji</span><span>slider</span></span></div>
               </div>
-              <div class="wf-card">
-                <span class="cat">Physical</span>
-                <span class="t">Move more, together</span>
-                <span class="meta">weekly, 6 weeks &middot; 2 questions</span>
-                <span class="desc">Small movement goals, no individual tracking.</span>
-                <span class="act">Select</span>
+              <div class="wf-sec">
+                <div class="lbl">3 &middot; cadence</div>
+                <div class="wf-chips" style="display:flex;gap:8px;"><span class="wf-chip on">Weekly</span><span class="wf-plain">send day: Mon</span></div>
               </div>
-              <div class="wf-card">
-                <span class="wf-badge">Active</span>
-                <span class="cat">Financial</span>
-                <span class="t">Money basics</span>
-                <span class="meta">next cycle in 3 days &middot; 2 questions</span>
-                <span class="desc">Confidence with everyday finances.</span>
-                <span class="act">Manage</span>
+              <div class="wf-sec">
+                <div class="lbl">6 &middot; save</div>
+                <span class="wf-b solid">Save check-in</span> <span class="wf-plain">to 4.1 team pulse</span>
               </div>
-              <div class="wf-card">
-                <span class="wf-badge">Draft</span>
-                <span class="cat">Social</span>
-                <span class="t">Team connection</span>
-                <span class="meta">not started &middot; 1 question</span>
-                <span class="desc">Belonging and small rituals.</span>
-                <span class="act">Finish setup</span>
+            </div>
+            <div>
+              <div class="wf-sec">
+                <div class="lbl">4 &middot; privacy mechanics (D1)</div>
+                <div class="wf-priv">
+                  <div class="ph">Your team's privacy <span class="lock">Structural</span></div>
+                  <div class="row"><span class="n">N&ge;5</span><span>No score appears until at least 5 people answer.</span></div>
+                  <div class="row"><span class="n">0</span><span>No live count while a cycle is open, for anyone.</span></div>
+                </div>
               </div>
-              <div class="wf-card">
-                <span class="wf-badge">Ended</span>
-                <span class="cat">Mental health</span>
-                <span class="t">Stress reset</span>
-                <span class="meta">completed &middot; 3 questions</span>
-                <span class="desc">A short reset when things get heavy.</span>
-                <span class="act">View results</span>
-              </div>
-              <div class="wf-card wf-skel">
-                <div class="ln"></div><div class="ln s"></div><div class="ln"></div><div class="ln s"></div>
-                <div class="ln" style="margin-top:auto;"></div>
+              <div class="wf-sec">
+                <div class="lbl">5 &middot; employee preview</div>
+                <div class="wf-prev">Team sees a 30-second check-in, privacy note first.<br><span class="wf-plain">preview the employee view (10.x)</span></div>
               </div>
             </div>
           </div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">one link per card to 5.1 &middot; status + recommended are text, not color-only &middot; targets min 44px.</div>
+        <div class="wf-note">privacy statements are text, fixed, never toggles &middot; Save disabled until 1 question chosen &middot; targets min 44px.</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
           <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Programs</span></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>facets (scroll)</div><div class="wf-scroll"><span class="wf-chip on">All</span><span class="wf-chip">Mental</span><span class="wf-chip">Physical</span><span class="wf-chip">Financial</span><span class="wf-chip">Social</span></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>recommended (pinned)</div>
-            <div class="wf-card"><span class="wf-badge rec">Recommended for your size</span><span class="cat">Mental health</span><span class="t">Weekly mood check-in</span><span class="meta">weekly, 4 weeks &middot; 1 question</span><span class="act solid">Select</span></div>
+          <div class="wf-crumb">... / Check-in</div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-hl"></div></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>questions</div>
+            <div class="wf-count">2 of 3</div>
+            <div class="wf-opt"><span class="box on"></span><span class="qt">Team mood?</span><span class="wf-toggle"><span class="on">emoji</span></span></div>
+            <div class="wf-opt off"><span class="box"></span><span class="qt">Supported?</span></div>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>grid, single column</div>
-            <div class="wf-card"><span class="cat">Physical</span><span class="t">Move more, together</span><span class="meta">weekly, 6 weeks &middot; 2 questions</span><span class="act">Select</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>cadence</div><span class="wf-chip on">Weekly</span></div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>privacy (D1)</div>
+            <div class="wf-priv"><div class="ph">Privacy <span class="lock">Fixed</span></div><div class="row"><span class="n">N&ge;5</span><span>score only after 5 answer</span></div><div class="row"><span class="n">0</span><span>no live count</span></div></div>
           </div>
+          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">6</span>save</div><span class="wf-b solid">Save check-in</span></div>
           <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, facets scroll horizontally.</div>
+        <div class="wf-note">same blocks, single column, privacy block stays prominent.</div>
       </div>
-    </div>
-
-    <div class="wf-frame" style="margin-top:22px;">
-      <div class="wf-cap">State 5.3 &middot; first-run empty (never a dead-end)</div>
-      <div class="wf-empty">
-        No active program yet.
-        <div class="sub">Start with the one we recommend for your size.</div>
-        <span class="wf-b solid">Select recommended</span> <span class="wf-plain">or browse by category</span>
-      </div>
-      <div class="wf-note">the empty state replaces the grid, it does not blank the page; the shortcut goes to 5.1.</div>
     </div>
   </section>
 
@@ -390,27 +354,26 @@
   <section id="seo">
     <div class="section-label">Private app zone</div>
     <h2>SEO block (noindex)</h2>
-    <p>Program library is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Check-in setup is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
     <div class="seo-block">
       <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/programs</code>, facet as <code>?category=</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/programs/:slug/check-in</code></span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 ("Programs") for the accessible document outline</li>
-      <li>the facet controls are labeled controls, not color-only</li>
-      <li>every card is one in-app <code>&lt;a&gt;</code> to 5.1 with the title as its accessible name</li>
-      <li>the recommended tag and status badges are text, not color alone; tap targets at least 44px</li>
-      <li>if a public "programs overview" or a 1.5 category landing ever renders these cards, that page is indexable and gets its own A-E SEO and schema decision at its own node, not here</li>
+      <li>exactly one H1 ("Set up the check-in") for the accessible document outline</li>
+      <li>the question checkboxes and type controls are labeled form controls under a group label</li>
+      <li>the "N of 3 selected" counter is a live region</li>
+      <li>the privacy statements are plain text, not color-only; tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Listing template set.</strong> Program library reuses 0.1, 0.4, and 0.6 and invents nothing but the thin in-node facet set. Next page: <strong>5.1 Program detail / manage</strong> (the card opened into a full page), per the persona-priority order.</div>
+    <div class="callout ok"><strong>Cluster 5 closed.</strong> Check-in setup reuses 0.1, 0.3, and 0.6 and invents nothing global; the picker and cadence are thin page controls. This is where D1's privacy mechanics first appear in the UI. Next: cluster 4, <strong>4.0 Dashboard</strong> then 4.1 Team pulse detail, where those mechanics pay off as the aggregate signal.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 5.0 Program library - July 2026</p>
-    <p style="margin-top:4px;">The first listing: in-node facet set, a grid of canonical 0.4 cards, first-run empty (5.3) and skeleton states, noindex app zone. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/program-library.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 5.2 Check-in setup - July 2026</p>
+    <p style="margin-top:4px;">Pick 1 to 3 questions with emoji or slider types, weekly cadence, and the fixed D1 privacy guarantees (minimum-N of 5, no live count) stated in the UI. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/check-in-setup.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
