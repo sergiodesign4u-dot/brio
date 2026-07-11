@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Detail: Pre-Q1 privacy disclosure (10.1)</title>
+  <style>
+    :root {
+      --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
+      --border: #252a33; --border-subtle: #1e232c; --text: #e8eaf0; --text-muted: #8b909c; --text-faint: #555b68;
+      --accent: #4f9cf9; --accent-dim: #1d3a5f; --accent-warm: #f4a261; --accent-warm-dim: #3d2810;
+      --green: #4ade80; --green-dim: #14532d; --red: #f87171; --red-dim: #450a0a; --yellow: #fbbf24; --yellow-dim: #451a03;
+      --radius: 8px; --radius-lg: 12px; --radius-sm: 4px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .sidebar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13, 15, 18, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 36px; height: 36px; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px; }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
+    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
+    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ul li { margin-bottom: 6px; }
+    ol { color: var(--text-muted); margin: 0 0 14px 20px; }
+    ol li { margin-bottom: 6px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
+    .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.ok { border-color: var(--green-dim); }
+    .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
+
+    .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
+    .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
+    .seo-row:last-child { border-bottom: none; }
+    .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
+    .seo-v code { font-size: 12px; }
+
+    /* ===== Black-and-white wireframe kit ===== */
+    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
+    .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
+    .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
+    .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
+    .wf-b.block { display: block; }
+    .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
+
+    /* employee check-in surface (mobile, no nav, near-anonymous) */
+    .wf-checkbar { padding: 11px 12px; border-bottom: 1px solid #2c2c2c; text-align: center; }
+    .wf-checkbar .co { color: #8a8a8a; font-size: 9px; font-family: ui-monospace, monospace; }
+    .wf-checkbody { padding: 16px 13px; }
+    .wf-anon { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 11px; color: #fff; border: 1px solid #6a6a6a; border-radius: 6px; padding: 9px; margin-bottom: 14px; text-align: center; }
+    .wf-anon .lk { font-size: 12px; }
+    .wf-secttitle { color: #fff; font-size: 16px; font-weight: 800; text-align: center; margin-bottom: 4px; }
+    .wf-sectsub { color: #9a9a9a; font-size: 10px; text-align: center; margin-bottom: 14px; font-family: ui-monospace, monospace; letter-spacing: 0.04em; }
+
+    /* the five canonical claims (0.3 employee variant): icon + one sentence */
+    .wf-claim { display: flex; gap: 9px; padding: 9px 0; border-bottom: 1px solid #1d1d1d; align-items: flex-start; }
+    .wf-claim:first-of-type { padding-top: 2px; }
+    .wf-claim .ic { flex: 0 0 auto; width: 22px; height: 22px; border: 1px solid #6a6a6a; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #e6e6e6; }
+    .wf-claim .ct { font-size: 11px; color: #b8b8b8; line-height: 1.5; }
+    .wf-claim .ct b { color: #fff; font-weight: 700; }
+    .wf-claim.swap .ic { border-style: dashed; }
+    .wf-claim.swap .ct b { color: #fff; }
+
+    /* the "see exactly what your manager sees" expander (disclosure widget) */
+    .wf-exp { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 1px solid #6a6a6a; border-radius: 6px; padding: 9px 11px; font-size: 11px; color: #fff; margin-top: 14px; background: transparent; text-align: left; }
+    .wf-exp .car { font-size: 8px; color: #8a8a8a; font-family: ui-monospace, monospace; }
+    .wf-expbody { border: 1px solid #333; border-top: none; border-radius: 0 0 6px 6px; padding: 12px 11px 13px; }
+    .wf-explabel { font-size: 9px; color: #7a7a7a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; text-align: center; }
+
+    /* aggregate-only mock inside the expander = the pulse-read element (reused from 9.0/4.0), B/W */
+    .wf-mock { text-align: center; padding: 4px 0 8px; }
+    .wf-mnum { font-size: 22px; font-weight: 800; color: #fff; }
+    .wf-mlbl { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; }
+    .wf-mspark { display: flex; align-items: flex-end; gap: 3px; height: 26px; justify-content: center; margin: 9px 0 4px; }
+    .wf-mspark i { width: 7px; background: #5a5a5a; display: block; border-radius: 1px; }
+    .wf-mpart { font-size: 10px; color: #9a9a9a; }
+
+    /* can / cannot elaboration (owner sees vs never sees) */
+    .wf-cc { display: flex; gap: 8px; margin-top: 11px; }
+    .wf-cccol { flex: 1; border: 1px solid #333; border-radius: 6px; padding: 8px 9px; }
+    .wf-cch { font-size: 8px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.07em; font-family: ui-monospace, monospace; margin-bottom: 6px; }
+    .wf-ccrow { display: flex; gap: 6px; font-size: 10px; color: #b8b8b8; margin-bottom: 4px; line-height: 1.35; }
+    .wf-ccrow .mk { flex: 0 0 auto; width: 13px; height: 13px; border: 1px solid #6a6a6a; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; color: #e6e6e6; }
+    .wf-ccrow.no .mk { border-style: dashed; }
+
+    .wf-cta { margin-top: 15px; }
+    .wf-leave { display: block; text-align: center; margin-top: 11px; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
+    .wf-deskcard { max-width: 440px; margin: 0 auto; border: 1px solid #3a3a3a; border-radius: 12px; overflow: hidden; background: #0c0c0c; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
+    @media (min-width: 760px) { .wf-cc.wide { gap: 10px; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+
+      <div class="nav-subhead">Base Layer</div>
+      <a href="flows.html" class="nav-sub-link">Flows</a>
+      <a href="concept.html" class="nav-sub-link">Concept map</a>
+
+      <div class="nav-subhead">Detail Layer</div>
+      <a href="sitemap.html" class="nav-sub-link">Sitemap</a>
+      <div class="nav-subhead-sm">Structure</div>
+      <a href="navigation.html" class="nav-sub-item">Navigation</a>
+      <a href="footer.html" class="nav-sub-item">Footer</a>
+      <a href="privacy-disclosure.html" class="nav-sub-item">Privacy disclosure</a>
+      <a href="program-card.html" class="nav-sub-item">Program card</a>
+      <a href="dialog.html" class="nav-sub-item">Dialog</a>
+      <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
+      <div class="nav-subhead-sm">Pages</div>
+      <a href="home.html" class="nav-sub-item">Home</a>
+      <a href="program-library.html" class="nav-sub-item">Program library</a>
+      <a href="program-detail.html" class="nav-sub-item">Program detail</a>
+      <a href="check-in-setup.html" class="nav-sub-item">Check-in setup</a>
+      <a href="dashboard.html" class="nav-sub-item">Dashboard</a>
+      <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
+      <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
+      <a href="team-roster.html" class="nav-sub-item">Team roster</a>
+      <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
+      <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
+      <a href="onboarding-program.html" class="nav-sub-item">First program</a>
+      <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
+      <a href="invite-send-error.html" class="nav-sub-item">Invite-send error</a>
+      <a href="signup.html" class="nav-sub-item">Sign up</a>
+      <a href="login.html" class="nav-sub-item">Log in</a>
+      <a href="magic-link-sent.html" class="nav-sub-item">Magic-link sent</a>
+      <a href="link-expired.html" class="nav-sub-item">Invalid or expired link</a>
+      <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
+      <a href="invite-owner.html" class="nav-sub-item">Invite owner + upgrade</a>
+      <a href="upgrade.html" class="nav-sub-item">Upgrade / paywall</a>
+      <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
+      <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
+      <a href="owner-digest.html" class="nav-sub-item">Monthly digest</a>
+      <a href="checkin-entry.html" class="nav-sub-item">Check-in entry</a>
+      <a href="checkin-privacy.html" class="nav-sub-item nav-sub-active">Pre-Q1 privacy</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Detail Layer</span>
+      <span class="badge">Node 10.1</span>
+      <span class="badge">Employee flow (mobile)</span>
+      <span class="badge privacy">The H2 trust moment</span>
+    </div>
+    <div class="crumb">IA / Detail Layer / Pages / Pre-Q1 privacy disclosure (10.1) &middot; URL: /c/{invite-token} (disclosure step)</div>
+    <h1>Pre-Q1 privacy disclosure</h1>
+    <p class="hero-intro">Before the employee answers anything, show, not just tell, that their individual response is never seen. This renders the canonical 0.3 privacy-disclosure component in its employee variant: five plain claims plus a "see exactly what your manager sees" expander that opens the real, aggregate-only owner view. It is persistent, shown before Question 1 every cycle. This is the trust-critical screen where the riskiest assumption (H2, honest participation at or above 65%) is won or lost. Serves J3, E2, item 4; on flow F2. Private token-gated surface, so noindex. Source of truth: ia/docs/pages/checkin-privacy.md.</p>
+  </section>
+
+  <!-- Blocks -->
+  <section id="blocks">
+    <div class="section-label">Mobile-first priority</div>
+    <h2>Content blocks</h2>
+    <p>Block order reasoned from the 360px baseline up. The disclosure is the only thing between entry (10.0) and Question 1 (10.2); it must be read, not skipped past chrome. This is Principle 3 (earn trust before asking for data) and Principle 1 (privacy is the product) made into a screen.</p>
+    <ol>
+      <li><strong>Minimal check-in top bar</strong>: the Brio mark and the company name ("for Acme"), no navigation and no account controls (the 10.0 chrome carried through).</li>
+      <li><strong>Section heading</strong>: a plain-language title ("Before you answer"), the screen H1 for the document outline. The 0.3 component itself carries no H1, but the screen does.</li>
+      <li><strong>The five claims</strong>: each an icon plus one plain sentence, in the employee variant, stacked on a phone. The body of the disclosure.</li>
+      <li><strong>"See exactly what your manager sees" expander</strong>: an employee-only disclosure that opens an aggregate-only mock (the exact owner view: a team number, a trend, a participation share, and a "cannot see" line). The promise shown, not just told. F2 DE2 recovery for the skeptical employee.</li>
+      <li><strong>Continue</strong>: the primary action, to 10.2 Questions.</li>
+      <li><strong>Leave</strong>: a quiet exit with no penalty; nothing has been asked or recorded yet.</li>
+    </ol>
+    <p><strong>Components used:</strong> the canonical 0.3 privacy-disclosure (employee variant) on the 10.0 check-in chrome. The expander is a disclosure widget (a <code>button aria-expanded</code> toggling a labelled region). The aggregate-only mock reuses the 9.0 / 4.0 pulse-read element, so the employee sees the same aggregate an owner would, never an individual. No new global is invented; this is a role render of an existing one.</p>
+  </section>
+
+  <!-- The five claims -->
+  <section id="spine">
+    <div class="section-label">Canonical spine, employee variant</div>
+    <h2>The five claims</h2>
+    <p>This section is one render of the 0.3 component. The five claims are fixed; the wording is <strong>[?]</strong> pending final UX and legal copy. The employee variant leads with "no one sees your individual response" and frames each claim as "your answer".</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Claim</th><th>Employee framing</th><th>Basis</th></tr></thead>
+        <tbody>
+          <tr><td>1. Aggregate only</td><td>No one sees your individual response. No named list, no individual timeline.</td><td>Differentiator, Principle 1</td></tr>
+          <tr><td>2. Minimum-N of 5</td><td>Your answer joins an aggregate of at least 5, so no single response can be picked out.</td><td>Culture Amp indirect-ID protection</td></tr>
+          <tr><td>3. No live count</td><td>No running count while the check-in is open, so no one can guess who answered when.</td><td>Founder decision D1</td></tr>
+          <tr><td>4. Subscription as privacy</td><td>The owner pays for the team view, never for your answers.</td><td>Business model aligned to privacy</td></tr>
+          <tr><td>5. What the owner sees</td><td>Results appear only after the cycle closes, and only as a team number, trend, and participation share.</td><td>Item 4, E2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><strong>Below minimum-N.</strong> When the team is under 5, claim 5 is replaced by "Results need at least 5 people. If fewer answer this cycle, no results are shown at all." No live count is still enforced. The same honest limit as 4.3 and 9.3, surfaced not hidden, which is what makes it credible on a small team ("my dept only has 3 of us").</div>
+  </section>
+
+  <!-- Wireframe -->
+  <section id="mockup">
+    <div class="section-label">Black and white, wireframe level</div>
+    <h2>Wireframe</h2>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A phone-first surface with no navigation. The five claims stack; the expander opens in place to reveal the aggregate-only owner view. The desktop version centers the same narrow card and never becomes an app.</p>
+
+    <div class="wf-row">
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, default (expander collapsed)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div></div>
+            <div class="wf-checkbody">
+              <div class="wf-secttitle">Before you answer</div>
+              <div class="wf-sectsub">how your answer stays private</div>
+              <div class="wf-claim"><span class="ic">&#128274;</span><span class="ct"><b>No one sees your individual response.</b> Not your manager, not the owner. No named list, no individual timeline.</span></div>
+              <div class="wf-claim"><span class="ic">5+</span><span class="ct"><b>Your answer joins an aggregate of at least 5.</b> No single response can be picked out.</span></div>
+              <div class="wf-claim"><span class="ic">&#8709;</span><span class="ct"><b>No running count while the check-in is open.</b> No one can guess who answered when.</span></div>
+              <div class="wf-claim"><span class="ic">&#9633;</span><span class="ct"><b>The owner pays for the team view,</b> never for your answers.</span></div>
+              <div class="wf-claim"><span class="ic">&#9202;</span><span class="ct"><b>Results appear only after the cycle closes,</b> and only as a team number.</span></div>
+              <button class="wf-exp"><span>See exactly what your manager sees</span><span class="car">&#9662;</span></button>
+              <div class="wf-b solid block wf-cta">Continue</div>
+              <a class="wf-link wf-leave">Leave, no answer recorded</a>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">the 0.3 employee variant &middot; five plain claims &middot; anonymity is stated before Q1 (J3) &middot; Continue to 10.2, Leave never penalises.</div>
+      </div>
+
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, expander OPEN (promise shown, not told)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div></div>
+            <div class="wf-checkbody">
+              <div class="wf-secttitle">Before you answer</div>
+              <div class="wf-sectsub">how your answer stays private</div>
+              <div class="wf-claim"><span class="ic">&#128274;</span><span class="ct"><b>No one sees your individual response.</b> Not your manager, not the owner.</span></div>
+              <div class="wf-claim"><span class="ic">5+</span><span class="ct"><b>Your answer joins an aggregate of at least 5.</b></span></div>
+              <button class="wf-exp" style="border-radius:6px 6px 0 0;"><span>See exactly what your manager sees</span><span class="car">&#9652;</span></button>
+              <div class="wf-expbody">
+                <div class="wf-explabel">the owner's exact view, aggregate only</div>
+                <div class="wf-mock">
+                  <div class="wf-mnum">Steady</div>
+                  <div class="wf-mlbl">team wellbeing</div>
+                  <div class="wf-mspark"><i style="height:12px;"></i><i style="height:16px;"></i><i style="height:13px;"></i><i style="height:18px;"></i><i style="height:16px;"></i><i style="height:19px;"></i></div>
+                  <div class="wf-mpart">8 of 12 took part</div>
+                </div>
+                <div class="wf-cc">
+                  <div class="wf-cccol">
+                    <div class="wf-cch">Can see</div>
+                    <div class="wf-ccrow"><span class="mk">&#10003;</span><span>Team score</span></div>
+                    <div class="wf-ccrow"><span class="mk">&#10003;</span><span>Trend</span></div>
+                    <div class="wf-ccrow"><span class="mk">&#10003;</span><span>How many took part</span></div>
+                  </div>
+                  <div class="wf-cccol">
+                    <div class="wf-cch">Cannot see</div>
+                    <div class="wf-ccrow no"><span class="mk">&#215;</span><span>Any individual</span></div>
+                    <div class="wf-ccrow no"><span class="mk">&#215;</span><span>Any answer</span></div>
+                    <div class="wf-ccrow no"><span class="mk">&#215;</span><span>Any group below 5</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="wf-b solid block wf-cta">Continue</div>
+              <a class="wf-link wf-leave">Leave, no answer recorded</a>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">F2 DE2 recovery for the skeptic &middot; opens the real aggregate-only owner view (pulse-read reused from 9.0) &middot; shown, not just told.</div>
+      </div>
+    </div>
+
+    <div class="wf-row" style="margin-top:8px;">
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, below minimum-N (claim 5 swapped)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div></div>
+            <div class="wf-checkbody">
+              <div class="wf-secttitle">Before you answer</div>
+              <div class="wf-sectsub">how your answer stays private</div>
+              <div class="wf-claim"><span class="ic">&#128274;</span><span class="ct"><b>No one sees your individual response.</b> Not your manager, not the owner.</span></div>
+              <div class="wf-claim"><span class="ic">5+</span><span class="ct"><b>Your answer joins an aggregate of at least 5.</b></span></div>
+              <div class="wf-claim"><span class="ic">&#8709;</span><span class="ct"><b>No running count while the check-in is open.</b></span></div>
+              <div class="wf-claim"><span class="ic">&#9633;</span><span class="ct"><b>The owner pays for the team view,</b> never for your answers.</span></div>
+              <div class="wf-claim swap"><span class="ic">!</span><span class="ct"><b>Results need at least 5 people.</b> If fewer answer this cycle, no results are shown at all.</span></div>
+              <button class="wf-exp"><span>See exactly what your manager sees</span><span class="car">&#9662;</span></button>
+              <div class="wf-b solid block wf-cta">Continue</div>
+              <a class="wf-link wf-leave">Leave, no answer recorded</a>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">small-team honesty &middot; claim 5 swaps to "need at least 5" (ties 4.3 / 9.3) &middot; dashed mark, no color &middot; the limit surfaced, not hidden.</div>
+      </div>
+
+      <div style="flex:1; min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop / wide, centered card (never an app)</div>
+        <div class="wf-frame" style="margin-top:0;">
+          <div class="wf-deskcard">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div></div>
+            <div class="wf-checkbody" style="padding:20px 22px;">
+              <div class="wf-secttitle" style="font-size:18px;">Before you answer</div>
+              <div class="wf-sectsub">how your answer stays private</div>
+              <div class="wf-claim"><span class="ic">&#128274;</span><span class="ct"><b>No one sees your individual response.</b> Not your manager, not the owner. No named list, no individual timeline.</span></div>
+              <div class="wf-claim"><span class="ic">5+</span><span class="ct"><b>Your answer joins an aggregate of at least 5,</b> so no single response can be picked out.</span></div>
+              <div class="wf-claim"><span class="ic">&#8709;</span><span class="ct"><b>No running count while the check-in is open,</b> so no one can guess who answered when.</span></div>
+              <div class="wf-claim"><span class="ic">&#9633;</span><span class="ct"><b>The owner pays for the team view,</b> never for your answers.</span></div>
+              <div class="wf-claim"><span class="ic">&#9202;</span><span class="ct"><b>Results appear only after the cycle closes,</b> and only as a team number, trend, and participation share.</span></div>
+              <button class="wf-exp"><span>See exactly what your manager sees</span><span class="car">&#9662;</span></button>
+              <div class="wf-b solid block wf-cta" style="max-width:200px; margin-left:auto; margin-right:auto;">Continue</div>
+              <a class="wf-link wf-leave">Leave, no answer recorded</a>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">same content centered in a narrow card &middot; claims in a tighter list &middot; the surface never becomes an app on a large screen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States and primary CTA</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td>the five claims, the expander collapsed</td><td>Continue (to 10.2) / Leave (no penalty)</td></tr>
+          <tr><td>Expanded (employee)</td><td>the aggregate-only owner view (team number, trend, participation share) plus an explicit "cannot see" line</td><td>collapse, or Continue</td></tr>
+          <tr><td>Below minimum-N</td><td>claim 5 replaced by "results need at least 5 people"; no live count still enforced</td><td>Continue / Leave</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Primary CTA:</strong> Continue, to 10.2 Questions. Leave is the always-present no-penalty exit (nothing recorded yet). There is no account step and no other navigation, by design: the disclosure is the only thing between entry and Question 1, and it must be read.</p>
+  </section>
+
+  <!-- SEO (noindex) -->
+  <section id="seo">
+    <div class="section-label">Private token-gated surface</div>
+    <h2>SEO block (noindex)</h2>
+    <p>Pre-Q1 disclosure is a private, token-gated employee surface. It is not indexed and carries no schema. The indexable version of the same five canonical claims lives on the public 1.1 Security and privacy page; the two must not drift (0.3 is the single source).</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (token-gated, personal)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; flow URL is <code>/c/{invite-token}</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
+    </div>
+    <h3>In-app findability (not SEO, still specified)</h3>
+    <ul>
+      <li>exactly one H1 (the section heading "Before you answer") for the accessible document outline</li>
+      <li>each claim is text with an icon, never carried by color alone; the below-N swap uses a dashed mark plus words, not color</li>
+      <li>the expander is a <code>button aria-expanded</code> toggling a labelled region; the aggregate mock is legible to a screen reader as text</li>
+      <li>Continue and Leave are labelled controls; tap targets at least 44px; the flow works without an account</li>
+    </ul>
+    <div class="callout ok"><strong>The trust gate.</strong> Pre-Q1 disclosure is the differentiator (aggregate-only privacy) rendered as the last thing the employee reads before answering, with the "see exactly what your manager sees" expander turning the promise into something shown, not just told. It renders the canonical 0.3 component (employee variant) and reuses the 9.0 pulse-read mock; it invents nothing global. This is where H2 (honest participation at or above 65%) is won or lost. Next: <strong>10.2 Questions</strong> (1 to 3, emoji or slider, under 30 seconds).</div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Detail Layer - Node 10.1 Pre-Q1 privacy disclosure - July 2026</p>
+    <p style="margin-top:4px;">The persistent employee-variant privacy disclosure shown before Question 1: five plain claims plus a "see exactly what your manager sees" expander that opens the real aggregate-only owner view, on the 10.0 check-in chrome with no navigation and no account. The trust-critical screen where H2 is won. Continue goes to 10.2 Questions; Leave never penalises. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/checkin-privacy.md.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link').forEach(function(link) {
+    link.addEventListener('click', function() { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+  });
+</script>
+
+</body>
+</html>
