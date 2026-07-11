@@ -30,6 +30,14 @@
     .nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
     a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
     .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
+    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
+    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
+    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub2-item.nav-sub-active { color: var(--accent); }
     .nav-item-active { color: var(--accent); font-weight: 600; }
     .nav-node { padding-left: 20px; font-size: 12px; }
     .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
@@ -134,17 +142,22 @@
     </div>
     <div class="nav-group">
       <div class="nav-group-label active-section">Information Architecture (IA)</div>
-      <a href="ia-base.html" class="nav-item">Base Layer</a>
-      <span class="nav-item nav-item-active">Detail Layer</span>
-      <div class="nav-group-label sub">Structure</div>
-      <a href="navigation.html" class="nav-item nav-node">Navigation (0.1)</a>
-      <span class="nav-item nav-item-active nav-node">Footer (0.2)</span>
-      <a href="#anatomy" class="nav-sub-item" id="sub-anatomy">Anatomy</a>
-      <a href="#registered" class="nav-sub-item" id="sub-registered">Registered nodes</a>
-      <a href="#variants" class="nav-sub-item" id="sub-variants">By surface</a>
-      <a href="#mockup" class="nav-sub-item" id="sub-mockup">Wireframe</a>
-      <a href="#seo" class="nav-sub-item" id="sub-seo">SEO + a11y</a>
-      <span class="nav-item nav-item-muted" style="margin-top:6px;">More nodes at Step 8</span>
+
+      <div class="nav-subhead">Base Layer</div>
+      <a href="flows.html" class="nav-sub-link">Flows</a>
+      <a href="concept.html" class="nav-sub-link">Concept map</a>
+
+      <div class="nav-subhead">Detail Layer</div>
+      <a href="sitemap.html" class="nav-sub-link">Sitemap</a>
+      <div class="nav-subhead-sm">Structure</div>
+      <a href="navigation.html" class="nav-sub-item">Navigation</a>
+      <a href="footer.html" class="nav-sub-item nav-sub-active">Footer</a>
+      <a href="privacy-disclosure.html" class="nav-sub-item">Privacy disclosure</a>
+      <a href="program-card.html" class="nav-sub-item">Program card</a>
+      <a href="dialog.html" class="nav-sub-item">Dialog</a>
+      <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
+      <div class="nav-subhead-sm">Pages</div>
+      <a href="home.html" class="nav-sub-item">Home</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>

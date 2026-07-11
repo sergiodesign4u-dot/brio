@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Sitemap</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar - mobile-first */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle {
+      display: flex; flex-direction: column; justify-content: center; gap: 4px;
+      width: 36px; height: 36px; background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px;
+    }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-item {
+      display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px;
+      color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s;
+    }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+    /* nested IA node-nav (Base / Detail sub-groups) */
+    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
+    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
+    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
+    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub2-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    .tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+    .tag-confirmed { background: var(--green-dim); color: var(--green); }
+    .tag-muted { background: var(--surface-3); color: var(--text-faint); }
+
+    .divider { height: 1px; background: var(--border); margin: 48px 0; }
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.warn { border-color: var(--yellow-dim); }
+    .callout.ok { border-color: var(--green-dim); }
+
+    .mermaid-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin: 14px 0 6px; }
+    .mermaid-wrap .mermaid { min-width: 680px; text-align: center; }
+
+    /* Traceability matrix */
+    .matrix-table td:not(:first-child), .matrix-table th:not(:first-child) { text-align: center; padding: 10px 8px; white-space: nowrap; }
+    .matrix-table td:first-child { white-space: nowrap; }
+    .matrix-table td.hit { color: var(--accent); font-weight: 700; }
+    .matrix-table tr.row-orphan td { background: rgba(244, 162, 97, 0.06); }
+    .matrix-table tr.row-orphan td:first-child { color: var(--accent-warm); border-left: 2px solid var(--accent-warm); }
+    .matrix-table th.col-orphan { color: var(--red); }
+
+    .deflist { display: grid; gap: 12px; margin: 16px 0; }
+    .def-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; display: flex; gap: 16px; }
+    .def-card.warn { border-color: var(--accent-warm-dim); }
+    .def-id { font-size: 12px; font-weight: 700; color: var(--accent-warm); min-width: 74px; flex-shrink: 0; }
+    .def-body { font-size: 13px; }
+    .def-body .def-note { font-size: 12px; color: var(--text-faint); margin-top: 4px; }
+
+    /* Detail-layer node cards */
+    .node-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin: 18px 0; }
+    .node-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; }
+    .node-num { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--accent); font-weight: 700; }
+    .node-type { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 7px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-muted); margin-left: 8px; }
+    .node-name { font-size: 15px; font-weight: 600; color: var(--text); margin: 8px 0 6px; }
+    .node-inc { font-size: 12.5px; color: var(--text-muted); }
+    .node-trans { font-size: 12px; color: var(--text-faint); margin-top: 10px; border-top: 1px solid var(--border-subtle); padding-top: 8px; }
+    .cluster-desc { color: var(--text-muted); font-size: 13.5px; max-width: 72ch; margin-bottom: 4px; }
+
+    @media (max-width: 640px) { main { padding-left: 16px; padding-right: 16px; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+
+      <div class="nav-subhead">Base Layer</div>
+      <a href="flows.html" class="nav-sub-link">Flows</a>
+      <a href="concept.html" class="nav-sub-link">Concept map</a>
+
+      <div class="nav-subhead">Detail Layer</div>
+      <a href="sitemap.html" class="nav-sub-link nav-link-active">Sitemap</a>
+      <a href="#c0" class="nav-sub2-item" id="sub-c0">0 - Global shell + home</a>
+      <a href="#c1" class="nav-sub2-item" id="sub-c1">1 - Public marketing</a>
+      <a href="#c2" class="nav-sub2-item" id="sub-c2">2 - Authentication</a>
+      <a href="#c3" class="nav-sub2-item" id="sub-c3">3 - Onboarding</a>
+      <a href="#c4" class="nav-sub2-item" id="sub-c4">4 - Dashboard + pulse</a>
+      <a href="#c5" class="nav-sub2-item" id="sub-c5">5 - Programs</a>
+      <a href="#c6" class="nav-sub2-item" id="sub-c6">6 - Team</a>
+      <a href="#c7" class="nav-sub2-item" id="sub-c7">7 - Owner share + upgrade</a>
+      <a href="#c8" class="nav-sub2-item" id="sub-c8">8 - Settings</a>
+      <a href="#c9" class="nav-sub2-item" id="sub-c9">9 - Owner surface</a>
+      <a href="#c10" class="nav-sub2-item" id="sub-c10">10 - Employee check-in</a>
+      <a href="#c11" class="nav-sub2-item" id="sub-c11">11 - System + global</a>
+
+      <div class="nav-subhead-sm">Structure</div>
+      <a href="navigation.html" class="nav-sub-item">Navigation</a>
+      <a href="footer.html" class="nav-sub-item">Footer</a>
+      <a href="privacy-disclosure.html" class="nav-sub-item">Privacy disclosure</a>
+      <a href="program-card.html" class="nav-sub-item">Program card</a>
+      <a href="dialog.html" class="nav-sub-item">Dialog</a>
+      <a href="canonical-lists.html" class="nav-sub-item">Canonical lists</a>
+
+      <div class="nav-subhead-sm">Pages</div>
+      <a href="home.html" class="nav-sub-item">Home</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Detail Layer</span>
+      <span class="badge">Site map + cards</span>
+    </div>
+    <div class="section-label">Information Architecture</div>
+    <h1>Site map + IA</h1>
+    <p class="hero-intro">The full site map: a tree of the 11 clusters (0 to 11) plus per-node cards, each with its number X.Y, type, what it includes, and transitions. This is the detailed body that expands the base <a href="concept.html">Concept map</a>. States and page copy live on the individual node pages; here we lay out the whole product surface, cluster by cluster. See also the <a href="flows.html">Flows</a>.</p>
+  </section>
+
+  <!-- Cluster tree -->
+  <section id="tree">
+    <div class="section-label">Overview</div>
+    <h2>Cluster tree</h2>
+    <p>The twelve clusters and how the primary journey threads through them: public acquisition into auth, auth into the one-time onboarding wizard, the wizard into the operator home, and from the Dashboard out to Programs, Team, the Owner path, and Settings. The owner surface and the employee check-in branch off Team and the Owner path. System nodes hang off the global shell.</p>
+
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    c0id["0 Global shell + home"]
+    c1id["1 Public marketing"]
+    c2id["2 Authentication"]
+    c3id["3 Onboarding"]
+    c4id["4 Dashboard + pulse"]
+    c5id["5 Programs"]
+    c6id["6 Team"]
+    c7id["7 Owner share + upgrade"]
+    c8id["8 Settings"]
+    c9id["9 Owner surface"]
+    c10id["10 Employee check-in"]
+    c11id["11 System + global"]
+    c0id --&gt;|public| c1id
+    c0id --&gt;|auth| c2id
+    c2id --&gt;|"sign up"| c3id
+    c3id --&gt;|finish| c4id
+    c4id --&gt;|Programs| c5id
+    c4id --&gt;|Team| c6id
+    c4id --&gt;|Owner| c7id
+    c4id --&gt;|Settings| c8id
+    c7id --&gt;|"invite owner"| c9id
+    c6id --&gt;|"invite link"| c10id
+    c0id -.-&gt;|system| c11id</pre>
+    </div>
+    <div class="callout"><strong>Tree, not menu.</strong> The arrows are cluster-level transitions inferred from the <a href="flows.html">flows</a> and the node map. Within each cluster the real nodes (X.Y) and their own transitions are the cards below. The six-intent consolidation of these clusters is the base <a href="concept.html">Concept map</a>.</div>
+  </section>
+
+  <!-- Cluster 0 -->
+  <section id="c0">
+    <div class="section-label">Cluster 0</div>
+    <h2>0 - Global shell and home</h2>
+    <p class="cluster-desc">Public and all roles. The per-page template exemplar plus the canonical global components (nav, footer, privacy disclosure, program card, dialog shell, canonical lists), each defined once and referenced everywhere.</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">0.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Home (marketing home)</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, hero (privacy-first H1 + state-dependent CTA), how-it-works (3 steps, mirrors F1), privacy proof (0.3 public variant), programs preview (0.6 categories), pricing teaser (1.0), FAQ teaser (1.4), final CTA, 0.2 footer. States: guest / logged-in operator / owner. Full A-E SEO (indexed).</div>
+        <div class="node-trans">&rarr; 2.0 Sign up (F1), 4.0 Dashboard, 1.0 Pricing, 1.1 Security and privacy, 2.1 Log in</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">0.1</span><span class="node-type">section</span></div>
+        <div class="node-name">Navigation (header + mobile tabs)</div>
+        <div class="node-inc"><strong>Includes:</strong> brand, 4 job tabs (Dashboard, Programs, Team, Owner), Settings utility, auth and role variants (guest / operator / owner-view / employee-none), mobile bottom tabs (base 360px).</div>
+        <div class="node-trans">&rarr; 4.0 Dashboard, 5.0 Programs, 6.0 Team, 7.0 Owner, 8.0 Settings</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">0.2</span><span class="node-type">section</span></div>
+        <div class="node-name">Footer</div>
+        <div class="node-inc"><strong>Includes:</strong> trust strip (aggregate-only privacy line), columns (Product, Company, Resources, Legal), SEO popular-links block, bottom row (copyright, cookie settings, social). Mobile: columns and SEO block collapse into accordions, present in the DOM.</div>
+        <div class="node-trans">&rarr; 1.0 Pricing, 1.1 Security, 1.2 About, 1.3 Contact, 1.4 Help, 1.5 Segment landing, 1.6 Legal, 11.3 Cookie settings</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">0.3</span><span class="node-type">section</span></div>
+        <div class="node-name">Privacy-disclosure component</div>
+        <div class="node-inc"><strong>Includes:</strong> canonical privacy spine (aggregate only, minimum-N=5, no live count D1, subscription-as-privacy, what the owner can and cannot see), role variants (employee pre-Q1 / operator proof / owner comfort / public explainer), "see what your manager sees" expander, below-minimum-N state.</div>
+        <div class="node-trans">&rarr; rendered by 10.1, 8.2, 3.1, 4.0, 9.1, 1.1 (variants, not copies)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">0.4</span><span class="node-type">section</span></div>
+        <div class="node-name">Program card</div>
+        <div class="node-inc"><strong>Includes:</strong> title, category (from 0.6), cadence and duration, short description, "recommended for your size" tag, status badge (draft / active / ended), questions count, primary action (Select / Confirm / Manage). States: default, recommended, active, draft, ended, skeleton.</div>
+        <div class="node-trans">&rarr; 5.1 Program detail; rendered by 3.1, 5.0, 5.1 (copies, propagate on change)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">0.5</span><span class="node-type">dialog</span></div>
+        <div class="node-name">Dialog / modal shell</div>
+        <div class="node-inc"><strong>Includes:</strong> overlay (inert, dimmed backdrop), container (role="dialog", aria-modal), header (title, close X), body slot, footer (primary + secondary or cancel), dismiss (X / Esc / backdrop). Variants: form, decision, destructive confirm, non-modal banner. States: default, loading, error, success.</div>
+        <div class="node-trans">&rarr; reused by 6.1, 7.2, 11.3, and every confirmation; focus trap, focus returns to opener on close</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">0.6</span><span class="node-type">section</span></div>
+        <div class="node-name">Canonical lists</div>
+        <div class="node-inc"><strong>Includes:</strong> program categories (mental health / physical / financial / social), plan tiers (Free / Starter / Growth, prices [?]), company-size buckets (cut points [?]), input types (emoji / slider), cadence (weekly), statuses (program draft/active/ended, cycle open/closed).</div>
+        <div class="node-trans">&rarr; consumed by 0.4, 5.0, 1.5 (categories), 1.0, 7.2, 8.1 (tiers), 3.0, 0.4 (sizes), 5.2, 10.2 (inputs)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 1 -->
+  <section id="c1">
+    <div class="section-label">Cluster 1</div>
+    <h2>1 - Public marketing and acquisition</h2>
+    <p class="cluster-desc">Public pages. Nodes 1.1 to 1.6 were registered from the footer (0.2) at Step 3, per discover-as-you-go; they serve the existing Main and trust jobs, not new jobs.</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">1.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Pricing</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, tier table (Free / Starter / Growth), "owner dashboard = paid" callout, subscription-as-privacy note, FAQ teaser, CTA "Start free", 0.2 footer.</div>
+        <div class="node-trans">&rarr; 2.0 Sign up, 0.0 Landing</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">1.1</span><span class="node-type">page</span></div>
+        <div class="node-name">Security and privacy (public explainer)</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, how the aggregate-only model works, minimum-N=5, no live count, what the owner can and cannot see, subscription-as-privacy, FAQ, CTA "Start free", 0.2 footer. Brio's differentiator made public.</div>
+        <div class="node-trans">&rarr; 2.0 Sign up, 1.6 Legal (Privacy Policy)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">1.2</span><span class="node-type">page</span></div>
+        <div class="node-name">About</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, mission (wellbeing without surveillance), team, contact link, 0.2 footer.</div>
+        <div class="node-trans">&rarr; 1.3 Contact</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">1.3</span><span class="node-type">page</span></div>
+        <div class="node-name">Contact / Support</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, support email or form, help link, response-time note, 0.2 footer.</div>
+        <div class="node-trans">&rarr; 1.4 Help</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">1.4</span><span class="node-type">page</span></div>
+        <div class="node-name">Help / FAQ</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, FAQ groups (setup, privacy, billing), search within help [?], contact fallback, 0.2 footer. Also an SEO surface.</div>
+        <div class="node-trans">&rarr; 1.3 Contact</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">1.5</span><span class="node-type">page</span></div>
+        <div class="node-name">Category / segment landing (SEO template)</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, canonical landing template, H1 per target, program-category or segment copy, CTA "Start free", internal links, 0.2 footer. One canonical template, not N hand-built pages; the exact list is [?] pending keyword research.</div>
+        <div class="node-trans">&rarr; 2.0 Sign up</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">1.6</span><span class="node-type">page</span></div>
+        <div class="node-name">Legal documents</div>
+        <div class="node-inc"><strong>Includes:</strong> one legal-document template rendering Privacy Policy, Terms of Service, Cookie Policy, last-updated, "cookie settings" re-opens 11.3. Content is legal copy, [?] pending legal review.</div>
+        <div class="node-trans">&rarr; 11.3 Cookie consent (settings)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 2 -->
+  <section id="c2">
+    <div class="section-label">Cluster 2</div>
+    <h2>2 - Authentication</h2>
+    <p class="cluster-desc">Public to operator. Closes no job on its own but gates every operator job (Main, J1, J2, E1); never a dead-end.</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">2.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Sign up</div>
+        <div class="node-inc"><strong>Includes:</strong> email + password, magic-link option, privacy and terms links, CTA "Create account". Self-serve, no credit card (item 1).</div>
+        <div class="node-trans">&rarr; 3.0 Company setup (F1), 2.2 Magic-link sent, 2.1 Log in</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">2.1</span><span class="node-type">page</span></div>
+        <div class="node-name">Log in (email + magic link)</div>
+        <div class="node-inc"><strong>Includes:</strong> email + password, magic-link option, forgot-password. Return access; gates Main / J1 / J2 / E1.</div>
+        <div class="node-trans">&rarr; 4.0 Dashboard, 2.2 Magic-link sent, 2.3 Invalid or expired link</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">2.2</span><span class="node-type">state</span></div>
+        <div class="node-name">Magic-link sent</div>
+        <div class="node-inc"><strong>Includes:</strong> "check your email" confirmation, resend, open-mail hint.</div>
+        <div class="node-trans">&rarr; 4.0 Dashboard (on valid link), 2.3 (if expired)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">2.3</span><span class="node-type">state</span></div>
+        <div class="node-name">Invalid or expired link</div>
+        <div class="node-inc"><strong>Includes:</strong> explanation, "request a new link" CTA. Error state, never a dead-end.</div>
+        <div class="node-trans">&rarr; 2.1 Log in</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 3 -->
+  <section id="c3">
+    <div class="section-label">Cluster 3</div>
+    <h2>3 - Onboarding, guided first-run wizard</h2>
+    <p class="cluster-desc">Linear, time-budgeted under 5 minutes. Sequential flow depth, not navigational depth. Runs once, not reachable from global nav afterward.</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">3.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Company setup (name, size)</div>
+        <div class="node-inc"><strong>Includes:</strong> company name, company-size selector, progress "step 1 of 3". Size drives the pre-selected program (J6).</div>
+        <div class="node-trans">&rarr; 3.1 First program confirm (F1)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">3.1</span><span class="node-type">page</span></div>
+        <div class="node-name">First program confirm (pre-selected by size)</div>
+        <div class="node-inc"><strong>Includes:</strong> loading (pre-select by size, F1 Load1), recommended program card (canonical), what it runs, interpretive line, "confirm" or "pick another (to 5.0)", progress "step 2 of 3".</div>
+        <div class="node-trans">&rarr; 3.2 Invite team, 5.0 Program library (change choice)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">3.2</span><span class="node-type">page</span></div>
+        <div class="node-name">Invite team (join link / code)</div>
+        <div class="node-inc"><strong>Includes:</strong> join link + copy, join code, email-invite field, privacy note (roster is not linked to answers), progress "step 3 of 3", "finish, go to Dashboard".</div>
+        <div class="node-trans">&rarr; 4.0 Dashboard, 3.3 (on send failure)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">3.3</span><span class="node-type">state</span></div>
+        <div class="node-name">Invite-send error</div>
+        <div class="node-inc"><strong>Includes:</strong> which invites failed, retry, skip for now (link and code still work). Never a dead-end (F1 MS3).</div>
+        <div class="node-trans">&rarr; 3.2 Invite team</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 4 -->
+  <section id="c4">
+    <div class="section-label">Cluster 4</div>
+    <h2>4 - Dashboard and pulse, operator home</h2>
+    <p class="cluster-desc">The operator home. The recurring aha, 1 tap from login: the pulse signal (score + interpretation + suggested next action).</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">4.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Dashboard (operator home)</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, plain-language pulse score + interpretation + suggested next action, trend spark, participation rate (share, not who), threshold-alert banner (contextual, DX1), privacy-proof mini element (DX2), states 4.3 empty and 4.4 loading.</div>
+        <div class="node-trans">&rarr; 4.1 Team pulse detail, 4.2 Threshold alert detail, 7.0 Share with owner (contextual, F3)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">4.1</span><span class="node-type">page</span></div>
+        <div class="node-name">Team pulse detail</div>
+        <div class="node-inc"><strong>Includes:</strong> score + number, trend over time, participation rate, interpretation + next action, minimum-N state.</div>
+        <div class="node-trans">&rarr; 7.0 Share with owner, 5.2 Check-in setup</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">4.2</span><span class="node-type">page</span></div>
+        <div class="node-name">Threshold alert detail</div>
+        <div class="node-inc"><strong>Includes:</strong> what dropped, plain-language reading, suggested next action, link to the relevant program. Reached 1-tap contextual and via notification deep-link (DX1).</div>
+        <div class="node-trans">&rarr; 5.1 Program detail, 4.1 Team pulse detail</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">4.3</span><span class="node-type">state</span></div>
+        <div class="node-name">Pre-minimum-N empty (score not ready)</div>
+        <div class="node-inc"><strong>Includes:</strong> "waiting for at least 5 responses", no live count, nudge-team CTA (to 6.0). J3 and E2 privacy math.</div>
+        <div class="node-trans">&rarr; 6.0 Team roster</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">4.4</span><span class="node-type">state</span></div>
+        <div class="node-name">Cycle open, no live count</div>
+        <div class="node-inc"><strong>Includes:</strong> "cycle open, results appear after it closes", no running tally. J3 (no timing inference).</div>
+        <div class="node-trans">&rarr; 4.0 Dashboard</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 5 -->
+  <section id="c5">
+    <div class="section-label">Cluster 5</div>
+    <h2>5 - Programs</h2>
+    <p class="cluster-desc">Browse, pick, manage, and set up the check-in. The core "what do I run" job (Main + J6 + item 2), entered repeatedly.</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">5.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Program library (browse + pick)</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, facet set (category: mental health, physical, financial, social), "recommended for your size" tag, canonical program-card grid, state 5.3 first-run empty.</div>
+        <div class="node-trans">&rarr; 5.1 Program detail</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">5.1</span><span class="node-type">page</span></div>
+        <div class="node-name">Program detail / manage</div>
+        <div class="node-inc"><strong>Includes:</strong> title, category, cadence and duration, status (draft / active / ended), the check-in questions it carries, manage actions (activate / end), "set up check-in (to 5.2)".</div>
+        <div class="node-trans">&rarr; 5.2 Check-in setup</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">5.2</span><span class="node-type">page</span></div>
+        <div class="node-name">Check-in setup (questions, cadence)</div>
+        <div class="node-inc"><strong>Includes:</strong> pick 1 to 3 questions, emoji or slider type, cadence (weekly), minimum-N=5 note, no-live-count note, save.</div>
+        <div class="node-trans">&rarr; 4.1 Team pulse detail</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">5.3</span><span class="node-type">state</span></div>
+        <div class="node-name">Library first-run empty (no active program)</div>
+        <div class="node-inc"><strong>Includes:</strong> "no active program yet, pick one", recommended-for-size shortcut. Never a dead-end (MS4).</div>
+        <div class="node-trans">&rarr; 5.1 Program detail</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 6 -->
+  <section id="c6">
+    <div class="section-label">Cluster 6</div>
+    <h2>6 - Team</h2>
+    <p class="cluster-desc">Invite and participation aggregate. Entered on every new hire; the invite / roster surface (Main + item 3 + item 10).</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">6.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Team roster (members, join link / code, participation aggregate)</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, invited-members list (invite identity only, never linked to answers), join link + code, team size, aggregate participation rate (share, not who), resend or manage (to 6.1).</div>
+        <div class="node-trans">&rarr; 6.1 Resend or manage invite, 4.0 Dashboard</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">6.1</span><span class="node-type">dialog</span></div>
+        <div class="node-name">Resend or manage invite</div>
+        <div class="node-inc"><strong>Includes:</strong> resend to selected, revoke or regenerate code, copy link.</div>
+        <div class="node-trans">&rarr; 6.0 Team roster</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 7 -->
+  <section id="c7">
+    <div class="section-label">Cluster 7</div>
+    <h2>7 - Owner share and upgrade, operator-facing</h2>
+    <p class="cluster-desc">The prove-it-works and paid-conversion path (J1 + J5 + S2 + item 8). Fires from a positive milestone (F3).</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">7.0</span><span class="node-type">page / section</span></div>
+        <div class="node-name">Share with owner</div>
+        <div class="node-inc"><strong>Includes:</strong> what the owner will see (aggregate-only preview), "invite owner", gate: on a paid plan? to 7.1.</div>
+        <div class="node-trans">&rarr; 7.1 Invite owner + upgrade, 9.0 Owner dashboard (once live)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">7.1</span><span class="node-type">page</span></div>
+        <div class="node-name">Invite owner + upgrade</div>
+        <div class="node-inc"><strong>Includes:</strong> owner email, plan comparison (owner dashboard = paid), 7.2 upgrade dialog, confirmation "invite sent".</div>
+        <div class="node-trans">&rarr; 7.2 Upgrade or paywall, 9.2 Monthly owner digest</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">7.2</span><span class="node-type">dialog</span></div>
+        <div class="node-name">Upgrade / paywall</div>
+        <div class="node-inc"><strong>Includes:</strong> tier, seats, price, payment, "stay free" (back). Item 8 and business model.</div>
+        <div class="node-trans">&rarr; 7.3 (on failure), 7.0 (recoverable exit, F3 DE3)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">7.3</span><span class="node-type">state</span></div>
+        <div class="node-name">Payment failed</div>
+        <div class="node-inc"><strong>Includes:</strong> reason, retry, "stay on the free tier, retry later". Recoverable, not a trap (F3 DE3).</div>
+        <div class="node-trans">&rarr; 7.2 Upgrade, 4.0 Dashboard</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 8 -->
+  <section id="c8">
+    <div class="section-label">Cluster 8</div>
+    <h2>8 - Settings, operator utility</h2>
+    <p class="cluster-desc">Noindex. One shell whose section list mirrors nav; a corner utility entry, not a job tab.</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">8.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Settings (shell)</div>
+        <div class="node-inc"><strong>Includes:</strong> 0.1 nav, section list (Plan, Privacy center, Notifications, Account).</div>
+        <div class="node-trans">&rarr; 8.1, 8.2, 8.3, 8.4</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">8.1</span><span class="node-type">section</span></div>
+        <div class="node-name">Plan / subscription</div>
+        <div class="node-inc"><strong>Includes:</strong> current tier, seats and usage, change plan (to 7.2), invoices.</div>
+        <div class="node-trans">&rarr; 7.2 Upgrade or paywall</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">8.2</span><span class="node-type">section</span></div>
+        <div class="node-name">Privacy center (what the owner can and cannot see)</div>
+        <div class="node-inc"><strong>Includes:</strong> canonical privacy-disclosure component, minimum-N=5 statement, no-live-count, owner can and cannot see panel, subscription-as-privacy statement. Operator-facing proof.</div>
+        <div class="node-trans">&rarr; 8.0 Settings</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">8.3</span><span class="node-type">section</span></div>
+        <div class="node-name">Notifications (reminders, digest cadence)</div>
+        <div class="node-inc"><strong>Includes:</strong> check-in reminder toggle and cadence, weekly operator digest, monthly owner digest, threshold-alert delivery.</div>
+        <div class="node-trans">&rarr; 8.0 Settings</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">8.4</span><span class="node-type">section</span></div>
+        <div class="node-name">Account settings</div>
+        <div class="node-inc"><strong>Includes:</strong> name, email, password, magic-link, sign out, delete account (GDPR erasure). Supporting identity infrastructure.</div>
+        <div class="node-trans">&rarr; 8.0 Settings</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 9 -->
+  <section id="c9">
+    <div class="section-label">Cluster 9</div>
+    <h2>9 - Owner surface, aggregate-only, secondary</h2>
+    <p class="cluster-desc">Under 2 minutes, one read. No nav tabs by design; a single aggregate dashboard for the secondary persona.</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">9.0</span><span class="node-type">page</span></div>
+        <div class="node-name">Owner dashboard (one number, trend, plain-language)</div>
+        <div class="node-inc"><strong>Includes:</strong> single pulse number, trend, plain-language reading, 9.1 "what I can and cannot see", state 9.3 empty, no nav tabs by design.</div>
+        <div class="node-trans">&rarr; 9.1 What I can and cannot see, re-entry from 9.2 digest</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">9.1</span><span class="node-type">section</span></div>
+        <div class="node-name">"What I can and cannot see"</div>
+        <div class="node-inc"><strong>Includes:</strong> canonical privacy-disclosure component, owner variant (aggregate-only, no individuals, no drill-down). E2 owner comfort + item 4.</div>
+        <div class="node-trans">&rarr; 9.0 Owner dashboard</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">9.2</span><span class="node-type">page</span></div>
+        <div class="node-name">Monthly owner digest (email to view)</div>
+        <div class="node-inc"><strong>Includes:</strong> month score + trend, one-line reading, link to 9.0. S2 + item 8 + W1 (under 2 min).</div>
+        <div class="node-trans">&rarr; 9.0 Owner dashboard</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">9.3</span><span class="node-type">state</span></div>
+        <div class="node-name">Owner score-not-ready empty</div>
+        <div class="node-inc"><strong>Includes:</strong> "score not available yet, the privacy minimum of 5 is not met", no individual data. MS2.</div>
+        <div class="node-trans">&rarr; 9.0 Owner dashboard</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 10 -->
+  <section id="c10">
+    <div class="section-label">Cluster 10</div>
+    <h2>10 - Employee check-in, near-anonymous, third-party, mobile</h2>
+    <p class="cluster-desc">Linear, under 30 seconds, no account for the first check-in. A near-anonymous flow for the third-party persona (J3 + J4).</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">10.0</span><span class="node-type">flow entry</span></div>
+        <div class="node-name">Check-in entry (via invite link / join code)</div>
+        <div class="node-inc"><strong>Includes:</strong> minimal top bar (no nav), "your answers are anonymous" pre-header, link validity check.</div>
+        <div class="node-trans">&rarr; 10.1 Pre-Q1 disclosure (F2), 10.4 (expired), 10.5 (already submitted)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">10.1</span><span class="node-type">section</span></div>
+        <div class="node-name">Pre-Q1 privacy disclosure</div>
+        <div class="node-inc"><strong>Includes:</strong> canonical privacy-disclosure component, employee variant, "no named responses, no individual timeline", "see exactly what your manager sees" expander (F2 DE2 recovery), continue.</div>
+        <div class="node-trans">&rarr; 10.2 Questions, back (leave)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">10.2</span><span class="node-type">page</span></div>
+        <div class="node-name">Questions (1 to 3, emoji / slider)</div>
+        <div class="node-inc"><strong>Includes:</strong> 1 to 3 questions, emoji or slider, progress, submit, loading (F2 Submit).</div>
+        <div class="node-trans">&rarr; 10.3 Check-in complete, 10.6 (submit error)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">10.3</span><span class="node-type">page</span></div>
+        <div class="node-name">Check-in complete / thank-you</div>
+        <div class="node-inc"><strong>Includes:</strong> thank-you, reassurance (the answer joined the aggregate), no score shown to the employee (unless HJ2 [?], parked).</div>
+        <div class="node-trans">&rarr; end</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">10.4</span><span class="node-type">state</span></div>
+        <div class="node-name">Invite link expired</div>
+        <div class="node-inc"><strong>Includes:</strong> "link expired, ask your operator to resend", no personal data. Never a dead-end (F2).</div>
+        <div class="node-trans">&rarr; operator resend path</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">10.5</span><span class="node-type">state</span></div>
+        <div class="node-name">Already submitted this cycle</div>
+        <div class="node-inc"><strong>Includes:</strong> "you have already checked in this cycle, thank-you", no duplicate, no individual data. MS1.</div>
+        <div class="node-trans">&rarr; end</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">10.6</span><span class="node-type">state</span></div>
+        <div class="node-name">Submit error</div>
+        <div class="node-inc"><strong>Includes:</strong> "submit failed, retry", answers preserved. Never a dead-end (F2).</div>
+        <div class="node-trans">&rarr; 10.2 Questions</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cluster 11 -->
+  <section id="c11">
+    <div class="section-label">Cluster 11</div>
+    <h2>11 - System and global nodes</h2>
+    <p class="cluster-desc">Fleshed at Step 6, grounded in law. The system surfaces that apply across all roles.</p>
+    <div class="node-grid">
+      <div class="node-card">
+        <div><span class="node-num">11.0</span><span class="node-type">page</span></div>
+        <div class="node-name">404 Not found</div>
+        <div class="node-inc"><strong>Includes:</strong> full page (nav + footer) with search and quick links, HTTP 404 + noindex, never a soft-404.</div>
+        <div class="node-trans">&rarr; 0.0 Home, search, quick links (recovery)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">11.1</span><span class="node-type">page</span></div>
+        <div class="node-name">500 Server error</div>
+        <div class="node-inc"><strong>Includes:</strong> minimal, backend-independent error page.</div>
+        <div class="node-trans">&rarr; retry, 0.0 Home</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">11.2</span><span class="node-type">page</span></div>
+        <div class="node-name">Maintenance</div>
+        <div class="node-inc"><strong>Includes:</strong> 503 + Retry-After maintenance page.</div>
+        <div class="node-trans">&rarr; retry after the stated wait</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">11.3</span><span class="node-type">dialog</span></div>
+        <div class="node-name">Cookie consent</div>
+        <div class="node-inc"><strong>Includes:</strong> banner component, grounded in real law via web fetch.</div>
+        <div class="node-trans">&rarr; reopened from 0.2 footer and 1.6 Legal (cookie settings)</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">11.4</span><span class="node-type">section</span></div>
+        <div class="node-name">Toast / inline notification</div>
+        <div class="node-inc"><strong>Includes:</strong> component, aria-live, no SEO impact.</div>
+        <div class="node-trans">&rarr; inline, no navigation</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">11.5</span><span class="node-type">section</span></div>
+        <div class="node-name">Global search</div>
+        <div class="node-inc"><strong>Includes:</strong> likely N/A for Brio [?]. The small curated library uses browse + facets (in 5.0), not a search index; confirmed or closed at Step 6.</div>
+        <div class="node-trans">&rarr; N/A (browse + facets in 5.0)</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Detail Layer, Site map - July 2026</p>
+    <p style="margin-top:4px;">The full site map: a tree of the 11 clusters plus per-node cards (X.Y, type, includes, transitions). It expands the base <a href="concept.html">Concept map</a>; states and page copy live on the individual node pages. See also the <a href="flows.html">Flows</a>.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose', flowchart: { htmlLabels: true, curve: 'basis' } });
+</script>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link, a.nav-sub2-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var subSections = [
+    { id: 'c0', sub: 'sub-c0' },
+    { id: 'c1', sub: 'sub-c1' },
+    { id: 'c2', sub: 'sub-c2' },
+    { id: 'c3', sub: 'sub-c3' },
+    { id: 'c4', sub: 'sub-c4' },
+    { id: 'c5', sub: 'sub-c5' },
+    { id: 'c6', sub: 'sub-c6' },
+    { id: 'c7', sub: 'sub-c7' },
+    { id: 'c8', sub: 'sub-c8' },
+    { id: 'c9', sub: 'sub-c9' },
+    { id: 'c10', sub: 'sub-c10' },
+    { id: 'c11', sub: 'sub-c11' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) {
+          var el = document.getElementById(s.sub);
+          if (el) el.classList.remove('nav-sub-active');
+        });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) {
+          var el = document.getElementById(match.sub);
+          if (el) el.classList.add('nav-sub-active');
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

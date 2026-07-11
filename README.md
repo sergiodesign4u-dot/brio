@@ -9,7 +9,9 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 - **Jobs to Be Done:** https://sergiodesign4u-dot.github.io/brio/user-research/jtbd.html
 - **CJM As-Is:** https://sergiodesign4u-dot.github.io/brio/user-research/cjm-as-is.html
 - **CJM To-Be:** https://sergiodesign4u-dot.github.io/brio/user-research/cjm-to-be.html
-- **IA Base Layer:** https://sergiodesign4u-dot.github.io/brio/ia/ia-base.html
+- **IA Base Layer - Flows:** https://sergiodesign4u-dot.github.io/brio/ia/flows.html
+- **IA Base Layer - Concept map:** https://sergiodesign4u-dot.github.io/brio/ia/concept.html
+- **IA Detail Layer - Sitemap:** https://sergiodesign4u-dot.github.io/brio/ia/sitemap.html
 
 ---
 
@@ -20,7 +22,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 | Foundation Research | Done (competitors, benchmark, Lean UX Canvas, AARRR, UX patterns, research synthesis, research.html) |
 | User Research (Personas + JTBD) | Done (personas, jobs to be done, JTBD matrix, MVP core, personas.html, jtbd.html) |
 | CJM (As-Is + To-Be) | Done (customer journey map As-Is + To-Be, emotional curve, backlog, cjm-as-is.html, cjm-to-be.html) |
-| Information Architecture (Basic + Detailed) | In progress (Base Layer done: sitemap, user flows, traceability, navigation, ia-base.html. Detail layer next) |
+| Information Architecture (Basic + Detailed) | In progress (Base Layer done: Flows + Concept map, ia/flows.html + ia/concept.html. Detail layer in progress: Sitemap + nodes, ia/sitemap.html) |
 | Wireframes | Not started |
 | Voice | Not started |
 | Concept | Not started |

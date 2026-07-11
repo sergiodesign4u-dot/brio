@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Flows</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar - mobile-first */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle {
+      display: flex; flex-direction: column; justify-content: center; gap: 4px;
+      width: 36px; height: 36px; background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px;
+    }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-item {
+      display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px;
+      color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s;
+    }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+    /* nested IA node-nav (Base / Detail sub-groups) */
+    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
+    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
+    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
+    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub2-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .divider { height: 1px; background: var(--border); margin: 48px 0; }
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.warn { border-color: var(--yellow-dim); }
+    .callout.ok { border-color: var(--green-dim); }
+
+    /* Flow legend + mermaid */
+    .legend { display: flex; gap: 18px; font-size: 12px; color: var(--text-faint); margin: 12px 0 6px; flex-wrap: wrap; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend .dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+    .mermaid-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin: 14px 0 6px; }
+    .mermaid-wrap .mermaid { min-width: 520px; text-align: center; }
+    .flow-note { font-size: 12.5px; color: var(--text-muted); margin: 4px 0 28px; }
+    .flow-note b { color: var(--text); }
+
+    @media (max-width: 640px) { main { padding-left: 16px; padding-right: 16px; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+
+      <div class="nav-subhead">Base Layer</div>
+      <a href="flows.html" class="nav-sub-link nav-link-active">Flows</a>
+      <a href="#flow1" class="nav-sub2-item" id="sub-flow1">Flow 1 - Main job</a>
+      <a href="#flow2" class="nav-sub2-item" id="sub-flow2">Flow 2 - Check-in</a>
+      <a href="#flow3" class="nav-sub2-item" id="sub-flow3">Flow 3 - Share + upgrade</a>
+      <a href="#flow4" class="nav-sub2-item" id="sub-flow4">Flow 4 - Early warning</a>
+      <a href="concept.html" class="nav-sub-link">Concept map</a>
+
+      <div class="nav-subhead">Detail Layer</div>
+      <a href="sitemap.html" class="nav-sub-link">Sitemap</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Base Layer</span>
+      <span class="badge">Flows</span>
+      <span class="badge">Color = outcome</span>
+    </div>
+    <div class="section-label">Information Architecture</div>
+    <h1>User Flows</h1>
+    <p class="hero-intro">How the primary persona actually moves through the main job and three related jobs: steps, decision diamonds, states (empty / error / loading) and both ends, success and dead-end. Color is semantic: green reaches the goal, red is a true dead-end, grey is neutral. The concept sitemap derived from these flows lives on <a href="concept.html">Concept map</a>.</p>
+  </section>
+
+  <!-- User Flows -->
+  <section id="flows">
+    <div class="section-label">Routes</div>
+    <h2>User Flows</h2>
+    <p>The main job plus three related jobs, each proving the route: steps, decision diamonds, states, and both ends, success and dead-end. Color is semantic.</p>
+
+    <div class="legend">
+      <span><span class="dot" style="background:#3fb56b;"></span> Success: happy-path ends and the arrows that reach them</span>
+      <span><span class="dot" style="background:#e5484d;"></span> Dead-end: no path to the goal</span>
+      <span><span class="dot" style="background:#5a5a5a;"></span> Neutral: steps, decisions, loading / empty, recoverable error</span>
+    </div>
+
+    <div class="callout"><strong>Step 6 critique applied.</strong> Dead-end exits added (sub-N explainer, employee "see what your manager sees" detour, recoverable free-tier exit, digest re-surface of an ignored alert) and missing states added (already-submitted, owner "score not ready", invite-send error).</div>
+
+    <h3 id="flow1">Flow 1 - Main job (Priya): run wellbeing without HR training</h3>
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    Start(["Priya: handed wellbeing, no HR training"]) --> Landing["Landing / home"]
+    Landing --> Signup["Sign up"]
+    Signup --> Onboard["Onboarding: company setup"]
+    Onboard --> Load1["Loading: pre-select program by size"]
+    Load1 --> Confirm["First program confirm"]
+    Confirm --> Invite["Invite team: join link / code"]
+    Invite --> SendOk{"Invites sent?"}
+    SendOk -->|send failed| InviteErr["Error: invite send failed, retry"]
+    InviteErr --> Invite
+    SendOk -->|yes| Dash["Dashboard: waiting for check-ins"]
+    Dash --> Enough{"Cycle closed, N of 5 met?"}
+    Enough -->|still open| Waiting["Loading: cycle open, no live count"]
+    Waiting --> Enough
+    Enough -->|under 5 at close| EmptyN["Empty: too few responses, nudge team"]
+    EmptyN --> Roster["Team roster: resend invite"]
+    Roster --> Dash
+    Enough -->|team too small| TooSmall["Team below minimum-N: privacy math explained"]
+    TooSmall --> Grow{"Can invite more to reach 5?"}
+    Grow -->|yes| Roster
+    Grow -->|no| DeadN["Dead: under minimum-N, no team signal possible"]
+    Enough -->|yes| Pulse["Team pulse: score + interpretation + next action"]
+    Pulse --> Win(["Job closed: team read and next action"])
+    classDef success fill:#12351f,stroke:#3fb56b,color:#eafff9;
+    classDef dead fill:#3a1618,stroke:#e5484d,color:#ffd7d7;
+    classDef neutral fill:#1b1b1b,stroke:#5a5a5a,color:#dddddd;
+    class Start,Win success;
+    class DeadN dead;
+    class Landing,Signup,Onboard,Load1,Confirm,Invite,SendOk,InviteErr,Dash,Enough,Waiting,EmptyN,Roster,TooSmall,Grow,Pulse neutral;
+    linkStyle 0,1,2,3,4,5,6,9,10,20,21 stroke:#3fb56b,stroke-width:2px;</pre>
+    </div>
+    <p class="flow-note"><b>Decisions:</b> invites sent? cycle closed and N of 5 met? can invite more? <b>States:</b> loading, empty, invite-send error. <b>Dead-end:</b> a team structurally under minimum-N cannot get an aggregate signal (the honest limit of an aggregate-only model). <b>Recovers:</b> under-5-at-close nudges and loops back.</p>
+
+    <h3 id="flow2">Flow 2 - J3 + J4 (Yemi): private, under-30s check-in</h3>
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    Start(["Yemi: invite received, is it private?"]) --> Open["Check-in via invite link / join code"]
+    Open --> Valid{"Invite link valid?"}
+    Valid -->|expired| Expired["Error: invite expired, ask operator to resend"]
+    Valid -->|ok| Dup{"Already checked in this cycle?"}
+    Dup -->|yes| Already["Already submitted this cycle, thank-you"]
+    Dup -->|no| Disc["Pre-Q1 privacy disclosure"]
+    Disc --> Believe{"Do I believe my answer stays private?"}
+    Believe -->|not sure| Learn["See exactly what your manager sees"]
+    Learn --> Believe
+    Believe -->|no| DeadSkip["Dead: skips or non-answer, trust lost"]
+    Believe -->|yes| Q["Questions: 1 to 3, emoji / slider"]
+    Q --> Submit["Loading: submitting response"]
+    Submit --> Ok{"Submitted?"}
+    Ok -->|network error| Err["Error: submit failed, retry"]
+    Err --> Q
+    Ok -->|yes| Done["Check-in complete: thank-you, no individual data"]
+    Done --> Win(["Job closed: honest response joined the team aggregate"])
+    classDef success fill:#12351f,stroke:#3fb56b,color:#eafff9;
+    classDef dead fill:#3a1618,stroke:#e5484d,color:#ffd7d7;
+    classDef neutral fill:#1b1b1b,stroke:#5a5a5a,color:#dddddd;
+    class Start,Win success;
+    class DeadSkip dead;
+    class Open,Valid,Expired,Dup,Already,Disc,Believe,Learn,Q,Submit,Ok,Err,Done neutral;
+    linkStyle 0,1,3,5,6,10,11,12,15,16 stroke:#3fb56b,stroke-width:2px;</pre>
+    </div>
+    <p class="flow-note"><b>Decisions:</b> invite valid? already checked in? believe it stays private? submitted? <b>States:</b> error (expired, submit failed), loading, already-submitted. <b>Recovery:</b> an unsure employee opens "see exactly what your manager sees" and returns. <b>Dead-end:</b> disbelief in privacy, trust lost, no in-flow path back to an honest answer.</p>
+
+    <h3 id="flow3">Flow 3 - J1 + J5 + S2 (Priya to Marcus): prove it works, share and upgrade</h3>
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    Start(["Priya: wants to show the owner it works"]) --> Milestone["Dashboard: positive pulse milestone"]
+    Milestone --> Share["Share with owner"]
+    Share --> Gate{"On a paid plan?"}
+    Gate -->|no| Upgrade["Invite owner + upgrade"]
+    Upgrade --> Pay{"Upgrade completed?"}
+    Pay -->|payment failed| PayErr["Error: payment failed, retry or stay free"]
+    PayErr --> Upgrade
+    Pay -->|not now| StayFree["Stay on free tier, retry later"]
+    StayFree --> Milestone
+    Pay -->|yes| Sent["Confirmation: owner invite sent"]
+    Gate -->|yes| Sent
+    Sent --> Wait["Loading: waiting for owner to open"]
+    Wait --> Seen{"Owner opened dashboard or digest?"}
+    Seen -->|not yet| Nudge2["Empty: owner has not opened, resend digest"]
+    Nudge2 --> Wait
+    Seen -->|never opens| DeadUnseen["Dead: owner never opens, share never lands"]
+    Seen -->|yes| OwnerDash["Owner dashboard: one number, trend, what I cannot see"]
+    OwnerDash --> Ready{"Team score ready, N of 5 met?"}
+    Ready -->|no| OwnerEmpty["Empty: score not available yet, privacy minimum not met"]
+    Ready -->|yes| Win(["Job closed: owner sees an honest signal, renewal confidence"])
+    classDef success fill:#12351f,stroke:#3fb56b,color:#eafff9;
+    classDef dead fill:#3a1618,stroke:#e5484d,color:#ffd7d7;
+    classDef neutral fill:#1b1b1b,stroke:#5a5a5a,color:#dddddd;
+    class Start,Win success;
+    class DeadUnseen dead;
+    class Milestone,Share,Gate,Upgrade,Pay,PayErr,StayFree,Sent,Wait,Seen,Nudge2,OwnerDash,Ready,OwnerEmpty neutral;
+    linkStyle 0,1,2,10,11,12,16,17,19 stroke:#3fb56b,stroke-width:2px;</pre>
+    </div>
+    <p class="flow-note"><b>Decisions:</b> on a paid plan? upgrade completed? owner opened it? score ready? <b>States:</b> payment error, loading, two empties (owner not opened; score not ready under minimum-N). <b>Recoverable exit:</b> declining the upgrade stays on free tier and retries later. <b>Dead-end:</b> owner never opens despite resends, the share never lands.</p>
+
+    <h3 id="flow4">Flow 4 - J2 (Priya): know if the team is struggling early</h3>
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    Start(["Brio: a pulse cycle closes"]) --> Compute["Loading: compute aggregate, check N of 5"]
+    Compute --> N{"N of 5 met?"}
+    N -->|no| Hold["Empty: too few responses, no score, no alert"]
+    Hold --> Wait2["Wait for next cycle"]
+    Wait2 --> Start
+    N -->|yes| Trend{"Aggregate dropped past threshold?"}
+    Trend -->|no| Steady["Dashboard: steady, no action needed"]
+    Steady --> OkEnd(["Job closed: reassured, nothing needed"])
+    Trend -->|yes| Alert["Threshold alert detail"]
+    Alert --> Act{"Operator acts?"}
+    Act -->|ignores once| Digest["Weekly digest re-surfaces the alert"]
+    Digest --> Alert
+    Act -->|keeps ignoring| DeadMiss["Dead: alert ignored, someone resigns"]
+    Act -->|yes| NextAction["Team pulse: suggested next action"]
+    NextAction --> Win(["Job closed: acted before a resignation"])
+    classDef success fill:#12351f,stroke:#3fb56b,color:#eafff9;
+    classDef dead fill:#3a1618,stroke:#e5484d,color:#ffd7d7;
+    classDef neutral fill:#1b1b1b,stroke:#5a5a5a,color:#dddddd;
+    class Start,OkEnd,Win success;
+    class DeadMiss dead;
+    class Compute,N,Hold,Wait2,Trend,Steady,Alert,Act,Digest,NextAction neutral;
+    linkStyle 0,1,5,6,7,8,9,13,14 stroke:#3fb56b,stroke-width:2px;</pre>
+    </div>
+    <p class="flow-note"><b>Decisions:</b> N of 5 met? dropped past threshold? operator acts? <b>States:</b> loading, empty (no score, no alert). <b>Escalation:</b> a single ignore does not equal a resignation, the weekly digest re-surfaces the alert. <b>Two success ends</b> (both close J2): steady equals reassured, and alert-then-acted. <b>Dead-end:</b> alert kept ignored, someone resigns.</p>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Base Layer, Flows - July 2026</p>
+    <p style="margin-top:4px;">Four flows: the main job plus three related jobs, each with decision diamonds, states, and both ends. The concept sitemap derived from them lives on <a href="concept.html">Concept map</a>. Color is semantic, not decorative.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose', flowchart: { htmlLabels: true, curve: 'basis' } });
+</script>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link, a.nav-sub2-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var subSections = [
+    { id: 'flow1', sub: 'sub-flow1' },
+    { id: 'flow2', sub: 'sub-flow2' },
+    { id: 'flow3', sub: 'sub-flow3' },
+    { id: 'flow4', sub: 'sub-flow4' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) {
+          var el = document.getElementById(s.sub);
+          if (el) el.classList.remove('nav-sub-active');
+        });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) {
+          var el = document.getElementById(match.sub);
+          if (el) el.classList.add('nav-sub-active');
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

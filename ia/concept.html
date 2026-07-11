@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - IA Concept map</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar - mobile-first */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
+    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+    .sidebar-toggle {
+      display: flex; flex-direction: column; justify-content: center; gap: 4px;
+      width: 36px; height: 36px; background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px;
+    }
+    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
+    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
+    .sidebar-body.open { display: block; }
+    .nav-group { padding: 0 8px; }
+    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
+    .nav-group-label.active-section { color: var(--accent); }
+    .nav-item {
+      display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px;
+      color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s;
+    }
+    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
+    .nav-item-active { color: var(--accent); font-weight: 600; }
+    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+    /* nested IA node-nav (Base / Detail sub-groups) */
+    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
+    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
+    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
+    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub2-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
+    }
+
+    main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
+    section { padding: 80px 0 40px; }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    h1 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+    h2 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 16px; padding-top: 48px; }
+    h2:first-of-type { padding-top: 0; }
+    h3 { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; margin-top: 28px; }
+    p { color: var(--text-muted); margin-bottom: 14px; max-width: 72ch; }
+    strong { color: var(--text); font-weight: 600; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
+    .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border-subtle); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    .tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+    .tag-confirmed { background: var(--green-dim); color: var(--green); }
+    .tag-muted { background: var(--surface-3); color: var(--text-faint); }
+
+    .divider { height: 1px; background: var(--border); margin: 48px 0; }
+    footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
+    .callout strong { color: var(--text); }
+    .callout.warn { border-color: var(--yellow-dim); }
+    .callout.ok { border-color: var(--green-dim); }
+
+    .mermaid-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin: 14px 0 6px; }
+    .mermaid-wrap .mermaid { min-width: 680px; text-align: center; }
+
+    /* Traceability matrix */
+    .matrix-table td:not(:first-child), .matrix-table th:not(:first-child) { text-align: center; padding: 10px 8px; white-space: nowrap; }
+    .matrix-table td:first-child { white-space: nowrap; }
+    .matrix-table td.hit { color: var(--accent); font-weight: 700; }
+    .matrix-table tr.row-orphan td { background: rgba(244, 162, 97, 0.06); }
+    .matrix-table tr.row-orphan td:first-child { color: var(--accent-warm); border-left: 2px solid var(--accent-warm); }
+    .matrix-table th.col-orphan { color: var(--red); }
+
+    .deflist { display: grid; gap: 12px; margin: 16px 0; }
+    .def-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; display: flex; gap: 16px; }
+    .def-card.warn { border-color: var(--accent-warm-dim); }
+    .def-id { font-size: 12px; font-weight: 700; color: var(--accent-warm); min-width: 74px; flex-shrink: 0; }
+    .def-body { font-size: 13px; }
+    .def-body .def-note { font-size: 12px; color: var(--text-faint); margin-top: 4px; }
+
+    @media (max-width: 640px) { main { padding-left: 16px; padding-right: 16px; } }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">User Research</div>
+      <a href="../user-research/personas.html" class="nav-item">Personas</a>
+      <a href="../user-research/jtbd.html" class="nav-item">JTBD</a>
+      <a href="../user-research/cjm-as-is.html" class="nav-item">CJM As-Is</a>
+      <a href="../user-research/cjm-to-be.html" class="nav-item">CJM To-Be</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Information Architecture (IA)</div>
+
+      <div class="nav-subhead">Base Layer</div>
+      <a href="flows.html" class="nav-sub-link">Flows</a>
+      <a href="concept.html" class="nav-sub-link nav-link-active">Concept map</a>
+      <a href="#concept" class="nav-sub2-item" id="sub-concept">Screens by intent</a>
+      <a href="#nav" class="nav-sub2-item" id="sub-nav">Navigation Model</a>
+      <a href="#matrix" class="nav-sub2-item" id="sub-matrix">Traceability Matrix</a>
+
+      <div class="nav-subhead">Detail Layer</div>
+      <a href="sitemap.html" class="nav-sub-link">Sitemap</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-meta">
+      <span class="badge accent">IA - Base Layer</span>
+      <span class="badge">Concept map</span>
+      <span class="badge">Derived from flows + jobs</span>
+    </div>
+    <div class="section-label">Information Architecture</div>
+    <h1>Concept map</h1>
+    <p class="hero-intro">The concept layer: screens grouped by the person's intent, derived from the <a href="flows.html">flows</a> and jobs. Each node is a screen with the job it closes. States (empty / error / loading) are not here, they live in the flows and the matrix; page content and cards are the detail layer. Below: the intent map, the navigation model, and the traceability matrix.</p>
+  </section>
+
+  <!-- Screens by intent -->
+  <section id="concept">
+    <div class="section-label">Concept</div>
+    <h2>Screens by intent</h2>
+    <p>Not a hierarchy, a map of screens grouped by what the person is trying to do. Six intents (A to F) derived from the flows and jobs. Each node carries a short job-tag; no X.Y numbers, no states, no content cards, those belong to the <a href="sitemap.html">detail layer</a>.</p>
+
+    <div class="mermaid-wrap">
+<pre class="mermaid">flowchart TD
+    subgraph GA["A. Get started (acquire + sign up)"]
+      gs1["Landing / home<br/>Main, item 1"]
+      gs2["Pricing<br/>item 1"]
+      gs3["Sign up<br/>item 1"]
+      gs4["Log in<br/>supporting"]
+    end
+    subgraph GB["B. Set up wellbeing (onboarding)"]
+      sw1["Company setup<br/>J6"]
+      sw2["First program confirm<br/>Main, J6, item 2"]
+      sw3["Invite team<br/>Main, item 3"]
+    end
+    subgraph GC["C. Run wellbeing and read the pulse"]
+      rw1["Dashboard<br/>E1, J1, J2"]
+      rw2["Team pulse detail<br/>J1, J2, E1"]
+      rw3["Threshold alert<br/>J2"]
+      rw4["Program library<br/>Main, J6"]
+      rw5["Program detail / manage<br/>Main, item 2"]
+      rw6["Check-in setup<br/>J2, J4, item 3"]
+    end
+    subgraph GD["D. Team and check-ins"]
+      tc1["Team roster<br/>Main, item 3"]
+      tc2["Check-in, employee<br/>J3, J4, E2"]
+      tc3["Pre-Q1 disclosure<br/>J3, E2"]
+      tc4["Questions<br/>J4"]
+      tc5["Check-in complete<br/>J4, E2"]
+    end
+    subgraph GE["E. Prove it and upgrade (owner)"]
+      pu1["Share with owner<br/>J1, J5, S2"]
+      pu2["Invite owner + upgrade<br/>S2, item 8"]
+      pu3["Owner dashboard<br/>J1, J5, item 8"]
+      pu4["Monthly owner digest<br/>S2, item 8"]
+    end
+    subgraph GF["F. Account and utility"]
+      au1["Plan / subscription<br/>item 1, item 8"]
+      au2["Privacy center<br/>J3, E2, item 4"]
+      au3["Notifications<br/>J4, items 9-10"]
+      au4["Account<br/>supporting"]
+      au5["System: 404 / 500 / cookie<br/>all"]
+    end
+    gs3 --> sw1
+    sw3 --> rw1
+    rw1 --> tc1
+    rw6 --> tc2
+    tc2 --> tc3
+    tc3 --> tc4
+    tc4 --> tc5
+    rw2 --> pu1
+    pu1 --> pu2
+    pu2 --> pu3
+    rw1 -.-> au1</pre>
+    </div>
+    <div class="callout"><strong>Concept, not the site map.</strong> This consolidates the eleven detailed clusters (0 to 11 in <a href="sitemap.html">Sitemap</a>) into six human intents. It shows what the product is made of, by intent, and how screens connect along the flows. The full tree with X.Y nodes and content cards is the detail layer.</div>
+  </section>
+
+  <!-- Navigation Model -->
+  <section id="nav">
+    <div class="section-label">Movement</div>
+    <h2>Navigation Model</h2>
+    <p>Global navigation is the shortest path for the primary persona to her main job, not "what to put in a menu." Each global item is an entry into a job-cluster. The owner and employee surfaces have no multi-tab nav by design.</p>
+
+    <h3>Global navigation (operator app)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Global item</th><th>Job-cluster behind it</th><th>Why global</th></tr></thead>
+        <tbody>
+          <tr><td>Dashboard (home)</td><td>E1 + J1 + J2: the pulse signal (score + interpretation + next action)</td><td>The recurring aha and the reason she logs in. Post-login home</td></tr>
+          <tr><td>Programs</td><td>Main + J6: run wellbeing (library, pick, manage)</td><td>The core "what do I run" job, entered repeatedly</td></tr>
+          <tr><td>Team</td><td>Main + item 3: invite + participation (aggregate)</td><td>Entered on every new hire, the invite / roster surface</td></tr>
+          <tr><td>Owner</td><td>J1 + J5 + S2 + item 8: prove it works + upgrade</td><td>Top-3 operator job by importance and the paid-conversion path</td></tr>
+          <tr><td>Settings <span class="tag tag-muted">utility</span></td><td>supporting + item 4: Plan, Privacy center, Notifications, Account</td><td>Utility cluster, corner entry, not a job tab</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12.5px;color:var(--text-faint);">Trade-off: "Owner" is only ~monthly-frequency and could be a contextual "Share this result" action instead. It is kept global because the owner dashboard is the paid feature and J1 / J5 / S2 score 3 for Priya. Reversible if usage shows it is rarely a fresh entry.</p>
+
+    <h3>Depth: taps to the main job for Priya</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Path to a job-cluster</th><th>Taps</th><th>Within 3?</th></tr></thead>
+        <tbody>
+          <tr><td>Returning operator, pulse signal + next action (recurring main-job value)</td><td>1 (Dashboard is the post-login home)</td><td><span class="tag tag-confirmed">Yes</span></td></tr>
+          <tr><td>Run / adjust a program (Main + J6)</td><td>Programs (1), Program detail (2), Check-in setup (3)</td><td><span class="tag tag-confirmed">Yes, 3 at deepest</span></td></tr>
+          <tr><td>Invite team / roster (item 3)</td><td>Team (1), roster on the same screen</td><td><span class="tag tag-confirmed">Yes</span></td></tr>
+          <tr><td>Prove it works / invite owner (J1 + J5 + S2)</td><td>Owner (1), Invite owner + upgrade (2)</td><td><span class="tag tag-confirmed">Yes</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><strong>One intentional exception, not a violation:</strong> the first-run guided onboarding is a linear wizard (company setup, first program confirm, invite team). This is sequential flow depth, not navigational depth. It is J6 itself ("tells me exactly what to do and in what order"), budgeted by time (under 5 minutes), runs once, and is not reachable from global nav afterward.</div>
+
+    <h3>Global / contextual / deep</h3>
+    <p><strong>Global (always visible):</strong> the 4 job tabs (Dashboard, Programs, Team, Owner) plus Settings utility. Owner surface = single dashboard; employee surface = no nav.</p>
+    <p><strong>Contextual (inside a flow):</strong> "Share this result with your owner" (on a positive milestone), "Set up check-in" (inside a program), "Resend invite" (inside roster), threshold-alert banner (on the Dashboard when it fires), pre-Q1 privacy disclosure (inside the check-in), upgrade prompt (on a free-tier limit).</p>
+    <p><strong>Deep (rare):</strong> Plan / subscription change, Privacy center detail, Notification cadence, Account, and the one-time onboarding wizard.</p>
+  </section>
+
+  <!-- Traceability Matrix -->
+  <section id="matrix">
+    <div class="section-label">Coverage</div>
+    <h2>Traceability Matrix</h2>
+    <p>Screens (rows) by jobs (columns). A tick means the screen participates in closing that job. An empty row is an orphan screen; an empty column is an orphan job. Both are defects, surfaced and resolved below.</p>
+
+    <div class="table-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>Screen</th>
+            <th>Main</th><th>J1</th><th>J2</th><th>J3</th><th>J4</th><th>J5</th><th>J6</th><th>E1</th><th>E2</th><th>E3</th><th class="col-orphan">S1</th><th>S2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1 Landing</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>2 Pricing</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>3 Sign up</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr class="row-orphan"><td>4 Log in</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>5 Company setup</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>6 First program confirm</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>7 Invite team</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>8 Dashboard</td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>9 Team pulse detail</td><td></td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>10 Threshold alert detail</td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>11 Program library</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>12 Program detail / manage</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>13 Check-in setup</td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>14 Team roster</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>15 Share with owner</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>16 Invite owner + upgrade</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>17 Plan / subscription</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>18 Privacy center</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td></tr>
+          <tr><td>19 Notifications</td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr class="row-orphan"><td>20 Account</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>21 Owner dashboard</td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>22 Monthly owner digest</td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td class="hit">&#10003;</td></tr>
+          <tr><td>23 Check-in</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td></tr>
+          <tr><td>24 Pre-Q1 disclosure</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td></tr>
+          <tr><td>25 Questions</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>26 Check-in complete</td><td></td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td><td class="hit">&#10003;</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Orphan screens (empty rows)</h3>
+    <div class="deflist">
+      <div class="def-card warn"><div class="def-id">4 Log in<br>20 Account</div><div class="def-body">Close no job on their own. <strong>Resolution: keep, reclassify as supporting infrastructure.</strong> They gate every operator job; removing them removes access to all job-closing screens. The one honest exception to "no empty row," not cut.</div></div>
+    </div>
+
+    <h3>Orphan jobs (empty columns)</h3>
+    <div class="deflist">
+      <div class="def-card warn"><div class="def-id">S1</div><div class="def-body">Tell network what works has no MVP screen. <strong>Resolution: backlog / [?].</strong> S1 is a [?] hypothesis; the referral surface is parked (Stage 2 cut list bans cash referral, organic operator-to-peer is out of MVP scope). Validate S1 first, then a lightweight share surface post-MVP. Intentional hole.
+        <div class="def-note">Thin coverage (not a hole to fill in MVP): E3 (caring leader) is covered only by Owner dashboard / digest as shareable proof, a [?] hypothesis. Hypothesis jobs HJ1 and HJ2 are deliberately parked (HJ2 = backlog item 12 LATER).</div>
+      </div>
+    </div>
+
+    <div class="callout ok"><strong>Net:</strong> one real orphan job (S1, to backlog), zero orphan screens to cut (two supporting-infrastructure rows kept), no MVP job left uncovered.</div>
+  </section>
+
+  <footer>
+    <p>Brio - Information Architecture, Base Layer, Concept map - July 2026</p>
+    <p style="margin-top:4px;">Screens grouped by intent, derived from the <a href="flows.html">flows</a> and jobs; navigation is the shortest path to the main job; the matrix proves coverage. The full site map with X.Y nodes and cards is the detail layer <a href="sitemap.html">Sitemap</a>.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+
+</main>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose', flowchart: { htmlLabels: true, curve: 'basis' } });
+</script>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link, a.nav-sub2-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var subSections = [
+    { id: 'concept', sub: 'sub-concept' },
+    { id: 'nav', sub: 'sub-nav' },
+    { id: 'matrix', sub: 'sub-matrix' }
+  ];
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        subSections.forEach(function(s) {
+          var el = document.getElementById(s.sub);
+          if (el) el.classList.remove('nav-sub-active');
+        });
+        var match = subSections.find(function(s) { return s.id === entry.target.id; });
+        if (match) {
+          var el = document.getElementById(match.sub);
+          if (el) el.classList.add('nav-sub-active');
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  subSections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
