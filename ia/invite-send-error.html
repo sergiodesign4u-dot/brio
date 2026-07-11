@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Resend or manage invite (6.1)</title>
+  <title>Brio - IA Detail: Invite-send error (3.3)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -102,36 +102,44 @@
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; text-align: center; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.danger { border-color: #9a5a5a; color: #e2b3b3; }
+    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
     .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
 
-    /* dialog over an inert, dimmed roster */
-    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; }
-    .wf-under { padding: 12px 14px; filter: blur(1px); opacity: 0.4; pointer-events: none; }
-    .wf-under .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-under .ln.s { width: 55%; }
-    .wf-under .mrow { display: flex; gap: 8px; align-items: center; border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px; margin-bottom: 6px; }
-    .wf-under .mrow .who { flex: 1; color: #8a8a8a; font-size: 11px; }
-    .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
-    .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .wf-modal { width: 300px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
-    .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
-    .wf-member { border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px 10px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-    .wf-member .who { color: #cfcfcf; font-size: 11px; flex: 1; }
-    .wf-member .status { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid #444; border-radius: 3px; padding: 1px 6px; color: #9a9a9a; }
-    .wf-acts { display: flex; flex-direction: column; gap: 8px; }
-    .wf-priv { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px 10px; color: #9a9a9a; font-size: 10px; margin-top: 10px; }
+    /* wizard shell */
+    .wf-wizpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-wizhead { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-prog { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+    .wf-prog .seg { width: 22px; height: 4px; border-radius: 2px; background: #333; }
+    .wf-prog .seg.on { background: #e6e6e6; }
+    .wf-prog .txt { font-size: 9px; color: #8a8a8a; font-family: ui-monospace, monospace; margin-left: 4px; }
+    .wf-wiz { max-width: 360px; margin: 0 auto; padding: 22px 18px; }
+    .wf-wiz .wh { color: #fff; font-size: 18px; font-weight: 800; }
+    .wf-wiz .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 16px; }
+    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 6px; }
+    .wf-micro { color: #8a8a8a; font-size: 10px; }
 
-    /* mobile bottom sheet */
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; position: relative; overflow: hidden; min-height: 300px; }
-    .wf-phone .top { padding: 10px; filter: blur(1px); opacity: 0.4; }
-    .wf-phone .top .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #101010; border-top: 1px solid #4a4a4a; border-radius: 14px 14px 0 0; padding: 14px; }
-    .wf-sheet .grab { width: 34px; height: 4px; background: #3a3a3a; border-radius: 3px; margin: 0 auto 10px; }
+    /* invite element (shared with 6.0) */
+    .wf-field { display: flex; align-items: center; gap: 8px; border: 1px solid #3a3a3a; border-radius: 6px; padding: 7px 10px; margin-bottom: 8px; }
+    .wf-field .val { color: #cfcfcf; font-size: 11px; font-family: ui-monospace, monospace; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .wf-field .val.ph { color: #6a6a6a; }
+    .wf-code { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.14em; font-family: ui-monospace, monospace; }
+    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; margin: 4px 0 14px; }
+
+    /* in-node inline-error panel (3.3, stays in-node) */
+    .wf-alert { border: 1px solid #6a6a6a; border-radius: 6px; padding: 12px; margin-bottom: 14px; background: #0e0e0e; }
+    .wf-alert .at { color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    .wf-alert .asub { color: #9a9a9a; font-size: 10px; margin-bottom: 10px; }
+    .wf-erow { display: flex; align-items: center; gap: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 6px 9px; margin-bottom: 6px; }
+    .wf-erow .em { flex: 1; font-family: ui-monospace, monospace; font-size: 11px; color: #cfcfcf; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .wf-tag { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid #7a7a7a; border-radius: 3px; padding: 1px 5px; color: #bbb; font-family: ui-monospace, monospace; white-space: nowrap; }
+    .wf-okstrip { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px solid #4a4a4a; border-radius: 6px; margin: 12px 0 14px; }
+
+    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
@@ -177,11 +185,11 @@
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
-      <a href="manage-invite.html" class="nav-sub-item nav-sub-active">Manage invite</a>
+      <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
-      <a href="invite-send-error.html" class="nav-sub-item">Invite-send error</a>
+      <a href="invite-send-error.html" class="nav-sub-item nav-sub-active">Invite-send error</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -202,50 +210,46 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 6.1</span>
-      <span class="badge">Dialog (0.5)</span>
-      <span class="badge privacy">Roster, not answers</span>
+      <span class="badge">Node 3.3</span>
+      <span class="badge">State (error)</span>
+      <span class="badge privacy">Never a dead-end (F1 MS3)</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Manage invite (6.1) &middot; dialog, opened from 6.0</div>
-    <h1>Resend or manage invite</h1>
-    <p class="hero-intro">A small dialog on the canonical 0.5 shell, opened from a member row in the roster (6.0). The operator resends an invite, copies its link, or revokes it, without leaving the roster. It is roster-identity administration only; it never touches answer identity. Inside the operator app, so noindex. Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Invite-send error (3.3) &middot; within wizard step 3 &middot; URL: /app/onboarding/invite</div>
+    <h1>Invite-send error</h1>
+    <p class="hero-intro">The error surface behind a failed email send in onboarding step 3. It names which invites did not go out, lets the operator fix and retry, and always keeps a way forward: the join link and code are unaffected, so a bad email can never block onboarding. It inherits 3.2's job coverage and closes cluster 3. Inside the operator app, so noindex. Source of truth: ia/docs/pages/invite-send-error.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
-    <div class="section-label">Dialog anatomy</div>
+    <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
+    <p>Block 1 is the first thing the operator reads on mobile. Order reasoned from the 360px baseline up. This is a state of wizard step 3, not a new screen, so the wizard shell and "Step 3 of 3" stay.</p>
     <ol>
-      <li><strong>Title</strong>: "Manage invite" plus the member's name or email, with a close control.</li>
-      <li><strong>Member summary</strong>: name or email and status (invited or joined). Roster identity only.</li>
-      <li><strong>Actions, by status</strong>: pending shows Resend, Copy link, Revoke; joined shows Remove from team.</li>
-      <li><strong>Privacy note</strong>: next to a destructive action, that this affects the roster, never answers.</li>
-      <li><strong>Dismiss</strong>: Cancel or close; Esc also closes.</li>
+      <li><strong>Error summary</strong>: a plain, non-alarming line stating how many invites did not send ("2 of 3 invites did not send"). No blame, no jargon.</li>
+      <li><strong>Failed list</strong>: the specific addresses that failed, each with a short reason hint and a per-row retry. A typo can be seen and fixed in place.</li>
+      <li><strong>Retry action</strong>: Retry failed (retries all still-failing rows). The primary corrective action.</li>
+      <li><strong>Reassurance (link and code still work)</strong>: the join link and code shown again with copy and a one-line note that they are unaffected. The guarantee onboarding is never blocked.</li>
+      <li><strong>Skip for now</strong>: a clearly visible way to dismiss the error and return to 3.2, where Finish still completes onboarding to 4.0. Failed people can be invited later from 6.0.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.5 Dialog / modal shell (this node is an instance of it). No new component; 6.1 is the already-registered 0.5 consumer that 6.0 opens.</p>
-  </section>
-
-  <!-- Privacy -->
-  <section id="privacy">
-    <div class="section-label">What managing an invite touches</div>
-    <h2>This manages the roster, not answers</h2>
-    <p>Managing or revoking an invite is roster-identity administration, which is allowed. It never reveals or touches answer identity. Removing a joined member affects future participation only; their past contributions were only ever aggregate and were never stored as an identifiable individual record, so there is nothing individual to expose or delete. The dialog states this plainly next to the destructive action.</p>
+    <p><strong>Components used:</strong> the in-node invite element from 6.0 / 3.2 (link and code, here as the still-works reassurance), the wizard shell from 3.0, and an in-node inline-error panel. No new global invented; the error panel stays in-node until a second consumer justifies promoting it.</p>
   </section>
 
   <!-- States -->
   <section id="states">
-    <div class="section-label">By invite status</div>
-    <h2>Variants and states</h2>
+    <div class="section-label">Retry, skip, and role</div>
+    <h2>States and primary CTA</h2>
+    <p>The never-a-dead-end rule is concrete here: Skip for now is available in every state, so a bad address can never trap the operator (main flow F1, milestone MS3).</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Pending invite (default)</td><td>member + status invited</td><td>Resend invite</td></tr>
-          <tr><td>Joined member</td><td>member + status joined</td><td>Remove from team (destructive)</td></tr>
-          <tr><td>Revoke / remove confirm</td><td>inline "Revoke this invite?" inside the same dialog</td><td>Confirm / Cancel</td></tr>
-          <tr><td>Sending</td><td>the action shows a sending state; dialog stays open</td><td>-</td></tr>
-          <tr><td>Success</td><td>"Invite resent"; dialog closes or updates the row</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not resend, retry"; dialog stays open</td><td>retry (MS4)</td></tr>
+          <tr><td>Default (error shown)</td><td>summary, failed list with per-row retry, still-works link and code</td><td>Retry failed / Skip for now (to 3.2)</td></tr>
+          <tr><td>Retrying</td><td>retried rows show a sending state; Skip stays available throughout</td><td>-</td></tr>
+          <tr><td>Retry success</td><td>cleared rows leave the list; when empty, back to 3.2 default</td><td>to 3.2 Invite team</td></tr>
+          <tr><td>Retry fails again</td><td>the row stays with its reason hint; Skip is still there</td><td>Retry / Skip for now</td></tr>
+          <tr><td>Skip for now</td><td>link and code still work; Finish in 3.2 completes onboarding</td><td>to 3.2 (then 4.0 Dashboard)</td></tr>
+          <tr><td>Back</td><td>to step 3 default</td><td>to 3.2 Invite team</td></tr>
+          <tr><td>Already onboarded / Guest</td><td>redirect</td><td>4.0 Dashboard / 2.1 Log in</td></tr>
         </tbody>
       </table>
     </div>
@@ -255,84 +259,84 @@
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The dialog is a 0.5 instance: a centered modal over an inert, dimmed roster on desktop, and a bottom sheet on mobile.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The failure is conveyed in text and a labelled tag, not by color. The same wizard shell as 3.2 carries an inline-error panel above the still-works link and code; the same content stacks in one column at the 360px baseline.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:300px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, pending invite (over an inert roster)</div>
-        <div class="wf-modal-scrim" style="min-height:300px;">
-          <div class="wf-under">
-            <div class="ln"></div><div class="ln s"></div>
-            <div class="mrow"><span class="who">Yemi O.</span><span class="wf-plain">Joined</span></div>
-            <div class="mrow"><span class="who">dev@company.com</span><span class="wf-plain">Invited</span></div>
+      <div style="flex:1;min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, wizard step 3, send error</div>
+        <div class="wf-wizpage">
+          <div class="wf-wizhead">
+            <span class="wf-logo">Brio</span>
+            <span class="wf-prog"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="txt">Step 3 of 3</span></span>
           </div>
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-modal-wrap">
-            <div class="wf-modal" role="dialog" aria-modal="true">
-              <div class="mtitle">Manage invite <span class="x">&times;</span></div>
-              <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-              <div class="wf-acts">
-                <span class="wf-b solid block">Resend invite</span>
-                <span class="wf-b block">Copy invite link</span>
-                <span class="wf-b danger block">Revoke invite</span>
-              </div>
-              <div class="wf-priv">Managing an invite touches the roster, never answers.</div>
+          <div class="wf-wiz">
+            <div class="wh">Some invites did not send</div>
+            <div class="sub">2 of 3 invites did not go out. You can fix and retry, or skip for now.</div>
+            <div class="wf-alert">
+              <div class="at">Did not send</div>
+              <div class="asub">These addresses could not be delivered.</div>
+              <div class="wf-erow"><span class="em">teamate@company.co</span><span class="wf-tag">Failed</span><span class="wf-b sm">Retry</span></div>
+              <div class="wf-erow"><span class="em">j.diaz@compnay.com</span><span class="wf-tag">Failed</span><span class="wf-b sm">Retry</span></div>
+              <span class="wf-b solid block" style="margin-top:8px;">Retry failed</span>
             </div>
+            <div class="wf-okstrip">Your join link and code still work. Share them anytime.</div>
+            <div class="wf-lbl">Join link</div>
+            <div class="wf-field"><span class="val">app.brio.co/join/ab12cd</span><span class="wf-b sm">Copy link</span></div>
+            <div class="wf-lbl">Join code</div>
+            <div class="wf-field"><span class="wf-plain">Code</span><span class="wf-code">AB12CD</span></div>
+            <div class="wf-micro" style="text-align:center;margin-top:12px;">Skip for now</div>
           </div>
         </div>
-        <div class="wf-note">0.5 contract: role="dialog", aria-modal, focus trap, Esc closes, background inert, focus returns to the opener.</div>
+        <div class="wf-note">failure in text + tag, no color &middot; per-row retry to fix a typo &middot; link and code unaffected &middot; Skip for now always present (never a dead-end).</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="top"><div class="ln"></div><div class="ln s"></div><div class="ln"></div></div>
-          <div class="wf-sheet">
-            <div class="grab"></div>
-            <div class="mtitle" style="display:flex;align-items:center;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px;">Manage invite</div>
-            <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-            <div class="wf-acts">
-              <span class="wf-b solid block">Resend invite</span>
-              <span class="wf-b block">Copy invite link</span>
-              <span class="wf-b danger block">Revoke invite</span>
+          <div class="wf-wizhead"><span class="wf-logo">Brio</span><span class="wf-prog"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></span></div>
+          <div class="wf-wiz" style="padding:16px 10px;">
+            <div class="wh" style="font-size:16px;">Some invites did not send</div>
+            <div class="wf-alert" style="margin-top:10px;">
+              <div class="at" style="font-size:12px;"><span class="wf-bnum">2</span>Did not send</div>
+              <div class="wf-erow"><span class="em">teamate@company.co</span><span class="wf-b sm">Retry</span></div>
+              <div class="wf-erow"><span class="em">j.diaz@compnay.com</span><span class="wf-b sm">Retry</span></div>
+              <span class="wf-b solid block" style="margin-top:8px;">Retry failed</span>
             </div>
+            <div class="wf-okstrip">Link and code still work.</div>
+            <div class="wf-lbl">code</div>
+            <div class="wf-field"><span class="wf-code">AB12CD</span><span class="wf-b sm">Copy</span></div>
+            <div class="wf-micro" style="text-align:center;margin-top:10px;">Skip for now</div>
           </div>
         </div>
-        <div class="wf-note">same actions, full-width sheet, comfortable targets.</div>
+        <div class="wf-note">same blocks, single column, Skip for now kept in view.</div>
       </div>
-    </div>
-
-    <div class="wf-frame" style="margin-top:22px;max-width:360px;">
-      <div class="wf-cap">Inline revoke confirm (no stacked modal)</div>
-      <div class="wf-modal" style="width:auto;">
-        <div class="mtitle">Revoke this invite?</div>
-        <div class="wf-plain" style="margin-bottom:12px;">The link and code stop working for this person. You can re-invite later.</div>
-        <div class="wf-acts" style="flex-direction:row;justify-content:flex-end;">
-          <span class="wf-b">Cancel</span>
-          <span class="wf-b danger">Revoke</span>
-        </div>
-      </div>
-      <div class="wf-note">the confirm replaces the actions inside the same 6.1 dialog; reversible (re-invite).</div>
     </div>
   </section>
 
-  <!-- a11y / noindex -->
+  <!-- SEO (noindex) -->
   <section id="seo">
     <div class="section-label">Private app zone</div>
-    <h2>Accessibility contract and noindex</h2>
-    <p>A dialog, not a page: no URL of its own, noindex, no schema, no SEO block. It inherits the 0.5 accessibility contract.</p>
+    <h2>SEO block (noindex)</h2>
+    <p>Invite-send error is a transactional, authenticated wizard state. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">role</span><span class="seo-v"><code>dialog</code>, <code>aria-modal="true"</code>, labelled by the title</span></div>
-      <div class="seo-row"><span class="seo-k">focus</span><span class="seo-v">moves into the dialog on open, trapped; returns to the opener on close</span></div>
-      <div class="seo-row"><span class="seo-k">dismiss</span><span class="seo-v">Esc closes; background is inert</span></div>
-      <div class="seo-row"><span class="seo-k">targets</span><span class="seo-v">destructive confirm is keyboard reachable and labelled; tap targets at least 44px</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/onboarding/invite</code> (error surfaced inline)</span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (transactional wizard state)</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
-    <div class="callout ok"><strong>Cluster 6 closed.</strong> Resend or manage invite is a pure 0.5 instance; it invents nothing and keeps roster identity separate from answer identity. Cluster 6 Team is complete (6.0 roster, 6.1 manage). Next: cluster 3, the onboarding wizard (3.0 to 3.3), the guided first run.</div>
+    <h3>In-app findability (not SEO, still specified)</h3>
+    <ul>
+      <li>exactly one H1 (the error heading) for the accessible document outline</li>
+      <li>the failed addresses and the join code and link are selectable text with labelled controls</li>
+      <li>the error is conveyed in text and a labelled tag, not by color alone</li>
+      <li>each retry and copy control is a labelled button; tap targets at least 44px</li>
+    </ul>
+    <div class="callout ok"><strong>Cluster 3 closed.</strong> Invite-send error reuses the in-node invite element from 6.0 and the wizard shell; the inline-error panel stays in-node. It guarantees main flow F1 never dead-ends at MS3: a failed email cannot block onboarding, because the link and code always work and Skip for now always finishes. Next cluster: <strong>2 Auth</strong> (Sign up, Log in, Magic-link sent, Invalid or expired link).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 6.1 Resend or manage invite - July 2026</p>
-    <p style="margin-top:4px;">A 0.5 dialog opened from the roster: resend, copy link, or revoke an invite, with an inline destructive confirm and a note that this touches the roster, never answers. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 3.3 Invite-send error - July 2026</p>
+    <p style="margin-top:4px;">The error state of wizard step 3: which email invites failed, retry or fix in place, with the join link and code unaffected and Skip for now always available, so onboarding is never a dead-end. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/invite-send-error.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
