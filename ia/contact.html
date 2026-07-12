@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Team roster (6.0)</title>
+  <title>Brio - IA Detail: Contact / Support (1.3)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -69,7 +69,7 @@
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
-    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
+    .badge.seo { background: var(--accent-warm-dim); color: var(--accent-warm); border-color: var(--accent-warm-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -96,6 +96,8 @@
     .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
     .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
     .seo-v code { font-size: 12px; }
+    .count { color: var(--text-faint); font-size: 11px; font-family: ui-monospace, monospace; }
+    .seo-text { background: var(--surface-2); border-left: 2px solid var(--accent); border-radius: 4px; padding: 12px 16px; color: var(--text-muted); font-size: 13.5px; margin: 12px 0; }
 
     /* ===== Black-and-white wireframe kit ===== */
     .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
@@ -103,50 +105,47 @@
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
-
-    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; }
-    .wf-nav .sp { margin-left: auto; }
-    .wf-tab { font-size: 11px; color: #9a9a9a; }
-    .wf-tab.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
+    .wf-b.sm { padding: 5px 10px; font-size: 10px; }
+    .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
+
+    /* public marketing chrome (reused from 0.0 / 1.0 / 1.1 / 1.2) */
+    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; flex-wrap: wrap; }
+    .wf-nav .sp { margin-left: auto; }
     .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
     .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
+    .wf-hl.s { width: 55%; height: 12px; }
+    .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
     .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-strip2 { text-align: center; font-size: 11px; color: #e0e0e0; padding: 9px; border: 1px dashed #4a4a4a; border-radius: 6px; }
+
+    /* contact form (reused auth/settings fields) */
+    .wf-field { margin-bottom: 9px; }
+    .wf-flabel { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.07em; font-family: ui-monospace, monospace; margin-bottom: 4px; }
+    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 9px 10px; color: #6a6a6a; font-size: 11px; }
+    .wf-input.area { min-height: 48px; }
+    .wf-help { display: flex; align-items: center; gap: 8px; border: 1px solid #333; border-radius: 7px; padding: 9px 11px; }
+    .wf-help .ht { flex: 1; font-size: 10px; color: #b8b8b8; }
+    .wf-email { font-size: 11px; color: #cfcfcf; font-family: ui-monospace, monospace; }
+    .wf-rt { font-size: 9.5px; color: #8a8a8a; }
+    .wf-privnote { display: flex; gap: 7px; align-items: flex-start; border: 1px solid #333; border-radius: 7px; padding: 8px 11px; font-size: 9px; color: #9a9a9a; }
+    .wf-privnote .lk { flex: 0 0 auto; font-size: 11px; }
+
+    /* submit success (2.2 confirmation pattern) */
+    .wf-confirm { text-align: center; padding: 12px 6px; }
+    .wf-check { width: 40px; height: 40px; border: 1px solid #6a6a6a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #e6e6e6; margin: 0 auto 9px; }
+    .wf-confirm .ct { color: #fff; font-size: 13px; font-weight: 700; }
+    .wf-confirm .cs { color: #9a9a9a; font-size: 10px; margin-top: 3px; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
     .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
-
-    /* invite block */
-    .wf-field { display: flex; align-items: center; gap: 8px; border: 1px solid #3a3a3a; border-radius: 6px; padding: 7px 10px; margin-bottom: 8px; }
-    .wf-field .val { color: #cfcfcf; font-size: 11px; font-family: ui-monospace, monospace; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .wf-field .val.ph { color: #6a6a6a; }
-    .wf-code { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.14em; font-family: ui-monospace, monospace; }
-    .wf-metric { color: #fff; font-size: 13px; font-weight: 700; }
-    .wf-metric span { color: #9a9a9a; font-weight: 400; font-size: 11px; }
-    .wf-strip2 { text-align: center; font-size: 10.5px; color: #cfcfcf; padding: 8px; border: 1px dashed #4a4a4a; border-radius: 6px; margin-top: 8px; }
-
-    /* member rows */
-    .wf-mrow { display: flex; align-items: center; gap: 10px; border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px 10px; margin-bottom: 6px; }
-    .wf-mrow .who { color: #cfcfcf; font-size: 11px; flex: 1; }
-    .wf-mrow .status { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid #444; border-radius: 3px; padding: 1px 6px; color: #9a9a9a; }
-    .wf-mrow .status.joined { border-color: #7a7a7a; color: #e0e0e0; }
-
-    /* privacy wall */
-    .wf-wall { border: 1px solid #5a5a5a; border-radius: 8px; padding: 12px; background: #121212; }
-    .wf-wall .ph { color: #fff; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
-    .wf-wall .two { display: flex; gap: 10px; }
-    .wf-wall .col { flex: 1; border: 1px solid #333; border-radius: 6px; padding: 8px; font-size: 10.5px; color: #b6b6b6; }
-    .wf-wall .col .h { color: #fff; font-size: 10px; font-weight: 700; margin-bottom: 3px; }
-    .wf-wall .col.no { border-style: dashed; }
-    @media (max-width: 420px) { .wf-wall .two { flex-direction: column; } }
-
-    .wf-state { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 16px; text-align: center; color: #cfcfcf; font-size: 12px; }
-    .wf-state .n { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
-    .wf-state .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 10px; }
   </style>
 </head>
 <body>
@@ -191,7 +190,7 @@
       <a href="dashboard.html" class="nav-sub-item">Dashboard</a>
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
-      <a href="team-roster.html" class="nav-sub-item nav-sub-active">Team roster</a>
+      <a href="team-roster.html" class="nav-sub-item">Team roster</a>
       <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
@@ -222,7 +221,7 @@
       <a href="pricing.html" class="nav-sub-item">Pricing</a>
       <a href="security-privacy.html" class="nav-sub-item">Security and privacy</a>
       <a href="about.html" class="nav-sub-item">About</a>
-      <a href="contact.html" class="nav-sub-item">Contact / Support</a>
+      <a href="contact.html" class="nav-sub-item nav-sub-active">Contact / Support</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -243,169 +242,165 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 6.0</span>
-      <span class="badge">Page</span>
-      <span class="badge privacy">Roster is not answers</span>
+      <span class="badge">Node 1.3</span>
+      <span class="badge">Public marketing</span>
+      <span class="badge seo">Indexed &middot; full A-E SEO</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Team roster (6.0) &middot; URL: /app/team</div>
-    <h1>Team roster</h1>
-    <p class="hero-intro">The operator invites the team, sees who is in, and reads how much of the team takes part, all without ever learning who answered. The roster knows who is on the team because the operator invited them; it is never linked to who answered a check-in. Serves the main job and inviting the team. Inside the operator app, so noindex. Source of truth: ia/docs/pages/team-roster.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Contact / Support (1.3) &middot; URL: /contact</div>
+    <h1>Contact / Support</h1>
+    <p class="hero-intro">The supporting reachability page: a help-first deflection to 1.4, a simple contact form, a direct support email, and a response-time note, so a user can reach Brio with clear expectations. Messages here are support requests, not wellbeing data, kept separate from the private check-ins. Indexed, with a full A to E SEO block and the ContactPage schema. Support email and SLA are a hypothesis pending. For Priya the operator. Serves supporting reachability. Source of truth: ia/docs/pages/contact.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
+    <p>Help first, then a plain form and a direct email, with expectations set. The page's job is reachability, so the form and the email are the strongest elements.</p>
     <ol>
-      <li><strong>Nav + header</strong> (0.1 operator, Team active): H1 "Your team", subhead with team size.</li>
-      <li><strong>Invite block</strong>: the join link with a copy control, the join code, and an email-invite field. Same mechanism as 3.2, standalone here.</li>
-      <li><strong>Team size + participation</strong>: invited and joined counts, and the participation rate as a share ("72% answered"), never who; follows the D1 no-live-count rule.</li>
-      <li><strong>Members list</strong>: invited members with name or email and a status (invited or joined), each with resend or manage (to 6.1). Invite identity only, never connected to answers.</li>
-      <li><strong>Privacy boundary callout</strong>: the wall between roster identity and answer identity (see below).</li>
-      <li><strong>App shell footer</strong> (minimal): privacy link (1.1) and help.</li>
+      <li><strong>Public nav</strong> (0.1 pre-auth): the Brio mark, marketing links, Log in, Start free. No job tabs.</li>
+      <li><strong>Hero</strong>: H1 "Get in touch", a subhead. The LCP is the heading text.</li>
+      <li><strong>Help first</strong>: "most answers are in Help", with a link to 1.4, the faster path.</li>
+      <li><strong>Send us a message</strong>: a simple form (name, email, message), reusing the auth and settings inputs; success shows a confirmation (2.2 pattern).</li>
+      <li><strong>Email us directly</strong>: the support email as an alternative. <strong>When we reply</strong>: a response-time note (~1 business day <strong>[?]</strong>).</li>
+      <li><strong>Privacy note</strong>: messages here are support requests, not wellbeing data. <strong>CTA band</strong> + <strong>Footer</strong> (0.2).</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation, 0.3 Privacy-disclosure (condensed), 0.5 Dialog (via the 6.1 manage dialog). The invite block and members list are thin in-node elements. No new global invented.</p>
-  </section>
-
-  <!-- The wall -->
-  <section id="wall">
-    <div class="section-label">The make-or-break boundary</div>
-    <h2>Roster identity is not answer identity</h2>
-    <p>Two kinds of "who" exist on this page, and only one is ever visible.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Kind of "who"</th><th>Visible?</th><th>What it is</th></tr></thead>
-        <tbody>
-          <tr><td>Roster identity</td><td>Yes</td><td>who is on the team; the operator invited them, so name or email and an invited/joined status show</td></tr>
-          <tr><td>Answer identity</td><td>Never</td><td>who answered a check-in, and what they said; never shown, never linked to the roster, cannot be derived</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p>The members list and the participation rate sit on the same page but are never joined. The operator can see that a person is on the team and that 72% of the team answered, but never that that person answered, or what they said.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Data, privacy math, and role</div>
-    <h2>States and primary CTA</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
-        <tbody>
-          <tr><td>Default (has members)</td><td>invite block, participation share, members list with statuses</td><td>Invite (copy link / send)</td></tr>
-          <tr><td>Empty (first run)</td><td>just the invite block, "Invite your team to get started"</td><td>Copy join link</td></tr>
-          <tr><td>Pending invites</td><td>members show invited status</td><td>Resend (to 6.1)</td></tr>
-          <tr><td>Open cycle (D1)</td><td>participation shows "results after the cycle closes", no live count</td><td>-</td></tr>
-          <tr><td>Loading / Error</td><td>skeleton / "Could not load your team, retry"</td><td>retry or back to 4.0 (MS4)</td></tr>
-          <tr><td>Guest / Owner</td><td>redirect</td><td>2.1 Log in / 9.0 Owner dashboard</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p><strong>Components used:</strong> 0.1 Navigation (public), 0.2 Footer, the auth and settings inputs (wf-field, wf-input), and the 2.2 confirmation pattern for the submit success. No new global; the support email and SLA are a hypothesis pending.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The invite block and participation lead; the members list follows. All collapses to one column at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the contact page; mobile stacks the same blocks; the third frame is the submit confirmation (the 2.2 pattern).</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, default</div>
+      <div style="flex:1; min-width:300px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, contact page (guest)</div>
         <div class="wf-page">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab on">Team</span><span class="wf-tab">Owner</span><span class="sp"></span><span class="wf-plain">Settings</span></div>
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Pricing</span><span class="wf-plain">Security</span><span class="wf-plain">About</span><span class="sp"></span><span class="wf-b sm">Log in</span><span class="wf-b solid sm">Start free</span></div>
           <div class="wf-sec">
-            <div class="lbl">1 &middot; header (H1)</div>
-            <div class="wf-metric">Your team <span>&middot; 12 invited, 9 joined</span></div>
+            <div class="lbl">2 &middot; hero (H1)</div>
+            <div class="wf-hl"></div><div class="wf-hl s"></div>
           </div>
           <div class="wf-sec">
-            <div class="lbl">2 &middot; invite block</div>
-            <div class="wf-field"><span class="val">app.brio.co/join/ab12cd</span><span class="wf-b sm">Copy link</span></div>
-            <div class="wf-field"><span class="wf-plain">Join code</span><span class="wf-code">AB12CD</span></div>
-            <div class="wf-field"><span class="val ph">teammate@company.com</span><span class="wf-b sm solid">Send</span></div>
+            <div class="lbl">3 &middot; help first (to 1.4)</div>
+            <div class="wf-help"><span class="ht">Most answers are in Help, from setup to privacy to billing.</span><span class="wf-b sm">Go to Help</span></div>
           </div>
           <div class="wf-sec">
-            <div class="lbl">3 &middot; participation (aggregate)</div>
-            <div class="wf-metric">72% <span>of the team answered this cycle</span></div>
-            <div class="wf-strip2">A share of the whole team. Never who answered.</div>
+            <div class="lbl">4 &middot; send us a message (form)</div>
+            <div class="wf-field"><div class="wf-flabel">Your name</div><div class="wf-input">Priya Nair</div></div>
+            <div class="wf-field"><div class="wf-flabel">Email</div><div class="wf-input">you@company.com</div></div>
+            <div class="wf-field"><div class="wf-flabel">Message</div><div class="wf-input area">How can we help?</div></div>
+            <span class="wf-b solid block sm">Send message</span>
           </div>
           <div class="wf-sec">
-            <div class="lbl">4 &middot; members (invite identity only)</div>
-            <div class="wf-mrow"><span class="who">Yemi O.</span><span class="status joined">Joined</span><span class="wf-b sm">Manage</span></div>
-            <div class="wf-mrow"><span class="who">Sam R.</span><span class="status joined">Joined</span><span class="wf-b sm">Manage</span></div>
-            <div class="wf-mrow"><span class="who">dev@company.com</span><span class="status">Invited</span><span class="wf-b sm">Resend</span></div>
+            <div class="lbl">5 &middot; email us directly &middot; when we reply</div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;"><span class="wf-email">support@brio.[?]</span><span class="wf-rt">We reply within about 1 business day <span class="hyp" style="font-size:9px;">?</span></span></div>
           </div>
           <div class="wf-sec">
-            <div class="lbl">5 &middot; privacy boundary</div>
-            <div class="wf-wall">
-              <div class="ph">The wall</div>
-              <div class="two">
-                <div class="col"><div class="h">On the team</div>who you invited (shown)</div>
-                <div class="col no"><div class="h">Who answered</div>never shown, never linked</div>
-              </div>
-            </div>
+            <div class="lbl">6 &middot; privacy note</div>
+            <div class="wf-privnote"><span class="lk">&#128274;</span><span>Messages here are support requests, not wellbeing data. They are handled separately from the private check-ins.</span></div>
           </div>
-          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
+          <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
+          <div class="wf-foot-mini"><span>Product</span><span>Company</span><span>Resources</span><span>Legal</span></div>
         </div>
-        <div class="wf-note">members = who you invited &middot; participation = a share, never who &middot; the two are never joined &middot; targets min 44px.</div>
+        <div class="wf-note">public chrome &middot; help-first deflect to 1.4 &middot; simple form (auth/settings inputs) &middot; direct email + response-time &middot; support requests kept separate from wellbeing data.</div>
       </div>
 
       <div>
         <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-tab on">Team</span></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">1</span>header</div><div class="wf-metric">Your team <span>12 / 9</span></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>invite</div>
-            <div class="wf-field"><span class="val">.../join/ab12cd</span><span class="wf-b sm">Copy</span></div>
-            <div class="wf-field"><span class="wf-plain">Code</span><span class="wf-code">AB12CD</span></div>
+          <div class="wf-phoneinner">
+            <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-b solid sm">Start free</span></div>
+            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>hero</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
+            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>help first</div><div class="wf-help"><span class="ht">Most answers are in Help.</span><span class="wf-b sm">Help</span></div></div>
+            <div class="wf-sec">
+              <div class="lbl"><span class="wf-bnum">4</span>message</div>
+              <div class="wf-field"><div class="wf-flabel">Name</div><div class="wf-input">Priya Nair</div></div>
+              <div class="wf-field"><div class="wf-flabel">Email</div><div class="wf-input">you@company.com</div></div>
+              <div class="wf-field"><div class="wf-flabel">Message</div><div class="wf-input area">How can we help?</div></div>
+              <span class="wf-b solid block sm">Send message</span>
+            </div>
+            <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
+            <div class="wf-foot-mini"><span>Footer (accordions)</span></div>
           </div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>participation</div><div class="wf-metric">72% <span>answered</span></div></div>
-          <div class="wf-sec"><div class="lbl"><span class="wf-bnum">4</span>members</div>
-            <div class="wf-mrow"><span class="who">Yemi O.</span><span class="status joined">Joined</span></div>
-            <div class="wf-mrow"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-          </div>
-          <div class="wf-foot-mini"><span>Privacy</span><span>Help</span></div>
         </div>
-        <div class="wf-note">same blocks, single column, copy-link high.</div>
+        <div class="wf-note">same blocks stacked &middot; form fields full width &middot; thumb-reachable Send.</div>
       </div>
-    </div>
 
-    <div class="wf-frame" style="margin-top:22px;">
-      <div class="wf-cap">Open cycle &middot; participation follows D1 (no live count)</div>
-      <div class="wf-state">
-        <div class="n">Results appear after the cycle closes</div>
-        <div class="sub">No running count of who has answered, for anyone, while the cycle is open.</div>
-        <span class="wf-plain">consistent with 4.4 on the dashboard</span>
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Message sent (2.2 confirmation)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-b solid sm">Start free</span></div>
+            <div class="wf-sec">
+              <div class="wf-confirm">
+                <div class="wf-check">&#10003;</div>
+                <div class="ct">Message sent</div>
+                <div class="cs">We will reply to your email, usually within 1 business day.</div>
+              </div>
+            </div>
+            <div class="wf-sec"><div class="wf-help"><span class="ht">While you wait, Help may have your answer.</span><span class="wf-b sm">Help</span></div></div>
+            <div class="wf-foot-mini"><span>Footer</span></div>
+          </div>
+        </div>
+        <div class="wf-note">reuses the 2.2 confirmation layout &middot; on error the form stays filled (never a dead-end).</div>
       </div>
-      <div class="wf-note">the roster respects no-live-count too; the share only appears after close at minimum-N.</div>
     </div>
   </section>
 
-  <!-- SEO (noindex) -->
+  <!-- SEO A-E -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
-    <h2>SEO block (noindex)</h2>
-    <p>Team roster is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <div class="section-label">Structure SEO, ready copy</div>
+    <h2>SEO block A to E (indexed)</h2>
+    <p>Contact is indexed. Copy is ready; the support email and response-time SLA are <span class="hyp">?</span> pending; final query volumes deferred to production <span class="hyp">?</span>.</p>
+
+    <h3>A. Meta tags</h3>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/team</code></span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (not a public landing page)</span></div>
-      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
+      <div class="seo-row"><span class="seo-k">title</span><span class="seo-v"><code>Contact Brio support | Brio</code> <span class="count">26 / 60</span></span></div>
+      <div class="seo-row"><span class="seo-k">description</span><span class="seo-v"><code>Contact Brio support. Check Help for quick answers, or send a message and we will reply to your email, usually within one business day.</code> <span class="count">135 / 155</span></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v"><code>https://[production-domain]/contact</code> <span class="hyp">? domain</span></span></div>
+      <div class="seo-row"><span class="seo-k">hreflang</span><span class="seo-v">en-US (primary), en-GB (UK) <span class="hyp">?</span></span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>index, follow</code></span></div>
+      <div class="seo-row"><span class="seo-k">open graph</span><span class="seo-v">og:title, og:description, og:type=website, og:url, og:image <span class="hyp">? asset at Concept</span></span></div>
+      <div class="seo-row"><span class="seo-k">twitter</span><span class="seo-v"><code>summary_large_image</code></span></div>
     </div>
-    <h3>In-app findability (not SEO, still specified)</h3>
+
+    <h3>B. Heading structure</h3>
+    <p>Exactly one H1, then H2s in block order.</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">H1</span><span class="seo-v"><code>Get in touch</code></span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Check Help first</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Send us a message</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Email us directly</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">When we reply</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Start free in five minutes</span></div>
+    </div>
+
+    <h3>C. Ready SEO text</h3>
+    <div class="seo-text">Have a question about Brio? Many answers are in Help, from setup to privacy to billing, so it is worth a look first. If you still need us, send a message with the form or email support directly, and we will reply to your email, usually within one business day. Messages here are support requests, not wellbeing data; they are handled separately from the private, aggregate-only check-ins.</div>
+
+    <h3>D. Structured data (schema.org)</h3>
     <ul>
-      <li>exactly one H1 ("Your team") for the accessible document outline</li>
-      <li>the join code and link are selectable text with labeled copy controls</li>
-      <li>the members list is a real list with a status per row in text, not color-only</li>
-      <li>the participation share has a text label; tap targets at least 44px</li>
+      <li><code>ContactPage</code>: name, url, description</li>
+      <li><code>Organization</code> with <code>contactPoint</code> (email, contactType customer support) <span class="hyp">? email pending</span></li>
+      <li><code>BreadcrumbList</code>: Home, Contact</li>
     </ul>
-    <div class="callout ok"><strong>Reuse only, wall intact.</strong> Team roster reuses 0.1, 0.3, and 0.5 (via 6.1) and invents nothing global; the invite block and members list are thin in-node elements. It respects the D1 no-live-count rule and keeps roster identity and answer identity strictly apart. Next: <strong>6.1 Resend or manage invite</strong> (the small 0.5 dialog), then cluster 3, the onboarding wizard.</div>
+
+    <h3>E. Optimization checklist</h3>
+    <ul>
+      <li>exactly one H1; the LCP is the hero heading text, not an image</li>
+      <li>the form fields are labelled inputs; validation hints are text, not color alone</li>
+      <li>the support email is real text and matches the schema contactPoint; nav and footer links are crawlable <code>&lt;a&gt;</code></li>
+      <li>canonical and hreflang set; internal links to 1.4 Help, 0.0 Landing, 2.0 Sign up</li>
+      <li>Core Web Vitals budget respected; final SLA and support email deferred to production <span class="hyp">?</span></li>
+    </ul>
+    <div class="callout ok"><strong>Reachable, with expectations set.</strong> Contact offers a help-first deflection to 1.4, a simple form, a direct email, and a response-time note, in the public chrome, with a full A to E SEO block and the ContactPage schema. It reuses the public chrome, the auth and settings inputs, and the 2.2 confirmation, and invents nothing global. Next: <strong>1.4 Help / FAQ</strong> (also an SEO surface), then 1.5 Segment landing and 1.6 Legal.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 6.0 Team roster - July 2026</p>
-    <p style="margin-top:4px;">Invite the team, see who is in, read participation as a share, all without learning who answered. The roster is invite identity only, never linked to check-in answers, and participation follows the D1 no-live-count rule. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/team-roster.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 1.3 Contact / Support - July 2026</p>
+    <p style="margin-top:4px;">The supporting reachability page: a help-first deflection to 1.4, a simple contact form (auth and settings inputs), a direct support email, and a response-time note, in the public chrome, with a full A to E SEO block and the ContactPage schema. The submit success reuses the 2.2 confirmation; on error the form stays filled. Support email and SLA are a hypothesis pending. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/contact.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
