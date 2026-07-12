@@ -369,7 +369,7 @@
         <div><span class="node-num">0.5</span><span class="node-type">dialog</span></div>
         <div class="node-name">Dialog / modal shell</div>
         <div class="node-inc"><strong>Includes:</strong> overlay (inert, dimmed backdrop), container (role="dialog", aria-modal), header (title, close X), body slot, footer (primary + secondary or cancel), dismiss (X / Esc / backdrop). Variants: form, decision, destructive confirm, non-modal banner. States: default, loading, error, success.</div>
-        <div class="node-trans">&rarr; reused by 6.1, 7.2, 11.3, and every confirmation; focus trap, focus returns to opener on close</div>
+        <div class="node-trans">&rarr; reused by 5.1, 6.1, 7.2, 8.4, 11.3, and every confirmation; focus trap, focus returns to opener on close</div>
       </div>
       <div class="node-card">
         <div><span class="node-num">0.6</span><span class="node-type">section</span></div>
@@ -460,6 +460,12 @@
         <div class="node-name">Invalid or expired link</div>
         <div class="node-inc"><strong>Includes:</strong> explanation, "request a new link" CTA. Error state, never a dead-end.</div>
         <div class="node-trans">&rarr; 2.1 Log in</div>
+      </div>
+      <div class="node-card">
+        <div><span class="node-num">2.4</span><span class="node-type">page</span></div>
+        <div class="node-name">Reset password</div>
+        <div class="node-inc"><strong>Includes:</strong> new + confirm password, length-first requirements hint (shape + text), Set new password, signs out other devices. Tokened, noindex nofollow. Reached from the reset email.</div>
+        <div class="node-trans">&rarr; 2.1 Log in (on success), 2.3 Invalid or expired link (stale token)</div>
       </div>
     </div>
   </section>
@@ -793,7 +799,7 @@
 
   <footer>
     <p>Brio - Information Architecture, Detail Layer, Site map - July 2026</p>
-    <p style="margin-top:4px;">The full site map: a tree of the 11 clusters plus per-node cards (X.Y, type, includes, transitions). It expands the base <a href="concept.html">Concept map</a>; states and page copy live on the individual node pages. See also the <a href="flows.html">Flows</a>.</p>
+    <p style="margin-top:4px;">The full site map: a tree of the twelve clusters plus per-node cards (X.Y, type, includes, transitions). It expands the base <a href="concept.html">Concept map</a>; states and page copy live on the individual node pages. See also the <a href="flows.html">Flows</a>.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 

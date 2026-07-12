@@ -22,7 +22,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 | Foundation Research | Done (competitors, benchmark, Lean UX Canvas, AARRR, UX patterns, research synthesis, research.html) |
 | User Research (Personas + JTBD) | Done (personas, jobs to be done, JTBD matrix, MVP core, personas.html, jtbd.html) |
 | CJM (As-Is + To-Be) | Done (customer journey map As-Is + To-Be, emotional curve, backlog, cjm-as-is.html, cjm-to-be.html) |
-| Information Architecture (Basic + Detailed) | In progress (Base Layer done: Flows + Concept map, ia/flows.html + ia/concept.html. Detail layer in progress: Sitemap + nodes, ia/sitemap.html) |
+| Information Architecture (Basic + Detailed) | Done (Base Layer: Flows + Concept map, ia/flows.html + ia/concept.html. Detail Layer: Sitemap + all node specs and B/W wireframes, ia/sitemap.html + ia/docs/pages/ + ia/<node>.html) |
 | Wireframes | Not started |
 | Voice | Not started |
 | Concept | Not started |

@@ -68,7 +68,7 @@ INCLUDES: title · category (from 0.6) · cadence and duration · short descript
 
 **0.5 Dialog / modal shell** · dialog (global, canonical shell) · supporting; one accessible modal contract
 INCLUDES: overlay (inert, dimmed backdrop) · container (role="dialog", aria-modal) · header (title = accessible name, close X) · body slot · footer (primary + secondary or cancel) · dismiss (X / Esc / backdrop). Variants: form (6.1), decision (7.2), destructive confirm, non-modal banner (11.3). States: default, loading, error, success. Full spec: ia/docs/pages/dialog.md
-→ reused by 5.1 (End program confirm), 6.1, 7.2, 11.3, and every confirmation; focus trap, focus returns to opener on close
+→ reused by 5.1 (End program confirm), 6.1, 7.2, 8.4, 11.3, and every confirmation; focus trap, focus returns to opener on close
 
 **0.6 Canonical lists** · section (global reference) · supporting; single source for repeated values
 INCLUDES: program categories (mental health / physical / financial / social) · plan tiers (Free / Starter / Growth, prices [?]) · company-size buckets (cut points [?]) · input types (emoji / slider) · cadence (weekly) · statuses (program draft/active/ended, cycle open/closed). Full spec: ia/docs/pages/canonical-lists.md
@@ -127,6 +127,10 @@ INCLUDES: "check your email" confirmation · resend · open-mail hint
 **2.3 Invalid or expired link** · state (error) · supporting, never a dead-end
 INCLUDES: explanation · "request a new link" CTA
 → 2.1 Log in
+
+**2.4 Reset password** · page · supporting (return access; the screen reached from the reset email)
+INCLUDES: new + confirm password · length-first requirements hint (shape + text) · Set new password · signs out other devices · tokened, noindex nofollow
+→ 2.1 Log in (on success) · 2.3 Invalid or expired link (on a stale token)
 
 ### Cluster 3 - Onboarding, guided first-run wizard  [P]
 
