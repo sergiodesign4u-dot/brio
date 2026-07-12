@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Company setup (3.0)</title>
+  <title>Brio - IA Detail: Submit error (10.6)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -106,29 +106,35 @@
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
     .wf-b.block { display: block; }
-    .wf-b.disabled { border-style: dashed; color: #6a6a6a; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* wizard shell */
-    .wf-wizpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-wizhead { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; }
-    .wf-prog { margin-left: auto; display: flex; align-items: center; gap: 6px; }
-    .wf-prog .seg { width: 22px; height: 4px; border-radius: 2px; background: #333; }
-    .wf-prog .seg.on { background: #e6e6e6; }
-    .wf-prog .txt { font-size: 9px; color: #8a8a8a; font-family: ui-monospace, monospace; margin-left: 4px; }
-    .wf-wiz { max-width: 360px; margin: 0 auto; padding: 22px 18px; }
-    .wf-wiz .wh { color: #fff; font-size: 18px; font-weight: 800; }
-    .wf-wiz .sub { color: #9a9a9a; font-size: 11px; margin: 4px 0 16px; }
-    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 6px; }
-    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 9px 10px; color: #cfcfcf; font-size: 11px; margin-bottom: 16px; }
-    .wf-input.ph { color: #6a6a6a; }
-    .wf-sizes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-    .wf-size { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px; text-align: center; color: #9a9a9a; font-size: 11px; }
-    .wf-size.on { border-color: #fff; color: #fff; background: #161616; }
-    .wf-micro { color: #8a8a8a; font-size: 10px; margin: 6px 0 16px; }
+    /* employee check-in surface (mobile, no nav, near-anonymous) */
+    .wf-checkbar { padding: 9px 12px 8px; border-bottom: 1px solid #2c2c2c; text-align: center; }
+    .wf-checkbar .co { color: #8a8a8a; font-size: 9px; font-family: ui-monospace, monospace; }
+    .wf-minianon { display: inline-flex; align-items: center; gap: 4px; font-size: 8px; color: #9a9a9a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-top: 3px; }
+    .wf-checkbody { padding: 22px 16px 20px; text-align: center; }
 
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
-    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
+    /* attention badge (10.4 treatment): dashed "!" = error without color */
+    .wf-check { width: 50px; height: 50px; border: 1px solid #6a6a6a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 21px; color: #e6e6e6; margin: 0 auto 14px; }
+    .wf-check.attn { border-style: dashed; font-weight: 800; }
+    .wf-etitle { color: #fff; font-size: 17px; font-weight: 800; margin-bottom: 6px; }
+    .wf-expl { color: #9a9a9a; font-size: 11px; line-height: 1.55; margin-bottom: 14px; }
+
+    /* answers-saved reassurance (the key point of the state) */
+    .wf-reassure { display: flex; align-items: flex-start; gap: 8px; text-align: left; border: 1px solid #6a6a6a; border-radius: 8px; padding: 10px 11px; margin-bottom: 10px; }
+    .wf-reassure .lk { flex: 0 0 auto; font-size: 13px; color: #e6e6e6; }
+    .wf-reassure .tx { font-size: 10.5px; color: #b8b8b8; line-height: 1.5; }
+    .wf-reassure .tx b { color: #fff; font-weight: 700; }
+    .wf-held { display: inline-flex; align-items: center; gap: 6px; font-size: 9px; color: #cfcfcf; border: 1px solid #444; border-radius: 100px; padding: 3px 9px; margin-bottom: 16px; font-family: ui-monospace, monospace; }
+    .wf-held .ck { color: #e6e6e6; }
+
+    .wf-cta { margin-top: 2px; }
+    .wf-fallback { font-size: 10px; color: #6a6a6a; font-family: ui-monospace, monospace; margin-top: 12px; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
+    .wf-deskcard { max-width: 440px; margin: 0 auto; border: 1px solid #3a3a3a; border-radius: 12px; overflow: hidden; background: #0c0c0c; }
   </style>
 </head>
 <body>
@@ -175,7 +181,7 @@
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
       <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
-      <a href="onboarding-company.html" class="nav-sub-item nav-sub-active">Company setup</a>
+      <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
       <a href="invite-send-error.html" class="nav-sub-item">Invite-send error</a>
@@ -195,7 +201,7 @@
       <a href="checkin-complete.html" class="nav-sub-item">Check-in complete</a>
       <a href="checkin-expired.html" class="nav-sub-item">Invite link expired</a>
       <a href="checkin-already.html" class="nav-sub-item">Already submitted</a>
-      <a href="checkin-submit-error.html" class="nav-sub-item">Submit error</a>
+      <a href="checkin-submit-error.html" class="nav-sub-item nav-sub-active">Submit error</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -216,134 +222,124 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 3.0</span>
-      <span class="badge">Wizard step 1 of 3</span>
-      <span class="badge">B/W wireframe</span>
+      <span class="badge">Node 10.6</span>
+      <span class="badge">Employee flow (mobile)</span>
+      <span class="badge privacy">Recovery &middot; answers preserved</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Company setup (3.0) &middot; URL: /app/onboarding/company</div>
-    <h1>Company setup</h1>
-    <p class="hero-intro">The first step of the guided first run: name the company and pick its size, because the size pre-selects a fitting first program on the next step. The onboarding is a linear, one-time wizard under five minutes, sequential depth, not navigational depth. Serves J6 and the opinionated onboarding. Inside the operator app, so noindex. Source of truth: ia/docs/pages/onboarding-company.md.</p>
-  </section>
-
-  <!-- Wizard shell -->
-  <section id="shell">
-    <div class="section-label">Defined here, reused by 3.0 to 3.2</div>
-    <h2>The wizard shell</h2>
-    <p>The onboarding steps share a minimal chrome, defined in-node because it is thin and used only by cluster 3: a slim header with the Brio mark and a "Step N of 3" progress indicator, a single centered column, and one primary action per step. It deliberately omits the operator app's four job tabs, so the first run is a focused line, not a place to wander. This is "sequential depth, not navigational depth" made concrete.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Submit error (10.6) &middot; URL: /c/{invite-token} (submit-error state)</div>
+    <h1>Submit error</h1>
+    <p class="hero-intro">The failure-at-submit case: the 10.2 submit did not go through (a connection drop or a server error), so the answers are kept and it is recovered with a one-tap Try again, never a dead-end. It is the employee-side twin of the operator "could not save, the form stays filled" rule at 5.2 and 3.3. For Yemi the employee. Serves J4 and the F2 no-dead-end rule. Closes cluster 10. Private token-gated surface, so noindex. Source of truth: ia/docs/pages/checkin-submit-error.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up.</p>
+    <p>Even the failure keeps the calm near-anonymous surface, with the anonymity anchor present. The whole point is the answers-saved reassurance: the employee never has to answer twice.</p>
     <ol>
-      <li><strong>Wizard header</strong>: the Brio mark and the "Step 1 of 3" progress indicator.</li>
-      <li><strong>Welcome</strong>: a short, warm line with the time budget ("Let's set up wellbeing for your team. It takes about five minutes.").</li>
-      <li><strong>Company name</strong>: a single text field.</li>
-      <li><strong>Company-size selector</strong>: the size buckets from 0.6. The pivotal input; it pre-selects the first program on 3.1.</li>
-      <li><strong>Why we ask</strong>: one micro-line, "Your size helps us pick a first program that fits."</li>
-      <li><strong>Primary action</strong>: Continue, to 3.1.</li>
+      <li><strong>Minimal top bar with the anonymity anchor</strong>: the Brio mark, the company name, and the "Anonymous" reminder.</li>
+      <li><strong>Attention mark</strong>: a dashed badge with an "!" (not a check), so the error reads without relying on color (the 10.4 treatment).</li>
+      <li><strong>Plain, non-blaming explanation</strong>: "We could not send your answers", with a one-line honest reason (a connection problem, or something on our side).</li>
+      <li><strong>The key reassurance, answers preserved</strong>: a clear line and a small "answers saved" indicator that the entered answers are held on this screen and nothing was lost.</li>
+      <li><strong>Try again</strong>: the primary action, which re-submits the saved answers (back into 10.2, no re-entry). A quiet "still not working? give it a moment" fallback.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.6 Canonical lists (company-size buckets). The wizard shell, company-name field, and size selector are thin in-node elements. No new global invented.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Validation, entry, and role</div>
-    <h2>States and primary CTA</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Continue</th></tr></thead>
-        <tbody>
-          <tr><td>Default (step 1)</td><td>empty name, no size selected</td><td>disabled until name entered and size chosen</td></tr>
-          <tr><td>Validation</td><td>name required; size required (drives pre-selection)</td><td>enabled when valid</td></tr>
-          <tr><td>Saving</td><td>Continue shows a saving state, then advances</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not save, retry"; values kept</td><td>retry (MS4)</td></tr>
-          <tr><td>Already onboarded</td><td>the wizard runs once</td><td>redirect to 4.0 Dashboard</td></tr>
-          <tr><td>Guest</td><td>post-signup only</td><td>redirect to 2.1 Log in</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p>No back on step 1: this is the first step, so the operator moves forward. Primary CTA: Continue, to 3.1.</p>
+    <p><strong>Components used:</strong> the 10.0 check-in chrome (no nav, no account), the 10.4 attention treatment (dashed "!" badge), and the 10.4 reassurance block re-pointed to the answers-saved message. No new global; no personal data appears, only the anchor, the reassurance, and the small answers-saved indicator.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A centered, narrow wizard, no global tabs; the same content stacks in one column at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The error is drawn with the dashed "!" badge and words, never color, and the answers-saved reassurance is emphasized with a small "3 answers saved" indicator. Try again re-submits without re-entry. The desktop version centers the same narrow card.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, wizard step 1</div>
-        <div class="wf-wizpage">
-          <div class="wf-wizhead">
-            <span class="wf-logo">Brio</span>
-            <span class="wf-prog"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="txt">Step 1 of 3</span></span>
-          </div>
-          <div class="wf-wiz">
-            <div class="wh">Welcome to Brio</div>
-            <div class="sub">Let's set up wellbeing for your team. About five minutes.</div>
-            <div class="wf-lbl">Company name</div>
-            <div class="wf-input ph">Acme Co.</div>
-            <div class="wf-lbl">How big is your team?</div>
-            <div class="wf-sizes">
-              <div class="wf-size">Up to 10</div>
-              <div class="wf-size on">11 to 50</div>
-              <div class="wf-size">51 to 200</div>
-              <div class="wf-size">200+</div>
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, submit failed (default)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody">
+              <div class="wf-check attn">!</div>
+              <div class="wf-etitle">We could not send your answers</div>
+              <div class="wf-expl">Something went wrong, likely a connection problem. This was on our side, not yours.</div>
+              <div class="wf-reassure">
+                <span class="lk">&#128190;</span>
+                <span class="tx"><b>Your answers are saved here. Nothing was lost.</b> You will not have to answer again.</span>
+              </div>
+              <div class="wf-held"><span class="ck">&#10003;</span><span>3 answers saved</span></div>
+              <span class="wf-b solid block wf-cta">Try again</span>
+              <div class="wf-fallback">Still not working? Give it a moment and try again.</div>
             </div>
-            <div class="wf-micro">Your size helps us pick a first program that fits.</div>
-            <span class="wf-b solid block">Continue</span>
           </div>
         </div>
-        <div class="wf-note">no job tabs, one centered column, one action &middot; Continue disabled until name + size &middot; size drives the 3.1 pre-select.</div>
+        <div class="wf-note">dashed "!" = error without color &middot; KEY = answers preserved (twin of 5.2/3.3 "form stays filled") &middot; Try again re-submits to 10.2, no re-entry &middot; never a dead-end.</div>
       </div>
 
-      <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
-        <div class="wf-phone">
-          <div class="wf-wizhead"><span class="wf-logo">Brio</span><span class="wf-prog"><span class="seg on"></span><span class="seg"></span><span class="seg"></span></span></div>
-          <div class="wf-wiz" style="padding:16px 10px;">
-            <div class="wh" style="font-size:16px;">Welcome to Brio</div>
-            <div class="sub">Setup takes about 5 min.</div>
-            <div class="wf-lbl"><span class="wf-bnum">3</span>company name</div>
-            <div class="wf-input ph">Acme Co.</div>
-            <div class="wf-lbl"><span class="wf-bnum">4</span>team size</div>
-            <div class="wf-sizes"><div class="wf-size">Up to 10</div><div class="wf-size on">11-50</div><div class="wf-size">51-200</div><div class="wf-size">200+</div></div>
-            <span class="wf-b solid block" style="margin-top:12px;">Continue</span>
+      <div style="flex:1; min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop / wide, centered card (never an app)</div>
+        <div class="wf-frame" style="margin-top:0;">
+          <div class="wf-deskcard">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody" style="padding:28px 28px 24px;">
+              <div class="wf-check attn" style="width:56px; height:56px; font-size:24px;">!</div>
+              <div class="wf-etitle" style="font-size:19px;">We could not send your answers</div>
+              <div class="wf-expl">Something went wrong, likely a connection problem. This was on our side, not yours.</div>
+              <div class="wf-reassure" style="max-width:340px; margin-left:auto; margin-right:auto;">
+                <span class="lk">&#128190;</span>
+                <span class="tx"><b>Your answers are saved here. Nothing was lost.</b> You will not have to answer again.</span>
+              </div>
+              <div class="wf-held"><span class="ck">&#10003;</span><span>3 answers saved</span></div>
+              <span class="wf-b solid block wf-cta" style="max-width:220px; margin-left:auto; margin-right:auto;">Try again</span>
+              <div class="wf-fallback">Still not working? Give it a moment and try again.</div>
+            </div>
           </div>
         </div>
-        <div class="wf-note">same blocks, single column, focused first run.</div>
+        <div class="wf-note">same recovery centered &middot; Try again reuses the 10.2 submitting state, no double submit &middot; the surface never becomes an app.</div>
       </div>
     </div>
+  </section>
+
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States and primary CTA</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Submit failed (default)</td><td>the "!" mark, the non-blaming explanation, the answers-saved reassurance</td><td>Try again (re-submits saved answers)</td></tr>
+          <tr><td>Retrying</td><td>reuses the 10.2 submitting (loading) state, no double submit</td><td>route on result</td></tr>
+          <tr><td>Persistent failure</td><td>the quiet "give it a moment" fallback; answers stay saved</td><td>leave and return to the same link, still no dead-end</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Primary CTA:</strong> Try again, which re-submits the saved answers (to 10.2, then 10.3 on success). The answers remain preserved either way. No account step, no other navigation, and never a request to answer twice, by design.</p>
   </section>
 
   <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Private app zone</div>
+    <div class="section-label">Private token-gated surface</div>
     <h2>SEO block (noindex)</h2>
-    <p>Company setup is a transactional, authenticated wizard step. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <p>Submit error is a private, token-gated employee surface. It is not indexed and carries no schema. It is a transactional zone, per the platform SEO stance.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/onboarding/company</code></span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (transactional wizard)</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (token-gated, personal)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; flow URL is <code>/c/{invite-token}</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 (the welcome heading) for the accessible document outline</li>
-      <li>the size selector is a labelled radio group, not color-only</li>
-      <li>the progress indicator states "Step 1 of 3" in text</li>
-      <li>tap targets at least 44px</li>
+      <li>exactly one H1 (the explanation heading) for the accessible document outline</li>
+      <li>the error is conveyed by text and the "!" mark, never by color alone; the answers-saved reassurance is text, not color</li>
+      <li>Try again is a labelled control; the "answers saved" indicator is legible text</li>
+      <li>tap targets at least 44px; the flow works without an account</li>
     </ul>
-    <div class="callout ok"><strong>Wizard shell set.</strong> Company setup reuses 0.6 and defines the thin wizard shell used across 3.0 to 3.2; it invents nothing global. The size chosen here drives the pre-selection next. Next: <strong>3.1 First program confirm</strong> (the recommended 0.4 card pre-selected by size), wizard step 2 of 3.</div>
+    <div class="callout ok"><strong>A failure, not a wall, and no answering twice.</strong> Submit error is the employee-side version of the "could not save, the form stays filled" rule from 5.2 and 3.3: a failed submit becomes a plain explanation, an answers-saved reassurance, and a one-tap Try again. It reuses the 10.0 chrome, the 10.4 attention treatment, and the 10.4 reassurance block, and invents nothing global. This closes cluster 10 and the whole employee check-in surface. Next in the Detail rollout: <strong>cluster 8 Settings</strong> (8.0 shell, 8.1 Plan, 8.2 Privacy center, 8.3 Notifications, 8.4 Account), then <strong>cluster 1 Public pages</strong> (1.0 Pricing, 1.1 to 1.6).</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 3.0 Company setup - July 2026</p>
-    <p style="margin-top:4px;">Wizard step 1: name the company and pick its size in a focused, centered flow with no global tabs; the size pre-selects the first program on the next step. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/onboarding-company.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 10.6 Submit error - July 2026</p>
+    <p style="margin-top:4px;">The failure-at-submit case: a failed 10.2 submit gets a plain non-blaming explanation, a clear answers-saved reassurance, and a one-tap Try again that re-submits without re-entry, never a dead-end. Employee-side twin of the 5.2 and 3.3 "could not save, form stays filled" rule. Reuses the 10.0 chrome, the 10.4 attention treatment, and the 10.4 reassurance block. Closes cluster 10. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/checkin-submit-error.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
