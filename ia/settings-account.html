@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Settings shell (8.0)</title>
+  <title>Brio - IA Detail: Account settings (8.4)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -105,11 +105,13 @@
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.sm { padding: 5px 10px; font-size: 10px; }
     .wf-b.block { display: block; }
+    .wf-b.danger { border-style: dashed; border-color: #9a9a9a; color: #fff; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* operator app chrome (reused from 7.0) */
+    /* operator app chrome (reused from 7.0 / 8.0) */
     .wf-appwrap { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
     .wf-appbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
     .wf-tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; align-items: center; }
@@ -118,13 +120,10 @@
     .wf-gear { font-size: 10px; color: #fff; padding: 3px 8px; border-radius: 4px; border: 1px solid #6a6a6a; display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; }
     .wf-appbody { padding: 16px; }
 
-    /* settings shell layout */
-    .wf-settitle { color: #fff; font-size: 15px; font-weight: 800; margin-bottom: 2px; }
-    .wf-setintro { color: #9a9a9a; font-size: 10px; margin-bottom: 14px; }
+    /* settings shell layout (reused from 8.0) */
     .wf-scrollx { overflow-x: auto; max-width: 100%; }
-    .wf-setlayout { display: grid; grid-template-columns: 1fr; gap: 12px; }
-    .wf-setlayout.two { grid-template-columns: 200px 1fr; }
-    .wf-setlayout.two > * { min-width: 0; }
+    .wf-setlayout { display: grid; grid-template-columns: 200px 1fr; gap: 12px; }
+    .wf-setlayout > * { min-width: 0; }
     .wf-setnav { display: flex; flex-direction: column; gap: 7px; }
     .wf-setitem { display: flex; align-items: center; gap: 10px; border: 1px solid #333; border-radius: 7px; padding: 9px 11px; }
     .wf-setitem.on { border-color: #6a6a6a; background: #141414; }
@@ -132,18 +131,49 @@
     .wf-setitem .txt { flex: 1; min-width: 0; }
     .wf-setitem .lbl { font-size: 11px; color: #fff; font-weight: 600; }
     .wf-setitem .desc { font-size: 9px; color: #8a8a8a; }
-    .wf-setitem .chev { color: #6a6a6a; font-size: 12px; }
-    .wf-acctchip { display: flex; align-items: center; gap: 7px; border: 1px solid #2c2c2c; border-radius: 7px; padding: 7px 10px; margin-top: 3px; }
-    .wf-acctchip .av { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #6a6a6a; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #cfcfcf; }
-    .wf-acctchip .em { font-size: 9px; color: #9a9a9a; font-family: ui-monospace, monospace; }
+    .wf-setpane { border: 1px solid #333; border-radius: 7px; padding: 13px; }
+    .wf-secback { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #9a9a9a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-secback .cv { font-size: 13px; }
 
-    .wf-setpane { border: 1px solid #333; border-radius: 7px; padding: 13px; min-height: 150px; }
-    .wf-paneh { font-size: 11px; color: #fff; font-weight: 700; margin-bottom: 3px; }
-    .wf-panehint { font-size: 9px; color: #6a6a6a; font-family: ui-monospace, monospace; margin-bottom: 12px; }
-    .wf-stub { border: 1px dashed #3a3a3a; border-radius: 6px; padding: 9px; margin-bottom: 8px; }
-    .wf-stub .sl { height: 7px; background: #242424; border-radius: 3px; margin-bottom: 6px; }
-    .wf-stub .sl.s { width: 45%; }
-    .wf-stub .sl.m { width: 70%; }
+    /* account fields */
+    .wf-field { margin-bottom: 13px; }
+    .wf-flabel { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.07em; font-family: ui-monospace, monospace; margin-bottom: 5px; }
+    .wf-fline { display: flex; gap: 8px; align-items: center; }
+    .wf-input { flex: 1; border: 1px solid #3a3a3a; border-radius: 6px; padding: 9px 10px; color: #cfcfcf; font-size: 11px; min-width: 0; }
+    .wf-input.ph { color: #6a6a6a; }
+    .wf-magic { display: flex; align-items: center; gap: 8px; border: 1px solid #333; border-radius: 7px; padding: 9px 11px; margin-bottom: 13px; }
+    .wf-magic .mt { flex: 1; }
+    .wf-magic .ml { font-size: 11px; color: #fff; font-weight: 600; }
+    .wf-magic .md { font-size: 9px; color: #8a8a8a; }
+    .wf-switch { width: 34px; height: 18px; border: 1px solid #6a6a6a; border-radius: 100px; position: relative; flex: 0 0 auto; }
+    .wf-switch .knob { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #6a6a6a; top: 2px; left: 2px; }
+    .wf-switch.on { background: #e6e6e6; border-color: #e6e6e6; }
+    .wf-switch.on .knob { left: auto; right: 2px; background: #111; }
+    .wf-swtxt { font-size: 9px; color: #9a9a9a; text-transform: uppercase; letter-spacing: 0.05em; font-family: ui-monospace, monospace; width: 22px; }
+
+    /* danger zone */
+    .wf-danger { border: 1px dashed #9a9a9a; border-radius: 8px; padding: 12px; margin-top: 6px; }
+    .wf-danger .dh { display: flex; align-items: center; gap: 7px; color: #fff; font-size: 11px; font-weight: 700; margin-bottom: 3px; }
+    .wf-danger .dh .bang { width: 16px; height: 16px; border: 1px dashed #9a9a9a; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
+    .wf-danger .dd { font-size: 9.5px; color: #9a9a9a; line-height: 1.45; margin-bottom: 9px; }
+
+    /* 0.5 dialog / modal shell (reused from 6.1 / 7.2) */
+    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; min-height: 440px; }
+    .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+    .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
+    .wf-modal { width: 320px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
+    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+    .wf-modal .mtitle .bang { width: 18px; height: 18px; border: 1px dashed #9a9a9a; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
+    .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
+    .wf-modal .mbody { font-size: 10.5px; color: #b8b8b8; line-height: 1.5; margin-bottom: 10px; }
+    .wf-modal .mbody b { color: #fff; }
+    .wf-erlist { border: 1px solid #333; border-radius: 6px; padding: 9px 11px; margin-bottom: 10px; }
+    .wf-erlist .er { font-size: 10px; color: #cfcfcf; display: flex; gap: 7px; margin-bottom: 4px; }
+    .wf-erlist .er:last-child { margin-bottom: 0; }
+    .wf-erlist .er .mk { color: #fff; }
+    .wf-confirmin { border: 1px solid #3a3a3a; border-radius: 6px; padding: 8px 10px; color: #6a6a6a; font-size: 11px; margin-bottom: 11px; font-family: ui-monospace, monospace; }
+    .wf-mactions { display: flex; gap: 8px; }
+    .wf-mactions .wf-b { flex: 1; }
 
     .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
@@ -215,11 +245,11 @@
       <a href="checkin-expired.html" class="nav-sub-item">Invite link expired</a>
       <a href="checkin-already.html" class="nav-sub-item">Already submitted</a>
       <a href="checkin-submit-error.html" class="nav-sub-item">Submit error</a>
-      <a href="settings.html" class="nav-sub-item nav-sub-active">Settings shell</a>
+      <a href="settings.html" class="nav-sub-item">Settings shell</a>
       <a href="settings-plan.html" class="nav-sub-item">Plan / subscription</a>
       <a href="settings-privacy.html" class="nav-sub-item">Privacy center</a>
       <a href="settings-notifications.html" class="nav-sub-item">Notifications</a>
-      <a href="settings-account.html" class="nav-sub-item">Account settings</a>
+      <a href="settings-account.html" class="nav-sub-item nav-sub-active">Account settings</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -240,40 +270,41 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 8.0</span>
+      <span class="badge">Node 8.4</span>
       <span class="badge">Operator app (desktop-first)</span>
-      <span class="badge">Shell &middot; opens cluster 8</span>
+      <span class="badge">Closes cluster 8 &middot; GDPR erasure</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Settings shell (8.0) &middot; URL: /app/settings</div>
-    <h1>Settings shell</h1>
-    <p class="hero-intro">The operator utility shell: one predictable place for account and configuration, as a container whose section list mirrors the four settings areas (Plan, Privacy center, Notifications, Account). It is a utility reached from a settings entry in the app chrome, not one of the four job tabs, so it never competes with the main-job navigation. On desktop the selected section renders in a pane beside the list; on mobile each row drills into its section. For Priya the operator. Supporting node; opens cluster 8. Authenticated app view, so noindex. Source of truth: ia/docs/pages/settings.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Account settings (8.4) &middot; URL: /app/settings/account</div>
+    <h1>Account settings</h1>
+    <p class="hero-intro">The operator's identity and access section: name, email, password and magic link, sign out, and delete account (GDPR erasure). It is supporting infrastructure, but it carries the one destructive action in the app, so delete is gated by the 0.5 confirm dialog and never the visual primary. Closes cluster 8. For Priya the operator. Authenticated app view, so noindex. Source of truth: ia/docs/pages/settings-account.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>The shell's whole job is the section list, the map of what can be configured. Settings sits beside the four job tabs as a utility, not as a tab, so the main job stays uncluttered (Principle 2).</p>
+    <p>Plain identity and access, with the destructive delete kept separate and carefully gated. Individual employee responses were never stored identifiably (aggregate only), which the delete confirm notes.</p>
     <ol>
-      <li><strong>Nav + header</strong> (0.1 operator app chrome): the Brio mark and the four job tabs, none active, plus the Settings utility marked active. H1 "Settings".</li>
-      <li><strong>Section list (mirrors the areas)</strong>: Plan (tier, seats, invoices, to 8.1), Privacy center (what the owner can and cannot see, to 8.2, the proof surface), Notifications (reminders and digests, to 8.3), Account (name, email, password, sign out, to 8.4).</li>
-      <li><strong>Account context (quiet)</strong>: a small chip showing who is signed in; the full account controls live in 8.4.</li>
-      <li><strong>Section pane (desktop) or drill-in (mobile)</strong>: on desktop the selected section renders in a pane beside the list (Plan by default); on mobile each row opens its section.</li>
+      <li><strong>Name</strong>: an editable field with Save.</li>
+      <li><strong>Email</strong>: the current email with a change-email action; a changed email is verified (reuses the 2.2 check-your-email pattern), so a typo does not lock the operator out.</li>
+      <li><strong>Password and sign-in</strong>: a change-password action, plus a magic-link toggle for passwordless sign-in (ties to the 2.x auth choices).</li>
+      <li><strong>Sign out</strong>: signs out to 2.1 Log in.</li>
+      <li><strong>Delete account (danger)</strong>: a separated destructive action that opens the 0.5 confirm dialog; the confirm states what is erased and requires an explicit confirmation. GDPR erasure.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation (operator app chrome, the same wf-appbar and job tabs from 7.0, with Settings active rather than a job tab). The section list and pane are shell-specific layout, thin, not globals; the sections (8.1 to 8.4) render their own components, including the 0.3 privacy-disclosure inside 8.2. No new global is invented.</p>
+    <p><strong>Components used:</strong> the 8.0 shell chrome, the auth input field (wf-input, from the 2.x pages), and the canonical 0.5 Dialog / modal shell for the delete confirm (same shell as 5.1 End program, 6.1 revoke, 7.2 upgrade). 8.4 is a new 0.5 consumer. No new global is invented.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop is a two-pane layout (section list plus the selected section's pane); mobile is a stacked section index that drills into each area. Settings is reached from a utility entry in the app chrome, not a job tab, so no job tab is active.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows Account in the 8.0 two-pane; mobile shows the drilled-in section; the third frame is the delete-account 0.5 confirm. The destructive step reads by a dashed attention mark and words, not color. The wide desktop mockup scrolls inside its own box.</p>
 
     <div class="wf-row">
       <div style="flex:1; min-width:0;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, two-pane (Plan selected)</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, Account in the 8.0 two-pane</div>
         <div class="wf-scrollx">
-        <div class="wf-appwrap" style="min-width:480px;">
+        <div class="wf-appwrap" style="min-width:560px;">
           <div class="wf-appbar">
             <span class="wf-logo">Brio</span>
             <span class="wf-tabs">
@@ -282,96 +313,145 @@
             </span>
           </div>
           <div class="wf-appbody">
-            <div class="wf-settitle">Settings</div>
-            <div class="wf-setintro">Your account and how Brio runs for your team.</div>
-            <div class="wf-setlayout two">
+            <div class="wf-setlayout">
               <div class="wf-setnav">
-                <div class="wf-setitem on"><span class="ico">$</span><span class="txt"><span class="lbl">Plan</span><span class="desc">Tier, seats, invoices</span></span></div>
-                <div class="wf-setitem"><span class="ico">&#128274;</span><span class="txt"><span class="lbl">Privacy center</span><span class="desc">What the owner can and cannot see</span></span></div>
+                <div class="wf-setitem"><span class="ico">$</span><span class="txt"><span class="lbl">Plan</span><span class="desc">Tier, seats, invoices</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#128274;</span><span class="txt"><span class="lbl">Privacy center</span><span class="desc">Owner can and cannot see</span></span></div>
                 <div class="wf-setitem"><span class="ico">&#9862;</span><span class="txt"><span class="lbl">Notifications</span><span class="desc">Reminders and digests</span></span></div>
-                <div class="wf-setitem"><span class="ico">&#9737;</span><span class="txt"><span class="lbl">Account</span><span class="desc">Name, email, password, sign out</span></span></div>
-                <div class="wf-acctchip"><span class="av">P</span><span class="em">priya@acme.com</span></div>
+                <div class="wf-setitem on"><span class="ico">&#9737;</span><span class="txt"><span class="lbl">Account</span><span class="desc">Identity, sign out</span></span></div>
               </div>
               <div class="wf-setpane">
-                <div class="wf-paneh">Plan</div>
-                <div class="wf-panehint">the selected section renders here (8.1 to 8.4)</div>
-                <div class="wf-stub"><div class="sl m"></div><div class="sl s"></div></div>
-                <div class="wf-stub"><div class="sl m"></div><div class="sl s"></div></div>
-                <span class="wf-b" style="display:inline-block; margin-top:2px;">Change plan</span>
+                <div class="wf-field">
+                  <div class="wf-flabel">Name</div>
+                  <div class="wf-fline"><span class="wf-input">Priya Nair</span><span class="wf-b sm">Save</span></div>
+                </div>
+                <div class="wf-field">
+                  <div class="wf-flabel">Email</div>
+                  <div class="wf-fline"><span class="wf-input">priya@acme.com</span><span class="wf-b sm">Change</span></div>
+                </div>
+                <div class="wf-field">
+                  <div class="wf-flabel">Password</div>
+                  <div class="wf-fline"><span class="wf-input ph">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span><span class="wf-b sm">Change</span></div>
+                </div>
+                <div class="wf-magic">
+                  <div class="mt"><div class="ml">Sign in with a magic link</div><div class="md">Passwordless email sign-in.</div></div>
+                  <span class="wf-switch on"><span class="knob"></span></span><span class="wf-swtxt">On</span>
+                </div>
+                <span class="wf-b block" style="margin-bottom:14px;">Sign out</span>
+                <div class="wf-danger">
+                  <div class="dh"><span class="bang">!</span><span>Delete account</span></div>
+                  <div class="dd">Permanently erase your account and your company's data. This cannot be undone.</div>
+                  <span class="wf-b danger sm">Delete account</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
         </div>
-        <div class="wf-note">0.1 app chrome (7.0) &middot; Settings is a UTILITY (gear), not a job tab, so no tab is active &middot; left section list mirrors nav &middot; right pane = the active section (8.1-8.4). On a narrow screen the two-pane scrolls inside its own box, the page never does.</div>
+        <div class="wf-note">name / email (verified change) / password + magic-link toggle / sign out &middot; delete is a SEPARATED danger block, dashed "!" not red &middot; opens the 0.5 confirm.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, stacked section index (drills in)</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, drilled-in Account</div>
         <div class="wf-phone">
           <div class="wf-phoneinner">
             <div class="wf-appbar" style="padding:8px 10px;"><span class="wf-logo">Brio</span><span class="wf-tabs"><span class="wf-gear">&#9881; Settings</span></span></div>
             <div class="wf-appbody" style="padding:12px 11px;">
-              <div class="wf-settitle">Settings</div>
-              <div class="wf-setintro">Your account and how Brio runs.</div>
-              <div class="wf-setnav">
-                <div class="wf-setitem"><span class="ico">$</span><span class="txt"><span class="lbl">Plan</span><span class="desc">Tier, seats, invoices</span></span><span class="chev">&#8250;</span></div>
-                <div class="wf-setitem"><span class="ico">&#128274;</span><span class="txt"><span class="lbl">Privacy center</span><span class="desc">What the owner can and cannot see</span></span><span class="chev">&#8250;</span></div>
-                <div class="wf-setitem"><span class="ico">&#9862;</span><span class="txt"><span class="lbl">Notifications</span><span class="desc">Reminders and digests</span></span><span class="chev">&#8250;</span></div>
-                <div class="wf-setitem"><span class="ico">&#9737;</span><span class="txt"><span class="lbl">Account</span><span class="desc">Name, email, password, sign out</span></span><span class="chev">&#8250;</span></div>
-                <div class="wf-acctchip"><span class="av">P</span><span class="em">priya@acme.com</span></div>
+              <div class="wf-secback"><span class="cv">&#8249;</span><span>Settings / Account</span></div>
+              <div class="wf-field">
+                <div class="wf-flabel">Name</div>
+                <div class="wf-fline"><span class="wf-input">Priya Nair</span><span class="wf-b sm">Save</span></div>
+              </div>
+              <div class="wf-field">
+                <div class="wf-flabel">Email</div>
+                <div class="wf-fline"><span class="wf-input">priya@acme.com</span><span class="wf-b sm">Change</span></div>
+              </div>
+              <div class="wf-magic">
+                <div class="mt"><div class="ml">Magic-link sign-in</div><div class="md">Passwordless.</div></div>
+                <span class="wf-switch on"><span class="knob"></span></span><span class="wf-swtxt">On</span>
+              </div>
+              <span class="wf-b block" style="margin-bottom:13px;">Sign out</span>
+              <div class="wf-danger">
+                <div class="dh"><span class="bang">!</span><span>Delete account</span></div>
+                <div class="dd">Permanently erase your account and data. Cannot be undone.</div>
+                <span class="wf-b danger sm">Delete account</span>
               </div>
             </div>
           </div>
         </div>
-        <div class="wf-note">mobile = a settings index that navigates &middot; each row drills into 8.1-8.4 (chevron) &middot; account chip for orientation (full controls in 8.4).</div>
+        <div class="wf-note">drilled in from 8.0 &middot; fields stacked &middot; danger block last &middot; delete opens the 0.5 bottom sheet on mobile.</div>
+      </div>
+
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">Delete account, 0.5 confirm (GDPR erasure)</div>
+        <div class="wf-modal-scrim">
+          <div class="wf-scrim-fill"></div>
+          <div class="wf-modal-wrap">
+            <div class="wf-modal" role="dialog" aria-modal="true" aria-label="Delete your account">
+              <div class="mtitle"><span class="bang">!</span><span>Delete your account?</span><span class="x">&times;</span></div>
+              <div class="mbody">This <b>permanently erases</b> your account and your company's data. It cannot be undone (GDPR erasure).</div>
+              <div class="wf-erlist">
+                <div class="er"><span class="mk">&times;</span><span>Your operator account and login</span></div>
+                <div class="er"><span class="mk">&times;</span><span>Your company's programs and aggregate history</span></div>
+                <div class="er"><span class="mk">&#10003;</span><span>No individual responses to erase, they were never stored by person</span></div>
+              </div>
+              <div class="wf-flabel">Type DELETE to confirm</div>
+              <div class="wf-confirmin">DELETE</div>
+              <div class="wf-mactions">
+                <span class="wf-b block">Cancel</span>
+                <span class="wf-b danger block">Delete account</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">0.5 shell (role=dialog, aria-modal, focus trap, Esc, focus returns) &middot; states what is erased &middot; type-to-confirm &middot; Cancel is the safe default (close/Esc/scrim) &middot; danger dashed "!" not red.</div>
       </div>
     </div>
-    <div class="callout"><strong>Privacy center is emphasized on purpose.</strong> It is the operator-facing proof surface (0.3 operator variant, 8.2): the differentiator made checkable inside Settings, not just promised. The other three sections are ordinary utility. Settings stays one tap from the app chrome and out of the four-job-tab flow, so the main job never competes with configuration.</div>
   </section>
 
   <!-- States -->
   <section id="states">
     <div class="section-label">Behavior</div>
-    <h2>States and routing</h2>
+    <h2>States and primary CTA</h2>
     <div class="table-wrap">
       <table>
         <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
         <tbody>
-          <tr><td>Default (desktop)</td><td>section list + the first section (Plan) in a pane beside it</td><td>select a section, it renders in the pane</td></tr>
-          <tr><td>Default (mobile)</td><td>the section list stacked full width, each with a chevron</td><td>tap a row to drill into 8.1 to 8.4</td></tr>
-          <tr><td>Active section</td><td>the selected row is marked; the pane reflects it (desktop)</td><td>8.1 Plan / 8.2 Privacy / 8.3 Notifications / 8.4 Account</td></tr>
-          <tr><td>Guest / Owner</td><td>-</td><td>redirect to 2.1 Log in / 9.0 Owner dashboard</td></tr>
+          <tr><td>Default</td><td>name, email, password and magic link, sign out, delete-account danger block</td><td>Save / Change / Sign out</td></tr>
+          <tr><td>Editing a field</td><td>Save enabled on change; a saved confirmation; errors keep the value</td><td>Save</td></tr>
+          <tr><td>Change email (pending)</td><td>a note the new email must be confirmed (reuses 2.2); old email active until verified</td><td>verify via email</td></tr>
+          <tr><td>Delete confirm (0.5)</td><td>the destructive confirm, what is erased, type-to-confirm; Cancel is the safe exit</td><td>Cancel / Delete account</td></tr>
+          <tr><td>Deleting / deleted</td><td>a brief working state, then sign-out and erasure, unrecoverable</td><td>-</td></tr>
         </tbody>
       </table>
     </div>
-    <p><strong>Primary CTA:</strong> none of its own; the shell routes into 8.1 to 8.4, and the section list is the primary affordance. Settings is deliberately a utility, one tap from the app chrome and out of the four-job-tab flow.</p>
+    <p><strong>Primary CTA:</strong> per field, Save; for access, Change password and the magic-link toggle; Sign out to 2.1. The delete-account action is deliberately separated, destructive, gated by the 0.5 confirm dialog, and never the visual primary; Cancel is the safe default.</p>
   </section>
 
   <!-- SEO (noindex) -->
   <section id="seo">
     <div class="section-label">Authenticated app view</div>
     <h2>SEO block (noindex)</h2>
-    <p>Settings is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema.</p>
+    <p>Account is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema.</p>
     <div class="seo-block">
       <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (authenticated app)</span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/settings</code></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/settings/account</code></span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 ("Settings") for the accessible document outline</li>
-      <li>the section list is a labelled navigation list; the active section is conveyed by text and state, not color alone</li>
-      <li>the account chip is text; Settings is reachable from the app chrome as a labelled utility control</li>
-      <li>tap targets at least 44px</li>
+      <li>exactly one H1 ("Account" within the settings outline) for the accessible document outline</li>
+      <li>every field is a labelled input; the magic-link toggle state is by position and text, not color</li>
+      <li>the delete action and its confirm are labelled; the destructive step reads by an attention mark and words, not color</li>
+      <li>the confirm dialog is role=dialog with aria-modal, a focus trap, Esc to close, and focus returned to the opener; tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>One place for everything, still out of the way.</strong> Settings is the operator utility shell: one container whose section list mirrors the four settings areas, reached as a utility beside the job tabs, never competing with the main job. It reuses the 0.1 app chrome and invents nothing global; the sections render their own content, including the 0.3 privacy-disclosure inside 8.2. Next in cluster 8: <strong>8.1 Plan / subscription</strong> (tier, seats, invoices, change plan to 7.2), then 8.2 Privacy center, 8.3 Notifications, and 8.4 Account settings.</div>
+    <div class="callout ok"><strong>Careful with the one destructive action.</strong> Account handles identity and access and the single destructive step, delete account (GDPR erasure), gated by the 0.5 confirm that states what is erased and requires an explicit confirmation, with Cancel as the safe default. It reuses the shell chrome, the auth input, and the 0.5 dialog, and invents nothing global. This closes cluster 8. Next: <strong>cluster 1 Public pages</strong> (1.0 Pricing and 1.1 to 1.6), the first indexed surfaces with full A to E SEO, where 1.1 Security and privacy renders the public, indexable 0.3 privacy-disclosure.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 8.0 Settings shell - July 2026</p>
-    <p style="margin-top:4px;">The operator utility shell: one container whose section list mirrors the four settings areas (Plan, Privacy center, Notifications, Account), reached as a utility beside the four job tabs, never as a tab. Two-pane on desktop, a stacked index that drills in on mobile. Reuses the 0.1 operator app chrome. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/settings.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 8.4 Account settings - July 2026</p>
+    <p style="margin-top:4px;">The operator's identity and access section: name, email (verified change), password and magic link, sign out, and delete account (GDPR erasure) behind the 0.5 confirm dialog, inside the 8.0 shell. The destructive delete is separated, dashed-attention (not color), and gated. Closes cluster 8. Reuses the shell chrome, the auth input, and the 0.5 dialog. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/settings-account.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
