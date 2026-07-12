@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Log in (2.1)</title>
+  <title>Brio - IA Detail: Privacy center (8.2)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -105,30 +105,52 @@
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
-    .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* auth page shell (shared with 2.0 Sign up) */
-    .wf-authpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-topbar { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #2c2c2c; }
-    .wf-auth { max-width: 360px; margin: 0 auto; padding: 26px 20px; }
-    .wf-auth .wh { color: #fff; font-size: 19px; font-weight: 800; }
-    .wf-auth .sub { color: #9a9a9a; font-size: 11px; margin: 5px 0 18px; }
-    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 5px; }
-    .wf-lblrow { display: flex; align-items: baseline; justify-content: space-between; }
-    .wf-lblrow .wf-link { font-size: 9.5px; }
-    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px 11px; margin-bottom: 12px; color: #6a6a6a; font-size: 12px; }
-    .wf-or { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
-    .wf-or::before, .wf-or::after { content: ""; flex: 1; height: 1px; background: #2c2c2c; }
-    .wf-or span { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.1em; font-family: ui-monospace, monospace; }
-    .wf-legal { font-size: 9.5px; color: #8a8a8a; text-align: center; margin-top: 12px; line-height: 1.5; }
-    .wf-legal .wf-link { font-size: 9.5px; }
-    .wf-trust { text-align: center; font-size: 10px; color: #cfcfcf; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px; margin-top: 14px; }
-    .wf-alt { text-align: center; font-size: 11px; color: #9a9a9a; margin-top: 16px; }
+    /* operator app chrome (reused from 7.0 / 8.0) */
+    .wf-appwrap { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-appbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; align-items: center; }
+    .wf-tab { font-size: 10px; color: #8a8a8a; padding: 3px 8px; border-radius: 4px; }
+    .wf-tab.on { color: #fff; border: 1px solid #6a6a6a; }
+    .wf-gear { font-size: 10px; color: #fff; padding: 3px 8px; border-radius: 4px; border: 1px solid #6a6a6a; display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; }
+    .wf-appbody { padding: 16px; }
 
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    /* settings shell layout (reused from 8.0) */
+    .wf-scrollx { overflow-x: auto; max-width: 100%; }
+    .wf-setlayout { display: grid; grid-template-columns: 200px 1fr; gap: 12px; }
+    .wf-setlayout > * { min-width: 0; }
+    .wf-setnav { display: flex; flex-direction: column; gap: 7px; }
+    .wf-setitem { display: flex; align-items: center; gap: 10px; border: 1px solid #333; border-radius: 7px; padding: 9px 11px; }
+    .wf-setitem.on { border-color: #6a6a6a; background: #141414; }
+    .wf-setitem .ico { flex: 0 0 auto; width: 22px; height: 22px; border: 1px solid #6a6a6a; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #e6e6e6; }
+    .wf-setitem .txt { flex: 1; min-width: 0; }
+    .wf-setitem .lbl { font-size: 11px; color: #fff; font-weight: 600; }
+    .wf-setitem .desc { font-size: 9px; color: #8a8a8a; }
+    .wf-setpane { border: 1px solid #333; border-radius: 7px; padding: 13px; }
+    .wf-secback { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #9a9a9a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-secback .cv { font-size: 13px; }
+
+    /* privacy proof surface (0.3 operator variant) */
+    .wf-pintro { font-size: 10.5px; color: #b8b8b8; line-height: 1.5; margin-bottom: 8px; }
+    .wf-lock { display: inline-flex; align-items: center; gap: 5px; font-size: 8px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; border: 1px solid #6a6a6a; color: #fff; margin-bottom: 14px; }
+    .wf-pclaim { display: flex; gap: 9px; padding: 8px 0; border-bottom: 1px solid #1d1d1d; align-items: flex-start; }
+    .wf-pclaim:first-of-type { padding-top: 2px; }
+    .wf-pclaim .ic { flex: 0 0 auto; width: 22px; height: 22px; border: 1px solid #6a6a6a; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #e6e6e6; }
+    .wf-pclaim .ct { font-size: 10.5px; color: #b8b8b8; line-height: 1.5; }
+    .wf-pclaim .ct b { color: #fff; font-weight: 700; }
+
+    /* can / cannot panel (reused from 7.0 / 9.0) */
+    .wf-see { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 12px; margin-top: 13px; }
+    .wf-see .st { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 7px; }
+    .wf-seerow { display: flex; gap: 8px; font-size: 11px; color: #cfcfcf; margin-bottom: 5px; align-items: flex-start; }
+    .wf-seerow .mk { width: 14px; text-align: center; color: #fff; font-weight: 700; flex-shrink: 0; }
+    .wf-seerow.no { color: #9a9a9a; }
+    .wf-samepromise { font-size: 9px; color: #7a7a7a; font-family: ui-monospace, monospace; margin-top: 12px; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
@@ -181,7 +203,7 @@
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
       <a href="invite-send-error.html" class="nav-sub-item">Invite-send error</a>
       <a href="signup.html" class="nav-sub-item">Sign up</a>
-      <a href="login.html" class="nav-sub-item nav-sub-active">Log in</a>
+      <a href="login.html" class="nav-sub-item">Log in</a>
       <a href="magic-link-sent.html" class="nav-sub-item">Magic-link sent</a>
       <a href="link-expired.html" class="nav-sub-item">Invalid or expired link</a>
       <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
@@ -199,7 +221,7 @@
       <a href="checkin-submit-error.html" class="nav-sub-item">Submit error</a>
       <a href="settings.html" class="nav-sub-item">Settings shell</a>
       <a href="settings-plan.html" class="nav-sub-item">Plan / subscription</a>
-      <a href="settings-privacy.html" class="nav-sub-item">Privacy center</a>
+      <a href="settings-privacy.html" class="nav-sub-item nav-sub-active">Privacy center</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -220,130 +242,154 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 2.1</span>
-      <span class="badge">Public / pre-auth</span>
-      <span class="badge privacy">Gate to the app</span>
+      <span class="badge">Node 8.2</span>
+      <span class="badge">Operator app (desktop-first)</span>
+      <span class="badge privacy">0.3 operator variant &middot; proof</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Log in (2.1) &middot; URL: /login</div>
-    <h1>Log in</h1>
-    <p class="hero-intro">Return access. Log in is a supporting page, not an acquisition surface, but it gates every recurring job (Main, read the pulse, catch a decline early, feel competent), so it must be fast, forgiving, and never a dead-end. Email + password or magic link, with a forgot-password path. Reuses the auth-page shell from 2.0. Public but transactional, so the form is noindex. Source of truth: ia/docs/pages/login.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Privacy center (8.2) &middot; URL: /app/settings/privacy</div>
+    <h1>Privacy center</h1>
+    <p class="hero-intro">The operator-facing proof surface: exactly what you and the owner can and cannot see, built into how Brio works rather than a setting anyone can change. It renders the canonical 0.3 privacy-disclosure in its operator variant, the differentiator made checkable inside the product so the operator can stand behind it. The operator twin of 9.1 (owner) and 10.1 (employee): the same five claims, reframed. For Priya the operator. Serves J3, E2, item 4. Authenticated app view, so noindex. Source of truth: ia/docs/pages/settings-privacy.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. The chrome mirrors 2.0 so the two auth pages read as one system.</p>
+    <p>Privacy is proof, not a control panel. The whole point is that nothing here is a setting; it is read-only, and it says the same thing the team and the public are told.</p>
     <ol>
-      <li><strong>Pre-auth header</strong>: the Brio mark and a single "Sign up" link (the mirror of 2.0's header), no job tabs.</li>
-      <li><strong>Heading</strong>: a short welcome-back line ("Log in to Brio").</li>
-      <li><strong>Log-in form</strong>: a labelled email field and a labelled password field, with "Forgot password?" by the password, primary CTA "Log in".</li>
-      <li><strong>Magic-link option</strong>: "Email me a link instead" (passwordless), to 2.2 Magic-link sent. Sidesteps a forgotten password entirely.</li>
-      <li><strong>Sign-up link</strong>: "New to Brio? Create an account", to 2.0, so a person on the wrong page is never stuck.</li>
-      <li><strong>Footer</strong>: 0.2 footer, public variant (condensed).</li>
+      <li><strong>Section context</strong>: inside the app chrome, "Settings / Privacy center"; on mobile a back to the Settings index.</li>
+      <li><strong>Intro and structural note</strong>: this is exactly what can and cannot be seen, and it is built in, not a setting, marked with a "Structural" lock label (Principle 1, founder decision D1).</li>
+      <li><strong>The five claims (operator framing)</strong>: the canonical 0.3 spine, each an icon and one plain sentence, framed as "what you see".</li>
+      <li><strong>Can and cannot panel</strong>: can see the team score and trend and participation as a share; cannot see any individual, name, who answered, any drill-down, or any sub-group below 5.</li>
+      <li><strong>Same promise everywhere (quiet)</strong>: a note that this is the same promise the team sees before answering (10.1) and the public explainer (1.1).</li>
     </ol>
-    <p><strong>Components used:</strong> a reduced 0.1 (pre-auth header), 0.2 (public footer), and the auth-page shell from 2.0. No new global. The condensed 0.3 trust line from 2.0 is deliberately omitted (a returning operator needs speed, not re-selling). <strong>SSO</strong> is a paid feature, absent from standard log-in.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Validation, recovery, and role</div>
-    <h2>States and primary CTA</h2>
-    <p>Forgiveness is the theme: wrong credentials and a forgotten password both have a clear, non-dead-end path.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Default</td><td>empty email and password, Forgot password, Log in, magic-link option</td><td>Log in (to 4.0)</td></tr>
-          <tr><td>Field validation</td><td>inline text for an invalid email (not color alone)</td><td>correct in place</td></tr>
-          <tr><td>Wrong credentials</td><td>one generic message ("email or password is incorrect"), does not reveal which field</td><td>retry / Forgot password (never a dead-end)</td></tr>
-          <tr><td>Submitting</td><td>Log in shows in-progress; fields lock to prevent double submit</td><td>-</td></tr>
-          <tr><td>Success</td><td>into the app</td><td>4.0 Dashboard (onboarded) / 3.0 (resume onboarding)</td></tr>
-          <tr><td>Magic-link path</td><td>"Email me a link instead" sends the link</td><td>to 2.2 Magic-link sent</td></tr>
-          <tr><td>Forgot password</td><td>reset request (enter email, send reset link); confirmation reuses the 2.2 pattern</td><td>reset email sent; reset-entry screen is [?] (Step 6)</td></tr>
-          <tr><td>Stale magic / reset link</td><td>expired or already-used link</td><td>to 2.3 Invalid or expired link</td></tr>
-          <tr><td>Already authenticated</td><td>redirect</td><td>4.0 Dashboard</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p><strong>Components used:</strong> the canonical 0.3 privacy-disclosure (operator variant); the can and cannot panel reuses the wf-see and wf-seerow list from 7.0 and 9.0 (plus and x marks, never color); the claim list is the same five-claim spine as 10.1 and 9.1. Runs inside the 8.0 shell. No new global; 8.2 is a registered 0.3 instance that must not drift.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The same centered card and shell as 2.0, with Forgot password by the password field and a "Sign up" mirror in the header; the same content stacks full width at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows Privacy center in the 8.0 two-pane; mobile shows the drilled-in section. The can and cannot boundary is carried by the plus and x marks and words, never color. The wide desktop mockup scrolls inside its own box.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, centered log-in card</div>
-        <div class="wf-authpage">
-          <div class="wf-topbar">
+      <div style="flex:1; min-width:0;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, Privacy center in the 8.0 two-pane</div>
+        <div class="wf-scrollx">
+        <div class="wf-appwrap" style="min-width:560px;">
+          <div class="wf-appbar">
             <span class="wf-logo">Brio</span>
-            <span class="wf-link">Sign up</span>
+            <span class="wf-tabs">
+              <span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span>
+              <span class="wf-gear">&#9881; Settings</span>
+            </span>
           </div>
-          <div class="wf-auth">
-            <div class="wh">Log in to Brio</div>
-            <div class="sub">Welcome back. Pick up where you left off.</div>
-            <div class="wf-lbl">Work email</div>
-            <div class="wf-input">you@company.com</div>
-            <div class="wf-lblrow"><span class="wf-lbl">Password</span><span class="wf-link">Forgot password?</span></div>
-            <div class="wf-input">Your password</div>
-            <span class="wf-b solid block">Log in</span>
-            <div class="wf-or"><span>or</span></div>
-            <span class="wf-b block">Email me a link instead</span>
-            <div class="wf-alt">New to Brio? <span class="wf-link">Create an account</span></div>
+          <div class="wf-appbody">
+            <div class="wf-setlayout">
+              <div class="wf-setnav">
+                <div class="wf-setitem"><span class="ico">$</span><span class="txt"><span class="lbl">Plan</span><span class="desc">Tier, seats, invoices</span></span></div>
+                <div class="wf-setitem on"><span class="ico">&#128274;</span><span class="txt"><span class="lbl">Privacy center</span><span class="desc">Owner can and cannot see</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#9862;</span><span class="txt"><span class="lbl">Notifications</span><span class="desc">Reminders and digests</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#9737;</span><span class="txt"><span class="lbl">Account</span><span class="desc">Identity, sign out</span></span></div>
+              </div>
+              <div class="wf-setpane">
+                <div class="wf-pintro">This is exactly what you and your owner can and cannot see. It is how Brio is built, so it is the same for every plan.</div>
+                <div class="wf-lock"><span>&#128274;</span><span>Structural, not a setting</span></div>
+                <div class="wf-pclaim"><span class="ic">&#9633;</span><span class="ct"><b>Aggregate only.</b> You see the team aggregate, never an individual response, and there is no drill-down.</span></div>
+                <div class="wf-pclaim"><span class="ic">5+</span><span class="ct"><b>Minimum of 5.</b> No score appears until at least 5 people have answered.</span></div>
+                <div class="wf-pclaim"><span class="ic">&#8709;</span><span class="ct"><b>No live count.</b> While a cycle is open, no one sees a running tally of who has answered.</span></div>
+                <div class="wf-pclaim"><span class="ic">&#9736;</span><span class="ct"><b>Subscription as privacy.</b> The subscription pays for the aggregate; the business never exposes an individual.</span></div>
+                <div class="wf-see">
+                  <div class="st">What you and the owner can see</div>
+                  <div class="wf-seerow"><span class="mk">+</span><span>The team wellbeing score and its trend</span></div>
+                  <div class="wf-seerow"><span class="mk">+</span><span>Participation as a share of the team</span></div>
+                  <div class="st" style="margin-top:11px;">What no one can see</div>
+                  <div class="wf-seerow no"><span class="mk">x</span><span>Any individual response, name, or who answered</span></div>
+                  <div class="wf-seerow no"><span class="mk">x</span><span>Any drill-down to a person</span></div>
+                  <div class="wf-seerow no"><span class="mk">x</span><span>Any sub-group below 5</span></div>
+                </div>
+                <div class="wf-samepromise">Same promise your team sees before they answer (10.1) and on the public page (1.1).</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="wf-note">mirrors 2.0 shell &middot; Forgot password by the field &middot; magic link sidesteps a lost password &middot; wrong credentials stays generic &middot; success to 4.0 (or resume 3.0).</div>
+        </div>
+        <div class="wf-note">0.3 OPERATOR variant &middot; five claims + can/cannot (wf-see, +/x not color) &middot; marked Structural (read-only, not a toggle) &middot; operator twin of 9.1 / 10.1.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, drilled-in Privacy center</div>
         <div class="wf-phone">
-          <div class="wf-topbar" style="padding:9px 10px;"><span class="wf-logo">Brio</span><span class="wf-link">Sign up</span></div>
-          <div class="wf-auth" style="padding:18px 12px;">
-            <div class="wh" style="font-size:17px;">Log in to Brio</div>
-            <div class="sub" style="margin-bottom:14px;">Welcome back.</div>
-            <div class="wf-lbl"><span class="wf-bnum">3</span>email</div>
-            <div class="wf-input">you@company.com</div>
-            <div class="wf-lblrow"><span class="wf-lbl">password</span><span class="wf-link">Forgot?</span></div>
-            <div class="wf-input">Your password</div>
-            <span class="wf-b solid block">Log in</span>
-            <div class="wf-or"><span>or</span></div>
-            <span class="wf-b block">Email me a link</span>
-            <div class="wf-alt">New here? <span class="wf-link">Create an account</span></div>
+          <div class="wf-phoneinner">
+            <div class="wf-appbar" style="padding:8px 10px;"><span class="wf-logo">Brio</span><span class="wf-tabs"><span class="wf-gear">&#9881; Settings</span></span></div>
+            <div class="wf-appbody" style="padding:12px 11px;">
+              <div class="wf-secback"><span class="cv">&#8249;</span><span>Settings / Privacy center</span></div>
+              <div class="wf-pintro">Exactly what you and your owner can and cannot see.</div>
+              <div class="wf-lock"><span>&#128274;</span><span>Structural, not a setting</span></div>
+              <div class="wf-pclaim"><span class="ic">&#9633;</span><span class="ct"><b>Aggregate only.</b> Never an individual response, no drill-down.</span></div>
+              <div class="wf-pclaim"><span class="ic">5+</span><span class="ct"><b>Minimum of 5.</b> No score until at least 5 answer.</span></div>
+              <div class="wf-pclaim"><span class="ic">&#8709;</span><span class="ct"><b>No live count</b> while a cycle is open.</span></div>
+              <div class="wf-pclaim"><span class="ic">&#9736;</span><span class="ct"><b>Subscription as privacy.</b> Never exposes an individual.</span></div>
+              <div class="wf-see">
+                <div class="st">Can see</div>
+                <div class="wf-seerow"><span class="mk">+</span><span>Team score and trend</span></div>
+                <div class="wf-seerow"><span class="mk">+</span><span>Participation as a share</span></div>
+                <div class="st" style="margin-top:11px;">Cannot see</div>
+                <div class="wf-seerow no"><span class="mk">x</span><span>Any individual or who answered</span></div>
+                <div class="wf-seerow no"><span class="mk">x</span><span>Any drill-down</span></div>
+                <div class="wf-seerow no"><span class="mk">x</span><span>Any sub-group below 5</span></div>
+              </div>
+              <div class="wf-samepromise">Same promise your team sees (10.1).</div>
+            </div>
           </div>
         </div>
-        <div class="wf-note">same blocks, single column, full-width fields.</div>
+        <div class="wf-note">drilled in from the 8.0 index &middot; back to Settings &middot; same 0.3 spine + can/cannot &middot; read-only, structural.</div>
       </div>
     </div>
+    <div class="callout"><strong>The differentiator, made checkable.</strong> This is the strategic dimension we must win (privacy visible in the UI, not promised in a policy) put where the operator can verify it and answer a team member who asks "who sees this?". It is deliberately read-only: nothing here is a toggle, because the boundary is structural (Principle 1, D1). The same five claims render for the employee (10.1), the owner (9.1), and the public (1.1); 0.3 is the single source and must not drift.</div>
   </section>
 
-  <!-- SEO (noindex, follow) -->
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States and primary CTA</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Default</td><td>the five claims, the structural note, and the can and cannot panel</td><td>read-only; optional links to 1.1 and 10.1</td></tr>
+          <tr><td>Below minimum-N (contextual)</td><td>the "results need at least 5 people" note appears (ties 4.3, 9.3, 10.1)</td><td>read-only</td></tr>
+          <tr><td>Guest / Owner</td><td>-</td><td>redirect to 2.1 Log in / 9.0 (owner sees the 9.1 comfort variant)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Primary CTA:</strong> none that changes anything, by design; the whole point is that nothing here is a setting. The affordances are read-only, plus optional links to the public 1.1 explainer and the employee 10.1 view. Privacy is proof, not a control panel.</p>
+  </section>
+
+  <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Public but functional, return access</div>
-    <h2>SEO block (noindex, follow)</h2>
-    <p>Log in is a public but purely functional return-access page. It carries no acquisition value and is not indexed, the same treatment as 2.0 and different from the deep app zones (noindex, nofollow).</p>
+    <div class="section-label">Authenticated app view</div>
+    <h2>SEO block (noindex)</h2>
+    <p>Privacy center is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema. The indexable version of the same five claims lives on the public 1.1 Security and privacy page; the two must not drift (0.3 is the single source).</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, follow</code> (thin, transactional; follow keeps equity flowing to Sign up and legal)</span></div>
-      <div class="seo-row"><span class="seo-k">nav queries</span><span class="seo-v">"Brio login" is navigational, best served by Home / Landing which links here; the form need not rank</span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none on the form</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (authenticated app)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/settings/privacy</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none (public 1.1 carries the indexable version)</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
-    <h3>In-app findability (still specified)</h3>
+    <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 (the heading) for the accessible document outline</li>
-      <li>email and password are labelled inputs with visible labels</li>
-      <li>the wrong-credentials message is conveyed in text, not by color alone</li>
-      <li>Forgot password, Log in, and the magic-link option are labelled controls; tap targets at least 44px</li>
+      <li>exactly one H1 ("Privacy center" within the settings outline) for the accessible document outline</li>
+      <li>the claims and the can and cannot lists are text with plus and x marks, never carried by color alone</li>
+      <li>the structural note is text; the optional external links are labelled controls</li>
+      <li>tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>The recurring gate.</strong> Log in reuses the auth-page shell from 2.0, a reduced 0.1, and the 0.2 public footer; it invents nothing global. It is fast, forgiving (wrong credentials and forgotten passwords both have a clear path), and never a dead-end. Next: <strong>2.2 Magic-link sent</strong> (the "check your email" state, shared by the magic-link and password-reset paths), then <strong>2.3 Invalid or expired link</strong>, which closes cluster 2.</div>
+    <div class="callout ok"><strong>Proof, not a control.</strong> Privacy center renders the canonical 0.3 five claims and the can and cannot panel, framed for the operator and marked structural, inside the 8.0 shell. It reuses the 0.3 component, the wf-see and wf-seerow list from 7.0 and 9.0, and the shell chrome, and invents nothing global; it is the operator twin of 9.1 and 10.1, the same promise reframed. Next in cluster 8: <strong>8.3 Notifications</strong> (reminders and digests, items 9 and 10), then 8.4 Account settings, which closes cluster 8.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 2.1 Log in - July 2026</p>
-    <p style="margin-top:4px;">Return access: email + password or magic link, with a forgot-password path and a generic wrong-credentials message, reusing the 2.0 auth-page shell. Success routes to the Dashboard or resumes onboarding. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/login.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 8.2 Privacy center - July 2026</p>
+    <p style="margin-top:4px;">The operator-facing proof surface: the canonical 0.3 privacy-disclosure operator variant, the five claims and a can and cannot panel, marked structural rather than configurable, inside the 8.0 shell. The operator twin of 9.1 (owner) and 10.1 (employee), the same promise reframed. Reuses the 0.3 component and the wf-see can and cannot list from 7.0 and 9.0. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/settings-privacy.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
