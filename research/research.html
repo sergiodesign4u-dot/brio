@@ -639,6 +639,9 @@
     .pattern-card.primary { border-color: var(--accent-dim); background: rgba(79, 156, 249, 0.03); }
     .pattern-card.antipattern { border-color: var(--red-dim); opacity: 0.75; }
 
+    .findings-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 16px 0; }
+    @media (max-width: 700px) { .findings-grid { grid-template-columns: 1fr; } }
+
     .pattern-meta {
       display: flex;
       gap: 8px;
@@ -1488,7 +1491,7 @@
     </div>
 
     <h2>Key Findings</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:16px 0;">
+    <div class="findings-grid">
       <div class="pattern-card">
         <h3 style="margin-top:0;font-size:14px;color:var(--text-muted);">3 Common Patterns</h3>
         <p style="font-size:13px;margin-bottom:8px;">Privacy is claimed, not designed. No competitor specifies the mechanism on a public product page.</p>
