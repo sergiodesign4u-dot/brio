@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Security and privacy (1.1)</title>
+  <title>Brio - IA Detail: Help / FAQ (1.4)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -70,7 +70,6 @@
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
     .badge.seo { background: var(--accent-warm-dim); color: var(--accent-warm); border-color: var(--accent-warm-dim); }
-    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -113,7 +112,7 @@
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* public marketing chrome (reused from 0.0 / 1.0) */
+    /* public marketing chrome (reused from 0.0 / 1.0 / 1.1 / 1.2 / 1.3) */
     .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
     .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; flex-wrap: wrap; }
     .wf-nav .sp { margin-left: auto; }
@@ -124,33 +123,23 @@
     .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
     .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
 
-    /* how-it-works flow (3 steps) */
-    .wf-flow { display: flex; gap: 6px; align-items: stretch; flex-wrap: wrap; }
-    .wf-step { flex: 1; min-width: 84px; border: 1px solid #333; border-radius: 6px; padding: 9px; text-align: center; }
-    .wf-step .sn { font-size: 8px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.07em; font-family: ui-monospace, monospace; }
-    .wf-step .stx { font-size: 10px; color: #cfcfcf; line-height: 1.4; margin-top: 3px; }
-    .wf-arrow { align-self: center; color: #6a6a6a; font-size: 12px; }
+    /* in-help search (help-scoped, ties 11.5 which is likely N/A) */
+    .wf-search { display: flex; align-items: center; gap: 8px; border: 1px solid #3a3a3a; border-radius: 7px; padding: 9px 11px; }
+    .wf-search .mag { flex: 0 0 auto; width: 16px; height: 16px; border: 1px solid #7a7a7a; border-radius: 50%; position: relative; }
+    .wf-search .mag::after { content: ''; position: absolute; right: -3px; bottom: -2px; width: 5px; height: 1px; background: #7a7a7a; transform: rotate(45deg); }
+    .wf-search .ph { flex: 1; color: #6a6a6a; font-size: 11px; }
 
-    /* five claims (0.3 public variant, reused wf-pclaim from 8.2) */
-    .wf-pclaim { display: flex; gap: 9px; padding: 8px 0; border-bottom: 1px solid #1d1d1d; align-items: flex-start; }
-    .wf-pclaim:first-of-type { padding-top: 2px; }
-    .wf-pclaim .ic { flex: 0 0 auto; width: 22px; height: 22px; border: 1px solid #6a6a6a; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #e6e6e6; }
-    .wf-pclaim .ct { font-size: 10.5px; color: #b8b8b8; line-height: 1.5; }
-    .wf-pclaim .ct b { color: #fff; font-weight: 700; }
-
-    /* can / cannot panel (reused from 7.0 / 8.2 / 9.0) */
-    .wf-see { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 12px; margin-top: 4px; }
-    .wf-see .st { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 7px; }
-    .wf-seerow { display: flex; gap: 8px; font-size: 11px; color: #cfcfcf; margin-bottom: 5px; align-items: flex-start; }
-    .wf-seerow .mk { width: 14px; text-align: center; color: #fff; font-weight: 700; flex-shrink: 0; }
-    .wf-seerow.no { color: #9a9a9a; }
-
-    /* FAQ (crawlable, FAQPage schema source) */
-    .wf-faq { border: 1px solid #333; border-radius: 8px; overflow: hidden; }
+    /* FAQ groups (crawlable, FAQPage schema source; reused from 1.1) */
+    .wf-glbl { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin: 4px 0 8px; }
+    .wf-faq { border: 1px solid #333; border-radius: 8px; overflow: hidden; margin-bottom: 12px; }
     .wf-faqrow { padding: 10px 12px; border-bottom: 1px solid #242424; }
     .wf-faqrow:last-child { border-bottom: none; }
     .wf-faqq { font-size: 10.5px; color: #fff; font-weight: 700; }
     .wf-faqa { font-size: 9.5px; color: #9a9a9a; line-height: 1.5; margin-top: 3px; }
+
+    /* contact fallback (reused wf-help from 1.3) */
+    .wf-help { display: flex; align-items: center; gap: 8px; border: 1px solid #333; border-radius: 7px; padding: 9px 11px; }
+    .wf-help .ht { flex: 1; font-size: 10px; color: #b8b8b8; }
 
     .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
@@ -229,10 +218,10 @@
       <a href="settings-notifications.html" class="nav-sub-item">Notifications</a>
       <a href="settings-account.html" class="nav-sub-item">Account settings</a>
       <a href="pricing.html" class="nav-sub-item">Pricing</a>
-      <a href="security-privacy.html" class="nav-sub-item nav-sub-active">Security and privacy</a>
+      <a href="security-privacy.html" class="nav-sub-item">Security and privacy</a>
       <a href="about.html" class="nav-sub-item">About</a>
       <a href="contact.html" class="nav-sub-item">Contact / Support</a>
-      <a href="help.html" class="nav-sub-item">Help / FAQ</a>
+      <a href="help.html" class="nav-sub-item nav-sub-active">Help / FAQ</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -253,90 +242,79 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 1.1</span>
+      <span class="badge">Node 1.4</span>
       <span class="badge">Public marketing</span>
       <span class="badge seo">Indexed &middot; full A-E SEO</span>
-      <span class="badge privacy">Public 0.3 instance</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Security and privacy (1.1) &middot; URL: /security</div>
-    <h1>Security and privacy</h1>
-    <p class="hero-intro">The public, indexable instance of the canonical 0.3 privacy-disclosure: Brio's differentiator made public, a fuller, third-person, crawlable version of the same five claims. It explains how the aggregate-only model works so a prospective operator (and any employee who looks it up) can trust the model before signing up. This is the only crawlable version of the five claims, so its copy is the canonical public source and must not drift from the spine. Serves the Main job, the benchmark differentiator, and J3 and E2. Indexed, so full A to E SEO. Source of truth: ia/docs/pages/security-privacy.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Help / FAQ (1.4) &middot; URL: /help</div>
+    <h1>Help / FAQ</h1>
+    <p class="hero-intro">The main self-serve support hub and a key SEO surface: three FAQ groups (setting up, privacy, billing) in the 1.1 FAQ pattern, an in-help search, and a contact fallback to 1.3, so most questions resolve without contacting support and no user is a dead-end. The FAQ questions and answers are the FAQPage schema source and must match the visible text exactly; the privacy answers reuse the 1.1 canonical spine and must not drift. For Priya the operator. Serves supporting self-serve support and deflection. Indexed, with a full A to E SEO block. Source of truth: ia/docs/pages/help.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>The page's job is trust, so the strongest element is the plain, honest explanation, not the CTA. It says the same thing the team sees before answering (10.1) and the operator sees in the Privacy center (8.2).</p>
+    <p>Search first, then grouped answers, then a fallback: the page's job is deflection, so the strongest elements are the FAQ groups, not the CTA. The privacy group says the same thing the public explainer (1.1) and the pre-check-in disclosure (10.1) say.</p>
     <ol>
-      <li><strong>Public nav</strong> (0.1 pre-auth): the Brio mark, marketing links (Pricing, Security active, About), Log in, Start free. No job tabs.</li>
-      <li><strong>Hero</strong>: H1 "Your team's answers stay private", a subhead, and Start free. The LCP is the heading text.</li>
-      <li><strong>How the aggregate-only model works</strong>: a plain three-step explanation (your answer joins an aggregate, results appear only above a minimum of 5, the owner sees a team number, never an individual).</li>
-      <li><strong>The five claims (public framing)</strong>: the canonical 0.3 spine, fuller and third-person.</li>
-      <li><strong>What the owner can and cannot see</strong>: the can and cannot panel (the same wf-see and wf-seerow used at 7.0, 8.2, 9.0).</li>
-      <li><strong>Privacy questions (FAQ)</strong>: real questions and answers, marked up as an FAQ (the FAQPage schema source).</li>
-      <li><strong>CTA band and legal link</strong>: Start free, to 2.0 Sign up, plus a link to the full Privacy Policy (1.6). <strong>Footer</strong> (0.2).</li>
+      <li><strong>Public nav</strong> (0.1 pre-auth): the Brio mark, marketing links, Log in, Start free. No job tabs.</li>
+      <li><strong>Hero</strong>: H1 "How can we help?", a subhead. The LCP is the heading text.</li>
+      <li><strong>Search within help</strong>: a search box that filters the FAQ. Help-scoped, not the app-wide global search (11.5), which is likely N/A <strong>[?]</strong>; the FAQ text is in the HTML, not loaded only on search, so it stays crawlable.</li>
+      <li><strong>FAQ groups by topic</strong>: Setting up Brio, Privacy and your data, Plans and billing, each a set of question and answer rows (the 1.1 wf-faq pattern). These are the FAQPage schema source and must match the visible text exactly.</li>
+      <li><strong>Contact fallback</strong>: "still stuck? contact us", a link to 1.3, so a user who did not find an answer is never a dead-end.</li>
+      <li><strong>CTA band</strong>: Start free, to 2.0 Sign up. <strong>Footer</strong> (0.2).</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation (public), 0.2 Footer, the canonical 0.3 privacy-disclosure (public / explainer variant, the five claims and the can and cannot panel), and the public chrome from 1.0. No new global; 1.1 is the public, indexable 0.3 instance (operator, owner, and employee instances are noindex), so this page carries the crawlable copy and must not drift.</p>
+    <p><strong>Components used:</strong> 0.1 Navigation (public), 0.2 Footer, the public chrome from 1.0 and 1.1, the wf-faq groups from 1.1, and the wf-help fallback from 1.3. The in-help search is thin, page-specific layout; it ties to 11.5 Global search, which is likely N/A. No new global; the privacy answers must not drift from the 1.1 spine.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the full public explainer; mobile stacks the same blocks. The claims and the can and cannot boundary are carried by text and plus and x marks, never color.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the full help hub; mobile stacks the same blocks. The FAQ answers are plain crawlable text, never carried by color; every answer stays visible for the crawler.</p>
 
     <div class="wf-row">
       <div style="flex:1; min-width:300px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, public explainer (guest)</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, help hub (guest)</div>
         <div class="wf-page">
-          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Pricing</span><span class="wf-plain" style="color:#fff;">Security</span><span class="wf-plain">About</span><span class="sp"></span><span class="wf-b sm">Log in</span><span class="wf-b solid sm">Start free</span></div>
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Pricing</span><span class="wf-plain">Security</span><span class="wf-plain">About</span><span class="sp"></span><span class="wf-b sm">Log in</span><span class="wf-b solid sm">Start free</span></div>
           <div class="wf-sec">
             <div class="lbl">2 &middot; hero (H1)</div>
             <div class="wf-hl"></div><div class="wf-hl s"></div>
-            <div style="margin-top:10px;"><span class="wf-b solid sm">Start free</span></div>
           </div>
           <div class="wf-sec">
-            <div class="lbl">3 &middot; how the aggregate-only model works</div>
-            <div class="wf-flow">
-              <div class="wf-step"><div class="sn">You</div><div class="stx">Your answer is submitted anonymously</div></div>
-              <div class="wf-arrow">&#8594;</div>
-              <div class="wf-step"><div class="sn">Aggregate</div><div class="stx">It joins at least 5 others, so no one stands out</div></div>
-              <div class="wf-arrow">&#8594;</div>
-              <div class="wf-step"><div class="sn">Owner</div><div class="stx">Sees a team number and trend, never a person</div></div>
+            <div class="lbl">3 &middot; search within help (ties 11.5, likely N/A)</div>
+            <div class="wf-search"><span class="mag"></span><span class="ph">Search help, for example "invite team"</span><span class="wf-b sm">Search</span></div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">4 &middot; FAQ groups (FAQPage schema source)</div>
+            <div class="wf-glbl">Setting up Brio</div>
+            <div class="wf-faq">
+              <div class="wf-faqrow"><div class="wf-faqq">How do I get started with Brio?</div><div class="wf-faqa">Sign up, tell us your company size, and Brio pre-selects a first program for you; setup takes about five minutes.</div></div>
+              <div class="wf-faqrow"><div class="wf-faqq">How do I invite my team?</div><div class="wf-faqa">From the Team tab, share an invite link or a join code; people can take their first check-in without creating an account.</div></div>
+              <div class="wf-faqrow"><div class="wf-faqq">How long does a check-in take?</div><div class="wf-faqa">Under 30 seconds, one to three quick questions, with no account needed the first time.</div></div>
             </div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">4 &middot; the five claims (0.3 public variant)</div>
-            <div class="wf-pclaim"><span class="ic">&#9633;</span><span class="ct"><b>Aggregate only.</b> No one, not a manager and not the owner, ever sees an individual answer.</span></div>
-            <div class="wf-pclaim"><span class="ic">5+</span><span class="ct"><b>A minimum of 5.</b> No score is shown until at least 5 people have answered.</span></div>
-            <div class="wf-pclaim"><span class="ic">&#8709;</span><span class="ct"><b>No live count.</b> While a check-in is open, no one sees a running tally.</span></div>
-            <div class="wf-pclaim"><span class="ic">&#9736;</span><span class="ct"><b>Subscription as privacy.</b> The subscription pays for the aggregate; individual data is never shown or sold.</span></div>
-            <div class="wf-pclaim"><span class="ic">&#9737;</span><span class="ct"><b>What the owner sees.</b> A team score, a trend, and participation, listed in full below.</span></div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">5 &middot; what the owner can and cannot see</div>
-            <div class="wf-see">
-              <div class="st">Can see</div>
-              <div class="wf-seerow"><span class="mk">+</span><span>The team wellbeing score and its trend</span></div>
-              <div class="wf-seerow"><span class="mk">+</span><span>How many people took part</span></div>
-              <div class="st" style="margin-top:10px;">Cannot see</div>
-              <div class="wf-seerow no"><span class="mk">x</span><span>Any individual response, name, or who answered</span></div>
-              <div class="wf-seerow no"><span class="mk">x</span><span>Any group smaller than 5</span></div>
-            </div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">6 &middot; privacy FAQ (FAQPage schema source)</div>
+            <div class="wf-glbl">Privacy and your data (same as 1.1)</div>
             <div class="wf-faq">
               <div class="wf-faqrow"><div class="wf-faqq">Can my manager see my answer?</div><div class="wf-faqa">No. Answers are only ever shown as a team aggregate of at least 5 people.</div></div>
               <div class="wf-faqrow"><div class="wf-faqq">What if my team is small?</div><div class="wf-faqa">If fewer than 5 answer, no results are shown at all, so no one can be singled out.</div></div>
               <div class="wf-faqrow"><div class="wf-faqq">Do you sell my data?</div><div class="wf-faqa">No. Individual data is never shown or sold; the subscription pays for the aggregate.</div></div>
             </div>
+            <div class="wf-glbl">Plans and billing</div>
+            <div class="wf-faq">
+              <div class="wf-faqrow"><div class="wf-faqq">Is there a free plan?</div><div class="wf-faqa">Yes. The free plan covers up to 10 people with one active program and a basic weekly check-in.</div></div>
+              <div class="wf-faqrow"><div class="wf-faqq">What do I get when I upgrade?</div><div class="wf-faqa">Paid plans add the full program library, trends, and the owner dashboard; pricing is per seat.</div></div>
+              <div class="wf-faqrow"><div class="wf-faqq">Can I change or cancel anytime?</div><div class="wf-faqa">Yes, from Settings then Plan; changes take effect from the next billing cycle.</div></div>
+            </div>
           </div>
-          <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span> <span class="wf-link">Read the Privacy Policy (1.6)</span></div>
+          <div class="wf-sec">
+            <div class="lbl">5 &middot; still stuck? contact fallback (to 1.3)</div>
+            <div class="wf-help"><span class="ht">Still stuck? We are one message away.</span><span class="wf-b sm">Contact us</span></div>
+          </div>
+          <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
           <div class="wf-foot-mini"><span>Product</span><span>Company</span><span>Resources</span><span>Legal</span></div>
         </div>
-        <div class="wf-note">public 0.3 explainer &middot; how-it-works flow + five claims + can/cannot (+/x not color) + crawlable FAQ &middot; same promise as 8.2 / 9.1 / 10.1 &middot; LCP = hero text.</div>
+        <div class="wf-note">public chrome &middot; help-scoped search (ties 11.5, likely N/A) &middot; three FAQ groups = FAQPage schema source &middot; privacy group same as 1.1 &middot; contact fallback to 1.3 &middot; LCP = hero text.</div>
       </div>
 
       <div>
@@ -345,28 +323,30 @@
           <div class="wf-phoneinner">
             <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-b solid sm">Start free</span></div>
             <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>hero</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
+            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>search</div><div class="wf-search"><span class="mag"></span><span class="ph">Search help</span></div></div>
             <div class="wf-sec">
-              <div class="lbl"><span class="wf-bnum">3</span>how it works</div>
-              <div class="wf-flow" style="flex-direction:column;">
-                <div class="wf-step"><div class="sn">You</div><div class="stx">Answer anonymously</div></div>
-                <div class="wf-step"><div class="sn">Aggregate</div><div class="stx">Joins 5+ others</div></div>
-                <div class="wf-step"><div class="sn">Owner</div><div class="stx">Sees a team number only</div></div>
+              <div class="lbl"><span class="wf-bnum">4</span>FAQ groups</div>
+              <div class="wf-glbl">Setting up</div>
+              <div class="wf-faq">
+                <div class="wf-faqrow"><div class="wf-faqq">How do I get started?</div><div class="wf-faqa">Sign up, pick company size, first program is pre-selected; about 5 minutes.</div></div>
+                <div class="wf-faqrow"><div class="wf-faqq">How do I invite my team?</div><div class="wf-faqa">Share a link or join code; first check-in needs no account.</div></div>
+              </div>
+              <div class="wf-glbl">Privacy (same as 1.1)</div>
+              <div class="wf-faq">
+                <div class="wf-faqrow"><div class="wf-faqq">Can my manager see my answer?</div><div class="wf-faqa">No. Only ever a team aggregate of at least 5 people.</div></div>
+                <div class="wf-faqrow"><div class="wf-faqq">Do you sell my data?</div><div class="wf-faqa">No. Individual data is never shown or sold.</div></div>
+              </div>
+              <div class="wf-glbl">Billing</div>
+              <div class="wf-faq">
+                <div class="wf-faqrow"><div class="wf-faqq">Is there a free plan?</div><div class="wf-faqa">Yes, up to 10 people, one program, weekly check-in.</div></div>
               </div>
             </div>
-            <div class="wf-sec">
-              <div class="lbl"><span class="wf-bnum">5</span>can / cannot</div>
-              <div class="wf-see">
-                <div class="st">Can see</div>
-                <div class="wf-seerow"><span class="mk">+</span><span>Team score, trend, participation</span></div>
-                <div class="st" style="margin-top:9px;">Cannot see</div>
-                <div class="wf-seerow no"><span class="mk">x</span><span>Any individual or who answered</span></div>
-              </div>
-            </div>
+            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">5</span>still stuck?</div><div class="wf-help"><span class="ht">Still stuck?</span><span class="wf-b sm">Contact</span></div></div>
             <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
             <div class="wf-foot-mini"><span>Footer (accordions)</span></div>
           </div>
         </div>
-        <div class="wf-note">same blocks stacked &middot; how-it-works becomes a vertical flow &middot; FAQ + full Privacy Policy link below.</div>
+        <div class="wf-note">same blocks stacked &middot; search full width &middot; groups condensed but the desktop set is the full schema source &middot; contact fallback thumb-reachable.</div>
       </div>
     </div>
   </section>
@@ -375,13 +355,13 @@
   <section id="seo">
     <div class="section-label">Structure SEO, ready copy</div>
     <h2>SEO block A to E (indexed)</h2>
-    <p>Security and privacy is indexed and is the canonical public source of the five claims. Copy is ready; final query volumes deferred to production <span class="hyp">?</span>. It must not drift from the 0.3 spine.</p>
+    <p>Help is indexed and is a key SEO surface: the FAQPage schema is primary here. Copy is ready; final query volumes deferred to production <span class="hyp">?</span>. The privacy answers must not drift from the 1.1 spine.</p>
 
     <h3>A. Meta tags</h3>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">title</span><span class="seo-v"><code>How Brio keeps team wellbeing private | Brio</code> <span class="count">45 / 60</span></span></div>
-      <div class="seo-row"><span class="seo-k">description</span><span class="seo-v"><code>How Brio keeps employee wellbeing private: aggregate-only results, no score until 5 answer, no live count, never an individual response. See how it works.</code> <span class="count">153 / 155</span></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v"><code>https://[production-domain]/security</code> <span class="hyp">? domain</span></span></div>
+      <div class="seo-row"><span class="seo-k">title</span><span class="seo-v"><code>Brio Help center: setup, privacy, billing | Brio</code> <span class="count">48 / 60</span></span></div>
+      <div class="seo-row"><span class="seo-k">description</span><span class="seo-v"><code>Answers to common Brio questions: getting set up, how privacy works, and billing. Search the help center or contact support if you are still stuck.</code> <span class="count">148 / 155</span></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v"><code>https://[production-domain]/help</code> <span class="hyp">? domain</span></span></div>
       <div class="seo-row"><span class="seo-k">hreflang</span><span class="seo-v">en-US (primary), en-GB (UK) <span class="hyp">?</span></span></div>
       <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>index, follow</code></span></div>
       <div class="seo-row"><span class="seo-k">open graph</span><span class="seo-v">og:title, og:description, og:type=website, og:url, og:image <span class="hyp">? asset at Concept</span></span></div>
@@ -391,39 +371,38 @@
     <h3>B. Heading structure</h3>
     <p>Exactly one H1, then H2s in block order.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">H1</span><span class="seo-v"><code>Your team's answers stay private</code></span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">How the aggregate-only model works</span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">The five things we promise</span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">What the owner can and cannot see</span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Privacy questions</span></div>
+      <div class="seo-row"><span class="seo-k">H1</span><span class="seo-v"><code>How can we help?</code></span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Setting up Brio</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Privacy and your data</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Plans and billing</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Still need a hand?</span></div>
       <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Start free in five minutes</span></div>
     </div>
 
     <h3>C. Ready SEO text</h3>
-    <div class="seo-text">Brio is built so that no one, not a manager and not the owner, ever sees an individual employee's answer. Every response joins a team aggregate, and no score is shown until at least five people have answered, so a single reply cannot be picked out. While a check-in is open, no one sees a running count. The owner sees a team wellbeing score, its trend, and how many people took part, never who said what. This is the product, not a setting: the subscription pays for the aggregate, and individual data is never shown or sold.</div>
+    <div class="seo-text">The Brio help center answers the questions operators ask most: how to set up your first program and invite your team, how the aggregate-only privacy model protects individual answers, and how plans and billing work. Search for a topic, or browse the groups below. If you are still stuck, contact support and we will reply to your email, usually within one business day.</div>
 
     <h3>D. Structured data (schema.org)</h3>
     <ul>
-      <li><code>WebPage</code>: name, url, description; part of the Brio site</li>
-      <li><code>BreadcrumbList</code>: Home, Security and privacy</li>
-      <li><code>FAQPage</code>: the privacy questions and answers in the FAQ block (must match the visible text exactly)</li>
+      <li><code>FAQPage</code> (primary): every question and answer in the three groups (must match the visible text exactly)</li>
+      <li><code>BreadcrumbList</code>: Home, Help</li>
       <li><code>Organization</code>: name Brio, url, logo <span class="hyp">? asset at Concept</span></li>
     </ul>
 
     <h3>E. Optimization checklist</h3>
     <ul>
       <li>exactly one H1; the LCP is the hero heading text, not an image</li>
-      <li>the five claims and the can and cannot lists are real text, never baked into an image, never carried by color alone</li>
-      <li>the FAQ answers are crawlable text and match the FAQPage schema exactly</li>
-      <li>nav and footer links are crawlable <code>&lt;a&gt;</code>; canonical and hreflang set; internal links to 0.0 Landing, 1.0 Pricing, 2.0 Sign up, 1.6 Privacy Policy</li>
-      <li>copy must not drift from the 0.3 spine (single source); final query volumes deferred to production <span class="hyp">?</span></li>
+      <li>every FAQ answer is crawlable text and matches the FAQPage schema exactly; the search filters existing text, it does not replace it</li>
+      <li>the privacy answers must not drift from the 1.1 spine (single public source)</li>
+      <li>nav and footer links are crawlable <code>&lt;a&gt;</code>; canonical and hreflang set; internal links to 1.1 Security, 1.0 Pricing, 1.3 Contact, 2.0 Sign up</li>
+      <li>Core Web Vitals budget respected; final query volumes deferred to production <span class="hyp">?</span></li>
     </ul>
-    <div class="callout ok"><strong>The differentiator, made public and crawlable.</strong> Security and privacy renders the canonical 0.3 five claims and the can and cannot panel in a fuller public framing, with a how-it-works explanation and an FAQ, and a full A to E SEO block. It is the only indexable 0.3 instance, so its copy is the single public source and must not drift from the spine. Next: <strong>1.2 About</strong>, then 1.3 Contact, 1.4 Help / FAQ, 1.5 Segment landing, and 1.6 Legal (which holds the full Privacy Policy this page links to).</div>
+    <div class="callout ok"><strong>Self-serve first, then a human.</strong> Help is the main support hub and a key SEO surface: three FAQ groups (setup, privacy, billing) in the 1.1 FAQ pattern, an in-help search, and a contact fallback to 1.3, in the public chrome, with a full A to E SEO block and the FAQPage schema as the primary type. It reuses the public chrome, the wf-faq groups, and the wf-help fallback, and invents nothing global; the privacy answers must not drift from the 1.1 spine. Next: <strong>1.5 Category / segment landing</strong> (the SEO template), then 1.6 Legal, which closes cluster 1 and the Step 5 rollout.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 1.1 Security and privacy - July 2026</p>
-    <p style="margin-top:4px;">The public, indexable instance of the 0.3 privacy-disclosure: the differentiator made public, with a how-it-works explanation, the five claims, a can and cannot panel, and a crawlable FAQ, in the public chrome, and a full A to E SEO block. Its copy is the single public source and must not drift from the spine; the full Privacy Policy lives at 1.6. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/security-privacy.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 1.4 Help / FAQ - July 2026</p>
+    <p style="margin-top:4px;">The main self-serve support hub and a key SEO surface: three FAQ groups (setting up, privacy, billing) in the 1.1 wf-faq pattern, an in-help search (help-scoped, ties 11.5 which is likely N/A), and a contact fallback to 1.3, in the public chrome, with a full A to E SEO block and the FAQPage schema as the primary type. The FAQ questions and answers are the schema source and must match the visible text exactly; the privacy answers reuse the 1.1 spine and must not drift. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/help.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
