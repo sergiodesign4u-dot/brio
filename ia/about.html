@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Already submitted (10.5)</title>
+  <title>Brio - IA Detail: About (1.2)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -69,7 +69,7 @@
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
-    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
+    .badge.seo { background: var(--accent-warm-dim); color: var(--accent-warm); border-color: var(--accent-warm-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -96,6 +96,8 @@
     .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
     .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
     .seo-v code { font-size: 12px; }
+    .count { color: var(--text-faint); font-size: 11px; font-family: ui-monospace, monospace; }
+    .seo-text { background: var(--surface-2); border-left: 2px solid var(--accent); border-radius: 4px; padding: 12px 16px; color: var(--text-muted); font-size: 13.5px; margin: 12px 0; }
 
     /* ===== Black-and-white wireframe kit ===== */
     .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
@@ -105,32 +107,40 @@
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-b.sm { padding: 5px 10px; font-size: 10px; }
+    .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* employee check-in surface (mobile, no nav, near-anonymous) */
-    .wf-checkbar { padding: 9px 12px 8px; border-bottom: 1px solid #2c2c2c; text-align: center; }
-    .wf-checkbar .co { color: #8a8a8a; font-size: 9px; font-family: ui-monospace, monospace; }
-    .wf-minianon { display: inline-flex; align-items: center; gap: 4px; font-size: 8px; color: #9a9a9a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-top: 3px; }
-    .wf-checkbody { padding: 22px 16px 20px; text-align: center; }
+    /* public marketing chrome (reused from 0.0 / 1.0 / 1.1) */
+    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; flex-wrap: wrap; }
+    .wf-nav .sp { margin-left: auto; }
+    .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
+    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
+    .wf-hl.s { width: 55%; height: 12px; }
+    .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
+    .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .wf-3 { display: flex; gap: 10px; flex-wrap: wrap; }
+    .wf-3 .cell { flex: 1; min-width: 90px; border: 1px solid #333; border-radius: 6px; padding: 10px; color: #9a9a9a; font-size: 11px; }
+    .wf-3 .cell b { color: #fff; }
 
-    /* confirmation badge (10.3 layout, reused: success-adjacent solid check) */
-    .wf-donecheck { width: 52px; height: 52px; border: 1px solid #6a6a6a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #e6e6e6; margin: 0 auto 14px; }
-    .wf-thanks { color: #fff; font-size: 18px; font-weight: 800; margin-bottom: 6px; }
-    .wf-sub { color: #9a9a9a; font-size: 11px; line-height: 1.55; margin-bottom: 16px; }
+    /* mission statement */
+    .wf-mission { border-left: 2px solid #6a6a6a; padding: 6px 0 6px 12px; color: #e0e0e0; font-size: 12px; line-height: 1.5; }
 
-    /* no-duplicate aggregate reassurance (ties to 10.1 / 10.3) */
-    .wf-aggline { display: flex; align-items: flex-start; gap: 8px; text-align: left; border: 1px solid #333; border-radius: 8px; padding: 10px 11px; margin-bottom: 14px; }
-    .wf-aggline .lk { flex: 0 0 auto; font-size: 13px; }
-    .wf-aggline .tx { font-size: 10.5px; color: #b8b8b8; line-height: 1.5; }
-    .wf-aggline .tx b { color: #fff; font-weight: 700; }
-
-    .wf-closehint { font-size: 10px; color: #6a6a6a; font-family: ui-monospace, monospace; margin-bottom: 12px; }
-    .wf-privlink { font-size: 10.5px; }
+    /* team grid */
+    .wf-team { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wf-person { flex: 1; min-width: 78px; border: 1px solid #333; border-radius: 7px; padding: 10px 8px; text-align: center; }
+    .wf-person .av { width: 30px; height: 30px; border-radius: 50%; border: 1px solid #6a6a6a; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #cfcfcf; }
+    .wf-person .pn { font-size: 10px; color: #fff; font-weight: 700; }
+    .wf-person .pr { font-size: 8.5px; color: #8a8a8a; }
+    .wf-qmark { font-size: 8px; color: #7a7a7a; font-family: ui-monospace, monospace; margin-top: 6px; }
 
     .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
-    .wf-deskcard { max-width: 440px; margin: 0 auto; border: 1px solid #3a3a3a; border-radius: 12px; overflow: hidden; background: #0c0c0c; }
+    .wf-phone .wf-sec { padding: 12px 10px; }
+    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
@@ -196,7 +206,7 @@
       <a href="checkin-questions.html" class="nav-sub-item">Questions</a>
       <a href="checkin-complete.html" class="nav-sub-item">Check-in complete</a>
       <a href="checkin-expired.html" class="nav-sub-item">Invite link expired</a>
-      <a href="checkin-already.html" class="nav-sub-item nav-sub-active">Already submitted</a>
+      <a href="checkin-already.html" class="nav-sub-item">Already submitted</a>
       <a href="checkin-submit-error.html" class="nav-sub-item">Submit error</a>
       <a href="settings.html" class="nav-sub-item">Settings shell</a>
       <a href="settings-plan.html" class="nav-sub-item">Plan / subscription</a>
@@ -205,7 +215,7 @@
       <a href="settings-account.html" class="nav-sub-item">Account settings</a>
       <a href="pricing.html" class="nav-sub-item">Pricing</a>
       <a href="security-privacy.html" class="nav-sub-item">Security and privacy</a>
-      <a href="about.html" class="nav-sub-item">About</a>
+      <a href="about.html" class="nav-sub-item nav-sub-active">About</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -226,121 +236,154 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 10.5</span>
-      <span class="badge">Employee flow (mobile)</span>
-      <span class="badge privacy">Valid link &middot; no duplicate</span>
+      <span class="badge">Node 1.2</span>
+      <span class="badge">Public marketing</span>
+      <span class="badge seo">Indexed &middot; full A-E SEO</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Already submitted this cycle (10.5) &middot; URL: /c/{invite-token} (already-submitted state)</div>
-    <h1>Already submitted this cycle</h1>
-    <p class="hero-intro">A valid link, but the employee has already answered this cycle. Confirm plainly that they are done, reassure that the earlier answer is already in the aggregate and no one is counted twice, and end calmly. This prevents a duplicate submission (MS1) without making the employee feel they did anything wrong. Because it is success-adjacent, not an error, it reuses the 10.3 solid check, not the 10.4 dashed mark. For Yemi the employee. Serves J4 and E2; terminal. Private token-gated surface, so noindex. Source of truth: ia/docs/pages/checkin-already.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / About (1.2) &middot; URL: /about</div>
+    <h1>About</h1>
+    <p class="hero-intro">The supporting brand page: who Brio is and why it exists, so a prospective operator trusts the company, not just the features. The mission (wellbeing without surveillance), the values that map to the design principles, the team, and a way to get in touch. Indexed, with a full A to E SEO block and the Organization schema. Team bios and photos are a hypothesis pending. For Priya the operator (pre-auth). Serves supporting brand trust. Source of truth: ia/docs/pages/about.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>A calm confirmation, centered and short, that reads as reassurance rather than a block. The persistent anonymity anchor is carried through, and the reassurance is the no-duplicate point (MS1).</p>
+    <p>The page's job is trust and brand, so the strongest element is the mission, not the CTA. It reinforces the differentiator as a company belief, not a tactic (Principle 1 and Principle 4).</p>
     <ol>
-      <li><strong>Minimal top bar with the anonymity anchor</strong>: the Brio mark, the company name, and the "Anonymous" reminder.</li>
-      <li><strong>Confirmation</strong>: the same solid check badge as 10.3 (success-adjacent, not an error), "You have already checked in" and "for this cycle".</li>
-      <li><strong>No-duplicate reassurance</strong>: one line that the earlier answer is already in the team's aggregate, that no one is counted twice, and that nothing individual is shown.</li>
-      <li><strong>Next-cycle note (quiet)</strong>: a light "you will be invited again next cycle", so this reads as expected, not a failure.</li>
-      <li><strong>Calm end</strong>: a quiet "you can close this" hint; no account prompt, no upsell. An optional "how your privacy is protected" link to the public 1.1 page.</li>
+      <li><strong>Public nav</strong> (0.1 pre-auth): the Brio mark, marketing links (Pricing, Security, About active), Log in, Start free. No job tabs.</li>
+      <li><strong>Hero</strong>: H1 "Wellbeing without surveillance", a subhead, and Start free. The LCP is the heading text.</li>
+      <li><strong>Our mission</strong>: why Brio exists (people work handed out with no HR; wellbeing should never mean watching people; the privacy boundary is the belief).</li>
+      <li><strong>What we believe</strong>: a few values that map to the design principles.</li>
+      <li><strong>The team</strong>: a small grid of people (name and role), placeholders; real bios and photos are <strong>[?]</strong> pending.</li>
+      <li><strong>Get in touch</strong>: a link to 1.3 Contact. <strong>CTA band</strong>: Start free, to 2.0. <strong>Footer</strong> (0.2).</li>
     </ol>
-    <p><strong>Components used:</strong> the 10.0 check-in chrome (no nav, no account) and the 10.3 confirmation badge and layout (solid check, aggregate reassurance), reused because this is a success-adjacent state. No new global; the privacy content is not repeated (that is 10.1).</p>
+    <p><strong>Components used:</strong> 0.1 Navigation (public), 0.2 Footer, and the public chrome from 1.0 and 1.1. The mission, values, and team grid are page-specific marketing layout. No new global; team bios and photos are a hypothesis, and compliance badges are deliberately not shown pending legal review.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A short centered confirmation on a phone, using the solid check (like 10.3, not the dashed "!" of 10.4, because this is not an error). There is no forward button and no way to submit again, by design (MS1). The desktop version centers the same narrow card.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the full page; mobile stacks the same blocks. The team grid holds placeholder people; real bios and photos are a hypothesis pending.</p>
 
     <div class="wf-row">
+      <div style="flex:1; min-width:300px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, About page (guest)</div>
+        <div class="wf-page">
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Pricing</span><span class="wf-plain">Security</span><span class="wf-plain" style="color:#fff;">About</span><span class="sp"></span><span class="wf-b sm">Log in</span><span class="wf-b solid sm">Start free</span></div>
+          <div class="wf-sec">
+            <div class="lbl">2 &middot; hero (H1)</div>
+            <div class="wf-hl"></div><div class="wf-hl s"></div>
+            <div style="margin-top:10px;"><span class="wf-b solid sm">Start free</span></div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">3 &middot; our mission</div>
+            <div class="wf-mission">Small companies get handed people work with no HR. Wellbeing should never mean watching people, so the privacy boundary is the belief, not a setting.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">4 &middot; what we believe (maps to design principles)</div>
+            <div class="wf-3">
+              <div class="cell"><b>Privacy is the product</b>, never a switch</div>
+              <div class="cell"><b>Make the non-expert</b> feel competent</div>
+              <div class="cell"><b>Honest signals</b> over flattering ones</div>
+            </div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">5 &middot; the team (placeholders)</div>
+            <div class="wf-team">
+              <div class="wf-person"><div class="av">&#9679;</div><div class="pn">Name</div><div class="pr">Founder</div></div>
+              <div class="wf-person"><div class="av">&#9679;</div><div class="pn">Name</div><div class="pr">Product</div></div>
+              <div class="wf-person"><div class="av">&#9679;</div><div class="pn">Name</div><div class="pr">Engineering</div></div>
+              <div class="wf-person"><div class="av">&#9679;</div><div class="pn">Name</div><div class="pr">Design</div></div>
+            </div>
+            <div class="wf-qmark">? real bios and photos pending</div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">6 &middot; get in touch (to 1.3)</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;"><span class="wf-plain">Questions or press?</span><span class="wf-link">Contact us</span></div>
+          </div>
+          <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
+          <div class="wf-foot-mini"><span>Product</span><span>Company</span><span>Resources</span><span>Legal</span></div>
+        </div>
+        <div class="wf-note">public chrome (0.1) &middot; mission = the anti-surveillance stance &middot; values map to design principles &middot; team placeholders (? bios) &middot; LCP = hero text.</div>
+      </div>
+
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, already submitted (default)</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
         <div class="wf-phone">
           <div class="wf-phoneinner">
-            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
-            <div class="wf-checkbody">
-              <div class="wf-donecheck">&#10003;</div>
-              <div class="wf-thanks">You have already checked in</div>
-              <div class="wf-sub">You are all set for this cycle. We will invite you again next time.</div>
-              <div class="wf-aggline">
-                <span class="lk">&#128274;</span>
-                <span class="tx"><b>Your earlier answer is already in the team's aggregate.</b> No one is counted twice, and nothing individual is shown.</span>
+            <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-b solid sm">Start free</span></div>
+            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>hero</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
+            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>mission</div><div class="wf-mission">Wellbeing should never mean watching people.</div></div>
+            <div class="wf-sec">
+              <div class="lbl"><span class="wf-bnum">5</span>team</div>
+              <div class="wf-team">
+                <div class="wf-person"><div class="av">&#9679;</div><div class="pn">Name</div><div class="pr">Founder</div></div>
+                <div class="wf-person"><div class="av">&#9679;</div><div class="pn">Name</div><div class="pr">Product</div></div>
               </div>
-              <div class="wf-closehint">You can close this tab now.</div>
-              <a class="wf-link wf-privlink">How your privacy is protected</a>
+              <div class="wf-qmark">? bios pending</div>
             </div>
+            <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
+            <div class="wf-foot-mini"><span>Footer (accordions)</span></div>
           </div>
         </div>
-        <div class="wf-note">solid check (10.3), NOT the dashed "!" of 10.4 &middot; no duplicate, no double-count, no individual data (MS1) &middot; no forward, no resubmit by design.</div>
-      </div>
-
-      <div style="flex:1; min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop / wide, centered card (never an app)</div>
-        <div class="wf-frame" style="margin-top:0;">
-          <div class="wf-deskcard">
-            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
-            <div class="wf-checkbody" style="padding:30px 28px 26px;">
-              <div class="wf-donecheck" style="width:58px; height:58px; font-size:25px;">&#10003;</div>
-              <div class="wf-thanks" style="font-size:20px;">You have already checked in</div>
-              <div class="wf-sub">You are all set for this cycle. We will invite you again next time.</div>
-              <div class="wf-aggline" style="max-width:340px; margin-left:auto; margin-right:auto;">
-                <span class="lk">&#128274;</span>
-                <span class="tx"><b>Your earlier answer is already in the team's aggregate.</b> No one is counted twice, and nothing individual is shown.</span>
-              </div>
-              <div class="wf-closehint">You can close this tab now.</div>
-              <a class="wf-link wf-privlink">How your privacy is protected</a>
-            </div>
-          </div>
-        </div>
-        <div class="wf-note">same calm confirmation centered &middot; the surface never becomes an app on a large screen &middot; terminal, no forward.</div>
+        <div class="wf-note">same blocks stacked &middot; team grid wraps to two per row &middot; contact + footer below.</div>
       </div>
     </div>
-    <div class="callout"><strong>Same for every team size.</strong> Because the employee is never shown a score, minimum-N does not change this screen. There is no error variant here: a broken or expired link is 10.4, and a failure at submit is 10.6; this node is only the case where the answer already landed and a repeat visit is handled gracefully.</div>
   </section>
 
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Behavior</div>
-    <h2>States and primary CTA</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Already submitted (default)</td><td>the solid-check confirmation, the no-duplicate reassurance, the calm end</td><td>none (close the tab); optional link to 1.1</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><strong>Primary CTA:</strong> none, by design, like 10.3. The task is already done; the natural end is to close the tab. The only affordance is an optional quiet link to the public 1.1 page. There is no forward button and no way to submit again, which is the point of the state (MS1, no duplicate).</p>
-  </section>
-
-  <!-- SEO (noindex) -->
+  <!-- SEO A-E -->
   <section id="seo">
-    <div class="section-label">Private token-gated surface</div>
-    <h2>SEO block (noindex)</h2>
-    <p>Already submitted is a private, token-gated employee surface. It is not indexed and carries no schema. It is a transactional zone, per the platform SEO stance.</p>
+    <div class="section-label">Structure SEO, ready copy</div>
+    <h2>SEO block A to E (indexed)</h2>
+    <p>About is indexed. Copy is ready; team bios and photos are <span class="hyp">?</span> pending; final query volumes deferred to production <span class="hyp">?</span>.</p>
+
+    <h3>A. Meta tags</h3>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (token-gated, personal)</span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; flow URL is <code>/c/{invite-token}</code></span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
-      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
+      <div class="seo-row"><span class="seo-k">title</span><span class="seo-v"><code>About Brio: wellbeing without surveillance | Brio</code> <span class="count">48 / 60</span></span></div>
+      <div class="seo-row"><span class="seo-k">description</span><span class="seo-v"><code>Brio helps small companies with no HR run real employee wellbeing without surveillance. Meet the team and the belief behind privacy-first wellbeing.</code> <span class="count">151 / 155</span></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v"><code>https://[production-domain]/about</code> <span class="hyp">? domain</span></span></div>
+      <div class="seo-row"><span class="seo-k">hreflang</span><span class="seo-v">en-US (primary), en-GB (UK) <span class="hyp">?</span></span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>index, follow</code></span></div>
+      <div class="seo-row"><span class="seo-k">open graph</span><span class="seo-v">og:title, og:description, og:type=website, og:url, og:image <span class="hyp">? asset at Concept</span></span></div>
+      <div class="seo-row"><span class="seo-k">twitter</span><span class="seo-v"><code>summary_large_image</code></span></div>
     </div>
-    <h3>In-app findability (not SEO, still specified)</h3>
+
+    <h3>B. Heading structure</h3>
+    <p>Exactly one H1, then H2s in block order.</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">H1</span><span class="seo-v"><code>Wellbeing without surveillance</code></span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Our mission</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">What we believe</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">The team</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Get in touch</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Start free in five minutes</span></div>
+    </div>
+
+    <h3>C. Ready SEO text</h3>
+    <div class="seo-text">Brio exists because small companies get handed people work with no HR and no playbook, and because wellbeing should never mean watching people. We build employee wellbeing software that is guided enough for a non-expert to run and private by design: individual answers are never shown to anyone, because the privacy boundary is the product, not a setting. We would rather show an owner an honest team signal than a flattering vanity metric.</div>
+
+    <h3>D. Structured data (schema.org)</h3>
     <ul>
-      <li>exactly one H1 (the confirmation heading) for the accessible document outline</li>
-      <li>the confirmation is conveyed by text and a mark, never by color alone</li>
-      <li>the optional privacy link is a labelled control; tap targets at least 44px</li>
-      <li>the flow works without an account</li>
+      <li><code>Organization</code> (primary): name Brio, url, logo <span class="hyp">? asset at Concept</span>, sameAs social links <span class="hyp">?</span></li>
+      <li><code>AboutPage</code> (or <code>WebPage</code>): name, url, description</li>
+      <li><code>BreadcrumbList</code>: Home, About</li>
     </ul>
-    <div class="callout ok"><strong>A repeat visit, handled gracefully.</strong> Already submitted turns a second click into a calm confirmation rather than a wall or a duplicate: the earlier answer is in the aggregate, no one is counted twice, and nothing individual is shown (MS1). It reuses the 10.0 chrome and the 10.3 confirmation layout, invents nothing global, and has no forward step, by design. Next, the last state of the rollout so far: <strong>10.6 Submit error</strong>, the failure-at-submit case that preserves the answers and routes back into the flow, never a dead-end.</div>
+
+    <h3>E. Optimization checklist</h3>
+    <ul>
+      <li>exactly one H1; the LCP is the hero heading text, not an image</li>
+      <li>the mission and values are real text, never baked into an image</li>
+      <li>nav and footer links are crawlable <code>&lt;a&gt;</code>; canonical and hreflang set; internal links to 0.0 Landing, 1.1 Security and privacy, 1.3 Contact, 2.0 Sign up</li>
+      <li>team photos, when added, carry alt text; compliance badges deferred <span class="hyp">?</span>; Core Web Vitals budget respected</li>
+    </ul>
+    <div class="callout ok"><strong>The belief behind the product.</strong> About reinforces the differentiator as a company stance (wellbeing without surveillance), with values that map to the design principles, a team grid, and a contact link, in the public chrome, with a full A to E SEO block and the Organization schema. It reuses the public chrome and invents nothing global; team bios and photos are a hypothesis pending. Next: <strong>1.3 Contact / Support</strong>, then 1.4 Help / FAQ, 1.5 Segment landing, and 1.6 Legal.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 10.5 Already submitted this cycle - July 2026</p>
-    <p style="margin-top:4px;">A valid link handled gracefully: the employee already answered this cycle, so a calm solid-check confirmation reassures that the earlier answer is in the team's aggregate, no one is counted twice, and nothing individual is shown (MS1). Reuses the 10.0 chrome and the 10.3 confirmation layout; no forward and no resubmit, by design. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/checkin-already.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 1.2 About - July 2026</p>
+    <p style="margin-top:4px;">The supporting brand page: the mission (wellbeing without surveillance), values that map to the design principles, a team grid (placeholders, real bios pending), and a contact link, in the public chrome, with a full A to E SEO block and the Organization schema. Reuses the public chrome from 1.0 and 1.1. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/about.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
