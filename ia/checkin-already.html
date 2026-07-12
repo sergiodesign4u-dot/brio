@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Resend or manage invite (6.1)</title>
+  <title>Brio - IA Detail: Already submitted (10.5)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -102,36 +102,35 @@
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 6px 12px; font-size: 11px; color: #e6e6e6; text-align: center; }
+    .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
+    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.danger { border-color: #9a5a5a; color: #e2b3b3; }
-    .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* dialog over an inert, dimmed roster */
-    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; }
-    .wf-under { padding: 12px 14px; filter: blur(1px); opacity: 0.4; pointer-events: none; }
-    .wf-under .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-under .ln.s { width: 55%; }
-    .wf-under .mrow { display: flex; gap: 8px; align-items: center; border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px; margin-bottom: 6px; }
-    .wf-under .mrow .who { flex: 1; color: #8a8a8a; font-size: 11px; }
-    .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
-    .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .wf-modal { width: 300px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
-    .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
-    .wf-member { border: 1px solid #2c2c2c; border-radius: 6px; padding: 8px 10px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-    .wf-member .who { color: #cfcfcf; font-size: 11px; flex: 1; }
-    .wf-member .status { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid #444; border-radius: 3px; padding: 1px 6px; color: #9a9a9a; }
-    .wf-acts { display: flex; flex-direction: column; gap: 8px; }
-    .wf-priv { border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px 10px; color: #9a9a9a; font-size: 10px; margin-top: 10px; }
+    /* employee check-in surface (mobile, no nav, near-anonymous) */
+    .wf-checkbar { padding: 9px 12px 8px; border-bottom: 1px solid #2c2c2c; text-align: center; }
+    .wf-checkbar .co { color: #8a8a8a; font-size: 9px; font-family: ui-monospace, monospace; }
+    .wf-minianon { display: inline-flex; align-items: center; gap: 4px; font-size: 8px; color: #9a9a9a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-top: 3px; }
+    .wf-checkbody { padding: 22px 16px 20px; text-align: center; }
 
-    /* mobile bottom sheet */
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; position: relative; overflow: hidden; min-height: 300px; }
-    .wf-phone .top { padding: 10px; filter: blur(1px); opacity: 0.4; }
-    .wf-phone .top .ln { height: 12px; background: #2a2a2a; border-radius: 3px; margin: 8px 0; }
-    .wf-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #101010; border-top: 1px solid #4a4a4a; border-radius: 14px 14px 0 0; padding: 14px; }
-    .wf-sheet .grab { width: 34px; height: 4px; background: #3a3a3a; border-radius: 3px; margin: 0 auto 10px; }
+    /* confirmation badge (10.3 layout, reused: success-adjacent solid check) */
+    .wf-donecheck { width: 52px; height: 52px; border: 1px solid #6a6a6a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #e6e6e6; margin: 0 auto 14px; }
+    .wf-thanks { color: #fff; font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .wf-sub { color: #9a9a9a; font-size: 11px; line-height: 1.55; margin-bottom: 16px; }
+
+    /* no-duplicate aggregate reassurance (ties to 10.1 / 10.3) */
+    .wf-aggline { display: flex; align-items: flex-start; gap: 8px; text-align: left; border: 1px solid #333; border-radius: 8px; padding: 10px 11px; margin-bottom: 14px; }
+    .wf-aggline .lk { flex: 0 0 auto; font-size: 13px; }
+    .wf-aggline .tx { font-size: 10.5px; color: #b8b8b8; line-height: 1.5; }
+    .wf-aggline .tx b { color: #fff; font-weight: 700; }
+
+    .wf-closehint { font-size: 10px; color: #6a6a6a; font-family: ui-monospace, monospace; margin-bottom: 12px; }
+    .wf-privlink { font-size: 10.5px; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
+    .wf-deskcard { max-width: 440px; margin: 0 auto; border: 1px solid #3a3a3a; border-radius: 12px; overflow: hidden; background: #0c0c0c; }
   </style>
 </head>
 <body>
@@ -177,7 +176,7 @@
       <a href="team-pulse.html" class="nav-sub-item">Team pulse</a>
       <a href="threshold-alert.html" class="nav-sub-item">Threshold alert</a>
       <a href="team-roster.html" class="nav-sub-item">Team roster</a>
-      <a href="manage-invite.html" class="nav-sub-item nav-sub-active">Manage invite</a>
+      <a href="manage-invite.html" class="nav-sub-item">Manage invite</a>
       <a href="onboarding-company.html" class="nav-sub-item">Company setup</a>
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
@@ -197,7 +196,7 @@
       <a href="checkin-questions.html" class="nav-sub-item">Questions</a>
       <a href="checkin-complete.html" class="nav-sub-item">Check-in complete</a>
       <a href="checkin-expired.html" class="nav-sub-item">Invite link expired</a>
-      <a href="checkin-already.html" class="nav-sub-item">Already submitted</a>
+      <a href="checkin-already.html" class="nav-sub-item nav-sub-active">Already submitted</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -218,137 +217,121 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 6.1</span>
-      <span class="badge">Dialog (0.5)</span>
-      <span class="badge privacy">Roster, not answers</span>
+      <span class="badge">Node 10.5</span>
+      <span class="badge">Employee flow (mobile)</span>
+      <span class="badge privacy">Valid link &middot; no duplicate</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Manage invite (6.1) &middot; dialog, opened from 6.0</div>
-    <h1>Resend or manage invite</h1>
-    <p class="hero-intro">A small dialog on the canonical 0.5 shell, opened from a member row in the roster (6.0). The operator resends an invite, copies its link, or revokes it, without leaving the roster. It is roster-identity administration only; it never touches answer identity. Inside the operator app, so noindex. Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Already submitted this cycle (10.5) &middot; URL: /c/{invite-token} (already-submitted state)</div>
+    <h1>Already submitted this cycle</h1>
+    <p class="hero-intro">A valid link, but the employee has already answered this cycle. Confirm plainly that they are done, reassure that the earlier answer is already in the aggregate and no one is counted twice, and end calmly. This prevents a duplicate submission (MS1) without making the employee feel they did anything wrong. Because it is success-adjacent, not an error, it reuses the 10.3 solid check, not the 10.4 dashed mark. For Yemi the employee. Serves J4 and E2; terminal. Private token-gated surface, so noindex. Source of truth: ia/docs/pages/checkin-already.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
-    <div class="section-label">Dialog anatomy</div>
+    <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
+    <p>A calm confirmation, centered and short, that reads as reassurance rather than a block. The persistent anonymity anchor is carried through, and the reassurance is the no-duplicate point (MS1).</p>
     <ol>
-      <li><strong>Title</strong>: "Manage invite" plus the member's name or email, with a close control.</li>
-      <li><strong>Member summary</strong>: name or email and status (invited or joined). Roster identity only.</li>
-      <li><strong>Actions, by status</strong>: pending shows Resend, Copy link, Revoke; joined shows Remove from team.</li>
-      <li><strong>Privacy note</strong>: next to a destructive action, that this affects the roster, never answers.</li>
-      <li><strong>Dismiss</strong>: Cancel or close; Esc also closes.</li>
+      <li><strong>Minimal top bar with the anonymity anchor</strong>: the Brio mark, the company name, and the "Anonymous" reminder.</li>
+      <li><strong>Confirmation</strong>: the same solid check badge as 10.3 (success-adjacent, not an error), "You have already checked in" and "for this cycle".</li>
+      <li><strong>No-duplicate reassurance</strong>: one line that the earlier answer is already in the team's aggregate, that no one is counted twice, and that nothing individual is shown.</li>
+      <li><strong>Next-cycle note (quiet)</strong>: a light "you will be invited again next cycle", so this reads as expected, not a failure.</li>
+      <li><strong>Calm end</strong>: a quiet "you can close this" hint; no account prompt, no upsell. An optional "how your privacy is protected" link to the public 1.1 page.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.5 Dialog / modal shell (this node is an instance of it). No new component; 6.1 is the already-registered 0.5 consumer that 6.0 opens.</p>
-  </section>
-
-  <!-- Privacy -->
-  <section id="privacy">
-    <div class="section-label">What managing an invite touches</div>
-    <h2>This manages the roster, not answers</h2>
-    <p>Managing or revoking an invite is roster-identity administration, which is allowed. It never reveals or touches answer identity. Removing a joined member affects future participation only; their past contributions were only ever aggregate and were never stored as an identifiable individual record, so there is nothing individual to expose or delete. The dialog states this plainly next to the destructive action.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">By invite status</div>
-    <h2>Variants and states</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Primary action</th></tr></thead>
-        <tbody>
-          <tr><td>Pending invite (default)</td><td>member + status invited</td><td>Resend invite</td></tr>
-          <tr><td>Joined member</td><td>member + status joined</td><td>Remove from team (destructive)</td></tr>
-          <tr><td>Revoke / remove confirm</td><td>inline "Revoke this invite?" inside the same dialog</td><td>Confirm / Cancel</td></tr>
-          <tr><td>Sending</td><td>the action shows a sending state; dialog stays open</td><td>-</td></tr>
-          <tr><td>Success</td><td>"Invite resent"; dialog closes or updates the row</td><td>-</td></tr>
-          <tr><td>Error</td><td>"Could not resend, retry"; dialog stays open</td><td>retry (MS4)</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p><strong>Components used:</strong> the 10.0 check-in chrome (no nav, no account) and the 10.3 confirmation badge and layout (solid check, aggregate reassurance), reused because this is a success-adjacent state. No new global; the privacy content is not repeated (that is 10.1).</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The dialog is a 0.5 instance: a centered modal over an inert, dimmed roster on desktop, and a bottom sheet on mobile.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A short centered confirmation on a phone, using the solid check (like 10.3, not the dashed "!" of 10.4, because this is not an error). There is no forward button and no way to submit again, by design (MS1). The desktop version centers the same narrow card.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:300px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, pending invite (over an inert roster)</div>
-        <div class="wf-modal-scrim" style="min-height:300px;">
-          <div class="wf-under">
-            <div class="ln"></div><div class="ln s"></div>
-            <div class="mrow"><span class="who">Yemi O.</span><span class="wf-plain">Joined</span></div>
-            <div class="mrow"><span class="who">dev@company.com</span><span class="wf-plain">Invited</span></div>
-          </div>
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-modal-wrap">
-            <div class="wf-modal" role="dialog" aria-modal="true">
-              <div class="mtitle">Manage invite <span class="x">&times;</span></div>
-              <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-              <div class="wf-acts">
-                <span class="wf-b solid block">Resend invite</span>
-                <span class="wf-b block">Copy invite link</span>
-                <span class="wf-b danger block">Revoke invite</span>
-              </div>
-              <div class="wf-priv">Managing an invite touches the roster, never answers.</div>
-            </div>
-          </div>
-        </div>
-        <div class="wf-note">0.5 contract: role="dialog", aria-modal, focus trap, Esc closes, background inert, focus returns to the opener.</div>
-      </div>
-
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, already submitted (default)</div>
         <div class="wf-phone">
-          <div class="top"><div class="ln"></div><div class="ln s"></div><div class="ln"></div></div>
-          <div class="wf-sheet">
-            <div class="grab"></div>
-            <div class="mtitle" style="display:flex;align-items:center;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px;">Manage invite</div>
-            <div class="wf-member"><span class="who">dev@company.com</span><span class="status">Invited</span></div>
-            <div class="wf-acts">
-              <span class="wf-b solid block">Resend invite</span>
-              <span class="wf-b block">Copy invite link</span>
-              <span class="wf-b danger block">Revoke invite</span>
+          <div class="wf-phoneinner">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody">
+              <div class="wf-donecheck">&#10003;</div>
+              <div class="wf-thanks">You have already checked in</div>
+              <div class="wf-sub">You are all set for this cycle. We will invite you again next time.</div>
+              <div class="wf-aggline">
+                <span class="lk">&#128274;</span>
+                <span class="tx"><b>Your earlier answer is already in the team's aggregate.</b> No one is counted twice, and nothing individual is shown.</span>
+              </div>
+              <div class="wf-closehint">You can close this tab now.</div>
+              <a class="wf-link wf-privlink">How your privacy is protected</a>
             </div>
           </div>
         </div>
-        <div class="wf-note">same actions, full-width sheet, comfortable targets.</div>
+        <div class="wf-note">solid check (10.3), NOT the dashed "!" of 10.4 &middot; no duplicate, no double-count, no individual data (MS1) &middot; no forward, no resubmit by design.</div>
       </div>
-    </div>
 
-    <div class="wf-frame" style="margin-top:22px;max-width:360px;">
-      <div class="wf-cap">Inline revoke confirm (no stacked modal)</div>
-      <div class="wf-modal" style="width:auto;">
-        <div class="mtitle">Revoke this invite?</div>
-        <div class="wf-plain" style="margin-bottom:12px;">The link and code stop working for this person. You can re-invite later.</div>
-        <div class="wf-acts" style="flex-direction:row;justify-content:flex-end;">
-          <span class="wf-b">Cancel</span>
-          <span class="wf-b danger">Revoke</span>
+      <div style="flex:1; min-width:320px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop / wide, centered card (never an app)</div>
+        <div class="wf-frame" style="margin-top:0;">
+          <div class="wf-deskcard">
+            <div class="wf-checkbar"><span class="wf-logo">Brio</span><div class="co">for Acme</div><div class="wf-minianon"><span>&#128274;</span><span>Anonymous</span></div></div>
+            <div class="wf-checkbody" style="padding:30px 28px 26px;">
+              <div class="wf-donecheck" style="width:58px; height:58px; font-size:25px;">&#10003;</div>
+              <div class="wf-thanks" style="font-size:20px;">You have already checked in</div>
+              <div class="wf-sub">You are all set for this cycle. We will invite you again next time.</div>
+              <div class="wf-aggline" style="max-width:340px; margin-left:auto; margin-right:auto;">
+                <span class="lk">&#128274;</span>
+                <span class="tx"><b>Your earlier answer is already in the team's aggregate.</b> No one is counted twice, and nothing individual is shown.</span>
+              </div>
+              <div class="wf-closehint">You can close this tab now.</div>
+              <a class="wf-link wf-privlink">How your privacy is protected</a>
+            </div>
+          </div>
         </div>
+        <div class="wf-note">same calm confirmation centered &middot; the surface never becomes an app on a large screen &middot; terminal, no forward.</div>
       </div>
-      <div class="wf-note">the confirm replaces the actions inside the same 6.1 dialog; reversible (re-invite).</div>
     </div>
+    <div class="callout"><strong>Same for every team size.</strong> Because the employee is never shown a score, minimum-N does not change this screen. There is no error variant here: a broken or expired link is 10.4, and a failure at submit is 10.6; this node is only the case where the answer already landed and a repeat visit is handled gracefully.</div>
   </section>
 
-  <!-- a11y / noindex -->
-  <section id="seo">
-    <div class="section-label">Private app zone</div>
-    <h2>Accessibility contract and noindex</h2>
-    <p>A dialog, not a page: no URL of its own, noindex, no schema, no SEO block. It inherits the 0.5 accessibility contract.</p>
-    <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">role</span><span class="seo-v"><code>dialog</code>, <code>aria-modal="true"</code>, labelled by the title</span></div>
-      <div class="seo-row"><span class="seo-k">focus</span><span class="seo-v">moves into the dialog on open, trapped; returns to the opener on close</span></div>
-      <div class="seo-row"><span class="seo-k">dismiss</span><span class="seo-v">Esc closes; background is inert</span></div>
-      <div class="seo-row"><span class="seo-k">targets</span><span class="seo-v">destructive confirm is keyboard reachable and labelled; tap targets at least 44px</span></div>
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States and primary CTA</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Already submitted (default)</td><td>the solid-check confirmation, the no-duplicate reassurance, the calm end</td><td>none (close the tab); optional link to 1.1</td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="callout ok"><strong>Cluster 6 closed.</strong> Resend or manage invite is a pure 0.5 instance; it invents nothing and keeps roster identity separate from answer identity. Cluster 6 Team is complete (6.0 roster, 6.1 manage). Next: cluster 3, the onboarding wizard (3.0 to 3.3), the guided first run.</div>
+    <p><strong>Primary CTA:</strong> none, by design, like 10.3. The task is already done; the natural end is to close the tab. The only affordance is an optional quiet link to the public 1.1 page. There is no forward button and no way to submit again, which is the point of the state (MS1, no duplicate).</p>
+  </section>
+
+  <!-- SEO (noindex) -->
+  <section id="seo">
+    <div class="section-label">Private token-gated surface</div>
+    <h2>SEO block (noindex)</h2>
+    <p>Already submitted is a private, token-gated employee surface. It is not indexed and carries no schema. It is a transactional zone, per the platform SEO stance.</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (token-gated, personal)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; flow URL is <code>/c/{invite-token}</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
+      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
+    </div>
+    <h3>In-app findability (not SEO, still specified)</h3>
+    <ul>
+      <li>exactly one H1 (the confirmation heading) for the accessible document outline</li>
+      <li>the confirmation is conveyed by text and a mark, never by color alone</li>
+      <li>the optional privacy link is a labelled control; tap targets at least 44px</li>
+      <li>the flow works without an account</li>
+    </ul>
+    <div class="callout ok"><strong>A repeat visit, handled gracefully.</strong> Already submitted turns a second click into a calm confirmation rather than a wall or a duplicate: the earlier answer is in the aggregate, no one is counted twice, and nothing individual is shown (MS1). It reuses the 10.0 chrome and the 10.3 confirmation layout, invents nothing global, and has no forward step, by design. Next, the last state of the rollout so far: <strong>10.6 Submit error</strong>, the failure-at-submit case that preserves the answers and routes back into the flow, never a dead-end.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 6.1 Resend or manage invite - July 2026</p>
-    <p style="margin-top:4px;">A 0.5 dialog opened from the roster: resend, copy link, or revoke an invite, with an inline destructive confirm and a note that this touches the roster, never answers. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/manage-invite.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 10.5 Already submitted this cycle - July 2026</p>
+    <p style="margin-top:4px;">A valid link handled gracefully: the employee already answered this cycle, so a calm solid-check confirmation reassures that the earlier answer is in the team's aggregate, no one is counted twice, and nothing individual is shown (MS1). Reuses the 10.0 chrome and the 10.3 confirmation layout; no forward and no resubmit, by design. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/checkin-already.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
