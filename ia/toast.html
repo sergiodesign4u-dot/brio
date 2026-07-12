@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Owner dashboard (9.0)</title>
+  <title>Brio - IA Detail: Toast / inline notification (11.4)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -69,19 +69,18 @@
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
-    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
+    .badge.sys { background: var(--surface-3); color: var(--text-muted); border-color: var(--border); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
     .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
-    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+    thead th { padding: 12px 14px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
     tbody tr { border-bottom: 1px solid var(--border-subtle); }
     tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--surface); }
-    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
-    tbody td:first-child { color: var(--text); font-weight: 500; }
+    tbody td { padding: 12px 14px; color: var(--text-muted); vertical-align: top; }
+    tbody td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
 
     footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
@@ -90,58 +89,40 @@
     .callout.ok { border-color: var(--green-dim); }
     .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
 
-    .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
-    .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
-    .seo-row:last-child { border-bottom: none; }
-    .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
-    .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
-    .seo-v code { font-size: 12px; }
-
     /* ===== Black-and-white wireframe kit ===== */
-    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
-    .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
-    .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
-    .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
-    .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* owner surface chrome (distinct from operator app; NO job tabs by design) */
-    .wf-ownerwrap { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-ownerbar { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-bottom: 1px solid #2c2c2c; }
-    .wf-ownerbar .co { color: #cfcfcf; font-size: 11px; }
-    .wf-ownerbar .ov { margin-left: auto; font-size: 8px; color: #9a9a9a; border: 1px solid #4a4a4a; border-radius: 3px; padding: 1px 6px; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; }
-    .wf-ownerbody { padding: 18px 16px; }
+    /* public chrome (for placement demo) */
+    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; flex-wrap: wrap; }
+    .wf-nav .sp { margin-left: auto; }
+    .wf-sec { padding: 16px 14px; }
+    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
+    .wf-hl.s { width: 55%; height: 12px; }
 
-    /* pulse read (reuses the pulse element from 4.0 / 4.1 / 7.0) */
-    .wf-read { border: 1px solid #6a6a6a; border-radius: 8px; padding: 16px; margin-bottom: 12px; text-align: center; }
-    .wf-read .lab { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-num { font-size: 34px; font-weight: 800; color: #fff; line-height: 1; }
-    .wf-interp { font-size: 12px; color: #cfcfcf; margin-top: 6px; }
-    .wf-spark { display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 38px; margin: 14px 0 8px; }
-    .wf-spark .bar { width: 9px; background: #4a4a4a; border-radius: 2px 2px 0 0; }
-    .wf-metric { font-size: 10px; color: #8a8a8a; }
+    /* toast component */
+    .wf-toaststack { display: flex; flex-direction: column; gap: 10px; max-width: 340px; }
+    .wf-toast { display: flex; align-items: flex-start; gap: 9px; border: 1px solid #3a3a3a; border-radius: 8px; background: #141414; padding: 10px 12px; }
+    .wf-toast .ti { flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+    .wf-toast .ti.ok { background: #e6e6e6; color: #111; border: 1px solid #e6e6e6; }
+    .wf-toast .ti.err { background: transparent; color: #e6e6e6; border: 1px dashed #8a8a8a; }
+    .wf-toast .ti.info { background: transparent; color: #cfcfcf; border: 1px solid #6a6a6a; }
+    .wf-toast .tbody { flex: 1; min-width: 0; }
+    .wf-toast .tmsg { font-size: 11px; color: #fff; font-weight: 700; }
+    .wf-toast .tsub { font-size: 9.5px; color: #9a9a9a; margin-top: 1px; line-height: 1.4; }
+    .wf-toast .taction { font-size: 10px; color: #cfcfcf; text-decoration: underline; margin-top: 5px; display: inline-block; }
+    .wf-toast .tx { flex: 0 0 auto; font-size: 13px; color: #8a8a8a; line-height: 1; }
+    .wf-ttimer { height: 2px; background: #2a2a2a; border-radius: 2px; margin-top: 8px; position: relative; overflow: hidden; }
+    .wf-ttimer::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 55%; background: #7a7a7a; }
+    .wf-litebar { display: flex; align-items: center; padding: 9px 11px; border-bottom: 1px solid #2c2c2c; }
 
-    /* 9.1 what I can and cannot see (0.3 owner variant, sees/seerow from 7.0) */
-    .wf-see { border: 1px dashed #4a4a4a; border-radius: 8px; padding: 12px; margin-bottom: 10px; }
-    .wf-see .st { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 7px; }
-    .wf-seerow { display: flex; gap: 8px; font-size: 11px; color: #cfcfcf; margin-bottom: 5px; align-items: flex-start; }
-    .wf-seerow .mk { width: 14px; text-align: center; color: #fff; font-weight: 700; flex-shrink: 0; }
-    .wf-seerow.no { color: #9a9a9a; }
-    .wf-foot { font-size: 9.5px; color: #8a8a8a; text-align: center; margin-top: 10px; }
-
-    /* 9.3 empty (minimum-N not met) */
-    .wf-empty { border: 1px dashed #6a6a6a; border-radius: 8px; padding: 18px 14px; text-align: center; margin-bottom: 12px; }
-    .wf-empty .lock { width: 30px; height: 30px; border: 1px solid #6a6a6a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; color: #cfcfcf; font-size: 13px; }
-    .wf-empty .et { color: #fff; font-size: 12px; font-weight: 700; }
-    .wf-empty .es { color: #9a9a9a; font-size: 10px; margin-top: 4px; }
-
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
-    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
   </style>
 </head>
 <body>
@@ -200,7 +181,7 @@
       <a href="invite-owner.html" class="nav-sub-item">Invite owner + upgrade</a>
       <a href="upgrade.html" class="nav-sub-item">Upgrade / paywall</a>
       <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
-      <a href="owner-dashboard.html" class="nav-sub-item nav-sub-active">Owner dashboard</a>
+      <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
       <a href="owner-digest.html" class="nav-sub-item">Monthly digest</a>
       <a href="checkin-entry.html" class="nav-sub-item">Check-in entry</a>
       <a href="checkin-privacy.html" class="nav-sub-item">Pre-Q1 privacy</a>
@@ -226,7 +207,7 @@
       <a href="server-error.html" class="nav-sub-item">500 Server error</a>
       <a href="maintenance.html" class="nav-sub-item">503 Maintenance</a>
       <a href="cookie-consent.html" class="nav-sub-item">Cookie consent</a>
-      <a href="toast.html" class="nav-sub-item">Toast / notification</a>
+      <a href="toast.html" class="nav-sub-item nav-sub-active">Toast / notification</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -247,133 +228,115 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 9.0</span>
-      <span class="badge">Owner surface</span>
-      <span class="badge privacy">Aggregate-only &middot; under 2 min</span>
+      <span class="badge">Node 11.4</span>
+      <span class="badge sys">System / global</span>
+      <span class="badge sys">Component &middot; aria-live</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Owner dashboard (9.0) &middot; URL: /owner &middot; hosts 9.1 section + 9.3 empty</div>
-    <h1>Owner dashboard</h1>
-    <p class="hero-intro">The owner's surface: one honest, aggregate-only read of team wellbeing in under two minutes. One number, whether it is up or down, the plain-language meaning, and a clear statement of what the owner can and cannot see. It is the paid feature unlocked in cluster 7, and it is a read, not a tool: no navigation tabs, by design. For a different persona (Marcus the owner). It hosts the 9.1 privacy section and the 9.3 empty state. Private surface, so noindex. Source of truth: ia/docs/pages/owner-dashboard.md.</p>
+    <div class="crumb">IA / Detail Layer / System / Toast / inline notification (11.4) &middot; transient feedback</div>
+    <h1>Toast / inline notification</h1>
+    <p class="hero-intro">The single transient-feedback component, formalized so the "it worked" and light "it failed" messages already implied across the app (invite sent, saved, copied, and their failures) are consistent and accessible. A short message with an icon by shape (a solid check for success, a dashed "!" for error, a neutral i for info, never color alone), an optional action (Undo, Retry), a manual close, and an auto-dismiss timer, placed in a desktop corner stack or a mobile top or bottom slot, with aria-live and no focus trap. It is cleanly separated from the persistent inline panels (3.3, 10.6) and the modal dialog (0.5). No SEO impact. Source of truth: ia/docs/pages/toast.md.</p>
   </section>
 
-  <!-- Blocks -->
-  <section id="blocks">
-    <div class="section-label">Mobile-first priority</div>
-    <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. The whole read fits a short scroll; the owner often checks on a phone.</p>
-    <ol>
-      <li><strong>Minimal owner header</strong>: the Brio mark and the company name, with an "Owner view" label. No job tabs (deliberate contrast to the operator app).</li>
-      <li><strong>The pulse read (hero)</strong>: a single plain-language level and one honest sentence. Never a vanity metric (Principle 4).</li>
-      <li><strong>Trend</strong>: a simple trend over the last several cycles, so the direction is clear at a glance.</li>
-      <li><strong>Participation</strong>: as a share of the team, never who. Tells the owner the signal is real without exposing anyone.</li>
-      <li><strong>9.1 "What I can and cannot see"</strong>: the 0.3 owner variant, two plain lists. Can see the aggregate; cannot see individuals, names, who answered, or any drill-down (E2, item 4).</li>
-      <li><strong>Quiet footer note</strong>: when the data updates, that the read is under two minutes, and a link to the latest digest (9.2).</li>
-    </ol>
-    <p><strong>Components used:</strong> a minimal owner header (distinct chrome, not the operator 0.1 nav), the pulse element (from 4.0 / 4.1 / 7.0), and the 0.3 owner-variant privacy section (9.1). No new global; 9.1 is a 0.3 variant.</p>
+  <!-- Anatomy + variants -->
+  <section id="variants">
+    <div class="section-label">Black and white, wireframe level</div>
+    <h2>Variants (meaning by shape, not color)</h2>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Success is a solid check (the 10.3 mark), an error is a dashed "!" (the 2.3 mark), info is a neutral i; every toast pairs the mark with text, so the meaning never depends on color.</p>
+
+    <div class="wf-row">
+      <div style="flex:1; min-width:280px;">
+        <div class="wf-cap" style="margin-bottom:8px;">The four variants</div>
+        <div class="wf-toaststack">
+          <div class="wf-toast">
+            <span class="ti ok">&#10003;</span>
+            <div class="tbody"><div class="tmsg">Invite sent</div><div class="tsub">3 teammates invited.</div><div class="wf-ttimer"></div></div>
+            <span class="tx">&#215;</span>
+          </div>
+          <div class="wf-toast">
+            <span class="ti info">i</span>
+            <div class="tbody"><div class="tmsg">Draft saved</div><div class="wf-ttimer"></div></div>
+            <span class="tx">&#215;</span>
+          </div>
+          <div class="wf-toast">
+            <span class="ti err">!</span>
+            <div class="tbody"><div class="tmsg">Could not send</div><div class="tsub">Check your connection and try again.</div><a class="taction">Retry</a></div>
+            <span class="tx">&#215;</span>
+          </div>
+          <div class="wf-toast">
+            <span class="ti ok">&#10003;</span>
+            <div class="tbody"><div class="tmsg">Program ended</div><a class="taction">Undo</a><div class="wf-ttimer"></div></div>
+            <span class="tx">&#215;</span>
+          </div>
+        </div>
+        <div class="wf-note">success = solid check (auto-dismiss, polite) &middot; info = neutral i &middot; error = dashed "!" (persists, assertive) + Retry &middot; with-undo for a reversible action &middot; close (x) always present.</div>
+      </div>
+
+      <div style="flex:1; min-width:260px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop placement (corner stack, bottom-right)</div>
+        <div class="wf-page" style="position:relative; min-height:210px;">
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Dashboard</span><span class="wf-plain">Programs</span><span class="wf-plain">Team</span><span class="wf-plain">Owner</span></div>
+          <div class="wf-sec"><div class="lbl">app content (not blocked)</div><div class="wf-hl"></div><div class="wf-hl s"></div><div class="wf-hl s"></div></div>
+          <div style="position:absolute; right:12px; bottom:12px;">
+            <div class="wf-toaststack" style="max-width:220px;">
+              <div class="wf-toast"><span class="ti ok">&#10003;</span><div class="tbody"><div class="tmsg">Saved</div></div><span class="tx">&#215;</span></div>
+              <div class="wf-toast"><span class="ti ok">&#10003;</span><div class="tbody"><div class="tmsg">Link copied</div></div><span class="tx">&#215;</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">non-blocking corner stack &middot; app stays usable underneath &middot; newest nearest the corner &middot; each dismisses on its own timer.</div>
+
+        <div class="wf-cap" style="margin:16px 0 8px;">Mobile 360px (full-width, top)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div class="wf-litebar"><span class="wf-logo" style="font-size:11px;">Brio</span></div>
+            <div style="padding:8px;">
+              <div class="wf-toast"><span class="ti ok">&#10003;</span><div class="tbody"><div class="tmsg">Invite sent</div><div class="tsub">3 teammates invited.</div></div><span class="tx">&#215;</span></div>
+            </div>
+            <div class="wf-sec" style="opacity:0.5;"><div class="wf-hl"></div><div class="wf-hl s"></div></div>
+          </div>
+        </div>
+        <div class="wf-note">mobile: one full-width toast, top or bottom, above the thumb zone &middot; only one or two at a time.</div>
+      </div>
+    </div>
   </section>
 
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Read, empty, and honesty</div>
-    <h2>States and primary action</h2>
-    <p>There is no strong CTA, by design: the owner surface is a read, not a workflow, and the owner is never upsold here.</p>
+  <!-- Taxonomy -->
+  <section id="taxonomy">
+    <div class="section-label">The feedback taxonomy</div>
+    <h2>When to use which</h2>
+    <p>The reason to formalize the pattern: three feedback surfaces exist and must not be confused.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <thead>
+          <tr><th>Surface</th><th>Blocking</th><th>Persistence</th><th>aria</th><th>Use for</th></tr>
+        </thead>
         <tbody>
-          <tr><td>Default (minimum-N met)</td><td>the pulse read, trend, participation share, and the 9.1 privacy section</td><td>read only</td></tr>
-          <tr><td>9.3 empty (minimum-N not met)</td><td>"a score is not available yet, the privacy minimum of 5 has not been met"; no individual data; 9.1 still shows</td><td>read only (owner expression of D1, MS2)</td></tr>
-          <tr><td>Trending down (honest signal)</td><td>the same structure with a plainly worded drop, never softened</td><td>read only (Principle 4)</td></tr>
-          <tr><td>Re-entry from 9.2 digest</td><td>the same page, from the monthly email link</td><td>-</td></tr>
-          <tr><td>Access ended</td><td>"your access to this dashboard has ended"; no data</td><td>-</td></tr>
+          <tr><td>Toast (11.4)</td><td>No</td><td>Transient (auto-dismiss)</td><td>aria-live polite, or assertive for errors</td><td>Quick confirms and light recoverable failures: sent, saved, copied</td></tr>
+          <tr><td>Inline panel (3.3, 10.6)</td><td>No</td><td>Persistent, in the flow</td><td>Inline text next to the field</td><td>Errors the user must act on in place; the form stays filled</td></tr>
+          <tr><td>Dialog (0.5)</td><td>Yes (modal)</td><td>Until dismissed</td><td>role=dialog, aria-modal</td><td>Decisions and confirmations: delete, upgrade, consent</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- Wireframe -->
-  <section id="mockup">
-    <div class="section-label">Black and white, wireframe level</div>
-    <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A calm, single read with no tabs; desktop shows the default (minimum-N met), mobile shows the 9.3 empty state. The privacy boundary is carried by labels and marks, not color.</p>
-
-    <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, default read (no nav tabs, by design)</div>
-        <div class="wf-ownerwrap">
-          <div class="wf-ownerbar">
-            <span class="wf-logo">Brio</span>
-            <span class="co">Acme Inc</span>
-            <span class="ov">Owner view</span>
-          </div>
-          <div class="wf-ownerbody">
-            <div class="wf-read">
-              <div class="lab">Team wellbeing this month</div>
-              <div class="wf-num">Steady</div>
-              <div class="wf-interp">Holding steady, no sign anyone is at risk of leaving.</div>
-              <div class="wf-spark"><span class="bar" style="height:45%"></span><span class="bar" style="height:60%"></span><span class="bar" style="height:52%"></span><span class="bar" style="height:66%"></span><span class="bar" style="height:70%"></span></div>
-              <div class="wf-metric">Trend over 5 months &middot; participation 74% (share of the team, not who)</div>
-            </div>
-            <div class="wf-see">
-              <div class="st">What you can see</div>
-              <div class="wf-seerow"><span class="mk">+</span><span>The team wellbeing score and its trend</span></div>
-              <div class="wf-seerow"><span class="mk">+</span><span>Participation as a share of the team</span></div>
-              <div class="st" style="margin-top:11px;">What you cannot see</div>
-              <div class="wf-seerow no"><span class="mk">x</span><span>Individual responses, names, or who answered</span></div>
-              <div class="wf-seerow no"><span class="mk">x</span><span>Any drill-down to a person</span></div>
-            </div>
-            <div class="wf-foot">Updated monthly &middot; this read takes under 2 minutes &middot; <span class="wf-link">view the latest digest</span></div>
-          </div>
-        </div>
-        <div class="wf-note">one number + one honest sentence &middot; no tabs, no tools &middot; 9.1 privacy section inline &middot; participation as a share, never who &middot; honest if trending down.</div>
-      </div>
-
-      <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, 9.3 empty (minimum-N not met)</div>
-        <div class="wf-phone">
-          <div class="wf-ownerbar" style="padding:9px 10px;"><span class="wf-logo">Brio</span><span class="co">Acme</span><span class="ov">Owner</span></div>
-          <div class="wf-ownerbody" style="padding:14px 10px;">
-            <div class="wf-empty">
-              <div class="lock">&#128274;</div>
-              <div class="et"><span class="wf-bnum">2</span>No score yet</div>
-              <div class="es">A score is not available until at least 5 people respond. This protects everyone's privacy.</div>
-            </div>
-            <div class="wf-see">
-              <div class="st">What you cannot see</div>
-              <div class="wf-seerow no"><span class="mk">x</span><span>Individuals, names, who answered</span></div>
-            </div>
-            <div class="wf-foot">No individual data, ever.</div>
-          </div>
-        </div>
-        <div class="wf-note">9.3 empty = minimum-N of 5 stated plainly (D1) &middot; no partial number &middot; still no individual data.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEO (noindex) -->
-  <section id="seo">
-    <div class="section-label">Private owner surface</div>
-    <h2>SEO block (noindex)</h2>
-    <p>Owner dashboard is an authenticated, private surface. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
-    <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (private owner zone)</span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; surface URL is <code>/owner</code></span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
-      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
-    </div>
-    <h3>In-app findability (not SEO, still specified)</h3>
+  <!-- Accessibility + behavior -->
+  <section id="a11y">
+    <div class="section-label">Accessibility and behavior</div>
+    <h2>Accessibility and behavior</h2>
+    <p>No SEO impact: a toast is transient UI, not content and not a URL. What matters is that it is announced and never traps the user.</p>
     <ul>
-      <li>exactly one H1 (the pulse reading or the page title) for the accessible document outline</li>
-      <li>the number and reading are text, not an image; participation is stated as a share, never as who</li>
-      <li>the can-see / cannot-see boundary is conveyed in text and labels, not by color alone</li>
-      <li>the empty state states the minimum-N reason in text; tap targets at least 44px</li>
+      <li><strong>aria-live:</strong> success and info use <code>aria-live="polite"</code> (announced without interrupting); errors use <code>aria-live="assertive"</code> or <code>role="alert"</code> so they are announced promptly</li>
+      <li><strong>No focus trap:</strong> a toast never steals focus or blocks the page; if it carries an action (Undo, Retry), that control is keyboard reachable while the toast is present</li>
+      <li><strong>Dismissable:</strong> the close control is always present; auto-dismiss is paused on hover or focus so the message can be read and acted on; errors persist longer or until dismissed</li>
+      <li><strong>Reduced motion:</strong> the enter and exit is a simple fade when <code>prefers-reduced-motion</code> is set, no slide</li>
+      <li><strong>State by shape and text:</strong> the success, info, and error marks differ by shape and fill and are paired with text, never distinguished by color alone</li>
     </ul>
-    <div class="callout ok"><strong>The calm counterpart.</strong> Owner dashboard reuses the pulse element and the 0.3 owner-variant privacy section (9.1); it invents nothing global, and its sub-nodes (9.1 section, 9.3 empty) live on this page. One number, one honest sentence, one privacy statement, no navigation, under two minutes. It is where J5 (prove value) and E2 (owner comfort) are paid off, and where the aggregate-only promise is restated on the owner's own screen. Next: <strong>9.2 Monthly owner digest</strong> (the email-to-view read that links back here).</div>
+    <div class="callout ok"><strong>One transient-feedback component, not one per screen.</strong> Toast is a short message with an icon by shape (solid check for success, dashed "!" for error, neutral i for info), an optional action (Undo, Retry), a manual close, and an auto-dismiss timer, placed in a desktop corner stack or a mobile top or bottom slot, with aria-live and no focus trap. It reuses the 10.3 success check and the 2.3 attention mark, invents nothing new, and is cleanly separated from the persistent inline panels (3.3, 10.6) and the modal dialog (0.5). Next: confirm <strong>11.5 Global search is not applicable</strong>, and close the 2.x password-reset entry, which finishes Step 6.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 9.0 Owner dashboard - July 2026</p>
-    <p style="margin-top:4px;">The owner's aggregate-only read: one number, an honest one-line meaning, a trend, participation as a share, and the 9.1 "what I can and cannot see" section, with the 9.3 empty state when the privacy minimum of 5 is not met. No navigation tabs, by design; under two minutes. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/owner-dashboard.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 11.4 Toast / inline notification - July 2026</p>
+    <p style="margin-top:4px;">The single transient-feedback component: a short message with an icon by shape (solid check for success, dashed "!" for error, neutral i for info), an optional action (Undo, Retry), a manual close, and an auto-dismiss timer, in a desktop corner stack or a mobile top or bottom slot, with aria-live (polite for success and info, assertive for errors) and no focus trap. It reuses the 10.3 success check and the 2.3 attention mark, invents nothing new, and is separated cleanly from the persistent inline panels (3.3, 10.6) and the modal dialog (0.5). No SEO impact. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/toast.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
