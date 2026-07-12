@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Contact / Support (1.3)</title>
+  <title>Brio - IA Detail: Legal documents (1.6)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -112,35 +112,38 @@
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* public marketing chrome (reused from 0.0 / 1.0 / 1.1 / 1.2) */
+    /* public marketing chrome (reused from 0.0 / 1.0 / 1.1 / 1.2 / 1.3 / 1.4 / 1.5) */
     .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
     .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; flex-wrap: wrap; }
     .wf-nav .sp { margin-left: auto; }
     .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
     .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
-    .wf-hl.s { width: 55%; height: 12px; }
     .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
     .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .wf-strip2 { text-align: center; font-size: 11px; color: #e0e0e0; padding: 9px; border: 1px dashed #4a4a4a; border-radius: 6px; }
 
-    /* contact form (reused auth/settings fields) */
-    .wf-field { margin-bottom: 9px; }
-    .wf-flabel { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.07em; font-family: ui-monospace, monospace; margin-bottom: 4px; }
-    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 9px 10px; color: #6a6a6a; font-size: 11px; }
-    .wf-input.area { min-height: 48px; }
-    .wf-help { display: flex; align-items: center; gap: 8px; border: 1px solid #333; border-radius: 7px; padding: 9px 11px; }
-    .wf-help .ht { flex: 1; font-size: 10px; color: #b8b8b8; }
-    .wf-email { font-size: 11px; color: #cfcfcf; font-family: ui-monospace, monospace; }
-    .wf-rt { font-size: 9.5px; color: #8a8a8a; }
-    .wf-privnote { display: flex; gap: 7px; align-items: flex-start; border: 1px solid #333; border-radius: 7px; padding: 8px 11px; font-size: 9px; color: #9a9a9a; }
-    .wf-privnote .lk { flex: 0 0 auto; font-size: 11px; }
-
-    /* submit success (2.2 confirmation pattern) */
-    .wf-confirm { text-align: center; padding: 12px 6px; }
-    .wf-check { width: 40px; height: 40px; border: 1px solid #6a6a6a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #e6e6e6; margin: 0 auto 9px; }
-    .wf-confirm .ct { color: #fff; font-size: 13px; font-weight: 700; }
-    .wf-confirm .cs { color: #9a9a9a; font-size: 10px; margin-top: 3px; }
+    /* legal template (1.6): doc switcher + last-updated + contents + legal body + cookie table + doc map */
+    .wf-docnav { display: flex; gap: 6px; flex-wrap: wrap; }
+    .wf-doctab { border: 1px solid #3a3a3a; border-radius: 5px; padding: 4px 9px; font-size: 10px; color: #9a9a9a; }
+    .wf-doctab.on { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
+    .wf-updated { font-size: 9px; color: #8a8a8a; font-family: ui-monospace, monospace; margin-top: 6px; }
+    .wf-toc { border: 1px solid #333; border-radius: 6px; padding: 8px 10px; }
+    .wf-toc .tl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.07em; font-family: ui-monospace, monospace; margin-bottom: 6px; }
+    .wf-tocitem { display: block; font-size: 10px; color: #cfcfcf; text-decoration: underline; padding: 2px 0; }
+    .wf-legsec { margin-bottom: 12px; }
+    .wf-legh { font-size: 11px; color: #fff; font-weight: 700; margin-bottom: 5px; }
+    .wf-lline { height: 8px; background: #1e1e1e; border-radius: 3px; margin-bottom: 5px; }
+    .wf-spine { border: 1px solid #6a6a6a; border-radius: 6px; padding: 8px 10px; font-size: 9.5px; color: #cfcfcf; margin-bottom: 6px; }
+    .wf-cktable { border: 1px solid #333; border-radius: 6px; overflow: hidden; }
+    .wf-ckrow { display: flex; gap: 8px; padding: 6px 9px; border-bottom: 1px solid #242424; font-size: 9.5px; }
+    .wf-ckrow:last-child { border-bottom: none; }
+    .wf-ckrow .ck { flex: 0 0 62px; color: #cfcfcf; }
+    .wf-ckrow .cd { flex: 1; min-width: 0; color: #9a9a9a; }
+    .wf-docmap { border: 1px solid #333; border-radius: 7px; overflow: hidden; }
+    .wf-docrow { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; padding: 7px 10px; border-bottom: 1px solid #242424; }
+    .wf-docrow:last-child { border-bottom: none; }
+    .wf-docrow .dn { flex: 0 0 auto; font-size: 10px; color: #fff; font-weight: 700; }
+    .wf-docrow .ds { flex: 0 0 auto; font-size: 9px; color: #8a8a8a; font-family: ui-monospace, monospace; }
+    .wf-docrow .dnote { flex: 1 1 140px; min-width: 0; font-size: 9.5px; color: #9a9a9a; word-break: break-word; }
 
     .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
     .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
@@ -221,10 +224,10 @@
       <a href="pricing.html" class="nav-sub-item">Pricing</a>
       <a href="security-privacy.html" class="nav-sub-item">Security and privacy</a>
       <a href="about.html" class="nav-sub-item">About</a>
-      <a href="contact.html" class="nav-sub-item nav-sub-active">Contact / Support</a>
+      <a href="contact.html" class="nav-sub-item">Contact / Support</a>
       <a href="help.html" class="nav-sub-item">Help / FAQ</a>
       <a href="segment-landing.html" class="nav-sub-item">Segment landing</a>
-      <a href="legal.html" class="nav-sub-item">Legal</a>
+      <a href="legal.html" class="nav-sub-item nav-sub-active">Legal</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -245,165 +248,182 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 1.3</span>
-      <span class="badge">Public marketing</span>
-      <span class="badge seo">Indexed &middot; full A-E SEO</span>
+      <span class="badge">Node 1.6</span>
+      <span class="badge">Shared legal template</span>
+      <span class="badge seo">Indexed &middot; low crawl priority</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Contact / Support (1.3) &middot; URL: /contact</div>
-    <h1>Contact / Support</h1>
-    <p class="hero-intro">The supporting reachability page: a help-first deflection to 1.4, a simple contact form, a direct support email, and a response-time note, so a user can reach Brio with clear expectations. Messages here are support requests, not wellbeing data, kept separate from the private check-ins. Indexed, with a full A to E SEO block and the ContactPage schema. Support email and SLA are a hypothesis pending. For Priya the operator. Serves supporting reachability. Source of truth: ia/docs/pages/contact.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Legal documents (1.6) &middot; URL: /privacy &middot; /terms &middot; /cookies</div>
+    <h1>Legal documents</h1>
+    <p class="hero-intro">The shared legal template: one structure that renders each document (Privacy Policy, Terms of Service, Cookie Policy) as a template map, with a document switcher, a last-updated stamp, a contents list, section headings, and a cookie-settings control that reopens 11.3, in the public chrome. It is not three hand-built pages: the structure is fixed, the title, slug, date, and section body vary per document. The legal copy is a hypothesis pending legal review; the Privacy Policy must be consistent with the 1.1 privacy spine and must not contradict it. The LAST node of cluster 1: with it the Step 5 rollout is complete. Indexed but low crawl priority. Source of truth: ia/docs/pages/legal.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
-    <h2>Content blocks</h2>
-    <p>Help first, then a plain form and a direct email, with expectations set. The page's job is reachability, so the form and the email are the strongest elements.</p>
+    <h2>Content blocks (fixed skeleton, one template per document)</h2>
+    <p>The document's job is to be read and to be compliant, so there is no acquisition CTA. The structure is fixed; the title, date, and sections vary per document. The legal copy is pending legal review, so the wireframe shows headings and placeholder body only.</p>
     <ol>
-      <li><strong>Public nav</strong> (0.1 pre-auth): the Brio mark, marketing links, Log in, Start free. No job tabs.</li>
-      <li><strong>Hero</strong>: H1 "Get in touch", a subhead. The LCP is the heading text.</li>
-      <li><strong>Help first</strong>: "most answers are in Help", with a link to 1.4, the faster path.</li>
-      <li><strong>Send us a message</strong>: a simple form (name, email, message), reusing the auth and settings inputs; success shows a confirmation (2.2 pattern).</li>
-      <li><strong>Email us directly</strong>: the support email as an alternative. <strong>When we reply</strong>: a response-time note (~1 business day <strong>[?]</strong>).</li>
-      <li><strong>Privacy note</strong>: messages here are support requests, not wellbeing data. <strong>CTA band</strong> + <strong>Footer</strong> (0.2).</li>
+      <li><strong>Public nav</strong> (0.1 pre-auth): the Brio mark, marketing links, Log in, Start free. No job tabs. (Fixed.)</li>
+      <li><strong>Document header</strong>: H1 the document title, a switcher (Privacy / Terms / Cookies) so the siblings cross-link, and a <strong>last-updated stamp</strong> <span class="hyp">?</span>.</li>
+      <li><strong>In-page contents</strong>: an anchor list of the document's sections, for scanning and deep-linking.</li>
+      <li><strong>Legal-copy body</strong>: the document's sections, each an H2 plus body copy <span class="hyp">?</span> pending legal review.</li>
+      <li><strong>Manage cookie settings</strong>: a control that reopens 11.3 Cookie consent (a Step 6 system node <span class="hyp">?</span>). <strong>Footer</strong> (0.2) with the legal column linking all three.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 Navigation (public), 0.2 Footer, the auth and settings inputs (wf-field, wf-input), and the 2.2 confirmation pattern for the submit success. No new global; the support email and SLA are a hypothesis pending.</p>
+    <p><strong>Components used:</strong> 0.1 Navigation (public), 0.2 Footer, the public chrome from 1.0 and 1.1, and a forward to 11.3 Cookie consent. The document switcher, contents list, last-updated stamp, and legal body are thin, page-specific layout. No new global; the legal copy is pending legal review, and the Privacy Policy must not drift from the 1.1 spine.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the contact page; mobile stacks the same blocks; the third frame is the submit confirmation (the 2.2 pattern).</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The first frame is the Privacy Policy (linked from 1.1); the phone is the Cookie Policy (which carries the manage-settings tie to 11.3); the document map below shows the three siblings on one template.</p>
 
     <div class="wf-row">
       <div style="flex:1; min-width:300px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, contact page (guest)</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, one document (Privacy Policy)</div>
         <div class="wf-page">
           <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Pricing</span><span class="wf-plain">Security</span><span class="wf-plain">About</span><span class="sp"></span><span class="wf-b sm">Log in</span><span class="wf-b solid sm">Start free</span></div>
           <div class="wf-sec">
-            <div class="lbl">2 &middot; hero (H1)</div>
-            <div class="wf-hl"></div><div class="wf-hl s"></div>
+            <div class="lbl">2 &middot; document header &middot; H1 = <span class="wf-plain">{document title}</span></div>
+            <div style="color:#fff; font-size:14px; font-weight:700;">Privacy Policy</div>
+            <div class="wf-docnav" style="margin-top:8px;"><span class="wf-doctab on">Privacy Policy</span><span class="wf-doctab">Terms of Service</span><span class="wf-doctab">Cookie Policy</span></div>
+            <div class="wf-updated">Last updated: 1 July 2026 <span class="hyp" style="font-size:9px;">?</span></div>
           </div>
           <div class="wf-sec">
-            <div class="lbl">3 &middot; help first (to 1.4)</div>
-            <div class="wf-help"><span class="ht">Most answers are in Help, from setup to privacy to billing.</span><span class="wf-b sm">Go to Help</span></div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">4 &middot; send us a message (form)</div>
-            <div class="wf-field"><div class="wf-flabel">Your name</div><div class="wf-input">Priya Nair</div></div>
-            <div class="wf-field"><div class="wf-flabel">Email</div><div class="wf-input">you@company.com</div></div>
-            <div class="wf-field"><div class="wf-flabel">Message</div><div class="wf-input area">How can we help?</div></div>
-            <span class="wf-b solid block sm">Send message</span>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">5 &middot; email us directly &middot; when we reply</div>
-            <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;"><span class="wf-email">support@brio.[?]</span><span class="wf-rt">We reply within about 1 business day <span class="hyp" style="font-size:9px;">?</span></span></div>
-          </div>
-          <div class="wf-sec">
-            <div class="lbl">6 &middot; privacy note</div>
-            <div class="wf-privnote"><span class="lk">&#128274;</span><span>Messages here are support requests, not wellbeing data. They are handled separately from the private check-ins.</span></div>
-          </div>
-          <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
-          <div class="wf-foot-mini"><span>Product</span><span>Company</span><span>Resources</span><span>Legal</span></div>
-        </div>
-        <div class="wf-note">public chrome &middot; help-first deflect to 1.4 &middot; simple form (auth/settings inputs) &middot; direct email + response-time &middot; support requests kept separate from wellbeing data.</div>
-      </div>
-
-      <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
-        <div class="wf-phone">
-          <div class="wf-phoneinner">
-            <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-b solid sm">Start free</span></div>
-            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>hero</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
-            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">3</span>help first</div><div class="wf-help"><span class="ht">Most answers are in Help.</span><span class="wf-b sm">Help</span></div></div>
-            <div class="wf-sec">
-              <div class="lbl"><span class="wf-bnum">4</span>message</div>
-              <div class="wf-field"><div class="wf-flabel">Name</div><div class="wf-input">Priya Nair</div></div>
-              <div class="wf-field"><div class="wf-flabel">Email</div><div class="wf-input">you@company.com</div></div>
-              <div class="wf-field"><div class="wf-flabel">Message</div><div class="wf-input area">How can we help?</div></div>
-              <span class="wf-b solid block sm">Send message</span>
+            <div class="lbl">3 &middot; in-page contents (anchors)</div>
+            <div class="wf-toc">
+              <div class="tl">On this page</div>
+              <span class="wf-tocitem">What information we collect</span>
+              <span class="wf-tocitem">How wellbeing answers are handled</span>
+              <span class="wf-tocitem">How we use information</span>
+              <span class="wf-tocitem">Your rights (access, deletion / GDPR)</span>
+              <span class="wf-tocitem">Data retention and security</span>
+              <span class="wf-tocitem">How to contact us</span>
             </div>
-            <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
-            <div class="wf-foot-mini"><span>Footer (accordions)</span></div>
           </div>
+          <div class="wf-sec">
+            <div class="lbl">4 &middot; legal body &middot; headings real, copy pending legal review</div>
+            <div class="wf-legsec">
+              <div class="wf-legh">What information we collect</div>
+              <div class="wf-lline" style="width:96%;"></div><div class="wf-lline" style="width:88%;"></div><div class="wf-lline" style="width:66%;"></div>
+            </div>
+            <div class="wf-legsec">
+              <div class="wf-legh">How wellbeing answers are handled</div>
+              <div class="wf-spine">Must match the 1.1 spine: aggregate only, no score until 5 answer, no live count, individual data never shown or sold.</div>
+              <div class="wf-lline" style="width:92%;"></div><div class="wf-lline" style="width:78%;"></div>
+            </div>
+            <div class="wf-legsec">
+              <div class="wf-legh">Your rights (access, deletion / GDPR)</div>
+              <div class="wf-lline" style="width:94%;"></div><div class="wf-lline" style="width:72%;"></div>
+            </div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">5 &middot; manage cookie settings (reopens 11.3)</div>
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;"><span class="wf-b sm">Manage cookie settings</span><span class="wf-plain">reopens 11.3 Cookie consent <span class="hyp" style="font-size:9px;">?</span></span></div>
+          </div>
+          <div class="wf-foot-mini"><span>Product</span><span>Company</span><span>Resources</span><span>Legal: Privacy / Terms / Cookies</span></div>
         </div>
-        <div class="wf-note">same blocks stacked &middot; form fields full width &middot; thumb-reachable Send.</div>
+        <div class="wf-note">one document on the shared template &middot; switcher cross-links siblings &middot; last-updated = trust + schema dateModified &middot; privacy section traced to the 1.1 spine.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Message sent (2.2 confirmation)</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Same template, different document (Cookie Policy)</div>
         <div class="wf-phone">
           <div class="wf-phoneinner">
             <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-b solid sm">Start free</span></div>
             <div class="wf-sec">
-              <div class="wf-confirm">
-                <div class="wf-check">&#10003;</div>
-                <div class="ct">Message sent</div>
-                <div class="cs">We will reply to your email, usually within 1 business day.</div>
+              <div class="lbl"><span class="wf-bnum">2</span>header {document}</div>
+              <div style="color:#fff; font-size:12px; font-weight:700;">Cookie Policy</div>
+              <div class="wf-docnav" style="margin-top:6px;"><span class="wf-doctab">Privacy</span><span class="wf-doctab">Terms</span><span class="wf-doctab on">Cookies</span></div>
+              <div class="wf-updated">Last updated: 1 July 2026 <span class="hyp" style="font-size:9px;">?</span></div>
+            </div>
+            <div class="wf-sec">
+              <div class="lbl"><span class="wf-bnum">4</span>what cookies we use</div>
+              <div class="wf-cktable">
+                <div class="wf-ckrow"><span class="ck">Essential</span><span class="cd">Sign-in and security, always on.</span></div>
+                <div class="wf-ckrow"><span class="ck">Analytics</span><span class="cd">Usage stats, optional.</span></div>
               </div>
             </div>
-            <div class="wf-sec"><div class="wf-help"><span class="ht">While you wait, Help may have your answer.</span><span class="wf-b sm">Help</span></div></div>
-            <div class="wf-foot-mini"><span>Footer</span></div>
+            <div class="wf-sec">
+              <div class="lbl"><span class="wf-bnum">5</span>manage settings</div>
+              <span class="wf-b solid block sm">Manage cookie settings</span>
+              <div class="wf-plain" style="margin-top:5px;">reopens 11.3 <span class="hyp" style="font-size:9px;">?</span></div>
+            </div>
+            <div class="wf-foot-mini"><span>Footer (Legal column)</span></div>
           </div>
         </div>
-        <div class="wf-note">reuses the 2.2 confirmation layout &middot; on error the form stays filled (never a dead-end).</div>
+        <div class="wf-note">same skeleton, Cookie Policy &middot; only the title, date, and sections differ &middot; the manage-settings control ties to 11.3.</div>
       </div>
+    </div>
+
+    <div class="wf-frame">
+      <div class="wf-cap">Template map &middot; one template, three documents</div>
+      <div class="wf-docmap">
+        <div class="wf-docrow"><span class="dn">Privacy Policy</span><span class="ds">/privacy</span><span class="dnote">primary; linked from 1.1; must match the aggregate-only spine (no drift)</span></div>
+        <div class="wf-docrow"><span class="dn">Terms of Service</span><span class="ds">/terms</span><span class="dnote">use of the service, subscription, acceptable use</span></div>
+        <div class="wf-docrow"><span class="dn">Cookie Policy</span><span class="ds">/cookies</span><span class="dnote">cookies used; "manage settings" reopens 11.3 Cookie consent</span></div>
+      </div>
+      <div class="wf-note">one structure, self-canonical per document &middot; headings structural, body copy <span class="hyp">?</span> pending legal review &middot; indexed but low crawl priority (thin is acceptable for legal).</div>
     </div>
   </section>
 
   <!-- SEO A-E -->
   <section id="seo">
-    <div class="section-label">Structure SEO, ready copy</div>
+    <div class="section-label">Structure SEO, ready copy (template)</div>
     <h2>SEO block A to E (indexed)</h2>
-    <p>Contact is indexed. Copy is ready; the support email and response-time SLA are <span class="hyp">?</span> pending; final query volumes deferred to production <span class="hyp">?</span>.</p>
+    <p>Legal documents are indexed but thin by nature, so crawl priority is low; the block is written as a template and its checklist guards the two things that matter: a self canonical per document, and consistency between the Privacy Policy and the 1.1 spine. The legal copy and dates are <span class="hyp">?</span> pending legal review.</p>
 
-    <h3>A. Meta tags</h3>
+    <h3>A. Meta tags (per document)</h3>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">title</span><span class="seo-v"><code>Contact Brio support | Brio</code> <span class="count">26 / 60</span></span></div>
-      <div class="seo-row"><span class="seo-k">description</span><span class="seo-v"><code>Contact Brio support. Check Help for quick answers, or send a message and we will reply to your email, usually within one business day.</code> <span class="count">135 / 155</span></span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v"><code>https://[production-domain]/contact</code> <span class="hyp">? domain</span></span></div>
-      <div class="seo-row"><span class="seo-k">hreflang</span><span class="seo-v">en-US (primary), en-GB (UK) <span class="hyp">?</span></span></div>
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>index, follow</code></span></div>
-      <div class="seo-row"><span class="seo-k">open graph</span><span class="seo-v">og:title, og:description, og:type=website, og:url, og:image <span class="hyp">? asset at Concept</span></span></div>
-      <div class="seo-row"><span class="seo-k">twitter</span><span class="seo-v"><code>summary_large_image</code></span></div>
+      <div class="seo-row"><span class="seo-k">title pattern</span><span class="seo-v"><code>{document title} | Brio</code></span></div>
+      <div class="seo-row"><span class="seo-k">title, privacy</span><span class="seo-v"><code>Privacy Policy | Brio</code> <span class="count">21 / 60</span></span></div>
+      <div class="seo-row"><span class="seo-k">title, cookies</span><span class="seo-v"><code>Cookie Policy | Brio</code> <span class="count">20 / 60</span></span></div>
+      <div class="seo-row"><span class="seo-k">title, terms</span><span class="seo-v"><code>Terms of Service | Brio</code> <span class="count">23 / 60</span></span></div>
+      <div class="seo-row"><span class="seo-k">description</span><span class="seo-v"><code>How Brio handles your data: employee wellbeing answers are aggregate-only, never shown per individual. Read Brio's privacy policy.</code> <span class="count">130 / 155</span> <span class="hyp">? final copy pending legal review</span></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v"><code>https://[production-domain]/privacy</code> &middot; SELF per document <span class="hyp">? domain</span></span></div>
+      <div class="seo-row"><span class="seo-k">hreflang</span><span class="seo-v">en-US (primary), en-GB (UK) <span class="hyp">? UK GDPR variant may differ</span></span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>index, follow</code> &middot; indexable, low crawl priority (thin by nature is acceptable for legal)</span></div>
+      <div class="seo-row"><span class="seo-k">open graph</span><span class="seo-v">og:title, og:description, og:type=website, og:url</span></div>
+      <div class="seo-row"><span class="seo-k">twitter</span><span class="seo-v"><code>summary</code></span></div>
     </div>
 
     <h3>B. Heading structure</h3>
-    <p>Exactly one H1, then H2s in block order.</p>
+    <p>Exactly one H1 per document, then the document's section H2s (Privacy Policy example).</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">H1</span><span class="seo-v"><code>Get in touch</code></span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Check Help first</span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Send us a message</span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Email us directly</span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">When we reply</span></div>
-      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Start free in five minutes</span></div>
+      <div class="seo-row"><span class="seo-k">H1</span><span class="seo-v"><code>{document title}</code> &middot; e.g. <code>Privacy Policy</code></span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">What information we collect</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">How wellbeing answers are handled (aggregate only, a minimum of 5, no live count) &middot; consistent with 1.1</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">How we use information</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Your rights (access, deletion / GDPR)</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Data retention and security</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">How to contact us</span></div>
     </div>
 
     <h3>C. Ready SEO text</h3>
-    <div class="seo-text">Have a question about Brio? Many answers are in Help, from setup to privacy to billing, so it is worth a look first. If you still need us, send a message with the form or email support directly, and we will reply to your email, usually within one business day. Messages here are support requests, not wellbeing data; they are handled separately from the private, aggregate-only check-ins.</div>
+    <div class="seo-text">Legal copy is <span class="hyp">?</span> pending legal review, so it is not fabricated here. The template guarantees a structure: each document has one H1, a last-updated stamp, a contents list, and section headings. For the Privacy Policy, the "how wellbeing answers are handled" section must state, consistently with the 1.1 Security and privacy page, that answers are aggregate only, that no score is shown until at least five people have answered, that there is no live count while a check-in is open, and that individual data is never shown or sold.</div>
 
-    <h3>D. Structured data (schema.org)</h3>
+    <h3>D. Structured data (schema.org, per document)</h3>
     <ul>
-      <li><code>ContactPage</code>: name, url, description</li>
-      <li><code>Organization</code> with <code>contactPoint</code> (email, contactType customer support) <span class="hyp">? email pending</span></li>
-      <li><code>BreadcrumbList</code>: Home, Contact</li>
+      <li><code>WebPage</code>: name (the document title), url, description, <code>dateModified</code> (the last-updated date)</li>
+      <li><code>BreadcrumbList</code>: Home, {document}</li>
+      <li><code>Organization</code>: name Brio, url <span class="hyp">? logo asset at Concept</span></li>
     </ul>
 
-    <h3>E. Optimization checklist</h3>
+    <h3>E. Optimization checklist (the template's guardrails)</h3>
     <ul>
-      <li>exactly one H1; the LCP is the hero heading text, not an image</li>
-      <li>the form fields are labelled inputs; validation hints are text, not color alone</li>
-      <li>the support email is real text and matches the schema contactPoint; nav and footer links are crawlable <code>&lt;a&gt;</code></li>
-      <li>canonical and hreflang set; internal links to 1.4 Help, 0.0 Landing, 2.0 Sign up</li>
-      <li>Core Web Vitals budget respected; final SLA and support email deferred to production <span class="hyp">?</span></li>
+      <li>exactly one H1 per document; the last-updated stamp is real text and maps to schema <code>dateModified</code></li>
+      <li><strong>canonical is self per document</strong> (/privacy, /terms, /cookies), never one shared master</li>
+      <li><strong>the Privacy Policy must be consistent with the 1.1 privacy spine</strong> (aggregate only, minimum of 5, no live count, never shown or sold); it must not contradict the public claims</li>
+      <li>the "manage cookie settings" control reopens 11.3 Cookie consent (a Step 6 system node); the footer legal column links all three documents</li>
+      <li>legal pages are indexed but low priority; thin content is acceptable here, unlike the 1.5 landing template</li>
+      <li>all legal copy is <span class="hyp">?</span> pending legal review; do not ship placeholder text; nav and footer links are crawlable <code>&lt;a&gt;</code></li>
     </ul>
-    <div class="callout ok"><strong>Reachable, with expectations set.</strong> Contact offers a help-first deflection to 1.4, a simple form, a direct email, and a response-time note, in the public chrome, with a full A to E SEO block and the ContactPage schema. It reuses the public chrome, the auth and settings inputs, and the 2.2 confirmation, and invents nothing global. Next: <strong>1.4 Help / FAQ</strong> (also an SEO surface), then 1.5 Segment landing and 1.6 Legal.</div>
+    <div class="callout ok"><strong>One template, three compliant documents, closing cluster 1.</strong> Legal documents renders the Privacy Policy, Terms of Service, and Cookie Policy on one structure with a switcher, a last-updated stamp, a contents list, and a cookie-settings control that reopens 11.3, plus a full A to E SEO block whose checklist guards the self canonical and the consistency of the Privacy Policy with the 1.1 spine. It reuses the public chrome and the footer legal column, forwards to 11.3, and invents nothing global; the legal copy is <span class="hyp">?</span> pending legal review. This is the LAST node of cluster 1, so the <strong>Step 5 page rollout is complete</strong>. Next: <strong>Step 6</strong> (the cluster 11 system nodes 404 / 500 / 503 / cookie consent 11.3 / toast, and confirming 11.5 Global search is not applicable), then Step 7 audit and Step 8 reconcile.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 1.3 Contact / Support - July 2026</p>
-    <p style="margin-top:4px;">The supporting reachability page: a help-first deflection to 1.4, a simple contact form (auth and settings inputs), a direct support email, and a response-time note, in the public chrome, with a full A to E SEO block and the ContactPage schema. The submit success reuses the 2.2 confirmation; on error the form stays filled. Support email and SLA are a hypothesis pending. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/contact.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 1.6 Legal documents - July 2026</p>
+    <p style="margin-top:4px;">The shared legal template: one structure that renders each document (Privacy Policy, Terms of Service, Cookie Policy) as a template map, with a document switcher, a last-updated stamp, a contents list, section headings, and a cookie-settings control that reopens 11.3, in the public chrome, with a full A to E SEO block. Self-canonical per document; the Privacy Policy must be consistent with the 1.1 spine and must not contradict it; the legal copy and dates are a hypothesis pending legal review. Indexed but low crawl priority. The LAST node of cluster 1: the Step 5 rollout is complete. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/legal.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
