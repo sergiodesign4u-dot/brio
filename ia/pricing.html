@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Invite owner + upgrade (7.1)</title>
+  <title>Brio - IA Detail: Pricing (1.0)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -69,7 +69,7 @@
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
-    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
+    .badge.seo { background: var(--accent-warm-dim); color: var(--accent-warm); border-color: var(--accent-warm-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
 
@@ -96,6 +96,8 @@
     .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
     .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
     .seo-v code { font-size: 12px; }
+    .count { color: var(--text-faint); font-size: 11px; font-family: ui-monospace, monospace; }
+    .seo-text { background: var(--surface-2); border-left: 2px solid var(--accent); border-radius: 4px; padding: 12px 16px; color: var(--text-muted); font-size: 13.5px; margin: 12px 0; }
 
     /* ===== Black-and-white wireframe kit ===== */
     .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
@@ -105,40 +107,41 @@
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
+    .wf-b.sm { padding: 5px 10px; font-size: 10px; }
     .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
+    .wf-hyp { display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 1px 5px; border-radius: 100px; border: 1px solid #6a6a6a; color: #cfcfcf; margin-left: 5px; }
 
-    /* operator app chrome (0.1 nav; shared with 7.0) */
-    .wf-appwrap { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-appbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
-    .wf-tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
-    .wf-tab { font-size: 10px; color: #8a8a8a; padding: 3px 8px; border-radius: 4px; }
-    .wf-tab.on { color: #fff; border: 1px solid #6a6a6a; }
-    .wf-appbody { padding: 16px; }
-    .wf-h { color: #fff; font-size: 17px; font-weight: 800; margin-bottom: 12px; }
-    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 5px; }
-    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px 11px; margin-bottom: 12px; color: #6a6a6a; font-size: 12px; }
+    /* public marketing chrome (reused from 0.0 Home) */
+    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; flex-wrap: wrap; }
+    .wf-nav .sp { margin-left: auto; }
+    .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
+    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
+    .wf-hl.s { width: 55%; height: 12px; }
+    .wf-strip2 { text-align: center; font-size: 11px; color: #e0e0e0; padding: 9px; border: 1px dashed #4a4a4a; border-radius: 6px; }
+    .wf-band { text-align: center; padding: 14px; color: #fff; font-size: 12px; }
+    .wf-foot-mini { padding: 12px 14px; color: #6a6a6a; font-size: 10.5px; display: flex; gap: 12px; flex-wrap: wrap; }
 
-    /* plan comparison (0.6 tiers) */
-    .wf-plans { display: flex; gap: 8px; margin-bottom: 10px; }
-    .wf-plan { flex: 1; border: 1px solid #3a3a3a; border-radius: 8px; padding: 11px; }
-    .wf-plan.on { border-color: #e6e6e6; }
-    .wf-plan .pn { font-size: 11px; color: #fff; font-weight: 700; }
+    /* tier cards (7.1 plan cards) */
+    .wf-plans { display: flex; gap: 8px; flex-wrap: wrap; }
+    .wf-plan { flex: 1; min-width: 130px; border: 1px solid #3a3a3a; border-radius: 8px; padding: 11px; }
+    .wf-plan.rec { border-color: #e6e6e6; }
+    .wf-plan .ph { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+    .wf-plan .pn { font-size: 12px; color: #fff; font-weight: 700; }
     .wf-plan .pp { font-size: 10px; color: #9a9a9a; margin: 2px 0 8px; }
-    .wf-plan .prow { font-size: 10px; color: #cfcfcf; display: flex; gap: 6px; margin-bottom: 4px; align-items: flex-start; }
-    .wf-plan .prow .mk { width: 12px; text-align: center; flex-shrink: 0; font-weight: 700; color: #fff; }
+    .wf-plan .pp b { color: #fff; font-size: 13px; }
+    .wf-plan .prow { font-size: 9.5px; color: #cfcfcf; display: flex; gap: 6px; margin-bottom: 4px; align-items: flex-start; }
+    .wf-plan .prow .mk { width: 11px; text-align: center; flex-shrink: 0; font-weight: 700; color: #fff; }
     .wf-plan .prow.no { color: #7a7a7a; }
-    .wf-tagline { display: inline-block; font-size: 8px; color: #9a9a9a; border: 1px solid #4a4a4a; border-radius: 3px; padding: 0 5px; margin-left: 6px; font-family: ui-monospace, monospace; letter-spacing: 0.04em; text-transform: uppercase; }
-    .wf-mini { font-size: 10px; color: #9a9a9a; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 7px 9px; margin: 4px 0 12px; }
+    .wf-plan .pcta { margin-top: 9px; }
+    .wf-rec { font-size: 7.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 1px 5px; border-radius: 100px; border: 1px solid #e6e6e6; color: #fff; }
 
-    /* confirmation (reuses 2.2 layout) */
-    .wf-confirm { text-align: center; }
-    .wf-check { width: 46px; height: 46px; border: 1px solid #7a7a7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: #fff; font-size: 20px; }
-    .wf-addr { display: inline-block; font-family: ui-monospace, monospace; font-size: 11px; color: #fff; }
-
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
+    .wf-phone .wf-sec { padding: 12px 10px; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
@@ -195,7 +198,7 @@
       <a href="magic-link-sent.html" class="nav-sub-item">Magic-link sent</a>
       <a href="link-expired.html" class="nav-sub-item">Invalid or expired link</a>
       <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
-      <a href="invite-owner.html" class="nav-sub-item nav-sub-active">Invite owner + upgrade</a>
+      <a href="invite-owner.html" class="nav-sub-item">Invite owner + upgrade</a>
       <a href="upgrade.html" class="nav-sub-item">Upgrade / paywall</a>
       <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
       <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
@@ -212,7 +215,7 @@
       <a href="settings-privacy.html" class="nav-sub-item">Privacy center</a>
       <a href="settings-notifications.html" class="nav-sub-item">Notifications</a>
       <a href="settings-account.html" class="nav-sub-item">Account settings</a>
-      <a href="pricing.html" class="nav-sub-item">Pricing</a>
+      <a href="pricing.html" class="nav-sub-item nav-sub-active">Pricing</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -233,135 +236,172 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 7.1</span>
-      <span class="badge">Owner tab</span>
-      <span class="badge privacy">Paid unlock &middot; item 8</span>
+      <span class="badge">Node 1.0</span>
+      <span class="badge">Public marketing</span>
+      <span class="badge seo">Indexed &middot; full A-E SEO</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Invite owner + upgrade (7.1) &middot; URL: /app/owner/invite</div>
-    <h1>Invite owner + upgrade</h1>
-    <p class="hero-intro">Turn the intent from 7.0 into a real invite. The operator enters the owner's email, sees plainly that the owner dashboard is a paid feature, and either upgrades (free plan) or sends the invite directly (paid plan). The privacy boundary was set on 7.0, so here the reminder is condensed and the focus is the email, the plan, and the unlock. Serves S2 and item 8 (the paid unlock). Inside the operator app, so noindex. Source of truth: ia/docs/pages/invite-owner.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Pricing (1.0) &middot; URL: /pricing</div>
+    <h1>Pricing</h1>
+    <p class="hero-intro">The first indexed page of the rollout: transparent plan tiers and price, so an operator can decide without a demo, then Start free. It makes the business model legible (Free to start, the owner dashboard is the paid unlock) and reinforces the privacy promise as part of what the subscription buys. Unlike the app and employee surfaces, Pricing carries a full A to E SEO block with ready copy. All prices are a hypothesis. For Priya the operator (buyer, pre-auth). Serves item 1. Source of truth: ia/docs/pages/pricing.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. The paywall is never a surprise: 7.0 and the plan comparison both state the owner dashboard is paid before the action.</p>
+    <p>Transparent, self-serve pricing: no demo and no sales call (item 1). The privacy promise appears even here, because it is part of what the subscription buys.</p>
     <ol>
-      <li><strong>0.1 Navigation</strong>: the operator app nav with the Owner tab active.</li>
-      <li><strong>Heading</strong>: "Invite your owner".</li>
-      <li><strong>Owner email field</strong>: a labelled email field (and an optional owner name), so the invite reaches the right person.</li>
-      <li><strong>Plan comparison</strong>: a compact free-versus-Starter comparison with the owner dashboard as the paid unlock (0.6 tiers). Pricing is a hypothesis, benchmarked.</li>
-      <li><strong>Condensed privacy reminder</strong>: one 0.3 line ("your owner sees aggregate only, never individual data"), continuity with 7.0.</li>
-      <li><strong>Primary action (plan-dependent)</strong>: free = "Upgrade and invite" (opens 7.2); paid = "Send invite". On success, the "invite sent" confirmation.</li>
+      <li><strong>Public nav</strong> (0.1 pre-auth): the Brio mark, marketing links (Pricing, Security, About), Log in, and Start free. No job tabs.</li>
+      <li><strong>Hero</strong>: H1 "Simple pricing for team wellbeing", a subhead, and the primary Start free CTA. The LCP is the heading text.</li>
+      <li><strong>Compare plans</strong>: Free, Starter (recommended), Growth as cards (0.6 tiers, 7.1 plan cards); every price flagged a hypothesis; each tier has a CTA.</li>
+      <li><strong>Why the owner dashboard is paid</strong>: Free gives the operator the aggregate; the owner dashboard is the paid unlock (item 8).</li>
+      <li><strong>Your team's answers stay private</strong>: the subscription-as-privacy note (0.3 claim 4, public framing).</li>
+      <li><strong>Pricing questions (FAQ teaser)</strong>: a few questions with a link to 1.4 Help.</li>
+      <li><strong>CTA band</strong>: Start free, to 2.0 Sign up. <strong>Footer</strong> (0.2): the marketing footer.</li>
     </ol>
-    <p><strong>Components used:</strong> 0.1 (Owner tab), the 0.6 plan tiers, a condensed 0.3 reminder, the 7.2 Upgrade dialog (opened from the primary on the free plan), and the 2.2 confirmation layout (the "invite sent" success). No new global.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Plan gate, unlock, and confirmation</div>
-    <h2>States and primary CTA</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Default, free plan</td><td>email, plan comparison (owner dashboard = paid), privacy reminder</td><td>Upgrade and invite (opens 7.2)</td></tr>
-          <tr><td>Default, paid plan</td><td>email field, no upgrade needed</td><td>Send invite</td></tr>
-          <tr><td>Email validation</td><td>inline text for an invalid email (not color alone)</td><td>correct in place</td></tr>
-          <tr><td>Upgrade dialog open</td><td>the 7.2 Upgrade or paywall dialog</td><td>7.3 on failure; recoverable exit returns here (F3 DE3)</td></tr>
-          <tr><td>Sending</td><td>the primary shows in-progress; field locks</td><td>-</td></tr>
-          <tr><td>Confirmation (invite sent)</td><td>"your owner will get a link"</td><td>preview 9.2 digest / open 9.0 Owner dashboard</td></tr>
-          <tr><td>Owner already has access</td><td>the owner's status</td><td>manage or revoke</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p><strong>Components used:</strong> 0.1 Navigation (public pre-auth variant), 0.2 Footer, 0.6 tiers, and the 7.1 plan cards for the tier comparison. The hero, callouts, and FAQ teaser are page-specific marketing layout. No new global is invented; all pricing is a hypothesis.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The email and the plan comparison sit together, with the owner dashboard marked as the paid unlock; mobile shows the "invite sent" confirmation. The paid / not-paid split is carried by labels and marks, not color.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the full public page with the three tiers side by side; mobile stacks the tiers one per row. Every price carries a hypothesis flag.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, free plan (upgrade unlocks the owner dashboard)</div>
-        <div class="wf-appwrap">
-          <div class="wf-appbar">
-            <span class="wf-logo">Brio</span>
-            <span class="wf-tabs"><span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab on">Owner</span></span>
+      <div style="flex:1; min-width:300px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, public pricing page (guest)</div>
+        <div class="wf-page">
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Pricing</span><span class="wf-plain">Security</span><span class="wf-plain">About</span><span class="sp"></span><span class="wf-b sm">Log in</span><span class="wf-b solid sm">Start free</span></div>
+          <div class="wf-sec">
+            <div class="lbl">2 &middot; hero (H1)</div>
+            <div class="wf-hl"></div><div class="wf-hl s"></div>
+            <div style="margin-top:10px;"><span class="wf-b solid sm">Start free</span> <span class="wf-plain">No demo, no card</span></div>
           </div>
-          <div class="wf-appbody">
-            <div class="wf-h">Invite your owner</div>
-            <div class="wf-lbl">Owner email</div>
-            <div class="wf-input">owner@company.com</div>
-            <div class="wf-lbl">Plan</div>
+          <div class="wf-sec">
+            <div class="lbl">3 &middot; compare plans (0.6 tiers, 7.1 cards)</div>
             <div class="wf-plans">
               <div class="wf-plan">
-                <div class="pn">Free <span class="wf-tagline">Current</span></div>
-                <div class="pp">Up to 10 people</div>
-                <div class="prow"><span class="mk">+</span><span>Team pulse for you</span></div>
-                <div class="prow no"><span class="mk">x</span><span>Owner dashboard</span></div>
+                <div class="ph"><span class="pn">Free</span></div>
+                <div class="pp"><b>$0</b> / month <span class="wf-hyp">Hyp</span></div>
+                <div class="prow"><span class="mk">&#10003;</span>Up to 10 people</div>
+                <div class="prow"><span class="mk">&#10003;</span>1 program, weekly check-in</div>
+                <div class="prow no"><span class="mk">&#215;</span>No owner dashboard</div>
+                <div class="pcta"><span class="wf-b block sm">Start free</span></div>
               </div>
-              <div class="wf-plan on">
-                <div class="pn">Starter</div>
-                <div class="pp">$4 to 6 / seat / mo <span class="hyp">Hypothesis</span></div>
-                <div class="prow"><span class="mk">+</span><span>Full pulse and trends</span></div>
-                <div class="prow"><span class="mk">+</span><span>Owner dashboard (aggregate)</span></div>
+              <div class="wf-plan rec">
+                <div class="ph"><span class="pn">Starter</span><span class="wf-rec">Recommended</span></div>
+                <div class="pp"><b>$5</b> / seat / mo <span class="wf-hyp">Hyp</span></div>
+                <div class="prow"><span class="mk">&#10003;</span>Up to 50 people</div>
+                <div class="prow"><span class="mk">&#10003;</span>Full library, trends</div>
+                <div class="prow"><span class="mk">&#10003;</span>Owner dashboard</div>
+                <div class="pcta"><span class="wf-b solid block sm">Start free</span></div>
+              </div>
+              <div class="wf-plan">
+                <div class="ph"><span class="pn">Growth</span></div>
+                <div class="pp"><b>$9</b> / seat / mo <span class="wf-hyp">Hyp</span></div>
+                <div class="prow"><span class="mk">&#10003;</span>50 to 200+ people</div>
+                <div class="prow"><span class="mk">&#10003;</span>Multi-team, analytics</div>
+                <div class="prow"><span class="mk">&#10003;</span>Integrations</div>
+                <div class="pcta"><span class="wf-b block sm">Start free</span></div>
               </div>
             </div>
-            <div class="wf-mini">Your owner sees aggregate only, never individual data.</div>
-            <span class="wf-b solid block">Upgrade and invite</span>
-            <div class="wf-plain" style="text-align:center;margin-top:8px;">Owner dashboard unlocks on Starter. Opens the upgrade next.</div>
           </div>
+          <div class="wf-sec">
+            <div class="lbl">4 &middot; owner dashboard = paid (item 8)</div>
+            <div class="wf-strip2">Free gives you the team aggregate. The owner dashboard is the paid unlock.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">5 &middot; subscription-as-privacy (0.3 claim 4)</div>
+            <div class="wf-strip2">The subscription pays for the aggregate. Individual answers are never shown or sold.</div>
+          </div>
+          <div class="wf-sec">
+            <div class="lbl">6 &middot; FAQ teaser (to 1.4)</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;"><span class="wf-plain">Is it really private?</span><span class="wf-plain">What is a seat?</span><span class="wf-link">All questions</span></div>
+          </div>
+          <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
+          <div class="wf-foot-mini"><span>Product</span><span>Company</span><span>Resources</span><span>Legal</span><span>Popular (SEO)</span></div>
         </div>
-        <div class="wf-note">owner dashboard marked as the paid unlock &middot; pricing flagged Hypothesis &middot; paywall never a surprise &middot; free plan primary opens 7.2.</div>
+        <div class="wf-note">public pre-auth chrome (0.1) &middot; 3 tiers side by side, Starter recommended, all prices Hyp &middot; owner-dashboard-paid + privacy strips &middot; LCP = hero text.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, invite-sent confirmation</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, tiers stacked</div>
         <div class="wf-phone">
-          <div class="wf-appbar" style="padding:8px 10px;"><span class="wf-logo">Brio</span><span class="wf-tabs"><span class="wf-tab on">Owner</span></span></div>
-          <div class="wf-appbody" style="padding:16px 12px;">
-            <div class="wf-confirm">
-              <div class="wf-check">&#10003;</div>
-              <div class="wf-h" style="font-size:16px;margin-bottom:4px;">Invite sent</div>
-              <div class="wf-plain" style="margin-bottom:14px;">We sent a link to <span class="wf-addr">owner@company.com</span>.</div>
+          <div class="wf-phoneinner">
+            <div class="wf-nav"><span class="wf-logo">Brio</span><span class="sp"></span><span class="wf-b solid sm">Start free</span></div>
+            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">2</span>hero</div><div class="wf-hl"></div><div class="wf-hl s"></div><div style="margin-top:8px;"><span class="wf-b solid sm">Start free</span></div></div>
+            <div class="wf-sec">
+              <div class="lbl"><span class="wf-bnum">3</span>compare plans</div>
+              <div class="wf-plans" style="flex-direction:column;">
+                <div class="wf-plan"><div class="ph"><span class="pn">Free</span></div><div class="pp"><b>$0</b> / mo <span class="wf-hyp">Hyp</span></div><div class="prow"><span class="mk">&#10003;</span>Up to 10 people</div><div class="prow no"><span class="mk">&#215;</span>No owner dashboard</div></div>
+                <div class="wf-plan rec"><div class="ph"><span class="pn">Starter</span><span class="wf-rec">Rec</span></div><div class="pp"><b>$5</b> / seat <span class="wf-hyp">Hyp</span></div><div class="prow"><span class="mk">&#10003;</span>Owner dashboard</div></div>
+                <div class="wf-plan"><div class="ph"><span class="pn">Growth</span></div><div class="pp"><b>$9</b> / seat <span class="wf-hyp">Hyp</span></div><div class="prow"><span class="mk">&#10003;</span>Multi-team</div></div>
+              </div>
             </div>
-            <span class="wf-b block">See what your owner gets</span>
-            <span class="wf-b solid block" style="margin-top:8px;">Open owner dashboard</span>
+            <div class="wf-sec"><div class="lbl"><span class="wf-bnum">5</span>privacy</div><div class="wf-strip2">Answers are never shown or sold.</div></div>
+            <div class="wf-sec wf-band"><span class="wf-b solid sm">Start free</span></div>
+            <div class="wf-foot-mini"><span>Footer (accordions)</span></div>
           </div>
         </div>
-        <div class="wf-note">confirmation reuses the 2.2 layout &middot; preview 9.2 digest &middot; open 9.0.</div>
+        <div class="wf-note">tiers stack one per row &middot; thumb-reachable Start free &middot; footer collapses to accordions.</div>
       </div>
     </div>
   </section>
 
-  <!-- SEO (noindex) -->
+  <!-- SEO A-E -->
   <section id="seo">
-    <div class="section-label">Operator app zone</div>
-    <h2>SEO block (noindex)</h2>
-    <p>Invite owner and upgrade is inside the authenticated operator app. It is not indexed and carries no schema. The in-app findability rules still apply.</p>
+    <div class="section-label">Structure SEO, ready copy</div>
+    <h2>SEO block A to E (indexed)</h2>
+    <p>Pricing is indexed. Copy is ready, not "fill later"; final query volumes are deferred to production <span class="hyp">?</span>. Prices show a hypothesis flag in the UI, but the meta and schema carry the plain figures.</p>
+
+    <h3>A. Meta tags</h3>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (deep app zone, like Dashboard, Team, and Share)</span></div>
-      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/owner/invite</code></span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
-      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
+      <div class="seo-row"><span class="seo-k">title</span><span class="seo-v"><code>Pricing for team wellbeing software | Brio</code> <span class="count">44 / 60</span></span></div>
+      <div class="seo-row"><span class="seo-k">description</span><span class="seo-v"><code>See Brio's simple per-seat pricing for employee wellbeing at a company with no HR. Start free, upgrade for the owner dashboard, answers stay private.</code> <span class="count">152 / 155</span></span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v"><code>https://[production-domain]/pricing</code> <span class="hyp">? domain</span></span></div>
+      <div class="seo-row"><span class="seo-k">hreflang</span><span class="seo-v">en-US (primary), en-GB (UK) <span class="hyp">?</span></span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>index, follow</code></span></div>
+      <div class="seo-row"><span class="seo-k">open graph</span><span class="seo-v">og:title, og:description, og:type=website, og:url, og:image <span class="hyp">? asset at Concept</span></span></div>
+      <div class="seo-row"><span class="seo-k">twitter</span><span class="seo-v"><code>summary_large_image</code></span></div>
     </div>
-    <h3>In-app findability (not SEO, still specified)</h3>
+
+    <h3>B. Heading structure</h3>
+    <p>Exactly one H1, then H2s in block order.</p>
+    <div class="seo-block">
+      <div class="seo-row"><span class="seo-k">H1</span><span class="seo-v"><code>Simple pricing for team wellbeing</code></span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Compare plans</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Why the owner dashboard is paid</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Your team's answers stay private</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Pricing questions</span></div>
+      <div class="seo-row"><span class="seo-k">H2</span><span class="seo-v">Start free in five minutes</span></div>
+    </div>
+
+    <h3>C. Ready SEO text</h3>
+    <div class="seo-text">Brio has simple, transparent pricing for employee wellbeing, with no demo and no sales call. Start free for up to 10 people with one program and a weekly check-in. Upgrade to Starter for the full program library, trends, and the owner dashboard, the honest team-level proof an owner wants. Pricing is per seat, and the subscription pays for aggregate insight: individual answers are never shown or sold, because the privacy boundary is the product.</div>
+
+    <h3>D. Structured data (schema.org)</h3>
     <ul>
-      <li>exactly one H1 (the heading) for the accessible document outline</li>
-      <li>the email field is a labelled input; the plan comparison is a real list, not an image, and prices are text</li>
-      <li>the primary control states when it leads to an upgrade</li>
-      <li>the confirmation is conveyed in text and a mark, not by color alone; tap targets at least 44px</li>
+      <li><code>SoftwareApplication</code> (name Brio, applicationCategory BusinessApplication, operatingSystem Web) with <code>Offer</code> entries: Free (price 0), Starter and Growth (price <span class="hyp">? hypothesis</span>, priceCurrency USD); <code>AggregateOffer</code> lowPrice 0</li>
+      <li><code>BreadcrumbList</code>: Home, Pricing</li>
+      <li><code>FAQPage</code>: the pricing questions in the teaser</li>
+      <li><code>Organization</code>: name Brio, url, logo <span class="hyp">? asset at Concept</span></li>
     </ul>
-    <div class="callout ok"><strong>The business model, in the product.</strong> Invite owner and upgrade reuses 0.1, the 0.6 plan tiers, a condensed 0.3 reminder, the 7.2 Upgrade dialog, and the 2.2 confirmation layout; it invents nothing global. It is the paid unlock of flow F3: the operator upgrades to give the owner an aggregate-only dashboard, with the paywall never a surprise. Next: <strong>7.2 Upgrade or paywall</strong> (the dialog, a 0.5 instance), then <strong>7.3 Payment failed</strong> (recoverable, not a trap), which closes cluster 7.</div>
+
+    <h3>E. Optimization checklist</h3>
+    <ul>
+      <li>exactly one H1; the LCP is the hero heading text, not an image</li>
+      <li>tier prices are real text and in schema, never baked into an image; the hypothesis flag is in the UI, not the meta</li>
+      <li>nav and footer links are crawlable <code>&lt;a&gt;</code>; canonical and hreflang set</li>
+      <li>internal links to 0.0 Landing, 1.1 Security and privacy, 2.0 Sign up, and 1.4 Help</li>
+      <li>Core Web Vitals budget respected; final query volumes deferred to production <span class="hyp">?</span></li>
+    </ul>
+    <div class="callout ok"><strong>The first indexed page.</strong> Pricing makes the business model legible with transparent, self-serve tiers (no demo, item 1), reuses the public chrome (0.1, 0.2), the 0.6 tiers, and the 7.1 plan cards, and carries a full A to E SEO block with ready copy. All pricing is a hypothesis, and the privacy promise appears even here as part of what the subscription buys. Next: <strong>1.1 Security and privacy</strong>, the public, indexable instance of the 0.3 privacy-disclosure, Brio's differentiator made public.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 7.1 Invite owner + upgrade - July 2026</p>
-    <p style="margin-top:4px;">The paid unlock: the operator enters the owner's email, sees the owner dashboard marked as a paid feature in a free-versus-Starter comparison, and upgrades (free plan, opens 7.2) or sends the invite directly (paid), ending in an invite-sent confirmation. Pricing is a hypothesis. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/invite-owner.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 1.0 Pricing - July 2026</p>
+    <p style="margin-top:4px;">The first indexed page: transparent, self-serve plan tiers (Free, Starter, Growth) with hypothesis pricing, the owner-dashboard-is-paid callout, and the subscription-as-privacy note, in the public pre-auth chrome (0.1, 0.2). Full A to E SEO block with ready copy; no demo (item 1). Reuses the public chrome, the 0.6 tiers, and the 7.1 plan cards. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/pricing.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
