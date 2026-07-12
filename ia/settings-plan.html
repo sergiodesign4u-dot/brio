@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Payment failed (7.3)</title>
+  <title>Brio - IA Detail: Plan / subscription (8.1)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -109,28 +109,69 @@
     .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
+    .wf-hyp { display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 1px 5px; border-radius: 100px; border: 1px solid #6a6a6a; color: #cfcfcf; margin-left: 5px; }
 
-    /* ===== 0.5 dialog / modal shell (canonical, from 6.1 / 7.2) ===== */
-    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; min-height: 420px; }
-    .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
-    .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .wf-modal { width: 320px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 12px; }
-    .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
-    .wf-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #101010; border-top: 1px solid #4a4a4a; border-radius: 14px 14px 0 0; padding: 14px; }
-    .wf-sheet .grab { width: 34px; height: 4px; background: #3a3a3a; border-radius: 3px; margin: 0 auto 10px; }
-    .wf-scrimghost { padding: 12px 14px; }
-    .wf-ghostbar { display: flex; align-items: center; gap: 10px; opacity: 0.4; }
-    .wf-ghostbar .wf-tab { font-size: 10px; color: #8a8a8a; }
+    /* operator app chrome (reused from 7.0 / 8.0) */
+    .wf-appwrap { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-appbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; align-items: center; }
+    .wf-tab { font-size: 10px; color: #8a8a8a; padding: 3px 8px; border-radius: 4px; }
+    .wf-tab.on { color: #fff; border: 1px solid #6a6a6a; }
+    .wf-gear { font-size: 10px; color: #fff; padding: 3px 8px; border-radius: 4px; border: 1px solid #6a6a6a; display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; }
+    .wf-appbody { padding: 16px; }
 
-    /* attention mark + explanation (reused from 2.3) */
-    .wf-confirm { text-align: center; }
-    .wf-check { width: 46px; height: 46px; border: 1px solid #7a7a7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 4px auto 12px; color: #fff; font-size: 20px; }
-    .wf-check.attn { border-style: dashed; border-color: #9a9a9a; font-weight: 800; }
-    .wf-reason { color: #fff; font-size: 13px; font-weight: 700; }
-    .wf-expl { font-size: 10.5px; color: #9a9a9a; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 9px; margin: 10px 0 14px; line-height: 1.5; }
+    /* settings shell layout (reused from 8.0) */
+    .wf-scrollx { overflow-x: auto; max-width: 100%; }
+    .wf-setlayout { display: grid; grid-template-columns: 200px 1fr; gap: 12px; }
+    .wf-setlayout > * { min-width: 0; }
+    .wf-setnav { display: flex; flex-direction: column; gap: 7px; }
+    .wf-setitem { display: flex; align-items: center; gap: 10px; border: 1px solid #333; border-radius: 7px; padding: 9px 11px; }
+    .wf-setitem.on { border-color: #6a6a6a; background: #141414; }
+    .wf-setitem .ico { flex: 0 0 auto; width: 22px; height: 22px; border: 1px solid #6a6a6a; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #e6e6e6; }
+    .wf-setitem .txt { flex: 1; min-width: 0; }
+    .wf-setitem .lbl { font-size: 11px; color: #fff; font-weight: 600; }
+    .wf-setitem .desc { font-size: 9px; color: #8a8a8a; }
+    .wf-setpane { border: 1px solid #333; border-radius: 7px; padding: 13px; }
 
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 0; background: #0c0c0c; overflow: hidden; position: relative; min-height: 420px; }
+    /* section back (mobile drill-in) */
+    .wf-secback { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #9a9a9a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
+    .wf-secback .cv { font-size: 13px; }
+
+    /* current tier card */
+    .wf-tiercard { border: 1px solid #6a6a6a; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    .wf-tiercard .tlab { font-size: 8px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; }
+    .wf-tiercard .tn { font-size: 16px; color: #fff; font-weight: 800; margin-top: 2px; }
+    .wf-tiercard .tp { font-size: 11px; color: #cfcfcf; margin-top: 3px; }
+    .wf-tiercard .tmeta { font-size: 9px; color: #8a8a8a; margin-top: 5px; }
+
+    /* seats usage */
+    .wf-usage { margin-bottom: 13px; }
+    .wf-usage .ul { display: flex; justify-content: space-between; font-size: 10px; color: #b8b8b8; margin-bottom: 5px; }
+    .wf-usage .ubar { height: 6px; background: #2c2c2c; border-radius: 3px; overflow: hidden; }
+    .wf-usage .ufill { height: 100%; width: 16%; background: #6a6a6a; border-radius: 3px; }
+
+    /* plan comparison (7.1 cards, stacked vertical here) */
+    .wf-plans { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 12px; }
+    .wf-plan { flex: 1; border: 1px solid #3a3a3a; border-radius: 8px; padding: 11px; }
+    .wf-plan.on { border-color: #e6e6e6; }
+    .wf-plan .ph { display: flex; align-items: center; justify-content: space-between; }
+    .wf-plan .pn { font-size: 11px; color: #fff; font-weight: 700; }
+    .wf-plan .pp { font-size: 10px; color: #9a9a9a; margin: 2px 0 8px; }
+    .wf-plan .prow { font-size: 10px; color: #cfcfcf; display: flex; gap: 6px; margin-bottom: 4px; align-items: flex-start; }
+    .wf-plan .prow .mk { width: 12px; text-align: center; flex-shrink: 0; font-weight: 700; color: #fff; }
+    .wf-plan .prow.no { color: #7a7a7a; }
+    .wf-pcur { font-size: 8px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; border: 1px solid #e6e6e6; color: #fff; }
+
+    /* invoices */
+    .wf-invh { font-size: 10px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.07em; font-family: ui-monospace, monospace; margin: 4px 0 6px; }
+    .wf-invoices { border: 1px solid #333; border-radius: 7px; overflow: hidden; }
+    .wf-invrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 11px; border-bottom: 1px solid #242424; font-size: 10px; }
+    .wf-invrow:last-child { border-bottom: none; }
+    .wf-invrow .idate { color: #cfcfcf; font-family: ui-monospace, monospace; }
+    .wf-invrow .iamt { color: #9a9a9a; margin-left: auto; margin-right: 10px; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
@@ -189,7 +230,7 @@
       <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
       <a href="invite-owner.html" class="nav-sub-item">Invite owner + upgrade</a>
       <a href="upgrade.html" class="nav-sub-item">Upgrade / paywall</a>
-      <a href="payment-failed.html" class="nav-sub-item nav-sub-active">Payment failed</a>
+      <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
       <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
       <a href="owner-digest.html" class="nav-sub-item">Monthly digest</a>
       <a href="checkin-entry.html" class="nav-sub-item">Check-in entry</a>
@@ -200,7 +241,7 @@
       <a href="checkin-already.html" class="nav-sub-item">Already submitted</a>
       <a href="checkin-submit-error.html" class="nav-sub-item">Submit error</a>
       <a href="settings.html" class="nav-sub-item">Settings shell</a>
-      <a href="settings-plan.html" class="nav-sub-item">Plan / subscription</a>
+      <a href="settings-plan.html" class="nav-sub-item nav-sub-active">Plan / subscription</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -221,125 +262,165 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 7.3</span>
-      <span class="badge">State (error)</span>
-      <span class="badge privacy">Recoverable &middot; closes cluster 7</span>
+      <span class="badge">Node 8.1</span>
+      <span class="badge">Operator app (desktop-first)</span>
+      <span class="badge">Section of 8.0 &middot; item 1 + 8</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Payment failed (7.3) &middot; error state of the 7.2 modal</div>
-    <h1>Payment failed</h1>
-    <p class="hero-intro">When a card is declined during the upgrade, say plainly what happened, reassure that no charge was made and the team stays on the free plan, and offer two clear ways forward: try again, or stay free and retry later. A failed payment must never trap the operator or lose their place. It is the error body of the 7.2 dialog (recoverable, F3 DE3) and closes cluster 7. Inside the operator app, so noindex. Source of truth: ia/docs/pages/payment-failed.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Plan / subscription (8.1) &middot; URL: /app/settings/plan</div>
+    <h1>Plan / subscription</h1>
+    <p class="hero-intro">The billing home inside the Settings shell: the current tier and per-seat price (a hypothesis), seats and usage, a close change-plan path that opens the 7.2 paywall, and an invoices record. The owner dashboard is the paid unlock (item 8), so the upgrade path lives here. For Priya the operator (the buyer). Serves item 1 and item 8; rendered as the active section of 8.0. Authenticated app view, so noindex. All pricing is a hypothesis. Source of truth: ia/docs/pages/settings-plan.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first thing in the dialog. Order reasoned from the 360px baseline up. It is recoverable: retry and stay-free are both always present.</p>
+    <p>The plain answer to "what am I paying, for how many seats, and how do I change it", plus a billing record. All pricing is flagged a hypothesis (benchmarked in research/docs/competitors.md).</p>
     <ol>
-      <li><strong>Dialog title and close</strong>: "Payment did not go through" with a close control. Close equals staying on the free tier: a no-charge exit to 4.0.</li>
-      <li><strong>Attention mark</strong>: the same attention badge as 2.3 (an exclamation, not a check), so error reads from success without color.</li>
-      <li><strong>Reason</strong>: a plain, non-blaming reason ("your card was declined"), so the operator knows what to fix.</li>
-      <li><strong>Reassurance</strong>: "you have not been charged, and your team stays on the free plan."</li>
-      <li><strong>Primary and recoverable exit</strong>: "Try again" (to 7.2) as the primary; "Stay on the free tier, retry later" (to 4.0) as the always-present recoverable exit.</li>
+      <li><strong>Section context</strong>: inside the app chrome, "Settings / Plan"; on mobile a back to the Settings index.</li>
+      <li><strong>Current tier card</strong>: the plan (Free, Starter, or Growth), the per-seat price (hypothesis), the cadence, and the next renewal date.</li>
+      <li><strong>Seats and usage</strong>: how many seats are used of the limit (for example, 8 of 50), tied to team size, with a usage bar.</li>
+      <li><strong>Change plan</strong>: the primary action, opening 7.2 Upgrade or paywall (the same 0.5 modal); below it, the tier comparison (0.6 tiers, 7.1 cards) with the current plan marked.</li>
+      <li><strong>Invoices</strong>: past charges (date, amount as a hypothesis, download stub), so the operator has a record.</li>
     </ol>
-    <p><strong>Components used:</strong> the canonical 0.5 Dialog / modal shell (this is the error body of the 7.2 instance, not a second dialog), the 2.3 attention mark and explanation, and standard buttons. No new global; not a separate 0.5 consumer.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Retry, stay free, and exit</div>
-    <h2>States and primary CTA</h2>
-    <p>Never a trap (F3 DE3): a declined card always offers a retry and a no-penalty way back to the free tier.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Default (declined)</td><td>attention mark, reason, no-charge reassurance</td><td>Try again / Stay on the free tier</td></tr>
-          <tr><td>Try again</td><td>the payment step, ready to re-enter or use a different card</td><td>to 7.2 Upgrade</td></tr>
-          <tr><td>Stay on the free tier</td><td>the free plan continues; invite the owner later from 7.0</td><td>to 4.0 Dashboard</td></tr>
-          <tr><td>Close / Esc / scrim click</td><td>dismiss with no charge</td><td>to 4.0 Dashboard (recoverable exit, F3 DE3)</td></tr>
-          <tr><td>Repeated failure</td><td>still recoverable; the reason updates</td><td>Try again / Stay on the free tier</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="callout"><strong>0.5 a11y contract:</strong> <code>role="dialog"</code>, <code>aria-modal="true"</code>, labelled by the title; focus trapped; Esc closes (equals Stay on the free tier, to 4.0); background inert; focus returns to the opener. Error and reason in text and a mark, not color alone.</div>
+    <p><strong>Components used:</strong> 0.6 tiers, the 7.1 plan cards (reused as a vertical comparison), 7.2 as the change-plan action, and the 8.0 shell chrome. The tier card, usage bar, and invoices list are section-specific, thin. No new global is invented; all pricing is a hypothesis.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The same modal as 7.2, now an error body with an attention mark (not a check), a plain reason, a no-charge reassurance, and two ways forward; mobile is a bottom sheet.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop shows the Plan section in the 8.0 two-pane (list on the left, Plan in the pane); mobile shows the drilled-in Plan page. Pricing carries a hypothesis flag. The wide desktop mockup scrolls inside its own box, so 360px never overflows.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, error over the dimmed 7.1</div>
-        <div class="wf-modal-scrim">
-          <div class="wf-scrimghost">
-            <div class="wf-ghostbar"><span class="wf-logo">Brio</span><span style="margin-left:auto;"></span><span class="wf-tab">Owner</span></div>
-            <div class="wf-plain" style="opacity:0.4;margin-top:10px;">Invite your owner (behind the dialog)</div>
+      <div style="flex:1; min-width:0;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, Plan in the 8.0 two-pane</div>
+        <div class="wf-scrollx">
+        <div class="wf-appwrap" style="min-width:560px;">
+          <div class="wf-appbar">
+            <span class="wf-logo">Brio</span>
+            <span class="wf-tabs">
+              <span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span>
+              <span class="wf-gear">&#9881; Settings</span>
+            </span>
           </div>
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-modal-wrap">
-            <div class="wf-modal" role="dialog" aria-modal="true" aria-label="Payment did not go through">
-              <div class="mtitle">Payment did not go through <span class="x">x</span></div>
-              <div class="wf-confirm">
-                <div class="wf-check attn">!</div>
-                <div class="wf-reason">Your card was declined</div>
+          <div class="wf-appbody">
+            <div class="wf-setlayout">
+              <div class="wf-setnav">
+                <div class="wf-setitem on"><span class="ico">$</span><span class="txt"><span class="lbl">Plan</span><span class="desc">Tier, seats, invoices</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#128274;</span><span class="txt"><span class="lbl">Privacy center</span><span class="desc">Owner can and cannot see</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#9862;</span><span class="txt"><span class="lbl">Notifications</span><span class="desc">Reminders and digests</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#9737;</span><span class="txt"><span class="lbl">Account</span><span class="desc">Identity, sign out</span></span></div>
               </div>
-              <div class="wf-expl">You have not been charged, and your team stays on the free plan. Try again or use a different card.</div>
-              <span class="wf-b solid block">Try again</span>
-              <div class="wf-plain" style="text-align:center;margin-top:10px;"><span class="wf-link">Stay on the free tier, retry later</span></div>
+              <div class="wf-setpane">
+                <div class="wf-tiercard">
+                  <div class="tlab">Current plan</div>
+                  <div class="tn">Starter <span class="wf-hyp">Hypothesis pricing</span></div>
+                  <div class="tp">$5 / seat / month, billed monthly</div>
+                  <div class="tmeta">Renews Aug 12, 2026 &middot; includes the owner dashboard</div>
+                </div>
+                <div class="wf-usage">
+                  <div class="ul"><span>Seats used</span><span>8 of 50</span></div>
+                  <div class="ubar"><div class="ufill"></div></div>
+                </div>
+                <span class="wf-b solid block">Change plan</span>
+                <div class="wf-plans">
+                  <div class="wf-plan"><div class="ph"><span class="pn">Free</span><span class="wf-link">Downgrade</span></div><div class="pp">up to 10 seats <span class="wf-hyp">Hyp</span></div><div class="prow no"><span class="mk">&#215;</span>No owner dashboard</div></div>
+                  <div class="wf-plan on"><div class="ph"><span class="pn">Starter</span><span class="wf-pcur">Current</span></div><div class="pp">$5 / seat, up to 50 <span class="wf-hyp">Hyp</span></div><div class="prow"><span class="mk">&#10003;</span>Owner dashboard, full pulse</div></div>
+                  <div class="wf-plan"><div class="ph"><span class="pn">Growth</span><span class="wf-link">Upgrade</span></div><div class="pp">$9 / seat, 200+ <span class="wf-hyp">Hyp</span></div><div class="prow"><span class="mk">&#10003;</span>Multi-team, integrations</div></div>
+                </div>
+                <div class="wf-invh">Invoices</div>
+                <div class="wf-invoices">
+                  <div class="wf-invrow"><span class="idate">Jul 12, 2026</span><span class="iamt">$40.00 <span class="wf-hyp">Hyp</span></span><span class="wf-link">Download</span></div>
+                  <div class="wf-invrow"><span class="idate">Jun 12, 2026</span><span class="iamt">$40.00 <span class="wf-hyp">Hyp</span></span><span class="wf-link">Download</span></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="wf-note">attention mark (not a check) = error without color &middot; plain reason &middot; no-charge reassurance &middot; retry to 7.2, stay-free to 4.0 &middot; never a trap.</div>
+        </div>
+        <div class="wf-note">Plan is the active section in the 8.0 two-pane &middot; current tier + seats + Change plan (to 7.2) + 0.6 tiers via 7.1 cards + invoices &middot; pricing flagged Hypothesis.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, drilled-in Plan page</div>
         <div class="wf-phone">
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-sheet">
-            <div class="grab"></div>
-            <div class="mtitle" style="display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px;">Payment did not go through <span class="x" style="margin-left:auto;color:#9a9a9a;border:1px solid #444;border-radius:4px;width:20px;height:20px;text-align:center;line-height:18px;font-size:12px;">x</span></div>
-            <div class="wf-confirm">
-              <div class="wf-check attn">!</div>
-              <div class="wf-reason" style="font-size:12px;">Your card was declined</div>
+          <div class="wf-phoneinner">
+            <div class="wf-appbar" style="padding:8px 10px;"><span class="wf-logo">Brio</span><span class="wf-tabs"><span class="wf-gear">&#9881; Settings</span></span></div>
+            <div class="wf-appbody" style="padding:12px 11px;">
+              <div class="wf-secback"><span class="cv">&#8249;</span><span>Settings / Plan</span></div>
+              <div class="wf-tiercard">
+                <div class="tlab">Current plan</div>
+                <div class="tn">Starter</div>
+                <div class="tp">$5 / seat / month <span class="wf-hyp">Hyp</span></div>
+                <div class="tmeta">Renews Aug 12 &middot; owner dashboard included</div>
+              </div>
+              <div class="wf-usage">
+                <div class="ul"><span>Seats used</span><span>8 of 50</span></div>
+                <div class="ubar"><div class="ufill"></div></div>
+              </div>
+              <span class="wf-b solid block">Change plan</span>
+              <div class="wf-plans">
+                <div class="wf-plan"><div class="ph"><span class="pn">Free</span><span class="wf-link">Downgrade</span></div><div class="pp">up to 10 seats <span class="wf-hyp">Hyp</span></div></div>
+                <div class="wf-plan on"><div class="ph"><span class="pn">Starter</span><span class="wf-pcur">Current</span></div><div class="pp">$5 / seat, up to 50 <span class="wf-hyp">Hyp</span></div></div>
+                <div class="wf-plan"><div class="ph"><span class="pn">Growth</span><span class="wf-link">Upgrade</span></div><div class="pp">$9 / seat, 200+ <span class="wf-hyp">Hyp</span></div></div>
+              </div>
+              <div class="wf-invh">Invoices</div>
+              <div class="wf-invoices">
+                <div class="wf-invrow"><span class="idate">Jul 12</span><span class="iamt">$40 <span class="wf-hyp">Hyp</span></span><span class="wf-link">Download</span></div>
+                <div class="wf-invrow"><span class="idate">Jun 12</span><span class="iamt">$40 <span class="wf-hyp">Hyp</span></span><span class="wf-link">Download</span></div>
+              </div>
             </div>
-            <div class="wf-expl"><span class="wf-bnum">4</span>Not charged. You stay on the free plan.</div>
-            <span class="wf-b solid block">Try again</span>
-            <div class="wf-plain" style="text-align:center;margin-top:10px;"><span class="wf-link">Stay on the free tier</span></div>
           </div>
         </div>
-        <div class="wf-note">bottom sheet &middot; same order &middot; stay-free always in view.</div>
+        <div class="wf-note">drilled in from the 8.0 index &middot; back to Settings &middot; same content stacked &middot; Change plan opens the 7.2 modal.</div>
       </div>
     </div>
   </section>
 
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States and primary CTA</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Free plan</td><td>current tier Free; the upgrade path is emphasized (Starter unlocks the owner dashboard); no invoices</td><td>Change plan (to 7.2)</td></tr>
+          <tr><td>Paid (Starter / Growth)</td><td>tier, renewal, seats used; invoices present</td><td>upgrade or downgrade (to 7.2)</td></tr>
+          <tr><td>Near the seat limit</td><td>the usage bar close to full; a gentle upgrade prompt (no hard block in the MVP)</td><td>Change plan</td></tr>
+          <tr><td>Past-due / payment failed</td><td>a banner links to fix billing (ties 7.3); plan stays active per the recovery rule</td><td>fix billing</td></tr>
+          <tr><td>Loading</td><td>skeleton for the tier card, usage, and invoices</td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Primary CTA:</strong> Change plan, opening 7.2 Upgrade or paywall (the same 0.5 modal) to upgrade or downgrade. The upgrade path is deliberately close, because the owner dashboard is the paid unlock (item 8) and the operator is the buyer.</p>
+  </section>
+
   <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Operator app modal error</div>
+    <div class="section-label">Authenticated app view</div>
     <h2>SEO block (noindex)</h2>
-    <p>Payment failed is a modal error state inside the authenticated operator app. It is not indexed and carries no schema. The in-app findability and dialog a11y rules still apply.</p>
+    <p>Plan is inside the operator app, an authenticated per-account billing view. It is not indexed and carries no schema.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (no standalone URL; the error state of the 7.2 modal)</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (authenticated app)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/settings/plan</code></span></div>
       <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
     <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>the dialog has an accessible name (the title) and the 0.5 a11y contract</li>
-      <li>the error and the reason are conveyed in text and an attention mark, not by color alone</li>
-      <li>Try again and Stay on the free tier are labelled controls</li>
-      <li>the exit is reachable by keyboard (Esc) and pointer; tap targets at least 44px</li>
+      <li>exactly one H1 ("Plan" within the settings outline) for the accessible document outline</li>
+      <li>the tier, price, and seats used are text and a labelled bar, never carried by color alone</li>
+      <li>Change plan and Download are labelled controls; the hypothesis flag on pricing is text</li>
+      <li>tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Cluster 7 closed.</strong> Payment failed is the error state of the 7.2 dialog and reuses the 2.3 attention mark; it invents nothing global and is not a separate 0.5 consumer. It guarantees the upgrade path never traps (F3 DE3): a declined card always offers a retry and a no-penalty way back to the free tier. Cluster 7 Owner share and upgrade is complete (7.0, 7.1, 7.2, 7.3). Next cluster: <strong>9 Owner surface</strong> (9.0 Owner dashboard, aggregate-only).</div>
+    <div class="callout ok"><strong>The billing home, with a close upgrade path.</strong> Plan shows the current tier and price, seats and usage, an invoices record, and a change-plan action that opens 7.2, all inside the 8.0 shell. It reuses 0.6 tiers, the 7.1 plan cards, 7.2 as the change action, and the shell chrome, and invents nothing global; all pricing is a hypothesis. Next in cluster 8: <strong>8.2 Privacy center</strong> (the operator-facing proof surface, the 0.3 privacy-disclosure operator variant), then 8.3 Notifications and 8.4 Account settings.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 7.3 Payment failed - July 2026</p>
-    <p style="margin-top:4px;">The recoverable failure of the upgrade: a plain reason, a no-charge reassurance, and two ways forward (Try again to 7.2, Stay on the free tier to 4.0), rendered as the error body of the 7.2 dialog with the 2.3 attention mark. Never a trap (F3 DE3). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/payment-failed.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 8.1 Plan / subscription - July 2026</p>
+    <p style="margin-top:4px;">The billing home inside the Settings shell: current tier and per-seat price (a hypothesis), seats and usage, a change-plan path that opens the 7.2 paywall, and an invoices record. Reuses 0.6 tiers, the 7.1 plan cards, 7.2 as the change action, and the 8.0 shell chrome. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/settings-plan.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
