@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Sign up (2.0)</title>
+  <title>Brio - IA Detail: Settings shell (8.0)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -105,28 +105,48 @@
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
     .wf-b.block { display: block; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* auth page shell */
-    .wf-authpage { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
-    .wf-topbar { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #2c2c2c; }
-    .wf-auth { max-width: 360px; margin: 0 auto; padding: 26px 20px; }
-    .wf-auth .wh { color: #fff; font-size: 19px; font-weight: 800; }
-    .wf-auth .sub { color: #9a9a9a; font-size: 11px; margin: 5px 0 18px; }
-    .wf-lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 5px; }
-    .wf-input { border: 1px solid #3a3a3a; border-radius: 6px; padding: 10px 11px; margin-bottom: 12px; color: #6a6a6a; font-size: 12px; }
-    .wf-or { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
-    .wf-or::before, .wf-or::after { content: ""; flex: 1; height: 1px; background: #2c2c2c; }
-    .wf-or span { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.1em; font-family: ui-monospace, monospace; }
-    .wf-legal { font-size: 9.5px; color: #8a8a8a; text-align: center; margin-top: 12px; line-height: 1.5; }
-    .wf-legal .wf-link { font-size: 9.5px; }
-    .wf-trust { text-align: center; font-size: 10px; color: #cfcfcf; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px; margin-top: 14px; }
-    .wf-alt { text-align: center; font-size: 11px; color: #9a9a9a; margin-top: 16px; }
+    /* operator app chrome (reused from 7.0) */
+    .wf-appwrap { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-appbar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
+    .wf-tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; align-items: center; }
+    .wf-tab { font-size: 10px; color: #8a8a8a; padding: 3px 8px; border-radius: 4px; }
+    .wf-tab.on { color: #fff; border: 1px solid #6a6a6a; }
+    .wf-gear { font-size: 10px; color: #fff; padding: 3px 8px; border-radius: 4px; border: 1px solid #6a6a6a; display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; }
+    .wf-appbody { padding: 16px; }
 
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    /* settings shell layout */
+    .wf-settitle { color: #fff; font-size: 15px; font-weight: 800; margin-bottom: 2px; }
+    .wf-setintro { color: #9a9a9a; font-size: 10px; margin-bottom: 14px; }
+    .wf-scrollx { overflow-x: auto; max-width: 100%; }
+    .wf-setlayout { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .wf-setlayout.two { grid-template-columns: 200px 1fr; }
+    .wf-setlayout.two > * { min-width: 0; }
+    .wf-setnav { display: flex; flex-direction: column; gap: 7px; }
+    .wf-setitem { display: flex; align-items: center; gap: 10px; border: 1px solid #333; border-radius: 7px; padding: 9px 11px; }
+    .wf-setitem.on { border-color: #6a6a6a; background: #141414; }
+    .wf-setitem .ico { flex: 0 0 auto; width: 22px; height: 22px; border: 1px solid #6a6a6a; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #e6e6e6; }
+    .wf-setitem .txt { flex: 1; min-width: 0; }
+    .wf-setitem .lbl { font-size: 11px; color: #fff; font-weight: 600; }
+    .wf-setitem .desc { font-size: 9px; color: #8a8a8a; }
+    .wf-setitem .chev { color: #6a6a6a; font-size: 12px; }
+    .wf-acctchip { display: flex; align-items: center; gap: 7px; border: 1px solid #2c2c2c; border-radius: 7px; padding: 7px 10px; margin-top: 3px; }
+    .wf-acctchip .av { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #6a6a6a; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #cfcfcf; }
+    .wf-acctchip .em { font-size: 9px; color: #9a9a9a; font-family: ui-monospace, monospace; }
+
+    .wf-setpane { border: 1px solid #333; border-radius: 7px; padding: 13px; min-height: 150px; }
+    .wf-paneh { font-size: 11px; color: #fff; font-weight: 700; margin-bottom: 3px; }
+    .wf-panehint { font-size: 9px; color: #6a6a6a; font-family: ui-monospace, monospace; margin-bottom: 12px; }
+    .wf-stub { border: 1px dashed #3a3a3a; border-radius: 6px; padding: 9px; margin-bottom: 8px; }
+    .wf-stub .sl { height: 7px; background: #242424; border-radius: 3px; margin-bottom: 6px; }
+    .wf-stub .sl.s { width: 45%; }
+    .wf-stub .sl.m { width: 70%; }
+
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
     .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
   </style>
 </head>
@@ -178,7 +198,7 @@
       <a href="onboarding-program.html" class="nav-sub-item">First program</a>
       <a href="onboarding-invite.html" class="nav-sub-item">Invite team</a>
       <a href="invite-send-error.html" class="nav-sub-item">Invite-send error</a>
-      <a href="signup.html" class="nav-sub-item nav-sub-active">Sign up</a>
+      <a href="signup.html" class="nav-sub-item">Sign up</a>
       <a href="login.html" class="nav-sub-item">Log in</a>
       <a href="magic-link-sent.html" class="nav-sub-item">Magic-link sent</a>
       <a href="link-expired.html" class="nav-sub-item">Invalid or expired link</a>
@@ -195,7 +215,7 @@
       <a href="checkin-expired.html" class="nav-sub-item">Invite link expired</a>
       <a href="checkin-already.html" class="nav-sub-item">Already submitted</a>
       <a href="checkin-submit-error.html" class="nav-sub-item">Submit error</a>
-      <a href="settings.html" class="nav-sub-item">Settings shell</a>
+      <a href="settings.html" class="nav-sub-item nav-sub-active">Settings shell</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -216,134 +236,138 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 2.0</span>
-      <span class="badge">Public / pre-auth</span>
-      <span class="badge privacy">Starts flow F1</span>
+      <span class="badge">Node 8.0</span>
+      <span class="badge">Operator app (desktop-first)</span>
+      <span class="badge">Shell &middot; opens cluster 8</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Sign up (2.0) &middot; URL: /signup</div>
-    <h1>Sign up</h1>
-    <p class="hero-intro">The self-serve front door. An operator arriving from the Landing, Pricing, or a segment page creates a Brio account in seconds, with no credit card, and goes straight into onboarding. A focused conversion surface: minimal chrome, one clear action, one honest trust cue. Serves item 1 (self-serve start) and Main; it starts the main flow F1. Public but transactional, so the form is noindex. Source of truth: ia/docs/pages/signup.md.</p>
+    <div class="crumb">IA / Detail Layer / Pages / Settings shell (8.0) &middot; URL: /app/settings</div>
+    <h1>Settings shell</h1>
+    <p class="hero-intro">The operator utility shell: one predictable place for account and configuration, as a container whose section list mirrors the four settings areas (Plan, Privacy center, Notifications, Account). It is a utility reached from a settings entry in the app chrome, not one of the four job tabs, so it never competes with the main-job navigation. On desktop the selected section renders in a pane beside the list; on mobile each row drills into its section. For Priya the operator. Supporting node; opens cluster 8. Authenticated app view, so noindex. Source of truth: ia/docs/pages/settings.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on mobile. Order reasoned from the 360px baseline up. This is a conversion page, so the chrome is deliberately minimal: a pre-auth header, not the four job tabs (those are post-auth).</p>
+    <p>The shell's whole job is the section list, the map of what can be configured. Settings sits beside the four job tabs as a utility, not as a tab, so the main job stays uncluttered (Principle 2).</p>
     <ol>
-      <li><strong>Pre-auth header</strong>: the Brio mark and a single "Log in" link (a reduced 0.1 variant, no job tabs).</li>
-      <li><strong>Heading and value line</strong>: "Create your Brio account" plus one benefit line ("Start free. No credit card."). Reinforces item 1.</li>
-      <li><strong>Sign-up form</strong>: a labelled email field and a labelled password field, primary CTA "Create account". The shortest credible form.</li>
-      <li><strong>Magic-link option</strong>: "Email me a link instead" (passwordless), to 2.2 Magic-link sent. Equal-weight, since passwordless suits a non-technical operator.</li>
-      <li><strong>Legal microcopy</strong>: "By creating an account you agree to our Terms and Privacy Policy", linking to 1.6.</li>
-      <li><strong>Privacy trust cue</strong>: one condensed 0.3 line ("team-level, aggregate signals, never individual data") where it first matters.</li>
-      <li><strong>Log-in link</strong>: "Already have an account? Log in", to 2.1.</li>
-      <li><strong>Footer</strong>: 0.2 footer, public variant (condensed).</li>
+      <li><strong>Nav + header</strong> (0.1 operator app chrome): the Brio mark and the four job tabs, none active, plus the Settings utility marked active. H1 "Settings".</li>
+      <li><strong>Section list (mirrors the areas)</strong>: Plan (tier, seats, invoices, to 8.1), Privacy center (what the owner can and cannot see, to 8.2, the proof surface), Notifications (reminders and digests, to 8.3), Account (name, email, password, sign out, to 8.4).</li>
+      <li><strong>Account context (quiet)</strong>: a small chip showing who is signed in; the full account controls live in 8.4.</li>
+      <li><strong>Section pane (desktop) or drill-in (mobile)</strong>: on desktop the selected section renders in a pane beside the list (Plan by default); on mobile each row opens its section.</li>
     </ol>
-    <p><strong>Components used:</strong> a reduced 0.1 (pre-auth header), 0.2 (public footer), 0.3 (condensed trust line), links to 1.6. Standard form inputs, no new global. <strong>SSO</strong> (Google, Microsoft) is a paid feature, so it is deliberately absent from self-serve sign-up.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Validation, submit, and role</div>
-    <h2>States and primary CTA</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Default</td><td>empty email and password, Create account, magic-link option, trust line</td><td>Create account (to 3.0)</td></tr>
-          <tr><td>Field validation</td><td>inline text messages for an invalid email or a too-short password (not color alone)</td><td>correct in place</td></tr>
-          <tr><td>Email already registered</td><td>"this email already has an account" with a direct Log in action</td><td>to 2.1 Log in (never a dead-end)</td></tr>
-          <tr><td>Submitting</td><td>Create account shows in-progress; fields lock to prevent double submit</td><td>-</td></tr>
-          <tr><td>Success (password path)</td><td>account created; main flow F1 begins</td><td>to 3.0 Company setup</td></tr>
-          <tr><td>Magic-link path</td><td>"Email me a link instead" sends the link</td><td>to 2.2 Magic-link sent</td></tr>
-          <tr><td>Already authenticated</td><td>redirect</td><td>4.0 Dashboard (onboarded) / 3.0 (not yet)</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p><strong>Components used:</strong> 0.1 Navigation (operator app chrome, the same wf-appbar and job tabs from 7.0, with Settings active rather than a job tab). The section list and pane are shell-specific layout, thin, not globals; the sections (8.1 to 8.4) render their own components, including the 0.3 privacy-disclosure inside 8.2. No new global is invented.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). A centered, narrow card with a minimal pre-auth header and one primary action; the same content stacks full width at the 360px baseline.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). Desktop is a two-pane layout (section list plus the selected section's pane); mobile is a stacked section index that drills into each area. Settings is reached from a utility entry in the app chrome, not a job tab, so no job tab is active.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, centered sign-up card</div>
-        <div class="wf-authpage">
-          <div class="wf-topbar">
+      <div style="flex:1; min-width:0;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, two-pane (Plan selected)</div>
+        <div class="wf-scrollx">
+        <div class="wf-appwrap" style="min-width:480px;">
+          <div class="wf-appbar">
             <span class="wf-logo">Brio</span>
-            <span class="wf-link">Log in</span>
+            <span class="wf-tabs">
+              <span class="wf-tab">Dashboard</span><span class="wf-tab">Programs</span><span class="wf-tab">Team</span><span class="wf-tab">Owner</span>
+              <span class="wf-gear">&#9881; Settings</span>
+            </span>
           </div>
-          <div class="wf-auth">
-            <div class="wh">Create your Brio account</div>
-            <div class="sub">Start free. No credit card. Set up your first program in minutes.</div>
-            <div class="wf-lbl">Work email</div>
-            <div class="wf-input">you@company.com</div>
-            <div class="wf-lbl">Password</div>
-            <div class="wf-input">At least 8 characters</div>
-            <span class="wf-b solid block">Create account</span>
-            <div class="wf-or"><span>or</span></div>
-            <span class="wf-b block">Email me a link instead</span>
-            <div class="wf-legal">By creating an account you agree to our <span class="wf-link">Terms</span> and <span class="wf-link">Privacy Policy</span>.</div>
-            <div class="wf-trust">Brio only ever shows team-level, aggregate signals. Never individual data.</div>
-            <div class="wf-alt">Already have an account? <span class="wf-link">Log in</span></div>
+          <div class="wf-appbody">
+            <div class="wf-settitle">Settings</div>
+            <div class="wf-setintro">Your account and how Brio runs for your team.</div>
+            <div class="wf-setlayout two">
+              <div class="wf-setnav">
+                <div class="wf-setitem on"><span class="ico">$</span><span class="txt"><span class="lbl">Plan</span><span class="desc">Tier, seats, invoices</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#128274;</span><span class="txt"><span class="lbl">Privacy center</span><span class="desc">What the owner can and cannot see</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#9862;</span><span class="txt"><span class="lbl">Notifications</span><span class="desc">Reminders and digests</span></span></div>
+                <div class="wf-setitem"><span class="ico">&#9737;</span><span class="txt"><span class="lbl">Account</span><span class="desc">Name, email, password, sign out</span></span></div>
+                <div class="wf-acctchip"><span class="av">P</span><span class="em">priya@acme.com</span></div>
+              </div>
+              <div class="wf-setpane">
+                <div class="wf-paneh">Plan</div>
+                <div class="wf-panehint">the selected section renders here (8.1 to 8.4)</div>
+                <div class="wf-stub"><div class="sl m"></div><div class="sl s"></div></div>
+                <div class="wf-stub"><div class="sl m"></div><div class="sl s"></div></div>
+                <span class="wf-b" style="display:inline-block; margin-top:2px;">Change plan</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="wf-note">minimal header (no job tabs) &middot; email + password or magic link &middot; no credit card, no SSO (paid) &middot; trust line at first commitment &middot; success to 3.0 (F1 begins).</div>
+        </div>
+        <div class="wf-note">0.1 app chrome (7.0) &middot; Settings is a UTILITY (gear), not a job tab, so no tab is active &middot; left section list mirrors nav &middot; right pane = the active section (8.1-8.4). On a narrow screen the two-pane scrolls inside its own box, the page never does.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, block stack</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, stacked section index (drills in)</div>
         <div class="wf-phone">
-          <div class="wf-topbar" style="padding:9px 10px;"><span class="wf-logo">Brio</span><span class="wf-link">Log in</span></div>
-          <div class="wf-auth" style="padding:18px 12px;">
-            <div class="wh" style="font-size:17px;">Create your account</div>
-            <div class="sub" style="margin-bottom:14px;">Start free. No credit card.</div>
-            <div class="wf-lbl"><span class="wf-bnum">3</span>email</div>
-            <div class="wf-input">you@company.com</div>
-            <div class="wf-lbl">password</div>
-            <div class="wf-input">8+ characters</div>
-            <span class="wf-b solid block">Create account</span>
-            <div class="wf-or"><span>or</span></div>
-            <span class="wf-b block">Email me a link</span>
-            <div class="wf-legal">Terms &middot; Privacy Policy</div>
-            <div class="wf-trust">Aggregate only. Never individual data.</div>
-            <div class="wf-alt">Have an account? <span class="wf-link">Log in</span></div>
+          <div class="wf-phoneinner">
+            <div class="wf-appbar" style="padding:8px 10px;"><span class="wf-logo">Brio</span><span class="wf-tabs"><span class="wf-gear">&#9881; Settings</span></span></div>
+            <div class="wf-appbody" style="padding:12px 11px;">
+              <div class="wf-settitle">Settings</div>
+              <div class="wf-setintro">Your account and how Brio runs.</div>
+              <div class="wf-setnav">
+                <div class="wf-setitem"><span class="ico">$</span><span class="txt"><span class="lbl">Plan</span><span class="desc">Tier, seats, invoices</span></span><span class="chev">&#8250;</span></div>
+                <div class="wf-setitem"><span class="ico">&#128274;</span><span class="txt"><span class="lbl">Privacy center</span><span class="desc">What the owner can and cannot see</span></span><span class="chev">&#8250;</span></div>
+                <div class="wf-setitem"><span class="ico">&#9862;</span><span class="txt"><span class="lbl">Notifications</span><span class="desc">Reminders and digests</span></span><span class="chev">&#8250;</span></div>
+                <div class="wf-setitem"><span class="ico">&#9737;</span><span class="txt"><span class="lbl">Account</span><span class="desc">Name, email, password, sign out</span></span><span class="chev">&#8250;</span></div>
+                <div class="wf-acctchip"><span class="av">P</span><span class="em">priya@acme.com</span></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="wf-note">same blocks, single column, full-width fields.</div>
+        <div class="wf-note">mobile = a settings index that navigates &middot; each row drills into 8.1-8.4 (chevron) &middot; account chip for orientation (full controls in 8.4).</div>
       </div>
     </div>
+    <div class="callout"><strong>Privacy center is emphasized on purpose.</strong> It is the operator-facing proof surface (0.3 operator variant, 8.2): the differentiator made checkable inside Settings, not just promised. The other three sections are ordinary utility. Settings stays one tap from the app chrome and out of the four-job-tab flow, so the main job never competes with configuration.</div>
   </section>
 
-  <!-- SEO (noindex, follow) -->
+  <!-- States -->
+  <section id="states">
+    <div class="section-label">Behavior</div>
+    <h2>States and routing</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Default (desktop)</td><td>section list + the first section (Plan) in a pane beside it</td><td>select a section, it renders in the pane</td></tr>
+          <tr><td>Default (mobile)</td><td>the section list stacked full width, each with a chevron</td><td>tap a row to drill into 8.1 to 8.4</td></tr>
+          <tr><td>Active section</td><td>the selected row is marked; the pane reflects it (desktop)</td><td>8.1 Plan / 8.2 Privacy / 8.3 Notifications / 8.4 Account</td></tr>
+          <tr><td>Guest / Owner</td><td>-</td><td>redirect to 2.1 Log in / 9.0 Owner dashboard</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Primary CTA:</strong> none of its own; the shell routes into 8.1 to 8.4, and the section list is the primary affordance. Settings is deliberately a utility, one tap from the app chrome and out of the four-job-tab flow.</p>
+  </section>
+
+  <!-- SEO (noindex) -->
   <section id="seo">
-    <div class="section-label">Public funnel, transactional form</div>
-    <h2>SEO block (noindex, follow)</h2>
-    <p>Sign up sits in the public funnel, but the form itself is not indexed. This is a deliberate decision, and it differs from the deep app zones (which are noindex, nofollow): here <code>follow</code> is kept so equity flows to the legal pages and Log in.</p>
+    <div class="section-label">Authenticated app view</div>
+    <h2>SEO block (noindex)</h2>
+    <p>Settings is inside the operator app, an authenticated per-account view. It is not indexed and carries no schema.</p>
     <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, follow</code> (thin, transactional; duplicated in intent by the marketing pages)</span></div>
-      <div class="seo-row"><span class="seo-k">acquisition SEO</span><span class="seo-v">lives on the indexed pages that funnel here: 1.0 Landing, 1.x Pricing, 1.5 segment / category landings, each with its own H1, schema, and target queries</span></div>
-      <div class="seo-row"><span class="seo-k">branded queries</span><span class="seo-v">"Brio sign up" is captured by Landing / Home, which links to this form</span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none on the form</span></div>
+      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (authenticated app)</span></div>
+      <div class="seo-row"><span class="seo-k">canonical</span><span class="seo-v">none for search; app URL is <code>/app/settings</code></span></div>
+      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
       <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
     </div>
-    <h3>In-app findability (still specified)</h3>
+    <h3>In-app findability (not SEO, still specified)</h3>
     <ul>
-      <li>exactly one H1 (the heading) for the accessible document outline</li>
-      <li>email and password are labelled inputs with visible labels</li>
-      <li>errors are conveyed in text, not by color alone</li>
-      <li>the primary and secondary actions are labelled buttons; tap targets at least 44px</li>
+      <li>exactly one H1 ("Settings") for the accessible document outline</li>
+      <li>the section list is a labelled navigation list; the active section is conveyed by text and state, not color alone</li>
+      <li>the account chip is text; Settings is reachable from the app chrome as a labelled utility control</li>
+      <li>tap targets at least 44px</li>
     </ul>
-    <div class="callout ok"><strong>Flow F1 starts here.</strong> Sign up reuses a reduced 0.1 (pre-auth header), 0.2 (public footer), and a condensed 0.3 trust line, and links to 1.6; it invents nothing global. It is the self-serve expression of item 1: no credit card, straight into onboarding. Next: <strong>2.1 Log in</strong> (return access), then the 2.2 Magic-link sent and 2.3 Invalid or expired link states.</div>
+    <div class="callout ok"><strong>One place for everything, still out of the way.</strong> Settings is the operator utility shell: one container whose section list mirrors the four settings areas, reached as a utility beside the job tabs, never competing with the main job. It reuses the 0.1 app chrome and invents nothing global; the sections render their own content, including the 0.3 privacy-disclosure inside 8.2. Next in cluster 8: <strong>8.1 Plan / subscription</strong> (tier, seats, invoices, change plan to 7.2), then 8.2 Privacy center, 8.3 Notifications, and 8.4 Account settings.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 2.0 Sign up - July 2026</p>
-    <p style="margin-top:4px;">The self-serve front door: email + password or magic link, no credit card, no SSO (paid), with a first-commitment privacy trust line, then straight into onboarding (3.0, flow F1 begins). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/signup.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 8.0 Settings shell - July 2026</p>
+    <p style="margin-top:4px;">The operator utility shell: one container whose section list mirrors the four settings areas (Plan, Privacy center, Notifications, Account), reached as a utility beside the four job tabs, never as a tab. Two-pane on desktop, a stacked index that drills in on mobile. Reuses the 0.1 operator app chrome. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/settings.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
