@@ -19,7 +19,7 @@
 
 ### Components used
 
-0.1 Navigation (public pre-auth variant) and 0.2 Footer, the public marketing chrome from 1.0 and 1.1, and a forward to 11.3 Cookie consent (the cookie-settings control). The document switcher, the contents anchor list, the last-updated stamp, and the legal body are thin, page-specific layout, not new globals. No new global component is invented; 11.3 Cookie consent is a Step 6 system node not yet built, so the cookie-settings link is a forward reference [?]. All legal copy is [?] pending legal review; the Privacy Policy must be consistent with the 1.1 privacy spine (aggregate only, minimum of 5, no live count).
+0.1 Navigation (public pre-auth variant) and 0.2 Footer, the public marketing chrome from 1.0 and 1.1, and a forward to 11.3 Cookie consent (the cookie-settings control). The document switcher, the contents anchor list, the last-updated stamp, and the legal body are thin, page-specific layout, not new globals. No new global component is invented; 11.3 Cookie consent is a Step 6 system node (now built), and the cookie-settings link forwards to it. All legal copy is [?] pending legal review; the Privacy Policy must be consistent with the 1.1 privacy spine (aggregate only, minimum of 5, no live count).
 
 ### States
 

@@ -16,7 +16,7 @@ This section is one render of the 0.3 component. The five claims are fixed; the 
 2. **Your answer joins an aggregate of at least 5.** Nothing is shown until at least 5 people have answered, so no single response can be picked out. (Claim 2, minimum-N of 5, benchmarked to Culture Amp indirect-identification protection.)
 3. **No running count while the check-in is open.** No one watches answers arrive, so no one can guess who answered when. (Claim 3, no live count, founder decision D1, closes the small-team timing-inference vector.)
 4. **The owner pays for the team view, never for your answers.** The subscription buys an aggregate read of team wellbeing; the business is built on never exposing an individual. (Claim 4, subscription as privacy.)
-5. **Results appear only after the cycle closes, and only as a team number.** The owner sees the team score, the trend, and how many took part; never any individual, any answer, or any group smaller than 5. (Claim 5, what the owner can and cannot see.)
+5. **Results appear only after the cycle closes, and only as a team number.** The owner sees the team score, the trend, and what share of the team took part; never any individual, any answer, or any group smaller than 5. (Claim 5, what the owner can and cannot see.)
 
 ### Content blocks (mobile-first priority)
 

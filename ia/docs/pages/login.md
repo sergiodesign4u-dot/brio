@@ -31,7 +31,7 @@ A reduced 0.1 Navigation (pre-auth header variant), 0.2 Footer (public variant),
 - **Submitting:** the Log in control shows an in-progress state; fields lock to prevent a double submit.
 - **Success:** to 4.0 Dashboard if onboarded, or to 3.0 Company setup if the account exists but onboarding was never finished (resume the wizard).
 - **Magic-link path:** "Email me a link instead" sends the link and forwards to 2.2 Magic-link sent.
-- **Forgot password:** opens a reset request (enter email, we send a reset link); the "check your email" confirmation reuses the 2.2 pattern. The dedicated reset-password-entry screen reached from that email is not yet a registered node and is flagged [?] for Step 6 discover-as-you-go.
+- **Forgot password:** opens a reset request (enter email, we send a reset link); the "check your email" confirmation reuses the 2.2 pattern. The dedicated reset-password-entry screen reached from that email is node 2.4 Reset password (built at Step 6).
 - **Stale magic or reset link:** arriving via an expired or already-used link lands on 2.3 Invalid or expired link.
 - **Already authenticated:** redirect to 4.0 Dashboard.
 

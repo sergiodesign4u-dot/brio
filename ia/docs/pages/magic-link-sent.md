@@ -6,7 +6,7 @@
 
 **Purpose:** confirm that a link is on its way and hold the operator calmly while they go to their inbox. This is a waiting state, so the on-screen job is small: reassure, show where the link went (so a mistyped address is caught), and offer a low-friction resend. The real forward action happens when the operator clicks the link in their email. **Jobs:** supporting (return / first access), inheriting the job coverage of whichever path requested the link. Persona: Priya (operator), or the owner on the owner-surface sign-in.
 
-**URL / slug:** `/auth/check-email` (public, but reached only after a request, not a browse target). **Breadcrumbs:** none. **Reached from:** 2.0 Sign up (magic-link option), 2.1 Log in (magic-link option), 2.1 Forgot password (reset request). **Forward:** 4.0 Dashboard when a valid magic link is clicked (or 3.0 Company setup if onboarding is incomplete; for the reset path, the reset-password-entry screen, which is [?] not yet a node, flagged for Step 6), and 2.3 Invalid or expired link when the link is stale or already used.
+**URL / slug:** `/auth/check-email` (public, but reached only after a request, not a browse target). **Breadcrumbs:** none. **Reached from:** 2.0 Sign up (magic-link option), 2.1 Log in (magic-link option), 2.1 Forgot password (reset request). **Forward:** 4.0 Dashboard when a valid magic link is clicked (or 3.0 Company setup if onboarding is incomplete; for the reset path, the reset-password-entry screen, which is node 2.4 Reset password), and 2.3 Invalid or expired link when the link is stale or already used.
 
 ### Content blocks (mobile-first priority)
 
@@ -27,7 +27,7 @@ A reduced 0.1 Navigation (pre-auth header variant) and the auth-page shell from 
 - **Default (link sent):** confirmation, the target address, the open-mail hint with expiry, Resend, and Use a different email.
 - **Resend cooldown:** immediately after sending, Resend is disabled with a short countdown, to prevent repeated sends.
 - **Resent:** a brief "sent again" acknowledgement; the cooldown restarts.
-- **Valid link clicked (elsewhere):** the operator lands authenticated, to 4.0 Dashboard (or 3.0 if onboarding is incomplete; or, on the reset path, the reset-password-entry screen [?]).
+- **Valid link clicked (elsewhere):** the operator lands authenticated, to 4.0 Dashboard (or 3.0 if onboarding is incomplete; or, on the reset path, node 2.4 Reset password).
 - **Expired or used link:** to 2.3 Invalid or expired link, which offers a fresh request.
 - **Already authenticated:** if the operator is somehow already signed in, redirect to 4.0 Dashboard.
 

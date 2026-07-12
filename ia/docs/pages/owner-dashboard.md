@@ -14,7 +14,7 @@
 2. **The pulse read (hero)**: a single plain-language level and one honest sentence ("Team wellbeing is steady this month", or, if it dipped, "Team wellbeing has dropped this month"). The one thing the owner came for. Honest, never a vanity metric (Principle 4).
 3. **Trend**: a simple trend over the last several cycles, so the owner sees the direction at a glance.
 4. **Participation**: as a share of the team (what portion is engaging), never who. This tells the owner the signal is real without exposing anyone.
-5. **9.1 "What I can and cannot see"**: the canonical 0.3 Privacy-disclosure, owner variant, as two plain lists. Can see: the aggregate score, trend, participation share. Cannot see: individual responses, names, who answered, any drill-down. E2 owner comfort and item 4, the differentiator restated on the owner's own screen.
+5. **9.1 "What I can and cannot see"**: the canonical 0.3 Privacy-disclosure, owner variant, as two plain lists. Can see: the aggregate score, trend, participation share. Cannot see: individual responses, names, who answered, any drill-down, or any sub-group below 5 (minimum-N). E2 owner comfort and item 4, the differentiator restated on the owner's own screen.
 6. **Quiet footer note**: when the data updates and that the read takes under two minutes; a link to the latest digest (9.2).
 
 ### Components used

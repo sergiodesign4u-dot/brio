@@ -14,7 +14,7 @@ This is the product. In an SMB there is no HR layer between the boss and persona
 4. **Subscription as privacy.** The owner pays for aggregate insight; the business model is aligned with never exposing individual data, and this is stated plainly.
 5. **What the owner can and cannot see**, listed explicitly (can: team score, trend, participation rate; cannot: any individual, any answer, any sub-group below N).
 
-The five claims are fixed. The exact wording is [?] pending final UX and legal copy; the claims themselves do not change.
+The five claims are fixed. The exact wording is [?] pending final UX and legal copy; the claims themselves do not change. The public (1.1) and legal (1.6) instances additionally carry a data-handling commitment (individual data is never shown or sold), a sanctioned public and legal-only extension consistent with the 11.3 Cookie consent claim-4 reconciliation; it is deliberately not repeated on the in-product operator, owner, and employee renders, which focus on who can see what.
 
 Source: research/strategy.md Section 5 (founder decision D1, no live count), research/docs/benchmark.md (minimum-N, indirect identification), user-research/docs/cjm-to-be.md (privacy bundle), CLAUDE.md privacy mechanism.
 
