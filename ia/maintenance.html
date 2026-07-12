@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Monthly owner digest (9.2)</title>
+  <title>Brio - IA Detail: Maintenance (11.2)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -61,79 +61,45 @@
     a:hover { text-decoration: underline; }
     ul { color: var(--text-muted); margin: 0 0 14px 20px; }
     ul li { margin-bottom: 6px; }
-    ol { color: var(--text-muted); margin: 0 0 14px 20px; }
-    ol li { margin-bottom: 6px; }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; color: var(--text); }
 
     .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--border); animation: fadeUp 0.5s ease both; }
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
-    .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
+    .badge.sys { background: var(--surface-3); color: var(--text-muted); border-color: var(--border); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
-
-    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
-    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
-    tbody tr { border-bottom: 1px solid var(--border-subtle); }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--surface); }
-    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
-    tbody td:first-child { color: var(--text); font-weight: 500; }
 
     footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
     .callout strong { color: var(--text); }
     .callout.ok { border-color: var(--green-dim); }
+    .callout.warn { border-color: var(--yellow-dim); }
     .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
 
-    .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
-    .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
-    .seo-row:last-child { border-bottom: none; }
-    .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
-    .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
-    .seo-v code { font-size: 12px; }
-
     /* ===== Black-and-white wireframe kit ===== */
-    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
-    .wf-b.block { display: block; }
-    .wf-plain { color: #9a9a9a; font-size: 11px; }
+    .wf-b.sm { padding: 5px 10px; font-size: 10px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* email template (distinct from app chrome) */
-    .wf-email { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; max-width: 420px; }
-    .wf-emailhead { padding: 10px 14px; border-bottom: 1px solid #2c2c2c; }
-    .wf-emailhead .subj { color: #fff; font-size: 12px; font-weight: 700; }
-    .wf-emailhead .from { color: #8a8a8a; font-size: 10px; font-family: ui-monospace, monospace; }
-    .wf-emailbody { padding: 18px 16px; }
-    .wf-greet { color: #cfcfcf; font-size: 11px; margin-bottom: 12px; }
+    /* minimal, self-contained maintenance notice (reuses the 11.1 minimal card, calmer tone) */
+    .wf-mincard { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; padding: 26px 20px; }
+    .wf-statuspill { display: inline-block; font-size: 9px; font-family: ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; color: #b8b8b8; border: 1px solid #4a4a4a; border-radius: 100px; padding: 2px 10px; margin-bottom: 14px; }
+    .wf-errh { font-size: 15px; color: #fff; font-weight: 700; }
+    .wf-errsub { font-size: 11px; color: #9a9a9a; margin-top: 5px; }
+    .wf-eta { display: inline-block; border: 1px solid #333; border-radius: 6px; padding: 6px 10px; font-size: 10px; color: #cfcfcf; margin-top: 12px; }
+    .wf-reassure2 { font-size: 10px; color: #8a8a8a; margin-top: 10px; }
+    .wf-erractions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
 
-    /* pulse read (reuses the pulse element from 9.0) */
-    .wf-read { border: 1px solid #6a6a6a; border-radius: 8px; padding: 16px; margin-bottom: 12px; text-align: center; }
-    .wf-read .lab { font-size: 9px; color: #8a8a8a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
-    .wf-num { font-size: 30px; font-weight: 800; color: #fff; line-height: 1; }
-    .wf-interp { font-size: 11.5px; color: #cfcfcf; margin-top: 6px; }
-    .wf-spark { display: flex; align-items: flex-end; justify-content: center; gap: 4px; height: 34px; margin: 12px 0 8px; }
-    .wf-spark .bar { width: 9px; background: #4a4a4a; border-radius: 2px 2px 0 0; }
-    .wf-metric { font-size: 10px; color: #8a8a8a; }
-    .wf-trendline { font-size: 10.5px; color: #cfcfcf; text-align: center; margin: 2px 0 12px; }
-
-    .wf-privline { text-align: center; font-size: 10px; color: #cfcfcf; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 8px; margin-bottom: 14px; }
-    .wf-emailfoot { border-top: 1px solid #2c2c2c; padding: 10px 16px; font-size: 9px; color: #6a6a6a; text-align: center; font-family: ui-monospace, monospace; }
-    .wf-emailfoot .wf-link { font-size: 9px; }
-
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
-    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
   </style>
 </head>
 <body>
@@ -193,7 +159,7 @@
       <a href="upgrade.html" class="nav-sub-item">Upgrade / paywall</a>
       <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
       <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
-      <a href="owner-digest.html" class="nav-sub-item nav-sub-active">Monthly digest</a>
+      <a href="owner-digest.html" class="nav-sub-item">Monthly digest</a>
       <a href="checkin-entry.html" class="nav-sub-item">Check-in entry</a>
       <a href="checkin-privacy.html" class="nav-sub-item">Pre-Q1 privacy</a>
       <a href="checkin-questions.html" class="nav-sub-item">Questions</a>
@@ -216,7 +182,7 @@
       <div class="nav-subhead-sm">System</div>
       <a href="not-found.html" class="nav-sub-item">404 Not found</a>
       <a href="server-error.html" class="nav-sub-item">500 Server error</a>
-      <a href="maintenance.html" class="nav-sub-item">503 Maintenance</a>
+      <a href="maintenance.html" class="nav-sub-item nav-sub-active">503 Maintenance</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -237,126 +203,94 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 9.2</span>
-      <span class="badge">Owner email</span>
-      <span class="badge privacy">Under 2 min &middot; closes cluster 9</span>
+      <span class="badge">Node 11.2</span>
+      <span class="badge sys">System / global</span>
+      <span class="badge sys">Noindex &middot; HTTP 503</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Monthly owner digest (9.2) &middot; email &middot; view-in-browser: /owner/digest/{token}</div>
-    <h1>Monthly owner digest</h1>
-    <p class="hero-intro">The owner's monthly touch, delivered. The email carries the month's score, the trend, and one honest sentence, so the owner gets the value in their inbox in under two minutes, with a single link to open the full dashboard (9.0). It is the retention loop for the owner (W1) and a quiet reminder the tool is working (J5, S2). Aggregate-only, never individual. Email is not crawled; the view-in-browser is a private token-gated page. This node closes cluster 9. Source of truth: ia/docs/pages/owner-digest.md.</p>
+    <div class="crumb">IA / Detail Layer / System / Maintenance (11.2) &middot; during planned downtime</div>
+    <h1>Maintenance (503)</h1>
+    <p class="hero-intro">The planned-downtime notice: a calm, expected message that Brio is briefly unavailable for scheduled maintenance and will be back, not an apologetic error. Only the Brio wordmark, a calm status pill and friendly heading, a plain reason, an optional expected-return chip, and a small static recovery. It is minimal and self-contained like the 500, but the tone is a notice, not a fault. It returns a real HTTP 503 with a Retry-After header (the defining difference) and is noindex. Source of truth: ia/docs/pages/maintenance.md.</p>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first screen on a phone, where most email is read. The email delivers the value on its own; the link is the path to the full read.</p>
+    <p>A maintenance window is a normal event, not a failure, so the tone is calm and there is no large error numeral. Like the 500 it is minimal and self-contained, because the app may be intentionally offline.</p>
     <ol>
-      <li><strong>Email header</strong>: the sender and a plain subject ("Your Acme team wellbeing, June").</li>
-      <li><strong>The month's read</strong>: the score and one honest sentence. The value, delivered.</li>
-      <li><strong>Trend</strong>: the direction versus recent months, at a glance.</li>
-      <li><strong>Participation</strong>: as a share of the team, never who.</li>
-      <li><strong>Condensed privacy line</strong>: one 0.3 line ("you only ever see the team aggregate"), so the promise travels with the email.</li>
-      <li><strong>Primary action</strong>: "Open your dashboard" to 9.0, the single link.</li>
-      <li><strong>Email footer</strong>: sent monthly, manage frequency or unsubscribe, view in browser.</li>
+      <li><strong>Minimal chrome</strong>: only the Brio wordmark, no full nav and no footer, self-contained.</li>
+      <li><strong>Status and heading</strong>: a calm status pill ("Scheduled maintenance") and a friendly heading ("Brio is getting an upgrade" / "Back shortly"). No large error numeral; the 503 is a small technical detail, not a headline.</li>
+      <li><strong>Plain reason</strong>: "we are doing some scheduled maintenance and will be back shortly".</li>
+      <li><strong>Expected return</strong> (optional): an estimated time back <span class="hyp">?</span>, shown as a chip so the wait is bounded; omitted if unknown.</li>
+      <li><strong>Recovery (small, static)</strong>: "Try again" (reload) and a quiet "check status" link. No account push, no upsell.</li>
     </ol>
-    <p><strong>Components used:</strong> an email template layout (distinct from the app chrome), the pulse read reused from 9.0, a condensed 0.3 privacy line, and one primary link to 9.0. No new global; the email delivers the same aggregate-only read.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Delivered, honest, and respectful</div>
-    <h2>States and primary action</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Default (minimum-N met)</td><td>month score, honest sentence, trend, participation share, privacy line</td><td>Open your dashboard (to 9.0)</td></tr>
-          <tr><td>Minimum-N not met</td><td>"not enough responses yet for a score this month", no partial number, no individual data</td><td>still links to 9.0 (email form of 9.3)</td></tr>
-          <tr><td>Trending down (honest signal)</td><td>the same layout with a plainly worded drop, never softened</td><td>Open your dashboard</td></tr>
-          <tr><td>Manage frequency / unsubscribe</td><td>footer links to change cadence or stop</td><td>respected immediately</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p><strong>Components used:</strong> the 11.1 minimal card (wf-mincard) and the Brio wordmark, a status pill, an optional expected-return chip, and a static action row. No nav, footer, search, or app chrome. No new global; the calm-notice tone is what distinguishes it from the 500.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). An email that stands on its own: the month's read, an honest sentence, the trend, participation as a share, a privacy line, and one link. Single column, the same on phone and in webmail.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The desktop card shows the return-time-known variant (with the expected-return chip); the phone shows the return-time-unknown variant (the chip is omitted).</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Webmail, single-column email</div>
-        <div class="wf-email">
-          <div class="wf-emailhead">
-            <div class="from">Brio &middot; noreply@brio.co</div>
-            <div class="subj">Your Acme team wellbeing, June</div>
-          </div>
-          <div class="wf-emailbody">
-            <div class="wf-greet">Hi Marcus, here is this month's read.</div>
-            <div class="wf-read">
-              <div class="lab">June, team wellbeing</div>
-              <div class="wf-num">Steady</div>
-              <div class="wf-interp">Holding steady, no sign anyone is at risk of leaving.</div>
-              <div class="wf-spark"><span class="bar" style="height:48%"></span><span class="bar" style="height:56%"></span><span class="bar" style="height:52%"></span><span class="bar" style="height:64%"></span><span class="bar" style="height:70%"></span></div>
-              <div class="wf-metric">Participation 74% (share of the team, not who)</div>
+      <div style="flex:1; min-width:300px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, maintenance (return time known)</div>
+        <div class="wf-mincard">
+          <div style="text-align:center;">
+            <div class="wf-logo" style="margin-bottom:16px;">Brio</div>
+            <div class="wf-statuspill">Scheduled maintenance</div>
+            <div class="wf-errh">Brio is getting an upgrade</div>
+            <div class="wf-errsub">We are doing some scheduled maintenance and will be back shortly.</div>
+            <div class="wf-eta">Expected back by about 14:00 UTC <span class="hyp" style="font-size:9px;">?</span></div>
+            <div class="wf-erractions">
+              <span class="wf-b solid sm">Try again</span>
+              <span class="wf-b sm">Check status</span>
             </div>
-            <div class="wf-trendline">Up a little from May.</div>
-            <div class="wf-privline">You only ever see the team aggregate, never individual data.</div>
-            <span class="wf-b solid block">Open your dashboard</span>
           </div>
-          <div class="wf-emailfoot">Sent monthly &middot; <span class="wf-link">manage emails</span> &middot; <span class="wf-link">view in browser</span></div>
         </div>
-        <div class="wf-note">delivers value with no click &middot; one honest sentence &middot; participation as a share &middot; privacy line travels with the email &middot; one link to 9.0.</div>
+        <div class="wf-note">calm notice, not a fault &middot; status pill + friendly heading, NO error numeral &middot; expected-return chip bounds the wait &middot; minimal + self-contained &middot; returns HTTP 503 + Retry-After.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, minimum-N not met</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px (return time unknown)</div>
         <div class="wf-phone">
-          <div class="wf-email" style="max-width:none;">
-            <div class="wf-emailhead" style="padding:8px 10px;"><div class="from">Brio</div><div class="subj" style="font-size:11px;">Your team wellbeing, June</div></div>
-            <div class="wf-emailbody" style="padding:14px 10px;">
-              <div class="wf-greet"><span class="wf-bnum">2</span>Hi Marcus,</div>
-              <div class="wf-read">
-                <div class="wf-num" style="font-size:16px;">No score yet</div>
-                <div class="wf-interp" style="margin-top:8px;">Not enough responses this month for a score. A minimum of 5 protects everyone's privacy.</div>
+          <div class="wf-phoneinner">
+            <div style="padding:24px 14px; text-align:center;">
+              <div class="wf-logo" style="margin-bottom:12px;">Brio</div>
+              <div class="wf-statuspill">Scheduled maintenance</div>
+              <div class="wf-errh">Back shortly</div>
+              <div class="wf-errsub">We are doing some maintenance.</div>
+              <div class="wf-reassure2">We will be back as soon as we can.</div>
+              <div class="wf-erractions">
+                <span class="wf-b solid sm">Try again</span>
               </div>
-              <div class="wf-privline">No individual data, ever.</div>
-              <span class="wf-b solid block">Open your dashboard</span>
             </div>
-            <div class="wf-emailfoot" style="padding:9px 10px;">Sent monthly &middot; <span class="wf-link">manage</span></div>
           </div>
         </div>
-        <div class="wf-note">email form of 9.3 &middot; no partial number &middot; still invites the owner in.</div>
+        <div class="wf-note">same page, unknown-return variant &middot; the expected-return chip is omitted &middot; a reassurance line replaces it.</div>
       </div>
     </div>
   </section>
 
-  <!-- SEO (noindex) -->
+  <!-- Technical / SEO -->
   <section id="seo">
-    <div class="section-label">Email, private view-in-browser</div>
-    <h2>SEO block (noindex)</h2>
-    <p>The digest is an email; email is not crawled. The view-in-browser version is a private, token-gated page.</p>
-    <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> on the view-in-browser (token-gated, personal)</span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
-      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
-    </div>
-    <h3>Email findability (not SEO, still specified)</h3>
+    <div class="section-label">Technical and SEO</div>
+    <h2>Technical and SEO (noindex)</h2>
+    <p>A maintenance page is a system response, not indexable content, but the status code is the whole point and differs from the 404 and the 500.</p>
+    <div class="callout warn"><strong>Return HTTP 503 with a Retry-After header.</strong> The page must be served with a real <code>503 Service Unavailable</code> and a <code>Retry-After</code> header (a number of seconds, or a date). This is the defining difference: 503 tells search engines and monitors the site is temporarily unavailable, not gone, and Retry-After tells them when to come back, so a planned maintenance is not de-indexed or penalized. Contrast: 404 means gone, 500 means an unexpected fault, 503 means back soon.</div>
     <ul>
-      <li>a meaningful subject line and preview text; a plain-text alternative</li>
-      <li>semantic headings in the HTML email; the score, trend, and participation are text, not an image</li>
-      <li>participation is stated as a share, never as who; a missing score states its reason in text</li>
-      <li>table-based layout with inline styles, readable in light and dark clients, no meaning by color alone; tap targets at least 44px</li>
+      <li><strong>HTTP status:</strong> <code>503</code> plus <code>Retry-After</code> (the 404 returns 404, the 500 returns 500, neither carries Retry-After)</li>
+      <li><strong>robots:</strong> <code>noindex</code>; no schema.org</li>
+      <li><strong>self-contained:</strong> inline CSS, no external assets or dynamic includes, served from the edge or a static host so it renders while the app is offline</li>
+      <li>the LCP is the heading text, not an image; the retry is a reload and the status link is a static <code>&lt;a&gt;</code></li>
     </ul>
-    <div class="callout ok"><strong>Cluster 9 closed.</strong> Monthly owner digest reuses the pulse read from 9.0 and a condensed 0.3 privacy line; it invents nothing global and delivers the same aggregate-only read to the inbox. It is the owner's monthly habit (W1): honest, under two minutes, with one link to the full dashboard. Cluster 9 Owner surface is complete (9.0 with 9.1 and 9.3, 9.2). Next cluster: <strong>10 Employee check-in</strong> (the near-anonymous, under-30-second linear flow).</div>
+    <div class="callout ok"><strong>A calm, bounded wait, and search-engine-safe.</strong> Maintenance is the planned-downtime notice: the Brio wordmark, a status pill and friendly heading, a plain reason, an optional expected-return chip, and a small static recovery, returning a real HTTP 503 with a Retry-After header and noindex. It reuses the 11.1 minimal card and invents nothing global; its calm, expected tone and the 503 + Retry-After status are the deliberate contrast with the apologetic 500 and the gone-for-good 404. This completes the error-page trio. Next: <strong>11.3 Cookie consent</strong> (grounded in real law), then 11.4 Toast, and the 11.5 Global search N/A confirmation.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 9.2 Monthly owner digest - July 2026</p>
-    <p style="margin-top:4px;">The owner's monthly email: the month's score, an honest one-line reading, a trend, participation as a share, a condensed privacy line, and one link to the full dashboard (9.0). The email form of the 9.3 empty state states the minimum-N reason plainly. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/owner-digest.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 11.2 Maintenance - July 2026</p>
+    <p style="margin-top:4px;">The planned-downtime notice: the Brio wordmark, a calm status pill and friendly heading, a plain reason, an optional expected-return chip, and a small static recovery, returning a real HTTP 503 with a Retry-After header and noindex. It reuses the 11.1 minimal card and invents nothing global; the calm, expected tone and the 503 + Retry-After status are the deliberate contrast with the apologetic 500 and the gone-for-good 404. This completes the error-page trio (404, 500, 503). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/maintenance.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
