@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brio - IA Detail: Payment failed (7.3)</title>
+  <title>Brio - IA Detail: Cookie consent (11.3)</title>
   <style>
     :root {
       --bg: #0d0f12; --surface: #13161b; --surface-2: #1a1e25; --surface-3: #21262f;
@@ -69,69 +69,61 @@
     .hero-meta { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
     .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+    .badge.sys { background: var(--surface-3); color: var(--text-muted); border-color: var(--border); }
     .badge.privacy { background: var(--green-dim); color: var(--green); border-color: var(--green-dim); }
     .crumb { font-size: 12px; color: var(--text-faint); font-family: ui-monospace, monospace; margin-bottom: 14px; }
     .hero-intro { font-size: clamp(15px, 1.5vw, 17px); color: var(--text-muted); max-width: 68ch; margin-bottom: 0; }
-
-    .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius-lg); border: 1px solid var(--border); }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    thead tr { background: var(--surface-2); border-bottom: 1px solid var(--border); }
-    thead th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
-    tbody tr { border-bottom: 1px solid var(--border-subtle); }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--surface); }
-    tbody td { padding: 12px 16px; color: var(--text-muted); vertical-align: top; }
-    tbody td:first-child { color: var(--text); font-weight: 500; }
 
     footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 80px; color: var(--text-faint); font-size: 13px; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     .callout { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin: 16px 0; font-size: 13px; color: var(--text-muted); }
     .callout strong { color: var(--text); }
     .callout.ok { border-color: var(--green-dim); }
+    .callout.warn { border-color: var(--yellow-dim); }
     .hyp { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 1px 6px; border-radius: 100px; background: var(--yellow-dim); color: var(--yellow); }
 
-    .seo-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 4px 18px 14px; margin: 14px 0; }
-    .seo-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13px; flex-wrap: wrap; }
-    .seo-row:last-child { border-bottom: none; }
-    .seo-k { min-width: 110px; color: var(--text-faint); font-family: ui-monospace, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
-    .seo-v { color: var(--text-muted); flex: 1; min-width: 200px; }
-    .seo-v code { font-size: 12px; }
-
     /* ===== Black-and-white wireframe kit ===== */
-    .wf-frame { background: #0a0a0a; border: 1px solid #333; border-radius: 10px; padding: 18px; margin: 18px 0; }
     .wf-cap { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a8a8a; margin-bottom: 12px; font-family: ui-monospace, monospace; }
     .wf-note { font-size: 11px; color: #777; margin-top: 10px; font-family: ui-monospace, monospace; }
     .wf-row { display: flex; gap: 22px; flex-wrap: wrap; align-items: flex-start; }
     .wf-logo { font-weight: 700; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; }
     .wf-b { border: 1px solid #7a7a7a; border-radius: 5px; padding: 8px 14px; font-size: 11px; color: #e6e6e6; text-align: center; }
     .wf-b.solid { background: #e6e6e6; color: #111; border-color: #e6e6e6; font-weight: 600; }
-    .wf-b.sm { padding: 4px 9px; font-size: 10px; }
-    .wf-b.block { display: block; }
+    .wf-b.sm { padding: 5px 10px; font-size: 10px; }
     .wf-plain { color: #9a9a9a; font-size: 11px; }
     .wf-link { color: #cfcfcf; text-decoration: underline; font-size: 11px; }
 
-    /* ===== 0.5 dialog / modal shell (canonical, from 6.1 / 7.2) ===== */
-    .wf-modal-scrim { position: relative; background: #0c0c0c; border: 1px solid #333; border-radius: 10px; padding: 0; overflow: hidden; min-height: 420px; }
-    .wf-scrim-fill { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
-    .wf-modal-wrap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
-    .wf-modal { width: 320px; max-width: 100%; background: #101010; border: 1px solid #4a4a4a; border-radius: 10px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .wf-modal .mtitle { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 12px; }
-    .wf-modal .mtitle .x { margin-left: auto; color: #9a9a9a; border: 1px solid #444; border-radius: 4px; width: 20px; height: 20px; text-align: center; line-height: 18px; font-size: 12px; }
-    .wf-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #101010; border-top: 1px solid #4a4a4a; border-radius: 14px 14px 0 0; padding: 14px; }
-    .wf-sheet .grab { width: 34px; height: 4px; background: #3a3a3a; border-radius: 3px; margin: 0 auto 10px; }
-    .wf-scrimghost { padding: 12px 14px; }
-    .wf-ghostbar { display: flex; align-items: center; gap: 10px; opacity: 0.4; }
-    .wf-ghostbar .wf-tab { font-size: 10px; color: #8a8a8a; }
+    /* public chrome (for the page behind the banner) */
+    .wf-page { border: 1px solid #3a3a3a; border-radius: 8px; background: #0c0c0c; overflow: hidden; }
+    .wf-nav { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #2c2c2c; color: #cfcfcf; font-size: 12px; flex-wrap: wrap; }
+    .wf-nav .sp { margin-left: auto; }
+    .wf-sec { padding: 16px 14px; border-bottom: 1px solid #1f1f1f; }
+    .wf-sec .lbl { font-size: 9px; color: #6a6a6a; text-transform: uppercase; letter-spacing: 0.08em; font-family: ui-monospace, monospace; margin-bottom: 8px; }
+    .wf-hl { height: 16px; background: #262626; border-radius: 4px; width: 80%; margin-bottom: 8px; }
+    .wf-hl.s { width: 55%; height: 12px; }
 
-    /* attention mark + explanation (reused from 2.3) */
-    .wf-confirm { text-align: center; }
-    .wf-check { width: 46px; height: 46px; border: 1px solid #7a7a7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 4px auto 12px; color: #fff; font-size: 20px; }
-    .wf-check.attn { border-style: dashed; border-color: #9a9a9a; font-weight: 800; }
-    .wf-reason { color: #fff; font-size: 13px; font-weight: 700; }
-    .wf-expl { font-size: 10.5px; color: #9a9a9a; border: 1px dashed #4a4a4a; border-radius: 6px; padding: 9px; margin: 10px 0 14px; line-height: 1.5; }
+    /* cookie consent banner + manage panel */
+    .wf-cookiebar { border-top: 1px solid #4a4a4a; background: #111; padding: 12px 14px; }
+    .wf-cookietitle { font-size: 12px; color: #fff; font-weight: 700; margin-bottom: 4px; }
+    .wf-cookietext { font-size: 10px; color: #b8b8b8; line-height: 1.5; }
+    .wf-cookieactions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+    .wf-sheet { border-top: 1px solid #4a4a4a; border-radius: 12px 12px 0 0; background: #111; padding: 14px 12px; }
+    .wf-catrow { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid #222; }
+    .wf-catrow:last-of-type { border-bottom: none; }
+    .wf-catinfo { flex: 1; min-width: 0; }
+    .wf-catinfo .cn { font-size: 10.5px; color: #fff; font-weight: 700; }
+    .wf-catinfo .cd { font-size: 9px; color: #9a9a9a; line-height: 1.45; margin-top: 1px; }
+    .wf-lock { display: inline-block; font-size: 8px; font-family: ui-monospace, monospace; letter-spacing: 0.05em; text-transform: uppercase; color: #8a8a8a; border: 1px solid #4a4a4a; border-radius: 100px; padding: 1px 7px; }
+    .wf-swwrap { display: flex; align-items: center; gap: 5px; flex: 0 0 auto; }
+    .wf-swtxt { font-size: 9px; color: #9a9a9a; font-family: ui-monospace, monospace; width: 18px; text-align: right; }
+    .wf-switch { width: 30px; height: 17px; border: 1px solid #6a6a6a; border-radius: 100px; position: relative; flex: 0 0 auto; }
+    .wf-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; border-radius: 50%; background: #9a9a9a; }
+    .wf-switch.on { background: #e6e6e6; border-color: #e6e6e6; }
+    .wf-switch.on::after { left: auto; right: 2px; background: #111; }
+    .wf-switch.lock { opacity: 0.6; }
 
-    .wf-phone { width: 290px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 0; background: #0c0c0c; overflow: hidden; position: relative; min-height: 420px; }
-    .wf-bnum { display: inline-block; font-size: 9px; color: #888; border: 1px solid #444; border-radius: 3px; padding: 0 5px; margin-right: 6px; font-family: ui-monospace, monospace; }
+    .wf-phone { width: 300px; max-width: 100%; border: 1px solid #3a3a3a; border-radius: 18px; padding: 8px; background: #0c0c0c; }
+    .wf-phoneinner { border: 1px solid #262626; border-radius: 12px; overflow: hidden; }
   </style>
 </head>
 <body>
@@ -189,7 +181,7 @@
       <a href="share-owner.html" class="nav-sub-item">Share with owner</a>
       <a href="invite-owner.html" class="nav-sub-item">Invite owner + upgrade</a>
       <a href="upgrade.html" class="nav-sub-item">Upgrade / paywall</a>
-      <a href="payment-failed.html" class="nav-sub-item nav-sub-active">Payment failed</a>
+      <a href="payment-failed.html" class="nav-sub-item">Payment failed</a>
       <a href="owner-dashboard.html" class="nav-sub-item">Owner dashboard</a>
       <a href="owner-digest.html" class="nav-sub-item">Monthly digest</a>
       <a href="checkin-entry.html" class="nav-sub-item">Check-in entry</a>
@@ -215,7 +207,7 @@
       <a href="not-found.html" class="nav-sub-item">404 Not found</a>
       <a href="server-error.html" class="nav-sub-item">500 Server error</a>
       <a href="maintenance.html" class="nav-sub-item">503 Maintenance</a>
-      <a href="cookie-consent.html" class="nav-sub-item">Cookie consent</a>
+      <a href="cookie-consent.html" class="nav-sub-item nav-sub-active">Cookie consent</a>
     </div>
     <div class="nav-group">
       <span class="nav-item nav-item-muted">Wireframes <span class="nav-soon" style="color:var(--accent);border-color:var(--accent);background:transparent;">Next</span></span>
@@ -236,125 +228,138 @@
   <section class="hero" id="top">
     <div class="hero-meta">
       <span class="badge accent">IA - Detail Layer</span>
-      <span class="badge">Node 7.3</span>
-      <span class="badge">State (error)</span>
-      <span class="badge privacy">Recoverable &middot; closes cluster 7</span>
+      <span class="badge">Node 11.3</span>
+      <span class="badge sys">System / global</span>
+      <span class="badge">Dialog &middot; 0.5</span>
+      <span class="badge privacy">Law-grounded</span>
     </div>
-    <div class="crumb">IA / Detail Layer / Pages / Payment failed (7.3) &middot; error state of the 7.2 modal</div>
-    <h1>Payment failed</h1>
-    <p class="hero-intro">When a card is declined during the upgrade, say plainly what happened, reassure that no charge was made and the team stays on the free plan, and offer two clear ways forward: try again, or stay free and retry later. A failed payment must never trap the operator or lose their place. It is the error body of the 7.2 dialog (recoverable, F3 DE3) and closes cluster 7. Inside the operator app, so noindex. Source of truth: ia/docs/pages/payment-failed.md.</p>
+    <div class="crumb">IA / Detail Layer / System / Cookie consent (11.3) &middot; first visit + manage</div>
+    <h1>Cookie consent</h1>
+    <p class="hero-intro">The lawful, honest consent surface, grounded in current law: a first-visit non-modal banner where Reject is as easy as Accept, a modal manage panel with granular per-category toggles (essential locked on, the rest default off, no pre-ticked boxes), a persistent reopen control so consent can be withdrawn at any time, and a US opt-out variant with Global Privacy Control honored. For a privacy-first product this is the design principle made operational at the browser layer. Referenced by 1.6 (the "manage cookie settings" control) and shown on first visit. The legal copy and the final geo logic are a hypothesis pending legal review. Source of truth: ia/docs/pages/cookie-consent.md.</p>
+  </section>
+
+  <!-- Legal grounding -->
+  <section id="legal">
+    <div class="section-label">Grounded in real law</div>
+    <h2>Legal grounding (researched July 2026)</h2>
+    <p>Brio's primary market is the US and secondary the EU and UK, so two models apply and the surface is geo-adaptive. The copy and the final geo logic are <span class="hyp">?</span> pending legal review.</p>
+    <div class="callout"><strong>EU (GDPR + ePrivacy), opt-in.</strong> Prior opt-in consent before any non-essential cookie loads; strictly necessary cookies are exempt but disclosed. <strong>Reject must be as easy as Accept, on the same first layer, equal prominence</strong> (asymmetry has drawn CNIL fines). Granular per-category consent; <strong>no pre-ticked boxes</strong> (Planet49, CJEU C-673/17), so non-essential toggles default off. Consent is withdrawable any time, as easily as given; consent records are kept.</div>
+    <div class="callout"><strong>US (CCPA / CPRA and about 20 states), opt-out.</strong> A notice-and-opt-out model, not opt-in: cookies may load, but the user can opt out of any sale or sharing via a "Do Not Sell or Share My Personal Information" control, and browser Global Privacy Control (GPC) signals must be honored.</div>
+    <div class="callout ok"><strong>Brio reconciliation.</strong> Brio is aggregate-only and does not sell individual data (the 0.3 spine, claim 4), so the "sale" surface is largely moot, but the control is shown honestly. Because the brand is privacy-first, the recommended default is to apply the stricter opt-in model and a genuine Reject everywhere, and to honor GPC; the final geo logic is <span class="hyp">?</span> pending legal review.</div>
   </section>
 
   <!-- Blocks -->
   <section id="blocks">
     <div class="section-label">Mobile-first priority</div>
     <h2>Content blocks</h2>
-    <p>Block 1 is the first thing in the dialog. Order reasoned from the 360px baseline up. It is recoverable: retry and stay-free are both always present.</p>
     <ol>
-      <li><strong>Dialog title and close</strong>: "Payment did not go through" with a close control. Close equals staying on the free tier: a no-charge exit to 4.0.</li>
-      <li><strong>Attention mark</strong>: the same attention badge as 2.3 (an exclamation, not a check), so error reads from success without color.</li>
-      <li><strong>Reason</strong>: a plain, non-blaming reason ("your card was declined"), so the operator knows what to fix.</li>
-      <li><strong>Reassurance</strong>: "you have not been charged, and your team stays on the free plan."</li>
-      <li><strong>Primary and recoverable exit</strong>: "Try again" (to 7.2) as the primary; "Stay on the free tier, retry later" (to 4.0) as the always-present recoverable exit.</li>
+      <li><strong>Consent banner (first visit)</strong>: a non-modal region, shown before non-essential cookies load, with a plain line, a link to 1.6, and the first-layer actions <strong>Reject all</strong> and <strong>Accept all</strong> at equal prominence, plus a <strong>Manage</strong> link.</li>
+      <li><strong>Manage panel (modal)</strong>: the granular categories, a 0.5 dialog. Strictly necessary is on and locked; Functional, Analytics, and Advertising each a toggle (the 8.3 switch, state by knob position and On/Off text), all <strong>default off</strong>. Actions: Reject all, Save choices, Accept all.</li>
+      <li><strong>Persistent reopen control</strong>: a footer link or small floating preferences entry, and the 1.6 "manage cookie settings" control, so consent can be changed or withdrawn at any time.</li>
+      <li><strong>US opt-out variant</strong>: a notice with a "Do Not Sell or Share My Personal Information" control and a note that GPC is honored; because Brio does not sell data, this is honest reassurance more than a live sale toggle.</li>
     </ol>
-    <p><strong>Components used:</strong> the canonical 0.5 Dialog / modal shell (this is the error body of the 7.2 instance, not a second dialog), the 2.3 attention mark and explanation, and standard buttons. No new global; not a separate 0.5 consumer.</p>
-  </section>
-
-  <!-- States -->
-  <section id="states">
-    <div class="section-label">Retry, stay free, and exit</div>
-    <h2>States and primary CTA</h2>
-    <p>Never a trap (F3 DE3): a declined card always offers a retry and a no-penalty way back to the free tier.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>State</th><th>What shows</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Default (declined)</td><td>attention mark, reason, no-charge reassurance</td><td>Try again / Stay on the free tier</td></tr>
-          <tr><td>Try again</td><td>the payment step, ready to re-enter or use a different card</td><td>to 7.2 Upgrade</td></tr>
-          <tr><td>Stay on the free tier</td><td>the free plan continues; invite the owner later from 7.0</td><td>to 4.0 Dashboard</td></tr>
-          <tr><td>Close / Esc / scrim click</td><td>dismiss with no charge</td><td>to 4.0 Dashboard (recoverable exit, F3 DE3)</td></tr>
-          <tr><td>Repeated failure</td><td>still recoverable; the reason updates</td><td>Try again / Stay on the free tier</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="callout"><strong>0.5 a11y contract:</strong> <code>role="dialog"</code>, <code>aria-modal="true"</code>, labelled by the title; focus trapped; Esc closes (equals Stay on the free tier, to 4.0); background inert; focus returns to the opener. Error and reason in text and a mark, not color alone.</div>
+    <p><strong>Components used:</strong> the 8.3 toggle (wf-switch, wf-swtxt) for the optional categories, the 8.2 lock idea (wf-lock) for the always-on essential category, the 0.5 dialog shell for the modal manage panel (11.3 is already a registered 0.5 consumer), and a link to 1.6. No new global component is invented.</p>
   </section>
 
   <!-- Wireframe -->
   <section id="mockup">
     <div class="section-label">Black and white, wireframe level</div>
     <h2>Wireframe</h2>
-    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The same modal as 7.2, now an error body with an attention mark (not a check), a plain reason, a no-charge reassurance, and two ways forward; mobile is a bottom sheet.</p>
+    <p>No color and no brand: structure only, color arrives at Concept (stage 06). The first frame is the first-visit banner (Reject as prominent as Accept); the second is the modal manage panel (essential locked, the rest off); the third is the US opt-out variant. Toggle state is carried by knob position and On/Off text, never color.</p>
 
     <div class="wf-row">
-      <div style="flex:1;min-width:320px;">
-        <div class="wf-cap" style="margin-bottom:8px;">Desktop, error over the dimmed 7.1</div>
-        <div class="wf-modal-scrim">
-          <div class="wf-scrimghost">
-            <div class="wf-ghostbar"><span class="wf-logo">Brio</span><span style="margin-left:auto;"></span><span class="wf-tab">Owner</span></div>
-            <div class="wf-plain" style="opacity:0.4;margin-top:10px;">Invite your owner (behind the dialog)</div>
-          </div>
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-modal-wrap">
-            <div class="wf-modal" role="dialog" aria-modal="true" aria-label="Payment did not go through">
-              <div class="mtitle">Payment did not go through <span class="x">x</span></div>
-              <div class="wf-confirm">
-                <div class="wf-check attn">!</div>
-                <div class="wf-reason">Your card was declined</div>
-              </div>
-              <div class="wf-expl">You have not been charged, and your team stays on the free plan. Try again or use a different card.</div>
-              <span class="wf-b solid block">Try again</span>
-              <div class="wf-plain" style="text-align:center;margin-top:10px;"><span class="wf-link">Stay on the free tier, retry later</span></div>
+      <div style="flex:1; min-width:300px;">
+        <div class="wf-cap" style="margin-bottom:8px;">Desktop, first-visit banner (non-modal)</div>
+        <div class="wf-page">
+          <div class="wf-nav"><span class="wf-logo">Brio</span><span class="wf-plain">Pricing</span><span class="wf-plain">Security</span><span class="wf-plain">About</span><span class="sp"></span><span class="wf-b sm">Log in</span><span class="wf-b solid sm">Start free</span></div>
+          <div class="wf-sec"><div class="lbl">page still usable (not a cookie wall)</div><div class="wf-hl"></div><div class="wf-hl s"></div></div>
+          <div class="wf-cookiebar">
+            <div class="wf-cookietitle">We use cookies</div>
+            <div class="wf-cookietext">Brio uses essential cookies to run the site. With your consent we also use analytics to improve it. We never sell your data. <span class="wf-link">Cookie Policy (1.6)</span></div>
+            <div class="wf-cookieactions">
+              <span class="wf-b sm">Reject all</span>
+              <span class="wf-b sm">Accept all</span>
+              <span class="wf-link" style="margin-left:auto;">Manage</span>
             </div>
           </div>
         </div>
-        <div class="wf-note">attention mark (not a check) = error without color &middot; plain reason &middot; no-charge reassurance &middot; retry to 7.2, stay-free to 4.0 &middot; never a trap.</div>
+        <div class="wf-note">shown BEFORE non-essential cookies load &middot; Reject all and Accept all EQUAL prominence, same layer (EDPB / CNIL) &middot; Manage opens the panel &middot; non-modal region, page still works.</div>
       </div>
 
       <div>
-        <div class="wf-cap" style="margin-bottom:8px;">Mobile 360px, bottom sheet</div>
+        <div class="wf-cap" style="margin-bottom:8px;">Manage panel (0.5 modal, granular)</div>
         <div class="wf-phone">
-          <div class="wf-scrim-fill"></div>
-          <div class="wf-sheet">
-            <div class="grab"></div>
-            <div class="mtitle" style="display:flex;align-items:center;gap:8px;color:#fff;font-size:13px;font-weight:700;margin-bottom:10px;">Payment did not go through <span class="x" style="margin-left:auto;color:#9a9a9a;border:1px solid #444;border-radius:4px;width:20px;height:20px;text-align:center;line-height:18px;font-size:12px;">x</span></div>
-            <div class="wf-confirm">
-              <div class="wf-check attn">!</div>
-              <div class="wf-reason" style="font-size:12px;">Your card was declined</div>
+          <div class="wf-phoneinner">
+            <div style="padding:14px 10px; opacity:0.4;"><div class="wf-hl"></div><div class="wf-hl s"></div></div>
+            <div class="wf-sheet">
+              <div class="wf-cookietitle">Cookie settings</div>
+              <div class="wf-catrow">
+                <div class="wf-catinfo"><div class="cn">Strictly necessary</div><div class="cd">Sign-in, security, and core features.</div><div style="margin-top:4px;"><span class="wf-lock">Always on</span></div></div>
+                <div class="wf-swwrap"><span class="wf-switch on lock"></span><span class="wf-swtxt">On</span></div>
+              </div>
+              <div class="wf-catrow">
+                <div class="wf-catinfo"><div class="cn">Functional</div><div class="cd">Remember your preferences, like language.</div></div>
+                <div class="wf-swwrap"><span class="wf-switch"></span><span class="wf-swtxt">Off</span></div>
+              </div>
+              <div class="wf-catrow">
+                <div class="wf-catinfo"><div class="cn">Analytics</div><div class="cd">Help us understand usage to improve Brio.</div></div>
+                <div class="wf-swwrap"><span class="wf-switch"></span><span class="wf-swtxt">Off</span></div>
+              </div>
+              <div class="wf-catrow">
+                <div class="wf-catinfo"><div class="cn">Advertising</div><div class="cd">We do not sell your data, so this stays off.</div></div>
+                <div class="wf-swwrap"><span class="wf-switch"></span><span class="wf-swtxt">Off</span></div>
+              </div>
+              <div class="wf-cookieactions">
+                <span class="wf-b sm">Reject all</span>
+                <span class="wf-b solid sm">Save choices</span>
+                <span class="wf-b sm">Accept all</span>
+              </div>
+              <div style="margin-top:8px;"><span class="wf-link">Cookie Policy (1.6)</span></div>
             </div>
-            <div class="wf-expl"><span class="wf-bnum">4</span>Not charged. You stay on the free plan.</div>
-            <span class="wf-b solid block">Try again</span>
-            <div class="wf-plain" style="text-align:center;margin-top:10px;"><span class="wf-link">Stay on the free tier</span></div>
           </div>
         </div>
-        <div class="wf-note">bottom sheet &middot; same order &middot; stay-free always in view.</div>
+        <div class="wf-note">0.5 dialog (role=dialog, aria-modal, focus trap, Esc) &middot; essential locked ON, the rest DEFAULT OFF (no pre-ticked) &middot; state by knob position + On/Off text, not color &middot; Reject as easy as Accept.</div>
+      </div>
+
+      <div>
+        <div class="wf-cap" style="margin-bottom:8px;">US opt-out variant (CCPA / CPRA)</div>
+        <div class="wf-phone">
+          <div class="wf-phoneinner">
+            <div style="padding:14px 10px; opacity:0.4;"><div class="wf-hl"></div><div class="wf-hl s"></div></div>
+            <div class="wf-sheet">
+              <div class="wf-cookietitle">Your privacy choices</div>
+              <div class="wf-cookietext">Under US state law you can opt out of any sale or sharing of your personal information.</div>
+              <div style="margin-top:8px;"><span class="wf-link">Do Not Sell or Share My Personal Information</span></div>
+              <div class="wf-cookietext" style="margin-top:8px;">We honor Global Privacy Control (GPC) signals. Brio does not sell your data.</div>
+              <div class="wf-cookieactions">
+                <span class="wf-b solid sm">OK</span>
+                <span class="wf-link">Manage</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-note">notice + opt-out (not opt-in) &middot; "Do Not Sell or Share" control + GPC honored &middot; Brio does not sell data, so this is honest reassurance &middot; final geo logic [?] legal review.</div>
       </div>
     </div>
   </section>
 
-  <!-- SEO (noindex) -->
+  <!-- Accessibility + technical -->
   <section id="seo">
-    <div class="section-label">Operator app modal error</div>
-    <h2>SEO block (noindex)</h2>
-    <p>Payment failed is a modal error state inside the authenticated operator app. It is not indexed and carries no schema. The in-app findability and dialog a11y rules still apply.</p>
-    <div class="seo-block">
-      <div class="seo-row"><span class="seo-k">robots</span><span class="seo-v"><code>noindex, nofollow</code> (no standalone URL; the error state of the 7.2 modal)</span></div>
-      <div class="seo-row"><span class="seo-k">schema.org</span><span class="seo-v">none</span></div>
-      <div class="seo-row"><span class="seo-k">hreflang / OG</span><span class="seo-v">none</span></div>
-    </div>
-    <h3>In-app findability (not SEO, still specified)</h3>
+    <div class="section-label">Accessibility and technical</div>
+    <h2>Accessibility and technical</h2>
+    <p>The banner and panel are UI over the page, not a URL, so there is nothing to index here; the crawlable legal detail lives at 1.6.</p>
     <ul>
-      <li>the dialog has an accessible name (the title) and the 0.5 a11y contract</li>
-      <li>the error and the reason are conveyed in text and an attention mark, not by color alone</li>
-      <li>Try again and Stay on the free tier are labelled controls</li>
-      <li>the exit is reachable by keyboard (Esc) and pointer; tap targets at least 44px</li>
+      <li><strong>Banner (first visit):</strong> a non-modal <code>region</code> with an accessible label; it does not trap focus or block the page (not a cookie wall), but its actions are keyboard reachable and clearly labelled</li>
+      <li><strong>Manage panel:</strong> a modal <code>dialog</code> (the 0.5 contract): <code>role="dialog"</code>, <code>aria-modal="true"</code>, an accessible name, a focus trap, Escape to close, background inert, focus returned to the opener</li>
+      <li><strong>State by shape and text:</strong> toggle state is knob position and On/Off text, not color; the locked essential category is announced as disabled with an explanation</li>
+      <li><strong>Enforcement:</strong> non-essential cookies do not load until consent (EU); the choice is stored client-side and recorded server-side (timestamp, categories, banner version); GPC is honored as an opt-out</li>
     </ul>
-    <div class="callout ok"><strong>Cluster 7 closed.</strong> Payment failed is the error state of the 7.2 dialog and reuses the 2.3 attention mark; it invents nothing global and is not a separate 0.5 consumer. It guarantees the upgrade path never traps (F3 DE3): a declined card always offers a retry and a no-penalty way back to the free tier. Cluster 7 Owner share and upgrade is complete (7.0, 7.1, 7.2, 7.3). Next cluster: <strong>9 Owner surface</strong> (9.0 Owner dashboard, aggregate-only).</div>
+    <div class="callout ok"><strong>Consent done lawfully and honestly.</strong> Cookie consent is the first-visit non-modal banner with Reject as easy as Accept, a modal manage panel with granular per-category toggles (essential locked on, the rest default off, no pre-ticked boxes), a persistent reopen control, and a US opt-out variant with GPC honored, all grounded in current EU and US law. It reuses the 8.3 toggle, the 8.2 lock idea, and the 0.5 dialog shell, links to 1.6, and invents nothing global; the legal copy and final geo logic are <span class="hyp">?</span> pending legal review. Next: <strong>11.4 Toast / inline notification</strong>, then the 11.5 Global search N/A confirmation and the 2.x reset-entry decision.</div>
   </section>
 
   <footer>
-    <p>Brio - Information Architecture, Detail Layer - Node 7.3 Payment failed - July 2026</p>
-    <p style="margin-top:4px;">The recoverable failure of the upgrade: a plain reason, a no-charge reassurance, and two ways forward (Try again to 7.2, Stay on the free tier to 4.0), rendered as the error body of the 7.2 dialog with the 2.3 attention mark. Never a trap (F3 DE3). Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/payment-failed.md.</p>
+    <p>Brio - Information Architecture, Detail Layer - Node 11.3 Cookie consent - July 2026</p>
+    <p style="margin-top:4px;">The lawful, honest consent surface, grounded in current EU (GDPR + ePrivacy, opt-in, Reject as easy as Accept, no pre-ticked boxes) and US (CCPA / CPRA, notice-and-opt-out, GPC honored) law: a first-visit non-modal banner, a modal manage panel with granular per-category toggles (essential locked on, the rest default off), a persistent reopen control, and a US opt-out variant. It reuses the 8.3 toggle, the 8.2 lock idea, and the 0.5 dialog shell, links to 1.6, and invents nothing global; the legal copy and final geo logic are a hypothesis pending legal review. Mockups are black and white; color arrives at Concept (stage 06). Source of truth: ia/docs/pages/cookie-consent.md.</p>
     <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
   </footer>
 
