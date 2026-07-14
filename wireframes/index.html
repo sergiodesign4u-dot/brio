@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - Wireframes: All screens</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    /* index-specific (grey, structure only) */
+    .hero { padding: 74px 0 24px; border-bottom: 1px solid var(--border); }
+    @media (min-width: 900px) { .hero { padding: 56px 0 24px; } }
+    .hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-bottom: 12px; }
+    .hero p { color: var(--text-muted); max-width: 70ch; margin-bottom: 16px; }
+    .counter { display: inline-flex; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--wf-t-mid); font-family: ui-monospace, monospace; }
+    .counter b { color: var(--wf-t-hi); font-weight: 700; }
+    section { padding: 34px 0 8px; }
+    h2 { font-size: clamp(18px, 2.4vw, 24px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 6px; }
+    .sub { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; max-width: 70ch; }
+
+    .flow-card { border: 1px solid var(--wf-edge); border-radius: var(--radius-lg); background: var(--wf-panel); padding: 14px 16px; margin: 14px 0; }
+    .flow-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+    .flow-badge { font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: var(--wf-solid-ink); background: var(--wf-solid); border-radius: 4px; padding: 1px 7px; }
+    .flow-name { font-size: 15px; font-weight: 700; color: var(--wf-t-hi); }
+    .flow-meta { font-size: 12px; color: var(--wf-t-mid); }
+    .flow-note { font-size: 11px; color: var(--wf-t-lo); font-style: italic; margin-bottom: 12px; }
+    .scr { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid var(--wf-line-2); }
+    .scr-num { font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: var(--wf-t-mid); min-width: 34px; }
+    .scr-name { font-size: 13px; color: var(--wf-t); font-weight: 500; min-width: 150px; }
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip { font-size: 10.5px; border-radius: 100px; padding: 2px 9px; white-space: nowrap; text-decoration: none; border: 1px solid var(--wf-edge); }
+    .chip.built { color: var(--wf-t-2); border-color: var(--wf-stroke); }
+    a.chip.built:hover { color: var(--wf-t-hi); background: var(--surface-2); text-decoration: none; }
+    .chip.base.built { background: var(--wf-solid); color: var(--wf-solid-ink); border-color: var(--wf-solid); font-weight: 700; }
+    .chip.spec { color: var(--wf-t-lo); border-style: dashed; }
+    .scr-spec { margin-left: auto; font-size: 10.5px; color: var(--wf-t-lo); }
+    a.scr-spec:hover { color: var(--wf-t-mid); }
+
+    .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; color: var(--wf-t-mid); margin-bottom: 18px; font-family: ui-monospace, monospace; }
+    .legend span { display: inline-flex; align-items: center; gap: 7px; }
+    .swatch { width: 22px; height: 14px; border-radius: 3px; }
+    .swatch.built { border: 1px solid var(--wf-stroke); background: var(--wf-panel-2); }
+    .swatch.spec { border: 1px dashed var(--wf-edge); }
+    .cov-cluster { margin: 18px 0; }
+    .cov-h { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wf-t-mid); margin-bottom: 8px; font-family: ui-monospace, monospace; }
+    .cov-h b { color: var(--wf-t-lo); font-weight: 700; }
+    .cov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+    .tile { display: flex; align-items: center; gap: 9px; padding: 9px 12px; border-radius: var(--radius); text-decoration: none; }
+    .tile.built { border: 1px solid var(--wf-stroke); background: var(--wf-panel-2); }
+    .tile.spec { border: 1px dashed var(--wf-edge); }
+    a.tile:hover { background: var(--surface-2); text-decoration: none; }
+    .tile-num { font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: var(--wf-t-mid); min-width: 30px; }
+    .tile-name { font-size: 12.5px; color: var(--wf-t); flex: 1; line-height: 1.25; }
+    .tile-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--wf-t-lo); border: 1px solid var(--wf-edge); border-radius: 100px; padding: 1px 6px; white-space: nowrap; }
+    .tile.built .tile-tag { color: var(--wf-t-hi); border-color: var(--wf-stroke); }
+
+    footer { border-top: 1px solid var(--border); padding: 30px 0 60px; margin-top: 40px; color: var(--text-faint); font-size: 13px; }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <a href="../user-research/personas.html" class="nav-item">User Research</a>
+    </div>
+    <div class="nav-group">
+      <a href="../ia/flows.html" class="nav-item">Information Architecture (IA)</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Wireframes</div>
+      <div id="wf-flow-links"></div>
+      <a href="index.html" class="nav-sub-link nav-link-active">All screens</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Voice <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+  <section class="hero" id="top">
+    <h1>Wireframes</h1>
+    <p>A grey clickable prototype of the whole product, built from the IA Detail Layer. Enter by flow to click a path through, or read the coverage map below. Nothing is invented here: text, components, and states come from the IA. This index is the single coverage tracker; each screen lights up as its wireframe lands.</p>
+    <div class="counter" id="counter"></div>
+  </section>
+
+  <section id="flows">
+    <h2>Enter by flow</h2>
+    <p class="sub">The four product flows from ia/docs/flows.md. Flow 1 is assembled first; the rest roll out at Step 8. Base state plus every real state, each its own page.</p>
+    <div id="flow-entries"></div>
+  </section>
+
+  <section id="coverage">
+    <h2>Full coverage map</h2>
+    <p class="sub">Every product screen by IA cluster. Solid = wireframe built (with its state-page count); dashed and tagged IA = still specification only (links to the IA spec).</p>
+    <div class="legend">
+      <span><span class="swatch built"></span> built (state pages)</span>
+      <span><span class="swatch spec"></span> in spec (IA)</span>
+    </div>
+    <div id="coverage-map"></div>
+  </section>
+
+  <footer>
+    <p>Brio - Wireframes (Stage 04) - All screens and coverage. Grey clickable prototype; color arrives at Concept (stage 06) on copies in ui-visual/. Sources: ia/docs/sitemap.md, ia/docs/flows.md, wireframes/docs/screens.md.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+</main>
+
+<script src="_nav.js"></script>
+<script>
+  (function () {
+    var WF = window.BRIO_WF;
+    var byNum = {};
+    WF.screens.forEach(function (s) { byNum[s.num] = s; });
+
+    function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+
+    /* Sidebar flow links (from _nav.js) */
+    var fl = document.getElementById('wf-flow-links');
+    WF.flows.forEach(function (f) {
+      var a = el('a', 'nav-sub-link', f.n + ' - ' + f.label);
+      a.href = 'index.html#' + f.id;
+      fl.appendChild(a);
+    });
+
+    /* Counter */
+    var built = WF.screens.filter(function (s) { return s.status === 'built'; });
+    var pages = built.reduce(function (n, s) { return n + (s.states.length || 1); }, 0);
+    var c = document.getElementById('counter');
+    c.appendChild(el('span', null, '')).appendChild(document.createTextNode(''));
+    var b1 = el('span'); b1.innerHTML = '<b>' + built.length + '</b> of ' + WF.screens.length + ' screens built';
+    var b2 = el('span'); b2.innerHTML = '<b>' + pages + '</b> state pages';
+    var b3 = el('span'); b3.innerHTML = '<b>' + (WF.screens.length - built.length) + '</b> in spec';
+    c.innerHTML = '';
+    c.appendChild(b1); c.appendChild(el('span', null, '/')); c.appendChild(b2); c.appendChild(el('span', null, '/')); c.appendChild(b3);
+
+    /* Chips for one screen */
+    function chipsFor(s) {
+      var wrap = el('div', 'chips');
+      if (s.status === 'built' && s.states.length) {
+        s.states.forEach(function (st, i) {
+          var a = el('a', 'chip built' + (i === 0 ? ' base' : ''), st.s);
+          a.href = st.f; wrap.appendChild(a);
+        });
+      } else if (s.states.length) {
+        s.states.forEach(function (st, i) {
+          wrap.appendChild(el('span', 'chip spec' + (i === 0 ? ' base' : ''), st.s));
+        });
+      } else {
+        wrap.appendChild(el('span', 'chip spec base', 'states at Step 8'));
+      }
+      return wrap;
+    }
+
+    /* Flow entries */
+    var fe = document.getElementById('flow-entries');
+    WF.flows.forEach(function (f) {
+      var card = el('div', 'flow-card'); card.id = f.id;
+      var head = el('div', 'flow-head');
+      head.appendChild(el('span', 'flow-badge', f.n));
+      head.appendChild(el('span', 'flow-name', f.label));
+      head.appendChild(el('span', 'flow-meta', f.persona + ' - ' + f.job));
+      card.appendChild(head);
+      card.appendChild(el('div', 'flow-note', f.note));
+      f.screens.forEach(function (num) {
+        var s = byNum[num]; if (!s) return;
+        var row = el('div', 'scr');
+        row.appendChild(el('span', 'scr-num', num));
+        row.appendChild(el('span', 'scr-name', s.name));
+        row.appendChild(chipsFor(s));
+        var spec = el('a', 'scr-spec', s.status === 'built' ? 'open' : 'view IA');
+        spec.href = s.status === 'built' ? s.file : '../ia/' + s.ia;
+        row.appendChild(spec);
+        card.appendChild(row);
+      });
+      fe.appendChild(card);
+    });
+
+    /* Coverage map by cluster */
+    var cm = document.getElementById('coverage-map');
+    var clusters = {};
+    WF.screens.forEach(function (s) { var k = s.num.split('.')[0]; (clusters[k] = clusters[k] || []).push(s); });
+    Object.keys(clusters).sort(function (a, b) { return (+a) - (+b); }).forEach(function (k) {
+      var group = clusters[k];
+      var nb = group.filter(function (s) { return s.status === 'built'; }).length;
+      var block = el('div', 'cov-cluster');
+      var h = el('div', 'cov-h', 'Cluster ' + k + ' - ' + (WF.clusters[k] || '') + '  ');
+      var count = el('b', null, '(' + nb + '/' + group.length + ' built)');
+      h.appendChild(count); block.appendChild(h);
+      var grid = el('div', 'cov-grid');
+      group.forEach(function (s) {
+        var isBuilt = s.status === 'built';
+        var t = el('a', 'tile ' + (isBuilt ? 'built' : 'spec'));
+        t.href = isBuilt ? s.file : '../ia/' + s.ia;
+        t.appendChild(el('span', 'tile-num', s.num));
+        t.appendChild(el('span', 'tile-name', s.name));
+        t.appendChild(el('span', 'tile-tag', isBuilt ? (s.states.length || 1) + ' pg' : 'IA'));
+        grid.appendChild(t);
+      });
+      block.appendChild(grid);
+      cm.appendChild(block);
+    });
+
+    /* Sidebar toggle */
+    var toggle = document.getElementById('sidebarToggle');
+    var sbody = document.getElementById('sidebarBody');
+    toggle.addEventListener('click', function () {
+      var open = sbody.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    sbody.querySelectorAll('a.nav-item, a.nav-sub-link').forEach(function (link) {
+      link.addEventListener('click', function () { sbody.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); });
+    });
+  })();
+</script>
+
+</body>
+</html>

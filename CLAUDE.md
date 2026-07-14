@@ -49,6 +49,18 @@ Supporting architecture (serve Yemi; preconditions for the above; in MVP scope b
 
 ---
 
+## Wireframes
+
+*Stage 04 (in progress). A grey clickable prototype of the whole product in HTML, built from the IA Detail Layer. Nothing is invented here: text comes from each node's A-E SEO block, components from IA nodes, states from the node's IA "States" section, flow links from ia/docs/flows.md. A hole found while building is fixed in the IA first, then rendered. Grey contract only: no color, type, brand, icons, or shadows until Concept (stage 06), which colors COPIES in ui-visual/, never these source files. Full detail: wireframes/docs/screens.md (matrix), wireframes/docs/conventions.md (contract), wireframes/docs/critique.md (defect log).*
+
+**Etalon (working horse, locked Step 1): 4.0 Dashboard (wireframes/dashboard.html).** Maximum reuse: it sets the operator app shell (global nav + page frame, present on every operator screen) and the pulse card (score + interpretation + next action, reused on 4.1, 4.2, 9.0, 9.2), and carries the richest state set, so it fixes the state pattern for the whole product. Voice (05) and Concept (06) take the etalon from this file, they do not re-derive it.
+
+**First flow assembled (locked Step 1): Flow 1 (MAIN JOB, Priya) - run wellbeing without HR training:** Home, Sign up, onboarding wizard (Company setup, First program confirm, Invite team, Invite-send error), Dashboard, Team pulse, with Team roster as the recovery detour. The etalon is built first (Step 4), then its states (Step 5), then the rest of Flow 1 (Step 6); Flows 2 to 4 and the remaining sitemap roll out by subagent fan-out (Step 8).
+
+**Navigation is flow-first, from one source (wireframes/_nav.js):** an "All screens" index (wireframes/index.html) that doubles as the coverage map (built vs in-spec), a thin state panel on each screen, and flow entries. In the roadmap sidebar, Wireframes is one collapsed link on all non-wireframe pages and the expanded active group (Flow 1..N + All screens) only on wireframe pages. The shared grey stylesheet is wireframes/_wf.css, which inherits the IA B/W tokens and shell; stages 06 to 08 grow their own colored copies in ui-visual/, not this file.
+
+---
+
 ## Target Audience
 
 ### Operator (hero user - primary)
