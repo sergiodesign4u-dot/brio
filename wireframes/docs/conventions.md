@@ -21,11 +21,12 @@ The IA node pages (ia/*.html) already contain a black-and-white wireframe kit (t
 
 ## 3. Page anatomy (every screen file)
 
-Each screen file is thin: the shell comes from `_wf.css` and `_nav.js`, and only the screen body is unique.
+A wireframe screen page is a prototype screen, not a portfolio document and not a device mockup. It has no roadmap sidebar and no desktop or mobile frames. It is one responsive page that looks like the real product, in grey.
 
-1. **Roadmap sidebar** (portfolio nav): the same accordion sidebar as all stage pages, with Wireframes the expanded active group (Flow 1..N + All screens) and the earlier groups (Foundation, User Research, IA) each collapsed to one link. Markup and links come from `_nav.js`.
-2. **State panel** (`.wf-bar`, a thin bar at the top of `<main>`): the node number and name, the current state, chips linking the sibling states of the same screen, and a link back to the flow entry. Rendered from `_nav.js`. This is the prototype's flow-first nav, not a second product rail.
-3. **Screen body:** the product wireframe at real proportions, shown in two labelled viewports, §01 Desktop (`.wf-page`) and §02 Mobile 360 (`.wf-phone`), both grey, both semantic, both carrying the real `<a href>` links along the flow. Block priority is reasoned from the 360px baseline up; the desktop frame may use multi-column, the mobile frame stacks.
+1. **Prototype strip** (`.wf-bar`, sticky and full-bleed at the top, rendered from `_nav.js`): the node number and name, the current state, chips linking the sibling states of the same screen, and an All screens button back to `index.html` (the hub). No flow list here; flows live on the hub. This is the only prototype chrome.
+2. **The screen** (`.wf-screen`): one responsive grey page that fills the width and reflows with real viewport media queries, so resizing the browser is how you see mobile (there is no separate mobile file). It carries its own product chrome (a top app bar with the job tabs, which move to a bottom tab bar at 360) and a content area that goes from multi-column on desktop to a single column on mobile. Block priority is reasoned from the 360px baseline up. Semantic HTML, real controls, exactly one `<h1>`. It reads like a real product, only grey: the visible labels are real product copy, not "block" annotations, and zones are named with `aria-label` and headings, not meta tags.
+
+`index.html` is the one exception: it is the hub, so it keeps the roadmap sidebar (`body.has-rail`) as the bridge back to the rest of the project, and it holds the flow entries and the coverage map.
 
 ## 4. File naming
 
@@ -43,8 +44,8 @@ Each screen file is thin: the shell comes from `_wf.css` and `_nav.js`, and only
 
 ## 6. Navigation (flow-first)
 
-- The "All screens" index (wireframes/index.html) doubles as the coverage map (built vs still in spec); it plus the thin state panel plus the flow entries are all rendered from the single source wireframes/_nav.js.
-- No extra product-navigation rail inside the prototype; the portfolio roadmap sidebar is the only rail, and it must not fight the screen layout.
+- Screen pages carry no navigation rail. Navigation on a screen is the sticky top strip (the sibling-state chips plus the All screens button); the flow entries and the coverage map live on the hub, wireframes/index.html. All of it is rendered from the single source wireframes/_nav.js.
+- The hub (index.html) is the launcher and the coverage map (built vs still in spec); it keeps the roadmap sidebar (body.has-rail) as the only place with portfolio nav, the bridge back to the rest of the project.
 - A screen's primary action is a real `<a href>` to the next screen along ia/docs/flows.md; branches go both ways (a "no" leads somewhere real and back, a "yes" leads on); no dead ends anywhere.
 
 ## 7. SEO layout validation (layer 2)

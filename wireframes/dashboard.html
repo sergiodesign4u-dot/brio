@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Dashboard (4.0) - Score ready</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+
+    <nav class="wf-appbar" aria-label="Brio app">
+      <div class="wf-appbar-inner">
+        <span class="wf-brand">Brio</span>
+        <div class="wf-tabs">
+          <a class="wf-tab on" href="dashboard.html" aria-current="page">Dashboard</a>
+          <a class="wf-tab" href="program-library.html">Programs</a>
+          <a class="wf-tab" href="team-roster.html">Team</a>
+          <a class="wf-tab" href="share-owner.html">Owner</a>
+        </div>
+        <span class="sp"></span>
+        <a class="wf-settings" href="settings.html">Settings</a>
+      </div>
+    </nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Welcome back, Priya</p>
+        <h1>Your team pulse</h1>
+      </header>
+
+      <div class="wf-grid">
+
+        <section aria-label="Team pulse and next step">
+          <div class="wf-pulse">
+            <div class="read">Steady</div>
+            <p class="interp">The team is holding steady this week, in line with last.</p>
+            <div class="act-lbl">Suggested next step</div>
+            <a class="wf-btn solid" href="share-owner.html">Share this with your owner</a>
+          </div>
+          <div class="wf-btns" style="margin-top:16px;">
+            <a class="wf-btn" href="team-pulse.html">View full pulse</a>
+            <a class="wf-btn" href="program-library.html">Programs</a>
+          </div>
+        </section>
+
+        <aside aria-label="Trend, participation and privacy">
+          <div class="wf-card">
+            <h2>This week</h2>
+            <div class="wf-spark" aria-hidden="true">
+              <span class="bar" style="height:40%"></span><span class="bar" style="height:55%"></span><span class="bar" style="height:48%"></span><span class="bar hi" style="height:52%"></span><span class="bar hi" style="height:50%"></span>
+            </div>
+            <p class="wf-metric">72% <span>of the team answered</span></p>
+            <p class="wf-micro" style="margin-top:8px;">Holding steady over the last five cycles. Aggregate only, never who.</p>
+          </div>
+          <div class="wf-card">
+            <div class="wf-strip2">Aggregate only. You never see who answered.</div>
+            <a class="wf-micro" href="security-privacy.html" style="display:inline-block;margin-top:12px;">What your owner can and cannot see</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+    <footer class="wf-appfoot">
+      <div class="wf-appfoot-inner">
+        <a href="security-privacy.html">Privacy</a>
+        <a href="help.html">Help</a>
+      </div>
+    </footer>
+
+    <nav class="wf-tabbar" aria-label="Brio app tabs">
+      <a class="on" href="dashboard.html" aria-current="page">Dashboard</a>
+      <a href="program-library.html">Programs</a>
+      <a href="team-roster.html">Team</a>
+      <a href="share-owner.html">Owner</a>
+    </nav>
+
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>
+  window.WF_CUR = { node: '4.0', file: 'dashboard.html' };
+  (function () {
+    var WF = window.BRIO_WF;
+    var scr = WF.screens.find(function (s) { return s.num === WF_CUR.node; });
+    function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+    var bar = document.getElementById('wf-bar');
+    bar.appendChild(el('span', 'node', scr.num));
+    bar.appendChild(el('span', 'name', scr.name));
+    var cur = scr.states.find(function (st) { return st.f === WF_CUR.file; });
+    bar.appendChild(el('span', 'state', cur ? cur.s : ''));
+    var states = el('div', 'states');
+    scr.states.forEach(function (st) {
+      if (st.f === WF_CUR.file) { states.appendChild(el('span', 'wf-state-chip on', st.s)); }
+      else if (scr.status === 'built') { var a = el('a', 'wf-state-chip', st.s); a.href = st.f; states.appendChild(a); }
+      else { states.appendChild(el('span', 'wf-state-chip', st.s)); }
+    });
+    bar.appendChild(states);
+    var back = el('a', 'wf-back', 'All screens'); back.href = 'index.html'; bar.appendChild(back);
+  })();
+</script>
+
+</body>
+</html>
