@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Invite link expired (10.4) - Expired</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-badge { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1; margin: 0 auto 18px; }
+    .wf-badge.warn { background: none; color: var(--wf-t-hi); border: 1px dashed var(--wf-stroke); }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <div class="wf-badge warn" aria-hidden="true">!</div>
+        <h1 style="text-align:center;">This check-in link has expired</h1>
+        <p class="wf-lead" style="text-align:center;margin:10px auto 20px;">Check-in links are per cycle and expire when the cycle closes. Nothing personal is exposed, and nothing was recorded.</p>
+
+        <p class="wf-strip2" style="margin-bottom:22px;">Ask your operator to resend the check-in link. You cannot mint a new link yourself, because your operator controls invites.</p>
+
+        <form>
+          <label class="wf-field">
+            <span class="k">Have a fresh code?</span>
+            <input class="wf-input" type="text" placeholder="Enter the new join code" autocomplete="off" aria-label="Fresh join code">
+          </label>
+          <a class="wf-btn solid block" href="checkin-privacy.html">Continue</a>
+        </form>
+
+        <p class="wf-micro" style="text-align:center;margin-top:18px;">Not sure who to ask? Your operator is whoever shared this check-in with your team.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "10.4", file: "checkin-expired.html", shell: "employee" });</script>
+
+</body>
+</html>

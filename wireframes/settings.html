@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Settings shell (8.0) - Section index</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Acme Co.</p>
+        <h1>Settings</h1>
+        <p class="wf-lead">Your account and how Brio runs for your team.</p>
+        <p class="wf-micro" style="margin-top:6px;">Signed in as priya@acme.co</p>
+      </header>
+
+      <nav class="wf-list" aria-label="Settings sections" style="max-width:640px;margin-top:22px;">
+        <a class="wf-list-row" href="settings-plan.html">
+          <span class="who">Plan <small>Your tier, seats, and invoices</small></span>
+          <span class="wf-rowlink" aria-hidden="true">Open</span>
+        </a>
+        <a class="wf-list-row" href="settings-privacy.html">
+          <span class="who">Privacy center <small>What the owner can and cannot see</small></span>
+          <span class="wf-rowlink" aria-hidden="true">Open</span>
+        </a>
+        <a class="wf-list-row" href="settings-notifications.html">
+          <span class="who">Notifications <small>Reminders and digests</small></span>
+          <span class="wf-rowlink" aria-hidden="true">Open</span>
+        </a>
+        <a class="wf-list-row" href="settings-account.html">
+          <span class="who">Account <small>Name, email, password, sign out</small></span>
+          <span class="wf-rowlink" aria-hidden="true">Open</span>
+        </a>
+      </nav>
+
+      <div class="wf-strip2" style="max-width:640px;margin-top:16px;">Privacy center is the proof surface. It is where you can check, and show your team, exactly what the owner can and cannot see.</div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "8.0", file: "settings.html", shell: "operator" });</script>
+
+</body>
+</html>

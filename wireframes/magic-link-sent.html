@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Magic-link sent (2.2) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-badge { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; margin: 4px auto 18px; }
+    .wf-badge.ok { background: var(--wf-solid); color: var(--wf-solid-ink); }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow" style="text-align:center;">
+        <div class="wf-badge ok" aria-hidden="true">&#10003;</div>
+        <h1>Check your email</h1>
+        <p class="wf-lead" style="margin:8px auto 20px;">We sent a link to <strong>priya@acme.co</strong>. Open it to continue.</p>
+
+        <p class="wf-micro" style="margin-bottom:6px;">Open your email app to continue.</p>
+        <p class="wf-micro" style="margin-bottom:22px;">The link expires in about 15 minutes.</p>
+
+        <button class="wf-btn block" type="button">Didn't get it? Resend</button>
+
+        <p class="wf-micro" style="text-align:center;margin-top:18px;"><a href="login.html">Use a different email</a></p>
+        <p class="wf-micro" style="text-align:center;margin-top:10px;">Opened the link already? Continue to your <a href="dashboard.html">dashboard</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "2.2", file: "magic-link-sent.html", shell: "auth", authLabel: "Back to log in", authHref: "login.html" });</script>
+
+</body>
+</html>

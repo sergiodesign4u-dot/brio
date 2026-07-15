@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Answers to common Brio questions: getting set up, how privacy works, and billing. Search the help center or contact support if you are still stuck.">
+  <title>Brio - Wireframe: Help / FAQ (1.4)</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    /* Q and A rows built on the canonical wf-list (answers stay crawlable text) */
+    .wf-list-row.qa { display: block; }
+    .wf-list-row.qa .q { display: block; font-size: 14px; font-weight: 700; color: var(--wf-t-hi); }
+    .wf-list-row.qa .a { display: block; font-size: 13px; color: var(--wf-t-mid); line-height: 1.55; margin-top: 5px; }
+    .wf-search { display: flex; gap: 8px; }
+    .wf-search .wf-input { flex: 1; min-width: 0; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-mkt">
+
+        <section class="wf-hero" aria-label="Introduction">
+          <p class="wf-eyebrow">Help center</p>
+          <h1>How can we help?</h1>
+          <p class="wf-lead">The Brio help center answers the questions operators ask most: how to set up your first program and invite your team, how the aggregate-only privacy model protects individual answers, and how plans and billing work. Search for a topic, or browse the groups below. If you are still stuck, contact support and we will reply to your email, usually within one business day.</p>
+          <form class="wf-search" role="search" style="margin-top:22px;max-width:460px;">
+            <label class="wf-field" style="flex:1;margin-bottom:0;">
+              <span class="k" style="position:absolute;left:-9999px;">Search help</span>
+              <input class="wf-input" type="search" name="q" placeholder="Search help">
+            </label>
+            <button class="wf-btn" type="submit">Search</button>
+          </form>
+        </section>
+
+        <section id="setup" aria-label="Setting up Brio">
+          <h2>Setting up Brio</h2>
+          <div class="wf-list">
+            <div class="wf-list-row qa"><span class="q">How do I get started with Brio?</span><span class="a">Sign up, tell us your company size, and Brio pre-selects a first program for you; setup takes about five minutes.</span></div>
+            <div class="wf-list-row qa"><span class="q">How do I invite my team?</span><span class="a">From the Team tab, share an invite link or a join code; people can take their first check-in without creating an account.</span></div>
+            <div class="wf-list-row qa"><span class="q">How long does a check-in take?</span><span class="a">Under 30 seconds, one to three quick questions, with no account needed the first time.</span></div>
+          </div>
+        </section>
+
+        <section id="privacy" aria-label="Privacy and your data">
+          <h2>Privacy and your data</h2>
+          <div class="wf-list">
+            <div class="wf-list-row qa"><span class="q">Can my manager see my answer?</span><span class="a">No. Answers are only ever shown as a team aggregate of at least 5 people.</span></div>
+            <div class="wf-list-row qa"><span class="q">What if my team is small?</span><span class="a">If fewer than 5 answer, no results are shown at all, so no one can be singled out.</span></div>
+            <div class="wf-list-row qa"><span class="q">Do you sell my data?</span><span class="a">No. Individual data is never shown or sold; the subscription pays for the aggregate.</span></div>
+          </div>
+          <p class="wf-micro" style="margin-top:12px;">Read the full explainer on <a href="security-privacy.html">how privacy works</a>.</p>
+        </section>
+
+        <section id="billing" aria-label="Plans and billing">
+          <h2>Plans and billing</h2>
+          <div class="wf-list">
+            <div class="wf-list-row qa"><span class="q">Is there a free plan?</span><span class="a">Yes. The free plan covers up to 10 people with one active program and a basic weekly check-in.</span></div>
+            <div class="wf-list-row qa"><span class="q">What do I get when I upgrade?</span><span class="a">Paid plans add the full program library, trends, and the owner dashboard; pricing is per seat.</span></div>
+            <div class="wf-list-row qa"><span class="q">Can I change or cancel anytime?</span><span class="a">Yes, from Settings then Plan; changes take effect from the next billing cycle.</span></div>
+          </div>
+          <p class="wf-micro" style="margin-top:12px;">See the full breakdown on <a href="pricing.html">pricing</a>.</p>
+        </section>
+
+        <section id="contact" aria-label="Still need a hand?">
+          <h2>Still need a hand?</h2>
+          <div class="wf-strip2" style="text-align:left;padding:16px;">Did not find your answer? <a href="contact.html">Contact support</a> and we will reply to your email, usually within one business day.</div>
+        </section>
+
+        <section class="wf-cta-final" aria-label="Get started">
+          <h2>Start free in five minutes</h2>
+          <p class="wf-body" style="margin-bottom:16px;">No credit card. Free for up to 10 people.</p>
+          <a class="wf-btn solid" href="signup.html">Start free</a>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "1.4", file: "help.html", shell: "public" });</script>
+
+</body>
+</html>

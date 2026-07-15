@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Program library (5.0) - Loading</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 22px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Programs</p>
+        <h1>Programs</h1>
+        <p class="wf-lead">Pick a program. Brio runs it and reads the team pulse for you.</p>
+      </header>
+
+      <section aria-label="Loading the program library" aria-busy="true">
+        <div class="pg-grid">
+          <article class="wf-progcard">
+            <div class="wf-skel w40"></div>
+            <div class="wf-skel w70" style="margin-top:12px;height:20px;"></div>
+            <div class="wf-skel w50"></div>
+            <div class="wf-skel"></div>
+            <div class="wf-skel w70"></div>
+          </article>
+          <article class="wf-progcard">
+            <div class="wf-skel w40"></div>
+            <div class="wf-skel w70" style="margin-top:12px;height:20px;"></div>
+            <div class="wf-skel w50"></div>
+            <div class="wf-skel"></div>
+            <div class="wf-skel w70"></div>
+          </article>
+          <article class="wf-progcard">
+            <div class="wf-skel w40"></div>
+            <div class="wf-skel w70" style="margin-top:12px;height:20px;"></div>
+            <div class="wf-skel w50"></div>
+            <div class="wf-skel"></div>
+            <div class="wf-skel w70"></div>
+          </article>
+          <article class="wf-progcard">
+            <div class="wf-skel w40"></div>
+            <div class="wf-skel w70" style="margin-top:12px;height:20px;"></div>
+            <div class="wf-skel w50"></div>
+            <div class="wf-skel"></div>
+            <div class="wf-skel w70"></div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "5.0", file: "program-library-loading.html", shell: "operator", tab: "Programs" });</script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Invalid or expired link (2.3) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-badge { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; margin: 4px auto 18px; }
+    .wf-badge.warn { border: 2px solid var(--wf-stroke); color: var(--wf-t-hi); }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow" style="text-align:center;">
+        <div class="wf-badge warn" aria-hidden="true">!</div>
+        <h1>This link has expired</h1>
+        <p class="wf-lead" style="margin:8px auto 8px;">For your security, sign-in links expire after about 15 minutes and can be used only once.</p>
+        <p class="wf-lead" style="margin:0 auto 22px;">Your account is fine and nothing was lost.</p>
+
+        <a class="wf-btn solid block" href="login.html">Request a new link</a>
+
+        <p class="wf-micro" style="text-align:center;margin-top:18px;">Still stuck? <a href="contact.html">Contact support</a></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "2.3", file: "link-expired.html", shell: "auth", authLabel: "Back to log in", authHref: "login.html" });</script>
+
+</body>
+</html>

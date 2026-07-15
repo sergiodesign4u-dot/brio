@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Check-in setup (5.2) - Saving</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .ci-box { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); padding: 18px; background: var(--wf-panel-2); margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="program-library.html">Programs</a> / <a href="program-detail.html">Steady Weeks</a> / Check-in</p>
+        <h1>Set up the check-in</h1>
+        <p class="wf-lead">For Steady Weeks. Pick 1 to 3 questions the team answers each week, in under 30 seconds.</p>
+      </header>
+
+      <div class="wf-grid" aria-busy="true">
+        <section aria-label="Saving the check-in">
+          <div class="ci-box">
+            <div class="wf-skel w40"></div>
+            <div class="wf-skel"></div>
+            <div class="wf-skel w70"></div>
+            <div class="wf-skel"></div>
+            <div class="wf-skel w70"></div>
+          </div>
+          <div class="ci-box">
+            <div class="wf-skel w40"></div>
+            <div class="wf-skel w50"></div>
+          </div>
+        </section>
+        <aside aria-label="Saving">
+          <div class="ci-box">
+            <div class="wf-skel w50"></div>
+            <div class="wf-skel"></div>
+            <div class="wf-skel w70"></div>
+          </div>
+          <div class="ci-box">
+            <div class="wf-skel w40"></div>
+            <div class="wf-skel tall"></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="wf-card">
+        <div class="wf-btns">
+          <button class="wf-btn solid" type="button" disabled>Saving...</button>
+          <a class="wf-btn" href="program-detail.html">Back to program</a>
+        </div>
+        <p class="wf-micro" style="margin-top:10px;">Applying your check-in. This takes a moment.</p>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "5.2", file: "check-in-setup-loading.html", shell: "operator", tab: "Programs" });</script>
+
+</body>
+</html>

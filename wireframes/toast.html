@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Toast / inline notification (11.4) - Component</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    /* Feedback marks: meaning is carried by shape and fill, never color alone.
+       Success is a solid mark, error is a dashed mark, info is a thin outline mark. */
+    .fb-mark { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 100px; font-size: 13px; font-weight: 700; flex: 0 0 auto; }
+    .fb-mark.ok { background: var(--wf-solid); color: var(--wf-solid-ink); border: 1px solid var(--wf-solid); }
+    .fb-mark.err { background: none; color: var(--wf-t-2); border: 1px dashed var(--wf-stroke); }
+    .fb-mark.info { background: none; color: var(--wf-t-2); border: 1px solid var(--wf-stroke); }
+    /* Toast: a compact, non-blocking card. On desktop it sits in a corner stack; here it
+       is shown inline for documentation. */
+    .fb-toast { display: flex; align-items: flex-start; gap: 12px; max-width: 400px; }
+    .fb-toast .msg { flex: 1; min-width: 0; }
+    .fb-toast .msg .t { font-size: 14px; color: var(--wf-t-2); }
+    .fb-toast .msg .d { font-size: 12px; color: var(--wf-t-mid); margin-top: 2px; }
+    .fb-x { background: none; border: none; color: var(--wf-t-mid); font-size: 16px; line-height: 1; cursor: pointer; padding: 0 2px; }
+    .fb-x:hover { color: var(--wf-t-hi); }
+    .fb-timer { height: 2px; background: var(--wf-line); border-radius: 2px; margin-top: 12px; }
+    .fb-timer span { display: block; height: 100%; width: 40%; background: var(--wf-stroke); border-radius: 2px; }
+    .fb-note { font-size: 12px; color: var(--wf-t-mid); margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Component</p>
+        <h1>Feedback and notifications</h1>
+        <p class="wf-lead" style="margin-top:6px;">Three feedback surfaces, one for each job. Each is marked by shape and text, never by color alone.</p>
+      </header>
+
+      <section aria-label="Toast" style="margin-top:26px;">
+        <h2>Toast</h2>
+        <p class="fb-note">Non-blocking, transient, auto-dismisses. For quick confirmations and light, recoverable failures (sent, saved, copied). Announced with aria-live.</p>
+
+        <div class="wf-card" role="status" aria-live="polite">
+          <div class="fb-toast">
+            <span class="fb-mark ok" aria-hidden="true">&#10003;</span>
+            <div class="msg">
+              <p class="t">Invite sent</p>
+              <p class="d">3 teammates invited</p>
+            </div>
+            <button class="fb-x" type="button" aria-label="Dismiss">&#215;</button>
+          </div>
+          <div class="fb-timer" aria-hidden="true"><span></span></div>
+        </div>
+
+        <div class="wf-card" role="alert" aria-live="assertive">
+          <div class="fb-toast">
+            <span class="fb-mark err" aria-hidden="true">!</span>
+            <div class="msg">
+              <p class="t">Could not send</p>
+              <p class="d">Check the address and try again.</p>
+            </div>
+            <button class="wf-btn" type="button">Retry</button>
+            <button class="fb-x" type="button" aria-label="Dismiss">&#215;</button>
+          </div>
+        </div>
+
+        <div class="wf-card" role="status" aria-live="polite">
+          <div class="fb-toast">
+            <span class="fb-mark ok" aria-hidden="true">&#10003;</span>
+            <div class="msg">
+              <p class="t">Program ended</p>
+            </div>
+            <button class="wf-btn" type="button">Undo</button>
+            <button class="fb-x" type="button" aria-label="Dismiss">&#215;</button>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Inline message" style="margin-top:26px;">
+        <h2>Inline message</h2>
+        <p class="fb-note">Non-blocking but persistent, next to the thing that failed, keeping the form filled. For errors the user must act on in place, such as an invite-send or submit failure.</p>
+        <p class="wf-err">Some invites did not send. Your join link and code still work, so this never blocks you.</p>
+      </section>
+
+      <section aria-label="Dialog" style="margin-top:26px;">
+        <h2>Dialog</h2>
+        <p class="fb-note">Blocking and modal, until dismissed. For decisions and confirmations, such as ending a program, upgrading, or cookie consent.</p>
+        <div class="wf-dialog" role="dialog" aria-modal="false" aria-labelledby="d-title" style="margin:0;">
+          <h2 id="d-title">End this program?</h2>
+          <p class="wf-micro">The team stops checking in for this program. You can start it again later.</p>
+          <div class="wf-btns" style="margin-top:18px;">
+            <button class="wf-btn solid" type="button">End program</button>
+            <button class="wf-btn" type="button">Keep running</button>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="When to use which" style="margin-top:26px;">
+        <h2>When to use which</h2>
+        <div class="wf-list">
+          <div class="wf-list-row"><span class="who">Toast <small>Non-blocking, transient. Sent, saved, copied, and light failures.</small></span><span class="wf-status">aria-live</span></div>
+          <div class="wf-list-row"><span class="who">Inline message <small>Persistent, in the flow, next to the failure. Form stays filled.</small></span><span class="wf-status">in place</span></div>
+          <div class="wf-list-row"><span class="who">Dialog <small>Blocking, modal. Decisions and confirmations.</small></span><span class="wf-status">role=dialog</span></div>
+        </div>
+        <p class="wf-micro" style="margin-top:14px;">Back to <a href="dashboard.html">Dashboard</a>, or see the <a href="index.html">all screens</a> hub.</p>
+      </section>
+
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "11.4", file: "toast.html", shell: "public" });</script>
+
+</body>
+</html>

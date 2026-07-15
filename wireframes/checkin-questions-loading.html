@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Questions (10.2) - Submitting</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <h1>Sending your answer</h1>
+        <p class="wf-lead" style="margin-bottom:20px;">This takes a moment. It finishes on its own, and your answer is only recorded once.</p>
+
+        <div class="wf-skel tall" aria-hidden="true"></div>
+
+        <p style="margin:20px 0;"><button class="wf-btn solid block" type="button" disabled aria-busy="true">Sending...</button></p>
+
+        <p class="wf-micro" style="margin-bottom:14px;">On success you go to the confirmation. If it does not go through, your answers are kept so you can retry.</p>
+
+        <div class="wf-btns">
+          <a class="wf-btn" href="checkin-complete.html">Continue to confirmation</a>
+          <a class="wf-btn" href="checkin-submit-error.html">If sending fails</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "10.2", file: "checkin-questions-loading.html", shell: "employee" });</script>
+
+</body>
+</html>

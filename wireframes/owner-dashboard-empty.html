@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Owner dashboard (9.0) - Score not ready</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .owner-col { max-width: 560px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="owner-col">
+        <header>
+          <p class="wf-eyebrow">Acme Co. - Owner view</p>
+          <h1>A score is not available yet</h1>
+        </header>
+
+        <div class="wf-state" style="margin-top:16px;">
+          <div class="n">Waiting for the privacy minimum</div>
+          <p class="sub">The privacy minimum of 5 responses has not been met, so no score is shown yet. There is no partial number and no individual data.</p>
+        </div>
+
+        <div class="wf-card" style="margin-top:16px;">
+          <div class="wf-card-h">What I can and cannot see</div>
+          <div class="wf-list" style="margin-bottom:12px;">
+            <div class="wf-list-row"><span class="who">Can see<small>The aggregate score, the trend, participation as a share, once 5 people have answered</small></span></div>
+          </div>
+          <div class="wf-list">
+            <div class="wf-list-row"><span class="who">Cannot see<small>Individual responses, names, who answered, any drill-down, or any sub-group below 5</small></span></div>
+          </div>
+        </div>
+
+        <p class="wf-micro" style="margin-top:16px;">This read takes under two minutes. See the latest <a href="owner-digest.html">monthly digest</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "9.0", file: "owner-dashboard-empty.html", shell: "owner" });</script>
+
+</body>
+</html>

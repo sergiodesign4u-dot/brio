@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Invite owner + upgrade (7.1) - Invite sent</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-mark { width: 46px; height: 46px; border: 2px solid var(--wf-stroke); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--wf-t-hi); margin: 0 auto 16px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow" style="text-align:center;">
+        <header>
+          <div class="wf-mark" aria-hidden="true">&#10003;</div>
+          <p class="wf-eyebrow">Owner</p>
+          <h1>Invite sent</h1>
+          <p class="wf-lead" style="margin:8px auto 0;">Your owner will get a link to their aggregate-only dashboard. They see a team-level signal only, never any individual's answers.</p>
+        </header>
+
+        <div class="wf-btns" style="flex-direction:column;align-items:stretch;margin-top:22px;">
+          <a class="wf-btn solid block" href="owner-dashboard.html">Open the owner dashboard</a>
+          <a class="wf-btn block" href="owner-digest.html">Preview the monthly digest they receive</a>
+          <a class="wf-btn block" href="dashboard.html">Back to your dashboard</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "7.1", file: "invite-owner-sent.html", shell: "operator", tab: "Owner" });</script>
+
+</body>
+</html>

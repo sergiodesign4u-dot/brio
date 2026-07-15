@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Questions (10.2) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <p class="wf-eyebrow" aria-live="polite">Question 1 of 1</p>
+        <h1 id="q1-label">How has work felt this week?</h1>
+
+        <form style="margin-top:20px;">
+          <fieldset aria-labelledby="q1-label" style="border:0;padding:0;margin:0 0 8px;">
+            <label class="wf-radio"><input type="radio" name="q1" value="rough"> Rough</label>
+            <label class="wf-radio"><input type="radio" name="q1" value="okay"> Okay</label>
+            <label class="wf-radio"><input type="radio" name="q1" value="good"> Good</label>
+          </fieldset>
+          <a class="wf-btn solid block" href="checkin-questions-loading.html">Submit</a>
+        </form>
+
+        <p class="wf-strip2" style="margin-top:22px;">Your answer joins a team aggregate. A score is shown only after at least 5 people answer, and there is no live count.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "10.2", file: "checkin-questions.html", shell: "employee" });</script>
+
+</body>
+</html>

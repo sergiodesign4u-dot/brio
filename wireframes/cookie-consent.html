@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Cookie consent (11.3) - Banner</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    /* First-visit consent banner: a non-modal region pinned to the page bottom. It does
+       not trap focus or wall the page. Reject is as prominent as Accept (both plain
+       buttons, equal weight), per EU law. Non-essential cookies do not load until a choice. */
+    .cookie-banner { position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; background: var(--wf-panel-2); border-top: 1px solid var(--wf-edge); }
+    .cookie-banner-inner { max-width: 1140px; margin: 0 auto; padding: 16px 20px; display: flex; align-items: center; gap: 16px 22px; flex-wrap: wrap; }
+    .cookie-banner .say { font-size: 13px; color: var(--wf-t); flex: 1; min-width: 220px; }
+    .cookie-banner .acts { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .cookie-banner a:not(.wf-btn) { color: var(--wf-t); }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-mkt">
+        <section class="wf-hero" aria-label="Introduction">
+          <p class="wf-eyebrow">Employee wellbeing, without surveillance</p>
+          <h1>Employee wellbeing for teams with no HR</h1>
+          <p class="wf-lead">Brio gives whoever got handed people work a guided way to run real wellbeing, and gives the owner honest team-level proof. Individual answers are never shown to anyone. This page shows the cookie consent banner you see on your first visit, before any non-essential cookie loads.</p>
+        </section>
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<aside class="cookie-banner" role="region" aria-label="Cookie consent">
+  <div class="cookie-banner-inner">
+    <p class="say">Brio uses essential cookies to run the site. With your consent we also use analytics to improve it. We never sell your data. <a href="legal.html">Read the Cookie Policy</a>.</p>
+    <div class="acts">
+      <!-- Reject and Accept at equal prominence (same style), on the first layer. -->
+      <a class="wf-btn" href="home.html">Reject all</a>
+      <a class="wf-btn" href="home.html">Accept all</a>
+      <a class="wf-btn" href="cookie-consent-manage.html">Manage</a>
+    </div>
+    <p class="wf-micro" style="flex-basis:100%;margin-top:4px;">US residents: <a href="legal.html">Do Not Sell or Share My Personal Information</a>. We honor Global Privacy Control (GPC) signals.</p>
+  </div>
+</aside>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "11.3", file: "cookie-consent.html", shell: "public" });</script>
+
+</body>
+</html>

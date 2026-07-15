@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Already submitted (10.5) - Done</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-badge { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1; margin: 0 auto 18px; }
+    .wf-badge.ok { background: var(--wf-solid); color: var(--wf-solid-ink); border: 1px solid var(--wf-solid); }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow" style="text-align:center;">
+        <div class="wf-badge ok" aria-hidden="true">&#10003;</div>
+        <h1>You have already checked in</h1>
+        <p class="wf-lead" style="margin:10px auto 20px;">You are done for this cycle.</p>
+
+        <p class="wf-strip2" style="text-align:left;">Your earlier answer is already in your team's aggregate. No one is counted twice, and nothing individual is shown.</p>
+
+        <p class="wf-micro" style="margin-top:18px;">You will be invited again next cycle.</p>
+        <p class="wf-micro" style="margin-top:14px;">You can close this tab. Want to read more? <a href="security-privacy.html">How your privacy is protected</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "10.5", file: "checkin-already.html", shell: "employee" });</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="How Brio handles your data: employee wellbeing answers are aggregate-only, never shown per individual. Read Brio's privacy policy.">
+  <title>Brio - Wireframe: Legal documents (1.6) - Privacy Policy</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-switch { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 14px; }
+    .wf-switch a { font-size: 12px; color: var(--wf-t-mid); text-decoration: none; border: 1px solid var(--wf-edge); border-radius: 100px; padding: 4px 12px; }
+    .wf-switch a:hover { color: var(--wf-t-hi); border-color: var(--wf-stroke); }
+    .wf-switch a.on { color: var(--wf-solid-ink); background: var(--wf-solid); border-color: var(--wf-solid); font-weight: 700; }
+    .wf-updated { font-size: 12px; color: var(--wf-t-lo); font-family: ui-monospace, Menlo, monospace; }
+    .wf-legal { display: grid; grid-template-columns: 220px 1fr; gap: 30px; align-items: start; margin-top: 24px; }
+    @media (max-width: 720px) { .wf-legal { grid-template-columns: 1fr; gap: 18px; } }
+    .wf-toc { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); padding: 16px; background: var(--wf-panel-2); }
+    @media (min-width: 721px) { .wf-toc { position: sticky; top: 60px; } }
+    .wf-toc h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wf-t-lo); margin-bottom: 10px; }
+    .wf-toc a { display: block; font-size: 13px; color: var(--wf-t-mid); text-decoration: none; padding: 5px 0; }
+    .wf-toc a:hover { color: var(--wf-t-hi); }
+    .wf-doc section { margin-bottom: 26px; }
+    .wf-doc h2 { font-size: 16px; color: var(--wf-t-hi); margin-bottom: 8px; }
+    .wf-doc p { font-size: 14px; color: var(--wf-t-mid); line-height: 1.6; }
+    .wf-pending { font-size: 12px; color: var(--wf-t-lo); border-left: 2px solid var(--wf-edge); padding-left: 9px; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Legal</p>
+        <h1>Privacy Policy</h1>
+        <nav class="wf-switch" aria-label="Legal documents">
+          <a class="on" href="legal.html" aria-current="page">Privacy Policy</a>
+          <a href="legal.html">Terms of Service</a>
+          <a href="legal.html">Cookie Policy</a>
+        </nav>
+        <p class="wf-updated">Last updated: pending legal review</p>
+      </header>
+
+      <div class="wf-legal">
+        <nav class="wf-toc" aria-label="On this page">
+          <h2>On this page</h2>
+          <a href="#collect">What information we collect</a>
+          <a href="#answers">How wellbeing answers are handled</a>
+          <a href="#use">How we use information</a>
+          <a href="#rights">Your rights</a>
+          <a href="#retention">Data retention and security</a>
+          <a href="#contact">How to contact us</a>
+        </nav>
+
+        <div class="wf-doc">
+          <section id="collect" aria-label="What information we collect">
+            <h2>What information we collect</h2>
+            <p>This section will describe the account and company information Brio collects to run the service, and the wellbeing check-in responses collected from employees.</p>
+            <p class="wf-pending">Final wording is pending legal review.</p>
+          </section>
+
+          <section id="answers" aria-label="How wellbeing answers are handled">
+            <h2>How wellbeing answers are handled</h2>
+            <p>Employee wellbeing answers are aggregate only. No score is shown until at least five people have answered, there is no live count while a check-in is open, and individual data is never shown to a manager or the owner, and is never sold.</p>
+            <p class="wf-pending">Consistent with the Security and privacy page; final wording is pending legal review.</p>
+          </section>
+
+          <section id="use" aria-label="How we use information">
+            <h2>How we use information</h2>
+            <p>This section will describe how Brio uses account and aggregate information to provide the service, and the lawful basis for processing.</p>
+            <p class="wf-pending">Final wording is pending legal review.</p>
+          </section>
+
+          <section id="rights" aria-label="Your rights">
+            <h2>Your rights</h2>
+            <p>This section will describe your rights of access and deletion, including erasure of individual responses, and GDPR and UK GDPR provisions for European users.</p>
+            <p class="wf-pending">Final wording is pending legal review.</p>
+          </section>
+
+          <section id="retention" aria-label="Data retention and security">
+            <h2>Data retention and security</h2>
+            <p>This section will describe how long data is retained, data residency, and the security measures that protect it.</p>
+            <p class="wf-pending">Final wording is pending legal review.</p>
+          </section>
+
+          <section id="contact" aria-label="How to contact us">
+            <h2>How to contact us</h2>
+            <p>Questions about this policy can be sent to Brio support. See the <a href="contact.html">Contact page</a> for how to reach us.</p>
+            <p class="wf-pending">Final contact details are pending.</p>
+          </section>
+
+          <div class="wf-card">
+            <div class="wf-card-h">Cookie settings</div>
+            <p class="wf-body" style="margin-bottom:14px;">You can change your cookie choices at any time.</p>
+            <a class="wf-btn" href="cookie-consent.html">Manage cookie settings</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "1.6", file: "legal.html", shell: "public" });</script>
+
+</body>
+</html>

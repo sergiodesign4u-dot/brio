@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Company setup (3.0) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio setup"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <p class="wf-eyebrow">Step 1 of 3</p>
+        <h1>Set up your company</h1>
+        <p class="wf-lead" style="margin-bottom:24px;">This takes about a minute. Your company size lets Brio recommend the right first program, so you do not have to decide alone.</p>
+
+        <form>
+          <label class="wf-field">
+            <span class="k">Company name</span>
+            <input class="wf-input" placeholder="Acme Co." aria-label="Company name">
+          </label>
+
+          <div class="wf-field">
+            <span class="k">Company size</span>
+            <label class="wf-radio on"><input type="radio" name="size" checked> 10 to 24 people</label>
+            <label class="wf-radio"><input type="radio" name="size"> 25 to 49 people</label>
+            <label class="wf-radio"><input type="radio" name="size"> 50 to 99 people</label>
+            <label class="wf-radio"><input type="radio" name="size"> 100 to 200 people</label>
+          </div>
+
+          <a class="wf-btn solid block" href="onboarding-program.html">Continue</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "3.0", file: "onboarding-company.html", shell: "wizard", step: "Step 1 of 3" });</script>
+
+</body>
+</html>

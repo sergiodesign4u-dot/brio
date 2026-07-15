@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Submit error (10.6) - Submit failed</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-badge { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1; margin: 0 auto 18px; }
+    .wf-badge.warn { background: none; color: var(--wf-t-hi); border: 1px dashed var(--wf-stroke); }
+    .wf-saved { display: inline-block; font-size: 11px; color: var(--wf-t-hi); border: 1px solid var(--wf-stroke); border-radius: 100px; padding: 3px 12px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <div class="wf-badge warn" aria-hidden="true">!</div>
+        <h1 style="text-align:center;">We could not send your answers</h1>
+        <p class="wf-lead" style="text-align:center;margin:10px auto 20px;">This looks like a connection problem, or something on our side. It was not anything you did.</p>
+
+        <p class="wf-strip2" style="margin-bottom:14px;">Your answers are saved on this screen. Nothing was lost, and you will not have to answer again.</p>
+        <p style="text-align:center;margin-bottom:22px;"><span class="wf-saved">Answers saved</span></p>
+
+        <a class="wf-btn solid block" href="checkin-questions.html">Try again</a>
+        <p class="wf-micro" style="text-align:center;margin-top:16px;">Still not working? Give it a moment and try again. Your answers stay saved, so you can come back to this link.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "10.6", file: "checkin-submit-error.html", shell: "employee" });</script>
+
+</body>
+</html>

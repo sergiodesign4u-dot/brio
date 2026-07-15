@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Threshold alert (4.2) - Active alert</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="dashboard.html">Dashboard</a> / Alert</p>
+        <h1>What changed</h1>
+      </header>
+
+      <div class="wf-alert" role="status">
+        <span class="tag">Alert</span>
+        <span>The team pulse has dropped. Here is what changed and one step to take.</span>
+      </div>
+
+      <div class="wf-grid">
+        <section aria-label="What dropped and what it means">
+          <div class="wf-card">
+            <h2>What dropped</h2>
+            <p class="wf-metric" style="margin-bottom:12px;">Steady to Low <span>over the last two cycles</span></p>
+            <div class="wf-spark" style="height:60px;" aria-hidden="true">
+              <span class="bar hi" style="height:80%"></span><span class="bar hi" style="height:76%"></span><span class="bar" style="height:64%"></span><span class="bar" style="height:52%"></span><span class="bar" style="height:40%"></span><span class="bar" style="height:34%"></span>
+            </div>
+            <p class="wf-micro">Aggregate only, never who. A team-level move, not a read on any one person.</p>
+          </div>
+
+          <div class="wf-card">
+            <h2>What this means</h2>
+            <p class="wf-lead">The team is dipping as a group this fortnight. This is a signal to check in with everyone, not a read on any individual, and it is not a diagnosis of anyone. Acting early is the point: a short, warm message to the whole team usually helps.</p>
+          </div>
+        </section>
+
+        <aside aria-label="Do this next">
+          <div class="wf-card">
+            <h2>Do this next</h2>
+            <div class="wf-btns" style="flex-direction:column;align-items:stretch;">
+              <a class="wf-btn solid block" href="program-detail.html">See the program that feeds this</a>
+              <a class="wf-btn block" href="team-pulse.html">Review the full pulse</a>
+            </div>
+            <p class="wf-micro" style="margin-top:12px;">This signal comes from <a href="program-detail.html">Steady Weeks</a>, your weekly Mental health check-in.</p>
+          </div>
+          <div class="wf-card">
+            <div class="wf-strip2">This alert never names or points at an individual. It reports a team-level move only.</div>
+            <a class="wf-micro" href="security-privacy.html" style="display:inline-block;margin-top:12px;">What your owner can and cannot see</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "4.2", file: "threshold-alert.html", shell: "operator", tab: "Dashboard" });</script>
+
+</body>
+</html>

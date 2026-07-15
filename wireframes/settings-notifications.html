@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Notifications (8.3) - Reminders and digests</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    button.wf-status { background: none; cursor: pointer; font-family: inherit; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="settings.html">Settings</a></p>
+        <h1>Notifications</h1>
+        <p class="wf-lead">Decide what Brio sends and how often.</p>
+        <p class="wf-micro" style="margin-top:6px;">Channel: email. Slack is a later phase.</p>
+      </header>
+
+      <div class="wf-list" style="max-width:720px;margin-top:22px;" role="group" aria-label="Notification settings">
+        <div class="wf-list-row">
+          <span class="who">Check-in reminders <small>A gentle nudge so the team completes the check-in. Weekly, sent Mondays.</small></span>
+          <button class="wf-status on" type="button" role="switch" aria-checked="true">On</button>
+        </div>
+        <div class="wf-list-row">
+          <span class="who">Weekly team digest, to you <small>Your weekly summary of the team pulse.</small></span>
+          <button class="wf-status on" type="button" role="switch" aria-checked="true">On</button>
+        </div>
+        <div class="wf-list-row">
+          <span class="who">Monthly owner digest <small>The monthly email Marcus receives, aggregate only.</small></span>
+          <button class="wf-status on" type="button" role="switch" aria-checked="true">On</button>
+        </div>
+        <div class="wf-list-row">
+          <span class="who">Threshold alert <small>Emails you when the team pulse drops meaningfully.</small></span>
+          <button class="wf-status on" type="button" role="switch" aria-checked="true">On</button>
+        </div>
+      </div>
+
+      <div class="wf-strip2" style="max-width:720px;margin-top:16px;">Notifications never include individual data, only aggregate signals.</div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "8.3", file: "settings-notifications.html", shell: "operator" });</script>
+
+</body>
+</html>

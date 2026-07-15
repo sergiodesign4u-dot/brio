@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: First program confirm (3.1) - Pre-select</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio setup"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <p class="wf-eyebrow">Step 2 of 3</p>
+        <h1>Finding your program</h1>
+        <p class="wf-lead" style="margin-bottom:22px;">Picking a starting program for a team of 10 to 24.</p>
+
+        <div class="wf-progcard" aria-busy="true">
+          <div class="wf-skel w40"></div>
+          <div class="wf-skel tall" style="width:60%;margin-top:12px;"></div>
+          <div class="wf-skel w50"></div>
+          <div class="wf-skel w70"></div>
+          <div class="wf-skel w70"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "3.1", file: "onboarding-program-loading.html", shell: "wizard", step: "Step 2 of 3" });</script>
+
+</body>
+</html>

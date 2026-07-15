@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Program library (5.0) - First run empty</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .pg-facets { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 18px; }
+    button.wf-tag { cursor: pointer; font-family: inherit; }
+    .wf-tag.on { background: var(--wf-solid); color: var(--wf-solid-ink); border-color: var(--wf-solid); }
+    .pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .wf-progcard .wf-btns { margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Programs</p>
+        <h1>Programs</h1>
+        <p class="wf-lead">Pick a program. Brio runs it and reads the team pulse for you.</p>
+      </header>
+
+      <section aria-label="No active program yet">
+        <div class="wf-state" style="margin-top:22px;">
+          <div class="n">No active program yet</div>
+          <p class="sub">Start with the one we recommend for your size. You can always browse the four categories and switch later.</p>
+          <div class="wf-btns" style="justify-content:center;">
+            <a class="wf-btn solid" href="program-detail.html">Start with Steady Weeks</a>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Recommended for your size">
+        <article class="wf-progcard" style="margin-top:16px;">
+          <span class="wf-tag">Recommended for your size</span>
+          <div class="cat" style="margin-top:12px;">Mental health</div>
+          <div class="title">Steady Weeks</div>
+          <div class="meta">Weekly check-in, 1 question, runs continuously</div>
+          <p class="desc">A gentle weekly pulse on how the team is really doing. You get a plain-language read; no individual answers are ever shown to anyone.</p>
+          <div class="wf-btns"><a class="wf-btn solid" href="program-detail.html">Select</a></div>
+        </article>
+      </section>
+
+      <section aria-label="Browse by category">
+        <div class="pg-facets" role="group" aria-label="Filter by category">
+          <button class="wf-tag on" type="button" aria-pressed="true">All</button>
+          <button class="wf-tag" type="button" aria-pressed="false">Mental health</button>
+          <button class="wf-tag" type="button" aria-pressed="false">Physical</button>
+          <button class="wf-tag" type="button" aria-pressed="false">Financial</button>
+          <button class="wf-tag" type="button" aria-pressed="false">Social</button>
+        </div>
+        <div class="pg-grid">
+          <article class="wf-progcard">
+            <div class="cat">Physical</div>
+            <div class="title">Move More</div>
+            <div class="meta">Weekly check-in, 1 question</div>
+            <p class="desc">Small movement goals the team shares in aggregate. Encouragement, never a leaderboard.</p>
+            <div class="wf-btns"><a class="wf-btn" href="program-detail.html">Select</a></div>
+          </article>
+          <article class="wf-progcard">
+            <div class="cat">Financial</div>
+            <div class="title">Money Calm</div>
+            <div class="meta">Weekly check-in, 1 question</div>
+            <p class="desc">A low-pressure read on how settled the team feels about money stress this week.</p>
+            <div class="wf-btns"><a class="wf-btn" href="program-detail.html">Select</a></div>
+          </article>
+          <article class="wf-progcard">
+            <div class="cat">Social</div>
+            <div class="title">Team Ties</div>
+            <div class="meta">Weekly check-in, 1 question</div>
+            <p class="desc">A sense of how connected people feel to the team, reported as a share, never as who.</p>
+            <div class="wf-btns"><a class="wf-btn" href="program-detail.html">Select</a></div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "5.0", file: "program-library-empty.html", shell: "operator", tab: "Programs" });</script>
+
+</body>
+</html>

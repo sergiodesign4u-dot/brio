@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: 500 Server error (11.1) - Self-contained</title>
+  <link rel="stylesheet" href="_wf.css">
+  <!-- HTTP status: the server / edge must serve this page with a real HTTP 500.
+       Backend-independent and self-contained on purpose: no _nav.js, no render,
+       no app data, no external assets. It must render during an outage. -->
+  <style>
+    .wf-sys { min-height: 100vh; display: flex; flex-direction: column; }
+    .wf-sys-head { border-bottom: 1px solid var(--wf-line); padding: 15px 20px; }
+    .wf-sys-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+    .wf-errcode { font-size: clamp(56px, 12vw, 96px); font-weight: 800; color: var(--wf-t-hi); line-height: 1; letter-spacing: -0.02em; }
+    .wf-sys a:not(.wf-btn) { color: var(--wf-t); }
+    .wf-sys a:not(.wf-btn):hover { color: var(--wf-t-hi); }
+  </style>
+</head>
+<body>
+
+<div class="wf-sys">
+  <header class="wf-sys-head">
+    <span class="wf-brand">Brio</span>
+  </header>
+
+  <main class="wf-sys-body">
+    <div class="wf-screen"><div class="wf-narrow" style="text-align:center;">
+      <p class="wf-errcode" aria-hidden="true">500</p>
+      <h1>Something went wrong</h1>
+      <p class="wf-lead" style="margin:8px auto 0;">This is on our side, not you.</p>
+
+      <div class="wf-strip2" style="text-align:left;margin-top:22px;">
+        Your account and your team's data are safe, nothing was lost. We have been notified and are looking into it.
+      </div>
+
+      <div class="wf-btns" style="justify-content:center;margin-top:22px;">
+        <a class="wf-btn solid" href="server-error.html">Try again</a>
+        <a class="wf-btn" href="home.html">Go to homepage</a>
+      </div>
+      <p class="wf-micro" style="margin-top:18px;">Need a hand? <a href="contact.html">Contact support</a>.</p>
+    </div></div>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Check-in entry (10.0) - Valid link</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <p class="wf-strip2" style="margin-bottom:20px;">Your answers are anonymous. No named responses, no individual timeline.</p>
+
+        <h1>Acme Co. wellbeing check-in</h1>
+        <p class="wf-lead" style="margin-bottom:22px;">Acme Co. is running a quick wellbeing check-in. It takes under 30 seconds, and no account is needed.</p>
+
+        <a class="wf-btn solid block" href="checkin-privacy.html">Start</a>
+
+        <p class="wf-micro" style="text-align:center;margin:18px 0;">or</p>
+
+        <form>
+          <label class="wf-field">
+            <span class="k">Have a code instead?</span>
+            <input class="wf-input" type="text" placeholder="Enter your join code" autocomplete="off" aria-label="Join code">
+          </label>
+          <a class="wf-btn block" href="checkin-privacy.html">Continue</a>
+        </form>
+
+        <p class="wf-micro" style="text-align:center;margin-top:22px;">Link not working? If it has expired, <a href="checkin-expired.html">ask your operator to resend it</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "10.0", file: "checkin-entry.html", shell: "employee" });</script>
+
+</body>
+</html>

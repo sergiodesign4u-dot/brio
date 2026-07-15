@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: First program confirm (3.1) - Resolved</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio setup"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <p class="wf-eyebrow">Step 2 of 3</p>
+        <h1>Your recommended program</h1>
+        <p class="wf-lead" style="margin-bottom:22px;">Based on a team of 10 to 24, Brio suggests starting here. Confirm it, or pick another from the library.</p>
+
+        <div class="wf-progcard">
+          <span class="wf-tag">Recommended for your size</span>
+          <div class="cat" style="margin-top:12px;">Mental health</div>
+          <div class="title">Steady Weeks</div>
+          <div class="meta">Weekly check-in, 1 question, runs continuously</div>
+          <p class="desc">A gentle weekly pulse on how the team is really doing. You get a plain-language read; no individual answers are ever shown to anyone.</p>
+        </div>
+
+        <p class="wf-micro" style="margin:14px 0 18px;">What it runs: one short check-in each week. You see an aggregate read, employees answer in under 30 seconds.</p>
+
+        <div class="wf-btns">
+          <a class="wf-btn solid" href="onboarding-invite.html">Confirm and continue</a>
+          <a class="wf-btn" href="program-library.html">Pick another</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "3.1", file: "onboarding-program.html", shell: "wizard", step: "Step 2 of 3" });</script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Invite owner + upgrade (7.1) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 460px) { .plan-grid { grid-template-columns: 1fr; } }
+    .plan { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); padding: 14px; background: var(--wf-panel-2); }
+    .plan.pick { border-color: var(--wf-stroke); }
+    .plan .price { color: var(--wf-t-hi); font-weight: 700; font-size: 16px; margin: 4px 0 8px; }
+    .plan ul { list-style: none; margin: 0; }
+    .plan li { font-size: 12px; color: var(--wf-t); padding: 3px 0; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Owner</p>
+        <h1>Invite your owner</h1>
+        <p class="wf-lead">Enter your owner's email. The owner dashboard is a paid feature, so on the free plan you will unlock it before the invite sends.</p>
+      </header>
+
+      <div class="wf-grid">
+        <section aria-label="Owner email and next step">
+          <div class="wf-card">
+            <form>
+              <div class="wf-field">
+                <label class="k" for="owner-email">Owner email</label>
+                <input class="wf-input" id="owner-email" type="email" placeholder="marcus@acme.co" aria-describedby="email-note">
+                <p class="wf-err" id="email-note" hidden>Enter a valid email so the invite reaches your owner.</p>
+              </div>
+              <div class="wf-field">
+                <label class="k" for="owner-name">Owner name (optional)</label>
+                <input class="wf-input" id="owner-name" type="text" placeholder="Marcus">
+              </div>
+              <div class="wf-strip2">Your owner sees aggregate only, never individual data.</div>
+              <div class="wf-btns" style="margin-top:16px;">
+                <a class="wf-btn solid" href="upgrade.html">Upgrade and invite</a>
+                <a class="wf-btn" href="share-owner.html">Back</a>
+              </div>
+              <p class="wf-micro" style="margin-top:10px;">On the Starter plan already? This becomes Send invite, with no upgrade step.</p>
+            </form>
+          </div>
+        </section>
+
+        <aside aria-label="Plan comparison">
+          <div class="wf-card">
+            <div class="wf-card-h">Owner dashboard = paid</div>
+            <div class="plan-grid">
+              <div class="plan">
+                <span class="wf-tag">Current</span>
+                <p class="price">Free</p>
+                <ul>
+                  <li>Up to 10 people</li>
+                  <li>Aggregate score for you</li>
+                  <li>No owner dashboard</li>
+                </ul>
+              </div>
+              <div class="plan pick">
+                <span class="wf-tag">Your unlock</span>
+                <p class="price">Starter, $5 / seat / month</p>
+                <ul>
+                  <li>Up to 50 people</li>
+                  <li>Full pulse with trends</li>
+                  <li>Owner dashboard included</li>
+                </ul>
+              </div>
+            </div>
+            <p class="wf-micro" style="margin-top:10px;">Pricing is a working figure [?], benchmarked against comparable tools.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "7.1", file: "invite-owner.html", shell: "operator", tab: "Owner" });</script>
+
+</body>
+</html>

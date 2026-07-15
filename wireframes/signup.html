@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <title>Brio - Wireframe: Sign up (2.0) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <h1>Start free</h1>
+        <p class="wf-lead" style="margin-bottom:24px;">Run real wellbeing for your team, even with no HR. No credit card, and no individual answers are ever shown to anyone.</p>
+
+        <form>
+          <label class="wf-field">
+            <span class="k">Work email</span>
+            <input class="wf-input" type="email" placeholder="you@company.com" autocomplete="email">
+          </label>
+          <label class="wf-field">
+            <span class="k">Password</span>
+            <input class="wf-input" type="password" placeholder="At least 8 characters" autocomplete="new-password">
+          </label>
+          <a class="wf-btn solid block" href="onboarding-company.html">Create account</a>
+        </form>
+
+        <p style="text-align:center;margin:16px 0;"><a class="wf-micro" href="magic-link-sent.html">Email me a link instead</a></p>
+        <p class="wf-micro" style="text-align:center;">By continuing you agree to the <a href="legal.html">Terms</a> and <a href="legal.html">Privacy Policy</a>.</p>
+        <p class="wf-strip2" style="margin-top:20px;">Aggregate only. Brio never shows any individual's answers.</p>
+        <p class="wf-micro" style="text-align:center;margin-top:16px;">Already have an account? <a href="login.html">Log in</a></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "2.0", file: "signup.html", shell: "auth" });</script>
+
+</body>
+</html>

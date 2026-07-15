@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Team roster (6.0) - No members</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Team</p>
+        <h1>Your team</h1>
+      </header>
+
+      <section aria-label="Invite your team to get started">
+        <div class="wf-card" style="max-width:560px;">
+          <h2>Invite your team to get started</h2>
+          <p class="wf-body" style="margin-bottom:16px;">No one has joined yet. Share the join link or code, or send email invites. Your team pulse appears once at least 5 people have answered.</p>
+          <div class="wf-field">
+            <span class="k">Join link</span>
+            <div class="wf-copy">
+              <input class="wf-input" value="brio.app/join/steady-otter" readonly aria-label="Join link">
+              <button class="wf-btn" type="button">Copy</button>
+            </div>
+          </div>
+          <p class="wf-micro">Or share the join code: <strong>STEADY-OTTER</strong></p>
+          <div class="wf-field" style="margin-top:14px;">
+            <span class="k">Invite by email</span>
+            <div class="wf-copy">
+              <input class="wf-input" type="email" placeholder="name@company.com" aria-label="Invite by email">
+              <button class="wf-btn solid" type="button">Send</button>
+            </div>
+          </div>
+          <p class="wf-micro">The roster is who you invited. It is never linked to who answered what.</p>
+        </div>
+      </section>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "6.0", file: "team-roster-empty.html", shell: "operator", tab: "Team" });</script>
+
+</body>
+</html>

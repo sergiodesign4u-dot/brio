@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Contact Brio support. Check Help for quick answers, or send a message and we will reply to your email, usually within one business day.">
+  <title>Brio - Wireframe: Contact / Support (1.3)</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-textarea { min-height: 120px; resize: vertical; }
+    .wf-contact { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
+    @media (max-width: 720px) { .wf-contact { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-mkt">
+
+        <section class="wf-hero" aria-label="Introduction">
+          <p class="wf-eyebrow">Contact and support</p>
+          <h1>Get in touch</h1>
+          <p class="wf-lead">Have a question about Brio? Many answers are in Help, from setup to privacy to billing, so it is worth a look first. If you still need us, send a message with the form or email support directly, and we will reply to your email, usually within one business day. Messages here are support requests, not wellbeing data; they are handled separately from the private, aggregate-only check-ins.</p>
+        </section>
+
+        <section id="help-first" aria-label="Check Help first">
+          <h2>Check Help first</h2>
+          <div class="wf-strip2" style="text-align:left;padding:16px;">Most answers are in Help, and it is faster than waiting on a reply. <a href="help.html">Browse the Help center</a>.</div>
+        </section>
+
+        <div class="wf-contact">
+          <section id="message" aria-label="Send us a message" style="margin-bottom:0;">
+            <h2>Send us a message</h2>
+            <form>
+              <label class="wf-field">
+                <span class="k">Your name</span>
+                <input class="wf-input" type="text" name="name" placeholder="Jane Doe" autocomplete="name" required>
+              </label>
+              <label class="wf-field">
+                <span class="k">Email</span>
+                <input class="wf-input" type="email" name="email" placeholder="you@company.com" autocomplete="email" required>
+              </label>
+              <label class="wf-field">
+                <span class="k">Message</span>
+                <textarea class="wf-input wf-textarea" name="message" placeholder="How can we help?" required></textarea>
+              </label>
+              <a class="wf-btn solid block" href="contact-sent.html">Send message</a>
+              <p class="wf-micro" style="margin-top:10px;">Name, a valid email, and a message are required.</p>
+            </form>
+          </section>
+
+          <aside aria-label="Other ways to reach us">
+            <div class="wf-card">
+              <div class="wf-card-h">Email us directly</div>
+              <p class="wf-body">Prefer email? Reach support at <a href="contact.html">support@brio.example</a>. Exact address pending.</p>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-h">When we reply</div>
+              <p class="wf-body">We reply to your email, usually within about one business day.</p>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-h">A note on privacy</div>
+              <p class="wf-body">Messages here are support requests, not wellbeing data. They are never mixed with the private, aggregate-only check-ins.</p>
+            </div>
+          </aside>
+        </div>
+
+        <section id="email" aria-label="Email us directly">
+          <h2>Email us directly</h2>
+          <p class="wf-body">Not a form person? Email support at <a href="contact.html">support@brio.example</a> and we will reply to your email.</p>
+        </section>
+
+        <section id="reply" aria-label="When we reply">
+          <h2>When we reply</h2>
+          <p class="wf-body">We aim to reply within about one business day. Exact response times are being finalized.</p>
+        </section>
+
+        <section class="wf-cta-final" aria-label="Get started">
+          <h2>Start free in five minutes</h2>
+          <p class="wf-body" style="margin-bottom:16px;">No credit card. Free for up to 10 people.</p>
+          <a class="wf-btn solid" href="signup.html">Start free</a>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "1.3", file: "contact.html", shell: "public" });</script>
+
+</body>
+</html>

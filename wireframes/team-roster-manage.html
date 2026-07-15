@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Team roster (6.0) - Manage invite dialog</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Team</p>
+        <h1>Your team</h1>
+      </header>
+
+      <div class="wf-grid">
+        <section aria-label="Invite your team">
+          <div class="wf-card">
+            <h2>Invite your team</h2>
+            <div class="wf-field">
+              <span class="k">Join link</span>
+              <div class="wf-copy">
+                <input class="wf-input" value="brio.app/join/steady-otter" readonly aria-label="Join link">
+                <button class="wf-btn" type="button">Copy</button>
+              </div>
+            </div>
+            <p class="wf-micro">Or share the join code: <strong>STEADY-OTTER</strong></p>
+          </div>
+        </section>
+        <aside aria-label="Participation">
+          <div class="wf-card">
+            <h2>Participation</h2>
+            <p class="wf-metric">72% <span>of 18 answered last cycle</span></p>
+          </div>
+        </aside>
+      </div>
+
+      <h2 style="margin-top:26px;">Members</h2>
+      <div class="wf-list">
+        <div class="wf-list-row"><span class="who">Yemi O. <small>yemi@company.com</small></span><span class="wf-status on">Active</span><a class="wf-rowlink" href="team-roster-manage.html">Manage</a></div>
+        <div class="wf-list-row"><span class="who">Dev P. <small>dev@company.com</small></span><span class="wf-status">Invited</span><a class="wf-rowlink" href="team-roster-manage.html">Resend</a></div>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<div class="wf-overlay" role="presentation">
+  <div class="wf-dialog" role="dialog" aria-modal="true" aria-labelledby="manage-title">
+    <h2 id="manage-title">Manage invite</h2>
+    <p class="wf-micro">Dev P. - dev@company.com - Invited</p>
+    <div class="wf-btns" style="flex-direction:column;align-items:stretch;margin-top:18px;">
+      <button class="wf-btn solid block" type="button">Resend invite</button>
+      <button class="wf-btn block" type="button">Copy join link</button>
+      <button class="wf-btn block" type="button">Regenerate code</button>
+      <button class="wf-btn block" type="button">Revoke invite</button>
+    </div>
+    <div class="wf-btns" style="justify-content:flex-end;margin-top:16px;">
+      <a class="wf-btn" href="team-roster.html">Close</a>
+    </div>
+  </div>
+</div>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "6.0", file: "team-roster-manage.html", shell: "operator", tab: "Team" });</script>
+
+</body>
+</html>

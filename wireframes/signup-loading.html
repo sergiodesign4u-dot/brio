@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <title>Brio - Wireframe: Sign up (2.0) - Submitting</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <h1>Start free</h1>
+        <p class="wf-lead" style="margin-bottom:24px;">Run real wellbeing for your team, even with no HR. No credit card, and no individual answers are ever shown to anyone.</p>
+
+        <form>
+          <label class="wf-field">
+            <span class="k">Work email</span>
+            <input class="wf-input" type="email" value="priya@acme.co" disabled>
+          </label>
+          <label class="wf-field">
+            <span class="k">Password</span>
+            <input class="wf-input" type="password" value="password" disabled>
+          </label>
+          <button class="wf-btn solid block" type="button" disabled aria-busy="true">Creating account...</button>
+        </form>
+
+        <p class="wf-strip2" style="margin-top:20px;">Aggregate only. Brio never shows any individual's answers.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "2.0", file: "signup-loading.html", shell: "auth" });</script>
+
+</body>
+</html>

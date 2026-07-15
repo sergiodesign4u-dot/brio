@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Team pulse (4.1) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Dashboard</p>
+        <h1>Team pulse</h1>
+      </header>
+
+      <div class="wf-grid">
+        <section aria-label="Score, reading and next step">
+          <div class="wf-pulse">
+            <div class="read">Steady</div>
+            <p class="wf-metric" style="margin:8px 0 0;">7.4 <span>out of 10, up 0.1 on last week</span></p>
+            <p class="interp">The team is holding steady this week, in line with last. Nothing needs your attention right now.</p>
+            <div class="act-lbl">Suggested next step</div>
+            <div class="wf-btns">
+              <a class="wf-btn solid" href="share-owner.html">Share with your owner</a>
+              <a class="wf-btn" href="check-in-setup.html">Adjust check-in</a>
+            </div>
+          </div>
+        </section>
+
+        <aside aria-label="Trend and participation">
+          <div class="wf-card">
+            <h2>Trend over time</h2>
+            <div class="wf-spark" style="height:72px;" aria-hidden="true">
+              <span class="bar" style="height:44%"></span><span class="bar" style="height:52%"></span><span class="bar" style="height:48%"></span><span class="bar" style="height:60%"></span><span class="bar" style="height:55%"></span><span class="bar hi" style="height:58%"></span><span class="bar hi" style="height:56%"></span><span class="bar hi" style="height:57%"></span>
+            </div>
+            <p class="wf-micro">Last eight cycles. Aggregate only, never who.</p>
+          </div>
+          <div class="wf-card">
+            <h2>Participation</h2>
+            <p class="wf-metric">72% <span>of the team answered</span></p>
+            <p class="wf-micro" style="margin-top:6px;">Above the minimum of 5, so a score can be shown. You never see who answered.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "4.1", file: "team-pulse.html", shell: "operator", tab: "Dashboard" });</script>
+
+</body>
+</html>

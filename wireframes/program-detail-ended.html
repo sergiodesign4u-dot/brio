@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Program detail (5.1) - Ended</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .pd-head { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .pd-q { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--wf-line-2); }
+    .pd-q:last-child { border-bottom: none; }
+    .pd-q .qt { flex: 1; color: var(--wf-t-2); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="program-library.html">Programs</a> / Steady Weeks</p>
+        <article class="wf-progcard" style="margin-top:10px;">
+          <div class="pd-head">
+            <span class="wf-status">Ended</span>
+          </div>
+          <div class="cat">Mental health</div>
+          <h1>Steady Weeks</h1>
+          <div class="meta">Weekly check-in, 1 question, completed</div>
+        </article>
+      </header>
+
+      <div class="wf-card" style="margin-top:18px;">
+        <div class="wf-card-h">Status</div>
+        <p class="wf-metric">Ended <span>this program has finished</span></p>
+        <div class="wf-btns" style="margin-top:12px;">
+          <a class="wf-btn solid" href="team-pulse.html">View results</a>
+          <a class="wf-btn" href="check-in-setup.html">Reactivate</a>
+        </div>
+      </div>
+
+      <div class="wf-grid">
+        <section aria-label="What this program ran">
+          <div class="wf-card">
+            <h2>What it ran</h2>
+            <p class="wf-lead">A weekly check-in in the Mental health category. Its aggregate results stay available on the team pulse. No individual answers were ever shown to anyone.</p>
+          </div>
+
+          <div class="wf-card">
+            <h2>Check-in questions</h2>
+            <div class="pd-q">
+              <span class="qt">How has this week felt for you?</span>
+              <span class="wf-status">Emoji</span>
+            </div>
+            <p class="wf-micro" style="margin-top:12px;">Reactivate to run this check-in again from the next cycle.</p>
+          </div>
+        </section>
+
+        <aside aria-label="Manage and privacy">
+          <div class="wf-card">
+            <h2>Manage</h2>
+            <div class="wf-btns" style="flex-direction:column;align-items:stretch;">
+              <a class="wf-btn solid block" href="team-pulse.html">View results</a>
+              <a class="wf-btn block" href="check-in-setup.html">Reactivate</a>
+            </div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-strip2">You see aggregate only, never who answered.</div>
+            <a class="wf-micro" href="security-privacy.html" style="display:inline-block;margin-top:12px;">What your owner can and cannot see</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "5.1", file: "program-detail-ended.html", shell: "operator", tab: "Programs" });</script>
+
+</body>
+</html>

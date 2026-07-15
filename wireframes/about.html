@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Brio helps small companies with no HR run real employee wellbeing without surveillance. Meet the team and the belief behind aggregate-only, privacy-first wellbeing.">
+  <title>Brio - Wireframe: About (1.2)</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    /* Team grid (name and role placeholders; bios and photos pending) */
+    .wf-team { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 720px) { .wf-team { grid-template-columns: repeat(2, 1fr); } }
+    .wf-person { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); padding: 16px; background: var(--wf-panel-2); }
+    .wf-person .avatar { width: 44px; height: 44px; border-radius: 100px; border: 1px dashed var(--wf-stroke); margin-bottom: 12px; }
+    .wf-person .pn { font-size: 14px; font-weight: 700; color: var(--wf-t-hi); }
+    .wf-person .pr { font-size: 12px; color: var(--wf-t-mid); margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-mkt">
+
+        <section class="wf-hero" aria-label="Introduction">
+          <p class="wf-eyebrow">About Brio</p>
+          <h1>Wellbeing without surveillance</h1>
+          <p class="wf-lead">Brio exists because small companies get handed people work with no HR and no playbook, and because wellbeing should never mean watching people. We build employee wellbeing software that is guided enough for a non-expert to run and private by design: individual answers are never shown to anyone, because the privacy boundary is the product, not a setting. We would rather show an owner an honest team signal than a flattering vanity metric.</p>
+          <div class="wf-btns" style="margin-top:22px;">
+            <a class="wf-btn solid" href="signup.html">Start free</a>
+            <a class="wf-btn" href="contact.html">Get in touch</a>
+          </div>
+        </section>
+
+        <section id="mission" aria-label="Our mission">
+          <h2>Our mission</h2>
+          <p class="wf-body">Small companies get handed people work with no HR and no training. Someone becomes responsible for wellbeing overnight, an office manager, an ops lead, or the founder. Brio gives that person a guided way to run real wellbeing, and gives the business honest proof it is working, without ever watching a single individual. The privacy boundary is not a feature we added; it is the belief the whole product is built on.</p>
+        </section>
+
+        <section id="believe" aria-label="What we believe">
+          <h2>What we believe</h2>
+          <div class="wf-grid3">
+            <div class="wf-card"><div class="wf-card-h">Privacy is the product</div><p class="wf-body">The operator and owner never see named individuals. Aggregation is structural, not a setting you can switch off.</p></div>
+            <div class="wf-card"><div class="wf-card-h">Make the non-expert competent</div><p class="wf-body">Every step says what to do next, confirms it was done right, and shows that it mattered. No HR jargon.</p></div>
+            <div class="wf-card"><div class="wf-card-h">Honest signals over flattering ones</div><p class="wf-body">The owner gets a real team health signal, not a vanity metric. If things trend down, the product says so plainly.</p></div>
+          </div>
+        </section>
+
+        <section id="team" aria-label="The team">
+          <h2>The team</h2>
+          <div class="wf-team">
+            <div class="wf-person"><div class="avatar" aria-hidden="true"></div><div class="pn">Team member</div><div class="pr">Product</div></div>
+            <div class="wf-person"><div class="avatar" aria-hidden="true"></div><div class="pn">Team member</div><div class="pr">Engineering</div></div>
+            <div class="wf-person"><div class="avatar" aria-hidden="true"></div><div class="pn">Team member</div><div class="pr">Design</div></div>
+            <div class="wf-person"><div class="avatar" aria-hidden="true"></div><div class="pn">Team member</div><div class="pr">Support</div></div>
+          </div>
+          <p class="wf-micro" style="margin-top:12px;">Names, roles, and photos are placeholders at this stage; real bios arrive with the brand work.</p>
+        </section>
+
+        <section id="contact" aria-label="Get in touch">
+          <h2>Get in touch</h2>
+          <p class="wf-body">Questions about Brio, or about the privacy model? <a href="contact.html">Get in touch</a>, or read <a href="security-privacy.html">how privacy works</a>.</p>
+        </section>
+
+        <section class="wf-cta-final" aria-label="Get started">
+          <h2>Start free in five minutes</h2>
+          <p class="wf-body" style="margin-bottom:16px;">No credit card. Free for up to 10 people.</p>
+          <a class="wf-btn solid" href="signup.html">Start free</a>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "1.2", file: "about.html", shell: "public" });</script>
+
+</body>
+</html>

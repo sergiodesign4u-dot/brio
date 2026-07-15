@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Brio - Wireframe: Home (0.0) - Owner</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-mkt">
+
+        <section class="wf-hero" aria-label="Introduction">
+          <p class="wf-eyebrow">Welcome back</p>
+          <h1>Employee wellbeing for teams with no HR</h1>
+          <p class="wf-lead">You are signed in as an owner. See your team's aggregate read, or keep reading about how Brio works. You see a team-level signal only, never any individual's answers.</p>
+          <div class="wf-btns" style="margin-top:22px;">
+            <a class="wf-btn solid" href="owner-dashboard.html">Go to the owner dashboard</a>
+            <a class="wf-btn" href="security-privacy.html">See how privacy works</a>
+          </div>
+        </section>
+
+        <section id="how" aria-label="How Brio works">
+          <h2>How Brio works</h2>
+          <div class="wf-grid3">
+            <div class="wf-card"><div class="wf-card-h">1. Pick a program</div><p class="wf-body">Brio recommends a first program by team size. Your operator launches it, no building required.</p></div>
+            <div class="wf-card"><div class="wf-card-h">2. The team checks in</div><p class="wf-body">A weekly check-in takes under 30 seconds. No account is needed for the first one.</p></div>
+            <div class="wf-card"><div class="wf-card-h">3. You read the pulse</div><p class="wf-body">One number, a trend, and a plain-language reading. Aggregate only, never who.</p></div>
+          </div>
+        </section>
+
+        <section id="privacy" aria-label="Privacy">
+          <h2>Your team's privacy is the product</h2>
+          <div class="wf-strip2" style="text-align:left;padding:16px;">Aggregate only. Brio never shows any individual's answers, to you or to your operator. No score appears until at least 5 people have answered. <a href="security-privacy.html">See exactly what you can and cannot see</a>.</div>
+        </section>
+
+        <section class="wf-cta-final" aria-label="Get back in">
+          <h2>See where your team stands</h2>
+          <p class="wf-body" style="margin-bottom:16px;">A two-minute read, once a month.</p>
+          <a class="wf-btn solid" href="owner-dashboard.html">Go to the owner dashboard</a>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "0.0", file: "home-owner.html", shell: "public" });</script>
+
+</body>
+</html>

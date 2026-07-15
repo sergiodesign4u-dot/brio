@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Maintenance (11.2) - Self-contained</title>
+  <link rel="stylesheet" href="_wf.css">
+  <!-- HTTP status: during a maintenance window the edge / host must serve this page with
+       a real HTTP 503 Service Unavailable plus a Retry-After header (seconds or a date),
+       so monitors and search engines know the site is back soon, not gone. 503 != 404/500.
+       Self-contained on purpose: no _nav.js, no render, no app data, no external assets. -->
+  <style>
+    .wf-sys { min-height: 100vh; display: flex; flex-direction: column; }
+    .wf-sys-head { border-bottom: 1px solid var(--wf-line); padding: 15px 20px; }
+    .wf-sys-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+    .wf-pill { display: inline-block; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--wf-t); border: 1px solid var(--wf-stroke); border-radius: 100px; padding: 3px 12px; }
+    .wf-eta { display: inline-block; font-size: 12px; color: var(--wf-t); border: 1px dashed var(--wf-stroke); border-radius: 8px; padding: 8px 12px; margin-top: 18px; }
+    .wf-sys a:not(.wf-btn) { color: var(--wf-t); }
+    .wf-sys a:not(.wf-btn):hover { color: var(--wf-t-hi); }
+  </style>
+</head>
+<body>
+
+<div class="wf-sys">
+  <header class="wf-sys-head">
+    <span class="wf-brand">Brio</span>
+  </header>
+
+  <main class="wf-sys-body">
+    <div class="wf-screen"><div class="wf-narrow" style="text-align:center;">
+      <p><span class="wf-pill">Scheduled maintenance</span></p>
+      <h1 style="margin-top:14px;">Brio is getting an upgrade</h1>
+      <p class="wf-lead" style="margin:8px auto 0;">We are doing some scheduled maintenance and will be back shortly.</p>
+
+      <!-- Expected-return chip: shown only when the return time is known; omitted otherwise.
+           14:00 UTC is an example estimate [?]. -->
+      <p><span class="wf-eta">Expected back by about 14:00 UTC</span></p>
+
+      <div class="wf-btns" style="justify-content:center;margin-top:22px;">
+        <a class="wf-btn solid" href="maintenance.html">Try again</a>
+      </div>
+      <p class="wf-micro" style="margin-top:16px;">Back shortly. Follow live status at status.brio.app.</p>
+    </div></div>
+  </main>
+</div>
+
+</body>
+</html>

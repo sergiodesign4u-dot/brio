@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Privacy center (8.2) - Proof surface</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-claim { padding: 10px 0; border-bottom: 1px solid var(--wf-line-2); }
+    .wf-claim:last-child { border-bottom: none; }
+    .wf-claim strong { color: var(--wf-t-hi); }
+    .wf-see-row { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--wf-t); margin: 7px 0; }
+    .wf-see-row .mk { flex: 0 0 16px; text-align: center; font-weight: 700; color: var(--wf-t-hi); }
+    .wf-see-row.no { color: var(--wf-t-mid); }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="settings.html">Settings</a></p>
+        <h1>Privacy center</h1>
+        <p class="wf-lead">This is exactly what you and your owner can and cannot see. It is how Brio is built, so it is the same for every plan and team size.</p>
+        <p style="margin-top:10px;"><span class="wf-tag">Structural, not a setting</span></p>
+      </header>
+
+      <div class="wf-grid">
+        <section aria-label="How your team's answers stay private">
+          <div class="wf-card">
+            <h2>How your team's answers stay private</h2>
+            <div class="wf-claim"><strong>Aggregate only.</strong> You see the team aggregate, never an individual response, and there is no drill-down.</div>
+            <div class="wf-claim"><strong>Minimum of 5.</strong> No score appears until at least 5 people have answered.</div>
+            <div class="wf-claim"><strong>No live count.</strong> While a cycle is open, no one sees a running tally of who has answered.</div>
+            <div class="wf-claim"><strong>Subscription as privacy.</strong> The subscription pays for the aggregate; the business never exposes an individual.</div>
+          </div>
+          <p class="wf-micro">This is the same promise your team sees before they answer (<a href="checkin-privacy.html">what your team sees</a>) and on the public <a href="security-privacy.html">Security and privacy</a> page.</p>
+        </section>
+
+        <aside aria-label="What can and cannot be seen">
+          <div class="wf-card">
+            <p class="wf-card-h">What you and the owner can see</p>
+            <div class="wf-see-row"><span class="mk" aria-hidden="true">+</span><span>The team wellbeing score and its trend</span></div>
+            <div class="wf-see-row"><span class="mk" aria-hidden="true">+</span><span>Participation as a share of the team</span></div>
+          </div>
+          <div class="wf-card">
+            <p class="wf-card-h">What no one can see</p>
+            <div class="wf-see-row no"><span class="mk" aria-hidden="true">x</span><span>Any individual response, name, or who answered</span></div>
+            <div class="wf-see-row no"><span class="mk" aria-hidden="true">x</span><span>Any drill-down to a person</span></div>
+            <div class="wf-see-row no"><span class="mk" aria-hidden="true">x</span><span>Any sub-group below 5</span></div>
+          </div>
+          <div class="wf-strip2">Nothing on this page is a setting. The boundary is built into how Brio works.</div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "8.2", file: "settings-privacy.html", shell: "operator" });</script>
+
+</body>
+</html>

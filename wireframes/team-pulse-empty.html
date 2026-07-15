@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Team pulse (4.1) - Minimum-N not met</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Dashboard</p>
+        <h1>Team pulse</h1>
+      </header>
+
+      <div class="wf-grid">
+        <section aria-label="Waiting for the minimum number of responses">
+          <div class="wf-state">
+            <div class="n">Waiting for at least 5 responses</div>
+            <p class="sub">This cycle does not have enough answers to show a score yet, and there is no live count. A score appears once at least 5 people have answered, so no single answer can be singled out.</p>
+            <a class="wf-btn solid" href="team-roster.html">Nudge the team</a>
+          </div>
+        </section>
+
+        <aside aria-label="Trend and participation">
+          <div class="wf-card">
+            <h2>Trend over time</h2>
+            <div class="wf-spark" style="height:72px;" aria-hidden="true">
+              <span class="bar" style="height:44%"></span><span class="bar" style="height:52%"></span><span class="bar" style="height:48%"></span><span class="bar" style="height:60%"></span><span class="bar" style="height:55%"></span><span class="bar hi" style="height:58%"></span><span class="bar hi" style="height:56%"></span>
+            </div>
+            <p class="wf-micro">Past cycles that met the minimum still show. The current one does not yet.</p>
+          </div>
+          <div class="wf-card">
+            <div class="wf-strip2">Aggregate only. You never see who answered.</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "4.1", file: "team-pulse-empty.html", shell: "operator", tab: "Dashboard" });</script>
+
+</body>
+</html>

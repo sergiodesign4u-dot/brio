@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Team roster (6.0) - Loading</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Team</p>
+        <h1>Your team</h1>
+      </header>
+
+      <div class="wf-grid" aria-busy="true">
+        <section aria-label="Loading the invite panel">
+          <div class="wf-card">
+            <div class="wf-skel w40"></div>
+            <div class="wf-skel tall"></div>
+            <div class="wf-skel w50"></div>
+            <div class="wf-skel tall"></div>
+          </div>
+        </section>
+        <aside aria-label="Loading participation">
+          <div class="wf-card">
+            <div class="wf-skel w50"></div>
+            <div class="wf-skel w70"></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="wf-skel w40" style="margin-top:26px;"></div>
+      <div class="wf-list" aria-busy="true">
+        <div class="wf-list-row"><span class="who"><span class="wf-skel w50" style="margin:0;"></span></span><span class="wf-skel" style="width:60px;margin:0;"></span></div>
+        <div class="wf-list-row"><span class="who"><span class="wf-skel w50" style="margin:0;"></span></span><span class="wf-skel" style="width:60px;margin:0;"></span></div>
+        <div class="wf-list-row"><span class="who"><span class="wf-skel w40" style="margin:0;"></span></span><span class="wf-skel" style="width:60px;margin:0;"></span></div>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "6.0", file: "team-roster-loading.html", shell: "operator", tab: "Team" });</script>
+
+</body>
+</html>

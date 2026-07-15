@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Cookie consent (11.3) - Manage panel</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    /* Manage panel: a 0.5 modal dialog with granular per-category toggles. Strictly
+       necessary is always on and locked. Functional, Analytics, Advertising each default
+       off (no pre-ticked boxes). State is shown by the control and On/Off text, never color. */
+    .cookie-cat { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--wf-line-2); }
+    .cookie-cat:last-of-type { border-bottom: none; }
+    .cookie-cat .body { flex: 1; min-width: 0; }
+    .cookie-cat .body .name { font-size: 14px; color: var(--wf-t-2); }
+    .cookie-cat .body .desc { font-size: 12px; color: var(--wf-t-mid); margin-top: 2px; }
+    .cookie-cat .ctrl { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .cookie-dialog { max-width: 520px; max-height: 88vh; overflow-y: auto; }
+    .wf-dialog a:not(.wf-btn) { color: var(--wf-t); }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-mkt">
+        <section class="wf-hero" aria-label="Introduction">
+          <p class="wf-eyebrow">Employee wellbeing, without surveillance</p>
+          <h1>Employee wellbeing for teams with no HR</h1>
+          <p class="wf-lead">This state shows the granular manage panel, opened from the consent banner. Each optional category is off by default, and you can change or withdraw your choice at any time.</p>
+        </section>
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<div class="wf-overlay" role="presentation">
+  <div class="wf-dialog cookie-dialog" role="dialog" aria-modal="true" aria-labelledby="cc-title">
+    <h2 id="cc-title">Manage cookie preferences</h2>
+    <p class="wf-micro" style="margin-bottom:6px;">Choose which cookies Brio may use. Essential cookies are always on. <a href="legal.html">Read the Cookie Policy</a>.</p>
+
+    <div class="cookie-cat">
+      <div class="body">
+        <span class="name">Strictly necessary</span>
+        <p class="desc">Required to run the site and keep you signed in. Cannot be switched off.</p>
+      </div>
+      <span class="ctrl"><input type="checkbox" id="c-nec" checked disabled><label for="c-nec"><span class="wf-status on">Always on</span></label></span>
+    </div>
+
+    <div class="cookie-cat">
+      <div class="body">
+        <span class="name">Functional</span>
+        <p class="desc">Remembers your preferences, such as language.</p>
+      </div>
+      <span class="ctrl"><input type="checkbox" id="c-fun"><label for="c-fun"><span class="wf-status">Off</span></label></span>
+    </div>
+
+    <div class="cookie-cat">
+      <div class="body">
+        <span class="name">Analytics</span>
+        <p class="desc">Helps us understand how the site is used, so we can improve it.</p>
+      </div>
+      <span class="ctrl"><input type="checkbox" id="c-ana"><label for="c-ana"><span class="wf-status">Off</span></label></span>
+    </div>
+
+    <div class="cookie-cat">
+      <div class="body">
+        <span class="name">Advertising</span>
+        <p class="desc">Used for ad measurement. Brio does not sell your data.</p>
+      </div>
+      <span class="ctrl"><input type="checkbox" id="c-adv"><label for="c-adv"><span class="wf-status">Off</span></label></span>
+    </div>
+
+    <p class="wf-micro" style="margin-top:14px;">US residents: <a href="legal.html">Do Not Sell or Share My Personal Information</a>. We honor GPC signals.</p>
+
+    <div class="wf-btns" style="margin-top:18px;">
+      <a class="wf-btn" href="home.html">Reject all</a>
+      <a class="wf-btn solid" href="home.html">Save choices</a>
+      <a class="wf-btn" href="home.html">Accept all</a>
+    </div>
+    <div class="wf-btns" style="justify-content:flex-end;margin-top:12px;">
+      <a class="wf-btn" href="cookie-consent.html">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "11.3", file: "cookie-consent-manage.html", shell: "public" });</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Plan / subscription (8.1) - Paid plan</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-usebar { height: 10px; border: 1px solid var(--wf-edge); border-radius: 100px; overflow: hidden; margin-top: 8px; background: var(--wf-panel); }
+    .wf-usebar > span { display: block; height: 100%; background: var(--wf-stroke); }
+    button.wf-rowlink { background: none; border: none; cursor: pointer; font-family: inherit; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="settings.html">Settings</a></p>
+        <h1>Plan</h1>
+      </header>
+
+      <div class="wf-grid">
+        <section aria-label="Current plan and usage">
+          <div class="wf-card">
+            <p class="wf-eyebrow" style="margin-bottom:8px;">Current plan</p>
+            <p class="wf-metric" style="font-size:22px;">Starter <span class="wf-tag">Hypothesis pricing</span></p>
+            <p style="margin-top:6px;">$5 / seat / month, billed monthly</p>
+            <p class="wf-micro" style="margin-top:6px;">Renews Aug 12, 2026. Includes the owner dashboard.</p>
+          </div>
+          <div class="wf-card">
+            <h2>Seats and usage</h2>
+            <p class="wf-metric">18 of 50 <span>seats used</span></p>
+            <div class="wf-usebar" role="img" aria-label="18 of 50 seats used"><span style="width:36%"></span></div>
+            <p class="wf-micro" style="margin-top:8px;">Tied to your team size. You are not blocked at the limit, we prompt you first.</p>
+          </div>
+          <a class="wf-btn solid block" href="upgrade.html">Change plan</a>
+        </section>
+
+        <aside aria-label="Compare plans">
+          <div class="wf-card">
+            <h2>Compare plans</h2>
+            <div class="wf-list">
+              <div class="wf-list-row">
+                <span class="who">Free <small>Up to 10 seats. No owner dashboard.</small></span>
+                <a class="wf-rowlink" href="upgrade.html">Downgrade</a>
+              </div>
+              <div class="wf-list-row">
+                <span class="who">Starter <small>$5 / seat, up to 50. Owner dashboard, full pulse.</small></span>
+                <span class="wf-status on">Current</span>
+              </div>
+              <div class="wf-list-row">
+                <span class="who">Growth <small>$9 / seat, 200+. Multi-team, integrations.</small></span>
+                <a class="wf-rowlink" href="upgrade.html">Upgrade</a>
+              </div>
+            </div>
+            <p class="wf-micro" style="margin-top:10px;">All pricing is a hypothesis, benchmarked against competitors.</p>
+          </div>
+        </aside>
+      </div>
+
+      <h2 style="margin-top:26px;">Invoices</h2>
+      <div class="wf-list" style="max-width:720px;">
+        <div class="wf-list-row"><span class="who">Jul 12, 2026 <small>Starter, 18 seats</small></span><span class="wf-micro">$90.00</span><button class="wf-rowlink" type="button">Download</button></div>
+        <div class="wf-list-row"><span class="who">Jun 12, 2026 <small>Starter, 17 seats</small></span><span class="wf-micro">$85.00</span><button class="wf-rowlink" type="button">Download</button></div>
+      </div>
+      <p class="wf-micro" style="margin-top:8px;max-width:720px;">Amounts are a hypothesis. Download is not wired up in this prototype.</p>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "8.1", file: "settings-plan.html", shell: "operator" });</script>
+
+</body>
+</html>

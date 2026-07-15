@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Invite team (3.2) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio setup"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <p class="wf-eyebrow">Step 3 of 3</p>
+        <h1>Invite your team</h1>
+        <p class="wf-lead" style="margin-bottom:22px;">Share the link or code, or send email invites. You can always invite more later.</p>
+
+        <div class="wf-field">
+          <span class="k">Join link</span>
+          <div class="wf-copy">
+            <input class="wf-input" value="brio.app/join/steady-otter" readonly aria-label="Join link">
+            <button class="wf-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <p class="wf-micro">Or share the join code: <strong>STEADY-OTTER</strong></p>
+
+        <div class="wf-field" style="margin-top:14px;">
+          <span class="k">Invite by email</span>
+          <div class="wf-copy">
+            <input class="wf-input" type="email" placeholder="name@company.com" aria-label="Invite by email">
+            <a class="wf-btn" href="onboarding-invite-loading.html">Send invites</a>
+          </div>
+        </div>
+
+        <p class="wf-micro" style="margin:12px 0 22px;">The roster is who you invited. It is never linked to who answered what.</p>
+
+        <a class="wf-btn solid block" href="dashboard.html">Finish and go to your dashboard</a>
+        <p style="text-align:center;margin-top:12px;"><a class="wf-micro" href="dashboard.html">Invite later</a></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "3.2", file: "onboarding-invite.html", shell: "wizard", step: "Step 3 of 3" });</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Pre-Q1 privacy disclosure (10.1) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-claims { list-style: none; border: 1px solid var(--wf-line); border-radius: var(--radius-lg); overflow: hidden; margin: 18px 0; }
+    .wf-claims li { padding: 14px 16px; border-bottom: 1px solid var(--wf-line-2); }
+    .wf-claims li:last-child { border-bottom: none; }
+    .wf-claims .c-lead { display: block; color: var(--wf-t-hi); font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .wf-claims .c-body { color: var(--wf-t-mid); font-size: 13px; }
+    .wf-see { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); background: var(--wf-panel-2); margin-bottom: 20px; }
+    .wf-see > summary { cursor: pointer; padding: 14px 16px; color: var(--wf-t); font-size: 13px; font-weight: 700; list-style: none; }
+    .wf-see > summary::-webkit-details-marker { display: none; }
+    .wf-see[open] > summary { border-bottom: 1px solid var(--wf-line-2); }
+    .wf-see .see-body { padding: 16px; }
+    .wf-cannot { font-size: 12px; color: var(--wf-t); border-left: 2px solid var(--wf-stroke); padding-left: 10px; margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <h1>Before you answer</h1>
+        <p class="wf-lead" style="margin-bottom:8px;">Here is exactly how your answer is protected. This is how it works, not just a promise.</p>
+
+        <ol class="wf-claims">
+          <li>
+            <span class="c-lead">No one sees your individual response.</span>
+            <span class="c-body">Not your manager, not the owner, no one. There is no named list and no individual timeline.</span>
+          </li>
+          <li>
+            <span class="c-lead">Your answer joins an aggregate of at least 5.</span>
+            <span class="c-body">Nothing is shown until at least 5 people have answered, so no single response can be picked out.</span>
+          </li>
+          <li>
+            <span class="c-lead">No running count while the check-in is open.</span>
+            <span class="c-body">No one watches answers arrive, so no one can guess who answered when.</span>
+          </li>
+          <li>
+            <span class="c-lead">The owner pays for the team view, never for your answers.</span>
+            <span class="c-body">The subscription buys an aggregate read of team wellbeing. The business is built on never exposing an individual.</span>
+          </li>
+          <li>
+            <span class="c-lead">Results appear only after the cycle closes, and only as a team number.</span>
+            <span class="c-body">The owner sees the team score, the trend, and what share of the team took part. Never any individual, any answer, or any group smaller than 5.</span>
+          </li>
+        </ol>
+
+        <details class="wf-see">
+          <summary>See exactly what your manager sees</summary>
+          <div class="see-body">
+            <p class="wf-micro" style="margin-bottom:12px;">This is the whole of what your manager and the owner ever see:</p>
+            <div class="wf-card" style="margin-bottom:0;">
+              <h2>Acme Co. team pulse</h2>
+              <div class="wf-pulse" style="border-radius:8px;padding:16px;">
+                <div class="read">Steady</div>
+                <p class="interp">The team is holding steady this week.</p>
+              </div>
+              <div class="wf-spark" aria-hidden="true" style="margin-top:14px;">
+                <span class="bar" style="height:40%"></span><span class="bar" style="height:55%"></span><span class="bar" style="height:48%"></span><span class="bar hi" style="height:52%"></span><span class="bar hi" style="height:50%"></span>
+              </div>
+              <p class="wf-metric">72% <span>of the team answered</span></p>
+              <p class="wf-cannot">They never see: your name, your answer, or any group smaller than 5.</p>
+            </div>
+          </div>
+        </details>
+
+        <a class="wf-btn solid block" href="checkin-questions.html">Continue</a>
+        <p class="wf-micro" style="text-align:center;margin-top:16px;">Rather not answer? <a href="checkin-entry.html">Leave, nothing has been recorded</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "10.1", file: "checkin-privacy.html", shell: "employee" });</script>
+
+</body>
+</html>

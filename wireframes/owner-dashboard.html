@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Owner dashboard (9.0) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .owner-col { max-width: 560px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="owner-col">
+        <header>
+          <p class="wf-eyebrow">Acme Co. - Owner view</p>
+          <h1>Team wellbeing is steady this month</h1>
+        </header>
+
+        <div class="wf-pulse" style="margin-top:16px;">
+          <div class="read">Steady</div>
+          <p class="wf-metric" style="margin:8px 0 0;">7.4 <span>out of 10</span></p>
+          <p class="interp">No sign anyone is at risk of leaving. This is the whole team read, not any one person.</p>
+        </div>
+
+        <div class="wf-card" style="margin-top:16px;">
+          <h2>Trend</h2>
+          <div class="wf-spark" style="height:64px;" aria-hidden="true">
+            <span class="bar" style="height:46%"></span><span class="bar" style="height:52%"></span><span class="bar" style="height:50%"></span><span class="bar" style="height:56%"></span><span class="bar hi" style="height:57%"></span><span class="bar hi" style="height:58%"></span>
+          </div>
+          <p class="wf-micro">Holding steady over recent cycles.</p>
+        </div>
+
+        <div class="wf-card">
+          <h2>Participation</h2>
+          <p class="wf-metric">72% <span>of the team took part</span></p>
+          <p class="wf-micro" style="margin-top:6px;">A share of the team, never who.</p>
+        </div>
+
+        <div class="wf-card">
+          <div class="wf-card-h">What I can and cannot see</div>
+          <div class="wf-list" style="margin-bottom:12px;">
+            <div class="wf-list-row"><span class="who">Can see<small>The aggregate score, the trend, participation as a share</small></span></div>
+          </div>
+          <div class="wf-list">
+            <div class="wf-list-row"><span class="who">Cannot see<small>Individual responses, names, who answered, any drill-down, or any sub-group below 5</small></span></div>
+          </div>
+        </div>
+
+        <p class="wf-micro" style="margin-top:16px;">Updated this cycle. This read takes under two minutes. See the latest <a href="owner-digest.html">monthly digest</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "9.0", file: "owner-dashboard.html", shell: "owner" });</script>
+
+</body>
+</html>

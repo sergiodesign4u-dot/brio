@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Account settings (8.4) - Default</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    button.wf-status { background: none; cursor: pointer; font-family: inherit; }
+    .wf-danger { border: 1px dashed var(--wf-stroke); border-radius: var(--radius-lg); padding: 18px; margin-top: 22px; max-width: 560px; }
+    .wf-danger h2 { color: var(--wf-t-hi); }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="settings.html">Settings</a></p>
+        <h1>Account</h1>
+      </header>
+
+      <form aria-label="Account details" style="max-width:560px;margin-top:22px;">
+        <div class="wf-field">
+          <label class="k" for="acct-name">Name</label>
+          <div class="wf-copy">
+            <input class="wf-input" id="acct-name" value="Priya Nair">
+            <button class="wf-btn" type="button">Save</button>
+          </div>
+        </div>
+        <div class="wf-field">
+          <label class="k" for="acct-email">Email</label>
+          <div class="wf-copy">
+            <input class="wf-input" id="acct-email" type="email" value="priya@acme.co" readonly>
+            <button class="wf-btn" type="button">Change</button>
+          </div>
+          <p class="wf-micro" style="margin-top:6px;">A new email must be confirmed before it takes effect, so a typo cannot lock you out.</p>
+        </div>
+        <div class="wf-field">
+          <label class="k" for="acct-pass">Password</label>
+          <div class="wf-copy">
+            <input class="wf-input" id="acct-pass" type="password" value="password" readonly aria-label="Password">
+            <button class="wf-btn" type="button">Change</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="wf-list" style="max-width:560px;">
+        <div class="wf-list-row">
+          <span class="who">Sign in with a magic link <small>Passwordless email sign-in.</small></span>
+          <button class="wf-status on" type="button" role="switch" aria-checked="true">On</button>
+        </div>
+      </div>
+
+      <div class="wf-btns" style="max-width:560px;margin-top:16px;">
+        <a class="wf-btn block" href="login.html">Sign out</a>
+      </div>
+
+      <section class="wf-danger" aria-label="Delete account">
+        <h2><span aria-hidden="true">! </span>Delete account</h2>
+        <p class="wf-micro" style="margin-bottom:14px;">Permanently erase your account and your company's data. This cannot be undone (GDPR erasure).</p>
+        <a class="wf-btn" href="settings-account-delete.html">Delete account</a>
+      </section>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "8.4", file: "settings-account.html", shell: "operator" });</script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Upgrade / paywall (7.2) - Dialog</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 460px) { .plan-grid { grid-template-columns: 1fr; } }
+    .plan { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); padding: 14px; background: var(--wf-panel-2); }
+    .plan.pick { border-color: var(--wf-stroke); }
+    .plan .price { color: var(--wf-t-hi); font-weight: 700; font-size: 16px; margin: 4px 0 8px; }
+    .plan ul { list-style: none; margin: 0; }
+    .plan li { font-size: 12px; color: var(--wf-t); padding: 3px 0; }
+    .pay-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .price-total { display: flex; align-items: baseline; justify-content: space-between; border: 1px solid var(--wf-edge); border-radius: 8px; padding: 12px 14px; margin: 4px 0 14px; }
+    .price-total .big { color: var(--wf-t-hi); font-size: 20px; font-weight: 800; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content" aria-hidden="true">
+      <header>
+        <p class="wf-eyebrow">Owner</p>
+        <h1>Invite your owner</h1>
+        <p class="wf-lead">Enter your owner's email. The owner dashboard is a paid feature, so on the free plan you will unlock it before the invite sends.</p>
+      </header>
+      <div class="wf-card" style="max-width:520px;">
+        <div class="wf-field">
+          <span class="k">Owner email</span>
+          <input class="wf-input" type="email" value="marcus@acme.co" readonly>
+        </div>
+        <div class="wf-strip2">Your owner sees aggregate only, never individual data.</div>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<div class="wf-overlay" role="presentation">
+  <div class="wf-dialog" role="dialog" aria-modal="true" aria-labelledby="up-title">
+    <div style="display:flex;align-items:baseline;gap:10px;">
+      <h2 id="up-title" style="flex:1;">Upgrade to Starter</h2>
+      <a class="wf-rowlink" href="share-owner.html" aria-label="Close, stay on Free">Close</a>
+    </div>
+    <p class="wf-micro">Unlocks the owner dashboard. You can leave without being charged.</p>
+
+    <div class="plan pick" style="margin-top:14px;">
+      <span class="wf-tag">Starter</span>
+      <p class="price">$5 / seat / month</p>
+      <ul>
+        <li>Owner dashboard included</li>
+        <li>Up to 50 people, full pulse with trends</li>
+      </ul>
+    </div>
+
+    <div class="wf-field" style="margin-top:14px;">
+      <label class="k" for="seats">Seats (your team size)</label>
+      <input class="wf-input" id="seats" type="number" value="18" min="1">
+    </div>
+
+    <div class="price-total">
+      <span class="wf-micro">18 seats &times; $5, billed monthly</span>
+      <span class="big">$90 / month</span>
+    </div>
+    <p class="wf-micro" style="margin-top:-6px;margin-bottom:14px;">Pricing is a working figure [?], benchmarked against comparable tools.</p>
+
+    <fieldset style="border:0;padding:0;margin:0;">
+      <legend class="wf-card-h">Payment</legend>
+      <div class="wf-field">
+        <label class="k" for="card">Card number</label>
+        <input class="wf-input" id="card" inputmode="numeric" placeholder="1234 1234 1234 1234">
+      </div>
+      <div class="pay-row">
+        <div class="wf-field">
+          <label class="k" for="exp">Expiry</label>
+          <input class="wf-input" id="exp" placeholder="MM / YY">
+        </div>
+        <div class="wf-field">
+          <label class="k" for="cvc">Security code</label>
+          <input class="wf-input" id="cvc" inputmode="numeric" placeholder="CVC">
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="wf-btns" style="flex-direction:column;align-items:stretch;margin-top:6px;">
+      <a class="wf-btn solid block" href="invite-owner-sent.html">Upgrade now</a>
+      <a class="wf-btn block" href="share-owner.html">Stay on Free</a>
+    </div>
+    <p class="wf-micro" style="margin-top:10px;">If the <a href="payment-failed.html">card is declined</a>, you will not be charged and can retry.</p>
+  </div>
+</div>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "7.2", file: "upgrade.html", shell: "operator", tab: "Owner" });</script>
+
+</body>
+</html>

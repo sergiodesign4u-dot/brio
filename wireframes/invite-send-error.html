@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Invite-send error (3.3) - Error shown</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio setup"></nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <p class="wf-eyebrow">Step 3 of 3</p>
+        <h1>Some invites did not send</h1>
+        <p class="wf-lead" style="margin-bottom:20px;">Two of three email invites failed, usually a mistyped address. Your join link and code still work, so this never blocks you.</p>
+
+        <div class="wf-list">
+          <div class="wf-list-row"><span class="who">dev@company,com <small>looks mistyped</small></span><button class="wf-btn" type="button">Retry</button></div>
+          <div class="wf-list-row"><span class="who">ana@compnay.com <small>could not deliver</small></span><button class="wf-btn" type="button">Retry</button></div>
+        </div>
+
+        <div class="wf-btns" style="margin:18px 0;">
+          <a class="wf-btn solid" href="onboarding-invite.html">Retry failed</a>
+          <a class="wf-btn" href="onboarding-invite.html">Skip for now</a>
+        </div>
+
+        <div class="wf-card">
+          <p class="wf-micro" style="margin-bottom:10px;">These always work, no email needed:</p>
+          <div class="wf-copy">
+            <input class="wf-input" value="brio.app/join/steady-otter" readonly aria-label="Join link">
+            <button class="wf-btn" type="button">Copy</button>
+          </div>
+          <p class="wf-micro" style="margin-top:8px;">Join code: <strong>STEADY-OTTER</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "3.3", file: "invite-send-error.html", shell: "wizard", step: "Step 3 of 3" });</script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Brio - Wireframe: Dashboard (4.0) - Score ready</title>
+  <title>Brio - Wireframe: Dashboard (4.0) - Threshold alert</title>
   <link rel="stylesheet" href="_wf.css">
 </head>
 <body>
@@ -21,13 +21,20 @@
         <h1>Your team pulse</h1>
       </header>
 
+      <div class="wf-alert" role="status">
+        <span class="tag">Alert</span>
+        <span>Wellbeing dipped this week.</span>
+        <span class="sp"></span>
+        <a class="wf-btn" href="threshold-alert.html">See what changed</a>
+      </div>
+
       <div class="wf-grid">
         <section aria-label="Team pulse and next step">
           <div class="wf-pulse">
-            <div class="read">Steady</div>
-            <p class="interp">The team is holding steady this week, in line with last.</p>
+            <div class="read">Dipping</div>
+            <p class="interp">The team is down from last week. It is worth a look now, before it settles into a pattern.</p>
             <div class="act-lbl">Suggested next step</div>
-            <a class="wf-btn solid" href="share-owner.html">Share this with your owner</a>
+            <a class="wf-btn solid" href="threshold-alert.html">See what changed</a>
           </div>
           <div class="wf-btns" style="margin-top:16px;">
             <a class="wf-btn" href="team-pulse.html">View full pulse</a>
@@ -39,10 +46,10 @@
           <div class="wf-card">
             <h2>This week</h2>
             <div class="wf-spark" aria-hidden="true">
-              <span class="bar" style="height:40%"></span><span class="bar" style="height:55%"></span><span class="bar" style="height:48%"></span><span class="bar hi" style="height:52%"></span><span class="bar hi" style="height:50%"></span>
+              <span class="bar" style="height:55%"></span><span class="bar" style="height:60%"></span><span class="bar hi" style="height:52%"></span><span class="bar hi" style="height:48%"></span><span class="bar" style="height:32%"></span>
             </div>
-            <p class="wf-metric">72% <span>of the team answered</span></p>
-            <p class="wf-micro" style="margin-top:8px;">Holding steady over the last five cycles. Aggregate only, never who.</p>
+            <p class="wf-metric">68% <span>of the team answered</span></p>
+            <p class="wf-micro" style="margin-top:8px;">Down from last week. Aggregate only, never who.</p>
           </div>
           <div class="wf-card">
             <div class="wf-strip2">Aggregate only. You never see who answered.</div>
@@ -58,7 +65,7 @@
 </main>
 
 <script src="_nav.js"></script>
-<script>BRIO_WF.render({ node: "4.0", file: "dashboard.html", shell: "operator", tab: "Dashboard" });</script>
+<script>BRIO_WF.render({ node: "4.0", file: "dashboard-alert.html", shell: "operator", tab: "Dashboard" });</script>
 
 </body>
 </html>

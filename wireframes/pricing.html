@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="See Brio's simple per-seat pricing for employee wellbeing at a small company with no HR. Start free, upgrade for the owner dashboard, and individual answers stay private.">
+  <title>Brio - Wireframe: Pricing (1.0)</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    /* Plan tier cards (0.6 tiers via 7.1 plan cards), greyscale only */
+    .wf-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 720px) { .wf-plans { grid-template-columns: 1fr; } }
+    .wf-plan { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); padding: 20px; background: var(--wf-panel-2); display: flex; flex-direction: column; }
+    .wf-plan.rec { border-color: var(--wf-stroke); }
+    .wf-plan .ph { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .wf-plan .pn { font-size: 15px; font-weight: 700; color: var(--wf-t-hi); }
+    .wf-rec { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--wf-solid-ink); background: var(--wf-solid); border-radius: 100px; padding: 2px 8px; font-weight: 700; }
+    .wf-plan .pp { font-size: 13px; color: var(--wf-t-mid); margin: 4px 0 16px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+    .wf-plan .pp b { color: var(--wf-t-hi); font-size: 24px; font-weight: 800; }
+    .wf-hyp { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--wf-t-lo); border: 1px solid var(--wf-edge); border-radius: 100px; padding: 1px 7px; }
+    .wf-plan .prow { font-size: 13px; color: var(--wf-t); display: flex; gap: 9px; margin-bottom: 9px; align-items: flex-start; }
+    .wf-plan .prow .mk { color: var(--wf-t-hi); font-weight: 700; flex-shrink: 0; width: 12px; text-align: center; }
+    .wf-plan .prow.no { color: var(--wf-t-lo); }
+    .wf-plan .prow.no .mk { color: var(--wf-t-lo); }
+    .wf-plan .pcta { margin-top: auto; padding-top: 16px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-mkt">
+
+        <section class="wf-hero" aria-label="Introduction">
+          <p class="wf-eyebrow">Pricing</p>
+          <h1>Simple pricing for team wellbeing</h1>
+          <p class="wf-lead">Brio has simple, transparent pricing for employee wellbeing, with no demo and no sales call. Start free for up to 10 people with one program and a weekly check-in. Upgrade to Starter for the full program library, trends, and the owner dashboard, the honest team-level proof an owner wants. Pricing is per seat, and the subscription pays for aggregate insight: individual answers are never shown or sold, because the privacy boundary is the product.</p>
+          <div class="wf-btns" style="margin-top:22px;">
+            <a class="wf-btn solid" href="signup.html">Start free</a>
+            <span class="wf-micro" style="align-self:center;">No demo, no card.</span>
+          </div>
+        </section>
+
+        <section id="plans" aria-label="Compare plans">
+          <h2>Compare plans</h2>
+          <div class="wf-plans">
+            <div class="wf-plan">
+              <div class="ph"><span class="pn">Free</span></div>
+              <div class="pp"><b>$0</b> <span>/ month</span> <span class="wf-hyp">Hypothesis</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Up to 10 people</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>One program, weekly check-in</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Aggregate score for the operator</span></div>
+              <div class="prow no"><span class="mk">&#215;</span><span>No owner dashboard</span></div>
+              <div class="pcta"><a class="wf-btn block" href="signup.html">Start free</a></div>
+            </div>
+            <div class="wf-plan rec">
+              <div class="ph"><span class="pn">Starter</span><span class="wf-rec">Recommended</span></div>
+              <div class="pp"><b>$5</b> <span>/ seat / month</span> <span class="wf-hyp">Hypothesis</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Up to 50 people</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Full program library and trends</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Owner dashboard, aggregate only</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Custom nudge scheduling</span></div>
+              <div class="pcta"><a class="wf-btn solid block" href="signup.html">Start free</a></div>
+            </div>
+            <div class="wf-plan">
+              <div class="ph"><span class="pn">Growth</span></div>
+              <div class="pp"><b>$9</b> <span>/ seat / month</span> <span class="wf-hyp">Hypothesis</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>50 to 200+ people</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Multi-team aggregation</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Advanced trend analytics</span></div>
+              <div class="prow"><span class="mk">&#10003;</span><span>Integrations and priority support</span></div>
+              <div class="pcta"><a class="wf-btn block" href="signup.html">Start free</a></div>
+            </div>
+          </div>
+          <p class="wf-micro" style="margin-top:14px;">All prices are hypotheses, benchmarked against competitor pricing. Pricing is per seat and billed monthly.</p>
+        </section>
+
+        <section id="owner-paid" aria-label="Why the owner dashboard is paid">
+          <h2>Why the owner dashboard is paid</h2>
+          <div class="wf-strip2" style="text-align:left;padding:16px;">Free gives you, the operator, the team aggregate. The owner dashboard, the honest proof of value your owner wants, is the paid unlock. You upgrade to give the owner an aggregate-only read, never a per-person one.</div>
+        </section>
+
+        <section id="privacy" aria-label="Your team's answers stay private">
+          <h2>Your team's answers stay private</h2>
+          <div class="wf-strip2" style="text-align:left;padding:16px;">The subscription pays for the aggregate. Individual answers are never shown or sold, because the privacy boundary is the product, not a setting. <a href="security-privacy.html">See exactly what the owner can and cannot see</a>.</div>
+        </section>
+
+        <section id="faq" aria-label="Pricing questions">
+          <h2>Pricing questions</h2>
+          <div class="wf-list">
+            <div class="wf-list-row"><span class="who">Is there really a free plan?</span><a class="wf-rowlink" href="help.html">Read</a></div>
+            <div class="wf-list-row"><span class="who">What counts as a seat?</span><a class="wf-rowlink" href="help.html">Read</a></div>
+            <div class="wf-list-row"><span class="who">Can I change or cancel anytime?</span><a class="wf-rowlink" href="help.html">Read</a></div>
+          </div>
+          <p class="wf-micro" style="margin-top:12px;">More answers in the <a href="help.html">Help center</a>.</p>
+        </section>
+
+        <section class="wf-cta-final" aria-label="Get started">
+          <h2>Start free in five minutes</h2>
+          <p class="wf-body" style="margin-bottom:16px;">No credit card. Free for up to 10 people.</p>
+          <a class="wf-btn solid" href="signup.html">Start free</a>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "1.0", file: "pricing.html", shell: "public" });</script>
+
+</body>
+</html>
