@@ -69,3 +69,59 @@
 - **Canonical illustrative data** (one team, one score, one participation share, one set of programs) is fixed once at Step 8 and threaded through every page so neighboring screens never disagree on the same number. Until then, each screen uses the ready A-E text from its own IA node.
 - **Nothing invented:** every state above is quoted from the "States" section of the node's spec in ia/docs/pages/. A state not there is not drawn. A hole found while building is fixed in the IA spec first, then rendered.
 - **Success is not universal:** Home has no data states (static marketing); form and wizard nodes forward on success rather than render a success page, so their base file is the ready form.
+
+---
+
+## Full coverage - all flows and the rest of the sitemap (Steps 6 to 9)
+
+*Step 1 above defines the Flow 1 matrix in full. Steps 6 to 8 built the rest; every screen state below is taken from its node IA "States" section (ia/docs/pages/), nothing invented. The live, always-current matrix is the coverage map in index.html (rendered from _nav.js). Totals: 47 of 47 screens built, 99 state pages, 0 in spec.*
+
+| Cluster | Screen (node) | State pages |
+|---|---|---|
+| **0 Global shell and home** | 0.0 Home | Base (guest), Returning operator, Owner |
+| **1 Public marketing and acquisition** | 1.0 Pricing | Default |
+|  | 1.1 Security and privacy | Default |
+|  | 1.2 About | Default |
+|  | 1.3 Contact / Support | Default, Error, Sent |
+|  | 1.4 Help / FAQ | Default |
+|  | 1.5 Category / segment landing | Default |
+|  | 1.6 Legal documents | Default |
+| **2 Authentication** | 2.0 Sign up | Default, Error, Submitting |
+|  | 2.1 Log in | Default, Error, Loading |
+|  | 2.2 Magic-link sent | Link sent |
+|  | 2.3 Invalid or expired link | Expired |
+|  | 2.4 Reset password | Default, Error, Loading, Success |
+| **3 Onboarding wizard** | 3.0 Company setup | Default, Save failed, Saving |
+|  | 3.1 First program confirm | Resolved, Pre-select, Pre-select failed |
+|  | 3.2 Invite team | Default, Sending |
+|  | 3.3 Invite-send error | Error shown |
+| **4 Dashboard and pulse** | 4.0 Dashboard | Score ready, Pre-minimum-N, Cycle open, Loading, Error, No program, Threshold alert |
+|  | 4.1 Team pulse detail | Default, Minimum-N not met, Cycle open, Loading, Error, First run |
+|  | 4.2 Threshold alert detail | Default, Error, Loading, Recovered |
+| **5 Programs** | 5.0 Program library | Default, Empty, Error, Loading |
+|  | 5.1 Program detail / manage | Default, Draft, End dialog, Ended, Error, Loading, Not found |
+|  | 5.2 Check-in setup | Default, Error, Loading |
+| **6 Team** | 6.0 Team roster | Has members, No members, Pending invites, Open cycle, Loading, Error, Manage dialog |
+| **7 Owner share and upgrade** | 7.0 Share with owner | Default |
+|  | 7.1 Invite owner + upgrade | Default, Sent |
+|  | 7.2 Upgrade / paywall | Default |
+|  | 7.3 Payment failed | Payment failed |
+| **8 Settings** | 8.0 Settings shell | Default |
+|  | 8.1 Plan / subscription | Default |
+|  | 8.2 Privacy center | Default |
+|  | 8.3 Notifications | Default |
+|  | 8.4 Account settings | Default, Delete |
+| **9 Owner surface** | 9.0 Owner dashboard | Default, Empty |
+|  | 9.2 Monthly owner digest | Default |
+| **10 Employee check-in** | 10.0 Check-in entry | Default |
+|  | 10.1 Pre-Q1 privacy disclosure | Default |
+|  | 10.2 Questions | Default, Loading |
+|  | 10.3 Check-in complete | Default |
+|  | 10.4 Invite link expired | Expired |
+|  | 10.5 Already submitted | Already |
+|  | 10.6 Submit error | Submit error |
+| **11 System and global** | 11.0 404 Not found | 404 |
+|  | 11.1 500 Server error | 500 |
+|  | 11.2 Maintenance | 503 |
+|  | 11.3 Cookie consent | Default, Manage |
+|  | 11.4 Toast / inline notification | Default |

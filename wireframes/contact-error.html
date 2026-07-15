@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title>Brio - Wireframe: Contact / Support (1.3) - Send failed</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    .wf-textarea { min-height: 120px; resize: vertical; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio"></nav>
+
+    <div class="wf-content">
+      <div class="wf-mkt">
+
+        <section class="wf-hero" aria-label="Introduction">
+          <p class="wf-eyebrow">Contact and support</p>
+          <h1>Get in touch</h1>
+          <p class="wf-lead">Have a question about Brio? Many answers are in Help. If you still need us, send a message or email support directly, and we will reply to your email, usually within one business day.</p>
+        </section>
+
+        <section aria-label="Send us a message" style="max-width:560px;">
+          <h2>Send us a message</h2>
+          <form>
+            <p class="wf-err" style="margin:0 0 14px;">Could not send. Please try again, or email us directly at support@brio.example.</p>
+            <label class="wf-field">
+              <span class="k">Your name</span>
+              <input class="wf-input" type="text" value="Priya" autocomplete="name">
+            </label>
+            <label class="wf-field">
+              <span class="k">Email</span>
+              <input class="wf-input" type="email" value="priya@acme.co" autocomplete="email">
+            </label>
+            <label class="wf-field">
+              <span class="k">Message</span>
+              <textarea class="wf-input wf-textarea">How do I invite my team?</textarea>
+            </label>
+            <div class="wf-btns">
+              <a class="wf-btn solid" href="contact-sent.html">Try again</a>
+              <a class="wf-btn" href="contact.html">Email us directly</a>
+            </div>
+            <p class="wf-micro" style="margin-top:10px;">Your message is kept as you wrote it.</p>
+          </form>
+        </section>
+
+      </div>
+    </div>
+
+    <footer class="wf-pubfoot" id="wf-appfoot"></footer>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "1.3", file: "contact-error.html", shell: "public" });</script>
+
+</body>
+</html>

@@ -23,7 +23,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 | User Research (Personas + JTBD) | Done (personas, jobs to be done, JTBD matrix, MVP core, personas.html, jtbd.html) |
 | CJM (As-Is + To-Be) | Done (customer journey map As-Is + To-Be, emotional curve, backlog, cjm-as-is.html, cjm-to-be.html) |
 | Information Architecture (Basic + Detailed) | Done (Base Layer: Flows + Concept map, ia/flows.html + ia/concept.html. Detail Layer: Sitemap + all node specs and B/W wireframes, ia/sitemap.html + ia/docs/pages/ + ia/<node>.html) |
-| Wireframes | Not started |
+| Wireframes | Done. Grey clickable prototype of the whole product: wireframes/index.html (All-screens hub + coverage map), 47 of 47 screens, 99 state pages, 100 html files, six render shells in _nav.js, shared grey _wf.css. Every internal link resolves; greyscale and one-H1 clean; audited in wireframes/docs/critique.md. |
 | Voice | Not started |
 | Concept | Not started |
 | UI + Visual | Not started |

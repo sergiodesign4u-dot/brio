@@ -51,7 +51,10 @@ Supporting architecture (serve Yemi; preconditions for the above; in MVP scope b
 
 ## Wireframes
 
-*Stage 04 (in progress). A grey clickable prototype of the whole product in HTML, built from the IA Detail Layer. Nothing is invented here: text comes from each node's A-E SEO block, components from IA nodes, states from the node's IA "States" section, flow links from ia/docs/flows.md. A hole found while building is fixed in the IA first, then rendered. Grey contract only: no color, type, brand, icons, or shadows until Concept (stage 06), which colors COPIES in ui-visual/, never these source files. Full detail: wireframes/docs/screens.md (matrix), wireframes/docs/conventions.md (contract), wireframes/docs/critique.md (defect log).*
+*Stage 04 DONE. A grey clickable prototype of the whole product in HTML, built from the IA Detail Layer. Live entry: wireframes/index.html (the All-screens hub and coverage map). Coverage: 47 of 47 screens, 99 state pages, 100 html files, 0 in spec; every internal link resolves, greyscale and one-H1 clean, audited (wireframes/docs/critique.md).*
+
+*Original stage brief:*
+*A grey clickable prototype of the whole product in HTML, built from the IA Detail Layer. Nothing is invented here: text comes from each node's A-E SEO block, components from IA nodes, states from the node's IA "States" section, flow links from ia/docs/flows.md. A hole found while building is fixed in the IA first, then rendered. Grey contract only: no color, type, brand, icons, or shadows until Concept (stage 06), which colors COPIES in ui-visual/, never these source files. Full detail: wireframes/docs/screens.md (matrix), wireframes/docs/conventions.md (contract), wireframes/docs/critique.md (defect log).*
 
 **Etalon (working horse, locked Step 1): 4.0 Dashboard (wireframes/dashboard.html).** Maximum reuse: it sets the operator app shell (global nav + page frame, present on every operator screen) and the pulse card (score + interpretation + next action, reused on 4.1, 4.2, 9.0, 9.2), and carries the richest state set, so it fixes the state pattern for the whole product. Voice (05) and Concept (06) take the etalon from this file, they do not re-derive it.
 
@@ -206,7 +209,7 @@ Employee wellbeing programs in the US operate near several regulatory areas. Thi
 | User Research (Personas + JTBD) | user-research/docs/ (personas, jtbd) + user-research/personas.html + user-research/jtbd.html | Done |
 | CJM (As-Is + To-Be) | user-research/docs/ (cjm-as-is, cjm-to-be) + user-research/cjm-as-is.html + cjm-to-be.html | Done |
 | Information Architecture (Basic + Detailed) | ia/docs/ (sitemap, flows) + ia/flows.html + ia/concept.html + ia/sitemap.html + ia/docs/pages/ (all node specs) + ia/<node>.html wireframes | Done (Base Layer: Flows + Concept map; Detail Layer: Sitemap + all 41 page nodes + cluster 11 system + globals, per-node specs and B/W wireframes) |
-| Wireframes | wireframes/ | Not started |
+| Wireframes | wireframes/ (docs: screens, conventions, critique) + _nav.js + _wf.css + index.html + 100 screen and state html | Done |
 | Voice | voice/ | Not started |
 | Concept | concept/ | Not started |
 | UI + Visual | ui-visual/ | Not started |

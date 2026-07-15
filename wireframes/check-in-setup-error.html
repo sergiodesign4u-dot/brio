@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Check-in setup (5.2) - Error</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    fieldset.ci-set { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); padding: 16px 18px; margin: 0 0 16px; background: var(--wf-panel-2); }
+    fieldset.ci-set > legend { font-size: 12px; font-weight: 700; color: var(--wf-t); padding: 0 6px; }
+    .ci-q { display: flex; align-items: center; gap: 10px; padding: 11px 0; }
+    .ci-q .qt { flex: 1; color: var(--wf-t-2); font-size: 14px; }
+    .ci-type { width: auto; display: inline-block; padding: 6px 10px; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="program-library.html">Programs</a> / <a href="program-detail.html">Steady Weeks</a> / Check-in</p>
+        <h1>Set up the check-in</h1>
+        <p class="wf-lead">For Steady Weeks. Pick 1 to 3 questions the team answers each week, in under 30 seconds.</p>
+      </header>
+
+      <form>
+        <p class="wf-err" style="margin:0 0 16px;">Could not save. Your setup is kept, please try again.</p>
+
+        <fieldset class="ci-set">
+          <legend>Questions, pick 1 to 3</legend>
+          <div class="ci-q">
+            <input type="checkbox" id="q1" checked>
+            <label class="qt" for="q1">How has this week felt for you?</label>
+            <select class="wf-input ci-type" aria-label="Answer type for question 1"><option>Emoji</option><option>Slider</option></select>
+          </div>
+        </fieldset>
+
+        <fieldset class="ci-set">
+          <legend>Cadence</legend>
+          <label class="wf-radio on"><input type="radio" name="cadence" checked> Weekly</label>
+        </fieldset>
+
+        <div class="wf-card" style="margin-top:8px;">
+          <div class="wf-btns">
+            <a class="wf-btn solid" href="team-pulse.html">Try again</a>
+            <a class="wf-btn" href="program-detail.html">Back to program</a>
+          </div>
+          <p class="wf-micro" style="margin-top:10px;">Your questions and cadence are kept as you left them.</p>
+        </div>
+      </form>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "5.2", file: "check-in-setup-error.html", shell: "operator", tab: "Programs" });</script>
+
+</body>
+</html>

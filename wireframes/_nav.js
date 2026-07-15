@@ -49,6 +49,7 @@ window.BRIO_WF = {
       { f: "about.html", s: "Default" } ] },
     { num: "1.3", name: "Contact / Support", file: "contact.html", ia: "contact.html", status: "built", states: [
       { f: "contact.html", s: "Default" },
+      { f: "contact-error.html", s: "Error" },
       { f: "contact-sent.html", s: "Sent" } ] },
     { num: "1.4", name: "Help / FAQ", file: "help.html", ia: "help.html", status: "built", states: [
       { f: "help.html", s: "Default" } ] },
@@ -70,7 +71,8 @@ window.BRIO_WF = {
     { num: "2.4", name: "Reset password", file: "reset-password.html", ia: "reset-password.html", status: "built", states: [
       { f: "reset-password.html", s: "Default" },
       { f: "reset-password-error.html", s: "Error" },
-      { f: "reset-password-loading.html", s: "Loading" } ] },
+      { f: "reset-password-loading.html", s: "Loading" },
+      { f: "reset-password-success.html", s: "Success" } ] },
 
     { num: "3.0", name: "Company setup", file: "onboarding-company.html", ia: "onboarding-company.html", status: "built", states: [
       { f: "onboarding-company.html", s: "Default" }, { f: "onboarding-company-error.html", s: "Save failed" }, { f: "onboarding-company-loading.html", s: "Saving" } ] },
@@ -88,19 +90,27 @@ window.BRIO_WF = {
       { f: "team-pulse.html", s: "Default" }, { f: "team-pulse-empty.html", s: "Minimum-N not met" }, { f: "team-pulse-open.html", s: "Cycle open" },
       { f: "team-pulse-loading.html", s: "Loading" }, { f: "team-pulse-error.html", s: "Error" }, { f: "team-pulse-nodata.html", s: "First run" } ] },
     { num: "4.2", name: "Threshold alert detail", file: "threshold-alert.html", ia: "threshold-alert.html", status: "built", states: [
-      { f: "threshold-alert.html", s: "Default" } ] },
+      { f: "threshold-alert.html", s: "Default" },
+      { f: "threshold-alert-error.html", s: "Error" },
+      { f: "threshold-alert-loading.html", s: "Loading" },
+      { f: "threshold-alert-recovered.html", s: "Recovered" } ] },
 
     { num: "5.0", name: "Program library", file: "program-library.html", ia: "program-library.html", status: "built", states: [
       { f: "program-library.html", s: "Default" },
       { f: "program-library-empty.html", s: "Empty" },
+      { f: "program-library-error.html", s: "Error" },
       { f: "program-library-loading.html", s: "Loading" } ] },
     { num: "5.1", name: "Program detail / manage", file: "program-detail.html", ia: "program-detail.html", status: "built", states: [
       { f: "program-detail.html", s: "Default" },
       { f: "program-detail-draft.html", s: "Draft" },
       { f: "program-detail-end.html", s: "End dialog" },
-      { f: "program-detail-ended.html", s: "Ended" } ] },
+      { f: "program-detail-ended.html", s: "Ended" },
+      { f: "program-detail-error.html", s: "Error" },
+      { f: "program-detail-loading.html", s: "Loading" },
+      { f: "program-detail-notfound.html", s: "Not found" } ] },
     { num: "5.2", name: "Check-in setup", file: "check-in-setup.html", ia: "check-in-setup.html", status: "built", states: [
       { f: "check-in-setup.html", s: "Default" },
+      { f: "check-in-setup-error.html", s: "Error" },
       { f: "check-in-setup-loading.html", s: "Loading" } ] },
 
     { num: "6.0", name: "Team roster", file: "team-roster.html", ia: "team-roster.html", status: "built", states: [

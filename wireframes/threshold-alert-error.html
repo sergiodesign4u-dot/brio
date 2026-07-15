@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Wireframe: Threshold alert (4.2) - Error</title>
+  <link rel="stylesheet" href="_wf.css">
+</head>
+<body>
+
+<div class="wf-bar" id="wf-bar"></div>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app"></nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow"><a href="dashboard.html">Dashboard</a> / Alert</p>
+        <h1>What changed</h1>
+      </header>
+
+      <section aria-label="Could not load this alert">
+        <div class="wf-state">
+          <div class="n">Could not load this alert</div>
+          <p class="sub">Something went wrong on our side, or this alert no longer exists. Your team data is safe. Try again, or go back to your dashboard.</p>
+          <div class="wf-btns" style="justify-content:center;">
+            <a class="wf-btn solid" href="threshold-alert.html">Retry</a>
+            <a class="wf-btn" href="dashboard.html">Back to dashboard</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot"></footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs"></nav>
+  </div>
+</main>
+
+<script src="_nav.js"></script>
+<script>BRIO_WF.render({ node: "4.2", file: "threshold-alert-error.html", shell: "operator", tab: "Dashboard" });</script>
+
+</body>
+</html>
