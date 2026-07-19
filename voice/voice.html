@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - Voice</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #13161b;
+      --surface-2: #1a1e25;
+      --surface-3: #21262f;
+      --border: #252a33;
+      --border-subtle: #1e232c;
+      --text: #e8eaf0;
+      --text-muted: #8b909c;
+      --text-faint: #555b68;
+      --accent: #4f9cf9;
+      --accent-dim: #1d3a5f;
+      --accent-warm: #f4a261;
+      --accent-warm-dim: #3d2810;
+      --green: #4ade80;
+      --green-dim: #14532d;
+      --red: #f87171;
+      --red-dim: #450a0a;
+      --yellow: #fbbf24;
+      --yellow-dim: #451a03;
+      --score-5: #4ade80;
+      --score-4: #86efac;
+      --score-3: #fbbf24;
+      --score-2: #fb923c;
+      --score-1: #f87171;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --radius-sm: 4px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sidebar navigation - mobile-first */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 52px;
+    }
+
+    .sidebar-brand {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .sidebar-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: 9px 8px;
+    }
+
+    .sidebar-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--text-muted);
+      border-radius: 1px;
+    }
+
+    .sidebar-body {
+      display: none;
+      padding: 8px 0 16px;
+      border-top: 1px solid var(--border);
+      overflow-y: auto;
+      max-height: calc(100vh - 52px);
+    }
+    .sidebar-body.open { display: block; }
+
+    .nav-group { padding: 0 8px; }
+
+    .nav-group-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 14px 12px 6px;
+    }
+
+    .nav-group-label.active-section { color: var(--accent); }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s, background 0.15s;
+    }
+
+    a.nav-item:hover {
+      color: var(--text);
+      background: var(--surface-2);
+      text-decoration: none;
+    }
+
+    .nav-item-disabled {
+      color: var(--text-faint);
+      cursor: default;
+    }
+
+    .nav-soon {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 100px;
+      background: var(--surface-3);
+      color: var(--text-faint);
+      border: 1px solid var(--border);
+    }
+
+    .nav-group-next .nav-group-label { opacity: 0.5; }
+
+    .nav-item-muted {
+      color: var(--text-faint);
+      opacity: 0.5;
+      cursor: default;
+      font-size: 12px;
+    }
+
+    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
+    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
+    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
+    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub-item.nav-sub-active { color: var(--accent); }
+    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
+    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
+    .nav-sub2-item.nav-sub-active { color: var(--accent); }
+
+    @media (min-width: 900px) {
+      .sidebar {
+        left: 0;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        width: 220px;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+      }
+      .sidebar-header { height: 64px; padding: 0 20px; }
+      .sidebar-toggle { display: none; }
+      .sidebar-body {
+        display: block;
+        max-height: none;
+        border-top: none;
+        padding: 4px 0 24px;
+        overflow-y: visible;
+      }
+    }
+
+    /* Layout */
+    main {
+      padding-top: 52px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (min-width: 900px) {
+      main {
+        padding-top: 0;
+        margin-left: 220px;
+        margin-right: 0;
+        max-width: none;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+
+    section {
+      padding: 80px 0 40px;
+    }
+
+    /* Typography */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-top: 48px;
+    }
+    h2:first-of-type { padding-top: 0; }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      margin-top: 28px;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      max-width: 72ch;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Hero section */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .badge.accent { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-dim); }
+
+    .hero-intro {
+      font-size: clamp(15px, 1.5vw, 17px);
+      color: var(--text-muted);
+      max-width: 68ch;
+      margin-bottom: 40px;
+    }
+
+    .conclusions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .conclusion-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+    .conclusion-card:hover { border-color: var(--accent-dim); }
+
+    .conclusion-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .conclusion-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead tr {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.1s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+
+    tbody td {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+
+    tbody td:first-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Score cells */
+    .score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      color: #0d0f12;
+    }
+    .score-5 { background: var(--score-5); }
+    .score-4 { background: var(--score-4); }
+    .score-3 { background: var(--score-3); }
+    .score-2 { background: var(--score-2); }
+    .score-1 { background: var(--score-1); }
+    .score-na { background: var(--surface-3); color: var(--text-faint); font-size: 11px; width: auto; padding: 0 6px; }
+
+    /* Highlighted row */
+    tr.highlight td { color: var(--text); background: rgba(79, 156, 249, 0.04); }
+    tr.highlight td:first-child { color: var(--accent); }
+
+    /* Tag chips */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .tag-confirmed { background: var(--green-dim); color: var(--green); }
+    .tag-challenged { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-changed { background: var(--accent-dim); color: var(--accent); }
+    .tag-elevated { background: var(--accent-warm-dim); color: var(--accent-warm); }
+    .tag-critical { background: var(--red-dim); color: var(--red); }
+    .tag-high { background: var(--yellow-dim); color: var(--yellow); }
+    .tag-medium { background: var(--surface-3); color: var(--text-muted); }
+
+    /* Competitor group cards */
+    .group-section {
+      margin-bottom: 40px;
+    }
+
+    .group-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin-bottom: 16px;
+    }
+    .group-label.hard { color: var(--red); border-color: var(--red-dim); background: var(--red-dim); }
+    .group-label.soft { color: var(--yellow); border-color: var(--yellow-dim); background: var(--yellow-dim); }
+    .group-label.aspirational { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-dim); }
+
+    /* Screenshot gallery */
+    .gallery {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 4px 0 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+      margin: 24px 0;
+    }
+
+    .gallery-item {
+      flex-shrink: 0;
+      width: 320px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: block;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .gallery-item img:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .gallery-caption {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 8px;
+      padding: 0 2px;
+    }
+
+    /* Hypothesis cards */
+    .hypotheses {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .hypothesis-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      transition: border-color 0.15s;
+    }
+    .hypothesis-card:hover { border-color: var(--accent-dim); }
+
+    @media (max-width: 700px) {
+      .hypothesis-card { grid-template-columns: 1fr; }
+    }
+
+    .hypothesis-part-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .if-label { color: var(--accent); }
+    .then-label { color: var(--green); }
+    .because-label { color: var(--accent-warm); }
+
+    .hypothesis-num {
+      grid-column: 1 / -1;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+      margin-bottom: -12px;
+    }
+
+    .hypothesis-part p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Mechanism cards */
+    .mechanisms {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .mechanism-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color 0.15s;
+    }
+    .mechanism-card:hover { border-color: var(--green-dim); }
+
+    .mechanism-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mechanism-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--green-dim);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .mechanism-card h3 { margin: 0; font-size: 15px; }
+
+    .mechanism-source {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 8px;
+    }
+
+    .mechanism-why {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      border-left: 2px solid var(--accent);
+    }
+    .mechanism-why p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+    /* Anti-pattern card */
+    .antipattern-card {
+      background: var(--surface);
+      border: 1px solid var(--red-dim);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin: 16px 0;
+    }
+
+    .antipattern-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .antipattern-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--red-dim);
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* UX Pattern cards */
+    .patterns-grid {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .pattern-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+    .pattern-card:hover { border-color: var(--border-subtle); }
+    .pattern-card.primary { border-color: var(--accent-dim); background: rgba(79, 156, 249, 0.03); }
+    .pattern-card.antipattern { border-color: var(--red-dim); opacity: 0.75; }
+
+    .findings-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 16px 0; }
+    @media (max-width: 700px) { .findings-grid { grid-template-columns: 1fr; } }
+
+    .pattern-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pattern-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-faint);
+    }
+
+    /* Gap table row coloring */
+    .gap-critical td:last-child { color: var(--red); }
+    .gap-high td:last-child { color: var(--yellow); }
+    .gap-medium td:last-child { color: var(--text-muted); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* Quote block */
+    blockquote {
+      border-left: 2px solid var(--accent);
+      padding: 12px 20px;
+      background: var(--surface);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Open questions */
+    .open-questions {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .question-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .q-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 24px;
+    }
+
+    .q-body p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .q-body .q-note {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 4px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      margin-top: 80px;
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    /* Subtle enter animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { animation: fadeUp 0.5s ease both; }
+
+    /* Lean UX Canvas */
+    .canvas-block {
+      background: var(--surface);
+      border: 1px solid var(--accent-dim);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin: 40px 0;
+    }
+
+    .canvas-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .canvas-title-group h2 {
+      padding-top: 0;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+
+    .canvas-attribution {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin: 0;
+    }
+
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .canvas-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .canvas-grid { grid-template-columns: 1fr; }
+    }
+
+    .canvas-cell {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .canvas-cell.riskiest {
+      border-color: var(--accent-warm);
+      background: var(--accent-warm-dim);
+    }
+
+    .canvas-cell.span-2 {
+      grid-column: span 2;
+    }
+
+    .canvas-cell-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .canvas-cell.riskiest .canvas-cell-label {
+      color: var(--accent-warm);
+    }
+
+    .canvas-cell p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0 0 6px;
+      max-width: none;
+    }
+
+    .canvas-cell p:last-child { margin-bottom: 0; }
+
+    .canvas-cell ul {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .canvas-cell ul li {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .canvas-cell ul li:last-child { margin-bottom: 0; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding-left: 16px; padding-right: 16px; }
+      .hypothesis-card { padding: 16px; gap: 16px; }
+    }
+
+    /* ========================
+       LIVE RESEARCH - SECTION
+       ======================== */
+
+    .stat-line {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+
+    .stat-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .stat-killed .stat-number { color: var(--red); }
+    .stat-confirmed .stat-number { color: var(--green); }
+
+    .finding-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .finding-card.killed {
+      border-color: var(--red-dim);
+      background: rgba(248, 113, 113, 0.03);
+    }
+
+    .finding-card.resolved {
+      border-color: var(--green-dim);
+    }
+
+    .finding-id {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      margin-bottom: 8px;
+    }
+
+    .finding-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .finding-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .finding-what {
+      margin-bottom: 12px;
+    }
+
+    .finding-impact {
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      border-left: 2px solid var(--accent);
+    }
+
+    .finding-impact p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .unresolved-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .unresolved-id {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--yellow);
+      min-width: 28px;
+      flex-shrink: 0;
+    }
+
+    .resolution-note {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--green-dim);
+      border-radius: var(--radius);
+      border-left: 2px solid var(--green);
+    }
+
+    .resolution-note p {
+      font-size: 13px;
+      color: var(--green);
+      margin: 0;
+    }
+    .nav-item-next { color: var(--text-muted); cursor: default; font-size: 12px; }
+    .nav-next { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--accent-dim); background: var(--accent-dim); color: var(--accent); margin-left: auto; }
+
+    /* ========================
+       VOICE - SECTION (extends the research template, tokens reused)
+       ======================== */
+
+    a.nav-item.nav-item-active-scroll { color: var(--accent); }
+
+    /* Principle cards */
+    .principle-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin: 16px 0;
+      transition: border-color 0.15s;
+    }
+    .principle-card:hover { border-color: var(--accent-dim); }
+
+    .principle-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .principle-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .principle-card h3 { margin: 0; font-size: 16px; }
+
+    .rule-line {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin: 0 0 16px;
+      max-width: none;
+    }
+
+    /* Positive / negative example lines */
+    .ex-block {
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .ex-good {
+      background: rgba(74, 222, 128, 0.05);
+      border-left: 2px solid var(--green);
+    }
+    .ex-bad {
+      background: rgba(248, 113, 113, 0.05);
+      border-left: 2px solid var(--red);
+    }
+    .ex-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .ex-good .ex-label { color: var(--green); }
+    .ex-bad .ex-label { color: var(--red); }
+    .ex-block ul { margin: 0; padding-left: 16px; }
+    .ex-block li { color: var(--text-muted); margin-bottom: 4px; }
+    .ex-block li:last-child { margin-bottom: 0; }
+
+    .source-line {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin: 12px 0 0;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+      max-width: none;
+    }
+
+    .voice-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin: 8px 0 0;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border-radius: var(--radius);
+      border-left: 2px solid var(--accent-warm);
+      max-width: none;
+    }
+
+    /* Address-form list */
+    .addr-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 10px;
+    }
+    .addr-item p { margin: 0; font-size: 13px; max-width: none; }
+    .addr-item strong { color: var(--text); }
+
+    /* Dictionary table cell tints */
+    td.use-cell { color: var(--green); }
+    td.use-cell strong { color: var(--green); }
+    td.not-cell { color: var(--red); }
+
+    /* Allowed / banned word blocks */
+    .word-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+    .word-block.allowed { border-left: 2px solid var(--green); }
+    .word-block.banned { border-left: 2px solid var(--red); }
+    .word-block h3 { margin: 0 0 8px; font-size: 14px; }
+    .word-block.allowed h3 { color: var(--green); }
+    .word-block.banned h3 { color: var(--red); }
+    .word-block p { margin: 0; font-size: 13px; max-width: none; }
+    .word-block .why { color: var(--text-faint); font-size: 12px; margin-top: 8px; }
+
+    /* Forbidden table was / should tints */
+    td.cell-was { color: var(--red); background: rgba(248, 113, 113, 0.05); }
+    td.cell-should { color: var(--green); background: rgba(74, 222, 128, 0.05); }
+
+    /* Microcopy rule blocks */
+    .micro-rule {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+    .micro-rule h3 { margin: 0 0 8px; font-size: 15px; }
+    .micro-rule p { font-size: 13px; margin: 0 0 8px; max-width: none; }
+    .micro-rule p:last-child { margin-bottom: 0; }
+    .micro-rule .lead { color: var(--text-muted); }
+    .mc-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1px 7px;
+      border-radius: 100px;
+      margin-right: 8px;
+      vertical-align: 1px;
+    }
+    .mc-tag-yes { background: var(--green-dim); color: var(--green); }
+    .mc-tag-no { background: var(--red-dim); color: var(--red); }
+    .mc-tag-line { background: var(--accent-dim); color: var(--accent); }
+    .mc-note { color: var(--text-faint); font-size: 12px; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-brand">Brio</span>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="sidebar-body" id="sidebarBody">
+    <div class="nav-group">
+      <a href="../research/research.html" class="nav-item">Foundation Research</a>
+    </div>
+    <div class="nav-group">
+      <a href="../user-research/personas.html" class="nav-item">User Research</a>
+    </div>
+    <div class="nav-group">
+      <a href="../ia/flows.html" class="nav-item">Information Architecture (IA)</a>
+    </div>
+    <div class="nav-group">
+      <a href="../wireframes/index.html" class="nav-item">Wireframes</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label active-section">Voice</div>
+      <a href="#intro" class="nav-item">Overview</a>
+      <a href="#principles" class="nav-item">Principles</a>
+      <a href="#dictionary" class="nav-item">Dictionary</a>
+      <a href="#forbidden" class="nav-item">Forbidden</a>
+      <a href="#microcopy" class="nav-item">Microcopy</a>
+    </div>
+    <div class="nav-group">
+      <span class="nav-item nav-item-muted">Concept <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
+      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+  <!-- Overview / Tone orientation -->
+  <section class="hero" id="intro">
+    <div class="hero-meta">
+      <span class="badge accent">Phase 5 - Voice</span>
+      <span class="badge">Rules, not a mood</span>
+      <span class="badge">English UI copy</span>
+    </div>
+
+    <div class="section-label">Voice</div>
+    <h1>How Brio speaks</h1>
+
+    <p class="hero-intro">The rules by which Brio speaks. Voice is rules, not a mood: an adjective like "friendly" cannot write a button, so every principle carries a one-sentence rule, an example line, an anti-example line, and the source it follows from. Once complete, this is what every screen is written against.</p>
+
+    <p>Brio sells into wellbeing, privacy, and unfamiliar people-work, three places where trust matters more than cleverness. The whole product is a privacy boundary standing in for the HR layer a small company does not have, so the voice has to earn belief, not applause.</p>
+
+    <p>So Brio speaks like <strong>a calm, plain-spoken colleague who has done this before</strong>: it hands the non-expert operator a clear next step, it reports team health honestly even when the news is a dip, and it proves privacy by naming the mechanism rather than promising to care. Proof over promises, honesty over cheer, brevity over buzzwords.</p>
+
+    <p>The single load-bearing line from the research:</p>
+    <blockquote>"The product acts as a knowledgeable peer, not a data terminal."<br><span style="font-style:normal;font-size:12px;color:var(--text-faint);">ux-patterns.md, Pattern B4</span></blockquote>
+    <p>Everything below is that sentence, made operable. The product ships in English, so every example and anti-example line is a real English interface string. No em dash anywhere: commas, periods, or a spaced hyphen.</p>
+  </section>
+
+  <!-- Principles -->
+  <section id="principles">
+    <div class="section-label">Principles</div>
+    <h1>Five principles</h1>
+    <p>Each principle is a one-sentence rule, a positive example, an anti-example, and the source line it follows from in the personas, research, UX patterns, or competitor language.</p>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <span class="principle-tag">P1</span>
+        <h3>Plain language, and carry the meaning</h3>
+      </div>
+      <p class="rule-line"><strong>Rule.</strong> Say it in everyday words and put the interpretation right next to the number, so a non-expert always knows what a reading means without HR training.</p>
+      <div class="ex-block ex-good">
+        <span class="ex-label">Example</span>
+        <ul>
+          <li>"The team is holding steady this week, in line with last."</li>
+          <li>"72% of the team answered. Above the minimum of 5, so a score can be shown."</li>
+        </ul>
+      </div>
+      <div class="ex-block ex-bad">
+        <span class="ex-label">Anti-example</span>
+        <ul>
+          <li>"Engagement index 7.4 (participation quotient 72%)."</li>
+          <li>"Leverage your team wellbeing analytics to action key drivers."</li>
+        </ul>
+      </div>
+      <p class="source-line"><strong style="color:var(--text-muted);">Source.</strong> ux-patterns.md B4: "the operator needs the product to tell them 'this is normal' or 'this is worth noticing' ... Scores are not shown without context. The product acts as a knowledgeable peer, not a data terminal." personas.md, Priya, What scares her off: "A dashboard full of numbers without interpretation" and "A product that assumes she knows HR terminology." research.md, Gap (f): "makes a non-expert operator the hero of the interface."</p>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <span class="principle-tag">P2</span>
+        <h3>Privacy as mechanism, not marketing</h3>
+      </div>
+      <p class="rule-line"><strong>Rule.</strong> Every privacy line names the concrete mechanism (aggregate only, minimum of 5, no live count) in one specific sentence, never a soft reassurance and never just a link to a policy.</p>
+      <div class="ex-block ex-good">
+        <span class="ex-label">Example</span>
+        <ul>
+          <li>"No one sees your individual response. Not your manager, not the owner, no one."</li>
+          <li>"No score appears until at least 5 people have answered, and there is no live count."</li>
+        </ul>
+      </div>
+      <div class="ex-block ex-bad">
+        <span class="ex-label">Anti-example</span>
+        <ul>
+          <li>"Your privacy matters to us. Read our Privacy Policy to learn more."</li>
+          <li>"Rest assured, your data is safe and secure with Brio."</li>
+        </ul>
+      </div>
+      <p class="source-line"><strong style="color:var(--text-muted);">Source.</strong> personas.md, Marcus, What scares him off: "Privacy language that sounds like marketing copy rather than a structural guarantee," and Trust triggers: "He trusts architecture over policy." personas.md, Yemi, Trust triggers: "One specific sentence before Question 1 ... Not a link to a privacy policy. A sentence." ux-patterns.md B5: "one sentence, in plain language, specific ... The repetition is the trust."</p>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <span class="principle-tag">P3</span>
+        <h3>Honest signals, never flattering ones</h3>
+      </div>
+      <p class="rule-line"><strong>Rule.</strong> Report team health as it is: a dip is called a dip, plainly and early; success states just state the fact and the next step, they never congratulate.</p>
+      <div class="ex-block ex-good">
+        <span class="ex-label">Example</span>
+        <ul>
+          <li>"Wellbeing dipped this week."</li>
+          <li>"The team is down from last week. It is worth a look now, before it settles into a pattern."</li>
+          <li>Success: "Answers saved. You can close this tab."</li>
+        </ul>
+      </div>
+      <div class="ex-block ex-bad">
+        <span class="ex-label">Anti-example</span>
+        <ul>
+          <li>"Great news, your team is thriving!"</li>
+          <li>"Check-in submitted successfully. Way to go!"</li>
+        </ul>
+      </div>
+      <p class="source-line"><strong style="color:var(--text-muted);">Source.</strong> research.md, Objectives: "Signal must be honest, not vanity." research.md Benchmark C6 tone target: "honest, useful, and non-judgmental, rather than clinical, corporate, or surveillance-flavored." personas.md, Yemi: she has seen "wellness theater ... 'we heard you' but nothing changed," so hollow cheer reads as the thing she distrusts. CLAUDE.md Design Principle 4: "If things are trending down, the product says so plainly."</p>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <span class="principle-tag">P4</span>
+        <h3>Always a next step, and a confirmation</h3>
+      </div>
+      <p class="rule-line"><strong>Rule.</strong> Speak so the operator always has one clear next action and, after they act, a plain confirmation it was done, because they were handed this role without training and need competence more than praise.</p>
+      <div class="ex-block ex-good">
+        <span class="ex-label">Example</span>
+        <ul>
+          <li>"Suggested next step: Share this with your owner."</li>
+          <li>"Waiting for at least 5 responses. Nudge the team."</li>
+          <li>Error: "Your team data is safe. Try again, or head to your programs in the meantime."</li>
+        </ul>
+      </div>
+      <div class="ex-block ex-bad">
+        <span class="ex-label">Anti-example</span>
+        <ul>
+          <li>A bare score with no next action ("7.4 out of 10." and nothing else).</li>
+          <li>"You are a wellbeing pro now!" (praise instead of the next step).</li>
+        </ul>
+      </div>
+      <p class="source-line"><strong style="color:var(--text-muted);">Source.</strong> personas.md, Priya, Trust triggers: "Product tells her what to do next, not just what happened," and "Gets a confirmation moment: 'you launched a program correctly, here is what the team saw.'" ux-patterns.md B1: "Every screen should have one clear next action, not a menu of options." ux-patterns.md B4: "The operator needs confirmation, not just data." jtbd.md E1: "feel like a competent 'people person'."</p>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <span class="principle-tag">P5</span>
+        <h3>Quiet and concrete, against a loud category</h3>
+      </div>
+      <p class="rule-line"><strong>Rule.</strong> Cut the wellbeing-industry abstractions and hype the whole category leans on; use concrete words, keep it short, and never reach for superlatives, exclamation marks, or emoji. Where everyone else sounds the same, plain is the differentiator.</p>
+      <div class="ex-block ex-good">
+        <span class="ex-label">Example</span>
+        <ul>
+          <li>"Pick a program. Brio runs it and reads the team pulse for you."</li>
+          <li>"Programs" (a tab named for the thing, not "Insights").</li>
+          <li>"Start free."</li>
+        </ul>
+      </div>
+      <div class="ex-block ex-bad">
+        <span class="ex-label">Anti-example</span>
+        <ul>
+          <li>"Empower your people with AI-powered insights that drive engagement across your all-in-one wellbeing platform."</li>
+          <li>"Unlock actionable insights to fuel a healthier, happier culture!"</li>
+        </ul>
+      </div>
+      <p class="source-line"><strong style="color:var(--text-muted);">Source.</strong> research.md, Competitor language (Stage 05 crawl): 12 competitors converge on one voice built from "insights," "drive engagement," "key drivers," "all-in-one," "empower," "thrive," "AI-powered," and "healthier people, better business," almost always sold to the buyer with a "Request a demo" wall. ux-patterns.md B1: the operator dashboard "must be scannable in under 30 seconds." personas.md, Priya, What scares her off: "A product that assumes she knows HR terminology" (category buzzwords are that jargon in a friendlier coat). CLAUDE.md Design Principle 5: "Low effort for everyone."</p>
+    </div>
+
+    <p class="voice-note">The competitor crawl also reinforces P2: no competitor puts the privacy mechanism above the fold. Officevibe's real rule (aggregate only, minimum-N) lives in a help article while its marketing says the vague "shown only when privacy rules are met," and even "anonymous" is sold to the manager ("Anonymous feedback to know how employees really feel"). Saying the mechanism plainly, to the employee, is open territory Brio takes.</p>
+  </section>
+
+  <!-- Dictionary -->
+  <section id="dictionary">
+    <div class="section-label">Dictionary</div>
+    <h1>One concept, one word</h1>
+    <p>Every pair below resolves a divergence already marked in the microcopy inventory, so this is a set of decisions, not a new search. Terms are taken from the language of the personas and the research, not invented. Where two labels turned out to be two genuinely different actions, both are kept and the boundary is stated.</p>
+
+    <h2>How Brio addresses people</h2>
+    <div class="addr-item">
+      <p><strong>The reader is "you."</strong> One address form on every surface: the operator, the owner, and the employee are each spoken to as "you." Describe other roles in the third person ("what the owner sees"), never switch the reader to first person. Fix: owner dashboard "What I can and cannot see" becomes "What you can and cannot see." Why: ux-patterns.md B4, a knowledgeable peer speaks to a person, and one address form keeps the voice steady across the three audiences.</p>
+    </div>
+    <div class="addr-item">
+      <p><strong>No contractions.</strong> Write "do not," "cannot," "you are," "did not," not "don't," "can't," "you're," "didn't." Why: the product already spells out on almost every screen; holding it makes the voice calm and consistent rather than chatty (P3, P5). Fix: "Thanks, you're done" and "Didn't get it?" carry the only slips.</p>
+    </div>
+    <div class="addr-item">
+      <p><strong>Brio names itself "Brio."</strong> In product UI the subject is "Brio" ("Brio runs it for you"). "We" and "us" belong only to marketing and support voice ("we reply to your email"), where a human team is speaking. Never "we" inside the app chrome.</p>
+    </div>
+    <div class="addr-item">
+      <p><strong>Register: plain, calm, specific.</strong> Warm is allowed; cute, hype, and jokey are not (P3, P5). No exclamation marks, no emoji, no superlatives. See Forbidden.</p>
+    </div>
+
+    <h2>One concept, one word</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Concept</th><th>Use this</th><th>Not this</th><th>Why (source)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The whole signal surface</td>
+            <td class="use-cell"><strong>team pulse</strong> / <strong>pulse</strong></td>
+            <td class="not-cell">signal (in-app), reading</td>
+            <td>the chosen pattern is the Pulse Loop; the etalon H1 is "Your team pulse" (ux-patterns.md sec 6). "signal" stays for owner and marketing framing only ("a team-level signal")</td>
+          </tr>
+          <tr>
+            <td>The number out of 10</td>
+            <td class="use-cell"><strong>score</strong></td>
+            <td class="not-cell">team number, rating, index</td>
+            <td>plain-language, ux-patterns.md B4 ("a 7.2/10 team score")</td>
+          </tr>
+          <tr>
+            <td>The plain-language interpretation</td>
+            <td class="use-cell"><strong>read</strong> (a read, you read)</td>
+            <td class="not-cell">reading, insight</td>
+            <td>"insight" is the category buzzword Brio drops (P5); "read" is concrete</td>
+          </tr>
+          <tr>
+            <td>Share of the team who responded</td>
+            <td class="use-cell">verb <strong>answered</strong>; heading <strong>Participation</strong></td>
+            <td class="not-cell">took part, taking part</td>
+            <td>one verb; "72% of the team answered" is the concrete form. research.md uses "participation rate" for the metric, "answered" for the act</td>
+          </tr>
+          <tr>
+            <td>Movement over time</td>
+            <td class="use-cell"><strong>Trend</strong></td>
+            <td class="not-cell">Trend over time</td>
+            <td>brevity (P5); owner surfaces already say "Trend"</td>
+          </tr>
+          <tr>
+            <td>The boss, to an employee</td>
+            <td class="use-cell"><strong>your manager</strong> (who cannot see) and <strong>the owner</strong></td>
+            <td class="not-cell">your operator, your admin</td>
+            <td>employees do not know the word "operator"; personas.md Yemi asks "Can my manager see my answer?" For the resend action say "whoever set up this check-in," never "operator"</td>
+          </tr>
+          <tr>
+            <td>The person who runs Brio, to themselves</td>
+            <td class="use-cell"><strong>operator</strong> (operator-facing and internal only)</td>
+            <td class="not-cell">admin, coordinator, manager</td>
+            <td>Brio's own term; never shown to employees</td>
+          </tr>
+          <tr>
+            <td>The paid tiers</td>
+            <td class="use-cell"><strong>Free</strong>, <strong>Starter</strong>, <strong>Growth</strong> (proper nouns); "the Free plan"</td>
+            <td class="not-cell">free tier, the free tier</td>
+            <td>one naming; ban "tier" in user copy. Fix: "Stay on the free tier" becomes "Stay on Free"</td>
+          </tr>
+          <tr>
+            <td>Sign-in verb</td>
+            <td class="use-cell"><strong>log in</strong> / <strong>log out</strong></td>
+            <td class="not-cell">sign in, sign out, signing you in</td>
+            <td>one verb pair; nav and login already use "Log in." Fix: "Sign out," "Sign in with a magic link," "Signing you in"</td>
+          </tr>
+          <tr>
+            <td>The recurring employee check</td>
+            <td class="use-cell"><strong>check-in</strong> (noun and the act)</td>
+            <td class="not-cell">survey, pulse survey, questionnaire</td>
+            <td>research.md and personas use "check-in"; "survey" is the category word employees distrust ("wellness theater")</td>
+          </tr>
+          <tr>
+            <td>The privacy floor</td>
+            <td class="use-cell"><strong>minimum of 5</strong></td>
+            <td class="not-cell">threshold, minimum-N (in UI), N=5</td>
+            <td>plain number; "minimum-N" is internal only</td>
+          </tr>
+          <tr>
+            <td>A running total during an open cycle</td>
+            <td class="use-cell"><strong>live count</strong></td>
+            <td class="not-cell">running tally, live tally</td>
+            <td>one term. Fix: "no running tally" becomes "no live count"</td>
+          </tr>
+          <tr>
+            <td>The employee-facing question</td>
+            <td class="use-cell"><strong>How has work felt this week?</strong></td>
+            <td class="not-cell">How has this week felt for you?</td>
+            <td>one wording, used identically in program setup and in the employee check-in</td>
+          </tr>
+          <tr>
+            <td>Aggregate-only tail (operator)</td>
+            <td class="use-cell"><strong>Aggregate only. You never see who answered.</strong> (full) / <strong>never who</strong> (short)</td>
+            <td class="not-cell">never individual data, never any individual's answers</td>
+            <td>sanctioned variants only; marketing keeps "Brio never shows any individual's answers"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>One action, one label</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Action</th><th>Label</th><th>Not this</th><th>Note</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Recover from an error</td>
+            <td class="use-cell"><strong>Try again</strong></td>
+            <td>Retry</td>
+            <td>the single biggest split in the inventory; "Try again" is the plainer human word (P1). Ban "Retry" everywhere, including the toast</td>
+          </tr>
+          <tr>
+            <td>Open the program library</td>
+            <td class="use-cell"><strong>Browse programs</strong></td>
+            <td>See your programs, Go to Programs, Browse the library</td>
+            <td>the tab is "Programs"; the action is "Browse programs"</td>
+          </tr>
+          <tr>
+            <td>Choose a first program</td>
+            <td class="use-cell"><strong>Pick a program</strong></td>
+            <td>Start with Steady Weeks (as a generic label)</td>
+            <td>"Start with {Program}" is fine only when it starts that named program</td>
+          </tr>
+          <tr>
+            <td>Go back to the app dashboard</td>
+            <td class="use-cell"><strong>Back to dashboard</strong></td>
+            <td>Back to your dashboard, Dashboard (bare)</td>
+            <td>"Go to homepage" is a different place (the public 500 page) and stays</td>
+          </tr>
+          <tr>
+            <td>Edit the check-in</td>
+            <td class="use-cell"><strong>Edit check-in</strong></td>
+            <td>Adjust check-in</td>
+            <td>one label; fix team-pulse "Adjust check-in"</td>
+          </tr>
+          <tr>
+            <td>Email invites to teammates</td>
+            <td class="use-cell"><strong>Send invites</strong> (many) / <strong>Send invite</strong> (one owner)</td>
+            <td>Send</td>
+            <td>ban bare "Send"; singular only when there is one recipient</td>
+          </tr>
+          <tr>
+            <td>Go to the owner-share surface</td>
+            <td class="use-cell"><strong>Share with your owner</strong></td>
+            <td>Share this with your owner</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Send the owner their access</td>
+            <td class="use-cell"><strong>Invite your owner</strong></td>
+            <td>(kept distinct from Share)</td>
+            <td>Share opens the surface; Invite sends the actual owner access. Two acts, two labels</td>
+          </tr>
+          <tr>
+            <td>Open the full pulse</td>
+            <td class="use-cell"><strong>View full pulse</strong></td>
+            <td>Review the full pulse, See the current pulse</td>
+            <td>one label</td>
+          </tr>
+          <tr>
+            <td>Reminder to already-invited members</td>
+            <td class="use-cell"><strong>Nudge the team</strong></td>
+            <td>(kept distinct)</td>
+            <td>used only when waiting on responses from people already invited</td>
+          </tr>
+          <tr>
+            <td>Add new members</td>
+            <td class="use-cell"><strong>Invite the team</strong></td>
+            <td>(kept distinct)</td>
+            <td>used only first-run, when there are no members yet</td>
+          </tr>
+          <tr>
+            <td>Resend one pending invite</td>
+            <td class="use-cell"><strong>Resend</strong></td>
+            <td>(kept distinct)</td>
+            <td>one member, one pending invite</td>
+          </tr>
+          <tr>
+            <td>Reach support (help action)</td>
+            <td class="use-cell"><strong>Contact support</strong></td>
+            <td>Contact us</td>
+            <td>fix not-found "Contact us"</td>
+          </tr>
+          <tr>
+            <td>Warm marketing invitation</td>
+            <td class="use-cell"><strong>Get in touch</strong></td>
+            <td>(kept distinct)</td>
+            <td>about and contact hero only, not an error-page support link</td>
+          </tr>
+          <tr>
+            <td>Marketing / nav call to action</td>
+            <td class="use-cell"><strong>Start free</strong></td>
+            <td>(kept distinct)</td>
+            <td>navigates to signup; the signup submit button stays <strong>Create account</strong> (the actual act)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Allowed and banned words</h2>
+    <div class="word-block allowed">
+      <h3>Allowed plain product terms</h3>
+      <p>pulse, score, read, check-in, program, cycle, aggregate, participation, nudge, minimum of 5, live count, owner, operator (operator-facing), team.</p>
+    </div>
+    <div class="word-block banned">
+      <h3>Banned category jargon</h3>
+      <p>insights, drivers, engagement (as a buzzword noun), all-in-one, empower, thrive, leverage, unlock, actionable, seamless, holistic, solutions, "drive" as in "drive engagement." (See Forbidden for was / should-be.)</p>
+      <p class="why">Why: research.md Competitor language, all 12 competitors converge on these; plain words are Brio's differentiation (P5).</p>
+    </div>
+  </section>
+
+  <!-- Forbidden -->
+  <section id="forbidden">
+    <div class="section-label">Forbidden</div>
+    <h1>What Brio never writes</h1>
+    <p>Without this list, the model default (enthusiasm, exclamation, emoji, buzzwords) comes back with every new prompt. Each row pairs the ban with a concrete was / should-be, drawn from the microcopy inventory and the competitor language. The prototype is already clean of most of these; the list keeps it that way through the rewrite.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Never</th><th>Was (or the risk)</th><th>Should be</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Exclamation marks in copy</td>
+            <td class="cell-was">"Great news, your team is thriving!"</td>
+            <td class="cell-should">"The team is holding steady this week."</td>
+            <td>P3, honest not flattering; calm register</td>
+          </tr>
+          <tr>
+            <td>Emoji in any product or system text</td>
+            <td class="cell-was">"Answers saved ✅"</td>
+            <td class="cell-should">"Answers saved."</td>
+            <td>P5; the word "Emoji" as an answer-type label is not an emoji and stays</td>
+          </tr>
+          <tr>
+            <td>The word "successfully"</td>
+            <td class="cell-was">"Check-in submitted successfully"</td>
+            <td class="cell-should">"Answers saved."</td>
+            <td>states the fact, not the achievement (P3)</td>
+          </tr>
+          <tr>
+            <td>Celebration on success</td>
+            <td class="cell-was">"Thanks, you're done"</td>
+            <td class="cell-should">"You are done. Your answer is in your team's aggregate."</td>
+            <td>success states the fact and the next step, no gushing (P3, P4)</td>
+          </tr>
+          <tr>
+            <td>Effusive thanks</td>
+            <td class="cell-was">"Thanks for reaching out."</td>
+            <td class="cell-should">"Message sent. We reply to your email, usually within one business day."</td>
+            <td>plain acknowledgement over warmth theatre</td>
+          </tr>
+          <tr>
+            <td>Casual filler and interjections</td>
+            <td class="cell-was">"No problem. Choose your first program." / "Oops" / "Uh oh"</td>
+            <td class="cell-should">"Choose your first program from the library."</td>
+            <td>P1, plain; filler adds nothing</td>
+          </tr>
+          <tr>
+            <td>Cute or jokey lines</td>
+            <td class="cell-was">"Ready when you are"</td>
+            <td class="cell-should">"Your dashboard is one tap away."</td>
+            <td>P5, quiet not cute</td>
+          </tr>
+          <tr>
+            <td>Idioms where a plain word exists</td>
+            <td class="cell-was">"Give your owner the big picture" / "loop in your owner"</td>
+            <td class="cell-should">"Give your owner the team read" / "share this with your owner"</td>
+            <td>P1, concrete over idiom</td>
+          </tr>
+          <tr>
+            <td>Motivational or aspirational tone</td>
+            <td class="cell-was">"Start your wellbeing journey" / "Build a thriving culture"</td>
+            <td class="cell-should">"Run your first program in about five minutes."</td>
+            <td>P3, P5; this is personas.md Yemi's "wellness theater"</td>
+          </tr>
+          <tr>
+            <td>Category buzzwords</td>
+            <td class="cell-was">"Actionable insights that drive engagement" / "empower your people" / "all-in-one platform"</td>
+            <td class="cell-should">"See what to do next." / "help your team" / "one place to run wellbeing"</td>
+            <td>P5; research.md Competitor language, the sea of sameness</td>
+          </tr>
+          <tr>
+            <td>Contractions</td>
+            <td class="cell-was">"you're," "don't," "can't," "didn't"</td>
+            <td class="cell-should">"you are," "do not," "cannot," "did not"</td>
+            <td>one consistent register</td>
+          </tr>
+          <tr>
+            <td>Vague privacy reassurance</td>
+            <td class="cell-was">"Your privacy matters to us." / "Rest assured your data is safe."</td>
+            <td class="cell-should">"No one sees your individual response. Not your manager, not the owner, no one."</td>
+            <td>P2, mechanism not marketing</td>
+          </tr>
+          <tr>
+            <td>HR or admin jargon to the operator or employee</td>
+            <td class="cell-was">"program administrator," "utilization," "your operator" (to an employee)</td>
+            <td class="cell-should">"you," "how much of the team took part," "whoever set up this check-in"</td>
+            <td>personas.md Priya scare-off, HR terminology; research.md gap (f)</td>
+          </tr>
+          <tr>
+            <td>Prototype stubs and hypothesis markers shipping as copy</td>
+            <td class="cell-was">"Pricing is a working figure [?]" / "Download is not wired up in this prototype"</td>
+            <td class="cell-should">final copy, or the line removed</td>
+            <td>the "[?]" marker and prototype notes must never reach a user</td>
+          </tr>
+          <tr>
+            <td>Superlatives and hype proof</td>
+            <td class="cell-was">"industry-leading," "#1," "market-leading"</td>
+            <td class="cell-should">a plain, specific claim or nothing</td>
+            <td>P5; the competitor crutch Brio does not need</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Microcopy -->
+  <section id="microcopy">
+    <div class="section-label">Microcopy</div>
+    <h1>Rules per element and per state</h1>
+    <p>Rules per element type and per state, each with a real Brio line. Every rule is checked against the Principles and the Dictionary above. After this section the voice document is complete: any line in the product is written from here.</p>
+
+    <h2>By element type</h2>
+
+    <div class="micro-rule">
+      <h3>Button</h3>
+      <p class="lead">A verb plus its object, so the result is visible before the tap. Never a bare "OK," "Next," "Submit," or "Retry."</p>
+      <p><span class="mc-tag mc-tag-yes">Yes</span> "Send invites," "Browse programs," "View full pulse," "Nudge the team," "Try again."</p>
+      <p><span class="mc-tag mc-tag-no">No</span> "Submit," "OK," "Continue" (when a specific result is known), "Retry."</p>
+      <p class="mc-note">The canonical label for each shared action is fixed in the Dictionary, one action one label.</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Screen heading (H1)</h3>
+      <p class="lead">Names the place in Dictionary words, not a slogan. It stays stable across a screen's states unless the state genuinely is a different place.</p>
+      <p><span class="mc-tag mc-tag-yes">Yes</span> "Your team pulse," "Programs," "Set up the check-in," "Privacy center," "Program not found."</p>
+      <p class="mc-note">Fix: node 3.1 drifts across "Your recommended program" / "Finding your program" / "Choose your first program"; pick one H1 for the resolved page and let the loading and error states keep it.</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Eyebrow and breadcrumb</h3>
+      <p class="lead">The location or context, short. "Welcome back, Priya," "Programs / Steady Weeks," "Step 1 of 3." No sentence, no promise.</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Form field</h3>
+      <p class="lead">The label says what to enter; the placeholder shows the format; the validation error says the one thing to fix.</p>
+      <p><span class="mc-tag mc-tag-line">Label</span> "Work email," "Company name," "Owner email."</p>
+      <p><span class="mc-tag mc-tag-line">Placeholder</span> a format hint, never a repeat of the label: "you@company.com."</p>
+      <p><span class="mc-tag mc-tag-line">Validation</span> "Use at least 8 characters." / "Enter a valid email so the invite reaches your owner." Never "Invalid input" or "This field is required."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Link</h3>
+      <p class="lead">Describes the destination, never "click here" or "learn more." "What your owner can and cannot see," "how privacy works," "Preview the employee check-in."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Helper and micro text</h3>
+      <p class="lead">One plain sentence, often the privacy mechanism or a concrete reassurance. "The roster is who you invited. It is never linked to who answered what."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Privacy strip (a Brio-specific element, on nearly every screen)</h3>
+      <p class="lead">One specific mechanism sentence (P2), phrased for the audience, never a soft reassurance.</p>
+      <p><span class="mc-tag mc-tag-line">Operator</span> "Aggregate only. You never see who answered."</p>
+      <p><span class="mc-tag mc-tag-line">Employee</span> "Your answers are anonymous. No named responses, no individual timeline."</p>
+      <p><span class="mc-tag mc-tag-line">Owner</span> "You only ever see the team aggregate, never individual data."</p>
+    </div>
+
+    <h2>By state (the tone a state carries)</h2>
+
+    <div class="micro-rule">
+      <h3>Base</h3>
+      <p class="lead">The page the user acts from. The operator pulse card carries score, then read, then one suggested next step, in that order (P4).</p>
+      <p><span class="mc-tag mc-tag-yes">Line</span> "Steady. The team is holding steady this week, in line with last. Suggested next step: Share with your owner."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Empty and pre-minimum-N</h3>
+      <p class="lead">Say why it is empty and give the one way out; never a dead end. The empty state is also a privacy moment: it explains the minimum of 5 as protection, not a limitation.</p>
+      <p><span class="mc-tag mc-tag-yes">Line</span> "Waiting for at least 5 responses. No score yet, and no live count while the cycle is open ... Nudge the team."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Cycle open (domain state)</h3>
+      <p class="lead">Explain that results come after the cycle closes, and why there is nothing to show now: the no-live-count rule.</p>
+      <p><span class="mc-tag mc-tag-yes">Line</span> "This cycle is open. Results appear after it closes. There is no live count, for anyone, so no one can work out who answered or when."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Loading</h3>
+      <p class="lead">Silent (a skeleton) or one line naming what is loading. No chatter.</p>
+      <p><span class="mc-tag mc-tag-yes">Yes</span> "Saving...," "Sending your answer."</p>
+      <p><span class="mc-tag mc-tag-no">No</span> "Please wait while we work our magic."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Error</h3>
+      <p class="lead">Three beats: what happened, that the data is safe, what to do. No apology theatre, no joke, no blaming the user.</p>
+      <p><span class="mc-tag mc-tag-yes">Line</span> "Could not load your pulse. Something went wrong on our side. Your team data is safe. Try again, or head to your programs in the meantime."</p>
+      <p class="mc-note">On the employee submit error, reassuring the person is right and stays plain: "It was not anything you did."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Success</h3>
+      <p class="lead">Name the fact and the next step; do not celebrate (P3).</p>
+      <p><span class="mc-tag mc-tag-yes">Line</span> "Answers saved. You can close this tab." "Invite sent."</p>
+      <p class="mc-note">Never "successfully," never an exclamation.</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Alert and dip (the honest-signal state)</h3>
+      <p class="lead">Name the dip plainly, calmly, early, with one step, and never as a read on any individual (P2, P3).</p>
+      <p><span class="mc-tag mc-tag-yes">Line</span> "Wellbeing dipped this week. See what changed."</p>
+      <p class="mc-note">The detail view holds the line: "a team-level move, not a read on any one person ... it is not a diagnosis of anyone."</p>
+    </div>
+
+    <div class="micro-rule">
+      <h3>Danger action</h3>
+      <p class="lead">Before the press, say exactly what happens and what cannot be undone, and require a deliberate confirmation. Where a privacy fact reassures, state it.</p>
+      <p><span class="mc-tag mc-tag-yes">Line</span> "This permanently erases your account and your company's data. It cannot be undone (GDPR erasure). No individual responses to erase, they were never stored by person. Type DELETE to confirm."</p>
+      <p class="mc-note">The confirm button names the act ("Delete account"), never "OK."</p>
+    </div>
+
+    <h2>From the inventory</h2>
+    <p>One table pulled straight from the microcopy inventory, Section C1: the same concept named more than one way across the prototype. The Dictionary above is the resolution; this is the raw drift it resolves, and it links this page back to the microcopy source of truth.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Concept</th><th>Variants found in the prototype</th><th>Where</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The aggregate result</td>
+            <td>team pulse, pulse, score, read, reading, team wellbeing score, team number, team-level signal, aggregate read</td>
+            <td>dashboard, team-pulse, owner-dashboard, share-owner, home, security-privacy</td>
+          </tr>
+          <tr>
+            <td>Participation</td>
+            <td>of the team answered, of the team took part, how much of the team is taking part, what share of the team took part, participation as a share</td>
+            <td>dashboard, team-pulse, owner-dashboard, digest, share-owner</td>
+          </tr>
+          <tr>
+            <td>The boss, to the employee</td>
+            <td>your manager, your operator, a manager, the owner</td>
+            <td>checkin-privacy ("your manager") vs checkin-entry / checkin-expired ("your operator")</td>
+          </tr>
+          <tr>
+            <td>Trend section title</td>
+            <td>Trend, Trend over time</td>
+            <td>owner-dashboard / digest ("Trend") vs team-pulse ("Trend over time")</td>
+          </tr>
+          <tr>
+            <td>The paid tier state</td>
+            <td>Free plan, free plan, free tier, Stay on Free</td>
+            <td>pricing, payment-failed ("free tier"), upgrade ("Stay on Free")</td>
+          </tr>
+          <tr>
+            <td>Sign-in verb</td>
+            <td>Log in, Logging in, Signing you in, Sign in with a magic link, Sign out</td>
+            <td>login vs login-loading ("Signing you in") vs account ("Sign in", "Sign out")</td>
+          </tr>
+          <tr>
+            <td>Privacy promise phrasing</td>
+            <td>Aggregate only, never who / never who answered / never any individual's answers / never individual data / A share, never who</td>
+            <td>recurs on nearly every screen with different tails</td>
+          </tr>
+          <tr>
+            <td>The check-in question</td>
+            <td>How has this week felt for you? (program) vs How has work felt this week? (employee check-in)</td>
+            <td>program-detail / check-in-setup vs checkin-questions</td>
+          </tr>
+          <tr>
+            <td>GPC</td>
+            <td>Global Privacy Control (GPC) vs GPC</td>
+            <td>cookie-consent banner vs manage dialog</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>Brio - Voice - Phase 5 - Stage 05</p>
+    <p style="margin-top:4px;">Rules, not a mood. Every example and anti-example line is a real English interface string. No em dash anywhere: commas, periods, or a spaced hyphen. Sources cited by file and section so any rule traces back to data.</p>
+    <p style="margin-top:8px;">Source: voice/docs/voice.md and voice/docs/microcopy.md</p>
+  </footer>
+
+</main>
+
+<script>
+  var toggle = document.getElementById('sidebarToggle');
+  var sbody = document.getElementById('sidebarBody');
+  toggle.addEventListener('click', function() {
+    var open = sbody.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  sbody.querySelectorAll('a.nav-item').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sbody.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // IntersectionObserver for active sidebar nav tracking
+  var navSections = [
+    'intro', 'principles', 'dictionary', 'forbidden', 'microcopy'
+  ];
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        sbody.querySelectorAll('a.nav-item').forEach(function(link) {
+          link.classList.remove('nav-item-active-scroll');
+          link.removeAttribute('aria-current');
+        });
+        var id = entry.target.id;
+        var matchLink = sbody.querySelector('a.nav-item[href="#' + id + '"]');
+        if (matchLink) {
+          matchLink.classList.add('nav-item-active-scroll');
+          matchLink.setAttribute('aria-current', 'location');
+        }
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+
+  navSections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

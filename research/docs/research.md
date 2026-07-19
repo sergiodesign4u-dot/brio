@@ -119,6 +119,60 @@ No product: (a) prices transparently for 10 to 50 employees, (b) is self-serve w
 
 ---
 
+## 4b. Competitor language (Stage 05, Voice)
+
+*Added for the Voice stage. A live public-page crawl of how competitors WRITE, so Brio can set its voice against the category sameness. Public pages only, no login, no accounts. Verified verbatim on the live page unless marked [?]. The principle: where every competitor writes the same way, Brio differentiates through voice.*
+
+### Verbatim samples (12 live companies)
+
+| Company | Where | Verbatim | Source |
+|---------|-------|----------|--------|
+| Culture Amp | hero | "Finally answer the question: Do we have a high performing culture?" | cultureamp.com |
+| Culture Amp | feature | "drive meaningful performance for your people ... Eliminate guesswork and manual tasks with AI analysis and recommendations." | cultureamp.com |
+| Culture Amp | privacy | "Culture Amp protects the confidentiality, integrity, and availability of all systems and data entrusted to us" | cultureamp.com |
+| Officevibe (Workleap) | hero | "You can't fix issues if you're not paying attention" | workleap.com/officevibe |
+| Officevibe | privacy (marketing) | "Anonymous feedback to know how employees really feel" · "shown only when privacy rules are met." | workleap.com/officevibe |
+| Officevibe | privacy (help doc) | "Individual answers are never displayed; only aggregated results are presented." · minimum of 3 for scores, "A minimum of 5 members ... to ensure the manager gains access to anonymous feedback." | help.workleap.com |
+| 15Five | hero | "The AI-powered performance management platform built for business impact" · "effortless insights" | 15five.com |
+| Bonusly | hero / CTA | "Great work deserves to be seen, celebrated, and rewarded" · "Get Started for Free" · "No credit card required" | bonusly.com |
+| Calm Health | privacy | "complies with HIPAA privacy standards and HITRUST security regulations." · "Request a demo" | health.calm.com/employers |
+| Headspace | hero | "Healthier people. Better business." · "Empower your global organization with industry-leading mental healthcare" | organizations.headspace.com/employers |
+| Wellhub (Gympass) | hero | "Employee wellness programs for healthier business" · "Healthy people are good for business" · "Get free quote" | wellhub.com |
+| Woliba | hero | "Designed For A Healthier, Happier Culture." · "We Don't Just Deliver Wellness. We Improve How Employees Thrive." | woliba.io |
+| Oura | privacy | "Your teams' privacy matters, and every employee remains in complete control of their data." · "view de-identified engagement trends" | organizations.ouraring.com |
+| Lattice | feature | "Use AI to surface key drivers, trends, and next steps ... in a matter of seconds." | lattice.com |
+| Gusto | feature | "easy to pay and manage your team, even if you're not a payroll expert." · "Create free account" | gusto.com |
+| Leapsome | survey | "anonymous, customizable surveys tied to proven engagement drivers." | leapsome.com [? search-only] |
+| Limeade | - | no live public page (acquired by WebMD, site defunct) | [? not accessible] |
+
+### The sameness (what almost all of them say the same way)
+
+- **"insights" is the default noun** for the output: "effortless insights" (15Five), "AI-powered insights" (Officevibe, Lattice), "surface key drivers, trends" (Lattice). Never a plain-language read.
+- **ROI framing over human framing:** "built for business impact" (15Five), "Healthier people. Better business." (Headspace), "Healthy people are good for business" (Wellhub). Wellhub and Woliba lead with hard-dollar stats ("35% reduction in healthcare costs," "$280K in avoided turnover").
+- **Shared in-group vocabulary:** "engagement" + "key drivers," "all-in-one," "empower," "thrive," "healthier + happier," "high performing culture."
+- **AI bolted onto everything:** "AI analysis" (Culture Amp), "AI-generated recommended actions" (Officevibe), "AI-powered all-in-one" (15Five).
+- **CTA monoculture, the demo wall:** "Request a demo / Book a demo / Get a demo / Contact us / Get free quote" dominate. Only SMB-priced players self-serve ("Get Started for Free," Bonusly; "Create free account," Gusto).
+- **Trademark-and-score proof:** "Performance Culture Quadrant" (Culture Amp), "8.2/10," "Daily health scores" (Oura), superlatives "industry-leading," "market-leading," "#1."
+
+### Privacy language, specifically
+
+- **The word split is real.** Pulse/survey vendors say "anonymous" (Officevibe, Leapsome). Health/wearable vendors avoid it and say "privacy," "de-identified," "in control of their data" (Oura). Mental-health vendors lean on compliance frameworks (Calm: "HIPAA ... HITRUST"; Headspace: nothing in body copy). Enterprise HR shrinks it to "enterprise-grade security" (15Five).
+- **Nobody leads with privacy in the hero.** On every homepage the privacy claim is absent, or shrunk to a compliance line. The promise Brio owns is not in anyone's above-the-fold.
+- **The honest mechanism lives in the help center, not the marketing.** Officevibe's real aggregate-only design and minimum-N numbers are only in a support article; the marketing says the vague "shown only when privacy rules are met."
+- **Framing is buyer-benefit, not employee-trust.** Even "anonymous" is sold to the manager: "Anonymous feedback to know how employees really feel." The employee is rarely addressed directly. Oura is the closest to employee-side, control-framed privacy, and it still sits behind a "Contact us" wall.
+
+### Voice opportunities for Brio (the differentiation)
+
+1. **Put the privacy mechanism in the hero, in plain words, as the product.** The above-the-fold privacy space is empty across all 12. The minimum-N nobody markets becomes Brio's headline promise.
+2. **Write to the employee, not only the buyer.** Directly reassuring the person answering is unoccupied territory.
+3. **Drop the abstraction stack.** Concrete, plain, non-expert language stands out instantly against "insights / drive engagement / key drivers / empower / AI-powered."
+4. **Be honest, not just up-and-to-the-right.** Naming a down-trend plainly reads as trustworthy against a wall of flattering stats.
+5. **Skip the demo wall and the AI hype.** A self-serve, start-free voice fits the SMB operator and signals "simple enough that you do not need to be sold this."
+
+*Feeds Voice principles P2 and P5 (voice/docs/voice.md). Residual [?]: Leapsome quote search-only; Limeade site defunct; older Culture Amp "Empower your teams ..." hero seen in search only, not on the live page.*
+
+---
+
 ## 5. Benchmark
 
 ### Scores
