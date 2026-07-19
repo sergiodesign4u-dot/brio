@@ -12,6 +12,8 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 - **IA Base Layer - Flows:** https://sergiodesign4u-dot.github.io/brio/ia/flows.html
 - **IA Base Layer - Concept map:** https://sergiodesign4u-dot.github.io/brio/ia/concept.html
 - **IA Detail Layer - Sitemap:** https://sergiodesign4u-dot.github.io/brio/ia/sitemap.html
+- **Wireframes - All-screens hub:** https://sergiodesign4u-dot.github.io/brio/wireframes/index.html
+- **Voice:** https://sergiodesign4u-dot.github.io/brio/voice/voice.html
 
 ---
 
@@ -24,7 +26,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 | CJM (As-Is + To-Be) | Done (customer journey map As-Is + To-Be, emotional curve, backlog, cjm-as-is.html, cjm-to-be.html) |
 | Information Architecture (Basic + Detailed) | Done (Base Layer: Flows + Concept map, ia/flows.html + ia/concept.html. Detail Layer: Sitemap + all node specs and B/W wireframes, ia/sitemap.html + ia/docs/pages/ + ia/<node>.html) |
 | Wireframes | Done. Grey clickable prototype of the whole product: wireframes/index.html (All-screens hub + coverage map), 47 of 47 screens, 99 state pages, 100 html files, six render shells in _nav.js, shared grey _wf.css. Every internal link resolves; greyscale and one-H1 clean; audited in wireframes/docs/critique.md. |
-| Voice | Not started |
+| Voice | Done. The rules by which Brio speaks, applied to all 99 screens. voice/docs/voice.md (tone, five principles, dictionary, forbidden, microcopy rules), voice/docs/microcopy.md (full text inventory with was/now), voice/voice.html (live). Rules are sourced from personas.md and research.md (including a live competitor-language crawl); only text changed, never markup; audited clean (0 em dash, no banned terms, one voice throughout). |
 | Concept | Not started |
 | UI + Visual | Not started |
 | Tokens + Components | Not started |
@@ -58,5 +60,7 @@ The CJM (As-Is + To-Be) maps Priya's journey end to end: the deepest As-Is low i
 - [CJM To-Be](user-research/docs/cjm-to-be.md)
 - [IA Sitemap (entities, screens, navigation, traceability, critique)](ia/docs/sitemap.md)
 - [IA User Flows](ia/docs/flows.md)
+- [Voice (principles, dictionary, forbidden, microcopy)](voice/docs/voice.md)
+- [Microcopy inventory (all screens, was/now)](voice/docs/microcopy.md)
 
 Supporting history (superseded, kept for provenance): research/strategy.md, research/product-model.md, research/quality-check.md, research/live-research.md.

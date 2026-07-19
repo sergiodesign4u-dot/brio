@@ -64,6 +64,18 @@ Supporting architecture (serve Yemi; preconditions for the above; in MVP scope b
 
 ---
 
+## Voice
+
+*Stage 05 DONE. The rules by which Brio speaks, applied to every screen. Voice is rules, not a mood: each rule carries an example, an anti-example, and a source line from personas.md or research.md. On this stage only the text changed, never the markup (markup and look are stages 06 to 08); every wireframe edit is a one-for-one text swap. Full detail: voice/docs/voice.md (tone, principles, dictionary, forbidden, microcopy), voice/docs/microcopy.md (full text inventory of all 99 screens with was/now), and the live page voice/voice.html.*
+
+**Tone orientation:** Brio speaks like a calm, plain-spoken colleague who has done this before. Proof over promises, honesty over cheer, brevity over buzzwords. Load-bearing line from the research: "The product acts as a knowledgeable peer, not a data terminal" (ux-patterns.md B4).
+
+**Five principles.** P1 Plain language, and carry the meaning (a number never appears without its interpretation; no HR jargon). P2 Privacy as mechanism, not marketing (one specific sentence: aggregate only, minimum of 5, no live count; never a policy link). P3 Honest signals, never flattering ones (a dip is called a dip; success states the fact, never celebrates). P4 Always a next step, and a confirmation (competence over praise). P5 Quiet and concrete against a loud category (no buzzwords, superlatives, exclamations, or emoji; the whole competitor set writes the same way, so plain is the differentiation, sourced from research.md Competitor language).
+
+**Dictionary core (one concept, one word).** The reader is "you" everywhere; no contractions; Brio names itself "Brio" in-app ("we" only in marketing and support voice). team pulse (the signal surface), score (the number), read (the interpretation, not "reading" or "insight"), answered (not "took part"), Trend (not "Trend over time"), check-in, minimum of 5, live count (not "running tally"), Free / Starter / Growth plans (not "tier"), log in / log out (not "sign in/out"). To an employee the boss is "your manager", never "operator". One action, one label: Try again (not Retry), Browse programs, Edit check-in, Send invites, View full pulse, Back to dashboard, Share with your owner (distinct from Invite your owner), and the three distinct acts Nudge the team / Invite the team / Resend. Forbidden: exclamations, emoji, "successfully", celebration, effusive thanks, casual filler, cute lines, idioms, motivational tone, category buzzwords (insights, drive engagement, empower, thrive, all-in-one, unlock, actionable), superlatives, vague privacy reassurance, contractions, and any "[?]" marker in shipped copy.
+
+---
+
 ## Target Audience
 
 ### Operator (hero user - primary)
@@ -210,7 +222,7 @@ Employee wellbeing programs in the US operate near several regulatory areas. Thi
 | CJM (As-Is + To-Be) | user-research/docs/ (cjm-as-is, cjm-to-be) + user-research/cjm-as-is.html + cjm-to-be.html | Done |
 | Information Architecture (Basic + Detailed) | ia/docs/ (sitemap, flows) + ia/flows.html + ia/concept.html + ia/sitemap.html + ia/docs/pages/ (all node specs) + ia/<node>.html wireframes | Done (Base Layer: Flows + Concept map; Detail Layer: Sitemap + all 41 page nodes + cluster 11 system + globals, per-node specs and B/W wireframes) |
 | Wireframes | wireframes/ (docs: screens, conventions, critique) + _nav.js + _wf.css + index.html + 100 screen and state html | Done |
-| Voice | voice/ | Not started |
+| Voice | voice/docs/ (voice, microcopy) + voice/voice.html | Done |
 | Concept | concept/ | Not started |
 | UI + Visual | ui-visual/ | Not started |
 | Tokens + Components | tokens-components/ | Not started |

@@ -1436,6 +1436,97 @@ Scores and numbers are canonical illustrative data threaded through the prototyp
 
 ---
 
+## Rewrite log (was / now)
+
+*Filled from Step 6 on. Each row is a product line changed to match `voice.md`. User content and illustrative data are never rewritten. Where a screen's text was already voice-compliant, it is listed as confirmed, not changed.*
+
+### Step 6, etalon: 4.0 Dashboard (dashboard.html and 6 states)
+
+*Changed lines:*
+
+| State | Zone | Type | Was | Now | Rule |
+|-------|------|------|-----|-----|------|
+| dashboard.html | Pulse | button | Share this with your owner | Share with your owner | Dictionary, one action one label |
+| dashboard.html | Pulse | button | Programs | Browse programs | Dictionary, open the library = Browse programs |
+| dashboard-open.html | Cycle open | state-message | Results appear after it closes. There is no running tally, for anyone, so no one can work out who answered or when. | Results appear after it closes. There is no live count, for anyone, so no one can work out who answered or when. | Dictionary, running tally becomes live count |
+| dashboard-open.html | Cycle open | button | See your programs | Browse programs | Dictionary, one action one label |
+| dashboard-error.html | Error | button | Retry | Try again | Dictionary, the biggest split; Try again wins |
+| dashboard-error.html | Error | button | Go to Programs | Browse programs | Dictionary, one action one label |
+| dashboard-alert.html | Pulse | button | Programs | Browse programs | Dictionary, one action one label |
+
+*Confirmed already voice-compliant, no change (the etalon was written carefully at Stage 04):*
+- **dashboard.html:** H1 "Your team pulse," pulse read "Steady," interpretation, "Suggested next step," "View full pulse," "This week," "72% of the team answered," the trend helper, the privacy strip "Aggregate only. You never see who answered," and the link "What your owner can and cannot see."
+- **dashboard-empty.html:** "Waiting for at least 5 responses," the no-live-count sentence, "Nudge the team." All canon.
+- **dashboard-loading.html:** no product text (skeleton).
+- **dashboard-noprogram.html:** "No active program yet," the guidance sentence, "Browse programs." All canon.
+- **dashboard-alert.html:** "Wellbeing dipped this week," "See what changed," "Dipping," the interpretation, the trend helper. Honest-signal tone already correct (P3).
+- **Not touched (user content and frame):** the eyebrow "Welcome back, Priya" (the frame is ours, the name is UGC), and all structure and markup.
+
+*Read on the etalon: the Stage 04 wireframe was already close to the voice, so the rewrite is small and surgical. The whole change is the Dictionary, one action one label. This sets the bar: most screens will need the same handful of label swaps (Retry to Try again, the eight program-library labels to Browse programs, Adjust to Edit check-in, Send to Send invites), not a full rewrite.*
+
+### Step 7, rollout: the rest of the product (56 files rewritten by 7 subagents, plus 2 residual fixes)
+
+*Consolidated by canon rule, since almost every change is the same handful of Dictionary swaps applied across many screens. Total: 60 files changed since Step 6 (including the etalon), 97 lines, each a one-for-one text swap (git diff 97 insertions / 97 deletions, no markup touched).*
+
+| Canon swap (was to now) | Applied on | Rule |
+|-------------------------|-----------|------|
+| Retry to Try again | team-pulse-error, threshold-alert-error, invite-send-error (2 rows + "Retry failed" to "Try again on the failed ones"), program-library-error, program-detail-error, team-roster-error, upgrade, toast | Dictionary, the biggest split |
+| any library-open label to Browse programs | onboarding-program (button + "pick another from the library" to "browse other programs"), onboarding-program-error | Dictionary |
+| Adjust check-in to Edit check-in | team-pulse, team-pulse-open | Dictionary |
+| bare Send to Send invites | team-roster, team-roster-empty, team-roster-pending, team-roster-open | Dictionary |
+| Sign in / Sign out / Signing to Log in / Log out / Logging | login-loading, reset-password, reset-password-error, reset-password-success, link-expired ("sign-in links" to "login links"), home-operator, home-owner, settings (2), settings-account (2), settings-account-delete (2), cookie-consent-manage | Dictionary |
+| running tally / running count to live count | team-pulse-open, team-roster-open, security-privacy (2), check-in-setup, settings-privacy, checkin-privacy | Dictionary |
+| Trend over time to Trend | team-pulse, team-pulse-empty, team-pulse-open, share-owner | Dictionary (brevity, P5) |
+| took part / taking part to answered | security-privacy (2), owner-dashboard, owner-digest, checkin-privacy, share-owner | Dictionary |
+| free tier to Free plan; "tier" to "subscription" | payment-failed (3), share-owner, invite-owner, upgrade, settings | Dictionary |
+| "we" in app chrome to Brio | program-library-empty ("we recommend" to "Brio recommends"), settings-plan ("we prompt" to "Brio prompts") | Dictionary |
+| buzzwords insight / unlock to plain | pricing (insight to "the aggregate", unlock to "what a paid plan adds"), invite-owner (unlock x2 to "turn on" / "Your upgrade"), upgrade (unlock x2 to "turn on"), share-owner (unlock to "turn on") | P5 / Forbidden |
+| idioms big picture / loop in to plain | share-owner ("big picture" to "the team read", "loop in" to "share this with") | Forbidden / P1 |
+| cheerful and cute to plain | home-operator ("Ready when you are" to "Your dashboard is one tap away."), contact-sent ("Thanks for reaching out." cut), checkin-complete ("Thanks, you're done" to "You are done. Your answer is in your team's aggregate."), help ("Still need a hand?" to "Still need help?") | Forbidden (P3, P5) |
+| contractions spelled out | magic-link-sent ("Didn't" to "Did not") | Dictionary |
+| "operator" to "whoever set up this check-in" (employee copy) | checkin-entry, checkin-expired (2) | Dictionary (never "operator" to an employee) |
+| Contact us to Contact support | not-found | Dictionary |
+| bare Dashboard / "Back to your dashboard" to Back to dashboard | program-detail-notfound, invite-owner-sent | Dictionary |
+| [?] hypothesis marker removed (hedge kept) | invite-owner, upgrade | Forbidden (stub marker must not ship) |
+| reading to read; in-app "signal" to "alert" | share-owner (reading to read), threshold-alert ("This signal comes from" to "This alert comes from") | Dictionary |
+| Continue to Save and continue | onboarding-company | Microcopy, button = verb + object |
+| H1 stability (node 3.1) | onboarding-program-loading ("Finding your program" to "Your recommended program"), onboarding-program-error ("Choose your first program" to "Pick your first program") | Microcopy, H1 stable across states |
+
+*Already voice-compliant, no change: home.html, about.html, contact.html, contact-error.html, segment-landing.html, legal.html, signup*.html, login.html, login-error.html, reset-password-loading.html, onboarding-company-loading.html, onboarding-invite*.html, team-pulse-nodata.html, loading skeletons, program-detail (base/draft/end/ended/loading), check-in-setup-error/loading, team-roster-loading/manage, checkin-questions/already/submit-error, server-error, maintenance, cookie-consent, settings-notifications, and more. The etalon was close, and the wireframe stage was written carefully, so most screens needed nothing.*
+
+### Residual divergences to resolve in Step 8
+
+| Item | Where | Proposed fix |
+|------|-------|--------------|
+| Password minimum disagrees | signup.html "At least 8 characters" vs reset-password.html "At least 12 characters" (and its requirements list) | align both to one number (illustrative rule); recommend 12 to keep the stronger requirement |
+| Success H1 duplicates the lead below it | checkin-complete.html H1 "You are done. Your answer is in your team's aggregate." vs lead "Your answer joined your team's aggregate. It is never shown on its own." | trim H1 to "You are done." and let the lead carry the aggregate detail |
+| "your operator" on an owner surface | home-owner.html privacy strip "to you or to your operator" | kept on purpose (owner-facing; the owner knows what an operator is; the ban is for employee copy). Flag for confirmation |
+
+### Step 8, audit fixes
+
+*An adversarial audit of all 99 screens against `voice.md` surfaced a short defect list (mechanical sweep was already clean: 0 exclamation, emoji, "successfully", contractions, buzzwords; canon labels uniform). The Group A fixes below were applied; the Group B judgment calls were confirmed as deliberate keeps.*
+
+| File | Was | Now | Rule |
+|------|-----|-----|------|
+| checkin-questions.html | Submit | Send answers | Button = verb + object; ban bare "Submit" |
+| home-owner.html | a plain-language reading | a plain-language read | Dictionary: read, not reading |
+| server-error.html | Need a hand? | Need help? | Forbidden idiom (consistency with help.html) |
+| signup.html, signup-error.html | At least 8 characters (placeholder + "Use at least 8 characters.") | At least 12 characters | align to reset-password (the stronger requirement) |
+| checkin-complete.html | H1 "You are done. Your answer is in your team's aggregate." | H1 "You are done." | Screen heading is a place-name, not a two-sentence success line; the lead carries the aggregate detail |
+| payment-failed.html | Stay on the Free plan, retry later | Stay on the Free plan and try again later | Dictionary: ban "retry" |
+| checkin-submit-error.html | Give it a moment and try again. | Wait a moment, then try again. | Forbidden: conversational filler |
+| settings-notifications.html | only aggregate signals | only aggregate results | Dictionary: "signal" reserved for owner/marketing |
+| threshold-alert.html | This is a signal to check in with everyone | This is a prompt to check in with everyone | Dictionary: in-app "signal" |
+| team-pulse.html | aria-label "Score, reading and next step" | aria-label "Score, read and next step" | Dictionary: read; accessibility copy is voice-governed |
+| help.html | aria-label "Still need a hand?" | aria-label "Still need help?" | consistency with the visible H2 |
+| owner-dashboard.html, owner-dashboard-empty.html | What I can and cannot see | What you can and cannot see | reader is "you" (Step 7 fix, logged here for the record) |
+
+*Group B, confirmed deliberate (no change): node 3.1 error H1 stays "Pick your first program" (the error is a library fallback, genuinely a different place); "Select" on library cards stays distinct from the "Pick a program" navigate CTA; bare "Save" / "Change" / "Continue" stay in their form and linear-flow contexts; home-owner "to your operator" stays (owner-facing, where the term is understood).*
+
+*aria-labels are now in voice scope. Two were fixed above; the inventory (Section B) captured visible copy only, so aria-label coverage begins here.*
+
+---
+
 ## Status
 
-Step 1 complete: 99 screen and state files inventoried, shell captured once, divergences and user content marked. Next, Step 2 writes the voice principles into `voice.md`, sourced from `personas.md` and `research.md`. Nothing in this file has been rewritten; the "was" / "now" columns fill in from Step 6 on.
+**Voice stage (05) complete.** All 99 product screens speak one voice, written against `voice.md`, audited, and fixed. Global state: 0 em dash, no banned terms, one H1 per page, markup and user content untouched (every wireframe change is a one-for-one text swap). The voice document (Tone, 5 Principles, Dictionary, Forbidden, Microcopy) is the source of truth; this file is the inventory plus the was / now record. `voice.html` is live in the roadmap (active), the Next badge has moved to Concept, and CLAUDE.md and README.md carry the Voice section with Voice = Done.
