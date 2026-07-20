@@ -272,3 +272,10 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--wf-stroke); }
 .wf-quote { border: 1px solid var(--wf-line); border-radius: var(--radius-lg); padding: 24px; background: var(--wf-panel-2); }
 .wf-quote-t { font-size: clamp(16px, 2vw, 20px); color: var(--wf-t-2); line-height: 1.5; max-width: 54ch; }
 .wf-quote-by { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+
+/* split auth: the focused form beside a brand panel; the panel hides on mobile
+   so the auth screen stays a single fast column, exactly as before. */
+.wf-auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; max-width: 960px; margin: 0 auto; }
+.wf-auth-brand { display: flex; flex-direction: column; gap: 16px; }
+.wf-auth-proof { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--wf-t); }
+@media (max-width: 760px) { .wf-auth-grid { grid-template-columns: 1fr; } .wf-auth-brand { display: none; } }
