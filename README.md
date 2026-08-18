@@ -22,6 +22,9 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 - **Concept - The stand:** https://sergiodesign4u-dot.github.io/brio/design/concept/concept.html
 - **Concept - The etalon in colour:** https://sergiodesign4u-dot.github.io/brio/design/dashboard.html
 - **Concept - The check-in in colour:** https://sergiodesign4u-dot.github.io/brio/design/checkin-privacy.html
+- **UI + Visual - Coloured screens:** https://sergiodesign4u-dot.github.io/brio/design/overview.html
+- **UI + Visual - Component kit:** https://sergiodesign4u-dot.github.io/brio/design/kit/kit.html
+- **UI + Visual - Product home in colour:** https://sergiodesign4u-dot.github.io/brio/design/index.html
 
 ---
 
@@ -38,7 +41,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 | Wireframes | Done. Grey clickable prototype of the whole product: overview.html (all-screens hub + coverage map), index.html (product home), 47 of 47 screens, 99 state pages, shared grey _wf.css. Every internal link resolves; greyscale and one-H1 clean; audited in wireframes/docs/critique.md. |
 | Voice | Done. The rules by which Brio speaks, applied to all 99 screens. voice/docs/voice.md (tone, five principles, dictionary, forbidden, microcopy rules), voice/docs/microcopy.md (full text inventory with was/now), voice/voice.html. Only text changed, never markup. |
 | Concept | Done. The visual language, proven on the screen rather than described in a table. Brand plate A and layout direction 02 chosen; root DESIGN-artifacts.md holds the brand with an origin on every value; design/concept/ carries the references, the attributes, the three layout directions and the concept stand; design/_theme.css is the single place a value lives; 15 coloured copies in design/ (4.0 Dashboard with six states, the employee check-in with eight screens) with zero structural drift from the grey originals. Critique in two instruments plus the mechanical detector, log in design/concept/docs/critique.md, summary on the stand. |
-| UI + Visual | Not started |
+| UI + Visual | In progress. DESIGN.md at the root (product language from code, every token with an origin), design/kit/ (inventory read from all 99 wireframes, kit.css moved in byte for byte, shell markup, showcase), design/visuals/ (own imagery, one grade, prompts recorded), 24 of 99 state pages assembled in colour from the kit, design/overview.html with an honest coverage map. Remaining: the triple critique and the closing audit. |
 | Tokens + Components | Not started |
 | Design System | Not started |
 | Responsive | Not started |
