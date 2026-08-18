@@ -39,7 +39,7 @@ Each state below is listed in the node's IA "States" section in ia/docs/pages/; 
 
 ## Post-fix verification
 
-- Coverage: **47 of 47 screens built, 99 state pages, 0 in spec** (index.html coverage map, rendered from _nav.js).
+- Coverage: **47 of 47 screens built, 99 state pages, 0 in spec** (overview.html coverage map, rendered from _nav.js).
 - Links: **0 broken** across 100 html files; every internal `<a href>` resolves to an existing wireframe file.
 - Grey contract: **0 greyscale leaks**, **0 shadows / images / icon-fonts / gradients**, spot-checked with computed styles on one screen per shell (public, auth, operator, owner, employee, banner, self-contained) plus every new state file.
 - Structure: **exactly one H1** in all 100 files; overflow **0** at 360px and desktop; correct shell rendered; **0 console errors**.

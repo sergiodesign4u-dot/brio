@@ -305,7 +305,7 @@ Small-team timing-based inference: SHRM documented that even without demographic
 
 ## Doresearch for CJM (Stage 3)
 
-*Targeted re-research to close the most dangerous As-Is gap (D1 in the CJM critique): the operator's first-person voice and what hurts most on the current path. Public pages only, no login. The Anthropic web crawler is blocked by Reddit, LinkedIn, and Quora, so the first pass (WebFetch / WebSearch) could not read them; a second pass with a real browser (Playwright) reached public Reddit threads via old.reddit.com and closed most of the gap. Detailed map: user-research/docs/cjm-as-is.md.*
+*Targeted re-research to close the most dangerous As-Is gap (D1 in the CJM critique): the operator's first-person voice and what hurts most on the current path. Public pages only, no login. The Anthropic web crawler is blocked by Reddit, LinkedIn, and Quora, so the first pass (WebFetch / WebSearch) could not read them; a second pass with a real browser (Playwright) reached public Reddit threads via old.reddit.com and closed most of the gap. Detailed map: research/docs/cjm-as-is.md.*
 
 **Q1 - What hurts most on the current path, in the operator's and employee's words?**
 

@@ -1,8 +1,8 @@
 /* Brio wireframes - single navigation source (Stage 04).
    Flows from ia/docs/flows.md; screens and state files from wireframes/docs/screens.md
-   and ia/docs/sitemap.md. index.html renders the flow entries and the coverage map from
-   here; each screen page reads its state row for the top state panel. Flip a screen's
-   status to "built" as its wireframe lands, and the coverage map lights up.
+   and ia/docs/sitemap.md. overview.html renders the flow entries and the coverage map
+   from here; each screen page renders its wireframe navigator panel from here too. Flip
+   a screen's status to "built" as its wireframe lands, and the coverage map lights up.
    Global-component render is added here at Step 5. No em dash. */
 window.BRIO_WF = {
 
@@ -38,8 +38,8 @@ window.BRIO_WF = {
      states: wireframe state files, base first. Filled for Flow 1 now; the rest fill at Step 8.
      A spec screen with no states links to its IA page (../ia/<file>) as reference. */
   screens: [
-    { num: "0.0", name: "Home", file: "home.html", ia: "home.html", status: "built", states: [
-      { f: "home.html", s: "Base (guest)" }, { f: "home-operator.html", s: "Returning operator" }, { f: "home-owner.html", s: "Owner" } ] },
+    { num: "0.0", name: "Home", file: "index.html", ia: "home.html", status: "built", states: [
+      { f: "index.html", s: "Base (guest)" }, { f: "home-operator.html", s: "Returning operator" }, { f: "home-owner.html", s: "Owner" } ] },
 
     { num: "1.0", name: "Pricing", file: "pricing.html", ia: "pricing.html", status: "built", states: [
       { f: "pricing.html", s: "Default" } ] },
@@ -212,30 +212,97 @@ window.BRIO_WF.publicnav = {
 
 /* Fill the placeholders on a screen page.
    opts: { node: "4.0", file: "dashboard.html", shell: "operator", tab: "Dashboard" }
-   - always renders the prototype strip into #wf-bar
+   - always renders the wireframe navigator panel into #wf-panel
    - shell "operator" also renders #wf-appbar, #wf-tabbar, #wf-appfoot */
 window.BRIO_WF.render = function (opts) {
   var WF = window.BRIO_WF;
   function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
 
-  var bar = document.getElementById("wf-bar");
-  if (bar) {
-    var scr = WF.screens.find(function (s) { return s.num === opts.node; });
-    bar.textContent = "";
-    if (scr) {
-      bar.appendChild(el("span", "node", scr.num));
-      bar.appendChild(el("span", "name", scr.name));
-      var cur = scr.states.find(function (st) { return st.f === opts.file; });
-      bar.appendChild(el("span", "state", cur ? cur.s : ""));
-      var states = el("div", "states");
-      scr.states.forEach(function (st) {
-        if (st.f === opts.file) { states.appendChild(el("span", "wf-state-chip on", st.s)); }
-        else if (scr.status === "built") { var a = el("a", "wf-state-chip", st.s); a.href = st.f; states.appendChild(a); }
-        else { states.appendChild(el("span", "wf-state-chip", st.s)); }
-      });
-      bar.appendChild(states);
+  /* ===== Wireframe navigator: head, three-level tree, accordion, cross-links ===== */
+  var panel = document.getElementById("wf-panel");
+  if (panel) {
+    var here = WF.screens.find(function (s) { return s.num === opts.node; });
+    var hereState = here && here.states.find(function (st) { return st.f === opts.file; });
+
+    var head = el("div", "wf-panel-head");
+    var back = el("a", "wf-panel-back", "All screens"); back.href = "overview.html";
+    head.appendChild(back);
+    var id = el("div", "wf-panel-id");
+    id.appendChild(el("span", "wf-panel-badge", "Wireframes"));
+    id.appendChild(el("span", "wf-panel-sub", "grey clickable prototype"));
+    head.appendChild(id);
+    var hereLbl = el("div", "wf-panel-here");
+    if (here) {
+      hereLbl.appendChild(el("span", "num", here.num));
+      hereLbl.appendChild(el("b", null, here.name));
+      if (hereState) hereLbl.appendChild(document.createTextNode(" - " + hereState.s));
     }
-    var back = el("a", "wf-back", "All screens"); back.href = "index.html"; bar.appendChild(back);
+    head.appendChild(hereLbl);
+    var toggle = el("button", "wf-panel-toggle");
+    toggle.setAttribute("aria-label", "All screens and states");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.appendChild(el("span")); toggle.appendChild(el("span")); toggle.appendChild(el("span"));
+    head.appendChild(toggle);
+
+    var tree = el("div", "wf-panel-tree");
+    Object.keys(WF.clusters)
+      .sort(function (a, b) { return (+a) - (+b); })
+      .forEach(function (k) {
+        var group = WF.screens.filter(function (s) { return s.num.split(".")[0] === k; });
+        if (!group.length) return;
+        tree.appendChild(el("div", "wf-cl", k + "  " + WF.clusters[k]));
+        group.forEach(function (s) {
+          var isHere = s.num === opts.node;
+          var row;
+          if (s.status === "built") {
+            row = el("a", "wf-scr" + (isHere ? " is-current" : "")); row.href = s.file;
+          } else {
+            row = el("span", "wf-scr is-spec");
+          }
+          row.appendChild(el("span", "wf-scr-num", s.num));
+          row.appendChild(el("span", null, s.name));
+          if (isHere) row.setAttribute("aria-current", "page");
+          tree.appendChild(row);
+          /* Accordion: only the current node shows its states. */
+          if (!isHere) return;
+          s.states.forEach(function (st) {
+            var stateRow;
+            if (st.f === opts.file) {
+              stateRow = el("span", "wf-st is-current", st.s);
+              stateRow.setAttribute("aria-current", "true");
+            } else if (s.status === "built") {
+              stateRow = el("a", "wf-st", st.s); stateRow.href = st.f;
+            } else {
+              stateRow = el("span", "wf-st", st.s);
+            }
+            tree.appendChild(stateRow);
+          });
+        });
+      });
+
+    /* Cross-links: the ways out of this artefact, not items inside it. */
+    var foot = el("div", "wf-panel-foot");
+    if (here && here.ia) {
+      var iaLink = el("a", null, "IA specification, node " + here.num);
+      iaLink.href = "../ia/" + here.ia;
+      foot.appendChild(iaLink);
+    }
+
+    panel.textContent = "";
+    panel.appendChild(head);
+    panel.appendChild(tree);
+    panel.appendChild(foot);
+
+    toggle.addEventListener("click", function () {
+      var open = panel.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    var focus = panel.querySelector(".wf-st.is-current") || panel.querySelector(".wf-scr.is-current");
+    if (focus) {
+      var offset = focus.offsetTop - tree.clientHeight / 2;
+      if (offset > 0) tree.scrollTop = offset;
+    }
   }
 
   if (opts.shell === "operator") {

@@ -1,6 +1,6 @@
 # Information Architecture - Base Layer (Sitemap)
 
-*Phase: IA (Basic). Built from user-research/docs/personas.md and jtbd.md, and the traced backlog in user-research/docs/cjm-to-be.md. Cross-cutting rule: every screen serves a job. A screen with no job is an [ORPHAN]. A job with no screen is a hole. Structure is derived from jobs, not copied from a competitor menu.*
+*Phase: IA (Basic). Built from research/docs/personas.md and jtbd.md, and the traced backlog in research/docs/cjm-to-be.md. Cross-cutting rule: every screen serves a job. A screen with no job is an [ORPHAN]. A job with no screen is a hole. Structure is derived from jobs, not copied from a competitor menu.*
 
 ---
 
@@ -412,6 +412,52 @@ No screen is deleted: every other row closes at least one job, and the two blank
 **Thin coverage (not a hole to fill in MVP):** E3 (caring leader) is covered only by Owner dashboard / digest as the shareable proof; it is a [?] hypothesis with no dedicated peer-share surface, acceptable as-is. Hypothesis jobs HJ1 (close the loop) and HJ2 (employee sees team result, backlog item 12 LATER) are deliberately unmapped / parked, not orphans-to-fix.
 
 **Net:** one real orphan job (S1, to backlog), zero orphan screens to cut (two supporting-infrastructure rows kept), no MVP job left uncovered.
+
+---
+
+## Volume label: MVP or LATER (Detail Layer, per node)
+
+*The one place where the volume of the product is narrowed. Applied retroactively on 5 August 2026 (see `docs/decisions.md`), because the label was missing when the Detail Layer was rolled out.*
+
+**Source of the label, not a judgement call.** The backlog in `research/docs/cjm-to-be.md` is the parent list: items 1-10 are MVP (7 core plus 3 supporting), items 11 and 12 are LATER. A node is **MVP** when an MVP backlog item cannot ship without it, or when it is an auth, legal or system precondition the To-Be path can actually hit (log in, reset password, 404, 500, cookie consent). A node is **LATER** when the same test passes without it: the first round of the product runs, and the node is acquisition breadth or an operational nicety. It is specified and wireframed either way; the label orders the work, it does not cut the spec.
+
+**Who reads it.** Stage 07 (which screens are coloured first and which enter the 3-5 sample), stage 08 (roll-out order), stage 09 (which node the system builds next). The label lives once, in `ia/_nav.js`, and is visible as a chip on `structure.html`.
+
+### Estimate
+
+| Group | Nodes | MVP | LATER |
+|-------|-------|-----|-------|
+| Global elements | 6 | 6 | 0 |
+| Pages | 48 | 43 | 5 |
+| **Total** | **54** | **49** | **5** |
+
+### The five LATER nodes, with the reason
+
+| Node | Why the To-Be path does not break without it | Parent it would serve |
+|------|----------------------------------------------|-----------------------|
+| 1.2 About | Trust in this product is carried by the privacy mechanism shown in the UI (1.1, 0.3, 8.2), not by a company story. Nothing in the backlog needs it. | brand credibility, no backlog item |
+| 1.3 Contact / Support | Self-serve by design: the operator starts in an afternoon without talking to anyone (backlog 1). A support surface matters, but no MVP item depends on it. | post-MVP support |
+| 1.4 Help / FAQ | The in-product answer to "am I doing this right" is the interpretive layer (backlog 5), which is MVP and cross-cutting. A separate help library is a second, weaker answer to the same job. | E1, already served by 4.0, 3.1, 5.2 |
+| 1.5 Category / segment landing | Pure acquisition breadth: the SEO layer is defined, and the landing multiplies it. Activation (H1) is measured from 1.0 and 2.0, not from segment pages. | growth after H1 is proven |
+| 11.2 Maintenance | An operational state, not a path state. The path can hit 404 and 500; planned maintenance is a deploy practice the MVP does not have yet. | operations |
+
+**Nothing in the current build is blocked by this.** All 54 nodes already have a specification and a grey wireframe; the label starts paying at stage 07, where 43 MVP pages plus 6 globals set the order of colour, and at stage 09, where the LATER five are the honest source for "the next screen built straight from the system."
+
+---
+
+## Emotional and social jobs: what supports them (not a screen)
+
+*The screens x jobs matrix above carries FUNCTIONAL jobs only. Emotional and social jobs are not closed by a screen but by a mechanism spread across screens, so they get their own table. Read by the Detail Layer (which node must carry the mechanism) and by Voice (what the line in that place has to do).*
+
+| Job | Persona | The mechanism that supports it | Where it is visible | Source |
+|-----|---------|--------------------------------|---------------------|--------|
+| **E1** feel like a competent people person | Priya (primary) | The interpretive layer, cross-cutting: no number is ever shown without its reading, every setup ends in a confirmation, and every operator screen offers one suggested next action | 4.0 Dashboard, 4.1, 3.1, 5.2, 6.0, 9.0 | jtbd.md E1; cjm-to-be.md backlog 5 |
+| **E2** feel supported, not monitored | Yemi (primary) | The privacy bundle as a visible mechanism, four parts: the pre-Q1 disclosure sentence, minimum of 5, no live count during an open cycle, and the subscription-as-privacy statement | 10.1 Pre-Q1 disclosure, 0.3 disclosure component, 1.1 Security and privacy, 8.2 Privacy center | jtbd.md E2; cjm-to-be.md backlog 4; founder decision D1 |
+| **E3** be seen as a caring leader | Marcus (secondary), Priya (secondary) | Shareable aggregate proof: the owner dashboard and the monthly digest are the artefact a leader can hold up. Deliberately thin: no dedicated peer-share surface, because E3 is still a hypothesis | 9.0 Owner dashboard, 9.2 Monthly digest | jtbd.md E3 `[?]`; Traceability thin-coverage note above |
+| **S1** tell my network what works | Priya | **Nothing in the MVP, and that is the decision.** S1 is a `[?]` hypothesis and cash referral is on the Stage 2 cut list; a lightweight share surface waits for validation | no node | jtbd.md S1 `[?]`; Orphan jobs table above |
+| **S2** share the result with the owner easily | Priya to Marcus | The operator-to-owner share act, kept distinct from inviting the owner: two different labels for two different acts, so the operator never confuses "show him" with "give him an account" | 7.0 Share with owner, 7.1 Invite owner and upgrade | jtbd.md S2; voice.md one action one label |
+
+**Consequence for Voice:** E2 fixes the one privacy sentence (mechanism, never reassurance), E1 fixes the rule that a score never appears without its reading, and S2 fixes the two distinct labels. All three are already rules in `voice/docs/voice.md`; this table is where they get their parent.
 
 ---
 

@@ -48,156 +48,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Sidebar navigation - mobile-first */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(13, 15, 18, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .sidebar-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      height: 52px;
-    }
-
-    .sidebar-brand {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      text-transform: uppercase;
-    }
-
-    .sidebar-toggle {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 4px;
-      width: 36px;
-      height: 36px;
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      padding: 9px 8px;
-    }
-
-    .sidebar-toggle span {
-      display: block;
-      height: 2px;
-      width: 100%;
-      background: var(--text-muted);
-      border-radius: 1px;
-    }
-
-    .sidebar-body {
-      display: none;
-      padding: 8px 0 16px;
-      border-top: 1px solid var(--border);
-      overflow-y: auto;
-      max-height: calc(100vh - 52px);
-    }
-    .sidebar-body.open { display: block; }
-
-    .nav-group { padding: 0 8px; }
-
-    .nav-group-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      padding: 14px 12px 6px;
-    }
-
-    .nav-group-label.active-section { color: var(--accent); }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 12px;
-      font-size: 13px;
-      color: var(--text-muted);
-      text-decoration: none;
-      border-radius: var(--radius-sm);
-      transition: color 0.15s, background 0.15s;
-    }
-
-    a.nav-item:hover {
-      color: var(--text);
-      background: var(--surface-2);
-      text-decoration: none;
-    }
-
-    .nav-item-disabled {
-      color: var(--text-faint);
-      cursor: default;
-    }
-
-    .nav-soon {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 6px;
-      border-radius: 100px;
-      background: var(--surface-3);
-      color: var(--text-faint);
-      border: 1px solid var(--border);
-    }
-
-    .nav-group-next .nav-group-label { opacity: 0.5; }
-
-    .nav-item-muted {
-      color: var(--text-faint);
-      opacity: 0.5;
-      cursor: default;
-      font-size: 12px;
-    }
-
-    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
-    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
-    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub-item.nav-sub-active { color: var(--accent); }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-
-    @media (min-width: 900px) {
-      .sidebar {
-        left: 0;
-        right: auto;
-        top: 0;
-        bottom: 0;
-        width: 220px;
-        border-bottom: none;
-        border-right: 1px solid var(--border);
-        overflow-y: auto;
-      }
-      .sidebar-header { height: 64px; padding: 0 20px; }
-      .sidebar-toggle { display: none; }
-      .sidebar-body {
-        display: block;
-        max-height: none;
-        border-top: none;
-        padding: 4px 0 24px;
-        overflow-y: visible;
-      }
-    }
-
     /* Layout */
     main {
       padding-top: 52px;
@@ -241,6 +91,16 @@
       margin-bottom: 20px;
     }
 
+    h2.h1-size {
+      font-size: clamp(26px, 3.4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--text);
+      padding-top: 0;
+      border: none;
+    }
     h2 {
       font-size: clamp(20px, 2.5vw, 26px);
       font-weight: 700;
@@ -957,53 +817,12 @@
       color: var(--green);
       margin: 0;
     }
-    .nav-item-next { color: var(--text-muted); cursor: default; font-size: 12px; }
-    .nav-next { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--accent-dim); background: var(--accent-dim); color: var(--accent); margin-left: auto; }
   </style>
+  <link rel="stylesheet" href="../_nav.css">
 </head>
 <body>
 
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <span class="sidebar-brand">Brio</span>
-    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-  <div class="sidebar-body" id="sidebarBody">
-    <div class="nav-group">
-      <div class="nav-group-label active-section">Foundation Research</div>
-      <a href="#intro" class="nav-item">Intro</a>
-      <a href="#canvas" class="nav-item">Lean UX Canvas</a>
-      <a href="#strategy" class="nav-item">Strategy</a>
-      <a href="#aarrr" class="nav-item">AARRR</a>
-      <a href="#competitors" class="nav-item">Competitors</a>
-      <a href="#benchmark" class="nav-item">Benchmark</a>
-      <a href="#patterns" class="nav-item">UX Patterns</a>
-      <a href="#conclusions" class="nav-item">Conclusions</a>
-      <a href="#live-research" class="nav-item">Live Research</a>
-    </div>
-    <div class="nav-group">
-      <a href="../user-research/personas.html" class="nav-item">User Research</a>
-    </div>
-    <div class="nav-group">
-      <a href="../ia/flows.html" class="nav-item">Information Architecture (IA)</a>
-    </div>
-    <div class="nav-group">
-      <a href="../wireframes/index.html" class="nav-item">Wireframes</a>
-      <a href="../voice/voice.html" class="nav-item">Voice</a>
-      <span class="nav-item nav-item-next">Concept <span class="nav-next">Next</span></span>
-      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
-    </div>
-  </div>
-</aside>
+<aside id="sidebar"></aside>
 
 <main>
 
@@ -1048,7 +867,7 @@
   <!-- Lean UX Canvas -->
   <section id="canvas">
     <div class="section-label">Executive Summary</div>
-    <h1>Lean UX Canvas</h1>
+    <h2 class="h1-size">Lean UX Canvas</h2>
     <p>One-page product hypothesis before the details. Read this first, then dive into the sections below for the evidence behind each cell.</p>
 
     <div class="canvas-block">
@@ -1133,7 +952,7 @@
   <!-- Strategy -->
   <section id="strategy">
     <div class="section-label">Section 2</div>
-    <h1>Strategy <span style="font-size: 18px; color: var(--text-muted); font-weight: 400;">(v_refresh - validated)</span></h1>
+    <h2 class="h1-size">Strategy <span style="font-size: 18px; color: var(--text-muted); font-weight: 400;">(v_refresh - validated)</span></h2>
 
     <h2>Objectives</h2>
     <div class="table-wrap">
@@ -1254,7 +1073,7 @@
   <!-- AARRR -->
   <section id="aarrr">
     <div class="section-label">Section 3</div>
-    <h1>AARRR Funnel <span style="font-size: 18px; color: var(--text-muted); font-weight: 400;">(v_refresh)</span></h1>
+    <h2 class="h1-size">AARRR Funnel <span style="font-size: 18px; color: var(--text-muted); font-weight: 400;">(v_refresh)</span></h2>
 
     <div class="table-wrap">
       <table>
@@ -1337,7 +1156,7 @@
   <!-- Competitors -->
   <section id="competitors">
     <div class="section-label">Section 4</div>
-    <h1>Competitive Analysis</h1>
+    <h2 class="h1-size">Competitive Analysis</h2>
 
     <p>8 companies researched across 3 groups. Public pages only - June 2026. Screenshots below.</p>
 
@@ -1514,7 +1333,7 @@
   <!-- Benchmark -->
   <section id="benchmark">
     <div class="section-label">Section 5</div>
-    <h1>Benchmark - Trust and Privacy</h1>
+    <h2 class="h1-size">Benchmark - Trust and Privacy</h2>
 
     <p>5 best-in-class products from outside the direct competitor set, scored on how well they handle aggregate insight without surveilling the individual.</p>
 
@@ -1682,7 +1501,7 @@
   <!-- UX Patterns -->
   <section id="patterns">
     <div class="section-label">Section 6</div>
-    <h1>UX Patterns</h1>
+    <h2 class="h1-size">UX Patterns</h2>
 
     <h2>Critical Behavioral Entry Point</h2>
     <div class="pattern-card primary" style="margin-bottom:24px;">
@@ -1780,7 +1599,7 @@
   <!-- Conclusions -->
   <section id="conclusions">
     <div class="section-label">Section 7</div>
-    <h1>Conclusions</h1>
+    <h2 class="h1-size">Conclusions</h2>
 
     <h2>Gaps</h2>
     <div class="table-wrap">
@@ -2125,48 +1944,12 @@
 
 </main>
 
+
 <script>
-  var toggle = document.getElementById('sidebarToggle');
-  var sbody = document.getElementById('sidebarBody');
-  toggle.addEventListener('click', function() {
-    var open = sbody.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  sbody.querySelectorAll('a.nav-item').forEach(function(link) {
-    link.addEventListener('click', function() {
-      sbody.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  // IntersectionObserver for active sidebar nav tracking
-  var navSections = [
-    'intro', 'canvas', 'strategy', 'aarrr', 'competitors',
-    'benchmark', 'patterns', 'conclusions', 'live-research'
-  ];
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        sbody.querySelectorAll('a.nav-item').forEach(function(link) {
-          link.classList.remove('nav-item-active-scroll');
-          link.removeAttribute('aria-current');
-        });
-        var id = entry.target.id;
-        var matchLink = sbody.querySelector('a.nav-item[href="#' + id + '"]');
-        if (matchLink) {
-          matchLink.classList.add('nav-item-active-scroll');
-          matchLink.setAttribute('aria-current', 'location');
-        }
-      }
-    });
-  }, { rootMargin: '-15% 0px -75% 0px' });
-
-  navSections.forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) observer.observe(el);
-  });
+  window.NAV_BASE = '../';
+  window.NAV_SECTIONS = [{"id": "intro", "label": "Intro"}, {"id": "canvas", "label": "Lean UX Canvas"}, {"id": "strategy", "label": "Strategy"}, {"id": "aarrr", "label": "AARRR"}, {"id": "competitors", "label": "Competitors"}, {"id": "benchmark", "label": "Benchmark"}, {"id": "patterns", "label": "UX Patterns"}, {"id": "conclusions", "label": "Conclusions"}, {"id": "live-research", "label": "Live Research"}];
 </script>
+<script src="../_nav.js"></script>
 
 </body>
 </html>

@@ -42,57 +42,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Sidebar - mobile-first */
-    .sidebar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(13, 15, 18, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
-    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
-    .sidebar-toggle {
-      display: flex; flex-direction: column; justify-content: center; gap: 4px;
-      width: 36px; height: 36px; background: none; border: 1px solid var(--border);
-      border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px;
-    }
-    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
-    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
-    .sidebar-body.open { display: block; }
-    .nav-group { padding: 0 8px; }
-    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
-    .nav-group-label.active-section { color: var(--accent); }
-    .nav-item {
-      display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px;
-      color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s;
-    }
-    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
-    .nav-item-active { color: var(--accent); font-weight: 600; }
-    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
-    .nav-item-next { color: var(--text-muted); cursor: default; font-size: 12px; }
-    .nav-next { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--accent-dim); background: var(--accent-dim); color: var(--accent); margin-left: auto; }
-    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub-item.nav-sub-active { color: var(--accent); }
-    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
-    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
-    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-
-    @media (min-width: 900px) {
-      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
-      .sidebar-header { height: 64px; padding: 0 20px; }
-      .sidebar-toggle { display: none; }
-      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
-    }
-
     main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
     @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
     section { padding: 72px 0 32px; }
@@ -129,48 +78,20 @@
     .chip[data-active] { border-color: var(--accent); background: var(--accent-dim); box-shadow: 0 0 0 1px var(--accent-dim); }
     .chip[data-active] .chip-name { color: var(--text); }
     .chip-empty { color: var(--text-faint); font-size: 13px; }
+    .bank-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 20px 0 8px; }
+    .bank { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 14px 16px; }
+    .bank b { display: block; font-size: 13px; color: var(--text); }
+    .bank span { display: block; font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--accent); margin: 3px 0 7px; }
+    .bank em { font-style: normal; font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+    .bank-note { margin-top: 16px; padding: 14px 16px; border: 1px solid var(--border); border-left: 2px solid var(--accent); border-radius: var(--radius); background: var(--surface); font-size: 13px; color: var(--text-muted); }
+    .chip-scope { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent); border: 1px solid var(--accent-dim); background: var(--accent-dim); border-radius: 100px; padding: 2px 7px; flex-shrink: 0; }
+    .chip-scope.is-later { color: var(--text-faint); border-color: var(--border); background: none; }
   </style>
+  <link rel="stylesheet" href="../_nav.css">
 </head>
 <body>
 
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <span class="sidebar-brand">Brio</span>
-    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  </div>
-  <div class="sidebar-body" id="sidebarBody">
-    <div class="nav-group">
-      <a href="../research/research.html" class="nav-item">Foundation Research</a>
-    </div>
-    <div class="nav-group">
-      <a href="../user-research/personas.html" class="nav-item">User Research</a>
-    </div>
-    <div class="nav-group">
-      <div class="nav-group-label active-section">Information Architecture (IA)</div>
-
-      <div class="nav-subhead">Base Layer</div>
-      <a href="flows.html" class="nav-sub-link">Flows</a>
-      <a href="concept.html" class="nav-sub-link">Concept map</a>
-
-      <div class="nav-subhead">Detail Layer</div>
-      <a href="sitemap.html" class="nav-sub-link">Sitemap</a>
-      <a href="structure.html" class="nav-sub-link nav-link-active">Structure</a>
-      <a href="#global" class="nav-sub2-item" id="sub-global">Global elements</a>
-      <a href="#pages" class="nav-sub2-item" id="sub-pages">Pages</a>
-    </div>
-    <div class="nav-group">
-      <a href="../wireframes/index.html" class="nav-item">Wireframes</a>
-      <a href="../voice/voice.html" class="nav-item">Voice</a>
-      <span class="nav-item nav-item-next">Concept <span class="nav-next">Next</span></span>
-      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
-    </div>
-  </div>
-</aside>
+<aside id="sidebar"></aside>
 
 <main>
 
@@ -198,6 +119,28 @@
     <div class="chip-grid" id="pages-chips"></div>
   </section>
 
+
+  <section id="blocks">
+    <div class="section-label">Block bank</div>
+    <h2>Block bank by page type</h2>
+    <p>Where the composition of a page comes from. Thirty nodes are eight to ten page types, so the pass is one per type, not one per node. Two sources answer two different questions and neither is enough alone: <strong>competitors</strong> give the domain truth (what a company in our category actually puts on this page), <strong>Refero</strong> gives the craft truth (how a page of this type is built in best-in-class products outside it). A block that traces to no job, barrier or SEO requirement is not taken. Full bank with tracing per block: <code>ia/docs/blocks.md</code>.</p>
+
+    <div class="bank-grid">
+      <div class="bank"><b>T1 Marketing landing</b><span>0.0, 1.5</span><em>The privacy mechanism sits above the fold. Nobody in the category puts the anonymity rule on the landing page.</em></div>
+      <div class="bank"><b>T2 Pricing</b><span>1.0</span><em>A published per-seat number, and one line saying the privacy rule does not change with the plan.</em></div>
+      <div class="bank"><b>T3 Trust and content</b><span>1.1, 1.6, 1.2</span><em>A two-column table of what the owner sees and never sees. The category states what is protected; we state what is visible.</em></div>
+      <div class="bank"><b>T4 Auth form</b><span>2.0 to 2.4</span><em>The privacy sentence sits where the decision is made, not one click away.</em></div>
+      <div class="bank"><b>T5 Guided wizard step</b><span>3.0 to 3.3</span><em>A pre-selected default with its rationale, and the reason this step exists under the question.</em></div>
+      <div class="bank"><b>T6 Read surface</b><span>4.0, 4.1, 4.2, 9.0, 9.2</span><em>The reading is the largest element and the number is second. Every reference dashboard does the reverse.</em></div>
+      <div class="bank"><b>T7 List and detail</b><span>5.0 to 5.2, 6.0, 6.1</span><em>Participation as a count, with no per-person answer column, ever.</em></div>
+      <div class="bank"><b>T8 Settings section</b><span>8.0 to 8.4, 7.0 to 7.3</span><em>The privacy centre repeats the mechanism verbatim. A paraphrase would be a second edition of the promise.</em></div>
+      <div class="bank"><b>T9 Linear task flow</b><span>10.0 to 10.6</span><em>The pre-question disclosure, its own screen, every cycle. The block the category does not have.</em></div>
+      <div class="bank"><b>T10 System state</b><span>11.0 to 11.4</span><em>One plain sentence and the one way back that is useful from here. No apology theatre.</em></div>
+    </div>
+
+    <div class="bank-note"><strong>The honest gap, named rather than papered over.</strong> Refero holds no screen of the type "what your employer can and cannot see" as a product surface, and no pre-question privacy disclosure: the closest craft reference is a marketing security page. The competitor half is worse, because the one competitor with a genuinely specific anonymity model explains it in a help-centre article, outside the product. For types T3 and T9 the craft half is therefore thin, and the composition is carried by our own research instead. This is the one place in the bank where "where we are better" is not a comparison but a hole in the category.</div>
+  </section>
+
   <footer>
     Structure hub - node chips render from the shared registry <strong>_nav.js</strong>. Landing here from a node page (Structure link) highlights that node's chip. Black and white wireframe stage; color arrives at Concept.
   </footer>
@@ -206,6 +149,7 @@
 
 <script src="_nav.js"></script>
 <script>
+
   (function () {
     var nodes = window.BRIO_NODES || [];
     function makeChip(n) {
@@ -217,7 +161,10 @@
       var num = document.createElement('span'); num.className = 'chip-num'; num.textContent = n.num;
       var name = document.createElement('span'); name.className = 'chip-name'; name.textContent = n.name;
       var type = document.createElement('span'); type.className = 'chip-type'; type.textContent = n.type;
-      a.appendChild(num); a.appendChild(name); a.appendChild(type);
+      var scope = document.createElement('span');
+      scope.className = 'chip-scope' + (n.scope === 'LATER' ? ' is-later' : '');
+      scope.textContent = n.scope || '';
+      a.appendChild(num); a.appendChild(name); a.appendChild(type); a.appendChild(scope);
       return a;
     }
     var g = document.getElementById('global-chips');
@@ -227,8 +174,12 @@
       if (n.group === 'global') { g.appendChild(makeChip(n)); gc++; }
       else { p.appendChild(makeChip(n)); pc++; }
     });
-    document.getElementById('global-count').textContent = gc + ' nodes';
-    document.getElementById('pages-count').textContent = pc + ' nodes';
+    function estimate(list) {
+      var mvp = list.filter(function (n) { return n.scope !== 'LATER'; }).length;
+      return list.length + ' nodes  /  ' + mvp + ' MVP, ' + (list.length - mvp) + ' LATER';
+    }
+    document.getElementById('global-count').textContent = estimate(nodes.filter(function (n) { return n.group === 'global'; }));
+    document.getElementById('pages-count').textContent = estimate(nodes.filter(function (n) { return n.group !== 'global'; }));
     if (!gc) g.innerHTML = '<span class="chip-empty">No global nodes.</span>';
     if (!pc) p.innerHTML = '<span class="chip-empty">No page nodes.</span>';
 
@@ -244,32 +195,13 @@
     highlight();
     window.addEventListener('hashchange', highlight);
   })();
-
-  var toggle = document.getElementById('sidebarToggle');
-  var sbody = document.getElementById('sidebarBody');
-  toggle.addEventListener('click', function () {
-    var open = sbody.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link, a.nav-sub2-item').forEach(function (link) {
-    link.addEventListener('click', function () {
-      sbody.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  var subSections = [ { id: 'global', sub: 'sub-global' }, { id: 'pages', sub: 'sub-pages' } ];
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        subSections.forEach(function (s) { var el = document.getElementById(s.sub); if (el) el.classList.remove('nav-sub-active'); });
-        var match = subSections.find(function (s) { return s.id === entry.target.id; });
-        if (match) { var el = document.getElementById(match.sub); if (el) el.classList.add('nav-sub-active'); }
-      }
-    });
-  }, { rootMargin: '-15% 0px -75% 0px' });
-  subSections.forEach(function (s) { var el = document.getElementById(s.id); if (el) observer.observe(el); });
 </script>
+
+<script>
+  window.NAV_BASE = '../';
+  window.NAV_SECTIONS = [{"id": "global", "label": "Global elements"}, {"id": "pages", "label": "Pages"}, {"id": "blocks", "label": "Block bank by type"}];
+</script>
+<script src="../_nav.js"></script>
 
 </body>
 </html>

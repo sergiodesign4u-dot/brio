@@ -15,7 +15,7 @@ The IA node pages (ia/*.html) already contain a black-and-white wireframe kit (t
 
 ## 2. The grey contract (structure, not look)
 
-- **Allowed palette:** only the greyscale scale defined in `_wf.css` as the `--wf-*` tokens (ink, panel, line, edge, stroke, and the text greys, plus white and the filled-control grey). No brand color, no type choice, no icon set, no shadow, no image, no finished UI on the screen body. Color, brand, and imagery arrive at Concept (stage 06), applied to COPIES in ui-visual/, never to these files.
+- **Allowed palette:** only the greyscale scale defined in `_wf.css` as the `--wf-*` tokens (ink, panel, line, edge, stroke, and the text greys, plus white and the filled-control grey). No brand color, no type choice, no icon set, no shadow, no image, no finished UI on the screen body. Color, brand, and imagery arrive at Concept (stage 06), applied to COPIES in design/, never to these files.
 - **One exception, the portfolio sidebar:** the roadmap sidebar is inherited portfolio chrome and keeps the IA accent for its active-nav state, exactly as every other stage page (research, IA) does. The grey rule governs the SCREEN body (the product wireframe in `<main>`), not the portfolio sidebar around it.
 - **Semantic HTML:** real `header`, `nav`, `main`, `section`, `article`, `form`, `button`, and labelled inputs, not a pile of `div`s. Buttons and fields are real elements. This is the first layer of product code, so it must read like code that grows into UI, not like a picture of one.
 
@@ -23,14 +23,14 @@ The IA node pages (ia/*.html) already contain a black-and-white wireframe kit (t
 
 A wireframe screen page is a prototype screen, not a portfolio document and not a device mockup. It has no roadmap sidebar and no desktop or mobile frames. It is one responsive page that looks like the real product, in grey.
 
-1. **Prototype strip** (`.wf-bar`, sticky and full-bleed at the top, rendered from `_nav.js`): the node number and name, the current state, chips linking the sibling states of the same screen, and an All screens button back to `index.html` (the hub). No flow list here; flows live on the hub. This is the only prototype chrome.
+1. **Wireframe navigator** (`.wf-panel`, rendered from `_nav.js`): four blocks top to bottom, a head with the All screens button back to `overview.html` plus the stage badge and its one-line subtitle, a three-level tree (IA cluster, screen with its muted node number, states), an accordion that opens only the current node, and the cross-links out of the artefact at the bottom. A left rail on desktop, a top bar that opens downward on mobile. No flow list here; flows live on the hub. This is the only prototype chrome. Replaced the sticky top strip on 5 August 2026, see `docs/decisions.md` D-05.
 2. **The screen** (`.wf-screen`): one responsive grey page that fills the width and reflows with real viewport media queries, so resizing the browser is how you see mobile (there is no separate mobile file). It carries its own product chrome (a top app bar with the job tabs, which move to a bottom tab bar at 360) and a content area that goes from multi-column on desktop to a single column on mobile. Block priority is reasoned from the 360px baseline up. Semantic HTML, real controls, exactly one `<h1>`. It reads like a real product, only grey: the visible labels are real product copy, not "block" annotations, and zones are named with `aria-label` and headings, not meta tags.
 
-`index.html` is the one exception: it is the hub, so it keeps the roadmap sidebar (`body.has-rail`) as the bridge back to the rest of the project, and it holds the flow entries and the coverage map.
+`overview.html` is the one exception: it is the hub, so it keeps the roadmap sidebar (`body.has-rail`, rendered from the root registry `/_nav.js`) as the bridge back to the rest of the project, and it holds the flow entries and the coverage map. `index.html` is not the hub: it is the product home page, node 0.0.
 
 ## 4. File naming
 
-- Latin, from the node basename in ia/docs/sitemap.md (the same basenames the IA HTML already uses: home.html, signup.html, onboarding-company.html, dashboard.html, team-pulse.html, and so on).
+- Latin, from the node basename in ia/docs/sitemap.md (the same basenames the IA HTML already uses: home.html, signup.html, onboarding-company.html, dashboard.html, team-pulse.html, and so on). One exception, and it is the folder rule rather than a naming slip: node 0.0 Home is served here as `index.html`, because in every stage folder `index.html` is the product home page. Its IA node page stays `ia/home.html`.
 - The base file `wireframes/<name>.html` is the primary state (success, or for a form or wizard node the ready form the user acts from, since success there is a forward redirect, not a page).
 - Each real state is its own page: `wireframes/<name>-<state>.html` (`-empty`, `-error`, `-loading`, `-<role>`, `-<domain>`). The exact list is the "State to wireframe file" map in wireframes/docs/screens.md. A state not in that map is not drawn.
 
@@ -44,8 +44,8 @@ A wireframe screen page is a prototype screen, not a portfolio document and not 
 
 ## 6. Navigation (flow-first)
 
-- Screen pages carry no navigation rail. Navigation on a screen is the sticky top strip (the sibling-state chips plus the All screens button); the flow entries and the coverage map live on the hub, wireframes/index.html. All of it is rendered from the single source wireframes/_nav.js.
-- The hub (index.html) is the launcher and the coverage map (built vs still in spec); it keeps the roadmap sidebar (body.has-rail) as the only place with portfolio nav, the bridge back to the rest of the project.
+- Screen pages carry the wireframe-only navigator panel: a three-level tree (IA cluster, screen with its muted node number, states), an accordion that opens only the current node, a link back to the hub, and cross-links out of the artefact at the bottom. It is a left rail on desktop and a top bar that opens downward on mobile. The flow entries and the coverage map live on the hub, wireframes/overview.html. All of it is rendered from the single source wireframes/_nav.js.
+- The hub (overview.html) is the launcher and the coverage map (built vs still in spec); it keeps the roadmap sidebar (body.has-rail) as the only place with portfolio nav, the bridge back to the rest of the project. The product home page is index.html, node 0.0.
 - A screen's primary action is a real `<a href>` to the next screen along ia/docs/flows.md; branches go both ways (a "no" leads somewhere real and back, a "yes" leads on); no dead ends anywhere.
 
 ## 7. SEO layout validation (layer 2)

@@ -92,7 +92,7 @@ All v2 elements reflected in downstream documents. No orphaned v1-only claims.
 
 ## 5. Em Dash Audit
 
-Scanning all research files for the em dash character (—).
+Scanning all research files for the em dash character ( - ).
 
 ```
 Files checked:

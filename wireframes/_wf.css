@@ -2,8 +2,9 @@
    A wireframe screen is ONE responsive page that looks like the real product, in grey:
    no color, type, brand, icon, or shadow. Not a device mockup, not two frames. It fills
    the page and reflows from 360 to desktop with real viewport media queries.
-   Inherits the IA :root tokens and the roadmap sidebar (used only by the index hub).
-   Stages 06 to 08 grow COLORED copies in ui-visual/, never this file. No em dash. */
+   Inherits the IA :root tokens. The roadmap sidebar on the hub (overview.html) comes from
+   the root registry /_nav.css, not from here.
+   Stages 06 to 08 grow COLORED copies in design/, never this file. No em dash. */
 
 :root {
   /* IA tokens (portfolio shell + roadmap sidebar chrome, used only by index) */
@@ -24,54 +25,86 @@ html { scroll-behavior: smooth; }
 body { background: var(--wf-ink); color: var(--wf-t-2); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
 body.has-rail { background: var(--bg); color: var(--text); }
 
-/* ===== Roadmap sidebar (inherited IA portfolio chrome, index hub only) ===== */
-.sidebar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13, 15, 18, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-.sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
-.sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
-.sidebar-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 36px; height: 36px; background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px; }
-.sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
-.sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
-.sidebar-body.open { display: block; }
-.nav-group { padding: 0 8px; }
-.nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
-.nav-group-label.active-section { color: var(--accent); }
-.nav-item { display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-.nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
-.nav-item-next { color: var(--text-muted); cursor: default; font-size: 12px; }
-.nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
-.nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-.nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-.nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
-.nav-next { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--accent-dim); background: var(--accent-dim); color: var(--accent); margin-left: auto; }
-@media (min-width: 900px) {
-  .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
-  .sidebar-header { height: 64px; padding: 0 20px; }
-  .sidebar-toggle { display: none; }
-  .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
-}
-
 /* ===== Main layout =====
-   Screen pages have no rail: the screen is the page, full width, under the sticky
-   strip. index.html keeps the roadmap rail as the hub bridge (body.has-rail). */
+   A screen page carries the wireframe-only navigator panel on the left; the screen
+   itself is the rest of the page, full width. overview.html is the hub and keeps the
+   roadmap rail from the root registry instead (body.has-rail). */
 main { padding: 0 0 48px; }
 body.has-rail main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; padding-bottom: 64px; }
 @media (min-width: 900px) { body.has-rail main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
 
-/* ===== Prototype strip (the only prototype chrome): node, state, states, back ===== */
-.wf-bar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap; padding: 9px 16px; background: var(--wf-panel-2); color: var(--wf-t); border-bottom: 1px solid var(--wf-edge); }
-@media (min-width: 720px) { .wf-bar { padding: 9px 24px; } }
-.wf-bar .node { font-family: ui-monospace, Menlo, monospace; font-size: 12px; font-weight: 700; color: var(--wf-t-hi); }
-.wf-bar .name { font-size: 13px; color: var(--wf-t); font-weight: 600; }
-.wf-bar .state { font-size: 11px; color: var(--wf-t-mid); }
-.wf-bar .state::before { content: "- "; color: var(--wf-t-lo); }
-.wf-bar .states { display: flex; gap: 6px; flex-wrap: wrap; }
-.wf-state-chip { font-size: 10.5px; color: var(--wf-t-mid); text-decoration: none; border: 1px solid var(--wf-edge); border-radius: 100px; padding: 2px 9px; white-space: nowrap; }
-a.wf-state-chip:hover { color: var(--wf-t-hi); border-color: var(--wf-stroke); text-decoration: none; }
-.wf-state-chip.on { color: var(--wf-solid-ink); background: var(--wf-solid); border-color: var(--wf-solid); font-weight: 700; }
-.wf-back { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--wf-solid-ink); background: var(--wf-solid); border: 1px solid var(--wf-solid); border-radius: 100px; padding: 4px 13px; text-decoration: none; white-space: nowrap; }
-.wf-back:hover { text-decoration: none; opacity: 0.9; }
+/* ===== Wireframe navigator (the only prototype chrome on a screen) =====
+   Four blocks top to bottom: head (back to the hub, stage badge, one-line subtitle),
+   three-level tree (IA cluster, screen with its muted node number, states), accordion
+   that opens only the current node, and cross-links out of the artefact at the bottom.
+   Mobile: a top bar that opens downward. Desktop: a fixed left rail. */
+.wf-panel {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--wf-panel-2); color: var(--wf-t);
+  border-bottom: 1px solid var(--wf-edge);
+  font-size: 12px; line-height: 1.45;
+}
+.wf-panel-head { display: flex; align-items: center; gap: 10px; padding: 8px 16px; }
+.wf-panel-back {
+  font-size: 11px; font-weight: 700; white-space: nowrap;
+  color: var(--wf-solid-ink); background: var(--wf-solid);
+  border: 1px solid var(--wf-solid); border-radius: 100px;
+  padding: 4px 12px; text-decoration: none;
+}
+.wf-panel-back:hover { text-decoration: none; opacity: 0.9; }
+.wf-panel-id { display: none; }
+.wf-panel-badge { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-t-hi); }
+.wf-panel-sub { display: block; font-size: 10.5px; color: var(--wf-t-lo); }
+.wf-panel-here { flex: 1; min-width: 0; font-size: 11.5px; color: var(--wf-t-mid); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wf-panel-here b { color: var(--wf-t); font-weight: 600; }
+.wf-panel-here .num { font-family: ui-monospace, Menlo, monospace; color: var(--wf-t-lo); margin-right: 5px; }
+.wf-panel-toggle {
+  margin-left: auto; display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  width: 32px; height: 30px; padding: 7px 7px; background: none; cursor: pointer;
+  border: 1px solid var(--wf-edge); border-radius: 4px;
+}
+.wf-panel-toggle span { display: block; height: 2px; width: 100%; background: var(--wf-t-mid); border-radius: 1px; }
+
+.wf-panel-tree, .wf-panel-foot { display: none; }
+.wf-panel.is-open .wf-panel-tree, .wf-panel.is-open .wf-panel-foot { display: block; }
+.wf-panel-tree { padding: 6px 8px 10px; border-top: 1px solid var(--wf-line-2); max-height: calc(100vh - 120px); overflow-y: auto; }
+
+.wf-cl { padding: 11px 10px 4px; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--wf-t-lo); }
+.wf-scr {
+  display: flex; gap: 7px; align-items: baseline;
+  padding: 4px 10px; border-radius: 4px;
+  color: var(--wf-t-mid); text-decoration: none;
+}
+a.wf-scr:hover { color: var(--wf-t-hi); background: var(--wf-line-2); text-decoration: none; }
+.wf-scr.is-current { color: var(--wf-t-hi); font-weight: 600; background: var(--wf-line-2); }
+.wf-scr.is-spec { opacity: 0.45; cursor: default; }
+.wf-scr-num { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; color: var(--wf-t-lo); flex: none; min-width: 26px; }
+.wf-scr.is-current .wf-scr-num { color: var(--wf-t-mid); }
+.wf-st {
+  display: block; padding: 3px 10px 3px 43px; border-radius: 4px;
+  font-size: 11.5px; color: var(--wf-t-mid); text-decoration: none;
+}
+a.wf-st:hover { color: var(--wf-t-hi); background: var(--wf-line-2); text-decoration: none; }
+.wf-st.is-current { color: var(--wf-solid-ink); background: var(--wf-solid); font-weight: 700; }
+
+.wf-panel-foot { padding: 10px 18px 14px; border-top: 1px solid var(--wf-line-2); }
+.wf-panel-foot a { display: block; font-size: 11px; color: var(--wf-t-lo); text-decoration: none; padding: 2px 0; }
+.wf-panel-foot a:hover { color: var(--wf-t); text-decoration: none; }
+
+@media (min-width: 1000px) {
+  body:not(.has-rail) { padding-left: 244px; }
+  .wf-panel {
+    position: fixed; top: 0; left: 0; bottom: 0; width: 244px;
+    display: flex; flex-direction: column;
+    border-bottom: none; border-right: 1px solid var(--wf-edge);
+  }
+  .wf-panel-head { flex-wrap: wrap; padding: 14px 16px 12px; border-bottom: 1px solid var(--wf-line-2); }
+  .wf-panel-id { display: block; }
+  .wf-panel-here, .wf-panel-toggle { display: none; }
+  .wf-panel-tree, .wf-panel-foot { display: block; }
+  .wf-panel-tree { flex: 1; border-top: none; max-height: none; }
+  .wf-panel-foot { border-top: 1px solid var(--wf-line-2); }
+}
 
 /* ===== The product screen (one responsive page, no frames) =====
    Full-bleed horizontal separators (the top-bar and footer lines run to the page
@@ -233,7 +266,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--wf-stroke); }
 
 /* ===== Media / icon / avatar / logo placeholders (grey wireframe markers) =====
    Grey only. These mark WHERE a photo, product screenshot, icon or avatar lands;
-   Concept (stage 06) fills them with real imagery on the ui-visual copies, never
+   Concept (stage 06) fills them with real imagery on the design/ copies, never
    here. The diagonal cross and bordered slot are the universal wireframe tell for
    "an asset goes here", so the composition reads without any real image. */
 .wf-media { position: relative; display: flex; align-items: center; justify-content: center; min-height: 140px;

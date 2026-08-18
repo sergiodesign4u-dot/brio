@@ -1,0 +1,125 @@
+# Decisions
+
+*Not loaded into any session. Referenced by path, never with `@`. This is where the reasoning lives so that `CLAUDE.md` can stay a list of rules: what we did, why this way, what we rejected and on what grounds. A reviewer who thinks they found a defect checks here first.*
+
+---
+
+## D-01 - Aggregation is structural, not a setting
+
+**Decided:** stage 01, held ever since. The owner and the operator never see a named individual. A score appears only once at least 5 people have answered.
+
+**Why:** in a company with no HR there is no layer between the boss and personal data. If aggregation were a toggle, the promise would be worth exactly as much as the person holding the toggle. Making it structural is the product.
+
+**Rejected:** per-individual drill-down, named timelines, leaderboards. They close no core job and they break J3 (certainty of privacy before responding). The legal validation of "5" is deferred, and the number is marked as an MVP default rather than a legal finding.
+
+---
+
+## D-02 - No live response count during an open cycle
+
+**Decided:** founder decision, June 2026. Neither the operator nor an employee sees a running tally while a cycle is open.
+
+**Why:** in a team of eight, a count that moves right after one person answers identifies that person. The timing-inference vector is specific to small teams, which is exactly our market.
+
+**Rejected:** showing the count to the operator only. It leaks the same signal to the one person whose curiosity the whole privacy model is built against.
+
+---
+
+## D-03 - Wireframes are never coloured in place
+
+**Decided:** stage 04, reaffirmed when planning stage 06. `wireframes/` is grey, and it is frozen after the Voice stage. Colour arrives as copies in `design/`.
+
+**Why:** a stage that overwrites the previous stage's artefact destroys it. If colour landed on the grey files, the grey prototype would stop existing and the "Wireframes: Done" row would start lying. Copies keep the change reversible and let the grey and the coloured screen be shown side by side.
+
+**Rejected:** colouring in place, as the base course lesson does.
+
+---
+
+## D-04 - The sidebar theme carries nine knobs, not eight
+
+**Decided:** 5 August 2026, while building `/_nav.css`.
+
+**Why:** the pipeline names eight theme variables (`--nav-fg`, `--nav-active`, `--nav-muted`, `--nav-rule`, `--nav-badge`, `--nav-w`, `--nav-size`, `--nav-lh`). None of them is the panel surface, and the panel needs one: Brio's pages are dark, and a sidebar with no background of its own would sit transparently over page content on mobile, where the panel overlays the page.
+
+**Rejected:** hardcoding the background inside a `nav-*` rule. That is the exact thing the knobs exist to prevent - the next theme change would need a rule edit rather than a variable edit.
+
+---
+
+## D-05 - Wireframe screens move from a top strip to a side tree
+
+**Decided:** 5 August 2026, superseding the stage 04 decision.
+
+**Why:** stage 04 gave each screen a sticky top strip (node number, current state, sibling-state chips, All screens) and no side panel, on the argument that a prototype screen should be clean chrome-free. With 47 screens and 99 states, a strip cannot show where a screen sits in the product: it shows the siblings of one state and nothing above them. The pipeline contract asks for a wireframe-only side panel with a three-level tree (IA cluster, screen, states), an accordion that opens only the current node, and a link back to the hub. That answers "where am I" without making the reader look at the URL.
+
+**Rejected:** keeping the strip and recording it as a named deviation. It was a real option, and the reason it lost is that the strip's weakness grows with the product, and this product is already at the size where it hurts.
+
+**Consequence:** `wireframes/_nav.js` is reworked and every screen re-renders from it. The grey contract is untouched - this is chrome around the screen, not the screen.
+
+---
+
+## D-06 - User Research merges into `research/`
+
+**Decided:** 5 August 2026. `user-research/` is gone; `personas.html`, `jtbd.html`, `cjm-as-is.html`, `cjm-to-be.html` and their markdown now live beside stage 01 in `research/`.
+
+**Why:** the folder convention groups by what is read and edited together, not by which stage produced it. `research.md` is amended by stage 02, and `personas.md` is amended by CJM. They belong in one folder for the same reason `design/` will hold stages 06 to 11.
+
+---
+
+## D-07 - `ia/concept.html` becomes `ia/concept-map.html`
+
+**Decided:** 5 August 2026.
+
+**Why:** with stage 06 arriving, "concept" means the visual language and lives at `design/concept/concept.html`. One word cannot mean the IA concept map on one page and the visual concept on the next; "open the concept page" stops being an answer.
+
+---
+
+## D-08 - `index.html` is a product home, `overview.html` is a hub
+
+**Decided:** 5 August 2026. In `wireframes/`, the former hub `index.html` is now `overview.html`, and the home screen wireframe is `index.html`.
+
+**Why:** the rule is one meaning per name across the whole project. Opening a stage folder should land on the product's home page; the list of every page is always `overview.html`. Before this, `index.html` meant "hub" in `wireframes/` and would have meant "home page" in `design/`, in adjacent folders.
+
+**Consequence:** node 0.0 Home is served from `wireframes/index.html`, and the 15 references to `home.html` were rewritten.
+
+---
+
+## D-09 - `design/` is the roof of the visual half
+
+**Decided:** 5 August 2026. The root `concept/` folder moved to `design/concept/`.
+
+**Why:** stages 06 to 11 all write into one place, and the values line (plate pixel, theme file, kit, tokens) moves through it without being re-derived. Product pages live flat in `design/`; supporting material lives in subfolders (`concept/`, later `kit/`, `system/`, `visuals/`).
+
+---
+
+## D-10 - Empty stage folders are not created ahead of time
+
+**Decided:** 5 August 2026. `animation/`, `design-system/`, `handoff/`, `responsive/`, `tokens-components/` and `ui-visual/` were deleted, along with their `.gitkeep` files.
+
+**Why:** the route of the project is shown by the registry (`/_nav.js`, with Next and Soon badges) and by the status table in `README.md`. An empty folder adds nothing to that and takes something away: it looks like started work, and it fixes the internal structure of stages 09 to 12 before those stages get to decide it. Stages 10 and 11 grow inside `design/`; stage 12 creates `handoff/` itself.
+
+---
+
+## D-11 - Scope boundary: the three questions, answered
+
+**Decided:** 5 August 2026, answering the questions stage 01 is supposed to ask before anything else.
+
+- **Second language: no.** Brio is English only. Nothing about hreflang, URL structure per language, per-language voice or microcopy keys applies. If a second language is ever wanted, the honest place to decide it was stage 03a, and adding it later means rewriting every IA node.
+- **Existing brand or design system: no.** There is no logo, palette, typeface or token set to inherit, so stage 06 takes the "nothing exists yet" route: three brand plates, one chosen.
+- **Product size: 47 screens, 99 state pages.** Far above the ~8-screen floor below which stages 07 to 09 stop paying for themselves.
+
+---
+
+## D-12 - The wireframe etalon is 4.0 Dashboard
+
+**Decided:** stage 04. Not the first screen of the main flow, but the working horse with the most reuse: it sets the operator app shell and the pulse card (reused on 4.1, 4.2, 9.0, 9.2) and carries the richest state set.
+
+**Why:** a defect caught on the etalon is fixed once; the same defect found after roll-out is fixed 47 times. The screen with maximum reuse is therefore worth more as an etalon than the screen a user sees first.
+
+---
+
+## D-13 - Brio looks like a privacy product, not a wellness brand
+
+**Decided:** stage 06, steps 1 and 2. Base reference Signal; restraint from Apple; product-as-proof and single-accent discipline from 1Password.
+
+**Why:** the strategic dimension named at stage 01 is employee trust in the aggregate-only model, made visible in the UI. A wellness look undercuts that on sight.
+
+**Rejected:** the category reflex - cream, sage, rounded blobs, soft illustration. It can be guessed from the category without looking at a single line of our data, which is the definition of a model reflex rather than a decision.

@@ -6,9 +6,9 @@
 
 ## Focus
 
-**Persona:** Priya, the Handed-It Operator (primary). Source: user-research/docs/personas.md.
+**Persona:** Priya, the Handed-It Operator (primary). Source: research/docs/personas.md.
 
-**Main job:** When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits. Source: user-research/docs/jtbd.md, Main Job.
+**Main job:** When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits. Source: research/docs/jtbd.md, Main Job.
 
 This is the current path Priya walks to do this job today, with existing alternatives (search, articles, demo-gated tools, generic survey tools, ad hoc check-ins), before Brio exists.
 

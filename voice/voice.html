@@ -48,156 +48,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Sidebar navigation - mobile-first */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(13, 15, 18, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .sidebar-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      height: 52px;
-    }
-
-    .sidebar-brand {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      text-transform: uppercase;
-    }
-
-    .sidebar-toggle {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 4px;
-      width: 36px;
-      height: 36px;
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      padding: 9px 8px;
-    }
-
-    .sidebar-toggle span {
-      display: block;
-      height: 2px;
-      width: 100%;
-      background: var(--text-muted);
-      border-radius: 1px;
-    }
-
-    .sidebar-body {
-      display: none;
-      padding: 8px 0 16px;
-      border-top: 1px solid var(--border);
-      overflow-y: auto;
-      max-height: calc(100vh - 52px);
-    }
-    .sidebar-body.open { display: block; }
-
-    .nav-group { padding: 0 8px; }
-
-    .nav-group-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      padding: 14px 12px 6px;
-    }
-
-    .nav-group-label.active-section { color: var(--accent); }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 12px;
-      font-size: 13px;
-      color: var(--text-muted);
-      text-decoration: none;
-      border-radius: var(--radius-sm);
-      transition: color 0.15s, background 0.15s;
-    }
-
-    a.nav-item:hover {
-      color: var(--text);
-      background: var(--surface-2);
-      text-decoration: none;
-    }
-
-    .nav-item-disabled {
-      color: var(--text-faint);
-      cursor: default;
-    }
-
-    .nav-soon {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 6px;
-      border-radius: 100px;
-      background: var(--surface-3);
-      color: var(--text-faint);
-      border: 1px solid var(--border);
-    }
-
-    .nav-group-next .nav-group-label { opacity: 0.5; }
-
-    .nav-item-muted {
-      color: var(--text-faint);
-      opacity: 0.5;
-      cursor: default;
-      font-size: 12px;
-    }
-
-    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
-    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
-    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub-item.nav-sub-active { color: var(--accent); }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-
-    @media (min-width: 900px) {
-      .sidebar {
-        left: 0;
-        right: auto;
-        top: 0;
-        bottom: 0;
-        width: 220px;
-        border-bottom: none;
-        border-right: 1px solid var(--border);
-        overflow-y: auto;
-      }
-      .sidebar-header { height: 64px; padding: 0 20px; }
-      .sidebar-toggle { display: none; }
-      .sidebar-body {
-        display: block;
-        max-height: none;
-        border-top: none;
-        padding: 4px 0 24px;
-        overflow-y: visible;
-      }
-    }
-
     /* Layout */
     main {
       padding-top: 52px;
@@ -241,6 +91,16 @@
       margin-bottom: 20px;
     }
 
+    h2.h1-size {
+      font-size: clamp(26px, 3.4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--text);
+      padding-top: 0;
+      border: none;
+    }
     h2 {
       font-size: clamp(20px, 2.5vw, 26px);
       font-weight: 700;
@@ -337,6 +197,9 @@
     }
 
     /* Tables */
+    .muted { color: var(--text-faint); font-size: 12px; }
+    .row-low td { background: rgba(79, 156, 249, 0.05); }
+    .low-tag { display: inline-block; margin-top: 4px; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent-dim); background: var(--accent-dim); border-radius: 100px; padding: 2px 7px; }
     .table-wrap {
       overflow-x: auto;
       margin: 24px 0;
@@ -957,14 +820,6 @@
       color: var(--green);
       margin: 0;
     }
-    .nav-item-next { color: var(--text-muted); cursor: default; font-size: 12px; }
-    .nav-next { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--accent-dim); background: var(--accent-dim); color: var(--accent); margin-left: auto; }
-
-    /* ========================
-       VOICE - SECTION (extends the research template, tokens reused)
-       ======================== */
-
-    a.nav-item.nav-item-active-scroll { color: var(--accent); }
 
     /* Principle cards */
     .principle-card {
@@ -1115,50 +970,11 @@
     .mc-tag-line { background: var(--accent-dim); color: var(--accent); }
     .mc-note { color: var(--text-faint); font-size: 12px; }
   </style>
+  <link rel="stylesheet" href="../_nav.css">
 </head>
 <body>
 
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <span class="sidebar-brand">Brio</span>
-    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-  <div class="sidebar-body" id="sidebarBody">
-    <div class="nav-group">
-      <a href="../research/research.html" class="nav-item">Foundation Research</a>
-    </div>
-    <div class="nav-group">
-      <a href="../user-research/personas.html" class="nav-item">User Research</a>
-    </div>
-    <div class="nav-group">
-      <a href="../ia/flows.html" class="nav-item">Information Architecture (IA)</a>
-    </div>
-    <div class="nav-group">
-      <a href="../wireframes/index.html" class="nav-item">Wireframes</a>
-    </div>
-    <div class="nav-group">
-      <div class="nav-group-label active-section">Voice</div>
-      <a href="#intro" class="nav-item">Overview</a>
-      <a href="#principles" class="nav-item">Principles</a>
-      <a href="#dictionary" class="nav-item">Dictionary</a>
-      <a href="#forbidden" class="nav-item">Forbidden</a>
-      <a href="#microcopy" class="nav-item">Microcopy</a>
-    </div>
-    <div class="nav-group">
-      <span class="nav-item nav-item-next">Concept <span class="nav-next">Next</span></span>
-      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
-    </div>
-  </div>
-</aside>
+<aside id="sidebar"></aside>
 
 <main>
 
@@ -1184,10 +1000,74 @@
     <p>Everything below is that sentence, made operable. The product ships in English, so every example and anti-example line is a real English interface string. No em dash anywhere: commas, periods, or a spaced hyphen.</p>
   </section>
 
+
+  <!-- Tone by phase -->
+  <section id="phases">
+    <div class="section-label">Tone</div>
+    <h2 class="h1-size">Tone by phase</h2>
+    <p>Tone is not one setting for the whole product. The state the reader is in sets it, and the phase sets the state: the same plain sentence that reads as competent on the dashboard reads as evasive at the moment an employee decides whether to answer honestly. The phases and emotions come from the journey map, not from a general idea of the persona: <a href="../research/cjm-as-is.html">CJM As-Is</a> gives the emotion the reader arrives with, <a href="../research/cjm-to-be.html">CJM To-Be</a> gives the emotion each step is supposed to produce. Every microcopy rule below is checked against this table.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Phase</th><th>Where it lives</th><th>Arrives from</th><th>Target emotion</th><th>How it sounds here</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Self-serve start</strong></td>
+            <td>0.0 Home, 1.0 Pricing, 2.0 Sign up</td>
+            <td>blocked, -4<br><span class="muted">the demo wall, no visible price</span></td>
+            <td>relief, control</td>
+            <td>Price, limits and what happens next stated as fact. No demo booking, no urgency, no persuasion verbs. The proof is that the number is simply there.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Guided onboarding</strong></td>
+            <td>3.0 to 3.2, 5.1</td>
+            <td>terrified and lost, -3<br><span class="muted">handed it, invents the process</span></td>
+            <td>competent, guided</td>
+            <td>One action per step, phrased as an instruction with its reason attached, and a confirmation the moment it is done. Never a choice the reader has no basis to make.</td>
+          </tr>
+          <tr class="row-low">
+            <td><strong>3. Privacy-visible check-in</strong><br><span class="low-tag">the low point</span></td>
+            <td>10.0 to 10.3, 0.3 disclosure</td>
+            <td>distrust, -4<br><span class="muted">"my dept only has 3 of us", "harvest and sell health info"</span></td>
+            <td>safe, supported and not monitored</td>
+            <td>The most conservative tone in the product. The mechanism sentence and nothing else: aggregate only, minimum of 5, no live count. No "we value your privacy", no policy link, no warmth signalling. Shortest sentences anywhere in the product.</td>
+          </tr>
+          <tr>
+            <td><strong>4. Score, reading, next action</strong></td>
+            <td>4.0 Dashboard, 4.1 Team pulse</td>
+            <td>confused, -3<br><span class="muted">"67 percent, is that good?"</span></td>
+            <td>clear, "I know what to do"</td>
+            <td>The reading comes first in plain words, the number second, one suggested next step third. A number is never the whole answer to anything.</td>
+          </tr>
+          <tr>
+            <td><strong>5. Early warning</strong></td>
+            <td>4.2, 4.0 alert state</td>
+            <td>reactive<br><span class="muted">the owner caught off guard by three departures</span></td>
+            <td>ahead of it</td>
+            <td>A dip is called a dip: what moved, over what period, and the one thing to do. No alarm words, no softening, no reassurance the data does not support.</td>
+          </tr>
+          <tr>
+            <td><strong>6. Owner share and proof</strong></td>
+            <td>7.0 to 7.2, 9.0, 9.2</td>
+            <td>anxious with no number, -3<br><span class="muted">nothing credible to show the founder</span></td>
+            <td>proud and validated; reassured</td>
+            <td>Facts an owner can check in two minutes, and in the same breath what he cannot see. "Share with your owner" and "Invite your owner" stay two different acts with two different labels.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout"><strong>Two consequences that outrank every other rule when they collide.</strong> First, phase 3 wins over tone: at the deepest low, warmth reads as sales, so where a line could be either mechanism or comfort, it is mechanism. Second, phase 5 wins over kindness: an honest dip stated plainly is the differentiator, and softening it turns Brio into the flattering dashboard the research says the category already is.</div>
+
+    <div class="callout"><strong>No brand platform to inherit.</strong> Asked before any rule was written: is there a brand platform, a tone-of-voice guide or an editorial policy already in place? No. Brio has none, so this voice is derived from the data alone and overrides no existing house style. Recorded as docs/decisions.md D-11.</div>
+  </section>
+
   <!-- Principles -->
   <section id="principles">
     <div class="section-label">Principles</div>
-    <h1>Five principles</h1>
+    <h2 class="h1-size">Five principles</h2>
     <p>Each principle is a one-sentence rule, a positive example, an anti-example, and the source line it follows from in the personas, research, UX patterns, or competitor language.</p>
 
     <div class="principle-card">
@@ -1314,7 +1194,7 @@
   <!-- Dictionary -->
   <section id="dictionary">
     <div class="section-label">Dictionary</div>
-    <h1>One concept, one word</h1>
+    <h2 class="h1-size">One concept, one word</h2>
     <p>Every pair below resolves a divergence already marked in the microcopy inventory, so this is a set of decisions, not a new search. Terms are taken from the language of the personas and the research, not invented. Where two labels turned out to be two genuinely different actions, both are kept and the boundary is stated.</p>
 
     <h2>How Brio addresses people</h2>
@@ -1542,7 +1422,7 @@
   <!-- Forbidden -->
   <section id="forbidden">
     <div class="section-label">Forbidden</div>
-    <h1>What Brio never writes</h1>
+    <h2 class="h1-size">What Brio never writes</h2>
     <p>Without this list, the model default (enthusiasm, exclamation, emoji, buzzwords) comes back with every new prompt. Each row pairs the ban with a concrete was / should-be, drawn from the microcopy inventory and the competitor language. The prototype is already clean of most of these; the list keeps it that way through the rewrite.</p>
 
     <div class="table-wrap">
@@ -1649,7 +1529,7 @@
   <!-- Microcopy -->
   <section id="microcopy">
     <div class="section-label">Microcopy</div>
-    <h1>Rules per element and per state</h1>
+    <h2 class="h1-size">Rules per element and per state</h2>
     <p>Rules per element type and per state, each with a real Brio line. Every rule is checked against the Principles and the Dictionary above. After this section the voice document is complete: any line in the product is written from here.</p>
 
     <h2>By element type</h2>
@@ -1813,6 +1693,28 @@
     </div>
   </section>
 
+
+  <section id="wasnow">
+    <div class="section-label">Critique</div>
+    <h2 class="h1-size">Was to now</h2>
+    <p>What the critique of this stage caught and what happened to it. The full inventory with every rewritten line is <code>voice/docs/microcopy.md</code>; the retrofit rows are in <code>docs/retrofit-audit.md</code>. Every row carries a status, and a finding withdrawn at verification stays here with its reason, so the same false finding cannot return next time in the same words.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Class</th><th>Was</th><th>Now</th><th>Who found it</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Tone had no phase</td><td>The rules were derived from the personas in general, so they could not say which tone belongs at the moment an employee decides whether to answer honestly</td><td>The tone-by-phase table above, built from the As-Is emotional curve and the To-Be target emotions, with the low point marked and two rules that outrank the rest on collision</td><td>Claude</td><td>fixed</td></tr>
+          <tr><td>Stale file name behind backticks</td><td>32 rows of the microcopy inventory addressed the Home base state as <code>home.html</code>, a file that no longer exists</td><td><code>index.html</code>, node 0.0 Home</td><td><b>Codex</b></td><td>fixed</td></tr>
+          <tr><td>More than one H1</td><td>This page carried 6 H1 elements: the title plus five section titles</td><td>One H1; the section titles are h2 styled identically, so nothing moved on screen</td><td>Claude</td><td>fixed</td></tr>
+          <tr><td>Brand platform never asked about</td><td>The voice was derived without recording whether an existing brand platform or editorial policy had to be inherited</td><td>Asked and answered in the open: there is none, so the voice is derived from the data alone and overrides no house style</td><td>Claude</td><td>fixed</td></tr>
+          <tr><td>Em dash in an output file</td><td>Ten em dashes survived in the concept sources</td><td>Spaced hyphens; zero em dashes anywhere in the project</td><td>Claude</td><td>fixed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout"><strong>What the second instrument bought here.</strong> Codex found the one class this stage could not have caught on its own: a filename written inside markdown backticks. The rename script matched a filename preceded by a quote, a bracket, whitespace or an angle bracket, and a backtick is none of those, so all 32 rows survived the rewrite and looked untouched. A second pass by the same instrument would have reproduced the same blind spot, because the blind spot was in the pattern rather than in the effort.</div>
+  </section>
+
   <footer>
     <p>Brio - Voice - Phase 5 - Stage 05</p>
     <p style="margin-top:4px;">Rules, not a mood. Every example and anti-example line is a real English interface string. No em dash anywhere: commas, periods, or a spaced hyphen. Sources cited by file and section so any rule traces back to data.</p>
@@ -1821,47 +1723,12 @@
 
 </main>
 
+
 <script>
-  var toggle = document.getElementById('sidebarToggle');
-  var sbody = document.getElementById('sidebarBody');
-  toggle.addEventListener('click', function() {
-    var open = sbody.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  sbody.querySelectorAll('a.nav-item').forEach(function(link) {
-    link.addEventListener('click', function() {
-      sbody.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  // IntersectionObserver for active sidebar nav tracking
-  var navSections = [
-    'intro', 'principles', 'dictionary', 'forbidden', 'microcopy'
-  ];
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        sbody.querySelectorAll('a.nav-item').forEach(function(link) {
-          link.classList.remove('nav-item-active-scroll');
-          link.removeAttribute('aria-current');
-        });
-        var id = entry.target.id;
-        var matchLink = sbody.querySelector('a.nav-item[href="#' + id + '"]');
-        if (matchLink) {
-          matchLink.classList.add('nav-item-active-scroll');
-          matchLink.setAttribute('aria-current', 'location');
-        }
-      }
-    });
-  }, { rootMargin: '-15% 0px -75% 0px' });
-
-  navSections.forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) observer.observe(el);
-  });
+  window.NAV_BASE = '../';
+  window.NAV_SECTIONS = [{"id": "intro", "label": "Overview"}, {"id": "phases", "label": "Tone by phase"}, {"id": "principles", "label": "Principles"}, {"id": "dictionary", "label": "Dictionary"}, {"id": "forbidden", "label": "Forbidden"}, {"id": "microcopy", "label": "Microcopy"}, {"id": "wasnow", "label": "Was to now"}];
 </script>
+<script src="../_nav.js"></script>
 
 </body>
 </html>

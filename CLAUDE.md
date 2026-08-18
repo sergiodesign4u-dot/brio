@@ -1,234 +1,103 @@
-# Brio - Project Brief
+# Brio - project rules
 
-## What it is
+*This file is loaded whole at the start of every session and re-read after every compact. It is not a journal and not a report: it is the set of rules that must hold next time. Status lives in `README.md` and in the `done` flags of `/_nav.js`. Reasoning and rejected options live in `docs/decisions.md` (never loaded, referenced by path). Budget: 200 lines - a new rule enters by replacing or generalising an existing one, not by being added beside it.*
 
-Brio is a responsive web SaaS that gives a small business with no HR team a simple way to run real employee wellbeing. It is operated by whoever got handed "people stuff" - an office manager, ops lead, EA, or the founder - and gives the business owner honest proof it is working at the team level, without ever surveilling any individual.
+## What Brio is
 
-**Platform:** Responsive web. The operator dashboard is desktop-first. The employee experience is mobile-friendly. A native app is a later decision, out of scope for now.
+A responsive web SaaS that gives a small business with no HR team a simple way to run real employee wellbeing. It is operated by whoever got handed "people stuff" - an office manager, ops lead, EA, or the founder - and gives the owner honest proof it is working at the team level, without ever surveilling any individual.
 
-**Core differentiator:** The product is the privacy boundary. In an SMB there is no HR layer between the boss and personal data. Brio is designed so the owner sees only aggregate, team-level signals - never named individuals. This is the make-or-break design constraint.
+**Platform:** mobile-first, fully responsive, mobile base 360px. The operator dashboard is desktop-first in daily use, but every screen is reasoned from 360px up. Native app is out of scope.
 
----
+**Core differentiator:** the product is the privacy boundary. In an SMB there is no HR layer between the boss and personal data, so aggregation is structural, not a setting. This is the make-or-break constraint (`docs/decisions.md` D-01).
 
-## People and Jobs
+**Scope boundary, answered once:** English only, no second language. No existing brand and no existing design system. 47 screens plus 99 state pages, well above the floor where the later stages stop paying for themselves. (D-11.)
 
-*Condensed context for downstream stages. Full detail: user-research/docs/personas.md and user-research/docs/jtbd.md.*
+## People and jobs
 
-**Primary persona - Priya (Operator, hero user).** Office manager, ops coordinator, EA, or founder at a 10 to 200 person company with no HR. Low-to-medium confidence: knows the people, not the methodology. She is the buyer, the daily driver, and the activation bottleneck. Age 26 to 45 [? no data]. Secondary persona: Marcus (Owner), approver and ROI judge, drives renewal. End user: Yemi (Employee), not the buyer but the engine; without honest participation there is no signal.
+**Primary persona - Priya (Operator, hero user).** Office manager, ops coordinator, EA, or founder at a 10 to 200 person company with no HR. Low-to-medium confidence: knows the people, not the methodology. Buyer, daily driver, and activation bottleneck. Conflicts between decisions are resolved in her favour. **Secondary - Marcus (Owner):** approver and ROI judge, drives renewal, wants a number and a trend in under two minutes. **End user - Yemi (Employee):** not the buyer but the engine; without honest participation there is no signal, and their individual response never surfaces up the chain.
 
-**Main job of the product:** When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits.
+**Main job:** when I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits.
 
-**MVP core - the 3 jobs to build first** (important for Priya AND not closed by any self-serve competitor; from the JTBD matrix):
-1. Main job - run wellbeing without HR training (guided program engine, curated library, opinionated onboarding).
-2. J2 - know if the team is struggling early (pulse loop, threshold trend alert). The retention driver.
-3. E1 - feel competent as a people person (every operator touchpoint carries an interpretive layer: plain-language score, setup confirmation, suggested next action).
+**MVP core, three jobs:** the main job (guided program engine, curated library, opinionated onboarding); J2 - know if the team is struggling early (pulse loop, threshold alert), the retention driver; E1 - feel competent (every operator touchpoint carries an interpretive layer: plain-language score, setup confirmation, next action). Supporting architecture, in scope but not primary design surfaces: J3 - certainty of privacy before responding; J4 - check-in under 30 seconds.
 
-Supporting architecture (serve Yemi; preconditions for the above; in MVP scope but not primary design surfaces): J3 - certainty of privacy before responding; J4 - check-in under 30 seconds.
+**Riskiest assumption (value risk):** that an SMB operator believes a self-serve, aggregate-only tool delivers team-level value worth paying for, AND that employees trust the promise enough to answer honestly. Its success signal is participation at or above 65%, still unproven. It is closed by a real test, never by design.
 
-**Refined by CJM (Stage 3) into a traced backlog (one version, not a fork):** 7 MVP-core features - self-serve start, guided onboarding, low-effort check-in, privacy bundle (pre-check-in disclosure + minimum-N of 5 + no live count + subscription-as-privacy statement), interpretive layer, aggregate score and trend, owner dashboard and share - plus 3 supporting (threshold alert, weekly digest, basic reminder). Every feature traces to an As-Is barrier or a job; no orphan; the Stage 2 cut list stays cut. The privacy bundle's success signal is H2 (participation at or above 65%), still [?] - the riskiest assumption, closed by the First Test, not by design. In the roadmap CJM is a separate status row, but its two pages live under the User Research group (now 4 pages: Personas, JTBD, CJM As-Is, CJM To-Be). Detail: user-research/docs/cjm-as-is.md and cjm-to-be.md.
+**Strategic dimension we must win:** employee trust in the aggregate-only model, made visible in the product UI rather than promised in a policy.
 
-**Structured by IA (Stage 4, Base Layer) into a screen map traced to jobs.** Top-level sitemap: three surfaces. (1) Public / pre-auth (Landing, Pricing, Sign up, Log in) for operator acquisition. (2) Operator app (primary, desktop-first) with four job tabs - Dashboard (the pulse aha: score + interpretation + next action), Programs (library, pick, manage, check-in setup), Team (invite + roster + participation), Owner (share + upgrade) - plus a Settings utility (Plan, Privacy center, Notifications, Account). (3) Owner surface (aggregate-only dashboard + monthly digest, under 2 min) and (4) Employee surface (a linear near-anonymous check-in: invite link, pre-Q1 disclosure, 1 to 3 questions, thank-you, under 30s). Main flow: Sign up, guided onboarding (company size pre-selects the first program), invite team, then read the aggregate pulse once minimum-N of 5 is met. Global navigation is 4 job tabs + Settings; the recurring main-job value (pulse + next action) is 1 tap from login (Dashboard is home), the deepest core action (check-in setup) is 3 taps, so the main job stays within three taps. The guided onboarding is a one-time linear wizard (time-budgeted under 5 min), not navigational depth. Every screen traces to a job; the only orphan job is S1 (tell network), parked to backlog. Detail: ia/docs/sitemap.md (entities, screens, navigation, traceability, critique) and ia/docs/flows.md (four user flows in Mermaid). Base Layer and the Detail Layer are both done: every node has a per-page spec (ia/docs/pages/) and a black-and-white wireframe (ia/<node>.html) with blocks, states, and SEO defined; next stage is Wireframes.
+Detail: `research/docs/personas.md`, `jtbd.md`, `cjm-as-is.md`, `cjm-to-be.md`, `benchmark.md`. `personas.md` has one writer only: after stage 02, CJM amends it. Every later stage reads it read-only and returns a contradiction as a finding rather than describing people its own way.
 
-**Riskiest assumption (value risk, kills the idea if false):** an SMB operator believes a self-serve, aggregate-only tool (no HR, no individual data ever visible) delivers real team-level value worth paying for, AND employees trust the privacy promise enough to answer honestly. Post-persona re-research strengthened it, did not kill it. Detail: research/docs/lean-ux-canvas.md block 7.
+## Non-negotiables
 
-**Strategic dimension we must win (benchmark):** employee trust in the aggregate-only privacy model, made visible in the product UI rather than promised in a policy. Detail: research/docs/benchmark.md.
+The privacy mechanism is structural and cannot be turned off:
 
-**Chosen UX pattern:** Guided Program Flow + Pulse Loop (hybrid) - one data flow serves the operator's need for structure and the owner's need for signal. Detail: research/docs/ux-patterns.md.
+- **Minimum-N aggregate:** no score is shown until at least 5 people have answered (MVP default; legal validation deferred).
+- **No live response count** during an open cycle, for operator or employee. In a small team a moving count identifies the person who just answered (D-02).
+- **Persistent pre-check-in disclosure** before question 1, every cycle. No named responses, no individual timeline, no drill-down.
+- **A clear UI statement** of what the owner can and cannot see.
+- **Deferred permanently for the MVP:** individual leaderboards and rankings, drill-down analytics. They close no core job and break J3.
 
----
+**Compliance boundary conditions, not legal advice.** US primary, Europe secondary. Programs are voluntary and participation-based, never health-outcome-based (ADA). No health, medical or genetic questions (GINA). No clinical health data; mood check-ins are not clinical, and where exactly that line falls needs legal confirmation before launch (HIPAA-adjacent). Aggregate-only architecture supports GDPR data minimisation by construction; individual responses must remain deletable, and EU data residency is an open infrastructure decision.
 
-## Information Architecture
+**Business model, still hypothesis:** per-seat SaaS. Free up to 10 employees, one program, operator-only score. Starter around $4-6 per seat for the full library, trends, and the owner dashboard - the owner dashboard is the paid feature, and the operator upgrades in order to give the owner visibility. Growth around $8-10 per seat for 50 to 200+, multi-team, integrations. All figures are benchmarked guesses, not commitments.
 
-*Standing decisions for the IA Detail Layer (course part 03b) and every stage after. Full detail: ia/docs/sitemap.md, ia/docs/flows.md, and the per-page sources in ia/docs/pages/.*
+## Design principles
 
-**Platform stance (fixed): mobile-first, fully responsive desktop to mobile, mobile base 360px.** Block priority and the first screen are reasoned from mobile first; desktop is designed deliberately, not as an afterthought. The operator dashboard stays desktop-first in daily use, but every node is specified from the 360px baseline up.
+1. **Privacy is the product, not a feature.** Aggregation is not a setting you can turn off.
+2. **Make the non-expert operator feel competent.** Every interaction says what to do next, confirms it was done right, and shows it mattered. No HR jargon, no ambiguous dashboards.
+3. **Earn trust before asking for data.** Communicate the privacy model clearly and repeatedly, especially at onboarding and at each check-in.
+4. **Honest signals over flattering ones.** A dip is called a dip. Success states the fact and never celebrates.
+5. **Low effort for everyone.** Employee check-in under 30 seconds, operator setup under 5 minutes, owner review under 2 minutes.
 
-**Two IA layers.** Global layer (part a, Base Layer, done): user flows (ia/flows.html) plus a concept map of screens grouped by intent, the navigation model, and the traceability matrix (ia/concept.html) that answer "where can the user go." Per-page layer (part b, Detail Layer): the full site map as a cluster tree with per-node cards (ia/sitemap.html), plus each screen gets a full specification of blocks, states, components, and SEO that answers "what is on each page and how it behaves." Nothing appears for the first time inside a wireframe; the wireframe renders a finished structure, it does not invent one.
+## Language and output
 
-**SEO ahead, three layers, one per phase.** The structural SEO layer (URL/slug, H1/H2, breadcrumbs, schema.org, index vs noindex, internal linking, target and segment landing pages) is defined here, now, because it IS information architecture. On the wireframe (stage 04) we only validate that each SEO block has a visible place. In production we finalize copy and real query volumes. Private and transactional zones (auth, account, the employee check-in) are noindex, no schema. All mockups this stage are black and white, wireframe level; color, brand, and imagery arrive at Concept (stage 06).
+- Internal markdown (this file, `*/docs/*.md`) is **English**. The exception is finished product copy embedded in markdown - the A-E SEO text in `ia/docs/pages/`, the dictionary and examples in `voice/docs/` - which is in the product language, also English here. Chat is **Ukrainian**.
+- **No em dash** in project output files. Checked, not assumed.
+- **No `[?]` marker in shipped product copy.** In research files it is the honest mark of an unknown and must stay.
+- Every fact cites its source. A number that cannot be cited is `[?]`, not an invention. Live sources are read in the session, not from memory.
 
----
+## Structure
 
-## Wireframes
+**Folder convention.** Each stage: `docs/` for markdown sources, the html page flat in the stage folder, `screens/` where screenshots are needed. Two folders deliberately hold several stages: `research/` (01, 02, 02+) and `design/` (06 onward). No empty folders created ahead of time - a folder appears together with its first file (D-10).
 
-*Stage 04 DONE. A grey clickable prototype of the whole product in HTML, built from the IA Detail Layer. Live entry: wireframes/index.html (the All-screens hub and coverage map). Coverage: 47 of 47 screens, 99 state pages, 100 html files, 0 in spec; every internal link resolves, greyscale and one-H1 clean, audited (wireframes/docs/critique.md).*
+**`index.html` is the entry to the folder you opened; the hub is always `overview.html`.** At the repo root, `index.html` is the entry to the project. In a stage folder it is the product home page. The list of every page in a stage is `overview.html`, never `index.html`. IA is the one exception by name: its hub is `structure.html`, because it shows node chips rather than a list of pages (D-08).
 
-*Original stage brief:*
-*A grey clickable prototype of the whole product in HTML, built from the IA Detail Layer. Nothing is invented here: text comes from each node's A-E SEO block, components from IA nodes, states from the node's IA "States" section, flow links from ia/docs/flows.md. A hole found while building is fixed in the IA first, then rendered. Grey contract only: no color, type, brand, icons, or shadows until Concept (stage 06), which colors COPIES in ui-visual/, never these source files. Full detail: wireframes/docs/screens.md (matrix), wireframes/docs/conventions.md (contract), wireframes/docs/critique.md (defect log).*
+**Navigation has one source and is rendered, not written.** `/_nav.js` holds the registry of all 12 stages and their pages with a `done` flag; `/_nav.css` holds the look. Every page carries an empty `<aside id="sidebar"></aside>`, declares `window.NAV_BASE`, optionally `window.NAV_SECTIONS`, and - if it is not itself a registry row - `window.NAV_ACTIVE` plus `window.NAV_ACTIVE_LABEL`. Active state, Next and Soon badges, the accordion and relative links are computed at render. **The only manual edit is a row in the registry and `done:true` when a page is finished.** A page never declares `nav-*` rules of its own. Per-stage registries (`ia/_nav.js`, `wireframes/_nav.js`, later `design/_nav.js`) are the registry of nodes inside their own hub and use their own namespace, never `window.NAV`.
 
-**Etalon (working horse, locked Step 1): 4.0 Dashboard (wireframes/dashboard.html).** Maximum reuse: it sets the operator app shell (global nav + page frame, present on every operator screen) and the pulse card (score + interpretation + next action, reused on 4.1, 4.2, 9.0, 9.2), and carries the richest state set, so it fixes the state pattern for the whole product. Voice (05) and Concept (06) take the etalon from this file, they do not re-derive it.
+**Every markdown file gets a visible place, and it is named by the same step that writes the file.** Three legal forms: its own page; a named section on the stage page, registered in that page's `NAV_SECTIONS`; or a satellite page outside the roadmap registry that declares `NAV_ACTIVE`. An artefact nobody can open in a browser does not exist for whoever makes the decision. Service files (`CLAUDE.md`, `README.md`, `AGENTS.md`, `docs/decisions.md`) need no page.
 
-**First flow assembled (locked Step 1): Flow 1 (MAIN JOB, Priya) - run wellbeing without HR training:** Home, Sign up, onboarding wizard (Company setup, First program confirm, Invite team, Invite-send error), Dashboard, Team pulse, with Team roster as the recovery detour. The etalon is built first (Step 4), then its states (Step 5), then the rest of Flow 1 (Step 6); Flows 2 to 4 and the remaining sitemap roll out by subagent fan-out (Step 8).
+**Critique and audit are shown as "was to now", not as a defect list.** Each stage page carries a closing section summarising by class, with a status on every row, the reason on anything withdrawn during verification, a "who found it" column, and three to five of the most telling before/after pairs. The full log stays in `docs/`; the page shows the picture.
 
-**Navigation is flow-first, from one source (wireframes/_nav.js):** a wireframe screen page is a clean prototype screen with no portfolio sidebar; its only chrome is a sticky top strip (node number and name, current state, sibling-state chips, and an All screens button back to the hub). Each screen is one responsive grey page with no device frames: it reflows from 360 to desktop (resize to see mobile), and the product job tabs move to a bottom bar on mobile. The hub wireframes/index.html holds the flow entries and the coverage map (built vs in-spec) and keeps the roadmap sidebar as the bridge back to the rest of the project; on all non-wireframe stage pages, Wireframes is one collapsed roadmap link to that hub. The shared grey stylesheet is wireframes/_wf.css, which inherits the IA B/W tokens and kit; stages 06 to 08 grow their own colored copies in ui-visual/, not this file.
+**Markdown is alive, html does not set.** When a later stage amends a published markdown file, the same step rebuilds the affected section of its page. If the page structure cannot hold the new material, put a visible "Updated after publication" block on it and say so out loud. A silent gap between source and page is a defect: the page is deployed, people read it, and it tells yesterday's truth with a confident face.
 
----
+## Stage contracts that still bind
 
-## Voice
+**Information Architecture.** Nothing appears for the first time in a wireframe: the wireframe renders a finished structure. SEO is structural and decided here - URL and slug, H1 and H2, breadcrumbs, schema.org, index versus noindex, internal linking. Private and transactional zones (auth, account, employee check-in) are noindex with no schema. Mockups here are black and white; colour arrives at Concept.
 
-*Stage 05 DONE. The rules by which Brio speaks, applied to every screen. Voice is rules, not a mood: each rule carries an example, an anti-example, and a source line from personas.md or research.md. On this stage only the text changed, never the markup (markup and look are stages 06 to 08); every wireframe edit is a one-for-one text swap. Full detail: voice/docs/voice.md (tone, principles, dictionary, forbidden, microcopy), voice/docs/microcopy.md (full text inventory of all 99 screens with was/now), and the live page voice/voice.html.*
+**Wireframes.** Grey contract: no colour, type, brand, icons or shadows. Each screen is one responsive page that reflows from 360px up, with no device frames. Exactly one main action per screen. Text comes from the node's SEO block, components from IA nodes, states from the node's States section, links from `flows.md`. A hole found while building is fixed in the IA first, then rendered. `wireframes/` is **frozen after Voice** - stage 05 is the last stage that edits it, and stages 06 onward work on copies in `design/`.
 
-**Tone orientation:** Brio speaks like a calm, plain-spoken colleague who has done this before. Proof over promises, honesty over cheer, brevity over buzzwords. Load-bearing line from the research: "The product acts as a knowledgeable peer, not a data terminal" (ux-patterns.md B4).
+**Voice.** Rules, not mood: each rule carries an example, an anti-example and a source line. Brio speaks like a calm, plain-spoken colleague who has done this before. Five principles: plain language that carries the meaning (a number never appears without its interpretation); privacy as mechanism, not marketing (one specific sentence: aggregate only, minimum of 5, no live count; never a policy link); honest signals, never flattering ones; always a next step and a confirmation; quiet and concrete against a loud category. The reader is "you", no contractions, and Brio names itself "Brio" in the app. One concept, one word: team pulse, score, read, answered, Trend, check-in, minimum of 5, live count, Free / Starter / Growth plans, log in and log out. One action, one label: Try again, Browse programs, Edit check-in, Send invites, View full pulse, Back to dashboard, Share with your owner, and the three distinct acts Nudge the team / Invite the team / Resend. To an employee the boss is "your manager", never "operator". Forbidden: exclamations, emoji, "successfully", celebration, effusive thanks, casual filler, idioms, motivational tone, category buzzwords (insights, drive engagement, empower, thrive, all-in-one, unlock, actionable), superlatives, vague privacy reassurance.
 
-**Five principles.** P1 Plain language, and carry the meaning (a number never appears without its interpretation; no HR jargon). P2 Privacy as mechanism, not marketing (one specific sentence: aggregate only, minimum of 5, no live count; never a policy link). P3 Honest signals, never flattering ones (a dip is called a dip; success states the fact, never celebrates). P4 Always a next step, and a confirmation (competence over praise). P5 Quiet and concrete against a loud category (no buzzwords, superlatives, exclamations, or emoji; the whole competitor set writes the same way, so plain is the differentiation, sourced from research.md Competitor language).
+**Concept onward.** Colour never lands on the grey wireframes: `design/` holds coloured copies that own the visual layer only, while structure, text and the set of states stay the property of `wireframes/`. Every colour, shape and typeface decision has a pair in the attributes or the recorded designer taste, or it is invention. A reference is an input, never an output. A palette that can be guessed from the category is a model reflex, not a decision. Values move forward through the stages and are never re-derived: plate pixel, then `design/_theme.css`, then the kit, then the token file, each stage adding a level rather than rewriting the last.
 
-**Dictionary core (one concept, one word).** The reader is "you" everywhere; no contractions; Brio names itself "Brio" in-app ("we" only in marketing and support voice). team pulse (the signal surface), score (the number), read (the interpretation, not "reading" or "insight"), answered (not "took part"), Trend (not "Trend over time"), check-in, minimum of 5, live count (not "running tally"), Free / Starter / Growth plans (not "tier"), log in / log out (not "sign in/out"). To an employee the boss is "your manager", never "operator". One action, one label: Try again (not Retry), Browse programs, Edit check-in, Send invites, View full pulse, Back to dashboard, Share with your owner (distinct from Invite your owner), and the three distinct acts Nudge the team / Invite the team / Resend. Forbidden: exclamations, emoji, "successfully", celebration, effusive thanks, casual filler, cute lines, idioms, motivational tone, category buzzwords (insights, drive engagement, empower, thrive, all-in-one, unlock, actionable), superlatives, vague privacy reassurance, contractions, and any "[?]" marker in shipped copy.
+## Critique in two instruments
 
----
+Every critique and audit step runs through **Claude and Codex** (plugin `codex`, read-only stated explicitly, reading the local working folder). Sets are taken **independently and in full before any merge** - Codex must not see Claude's table, or it edits instead of searching; deduplication happens afterwards on complete data. Codex owns what is falsifiable in text: contradictions between files, orphans, states not present in the code, drifted values, broken links, violated rules, facts without a source. What breaks at 360px, what breaks a layout, and pixel comparisons stay with the instrument that has a browser. **Verify before editing:** re-read the place in the file first, and a finding that does not survive stays in the log marked "withdrawn at verification" with the reason, rather than disappearing quietly. Disagreement between the two is not put to a vote: it goes to the user as its own row. Codex unavailable means stop and ask, not a quiet single-instrument pass, and the log says which half was missing.
 
-## Target Audience
+**Acceptance happens on screen, not in a table.** Where a stage produces a screen or text on a screen, open it in a browser, walk every state, narrow to 360px, and only then say it is done. Deliver a fix as a prompt rather than a hand edit: a hand edit does not survive the next clone, and repeatability goes with it.
 
-### Operator (hero user - primary)
+## Closing a stage
 
-The person who got handed people work with no title or training. Typically an office manager, operations coordinator, executive assistant, or a founder in a company small enough that HR does not exist yet.
+The last step of every stage runs this ritual, in order: gather what changed since the last close; classify each item as rule, status or decision, because the kind determines the address, not the stage; **show what to delete from this file** with a reason, beside the additions, in one table; count the budget, was and will be, against 200 lines; write only after an explicit go-ahead; put status in its own two files - the row in `README.md` and `done:true` in `/_nav.js`.
 
-- **Role:** Day-to-day runner of wellbeing programs. The daily driver of the product.
-- **Confidence level:** Low to medium. They know the people but not the methodology. They want to do right by the team and feel uncertain they are doing it well.
-- **Primary driver:** Competence and clarity. They want to know what to do next, that they did it right, and that it mattered.
-- **Company size:** 10 to 200 employees, no dedicated HR.
+## Where things live
 
-### Owner (second stakeholder)
-
-The founder or CEO who cares about the team and is paying for the tool. Not a daily driver - they check in occasionally for a high-level read.
-
-- **Role:** Approves spend, wants proof of value at the business level.
-- **Confidence level:** High on business, zero appetite for HR process detail. They want a number, a trend, and reassurance.
-- **Primary driver:** ROI and risk. Is the investment working? Is anyone about to leave?
-
-### Employee (third party - privacy is a hard constraint)
-
-Participates in programs and check-ins. Their individual responses must never be surfaced to the operator or owner. They are users of the product but not buyers.
-
-- **Role:** Participant. Their trust determines data quality.
-- **Privacy stance:** Aggregate only. No named individual data ever surfaces up the chain. This is a product design requirement, not a preference.
-
----
-
-## MVP Feature Scope
-
-*Narrowed to the MVP core jobs above (Main, J2, E1) plus their supporting architecture (J3, J4). Items that close no core job are deferred, per the cut list in user-research/docs/jtbd.md.*
-
-### Programs and check-in engine (serves Main, J6, and Yemi)
-
-- Curated wellbeing program library (mental health, physical, financial, social) - operator picks, system runs
-- Guided, opinionated onboarding: first program pre-selected by company size, setup under 5 minutes
-- Gentle nudges (scheduled reminders, optional check-in prompts)
-- Low-effort employee check-in (1 to 3 questions, emoji/slider, under 30 seconds, no account for the first check-in)
-
-### Pulse layer, aggregate only (serves J2, J1, J5)
-
-- Team-level wellbeing score (rolling aggregate, never per-individual)
-- Trend over time and participation rate (what share of the team completed something - not who)
-- Threshold alert when the aggregate drops meaningfully (the early-warning job)
-- Owner dashboard (aggregate only) is the primary paid feature; the operator upgrades to give the owner visibility
-
-### Privacy mechanism (structural, non-negotiable; serves J3, E2)
-
-- Minimum-N aggregate: no score shown until N >= 5 (MVP default; legal validation deferred)
-- No live response count during an open cycle, for operator or employee, to close the small-team timing-inference vector (founder decision D1, June 2026, research/strategy.md Section 5)
-- Persistent pre-check-in privacy disclosure before Question 1, every cycle. No named responses, no individual timeline, no drill-down
-- Clear UI statement of what the owner can and cannot see
-
-### Deferred to V2 (close no core job)
-
-Individual leaderboards and rankings (incompatible with J3), drill-down analytics, Slack and calendar integrations, formal referral program with cash incentives, custom program builder, team challenges. Source: user-research/docs/jtbd.md cut list.
-
----
-
-## Business Model Hypothesis
-
-**Model:** SaaS subscription, per-seat pricing with tiered plans.
-
-**Assumption - Free tier (to feel the value first):**
-- Up to 10 employees
-- 1 active program at a time
-- Basic pulse check-in (weekly, 1 question)
-- Aggregate score visible to operator only (not owner dashboard)
-- Limited program library (3 to 5 programs)
-
-**Assumption - Paid tier (Starter ~$4-6/seat/month):**
-- Up to 50 employees
-- Full program library
-- Full pulse layer with trends
-- Owner dashboard (aggregate only)
-- Custom nudge scheduling
-
-**Assumption - Growth tier (~$8-10/seat/month):**
-- 50 to 200+ employees
-- Multi-team aggregation
-- Advanced trend analytics
-- Integrations (Slack, calendar)
-- Priority support
-
-*All pricing figures are hypotheses, benchmarked against competitor pricing in research/docs/competitors.md and the Lean UX Canvas (research/docs/lean-ux-canvas.md).*
-
----
-
-## Geo and Compliance Constraints
-
-**Primary market:** United States. **Secondary:** Europe (UK + EU).
-
-### US regulatory boundary conditions
-
-Employee wellbeing programs in the US operate near several regulatory areas. This is not legal advice - these are design boundary conditions that flag where a real legal review is needed before launch.
-
-- **ADA (Americans with Disabilities Act):** Programs must not create outcomes that disadvantage employees with disabilities. Wellness incentives connected to health status can trigger ADA scrutiny. Design boundary: Brio programs are voluntary and participation-based, not health-outcome-based.
-- **GINA (Genetic Information Nondiscrimination Act):** Prohibits collecting genetic information as part of wellness programs. Design boundary: Brio does not ask health or medical questions. [? exact boundary between emotional wellbeing check-ins and health data needs legal review]
-- **HIPAA-adjacent:** If Brio ever integrates with health benefit providers or collects identifiable health-related data, HIPAA may apply. Design boundary: Brio does not collect clinical health data. Emotional/mood check-ins are not clinical. [? where the line falls needs legal confirmation before launch]
-- **EEOC wellness program rules:** Voluntary wellness programs have specific rules about incentive size, reasonable alternatives, and disclosure. [? applies if Brio programs include any incentive or reward mechanic]
-
-### Europe (secondary)
-
-- **GDPR:** Applies to any EU employee data. Core requirements: lawful basis for processing, data minimization, right to erasure, data residency considerations. Design boundary: aggregate-only architecture naturally supports data minimization. Individual responses must be deletable. [? data residency - EU data stored in EU? Needs infrastructure decision]
-- **UK GDPR:** Post-Brexit equivalent. Similar requirements.
-
-**Product stance:** Aggregate-only insight. No individual surveillance. The architecture is the compliance posture.
-
----
-
-## Design Principles
-
-1. **Privacy is the product, not a feature.** The operator and owner never see named individuals. Aggregation is not a setting you can turn off - it is structural.
-
-2. **Make the non-expert operator feel competent.** Every interaction gives them what to do next, confirms they did it right, and shows them it mattered. No HR jargon, no ambiguous dashboards.
-
-3. **Earn trust before asking for data.** Employees share more when they believe it stays private. Communicate the privacy model clearly and repeatedly, especially at onboarding and at each check-in moment.
-
-4. **Honest signals over flattering ones.** The owner gets a real team health signal, not a vanity metric. If things are trending down, the product says so plainly.
-
-5. **Low effort for everyone.** Employee check-ins take under 30 seconds. Operator program setup takes under 5 minutes. Owner review takes under 2 minutes.
-
----
-
-## Tech Stack Hypothesis
-
-- **Frontend:** React + TypeScript, Tailwind CSS. Responsive, desktop-first for operator, mobile-friendly for employee.
-- **Backend:** Node.js / TypeScript, REST or tRPC API.
-- **Database:** PostgreSQL. Aggregate computation happens server-side - raw individual responses are never exposed via API to the owner-facing surface.
-- **Auth:** Email + password with magic link option. SSO (Google, Microsoft) as a paid feature.
-- **Infrastructure:** Vercel (frontend), Railway or Render (backend), managed Postgres. US region primary.
-- **Notifications:** Email (Resend or Postmark), Slack integration (later phase).
-
-*All stack choices are hypotheses, subject to revision.*
-
----
-
-## Timeline
-
-| Stage | Deliverable | Status |
-|-------|-------------|--------|
-| Foundation Research | research/docs/ (competitors, benchmark, lean-ux-canvas, aarrr, ux-patterns, research) + research/research.html | Done |
-| User Research (Personas + JTBD) | user-research/docs/ (personas, jtbd) + user-research/personas.html + user-research/jtbd.html | Done |
-| CJM (As-Is + To-Be) | user-research/docs/ (cjm-as-is, cjm-to-be) + user-research/cjm-as-is.html + cjm-to-be.html | Done |
-| Information Architecture (Basic + Detailed) | ia/docs/ (sitemap, flows) + ia/flows.html + ia/concept.html + ia/sitemap.html + ia/docs/pages/ (all node specs) + ia/<node>.html wireframes | Done (Base Layer: Flows + Concept map; Detail Layer: Sitemap + all 41 page nodes + cluster 11 system + globals, per-node specs and B/W wireframes) |
-| Wireframes | wireframes/ (docs: screens, conventions, critique) + _nav.js + _wf.css + index.html + 100 screen and state html | Done |
-| Voice | voice/docs/ (voice, microcopy) + voice/voice.html | Done |
-| Concept | concept/ | Not started |
-| UI + Visual | ui-visual/ | Not started |
-| Tokens + Components | tokens-components/ | Not started |
-| Design System | design-system/ | Not started |
-| Responsive | responsive/ | Not started |
-| Animation | animation/ | Not started |
-| Handoff | handoff/ | Not started |
-
-*Supporting history (not canonical deliverables): research/strategy.md, research/product-model.md, research/quality-check.md, research/live-research.md.*
+| What | Where |
+|---|---|
+| Status of every stage | `README.md` table, `done` flags in `/_nav.js` |
+| Reasoning, rejected options | `docs/decisions.md` |
+| Entry for the Codex critic | `AGENTS.md` |
+| Research, personas, JTBD, CJM | `research/docs/` |
+| IA structure, flows, per-node specs | `ia/docs/`, `ia/docs/pages/` |
+| Wireframe conventions, screen matrix, critique log | `wireframes/docs/` |
+| Voice rules and the microcopy inventory | `voice/docs/` |
+| Visual language, brand plates, references | `design/concept/docs/`, `design/concept/assets/` |

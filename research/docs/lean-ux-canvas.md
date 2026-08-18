@@ -31,7 +31,7 @@ Note on O3 framing: an early-month start below 65% is expected and not a failure
 
 ## 3. Users
 
-Three parties in one value chain. The buyer and the end user are different people, and the end user did not choose the product. Segments are drawn from research/docs/research.md and validated in user-research/docs/personas.md.
+Three parties in one value chain. The buyer and the end user are different people, and the end user did not choose the product. Segments are drawn from research/docs/research.md and validated in research/docs/personas.md.
 
 - **Operator (primary, hero user, buyer + daily driver).** Office manager, ops coordinator, EA, or founder at a 10 to 200 person company with no dedicated HR. Low-to-medium confidence: knows the people, not the methodology. The activation bottleneck. Age 26 to 45 [? no competitive data]. Source: research/docs/competitors.md (Phase 3 gap analysis).
 - **Owner (secondary, approver + ROI judge).** Founder, CEO, or managing partner. Business-minded, time-poor, checks in monthly. Approves budget, drives renewal. Age [?]. Source: research/docs/research.md (Strategy).
@@ -41,7 +41,7 @@ Three parties in one value chain. The buyer and the end user are different peopl
 
 ## 4. User Outcomes & Benefits
 
-What each user is trying to get done, in JTBD language. Canonical job statements live in user-research/docs/jtbd.md.
+What each user is trying to get done, in JTBD language. Canonical job statements live in research/docs/jtbd.md.
 
 - **Operator:** When I am handed responsibility for wellbeing with no training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits. Benefit sought: certainty about the next step and proof it mattered. Source: research/docs/research.md (Strategy, primary job).
 - **Owner:** When I need to know if my people investment is working, I want a clear, honest team-level signal with no individual data, so that I can make a confident budget call. Benefit sought: a number, a trend, and reassurance in under 2 minutes. Source: research/docs/research.md (Strategy, secondary job).

@@ -62,38 +62,38 @@
 
 | State (file) | Zone | Type | Text | Note |
 |--------------|------|------|------|------|
-| home.html (guest) | Head | meta-description | Run real employee wellbeing at a small company with no HR. Brio gives the owner honest team-level proof and never shows any individual's answers. | |
-| home.html | Hero | eyebrow | Employee wellbeing, without surveillance | |
-| home.html | Hero | heading | Employee wellbeing for teams with no HR | H1 |
-| home.html | Hero | body | Brio is employee wellbeing software for small companies that have no HR team. Whoever got handed people work, an office manager, an ops lead, or the founder, gets a guided way to run real wellbeing programs. The owner gets honest proof it is working at the team level. Individual answers are never shown to anyone, because the privacy boundary is the product, not a setting you can switch off. | |
-| home.html | Hero | button | Start free | |
-| home.html | Hero | button | See how privacy works | |
-| home.html | How Brio works | heading | How Brio works | |
-| home.html | Card 1 | subhead | 1. Pick a program | |
-| home.html | Card 1 | body | Brio recommends a first program by your team size. You launch it, you do not build it. | |
-| home.html | Card 2 | subhead | 2. The team checks in | |
-| home.html | Card 2 | body | A weekly check-in takes under 30 seconds. No account is needed for the first one. | |
-| home.html | Card 3 | subhead | 3. You read the pulse | |
-| home.html | Card 3 | body | A plain-language score, what it means, and one next step. Aggregate only, never who. | |
-| home.html | Privacy strip | heading | Your team's privacy is the product | |
-| home.html | Privacy strip | body | Aggregate only. Brio never shows any individual's answers, to you or to the owner. No score appears until at least 5 people have answered, and there is no live count. See exactly what the owner can and cannot see. | |
-| home.html | Privacy strip | link | See exactly what the owner can and cannot see | |
-| home.html | Programs | heading | Programs for every kind of wellbeing | |
-| home.html | Programs tags | list-item | Mental health | |
-| home.html | Programs tags | list-item | Physical | |
-| home.html | Programs tags | list-item | Financial | |
-| home.html | Programs tags | list-item | Social | |
-| home.html | Pricing teaser | heading | Start free, upgrade when you are ready | |
-| home.html | Pricing teaser | body | Free for up to 10 people. Paid plans add the owner dashboard and the full program library. See pricing. | |
-| home.html | Pricing teaser | link | See pricing | |
-| home.html | FAQ | heading | Questions people ask | |
-| home.html | FAQ row 1 | list-item | Can my manager see my answer? | |
-| home.html | FAQ row 2 | list-item | Do employees need an account? | |
-| home.html | FAQ row 3 | list-item | What does the owner actually see? | |
-| home.html | FAQ rows | link | Read | repeated per row |
-| home.html | Final CTA | heading | Start in five minutes | |
-| home.html | Final CTA | body | No credit card. Free for up to 10 people. | |
-| home.html | Final CTA | button | Start free | |
+| index.html (guest) | Head | meta-description | Run real employee wellbeing at a small company with no HR. Brio gives the owner honest team-level proof and never shows any individual's answers. | |
+| index.html | Hero | eyebrow | Employee wellbeing, without surveillance | |
+| index.html | Hero | heading | Employee wellbeing for teams with no HR | H1 |
+| index.html | Hero | body | Brio is employee wellbeing software for small companies that have no HR team. Whoever got handed people work, an office manager, an ops lead, or the founder, gets a guided way to run real wellbeing programs. The owner gets honest proof it is working at the team level. Individual answers are never shown to anyone, because the privacy boundary is the product, not a setting you can switch off. | |
+| index.html | Hero | button | Start free | |
+| index.html | Hero | button | See how privacy works | |
+| index.html | How Brio works | heading | How Brio works | |
+| index.html | Card 1 | subhead | 1. Pick a program | |
+| index.html | Card 1 | body | Brio recommends a first program by your team size. You launch it, you do not build it. | |
+| index.html | Card 2 | subhead | 2. The team checks in | |
+| index.html | Card 2 | body | A weekly check-in takes under 30 seconds. No account is needed for the first one. | |
+| index.html | Card 3 | subhead | 3. You read the pulse | |
+| index.html | Card 3 | body | A plain-language score, what it means, and one next step. Aggregate only, never who. | |
+| index.html | Privacy strip | heading | Your team's privacy is the product | |
+| index.html | Privacy strip | body | Aggregate only. Brio never shows any individual's answers, to you or to the owner. No score appears until at least 5 people have answered, and there is no live count. See exactly what the owner can and cannot see. | |
+| index.html | Privacy strip | link | See exactly what the owner can and cannot see | |
+| index.html | Programs | heading | Programs for every kind of wellbeing | |
+| index.html | Programs tags | list-item | Mental health | |
+| index.html | Programs tags | list-item | Physical | |
+| index.html | Programs tags | list-item | Financial | |
+| index.html | Programs tags | list-item | Social | |
+| index.html | Pricing teaser | heading | Start free, upgrade when you are ready | |
+| index.html | Pricing teaser | body | Free for up to 10 people. Paid plans add the owner dashboard and the full program library. See pricing. | |
+| index.html | Pricing teaser | link | See pricing | |
+| index.html | FAQ | heading | Questions people ask | |
+| index.html | FAQ row 1 | list-item | Can my manager see my answer? | |
+| index.html | FAQ row 2 | list-item | Do employees need an account? | |
+| index.html | FAQ row 3 | list-item | What does the owner actually see? | |
+| index.html | FAQ rows | link | Read | repeated per row |
+| index.html | Final CTA | heading | Start in five minutes | |
+| index.html | Final CTA | body | No credit card. Free for up to 10 people. | |
+| index.html | Final CTA | button | Start free | |
 | home-operator.html | Hero | eyebrow | Welcome back, Priya | UGC (injected operator name) |
 | home-operator.html | Hero | body | You are signed in. Jump back to your team pulse, or keep reading about how Brio works. Individual answers are never shown to anyone, because the privacy boundary is the product, not a setting you can switch off. | |
 | home-operator.html | Hero | button | Go to your dashboard | |
@@ -1312,7 +1312,7 @@
 | cookie-consent-manage.html | Dialog | legal | US residents: Do Not Sell or Share My Personal Information. We honor GPC signals. | note: "GPC" vs "Global Privacy Control (GPC)" on the banner |
 | cookie-consent-manage.html | Actions | button | Reject all / Save choices / Accept all / Cancel | |
 
-*Note: both cookie states render behind the live marketing hero (eyebrow "Employee wellbeing, without surveillance", H1 "Employee wellbeing for teams with no HR"), which duplicates home.html; captured under 0.0.*
+*Note: both cookie states render behind the live marketing hero (eyebrow "Employee wellbeing, without surveillance", H1 "Employee wellbeing for teams with no HR"), which duplicates index.html (node 0.0 Home); captured under 0.0.*
 
 #### 11.4 Toast / inline notification (toast.html) - component reference
 
@@ -1492,7 +1492,7 @@ Scores and numbers are canonical illustrative data threaded through the prototyp
 | Continue to Save and continue | onboarding-company | Microcopy, button = verb + object |
 | H1 stability (node 3.1) | onboarding-program-loading ("Finding your program" to "Your recommended program"), onboarding-program-error ("Choose your first program" to "Pick your first program") | Microcopy, H1 stable across states |
 
-*Already voice-compliant, no change: home.html, about.html, contact.html, contact-error.html, segment-landing.html, legal.html, signup*.html, login.html, login-error.html, reset-password-loading.html, onboarding-company-loading.html, onboarding-invite*.html, team-pulse-nodata.html, loading skeletons, program-detail (base/draft/end/ended/loading), check-in-setup-error/loading, team-roster-loading/manage, checkin-questions/already/submit-error, server-error, maintenance, cookie-consent, settings-notifications, and more. The etalon was close, and the wireframe stage was written carefully, so most screens needed nothing.*
+*Already voice-compliant, no change: index.html (0.0 Home), about.html, contact.html, contact-error.html, segment-landing.html, legal.html, signup*.html, login.html, login-error.html, reset-password-loading.html, onboarding-company-loading.html, onboarding-invite*.html, team-pulse-nodata.html, loading skeletons, program-detail (base/draft/end/ended/loading), check-in-setup-error/loading, team-roster-loading/manage, checkin-questions/already/submit-error, server-error, maintenance, cookie-consent, settings-notifications, and more. The etalon was close, and the wireframe stage was written carefully, so most screens needed nothing.*
 
 ### Residual divergences to resolve in Step 8
 

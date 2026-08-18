@@ -42,58 +42,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Sidebar - mobile-first */
-    .sidebar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(13, 15, 18, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; }
-    .sidebar-brand { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
-    .sidebar-toggle {
-      display: flex; flex-direction: column; justify-content: center; gap: 4px;
-      width: 36px; height: 36px; background: none; border: 1px solid var(--border);
-      border-radius: var(--radius-sm); cursor: pointer; padding: 9px 8px;
-    }
-    .sidebar-toggle span { display: block; height: 2px; width: 100%; background: var(--text-muted); border-radius: 1px; }
-    .sidebar-body { display: none; padding: 8px 0 16px; border-top: 1px solid var(--border); overflow-y: auto; max-height: calc(100vh - 52px); }
-    .sidebar-body.open { display: block; }
-    .nav-group { padding: 0 8px; }
-    .nav-group-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 14px 12px 6px; }
-    .nav-group-label.active-section { color: var(--accent); }
-    .nav-item {
-      display: flex; align-items: center; gap: 6px; padding: 7px 12px; font-size: 13px;
-      color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s;
-    }
-    a.nav-item:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-    .nav-item-muted { color: var(--text-faint); opacity: 0.5; cursor: default; font-size: 12px; }
-    .nav-item-active { color: var(--accent); font-weight: 600; }
-    .nav-soon { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-faint); margin-left: auto; }
-    .nav-item-next { color: var(--text-muted); cursor: default; font-size: 12px; }
-    .nav-next { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 100px; border: 1px solid var(--accent-dim); background: var(--accent-dim); color: var(--accent); margin-left: auto; }
-    .nav-sub-item { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub-item.nav-sub-active { color: var(--accent); }
-    /* nested IA node-nav (Base / Detail sub-groups) */
-    .nav-subhead { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-muted); padding: 12px 12px 4px 12px; }
-    .nav-subhead-sm { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); padding: 10px 12px 3px 24px; }
-    .nav-sub-link { display: block; padding: 5px 12px 5px 24px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub-link:hover { color: var(--text); background: var(--surface-2); text-decoration: none; }
-    .nav-sub-link.nav-link-active { color: var(--accent); font-weight: 600; }
-    .nav-sub2-item { display: block; padding: 4px 12px 4px 38px; font-size: 11.5px; color: var(--text-faint); text-decoration: none; border-radius: var(--radius-sm); transition: color 0.15s, background 0.15s; }
-    a.nav-sub2-item:hover { color: var(--text-muted); background: var(--surface-2); text-decoration: none; }
-    .nav-sub2-item.nav-sub-active { color: var(--accent); }
-
-    @media (min-width: 900px) {
-      .sidebar { left: 0; right: auto; top: 0; bottom: 0; width: 220px; border-bottom: none; border-right: 1px solid var(--border); overflow-y: auto; }
-      .sidebar-header { height: 64px; padding: 0 20px; }
-      .sidebar-toggle { display: none; }
-      .sidebar-body { display: block; max-height: none; border-top: none; padding: 4px 0 24px; overflow-y: visible; }
-    }
-
     main { padding-top: 52px; max-width: 1080px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
     @media (min-width: 900px) { main { padding-top: 0; margin-left: 220px; margin-right: 0; max-width: none; padding-left: 40px; padding-right: 40px; } }
     section { padding: 80px 0 40px; }
@@ -157,50 +105,11 @@
 
     @media (max-width: 640px) { main { padding-left: 16px; padding-right: 16px; } }
   </style>
+  <link rel="stylesheet" href="../_nav.css">
 </head>
 <body>
 
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <span class="sidebar-brand">Brio</span>
-    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="sidebar-body" id="sidebarBody">
-    <div class="nav-group">
-      <a href="../research/research.html" class="nav-item">Foundation Research</a>
-    </div>
-    <div class="nav-group">
-      <a href="../user-research/personas.html" class="nav-item">User Research</a>
-    </div>
-    <div class="nav-group">
-      <div class="nav-group-label active-section">Information Architecture (IA)</div>
-
-      <div class="nav-subhead">Base Layer</div>
-      <a href="flows.html" class="nav-sub-link">Flows</a>
-      <a href="concept.html" class="nav-sub-link nav-link-active">Concept map</a>
-      <a href="#concept" class="nav-sub2-item" id="sub-concept">Screens by intent</a>
-      <a href="#nav" class="nav-sub2-item" id="sub-nav">Navigation Model</a>
-      <a href="#matrix" class="nav-sub2-item" id="sub-matrix">Traceability Matrix</a>
-
-      <div class="nav-subhead">Detail Layer</div>
-      <a href="sitemap.html" class="nav-sub-link">Sitemap</a>
-      <a href="structure.html" class="nav-sub-link">Structure</a>
-    </div>
-    <div class="nav-group">
-      <a href="../wireframes/index.html" class="nav-item">Wireframes</a>
-      <a href="../voice/voice.html" class="nav-item">Voice</a>
-      <span class="nav-item nav-item-next">Concept <span class="nav-next">Next</span></span>
-      <span class="nav-item nav-item-muted">UI + Visual <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Tokens + Components <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Design System <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Responsive <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Animation <span class="nav-soon">Soon</span></span>
-      <span class="nav-item nav-item-muted">Handoff <span class="nav-soon">Soon</span></span>
-    </div>
-  </div>
-</aside>
+<aside id="sidebar"></aside>
 
 <main>
 
@@ -379,6 +288,62 @@
     <div class="callout ok"><strong>Net:</strong> one real orphan job (S1, to backlog), zero orphan screens to cut (two supporting-infrastructure rows kept), no MVP job left uncovered.</div>
   </section>
 
+
+  <section id="support">
+    <div class="section-label">Coverage</div>
+    <h2>Emotional and social jobs: what supports them</h2>
+    <p>The matrix above carries functional jobs only. An emotional or social job is not closed by a screen: it is closed by a mechanism spread across screens. Putting a tick in the matrix for E1 or E2 would claim a screen owns a feeling. This table names the mechanism instead, and the Detail Layer and Voice read it from here. Source: research/docs/jtbd.md and research/docs/cjm-to-be.md.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Job</th><th>Persona</th><th>The mechanism that supports it</th><th>Where it is visible</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>E1</strong> feel like a competent people person</td><td>Priya, primary</td><td>The interpretive layer, cross-cutting: no number is shown without its reading, every setup ends in a confirmation, every operator screen offers one suggested next action</td><td>4.0, 4.1, 3.1, 5.2, 6.0, 9.0</td></tr>
+          <tr><td><strong>E2</strong> feel supported, not monitored</td><td>Yemi, primary</td><td>The privacy bundle as a visible mechanism, four parts: pre-Q1 disclosure sentence, minimum of 5, no live count during an open cycle, subscription-as-privacy statement</td><td>10.1, 0.3, 1.1, 8.2</td></tr>
+          <tr><td><strong>E3</strong> be seen as a caring leader</td><td>Marcus and Priya, secondary</td><td>Shareable aggregate proof: the owner dashboard and monthly digest are the artefact a leader can hold up. Deliberately thin, because E3 is still a hypothesis</td><td>9.0, 9.2</td></tr>
+          <tr><td><strong>S1</strong> tell my network what works</td><td>Priya</td><td>Nothing in the MVP, and that is the decision. S1 is a [?] hypothesis and cash referral is on the Stage 2 cut list</td><td>no node</td></tr>
+          <tr><td><strong>S2</strong> share the result with the owner easily</td><td>Priya to Marcus</td><td>The operator-to-owner share act, kept distinct from inviting the owner: two labels for two different acts</td><td>7.0, 7.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout"><strong>Consequence for Voice:</strong> E2 fixes the one privacy sentence (mechanism, never reassurance), E1 fixes the rule that a score never appears without its reading, and S2 fixes the two distinct labels. All three are rules in voice/docs/voice.md; this is where they get their parent.</div>
+  </section>
+
+  <section id="scope">
+    <div class="section-label">Volume</div>
+    <h2>Estimate: MVP and LATER</h2>
+    <p>The one place the volume of the product is narrowed. The parent list is the backlog in research/docs/cjm-to-be.md: items 1 to 10 are MVP, items 11 and 12 are LATER. A node is MVP when an MVP backlog item cannot ship without it, or when it is an auth, legal or system precondition the To-Be path can actually hit. A node is LATER when the first round runs without it. Every node keeps its specification and its grey wireframe either way: the label orders the work, it does not cut the spec.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Group</th><th>Nodes</th><th>MVP</th><th>LATER</th></tr></thead>
+        <tbody>
+          <tr><td>Global elements</td><td>6</td><td>6</td><td>0</td></tr>
+          <tr><td>Pages</td><td>48</td><td>43</td><td>5</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>54</strong></td><td><strong>49</strong></td><td><strong>5</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-wrap" style="margin-top:14px;">
+      <table>
+        <thead><tr><th>The five LATER nodes</th><th>Why the To-Be path does not break without it</th></tr></thead>
+        <tbody>
+          <tr><td>1.2 About</td><td>Trust here is carried by the privacy mechanism shown in the UI, not by a company story. No backlog item needs it.</td></tr>
+          <tr><td>1.3 Contact / Support</td><td>Self-serve by design: the operator starts in an afternoon without talking to anyone. No MVP item depends on it.</td></tr>
+          <tr><td>1.4 Help / FAQ</td><td>The in-product answer to "am I doing this right" is the interpretive layer, which is MVP and cross-cutting. A help library is a second, weaker answer to the same job.</td></tr>
+          <tr><td>1.5 Category / segment landing</td><td>Acquisition breadth. Activation is measured from Pricing and Sign up, not from segment pages.</td></tr>
+          <tr><td>11.2 Maintenance</td><td>An operational state, not a path state. The path can hit 404 and 500; planned maintenance is a deploy practice the MVP does not have yet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout ok"><strong>Who reads this:</strong> stage 07 (which screens are coloured first and which enter the 3 to 5 sample), stage 08 (roll-out order) and stage 09 (the next node built straight from the system). The label lives once, in ia/_nav.js, and shows as a chip on <a href="structure.html">Structure</a>.</div>
+  </section>
+
   <footer>
     <p>Brio - Information Architecture, Base Layer, Concept map - July 2026</p>
     <p style="margin-top:4px;">Screens grouped by intent, derived from the <a href="flows.html">flows</a> and jobs; navigation is the shortest path to the main job; the matrix proves coverage. The full site map with X.Y nodes and cards is the detail layer <a href="sitemap.html">Sitemap</a>.</p>
@@ -392,45 +357,12 @@
   mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose', flowchart: { htmlLabels: true, curve: 'basis' } });
 </script>
 
-<script>
-  var toggle = document.getElementById('sidebarToggle');
-  var sbody = document.getElementById('sidebarBody');
-  toggle.addEventListener('click', function() {
-    var open = sbody.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  sbody.querySelectorAll('a.nav-item, a.nav-sub-item, a.nav-sub-link, a.nav-sub2-item').forEach(function(link) {
-    link.addEventListener('click', function() {
-      sbody.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
 
-  var subSections = [
-    { id: 'concept', sub: 'sub-concept' },
-    { id: 'nav', sub: 'sub-nav' },
-    { id: 'matrix', sub: 'sub-matrix' }
-  ];
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        subSections.forEach(function(s) {
-          var el = document.getElementById(s.sub);
-          if (el) el.classList.remove('nav-sub-active');
-        });
-        var match = subSections.find(function(s) { return s.id === entry.target.id; });
-        if (match) {
-          var el = document.getElementById(match.sub);
-          if (el) el.classList.add('nav-sub-active');
-        }
-      }
-    });
-  }, { rootMargin: '-15% 0px -75% 0px' });
-  subSections.forEach(function(s) {
-    var el = document.getElementById(s.id);
-    if (el) observer.observe(el);
-  });
+<script>
+  window.NAV_BASE = '../';
+  window.NAV_SECTIONS = [{"id": "concept", "label": "Screens by intent"}, {"id": "nav", "label": "Navigation Model"}, {"id": "matrix", "label": "Traceability Matrix"}, {"id": "support", "label": "Emotional and social jobs"}, {"id": "scope", "label": "Estimate: MVP and LATER"}];
 </script>
+<script src="../_nav.js"></script>
 
 </body>
 </html>

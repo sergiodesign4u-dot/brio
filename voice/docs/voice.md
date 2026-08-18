@@ -14,6 +14,30 @@ So Brio speaks like **a calm, plain-spoken colleague who has done this before**:
 
 The single load-bearing line from the research: *"The product acts as a knowledgeable peer, not a data terminal."* (`ux-patterns.md`, Pattern B4). Everything below is that sentence, made operable.
 
+### Is there an existing brand platform to inherit?
+
+Asked before any rule was written: is there a brand platform, a tone-of-voice guide, or an editorial policy already in place? **No.** Brio has no brand, no style guide and no prior copy, so this voice is derived from the data alone: `personas.md`, `research.md`, `cjm-as-is.md`, `cjm-to-be.md` and a live crawl of competitor language. Nothing here overrides an existing house style, because there is none to conflict with. Recorded as `docs/decisions.md` D-11.
+
+---
+
+## Tone by phase
+
+*Tone is not one setting for the whole product. The state the reader is in sets it, and the phase sets the state: the same plain sentence that reads as competent on the dashboard reads as evasive at the moment an employee decides whether to answer honestly. Phases and emotions come from `research/docs/cjm-as-is.md` (the As-Is curve the reader arrives from) and `research/docs/cjm-to-be.md` (the target emotion each step is supposed to produce). The microcopy rules below are checked against this table, not against a general idea of the persona.*
+
+| # | Phase in the product | Where it lives | Arrives from (As-Is) | Target emotion | The barrier the words remove | How it sounds here |
+|---|---------------------|----------------|----------------------|----------------|------------------------------|--------------------|
+| 1 | Self-serve start | 0.0 Home, 1.0 Pricing, 2.0 Sign up | blocked, -4: the demo wall, no visible price | relief, control | GZ2: "can I just see a price and try it?" | Price, limits and what happens next stated as fact. No demo booking, no urgency, no persuasion verbs. The proof is that the number is simply there. |
+| 2 | Guided onboarding | 3.0 to 3.2, 5.1 | terrified and lost, -3: handed it, no framework, invents the process | competent, guided | GZ4: "I have no idea where to start" | One action per step, phrased as an instruction with its reason attached, and a confirmation the moment it is done. Never a choice the reader has no basis to make. |
+| 3 | **Privacy-visible check-in (the low point)** | 10.0 to 10.3, 0.3 disclosure component | distrust, **-4, the deepest low of the whole journey**: "my dept only has 3 of us", "harvest and sell health info" | safe, supported and not monitored | GZ1: anonymity is not believed in a small team | The most conservative tone in the product. The mechanism sentence and nothing else: aggregate only, minimum of 5, no live count. No "we value your privacy", no policy link, no warmth signalling, no thanks that sounds like relief. Shortest sentences anywhere in the product. |
+| 4 | Score, reading and next action | 4.0 Dashboard, 4.1 Team pulse | confused, -3: "67 percent, is that good? what do I do?" | clear, "I know what to do" | GZ3: a number with no interpretation | The reading comes first in plain words, the number second, one suggested next step third. A number is never the whole answer to anything. |
+| 5 | Early warning | 4.2, 4.0 alert state | reactive: the owner "caught off guard" by three departures | ahead of it | no honest early signal exists today | A dip is called a dip: what moved, over what period, and the one thing to do. No alarm words, no softening, no reassurance the data does not support. |
+| 6 | Owner share and proof | 7.0 to 7.2, 9.0, 9.2 | anxious with no number, -3: nothing credible to show the founder | proud and validated (Priya); reassured (Marcus) | GZ5: no team-level signal to point at | Facts an owner can check in two minutes, and, in the same breath, what he cannot see. "Share with your owner" and "Invite your owner" stay two different acts with two different labels. |
+
+**Two consequences that outrank every other rule when they collide:**
+
+1. **Phase 3 wins over tone.** At the deepest low, warmth reads as sales. Where a line could be either mechanism or comfort, it is mechanism.
+2. **Phase 5 wins over kindness.** An honest dip stated plainly is the product's differentiator; softening it turns Brio into the flattering dashboard the research says the category already is.
+
 ---
 
 ## Principles

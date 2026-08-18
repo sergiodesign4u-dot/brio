@@ -1,0 +1,187 @@
+/* Brio - roadmap sidebar: the look.
+   Structure is rendered by /_nav.js from the registry in that file; this file owns the look.
+   A page never declares nav-* rules of its own: it links this file with one line.
+   Theme knobs live in :root below - change the sidebar everywhere by editing them here. */
+
+:root {
+  --nav-fg: #e8eaf0;
+  --nav-active: #4f9cf9;
+  --nav-muted: #8b909c;
+  --nav-rule: #252a33;
+  --nav-badge: #1d3a5f;
+  --nav-w: 220px;
+  --nav-size: 13px;
+  --nav-lh: 1.5;
+  /* Ninth knob: the panel surface. Named decision, see docs/decisions.md D-04. */
+  --nav-bg: #0d0f12;
+}
+
+/* Panel shell - mobile first: a top bar that opens downward. */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--nav-bg) 95%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--nav-rule);
+  font-size: var(--nav-size);
+  line-height: var(--nav-lh);
+}
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 52px;
+}
+
+.nav-brand {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--nav-active);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+a.nav-brand:hover { color: var(--nav-fg); text-decoration: none; }
+
+.nav-burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--nav-rule);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 9px 8px;
+}
+.nav-burger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--nav-muted);
+  border-radius: 1px;
+}
+
+.nav-roadmap {
+  display: none;
+  padding: 8px 8px 16px;
+  border-top: 1px solid var(--nav-rule);
+  overflow-y: auto;
+  max-height: calc(100vh - 52px);
+}
+.nav-roadmap.is-open { display: block; }
+
+/* Top-level stage row. */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  color: var(--nav-muted);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+a.nav-item:hover { color: var(--nav-fg); background: color-mix(in srgb, var(--nav-fg) 7%, transparent); text-decoration: none; }
+.nav-item.is-soon { color: var(--nav-muted); opacity: 0.45; cursor: default; font-size: 12px; }
+.nav-item.is-next { cursor: default; font-size: 12px; }
+.nav-item.is-active {
+  color: var(--nav-active);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 12px 6px;
+}
+
+.nav-badge {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 100px;
+  border: 1px solid var(--nav-rule);
+  color: var(--nav-muted);
+}
+.nav-badge-next {
+  border-color: var(--nav-badge);
+  background: var(--nav-badge);
+  color: var(--nav-active);
+}
+
+/* Children of the active group. */
+.nav-sub { display: block; }
+
+.nav-subhead {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--nav-muted);
+  padding: 12px 12px 4px;
+}
+
+.nav-subitem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px 5px 24px;
+  font-size: 12px;
+  color: var(--nav-muted);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+a.nav-subitem:hover { color: var(--nav-fg); background: color-mix(in srgb, var(--nav-fg) 7%, transparent); text-decoration: none; }
+.nav-subitem.is-current { color: var(--nav-active); font-weight: 600; }
+.nav-subitem.is-soon { opacity: 0.45; cursor: default; }
+.nav-subitem.is-satellite { font-style: italic; }
+
+/* In-page sections of the current page. */
+.nav-sections { display: block; padding: 2px 0 6px; }
+
+.nav-section {
+  display: block;
+  padding: 4px 12px 4px 36px;
+  font-size: 12px;
+  color: var(--nav-muted);
+  opacity: 0.8;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+a.nav-section:hover { color: var(--nav-fg); background: color-mix(in srgb, var(--nav-fg) 7%, transparent); text-decoration: none; }
+.nav-section.is-current { color: var(--nav-active); opacity: 1; }
+
+/* Desktop: a fixed left rail. */
+@media (min-width: 900px) {
+  #sidebar {
+    left: 0;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: var(--nav-w);
+    border-bottom: none;
+    border-right: 1px solid var(--nav-rule);
+    overflow-y: auto;
+    background: var(--nav-bg);
+    backdrop-filter: none;
+  }
+  .nav-top { height: 64px; padding: 0 20px; }
+  .nav-burger { display: none; }
+  .nav-roadmap {
+    display: block;
+    max-height: none;
+    border-top: none;
+    padding: 4px 8px 24px;
+    overflow-y: visible;
+  }
+}

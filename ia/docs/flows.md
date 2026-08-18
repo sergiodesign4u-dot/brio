@@ -1,6 +1,6 @@
 # Information Architecture - Base Layer (User Flows)
 
-*Phase: IA (Basic). User flows for the primary persona's main job plus key related jobs, from user-research/docs/jtbd.md. Each flow proves the route: steps, decision diamonds, states (empty / error / loading), both ends (success and dead-end). Color is semantic, not decorative: green = happy-path ends and the arrows that reach them, red = a true dead-end with no path to the goal, gray = everything between, including an error that recovers. Every node-screen exists in sitemap.md. Colors reuse the project token palette (green #3fb56b, red #e5484d, gray #5a5a5a). Step 6 critique fixes are applied (dead-end exits and missing states added).*
+*Phase: IA (Basic). User flows for the primary persona's main job plus key related jobs, from research/docs/jtbd.md. Each flow proves the route: steps, decision diamonds, states (empty / error / loading), both ends (success and dead-end). Color is semantic, not decorative: green = happy-path ends and the arrows that reach them, red = a true dead-end with no path to the goal, gray = everything between, including an error that recovers. Every node-screen exists in sitemap.md. Colors reuse the project token palette (green #3fb56b, red #e5484d, gray #5a5a5a). Step 6 critique fixes are applied (dead-end exits and missing states added).*
 
 ---
 

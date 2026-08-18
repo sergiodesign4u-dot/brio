@@ -6,9 +6,9 @@
 
 ## Focus
 
-**Persona:** Priya, the Handed-It Operator (primary). Source: user-research/docs/personas.md.
+**Persona:** Priya, the Handed-It Operator (primary). Source: research/docs/personas.md.
 
-**Main job:** When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits. Source: user-research/docs/jtbd.md, Main Job.
+**Main job:** When I am handed responsibility for employee wellbeing with no HR training, I want a guided system that tells me what to run and when, so that I feel competent and the team actually benefits. Source: research/docs/jtbd.md, Main Job.
 
 This is the ideal path Priya walks to do the same job inside Brio (not yet built). Each step must close an As-Is barrier from cjm-as-is.md or serve a job from JTBD.
 
@@ -38,7 +38,7 @@ This is the ideal path Priya walks to do the same job inside Brio (not yet built
 
 ## Backlog and MVP Basis (Step 8)
 
-*Assembled from the To-Be "required capability" column, then reconciled against the existing MVP core (research/docs/lean-ux-canvas.md Solutions, user-research/docs/jtbd.md matrix core, CLAUDE.md MVP). This refines the one list; it does not fork a second.*
+*Assembled from the To-Be "required capability" column, then reconciled against the existing MVP core (research/docs/lean-ux-canvas.md Solutions, research/docs/jtbd.md matrix core, CLAUDE.md MVP). This refines the one list; it does not fork a second.*
 
 ### Backlog
 

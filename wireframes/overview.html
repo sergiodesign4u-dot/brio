@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brio - Wireframes: All screens</title>
+  <link rel="stylesheet" href="_wf.css">
+  <style>
+    /* index-specific (grey, structure only) */
+    .hero { padding: 74px 0 24px; border-bottom: 1px solid var(--border); }
+    @media (min-width: 900px) { .hero { padding: 56px 0 24px; } }
+    .hero h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-bottom: 12px; }
+    .hero p { color: var(--text-muted); max-width: 70ch; margin-bottom: 16px; }
+    .counter { display: inline-flex; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--wf-t-mid); font-family: ui-monospace, monospace; }
+    .counter b { color: var(--wf-t-hi); font-weight: 700; }
+    section { padding: 34px 0 8px; }
+    h2 { font-size: clamp(18px, 2.4vw, 24px); font-weight: 700; letter-spacing: -0.015em; color: var(--text); margin-bottom: 6px; }
+    .sub { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; max-width: 70ch; }
+
+    .flow-card { border: 1px solid var(--wf-edge); border-radius: var(--radius-lg); background: var(--wf-panel); padding: 14px 16px; margin: 14px 0; }
+    .flow-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+    .flow-badge { font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: var(--wf-solid-ink); background: var(--wf-solid); border-radius: 4px; padding: 1px 7px; }
+    .flow-name { font-size: 15px; font-weight: 700; color: var(--wf-t-hi); }
+    .flow-meta { font-size: 12px; color: var(--wf-t-mid); }
+    .flow-note { font-size: 11px; color: var(--wf-t-lo); font-style: italic; margin-bottom: 12px; }
+    .scr { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid var(--wf-line-2); }
+    .scr-num { font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: var(--wf-t-mid); min-width: 34px; }
+    .scr-name { font-size: 13px; color: var(--wf-t); font-weight: 500; min-width: 150px; }
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip { font-size: 10.5px; border-radius: 100px; padding: 2px 9px; white-space: nowrap; text-decoration: none; border: 1px solid var(--wf-edge); }
+    .chip.built { color: var(--wf-t-2); border-color: var(--wf-stroke); }
+    a.chip.built:hover { color: var(--wf-t-hi); background: var(--surface-2); text-decoration: none; }
+    .chip.base.built { background: var(--wf-solid); color: var(--wf-solid-ink); border-color: var(--wf-solid); font-weight: 700; }
+    .chip.spec { color: var(--wf-t-lo); border-style: dashed; }
+    .scr-spec { margin-left: auto; font-size: 10.5px; color: var(--wf-t-lo); }
+    a.scr-spec:hover { color: var(--wf-t-mid); }
+
+    .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; color: var(--wf-t-mid); margin-bottom: 18px; font-family: ui-monospace, monospace; }
+    .legend span { display: inline-flex; align-items: center; gap: 7px; }
+    .swatch { width: 22px; height: 14px; border-radius: 3px; }
+    .pair-h { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--wf-t-mid); margin: 26px 0 12px; }
+    .pair { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 860px) { .pair { grid-template-columns: 1fr 1fr; } }
+    .pair figure { border: 1px solid var(--wf-edge); border-radius: var(--radius); overflow: hidden; background: var(--wf-panel); }
+    .pair img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--wf-line-2); }
+    .pair figcaption { padding: 12px 14px; font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+    .pair figcaption b { color: var(--text); }
+    .conv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 16px 0 8px; }
+    .conv { border: 1px solid var(--wf-edge); border-radius: var(--radius); background: var(--wf-panel); padding: 14px 16px; }
+    .conv b { display: block; font-size: 13px; color: var(--text); margin-bottom: 5px; }
+    .conv span { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+    .swatch.built { border: 1px solid var(--wf-stroke); background: var(--wf-panel-2); }
+    .swatch.spec { border: 1px dashed var(--wf-edge); }
+    .cov-cluster { margin: 18px 0; }
+    .cov-h { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wf-t-mid); margin-bottom: 8px; font-family: ui-monospace, monospace; }
+    .cov-h b { color: var(--wf-t-lo); font-weight: 700; }
+    .cov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+    .tile { display: flex; align-items: center; gap: 9px; padding: 9px 12px; border-radius: var(--radius); text-decoration: none; }
+    .tile.built { border: 1px solid var(--wf-stroke); background: var(--wf-panel-2); }
+    .tile.spec { border: 1px dashed var(--wf-edge); }
+    a.tile:hover { background: var(--surface-2); text-decoration: none; }
+    .tile-num { font-family: ui-monospace, monospace; font-size: 11px; font-weight: 700; color: var(--wf-t-mid); min-width: 30px; }
+    .tile-name { font-size: 12.5px; color: var(--wf-t); flex: 1; line-height: 1.25; }
+    .tile-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--wf-t-lo); border: 1px solid var(--wf-edge); border-radius: 100px; padding: 1px 6px; white-space: nowrap; }
+    .tile.built .tile-tag { color: var(--wf-t-hi); border-color: var(--wf-stroke); }
+
+    footer { border-top: 1px solid var(--border); padding: 30px 0 60px; margin-top: 40px; color: var(--text-faint); font-size: 13px; }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+  <link rel="stylesheet" href="../_nav.css">
+</head>
+<body class="has-rail">
+
+<aside id="sidebar"></aside>
+
+<main>
+  <section class="hero" id="top">
+    <h1>Wireframes</h1>
+    <p>A grey clickable prototype of the whole product, built from the IA Detail Layer. Enter by flow to click a path through, or read the coverage map below. Nothing is invented here: text, components, and states come from the IA. This hub is the single coverage tracker; each screen lights up as its wireframe lands.</p>
+    <div class="counter" id="counter"></div>
+  </section>
+
+  <section id="flows">
+    <h2>Enter by flow</h2>
+    <p class="sub">The four product flows from ia/docs/flows.md. Flow 1 is assembled first; the rest roll out at Step 8. Base state plus every real state, each its own page.</p>
+    <div id="flow-entries"></div>
+  </section>
+
+  <section id="coverage">
+    <h2>Full coverage map</h2>
+    <p class="sub">Every product screen by IA cluster. Solid = wireframe built (with its state-page count); dashed and tagged IA = still specification only (links to the IA spec).</p>
+    <div class="legend">
+      <span><span class="swatch built"></span> built (state pages)</span>
+      <span><span class="swatch spec"></span> in spec (IA)</span>
+    </div>
+    <div id="coverage-map"></div>
+  </section>
+
+
+  <section id="conventions">
+    <h2>The grey contract</h2>
+    <p class="sub">The rules every screen in this folder is built against. Full text with examples: <code>wireframes/docs/conventions.md</code>. This folder is frozen after Voice: stages 06 and later work on coloured copies in design/, never here.</p>
+    <div class="conv-grid">
+      <div class="conv"><b>Grey only</b><span>No colour, type, brand, icon or shadow. The only palette a screen body may use is the greyscale scale in _wf.css.</span></div>
+      <div class="conv"><b>One responsive page</b><span>Not a device mockup and not two frames. Every screen reflows from 360px up with real media queries.</span></div>
+      <div class="conv"><b>One main action per screen</b><span>Everything else is secondary. Stage 09 turns this into a rule of the system in the terms of its own classes.</span></div>
+      <div class="conv"><b>Nothing is invented here</b><span>Text from the node SEO block, components from IA nodes, states from the node States section, links from flows.md. A hole found while building is fixed in the IA first, then rendered.</span></div>
+      <div class="conv"><b>Every state is its own page</b><span>So the prototype can navigate between states. 47 screens, 99 state pages.</span></div>
+      <div class="conv"><b>One navigator, one source</b><span>A screen carries an empty panel mount and one render call; the tree, the accordion and the cross-links come from _nav.js. Adding a screen is a row in the registry, not new markup.</span></div>
+    </div>
+  </section>
+
+
+  <section id="wasnow">
+    <h2>Was to now</h2>
+    <p class="sub">What the critique of this stage caught and what happened to it. The full defect log is <code>wireframes/docs/critique.md</code>; the retrofit rows are in <code>docs/retrofit-audit.md</code>. Every row carries a status, so the next stage does not start fixing what is already fixed.</p>
+    <div class="conv-grid">
+      <div class="conv"><b>Navigator, not a strip</b><span><b>Was:</b> a sticky top strip with the node, the state and chips for the sibling states. It could not show where a screen sat in a product of 47 screens. <b>Now:</b> a left rail with the IA cluster tree, an accordion on the current node, and a cross-link to the IA spec. <b>Who found it:</b> Claude, on screen. <b>Status:</b> fixed, decision D-05.</span></div>
+      <div class="conv"><b>Home was called by its old name</b><span><b>Was:</b> the state matrix and the naming rule pointed at <code>home.html</code>, a file that no longer exists. <b>Now:</b> <code>index.html</code>, the product home, node 0.0. <b>Who found it:</b> <b>Codex</b>, in a class the rename script missed systematically: a filename inside markdown backticks. <b>Status:</b> fixed.</span></div>
+      <div class="conv"><b>The naming rule read as a contradiction</b><span><b>Was:</b> the rule lists <code>home.html</code> among the IA basenames while the folder rule says <code>index.html</code> is the home page. <b>Verdict:</b> withdrawn at verification, the sentence is about IA basenames and <code>ia/home.html</code> does exist. A clarifying line was added instead of changing a correct fact. <b>Who found it:</b> Codex. <b>Status:</b> withdrawn, clarified.</span></div>
+      <div class="conv"><b>The hub lost two sections without an error</b><span><b>Was:</b> a scripted edit removed the closing line of the wrapping function on this page; the counter and the coverage map stopped rendering and nothing threw. <b>Now:</b> restored, and a brace-balance check over every inline script is the rule after any scripted surgery. <b>Who found it:</b> Claude, script. <b>Status:</b> fixed.</span></div>
+      <div class="conv"><b>Conventions had no visible place</b><span><b>Was:</b> <code>conventions.md</code> was read by the model and by nobody else. <b>Now:</b> the grey contract section above. <b>Who found it:</b> Claude. <b>Status:</b> fixed.</span></div>
+      <div class="conv"><b>Stale destination folder</b><span><b>Was:</b> the stylesheet and the conventions both said colour copies grow in <code>ui-visual/</code>. <b>Now:</b> <code>design/</code>. <b>Who found it:</b> Claude, script. <b>Status:</b> fixed.</span></div>
+    </div>
+
+    <h3 class="pair-h">The pair that shows it</h3>
+    <div class="pair">
+      <figure><img src="screens/4.0-dashboard-was.png" alt="Node 4.0 Dashboard with the old sticky top strip"><figcaption><b>Was.</b> A sticky top strip: the node, the current state, chips for the sibling states. It answered "which state am I in" and nothing else, so in a product of 47 screens the reader could not tell where this screen sat.</figcaption></figure>
+      <figure><img src="screens/4.0-dashboard-now.png" alt="Node 4.0 Dashboard with the wireframe navigator rail"><figcaption><b>Now.</b> A left rail: the IA cluster tree, the screen with its muted node number, an accordion open only on the current node, and a cross-link to the IA specification. On mobile the same panel is a top bar that opens downward.</figcaption></figure>
+    </div>
+  </section>
+
+  <footer>
+    <p>Brio - Wireframes (Stage 04) - All screens and coverage. Grey clickable prototype; color arrives at Concept (stage 06) on copies in design/. Sources: ia/docs/sitemap.md, ia/docs/flows.md, wireframes/docs/screens.md.</p>
+    <p style="margin-top:8px;"><a href="https://github.com/sergiodesign4u-dot/brio">github.com/sergiodesign4u-dot/brio</a></p>
+  </footer>
+</main>
+
+<script src="_nav.js"></script>
+<script>
+
+  (function () {
+    var WF = window.BRIO_WF;
+    var byNum = {};
+    WF.screens.forEach(function (s) { byNum[s.num] = s; });
+
+    function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+
+    /* Counter */
+    var built = WF.screens.filter(function (s) { return s.status === 'built'; });
+    var pages = built.reduce(function (n, s) { return n + (s.states.length || 1); }, 0);
+    var c = document.getElementById('counter');
+    c.appendChild(el('span', null, '')).appendChild(document.createTextNode(''));
+    var b1 = el('span'); b1.innerHTML = '<b>' + built.length + '</b> of ' + WF.screens.length + ' screens built';
+    var b2 = el('span'); b2.innerHTML = '<b>' + pages + '</b> state pages';
+    var b3 = el('span'); b3.innerHTML = '<b>' + (WF.screens.length - built.length) + '</b> in spec';
+    c.innerHTML = '';
+    c.appendChild(b1); c.appendChild(el('span', null, '/')); c.appendChild(b2); c.appendChild(el('span', null, '/')); c.appendChild(b3);
+
+    /* Chips for one screen */
+    function chipsFor(s) {
+      var wrap = el('div', 'chips');
+      if (s.status === 'built' && s.states.length) {
+        s.states.forEach(function (st, i) {
+          var a = el('a', 'chip built' + (i === 0 ? ' base' : ''), st.s);
+          a.href = st.f; wrap.appendChild(a);
+        });
+      } else if (s.states.length) {
+        s.states.forEach(function (st, i) {
+          wrap.appendChild(el('span', 'chip spec' + (i === 0 ? ' base' : ''), st.s));
+        });
+      } else {
+        wrap.appendChild(el('span', 'chip spec base', 'states at Step 8'));
+      }
+      return wrap;
+    }
+
+    /* Flow entries */
+    var fe = document.getElementById('flow-entries');
+    WF.flows.forEach(function (f) {
+      var card = el('div', 'flow-card'); card.id = f.id;
+      var head = el('div', 'flow-head');
+      head.appendChild(el('span', 'flow-badge', f.n));
+      head.appendChild(el('span', 'flow-name', f.label));
+      head.appendChild(el('span', 'flow-meta', f.persona + ' - ' + f.job));
+      card.appendChild(head);
+      card.appendChild(el('div', 'flow-note', f.note));
+      f.screens.forEach(function (num) {
+        var s = byNum[num]; if (!s) return;
+        var row = el('div', 'scr');
+        row.appendChild(el('span', 'scr-num', num));
+        row.appendChild(el('span', 'scr-name', s.name));
+        row.appendChild(chipsFor(s));
+        var spec = el('a', 'scr-spec', s.status === 'built' ? 'open' : 'view IA');
+        spec.href = s.status === 'built' ? s.file : '../ia/' + s.ia;
+        row.appendChild(spec);
+        card.appendChild(row);
+      });
+      fe.appendChild(card);
+    });
+
+    /* Coverage map by cluster */
+    var cm = document.getElementById('coverage-map');
+    var clusters = {};
+    WF.screens.forEach(function (s) { var k = s.num.split('.')[0]; (clusters[k] = clusters[k] || []).push(s); });
+    Object.keys(clusters).sort(function (a, b) { return (+a) - (+b); }).forEach(function (k) {
+      var group = clusters[k];
+      var nb = group.filter(function (s) { return s.status === 'built'; }).length;
+      var block = el('div', 'cov-cluster');
+      var h = el('div', 'cov-h', 'Cluster ' + k + ' - ' + (WF.clusters[k] || '') + '  ');
+      var count = el('b', null, '(' + nb + '/' + group.length + ' built)');
+      h.appendChild(count); block.appendChild(h);
+      var grid = el('div', 'cov-grid');
+      group.forEach(function (s) {
+        var isBuilt = s.status === 'built';
+        var t = el('a', 'tile ' + (isBuilt ? 'built' : 'spec'));
+        t.href = isBuilt ? s.file : '../ia/' + s.ia;
+        t.appendChild(el('span', 'tile-num', s.num));
+        t.appendChild(el('span', 'tile-name', s.name));
+        t.appendChild(el('span', 'tile-tag', isBuilt ? (s.states.length || 1) + ' pg' : 'IA'));
+        grid.appendChild(t);
+      });
+      block.appendChild(grid);
+      cm.appendChild(block);
+    });
+  })();
+</script>
+
+<script>
+  window.NAV_BASE = '../';
+  window.NAV_SECTIONS = [{"id":"top","label":"Wireframes"},{"id":"flows","label":"Enter by flow"},{"id":"coverage","label":"Coverage map"}, {"id":"conventions","label":"The grey contract"}, {"id":"wasnow","label":"Was to now"}];
+</script>
+<script src="../_nav.js"></script>
+
+</body>
+</html>

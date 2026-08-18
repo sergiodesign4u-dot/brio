@@ -1,6 +1,6 @@
 # Wireframes - Screen x State Matrix (Stage 04)
 
-*Phase: Wireframes. The order for the grey clickable prototype. This file is not a wireframe: no layout here, only screen names, jobs, flow places, and states. Every row traces to a node in ia/docs/sitemap.md, a job in user-research/docs/jtbd.md, and a place in ia/docs/flows.md. States are taken verbatim from the "States" section of each node's spec in ia/docs/pages/. Nothing is invented: a state not in the IA spec is not a column. This step covers the MAIN flow (Flow 1) only; Step 8 extends the matrix to Flows 2 to 4 and the rest of the sitemap.*
+*Phase: Wireframes. The order for the grey clickable prototype. This file is not a wireframe: no layout here, only screen names, jobs, flow places, and states. Every row traces to a node in ia/docs/sitemap.md, a job in research/docs/jtbd.md, and a place in ia/docs/flows.md. States are taken verbatim from the "States" section of each node's spec in ia/docs/pages/. Nothing is invented: a state not in the IA spec is not a column. This step covers the MAIN flow (Flow 1) only; Step 8 extends the matrix to Flows 2 to 4 and the rest of the sitemap.*
 
 ---
 
@@ -18,7 +18,7 @@
 
 | # | Screen (node) | Job it closes | Place in Flow 1 | Viewports |
 |---|---------------|---------------|-----------------|-----------|
-| 1 | **0.0 Home** (`home.html`) | Main + item 1 (acquisition) | Entry (Landing) | 360 + desktop |
+| 1 | **0.0 Home** (`index.html`) | Main + item 1 (acquisition) | Entry (Landing) | 360 + desktop |
 | 2 | **2.0 Sign up** (`signup.html`) | item 1 (self-serve start) | Landing to Sign up to Company setup | 360 + desktop |
 | 3 | **3.0 Company setup** (`onboarding-company.html`) | J6 (size drives the pre-selected program) | Wizard step 1 of 3 | 360 + desktop |
 | 4 | **3.1 First program confirm** (`onboarding-program.html`) | Main + J6 + item 2 | Wizard step 2 of 3 | 360 + desktop |
@@ -50,9 +50,9 @@
 
 ## State to wireframe file (Flow 1)
 
-*Every state is a separate page so the prototype can navigate between states. Base file = the node basename from ia/docs/sitemap.md; state files add a suffix. Counts feed the index.html coverage map at Step 3.*
+*Every state is a separate page so the prototype can navigate between states. Base file = the node basename from ia/docs/sitemap.md; state files add a suffix. Counts feed the overview.html coverage map at Step 3.*
 
-- **0.0 Home:** `home.html` (guest base), `home-operator.html` (returning operator), `home-owner.html` (owner CTA variant).
+- **0.0 Home:** `index.html` (guest base), `home-operator.html` (returning operator), `home-owner.html` (owner CTA variant).
 - **2.0 Sign up:** `signup.html` (default), `signup-error.html` (validation and email taken), `signup-loading.html` (submitting).
 - **3.0 Company setup:** `onboarding-company.html` (default), `onboarding-company-error.html` (save failed), `onboarding-company-loading.html` (saving).
 - **3.1 First program confirm:** `onboarding-program.html` (resolved), `onboarding-program-loading.html` (pre-select), `onboarding-program-error.html` (pre-select failed).
@@ -74,7 +74,7 @@
 
 ## Full coverage - all flows and the rest of the sitemap (Steps 6 to 9)
 
-*Step 1 above defines the Flow 1 matrix in full. Steps 6 to 8 built the rest; every screen state below is taken from its node IA "States" section (ia/docs/pages/), nothing invented. The live, always-current matrix is the coverage map in index.html (rendered from _nav.js). Totals: 47 of 47 screens built, 99 state pages, 0 in spec.*
+*Step 1 above defines the Flow 1 matrix in full. Steps 6 to 8 built the rest; every screen state below is taken from its node IA "States" section (ia/docs/pages/), nothing invented. The live, always-current matrix is the coverage map in overview.html (rendered from _nav.js). Totals: 47 of 47 screens built, 99 state pages, 0 in spec.*
 
 | Cluster | Screen (node) | State pages |
 |---|---|---|
