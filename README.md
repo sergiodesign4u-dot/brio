@@ -18,6 +18,8 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 - **Wireframes - All screens:** https://sergiodesign4u-dot.github.io/brio/wireframes/overview.html
 - **Wireframes - Product home:** https://sergiodesign4u-dot.github.io/brio/wireframes/index.html
 - **Voice:** https://sergiodesign4u-dot.github.io/brio/voice/voice.html
+- **Concept - Directions:** https://sergiodesign4u-dot.github.io/brio/design/concept/directions.html
+- **Concept - The stand:** https://sergiodesign4u-dot.github.io/brio/design/concept/concept.html
 
 ---
 
