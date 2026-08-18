@@ -73,11 +73,28 @@ Recorded and not chosen, so we can return to them: **Instrument Sans** for displ
 
 Numbers carry meaning in this product (the pulse score, participation, trend), so figures are set tabular. Inter provides them, and they are switched on in the concept stand with `font-feature-settings: "tnum"`. Origin: attribute A4 (a number never stands bare) and `voice.md` P1.
 
+### The scale, as it ships
+
+Sizes live as variables in `design/_theme.css` and the coloured screens read them, so this table and the product cannot drift apart silently. Origin of the scale: the character of plate A plus what the etalon and the check-in actually needed; each value was set once and reused.
+
+| Token | Value | Where it is used |
+|---|---|---|
+| `--size-display` | clamp 26 to 34 | the page h1 |
+| `--size-read` | clamp 30 to 40 | the pulse read, the one word that answers the question |
+| `--size-metric` | 24 | participation, the one number |
+| `--size-state-title`, `--size-brand` | 20 | a state heading, and the wordmark |
+| `--size-body` | 16 | running text |
+| `--size-ui`, `--size-h2` | 15 | controls, the privacy line, a card heading |
+| `--size-nav`, `--size-label` | 14 | app bar, form label, the unit beside a metric |
+| `--size-micro`, `--size-eyebrow` | 13 | the quiet line, and the label above a heading |
+| `--size-tabbar` | 12 | the mobile bottom bar |
+| `--size-tag` | 11 | the alert tag, the smallest type in the language |
+
 ---
 
 ## Icon language
 
-- **One weight, geometric, rounded joins, roughly 2px stroke at 24px.** Origin: plate A, icon zone, measured on the shape rather than the caption.
+- **One weight, geometric, rounded joins, stroke 1.5 on the 24px grid.** Origin: plate A, icon zone for the shape, and the Solar linear drawing for the stroke. Corrected at stage 06 step 8: this line first said "roughly 2px", read off the plate by eye, while every icon actually shipped is Solar linear at 1.5. The drawing is the evidence, the estimate was not.
 - **Two tones of one accent:** the line in the action blue, the fill in the soft accent. No third colour, no gradients. Origin: plate A, icon zone, plus attribute A3.
 - **Vocabulary already present on the plate:** shield, lock, people, pulse, check, trend, message, hidden eye. It maps one to one onto the product's own concepts (privacy, team, pulse, confirmation, trend, invitation, what is not shown). Origin: plate A, icon zone, checked against `ia/docs/` node specs.
 
@@ -102,6 +119,12 @@ Named out loud, because the plate is raw material and not a contract, and becaus
 1. **"Your privacy is our priority" does not ship.** It is a promise, and attribute A2 with `voice.md` P2 both require the mechanism to be shown instead: aggregate only, minimum of 5, no live count. The screens carry the owner CAN and CANNOT panel and the pre-check-in disclosure, which plate A does not show and plates D and E do. Origin: attribute A2, `voice.md` P2.
 2. **The stock meeting photograph does not ship.** Origin: attribute A5, which rejects stock smiles as explicitly as it rejects blobs.
 3. **The generic blue is a live risk, accepted knowingly.** `docs/decisions.md` D-13 says a palette that can be guessed from the category is a reflex rather than a decision, and a cornflower blue SaaS accent is close to that line. It is taken anyway by decision of the user, and the differentiation therefore has to be carried by the mechanism zones and the restraint, not by hue. If the accent later reads as anonymous, the honest fix is to shift the blue, not to add a second colour.
+
+---
+
+## Where the values live
+
+At stage 06 there is exactly one file that holds a value: **`design/_theme.css`**. This document is its written record and the two must agree; the concept stand at `design/concept/concept.html` shows the same values live. A value changed in one of the three and not in the other two is a defect, and it is the first thing stage 08 will audit. Stage 07 moves `_theme.css` to `design/kit/kit.css` unchanged, which is why the names are already in their final form.
 
 ---
 

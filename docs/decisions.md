@@ -123,3 +123,41 @@
 **Why:** the strategic dimension named at stage 01 is employee trust in the aggregate-only model, made visible in the UI. A wellness look undercuts that on sight.
 
 **Rejected:** the category reflex - cream, sage, rounded blobs, soft illustration. It can be guessed from the category without looking at a single line of our data, which is the definition of a model reflex rather than a decision.
+
+---
+
+## D-14 - Brand plate A, chosen with its risk named
+
+**Decided:** stage 06, step 3, by the user, 18 August 2026. Six plates were generated in two rounds; A is the base.
+
+**Why A:** a light airy surface, one blue accent used only for action, soft cards, real photography. It answers A1 (calm, not clinical), A3 (one accent as the single interactive colour) and A5 (human rather than faceless), and it sits closest to Signal, the base direction confirmed at step 1.
+
+**The risk, accepted knowingly:** a cornflower blue accent sits near the category reflex D-13 warns about. The differentiation is therefore carried by the mechanism zones and by restraint, not by hue. If the accent ever reads as anonymous, the honest fix is to shift the blue, not to add a second colour.
+
+**Rejected, and why:** B, indigo and uppercase, enterprise theatre. C, amber on the primary action reads as a warning. D, light teal, the strongest rival, kept as the source of the alert colour. E, graphite, a dark base where the base is fixed light; available later as a dark register. F, plum and moss, editorial and half a step back toward the wellness palette.
+
+**Also decided here:** two things on plate A do not ship. Its headline "Your privacy is our priority" is a promise where A2 requires the mechanism to be shown, and its stock meeting photograph is the stock smile A5 rejects.
+
+---
+
+## D-15 - Layout direction 02, the working desk
+
+**Decided:** stage 06, step 5. Two columns: the pulse, the participation, the privacy line and the next program on one screen without scrolling.
+
+**Why:** it is the composition the operator lives in weekly, and the owner review is meant to take two minutes. A4 survives the density because the read and the next step stay inside the pulse card and never split into a bare metric tile.
+
+**The standing constraint that comes with it:** density is the shortest path to the clinical feel A1 rules out, so every row added to the rail has to earn its place.
+
+**Rejected, and kept:** 01, a single wide column, is calmer but pushes participation and the privacy line below the fold on the screen used weekly. It remains the right shape for the employee check-in, where there is one question and one action. 03, the evidence band, expresses A2 most strongly, but a permanent proof panel competes with the one main action per screen; its panel survives as a pattern on the privacy surfaces.
+
+---
+
+## D-16 - There is no success colour in this language
+
+**Decided:** stage 06, steps 6 to 8, while colouring the confirmation screens.
+
+**Decided:** Brio has an alert colour and no success colour. A confirmation states the fact in ink and in the soft accent, and never celebrates.
+
+**Why:** voice principle P3, honest signals and never flattering ones. A green success state is the product congratulating itself for a person answering one question about a hard week. The same reasoning removed the coloured bar down the side of the alert banner: a dip is marked by the warning icon and the tag, then described in words.
+
+**Consequence:** the only semantic colour in the palette is the alert red, and it is still a candidate carried from plate D. It is fixed for good at stage 07, where every error state lives.

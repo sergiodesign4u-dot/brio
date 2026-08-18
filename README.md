@@ -37,7 +37,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 | Information Architecture (Base + Detail) | Done (Base Layer: flows.html + concept-map.html. Detail Layer: sitemap.html + structure.html + all node specs in ia/docs/pages/ + ia/<node>.html) |
 | Wireframes | Done. Grey clickable prototype of the whole product: overview.html (all-screens hub + coverage map), index.html (product home), 47 of 47 screens, 99 state pages, shared grey _wf.css. Every internal link resolves; greyscale and one-H1 clean; audited in wireframes/docs/critique.md. |
 | Voice | Done. The rules by which Brio speaks, applied to all 99 screens. voice/docs/voice.md (tone, five principles, dictionary, forbidden, microcopy rules), voice/docs/microcopy.md (full text inventory with was/now), voice/voice.html. Only text changed, never markup. |
-| Concept | In progress. Brand plate A chosen and layout direction 02 chosen. Root DESIGN-artifacts.md holds the brand with an origin on every value: palette sampled from the pixels of the plate, Inter Tight and Inter, icon language, UI tone. design/concept/directions.html shows the three layout directions; design/concept/concept.html is the stand (language live, attributes, palette with measured contrast, typography, shape, photography, icons, brand and references, three components). design/_theme.css carries the coloured layer with an origin comment on every variable, and fifteen coloured copies live in design/: the etalon 4.0 Dashboard with all six of its states, and the contrasting employee check-in, cluster 10, with all eight of its screens. A normalised diff reports zero structural drift from the grey originals. Remaining: the closing critique in two instruments. |
+| Concept | Done. The visual language, proven on the screen rather than described in a table. Brand plate A and layout direction 02 chosen; root DESIGN-artifacts.md holds the brand with an origin on every value; design/concept/ carries the references, the attributes, the three layout directions and the concept stand; design/_theme.css is the single place a value lives; 15 coloured copies in design/ (4.0 Dashboard with six states, the employee check-in with eight screens) with zero structural drift from the grey originals. Critique in two instruments plus the mechanical detector, log in design/concept/docs/critique.md, summary on the stand. |
 | UI + Visual | Not started |
 | Tokens + Components | Not started |
 | Design System | Not started |
@@ -46,6 +46,17 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 | Handoff | Not started |
 
 ---
+
+## Concept, the visual language
+
+Brio looks like a privacy product, not a wellness brand. That is the argument of stage 06, and every value traces back to it or it is not there.
+
+- **Brand:** plate A of six, generated in two rounds. The palette is sampled from the pixels of the image, not from the captions printed on it, and where the two disagreed the pixel won. Six values: paper `#F7F8FC`, surface `#FFFFFF`, ink `#1D1D1D`, soft accent `#A4BEF3`, action `#346FEC`, muted `#5B6171`. One accent, and only for action.
+- **Type:** Inter Tight for display, Inter for body, chosen against the character of the plate rather than copied from a name drawn on it.
+- **Layout:** direction 02, the working desk, the composition the operator lives in weekly.
+- **Where a value lives:** `design/_theme.css` and nowhere else. `DESIGN-artifacts.md` is its written record, the concept stand is its live one, and stage 07 moves the file to `design/kit/kit.css` unchanged.
+- **What is proven on a real screen:** the etalon 4.0 Dashboard with all six states, and the employee check-in with all eight, as coloured copies. `wireframes/` stays grey and untouched, and a normalised diff of every copy against its original reports zero structural drift.
+- **What is not:** photography never reached a product screen, because adding an image means adding an element and a copy owns the visual layer alone. Attribute A5 is proven on the stand only, and the first product screen with a real photograph belongs to stage 07.
 
 ## People
 

@@ -71,7 +71,7 @@ td b{font-weight:600}
 
 /* shared product pieces, identical to directions.html */
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:15px;font-weight:500;
-  line-height:1;padding:12px 18px;border-radius:var(--r-control);border:1px solid var(--line-strong);
+  line-height:1;padding:12px 20px;min-height:44px;border-radius:var(--r-control);border:1px solid var(--line-strong);
   background:var(--surface);color:var(--ink);text-decoration:none;cursor:pointer}
 .btn.solid{background:var(--action);border-color:var(--action);color:#fff}
 .btn.small{padding:9px 14px;font-size:14px}
@@ -87,6 +87,7 @@ td b{font-weight:600}
 .privacy svg{color:var(--action)}
 .spark{display:flex;align-items:flex-end;gap:8px;height:56px}
 .spark span{flex:1;max-width:18px;min-width:10px;background:var(--accent-soft);border-radius:3px 3px 0 0}
+.d-mobile{display:none}
 .spark span.hi{background:var(--action)}
 .metric{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em}
 .metric small{font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--muted);letter-spacing:0}
@@ -94,29 +95,29 @@ svg.i{width:20px;height:20px;flex:none}
 
 /* LANGUAGE LIVE - the chosen composition, direction 02 */
 .frame{margin-top:24px;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:clamp(14px,2.4vw,24px)}
-.appbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--r-card);padding:10px 12px;margin-bottom:16px}
-.appbar .wm{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.03em;margin-right:10px}
-.tab{display:inline-flex;align-items:center;gap:7px;font-size:14px;padding:8px 12px;border-radius:var(--r-control);
-  color:var(--muted);text-decoration:none}
-.tab.on{background:var(--accent-soft);color:var(--ink);font-weight:600}
+.appbar{display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:var(--surface);
+  border-bottom:1px solid var(--line);padding:16px 20px;margin:0 0 16px}
+.appbar .wm{font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-.03em;margin-right:10px}
+.tab{display:inline-flex;align-items:center;gap:7px;font-size:14px;padding:12px 0 8px;color:var(--muted);text-decoration:none}
+.tab.on{color:var(--ink);font-weight:600;border-bottom:2px solid var(--action)}
 .tab.on svg{color:var(--ink)}
 .two{display:grid;gap:16px;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}
 .two .stack{display:grid;gap:16px}
-.pulse{padding:20px}
-.pulse .read{font-size:36px;margin-top:6px}
+.pulse{padding:28px}
+.pulse .read{font-size:clamp(30px,4vw,40px);margin-top:6px}
 .pulse .interp{margin-top:8px;font-size:15px;color:var(--muted)}
 .pulse .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 .pulse .row .eyebrow{margin-right:auto}
-.prog{display:grid;grid-template-columns:132px minmax(0,1fr);gap:16px;padding:16px}
+.prog{display:grid;grid-template-columns:132px minmax(0,1fr);gap:16px;padding:20px}
 .prog img{width:132px;height:132px;object-fit:cover;border-radius:10px}
 .prog h3{font-size:18px;margin-top:8px}
 .prog p{margin-top:6px;font-size:14px;color:var(--muted)}
-.facts{padding:18px;display:grid;gap:12px}
-.facts .metric{font-size:22px}
+.facts{padding:20px;display:grid;gap:12px}
+.facts .metric{font-size:24px}
 .kv{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:8px 0;border-top:1px solid var(--line)}
 .kv span:last-child{font-weight:600}
-.strip{padding:16px 18px}
+.strip{padding:20px}
+.strip .privacy{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-control);padding:12px 16px;gap:12px}
 
 /* PALETTE */
 .swatches{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));margin-top:22px}
@@ -185,6 +186,15 @@ svg.i{width:20px;height:20px;flex:none}
 .vbadge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 10px;
   border-radius:var(--r-pill);background:var(--accent-soft);color:var(--ink)}
 .vbadge svg{width:14px;height:14px}
+.pairs{display:grid;gap:20px;margin-top:22px}
+.pair{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
+.pair .shots{display:grid;gap:1px;background:var(--line);grid-template-columns:1fr 1fr}
+.pair figure{margin:0;background:var(--surface)}
+.pair img{width:100%;display:block}
+.pair figcaption{padding:8px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+.pair figcaption b{color:var(--ink)}
+.pair .why{padding:14px 16px;font-size:14px;border-top:1px solid var(--line)}
+@media (max-width:620px){.pair .shots{grid-template-columns:1fr}}
 footer.page-foot{margin-top:72px;padding-top:22px;border-top:1px solid var(--line-strong);font-size:13px;color:var(--muted)}
 
 @media (max-width:860px){ .two{grid-template-columns:minmax(0,1fr)} }
@@ -451,16 +461,19 @@ footer.page-foot{margin-top:72px;padding-top:22px;border-top:1px solid var(--lin
     <p class="lede">Inter Tight for display, Inter for body. The plate gave the character, a neutral low contrast grotesque with an even stroke and open apertures, and the pair was chosen against that character. The name printed on a generated plate proves nothing, so it was not copied.</p>
 
     <div class="scale">
-      <div class="row"><span class="spec">Display 40 / 1.08 / -.02em</span><span style="font-family:var(--font-display);font-size:40px;font-weight:700;letter-spacing:-.02em;line-height:1.08">Your team pulse</span></div>
-      <div class="row"><span class="spec">Read 36 / 1 / -.03em</span><span class="read" style="font-size:36px">Steady</span></div>
-      <div class="row"><span class="spec">Heading 22 / 1.2</span><span style="font-family:var(--font-display);font-size:22px;font-weight:600">What your owner can and cannot see</span></div>
-      <div class="row"><span class="spec">Body 16 / 1.55</span><span style="font-size:16px">The team is holding steady this week, in line with last.</span></div>
-      <div class="row"><span class="spec">Interface 15 / 1.5</span><span style="font-size:15px">Aggregate only. You never see who answered.</span></div>
-      <div class="row"><span class="spec">Micro 13 / 1.5, muted</span><span class="micro" style="font-size:13px">Holding steady over the last five cycles. Aggregate only, never who.</span></div>
-      <div class="row"><span class="spec">Eyebrow 13, .06em, caps</span><span class="eyebrow">Suggested next step</span></div>
+      <div class="row"><span class="spec">--size-display, clamp 26 to 34</span><span style="font-family:var(--font-display);font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.12">Your team pulse</span></div>
+      <div class="row"><span class="spec">--size-read, clamp 30 to 40</span><span class="read" style="font-size:40px">Steady</span></div>
+      <div class="row"><span class="spec">--size-metric, 24</span><span style="font-family:var(--font-display);font-size:24px;font-weight:600;letter-spacing:-.02em">72% <span style="font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--muted)">of the team answered</span></span></div>
+      <div class="row"><span class="spec">--size-state-title and --size-brand, 20</span><span style="font-family:var(--font-display);font-size:20px;font-weight:600;letter-spacing:-.02em">Waiting for at least 5 responses</span></div>
+      <div class="row"><span class="spec">--size-body, 16</span><span style="font-size:16px">The team is holding steady this week, in line with last.</span></div>
+      <div class="row"><span class="spec">--size-ui and --size-h2, 15</span><span style="font-size:15px">Aggregate only. You never see who answered.</span></div>
+      <div class="row"><span class="spec">--size-nav and --size-label, 14</span><span style="font-size:14px">Dashboard &nbsp; Programs &nbsp; Team &nbsp; Owner</span></div>
+      <div class="row"><span class="spec">--size-micro and --size-eyebrow, 13</span><span class="micro" style="font-size:13px">Holding steady over the last five cycles. Aggregate only, never who.</span></div>
+      <div class="row"><span class="spec">--size-tabbar, 12</span><span style="font-size:12px;color:var(--muted)">The mobile bottom bar</span></div>
+      <div class="row"><span class="spec">--size-tag, 11</span><span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">Alert</span></div>
       <div class="row"><span class="spec">Figures, tabular</span><span style="font-family:var(--font-display);font-size:24px;font-weight:600">0123456789 &nbsp; 72% &nbsp; 24 people</span></div>
     </div>
-    <p class="note">Figures are tabular, switched on with <code>font-feature-settings: "tnum"</code>. A pulse score that shifts sideways as it changes would undercut A4, where the number is the thing being read. Instrument Sans and Public Sans are recorded in <code>DESIGN-artifacts.md</code> as the pair that was considered and not chosen.</p>
+    <p class="note">Figures are tabular, switched on with <code>font-feature-settings: "tnum"</code>. A pulse score that shifts sideways as it changes would undercut A4, where the number is the thing being read. Instrument Sans and Public Sans are recorded in <code>DESIGN-artifacts.md</code> as the pair that was considered and not chosen. Every size above is a variable in <code>design/_theme.css</code>, and the screens read the same variables, so this table and the product cannot drift apart without the drift being visible here.</p>
   </section>
 
   <!-- =========================== SHAPE ============================ -->
@@ -647,6 +660,60 @@ footer.page-foot{margin-top:72px;padding-top:22px;border-top:1px solid var(--lin
     </div>
   </section>
 
+  <!-- ========================= WAS TO NOW ========================= -->
+  <section id="wasnow">
+    <p class="sec-label">10</p>
+    <h2>Was to now</h2>
+    <p class="lede">What the two instruments found, and what happened to each finding. Claude took the classes that need an eye, Codex took the classes that are proved by comparing files, and the mechanical detector ran as a third source. The sets were taken independently and in full before they were merged, because an instrument that sees the other's table starts editing instead of searching. The whole log is in <code>design/concept/docs/critique.md</code>.</p>
+
+    <div class="scroll">
+    <table>
+      <thead><tr><th style="width:26%">Class</th><th style="width:10%">Found</th><th style="width:22%">Who found it</th><th>Outcome</th></tr></thead>
+      <tbody>
+        <tr><td>Structural drift of a copy from its wireframe</td><td>0</td><td>Codex and Claude, independently</td><td>Clean on all 15 pairs, confirmed twice</td></tr>
+        <tr><td>Same component, different values</td><td>8</td><td>Codex 7, Claude 2 (one overlap)</td><td>All 8 fixed. The stand and the product now read the same numbers</td></tr>
+        <tr><td>A value written past its variable</td><td>3</td><td>Codex</td><td>All fixed. Every value in a rule now reads a variable</td></tr>
+        <tr><td>The stand disagreeing with the brand document</td><td>2</td><td>Codex 1, Claude 1</td><td>Both fixed, including one where the brand document was the one that was wrong</td></tr>
+        <tr><td>Breaks at 360</td><td>3</td><td>Claude</td><td>1 fixed, 1 partly fixed, 1 found to be deliberate</td></tr>
+        <tr><td>Accessibility</td><td>2</td><td>impeccable audit and Claude</td><td>1 fixed (touch targets), 1 accepted (a disabled control is exempt)</td></tr>
+        <tr><td>Eye and taste</td><td>4</td><td>Claude</td><td>2 fixed, 1 deferred with a reason, 1 judged not a defect</td></tr>
+        <tr><td>Contrast below AA</td><td>0</td><td>Codex and Claude, independently</td><td>Clean, confirmed twice</td></tr>
+        <tr><td>Withdrawn at verification</td><td>1</td><td>Claude</td><td>Six console 404s turned out to be an artefact of my own test harness, not of the page. The row stays in the log with the reason rather than quietly disappearing</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="pairs">
+
+      <div class="pair">
+        <div class="shots">
+          <figure><img src="screens/was-alert-360.jpg" alt="The alert screen at 360 pixels before the fix, the banner pushing the page sideways" width="360" height="720"><figcaption><b>Was.</b> 360px, horizontal scroll: scrollWidth 367 against clientWidth 345</figcaption></figure>
+          <figure><img src="screens/now-alert-360.jpg" alt="The same screen at 360 pixels after the fix, the banner wrapped onto three lines" width="360" height="720"><figcaption><b>Now.</b> 345 against 345. The banner wraps, the action takes its own line</figcaption></figure>
+        </div>
+        <p class="why">The defect was introduced by an earlier fix: the warning icon added at step 6 made the banner row unbreakable. This is exactly why the taxonomy is run again after the edits, and why 360 is measured rather than eyeballed.</p>
+      </div>
+
+      <div class="pair">
+        <div class="shots">
+          <figure><img src="screens/was-stand-live.jpg" alt="The stand before alignment, with a bordered app bar, a smaller read and a white privacy strip" width="1100" height="880"><figcaption><b>Was.</b> The stand had its own numbers: read 36, card 18, wordmark 18, a bordered bar, a white strip</figcaption></figure>
+          <figure><img src="screens/now-stand-live.jpg" alt="The stand after alignment, identical to the coloured product screen" width="1100" height="880"><figcaption><b>Now.</b> The same nine values as the product: read 40, card 20, wordmark 20, a bottom rule, the strip on paper</figcaption></figure>
+        </div>
+        <p class="why">Eight of these came from Codex, which compares files rather than looking at screens. A stand that quietly drifts from the product is the worst kind of documentation: it is believed.</p>
+      </div>
+
+      <div class="pair">
+        <div class="shots">
+          <figure><img src="screens/was-see.jpg" alt="The proof disclosure before the fix, a row of text with no sign that it opens" width="960" height="80"><figcaption><b>Was.</b> The one place where the promise becomes proof, with nothing to say it opens</figcaption></figure>
+          <figure><img src="screens/now-see.jpg" alt="The same disclosure after the fix, with a chevron in the action colour" width="960" height="80"><figcaption><b>Now.</b> A Solar chevron in the action colour, turning on open, drawn from CSS so the markup is untouched</figcaption></figure>
+        </div>
+        <p class="why">Attribute A2 is proof shown rather than privacy promised. Proof that nobody opens is a promise again.</p>
+      </div>
+
+    </div>
+
+    <p class="note">Two lines are not green, and they are named rather than counted away. The <code>critique</code> playbook was not run as a separate scored review: its classes were covered by hand and by Codex, and that is recorded in the contract checklist instead of being claimed. And neither coloured screen carries a photograph, so attribute A5 is proven on the stand only: adding an image means adding an element, and a copy owns the visual layer alone. The first product screen with a real photograph belongs to stage 07.</p>
+  </section>
+
   <footer class="page-foot">
     <p><b>Brio, stage 06 Concept.</b> The visual language, proven on the screen rather than described in a table.</p>
     <p style="margin-top:6px">Values: <code>DESIGN-artifacts.md</code>. Attributes and taste: <code>design/concept/docs/concept.md</code>. References: <code>design/concept/docs/references.md</code>. Layout directions: <a href="directions.html">directions.html</a>. Text: <code>voice/docs/voice.md</code>.</p>
@@ -666,7 +733,8 @@ footer.page-foot{margin-top:72px;padding-top:22px;border-top:1px solid var(--lin
     {"id":"photo","label":"Photography"},
     {"id":"icons","label":"Icons"},
     {"id":"brand","label":"Brand and references"},
-    {"id":"components","label":"Components"}
+    {"id":"components","label":"Components"},
+    {"id":"wasnow","label":"Was to now"}
   ];
 </script>
 <script src="../../_nav.js"></script>

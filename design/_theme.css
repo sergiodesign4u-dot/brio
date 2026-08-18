@@ -40,6 +40,7 @@
   --radius-card: 16px;
   --radius-pill: 999px;
   --radius-sm: 4px;
+  --radius-bar: 3px;              /* one spark bar, the smallest shape in the language */
 
   /* ---- space: 4px step, attribute A3, restraint carried by rhythm ---- */
   --space-1: 4px;
@@ -57,12 +58,47 @@
   /* ---- size: the scale published on the concept stand ---- */
   --size-display: clamp(26px, 3.4vw, 34px);
   --size-read: clamp(30px, 4vw, 40px);
+  --size-state-title: 20px;   /* the heading of a state block, one step under the page h1 */
+  --size-brand: 20px;         /* the wordmark, plate A identity zone */
   --size-h2: 15px;
   --size-body: 16px;
   --size-ui: 15px;
+  --size-metric: 24px;        /* participation, the one number on the dashboard */
+  --size-nav: 14px;           /* app bar tabs and settings */
+  --size-label: 14px;         /* form label, and the unit beside a metric */
   --size-micro: 13px;
   --size-eyebrow: 13px;
+  --size-tabbar: 12px;        /* the mobile bottom bar, one step under micro */
+  --size-tag: 11px;           /* the alert tag, the smallest type in the language */
+  --size-badge-glyph: 26px;   /* the check or exclamation inside an outcome badge */
+
+  /* ---- geometry: shapes rather than spacing, measured on the plate or on the wireframe ---- */
+  --size-icon: 20px;          /* the icon square in a strip or a banner */
+  --size-icon-sm: 16px;       /* the icon square in a micro line */
+  --size-icon-lg: 24px;       /* the Solar drawing grid */
+  --size-badge-box: 56px;     /* outcome badge, carried from the wireframe */
+  --size-spark: 56px;         /* the trend spark, five cycles */
+  --size-bar: 18px;           /* one bar of the spark */
+  --size-skel-line: 14px;     /* a line of loading skeleton */
+  --size-skel-block: 52px;    /* a block of loading skeleton */
+  --size-skel-act: 190px;     /* the skeleton standing in for a button */
+  --size-control-h: 40px;     /* the height a control occupies while loading */
+  --size-content: 1140px;     /* the product content column */
+  --size-narrow: 480px;       /* the focused single column, employee check-in */
+  --size-rail: 220px;         /* the shared roadmap rail on desktop */
+  --size-rail-bar: 52px;      /* the shared roadmap bar on mobile */
+  --size-touch: 44px;         /* the smallest comfortable pointer target, WCAG 2.5.5 */
+
+  /* ---- space: additions for the two icon insets, derived from the icon size ---- */
+  --space-icon-inset: 42px;      /* icon 20 plus the gutters on both sides */
+  --space-icon-inset-sm: 26px;   /* icon 16 plus one gutter */
+  --space-icon-stack: 34px;      /* an icon standing above a centred heading */
 }
+
+/* Deliberate literals, and the only ones allowed in a rule below: hairlines (1px and
+   2px borders and outlines), percentages, the underline offset, and the media query
+   breakpoints. Breakpoints are not a decision of this stage: stage 10 owns responsive
+   and will name them. Everything else reads a variable. */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -83,24 +119,24 @@ img { display: block; max-width: 100%; }
    outside .wf-screen so the screen markup stays comparable to the grey one.
 ==================================================================== */
 .dz-strip {
-  position: sticky; top: 52px; z-index: 40;   /* the shared roadmap bar is fixed above it on mobile */
+  position: sticky; top: var(--size-rail-bar); z-index: 40;   /* the shared roadmap bar is fixed above it on mobile */
   display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-line-strong);
-  font-size: 12px;
+  font-size: var(--size-tabbar);
 }
 .dz-strip .dz-id { font-family: var(--font-display); font-weight: 600; letter-spacing: -.01em; margin-right: var(--space-2); }
-.dz-strip a { color: var(--color-muted); text-decoration: none; padding: 4px 10px; border-radius: var(--radius-pill); border: 1px solid transparent; }
+.dz-strip a { color: var(--color-muted); text-decoration: none; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); border: 1px solid transparent; }
 .dz-strip a:hover { color: var(--color-ink); border-color: var(--color-line-strong); }
 .dz-strip a.on { color: var(--color-ink); background: var(--color-accent-soft); font-weight: 600; }
 .dz-strip .dz-out { margin-left: auto; border: 1px solid var(--color-line-strong); }
 @media (max-width: 700px) { .dz-strip .dz-out { margin-left: 0; } }
 /* mobile: the roadmap is a fixed 52px bar across the top, so the page starts below it.
    desktop: the roadmap is a 220px left rail, so the page starts to the right of it. */
-body { padding-top: 52px; }
+body { padding-top: var(--size-rail-bar); }
 @media (min-width: 900px) {
-  body { padding-top: 0; padding-left: 220px; }
+  body { padding-top: 0; padding-left: var(--size-rail); }
   .dz-strip { top: 0; }
 }
 
@@ -111,23 +147,23 @@ body { padding-top: 52px; }
 main { padding: 0; }
 /* the screen fills the viewport so the app footer sits at the bottom of the page
    rather than stranded halfway down a short state */
-.wf-screen { width: 100%; min-height: calc(100vh - 42px); display: flex; flex-direction: column; }
+.wf-screen { width: 100%; min-height: calc(100vh - var(--space-icon-inset)); display: flex; flex-direction: column; }
 .wf-screen .wf-content { flex: 1 0 auto; }
 
 /* operator app shell: brand, job tabs, settings */
 .wf-appbar { border-bottom: 1px solid var(--color-line); background: var(--color-surface); }
-.wf-appbar-inner { max-width: 1140px; margin: 0 auto; display: flex; align-items: center; gap: 22px; padding: 15px var(--space-5); }
-.wf-brand { font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -.03em; color: var(--color-ink); }
-.wf-tabs { display: flex; gap: 22px; }
+.wf-appbar-inner { max-width: var(--size-content); margin: 0 auto; display: flex; align-items: center; gap: var(--space-5); padding: var(--space-4) var(--space-5); }
+.wf-brand { font-family: var(--font-display); font-weight: 700; font-size: var(--size-brand); letter-spacing: -.03em; color: var(--color-ink); }
+.wf-tabs { display: flex; gap: var(--space-5); }
 .wf-appbar-inner .sp { margin-left: auto; }
-.wf-tab { font-size: 14px; color: var(--color-muted); text-decoration: none; padding-bottom: 3px; }
+.wf-tab { font-size: var(--size-nav); color: var(--color-muted); text-decoration: none; padding: var(--space-3) 0 var(--space-2); }
 a.wf-tab:hover { color: var(--color-ink); }
 .wf-tab.on { color: var(--color-ink); font-weight: 600; border-bottom: 2px solid var(--color-action); }
-.wf-settings { font-size: 14px; color: var(--color-muted); text-decoration: none; }
+.wf-settings { font-size: var(--size-nav); color: var(--color-muted); text-decoration: none; padding: var(--space-3) 0; }
 a.wf-settings:hover { color: var(--color-ink); }
 
 /* content column and headings */
-.wf-content { max-width: 1140px; margin: 0 auto; padding: var(--space-6) var(--space-5) var(--space-7); }
+.wf-content { max-width: var(--size-content); margin: 0 auto; padding: var(--space-6) var(--space-5) var(--space-7); }
 .wf-screen h1 { font-family: var(--font-display); font-size: var(--size-display); font-weight: 700; line-height: 1.12; letter-spacing: -.02em; margin-bottom: var(--space-1); }
 .wf-screen h2 { font-family: var(--font-display); font-size: var(--size-h2); font-weight: 600; margin: 0 0 var(--space-3); }
 .wf-eyebrow { font-size: var(--size-eyebrow); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-muted); margin-bottom: var(--space-1); }
@@ -147,13 +183,13 @@ a.wf-settings:hover { color: var(--color-ink); }
 
 /* app footer */
 .wf-appfoot { border-top: 1px solid var(--color-line); background: var(--color-surface); }
-.wf-appfoot-inner { max-width: 1140px; margin: 0 auto; display: flex; gap: var(--space-5); flex-wrap: wrap; padding: var(--space-5); font-size: var(--size-micro); }
+.wf-appfoot-inner { max-width: var(--size-content); margin: 0 auto; display: flex; gap: var(--space-5); flex-wrap: wrap; padding: var(--space-5); font-size: var(--size-micro); }
 .wf-appfoot a { color: var(--color-muted); text-decoration: none; }
 .wf-appfoot a:hover { color: var(--color-ink); text-decoration: underline; }
 
 /* mobile bottom tab bar */
 .wf-tabbar { display: none; }
-.wf-tabbar a { flex: 1; text-align: center; padding: 11px var(--space-1); font-size: 12px; color: var(--color-muted); text-decoration: none; }
+.wf-tabbar a { flex: 1; text-align: center; padding: var(--space-3) var(--space-1); font-size: var(--size-tabbar); color: var(--color-muted); text-decoration: none; }
 .wf-tabbar a.on { color: var(--color-ink); font-weight: 600; }
 @media (max-width: 720px) {
   .wf-appbar .wf-tabs { display: none; }
@@ -164,7 +200,8 @@ a.wf-settings:hover { color: var(--color-ink); }
 .wf-btn {
   display: inline-flex; align-items: center; gap: var(--space-2);
   border: 1px solid var(--color-line-strong); border-radius: var(--radius-control);
-  padding: 12px 18px; font-size: var(--size-ui); font-weight: 500; line-height: 1;
+  padding: var(--space-3) var(--space-5); min-height: var(--size-touch);
+  font-size: var(--size-ui); font-weight: 500; line-height: 1;
   color: var(--color-ink); background: var(--color-surface);
   cursor: pointer; text-decoration: none; font-family: inherit;
 }
@@ -180,13 +217,13 @@ a.wf-btn:hover, button.wf-btn:hover { border-color: var(--color-muted); }
 
 /* ===================== pulse card, the aha ===================== */
 .wf-pulse { border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: var(--space-6); background: var(--color-surface); }
-.wf-pulse .read { font-family: var(--font-display); font-size: var(--size-read); font-weight: 700; line-height: 1.02; letter-spacing: -.03em; }
+.wf-pulse .read { font-family: var(--font-display); font-size: var(--size-read); font-weight: 700; line-height: 1; letter-spacing: -.03em; }
 .wf-pulse .interp { color: var(--color-muted); font-size: var(--size-ui); margin: var(--space-2) 0 var(--space-5); max-width: 44ch; }
 .wf-pulse .act-lbl { font-size: var(--size-eyebrow); color: var(--color-muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; margin-bottom: var(--space-2); padding-top: var(--space-4); border-top: 1px solid var(--color-line); }
 
 /* ===================== trend spark and metric ===================== */
-.wf-spark { display: flex; align-items: flex-end; gap: var(--space-2); height: 56px; margin-bottom: var(--space-3); }
-.wf-spark .bar { width: 18px; background: var(--color-accent-soft); border-radius: 3px 3px 0 0; }
+.wf-spark { display: flex; align-items: flex-end; gap: var(--space-2); height: var(--size-spark); margin-bottom: var(--space-3); }
+.wf-spark .bar { width: var(--size-bar); background: var(--color-accent-soft); border-radius: var(--radius-bar) var(--radius-bar) 0 0; }
 .wf-spark .bar.hi { background: var(--color-action); }
 /* bar heights are DATA carried by the wireframe, so they are classes here rather
    than inline styles on the copy. Same five cycles, same numbers. */
@@ -197,8 +234,8 @@ a.wf-btn:hover, button.wf-btn:hover { border-color: var(--color-muted); }
 .wf-spark .bar.h52 { height: 52%; }
 .wf-spark .bar.h55 { height: 55%; }
 .wf-spark .bar.h60 { height: 60%; }
-.wf-metric { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -.02em; }
-.wf-metric span { color: var(--color-muted); font-family: var(--font-body); font-weight: 400; font-size: 14px; letter-spacing: 0; }
+.wf-metric { font-family: var(--font-display); font-size: var(--size-metric); font-weight: 600; letter-spacing: -.02em; }
+.wf-metric span { color: var(--color-muted); font-family: var(--font-body); font-weight: 400; font-size: var(--size-label); letter-spacing: 0; }
 .wf-card .wf-metric + .wf-micro { margin-top: var(--space-2); }   /* was an inline margin */
 
 /* ===================== the privacy strip =====================
@@ -206,13 +243,13 @@ a.wf-btn:hover, button.wf-btn:hover { border-color: var(--color-muted); }
    grey original. Solar linear, one weight, the line in the action colour. */
 .wf-strip2 {
   position: relative; font-size: var(--size-ui); color: var(--color-ink);
-  padding: var(--space-3) var(--space-4) var(--space-3) 42px;
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-icon-inset);
   border: 1px solid var(--color-line); border-radius: var(--radius-control);
   background: var(--color-bg);
 }
 .wf-strip2::before {
   content: ""; position: absolute; left: var(--space-3); top: 50%; transform: translateY(-50%);
-  width: 20px; height: 20px; background-color: var(--color-action);
+  width: var(--size-icon); height: var(--size-icon); background-color: var(--color-action);
   -webkit-mask: var(--icon-shield) center / contain no-repeat;
           mask: var(--icon-shield) center / contain no-repeat;
 }
@@ -223,60 +260,83 @@ a.wf-btn:hover, button.wf-btn:hover { border-color: var(--color-muted); }
    never as a coloured bar down the side of the block: honest signals, never
    flattering ones, and never alarmist either. */
 .wf-alert {
-  display: flex; align-items: center; gap: var(--space-3);
+  display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--color-line-strong);
   border-radius: var(--radius-control); background: var(--color-surface);
   font-size: var(--size-ui); margin-bottom: var(--space-5);
 }
 .wf-alert::before {
-  content: ""; flex: none; width: 20px; height: 20px;
+  content: ""; flex: none; width: var(--size-icon); height: var(--size-icon);
   background-color: var(--color-alert);
   -webkit-mask: var(--icon-warning) center / contain no-repeat;
           mask: var(--icon-warning) center / contain no-repeat;
 }
 .wf-alert .tag {
-  font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  font-size: var(--size-tag); font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   color: var(--color-alert); border: 1px solid currentColor; border-radius: var(--radius-sm);
-  padding: 2px 7px; white-space: nowrap;
+  padding: var(--space-1) var(--space-2); white-space: nowrap;
 }
 .wf-alert .sp { margin-left: auto; }
+/* at 360 the row wraps instead of pushing the page sideways: the icon and the tag
+   hold the first line, the sentence takes the second, the action takes the third */
+@media (max-width: 520px) {
+  .wf-alert { align-items: flex-start; }
+  .wf-alert .sp { display: none; }
+  .wf-alert > span:not(.tag):not(.sp) { flex: 1 1 100%; }
+  .wf-alert .wf-btn { flex: 1 1 100%; justify-content: center; }
+}
 
 /* ===================== state blocks ===================== */
 .wf-state {
   border: 1px solid var(--color-line); border-radius: var(--radius-card);
   padding: var(--space-7) var(--space-5); text-align: center; background: var(--color-surface);
 }
-.wf-state .n { font-family: var(--font-display); font-size: 20px; font-weight: 600; letter-spacing: -.02em; margin-bottom: var(--space-2); }
+.wf-state .n { font-family: var(--font-display); font-size: var(--size-state-title); font-weight: 600; letter-spacing: -.02em; margin-bottom: var(--space-2); }
 .wf-state .sub { color: var(--color-muted); font-size: var(--size-ui); margin: var(--space-2) auto var(--space-5); max-width: 46ch; }
 
 /* The error state is the one place the alert colour touches a heading mark.
    Selected through the aria-label the grey original already carries, so the copy
    needs no extra class and the markup diff against wireframes/ stays empty. */
-[aria-label^="Could not load"] .wf-state .n { position: relative; padding-top: 34px; }
+[aria-label^="Could not load"] .wf-state .n { position: relative; padding-top: var(--space-icon-stack); }
 [aria-label^="Could not load"] .wf-state .n::before {
   content: ""; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
-  width: 24px; height: 24px; background-color: var(--color-alert);
+  width: var(--size-icon-lg); height: var(--size-icon-lg); background-color: var(--color-alert);
   -webkit-mask: var(--icon-warning) center / contain no-repeat;
           mask: var(--icon-warning) center / contain no-repeat;
 }
 
 /* ===================== loading skeletons ===================== */
-.wf-skel { background: var(--color-skeleton); border-radius: var(--radius-sm); height: 14px; margin: var(--space-2) 0; }
+.wf-skel { background: var(--color-skeleton); border-radius: var(--radius-sm); height: var(--size-skel-line); margin: var(--space-2) 0; }
 .wf-skel.w70 { width: 70%; }
 .wf-skel.w50 { width: 50%; }
 .wf-skel.w44 { width: 44%; }
-.wf-skel.tall { height: 52px; }
-.wf-pulse .wf-skel.tall + .wf-skel { margin-top: 14px; }   /* was an inline margin */
-.wf-skel.act { width: 190px; height: 40px; margin-top: var(--space-5); border-radius: var(--radius-control); }
+.wf-skel.tall { height: var(--size-skel-block); }
+.wf-pulse .wf-skel.tall + .wf-skel { margin-top: var(--space-4); }   /* was an inline margin */
+.wf-skel.act { width: var(--size-skel-act); height: var(--size-control-h); margin-top: var(--space-5); border-radius: var(--radius-control); }
+
+/* at 360 an outcome screen has to keep its action reachable without scrolling:
+   the badge and the leading paragraphs give back the space they can afford */
+@media (max-width: 520px) {
+  :root { --size-badge-box: 44px; --size-badge-glyph: 22px; }  /* the badge gives back what it can */
+  .wf-badge { margin-bottom: var(--space-3); }
+  .wf-narrow:has(> .wf-badge) > .wf-lead { margin-bottom: var(--space-3); }
+  .wf-narrow > .wf-strip2 { margin: var(--space-3) 0; }
+  .wf-content { padding: var(--space-4) var(--space-4) var(--space-6); }
+}
 
 /* ===================== icons, as data so the markup stays clean =====================
    Solar linear, 24px grid, 1.5 stroke. Inlined as data URIs and painted with
    background-color, so an icon takes the theme colour rather than carrying its own. */
 :root {
   --icon-shield: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M3 10.4167C3 7.21907 3 5.62028 3.37752 5.08241C3.75503 4.54454 5.25832 4.02996 8.26491 3.00079L8.83772 2.80472C10.405 2.26824 11.1886 2 12 2C12.8114 2 13.595 2.26824 15.1623 2.80472L15.7351 3.00079C18.7417 4.02996 20.245 4.54454 20.6225 5.08241C21 5.62028 21 7.21907 21 10.4167C21 10.8996 21 11.4234 21 11.9914C21 17.6294 16.761 20.3655 14.1014 21.5273C13.38 21.8424 13.0193 22 12 22C10.9807 22 10.62 21.8424 9.89856 21.5273C7.23896 20.3655 3 17.6294 3 11.9914C3 11.4234 3 10.8996 3 10.4167Z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9.5 12.4L10.9286 14L14.5 10'/%3E%3C/svg%3E");
+  /* Each icon is one Solar linear glyph, stroke 1.5 on the 24px grid, inlined as data.
+     Origin of every icon variable in this block, --icon-shield above included: the Solar
+     icon set, which is the icon language recorded in DESIGN-artifacts.md. --icon-chevron
+     was added at stage 06 step 8, so the proof disclosure looks openable. */
   --icon-lock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M2 16C2 13.1716 2 11.7574 2.87868 10.8787C3.75736 10 5.17157 10 8 10H16C18.8284 10 20.2426 10 21.1213 10.8787C22 11.7574 22 13.1716 22 16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H8C5.17157 22 3.75736 22 2.87868 21.1213C2 20.2426 2 18.8284 2 16Z'/%3E%3Cpath stroke-linecap='round' d='M12 14V18'/%3E%3Cpath stroke-linecap='round' d='M6 10V8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8V10'/%3E%3C/svg%3E");
   --icon-cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath stroke-linecap='round' d='M14.5 9.5L9.5 14.5M9.5 9.5L14.5 14.5'/%3E%3C/svg%3E");
+  --icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 6L15 12L9 18'/%3E%3C/svg%3E");
   --icon-warning: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M5.31171 10.7615C8.23007 5.58716 9.68925 3 12 3C14.3107 3 15.7699 5.58716 18.6883 10.7615L19.0519 11.4063C21.4771 15.7061 22.6897 17.856 21.5937 19.428C20.4978 21 17.7864 21 12.3637 21H11.6363C6.21356 21 3.50217 21 2.40626 19.428C1.31034 17.856 2.52291 15.7061 4.94805 11.4063L5.31171 10.7615Z'/%3E%3Cpath stroke-linecap='round' d='M12 8V13'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 16H12.0001'/%3E%3C/svg%3E");
 }
 
@@ -292,19 +352,19 @@ a.wf-btn:hover, button.wf-btn:hover { border-color: var(--color-muted); }
   font-size: var(--size-micro); color: var(--color-muted);
 }
 .wf-appbar-inner .wf-step::before {
-  content: ""; width: 16px; height: 16px; flex: none;
+  content: ""; width: var(--size-icon-sm); height: var(--size-icon-sm); flex: none;
   background-color: var(--color-action);
   -webkit-mask: var(--icon-lock) center / contain no-repeat;
           mask: var(--icon-lock) center / contain no-repeat;
 }
 
 /* the focused column */
-.wf-narrow { max-width: 480px; margin: 0 auto; }
+.wf-narrow { max-width: var(--size-narrow); margin: 0 auto; }
 .wf-lead { color: var(--color-muted); font-size: var(--size-ui); max-width: 60ch; margin: 0 auto var(--space-5); }
 .wf-narrow > .wf-strip2 { margin: var(--space-5) 0; }
 .wf-narrow form { margin-top: var(--space-5); }
 .wf-narrow fieldset { border: 0; padding: 0; margin: 0 0 var(--space-2); }
-.wf-narrow .wf-btns { margin-top: 14px; }
+.wf-narrow .wf-btns { margin-top: var(--space-4); }
 .wf-narrow .wf-skel + p { margin: var(--space-5) 0; }
 .wf-btn.block { display: flex; width: 100%; justify-content: center; text-align: center; }
 .wf-btn:disabled { opacity: .45; cursor: not-allowed; }
@@ -321,31 +381,33 @@ form + .wf-micro { display: block; text-align: center; margin-top: var(--space-5
 /* outcome badge. There is no success green anywhere in this language: a
    confirmation states the fact in the soft accent and never celebrates (voice P3). */
 .wf-badge {
-  width: 56px; height: 56px; border-radius: var(--radius-pill);
+  width: var(--size-badge-box); height: var(--size-badge-box); border-radius: var(--radius-pill);
   display: flex; align-items: center; justify-content: center;
-  font-size: 26px; line-height: 1; margin: 0 auto var(--space-5);
+  font-size: var(--size-badge-glyph); line-height: 1; margin: 0 auto var(--space-5);
 }
 .wf-badge.ok { background: var(--color-accent-soft); color: var(--color-ink); }  /* ink on soft accent measures 9.02 */
 .wf-badge.warn { background: var(--color-surface); color: var(--color-alert); border: 1px solid var(--color-alert); }  /* alert on white measures 6.16 */
 
 /* form primitives */
-.wf-field { display: block; margin-bottom: 14px; }
-.wf-field > .k { display: block; font-size: 14px; font-weight: 600; color: var(--color-ink); margin-bottom: 6px; }
+.wf-field { display: block; margin-bottom: var(--space-4); }
+.wf-field > .k { display: block; font-size: var(--size-label); font-weight: 600; color: var(--color-ink); margin-bottom: var(--space-2); }
 .wf-input {
   display: block; width: 100%; font: inherit; font-size: var(--size-ui);
   background: var(--color-surface); color: var(--color-ink);
   border: 1px solid var(--color-line-strong); border-radius: var(--radius-control);
-  padding: 11px 12px;
+  padding: var(--space-3) var(--space-3);
 }
 .wf-input::placeholder { color: var(--color-muted); }
 .wf-input:focus { outline: 2px solid var(--color-action); outline-offset: 1px; border-color: var(--color-action); }
 .wf-radio {
   display: flex; align-items: center; gap: var(--space-3);
   border: 1px solid var(--color-line-strong); border-radius: var(--radius-control);
-  padding: 14px var(--space-4); margin-bottom: var(--space-2);
+  padding: var(--space-4) var(--space-4); margin-bottom: var(--space-2);
   background: var(--color-surface); font-size: var(--size-ui); cursor: pointer;
 }
 .wf-radio:hover { border-color: var(--color-muted); }
+/* the chosen option carries the one interactive colour, nothing else changes */
+.wf-radio:has(input:checked) { border-color: var(--color-action); box-shadow: inset 0 0 0 1px var(--color-action); }
 .wf-radio:focus-within { outline: 2px solid var(--color-action); outline-offset: 1px; }
 input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action); }
 
@@ -358,7 +420,20 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
 
 /* "see exactly what your manager sees": the proof, shown rather than promised */
 .wf-see { border: 1px solid var(--color-line); border-radius: var(--radius-card); background: var(--color-surface); margin-bottom: var(--space-5); }
-.wf-see > summary { cursor: pointer; padding: var(--space-4); font-size: var(--size-ui); font-weight: 600; list-style: none; }
+.wf-see > summary {
+  cursor: pointer; padding: var(--space-4); font-size: var(--size-ui); font-weight: 600; list-style: none;
+  display: flex; align-items: center; gap: var(--space-3);
+}
+/* the proof has to look openable, or it is proof nobody opens */
+.wf-see > summary::before {
+  content: ""; flex: none; width: var(--size-icon); height: var(--size-icon);
+  background-color: var(--color-action);
+  -webkit-mask: var(--icon-chevron) center / contain no-repeat;
+          mask: var(--icon-chevron) center / contain no-repeat;
+  transform: rotate(0deg); transition: transform .15s ease;
+}
+.wf-see[open] > summary::before { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) { .wf-see > summary::before { transition: none; } }
 .wf-see > summary::-webkit-details-marker { display: none; }
 .wf-see > summary:focus-visible { outline: 2px solid var(--color-action); outline-offset: -2px; border-radius: var(--radius-card); }
 .wf-see[open] > summary { border-bottom: 1px solid var(--color-line); }
@@ -366,15 +441,15 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
 .wf-see .see-body .wf-card { margin-bottom: 0; }
 .wf-see .see-body .wf-micro { margin-bottom: var(--space-3); }
 .wf-see .see-body .wf-pulse { border-radius: var(--radius-control); padding: var(--space-4); }
-.wf-see .see-body .wf-spark { margin-top: 14px; }
+.wf-see .see-body .wf-spark { margin-top: var(--space-4); }
 
 /* what they never see. The cross of the icon language, not a coloured side bar. */
 .wf-cannot {
   position: relative; font-size: var(--size-micro); color: var(--color-muted);
-  padding-left: 26px; margin-top: 14px;
+  padding-left: var(--space-icon-inset-sm); margin-top: var(--space-4);
 }
 .wf-cannot::before {
-  content: ""; position: absolute; left: 0; top: 2px; width: 17px; height: 17px;
+  content: ""; position: absolute; left: 0; top: 2px; width: var(--size-icon-sm); height: var(--size-icon-sm);
   background-color: var(--color-muted);
   -webkit-mask: var(--icon-cross) center / contain no-repeat;
           mask: var(--icon-cross) center / contain no-repeat;
@@ -382,7 +457,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
 
 /* "answers saved" reassurance pill */
 .wf-saved {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: var(--space-2);
   font-size: var(--size-micro); color: var(--color-ink);
-  background: var(--color-accent-soft); border-radius: var(--radius-pill); padding: 5px 12px;
+  background: var(--color-accent-soft); border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3);
 }
