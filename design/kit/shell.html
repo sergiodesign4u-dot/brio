@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Brio - Kit: shell markup</title>
+<!-- Every path below is written the way a screen sitting flat in design/ writes it.
+     The base tag makes this file resolve them the same way, so the snippets can be
+     copied without editing and this page still works when opened on its own. -->
+<base href="../">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+</head>
+<body>
+
+<!-- ===================================================================
+     THE SHELL, AS MARKUP.
+     A kit made only of CSS cannot dress what has no skeleton, so the frame
+     lives here as copy-paste source. A coloured screen in design/ takes its
+     shell from this file: the six wireframe shells reduce to two frames plus
+     three lighter heads, because that is what the product actually carries.
+     Paths below assume a screen sitting flat in design/, so the stylesheet is
+     kit/kit.css and everything not yet coloured points at ../wireframes/.
+==================================================================== -->
+
+<main>
+
+  <!-- ============ 1. OPERATOR SHELL ============
+       97 of 99 screens carry an app bar. This is the operator one: wordmark,
+       four job tabs, settings. The bottom tab bar takes over under 720px. -->
+  <div class="wf-screen">
+    <nav class="wf-appbar" aria-label="Brio app">
+      <div class="wf-appbar-inner">
+        <span class="wf-brand">Brio</span>
+        <div class="wf-tabs">
+          <a class="wf-tab on" href="dashboard.html" aria-current="page">Dashboard</a>
+          <a class="wf-tab" href="../wireframes/program-library.html">Programs</a>
+          <a class="wf-tab" href="../wireframes/team-roster.html">Team</a>
+          <a class="wf-tab" href="../wireframes/share-owner.html">Owner</a>
+        </div>
+        <span class="sp"></span>
+        <a class="wf-settings" href="../wireframes/settings.html">Settings</a>
+      </div>
+    </nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Welcome back, Priya</p>
+        <h1>Your team pulse</h1>
+      </header>
+      <!-- the screen goes here -->
+    </div>
+
+    <footer class="wf-appfoot">
+      <div class="wf-appfoot-inner">
+        <a href="../wireframes/security-privacy.html">Privacy</a>
+        <a href="../wireframes/help.html">Help</a>
+      </div>
+    </footer>
+
+    <nav class="wf-tabbar" aria-label="Brio app tabs">
+      <a class="on" href="dashboard.html" aria-current="page">Dashboard</a>
+      <a href="../wireframes/program-library.html">Programs</a>
+      <a href="../wireframes/team-roster.html">Team</a>
+      <a href="../wireframes/share-owner.html">Owner</a>
+    </nav>
+  </div>
+
+  <!-- ============ 2. EMPLOYEE SHELL ============
+       No tabs, no footer, one standing line. The employee is here for thirty
+       seconds and the only navigation they need is the one action on screen. -->
+  <div class="wf-screen">
+    <nav class="wf-appbar" aria-label="Brio">
+      <div class="wf-appbar-inner">
+        <span class="wf-brand">Brio</span>
+        <span class="sp"></span>
+        <span class="wf-step">Your answers are anonymous</span>
+      </div>
+    </nav>
+
+    <div class="wf-content">
+      <div class="wf-narrow">
+        <!-- one question, one action -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 3. PUBLIC SHELL ============
+       Marketing pages: reduced nav, one call to action, a four column footer. -->
+  <div class="wf-screen">
+    <nav class="wf-appbar" aria-label="Brio">
+      <div class="wf-appbar-inner">
+        <span class="wf-brand">Brio</span>
+        <div class="wf-navlinks">
+          <a class="wf-navlink" href="../wireframes/pricing.html">Pricing</a>
+          <a class="wf-navlink" href="../wireframes/security-privacy.html">Security</a>
+          <a class="wf-navlink" href="../wireframes/help.html">Help</a>
+        </div>
+        <span class="sp"></span>
+        <a class="wf-settings" href="../wireframes/login.html">Log in</a>
+        <a class="wf-btn solid" href="../wireframes/signup.html">Start free</a>
+      </div>
+    </nav>
+
+    <div class="wf-content wf-mkt">
+      <!-- marketing sections go here -->
+    </div>
+
+    <footer class="wf-pubfoot">
+      <div class="wf-pubfoot-inner">
+        <p class="trust">Aggregate only. No individual answers, ever, to anyone.</p>
+        <div class="wf-foot-cols">
+          <div class="wf-foot-col">
+            <h3>Product</h3>
+            <a href="../wireframes/pricing.html">Pricing</a>
+            <a href="../wireframes/security-privacy.html">Security and privacy</a>
+          </div>
+          <div class="wf-foot-col">
+            <h3>Company</h3>
+            <a href="../wireframes/about.html">About</a>
+            <a href="../wireframes/contact.html">Contact</a>
+          </div>
+          <div class="wf-foot-col">
+            <h3>Resources</h3>
+            <a href="../wireframes/help.html">Help and FAQ</a>
+          </div>
+          <div class="wf-foot-col">
+            <h3>Legal</h3>
+            <a href="../wireframes/legal.html">Privacy Policy</a>
+            <a href="../wireframes/legal.html">Terms</a>
+            <a href="../wireframes/cookie-consent.html">Cookie settings</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ============ 4. WIZARD AND AUTH HEADS ============
+       Both are the app bar with the tabs removed: onboarding shows the step,
+       auth shows nothing but the wordmark. The column under them is .wf-narrow. -->
+  <div class="wf-screen">
+    <nav class="wf-appbar" aria-label="Brio">
+      <div class="wf-appbar-inner">
+        <span class="wf-brand">Brio</span>
+        <span class="sp"></span>
+        <span class="wf-step">Step 1 of 3</span>
+      </div>
+    </nav>
+    <div class="wf-content"><div class="wf-narrow"><!-- wizard step --></div></div>
+  </div>
+
+  <!-- ============ 5. SYSTEM SHELL ============
+       Maintenance and server error: no product navigation at all, because the
+       product is what is unavailable. -->
+  <div class="wf-sys">
+    <header class="wf-sys-head"><span class="wf-brand">Brio</span></header>
+    <div class="wf-sys-body"><div class="wf-narrow"><!-- the message --></div></div>
+  </div>
+
+</main>
+
+</body>
+</html>

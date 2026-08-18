@@ -112,6 +112,11 @@ a.nav-item:hover { color: var(--nav-fg); background: color-mix(in srgb, var(--na
   border: 1px solid var(--nav-rule);
   color: var(--nav-muted);
 }
+.nav-badge-wip {
+  border-color: var(--nav-active);
+  color: var(--nav-active);
+  background: none;
+}
 .nav-badge-next {
   border-color: var(--nav-badge);
   background: var(--nav-badge);

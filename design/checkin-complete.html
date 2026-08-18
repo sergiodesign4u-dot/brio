@@ -8,27 +8,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="_theme.css">
+  <link rel="stylesheet" href="kit/kit.css">
   <link rel="stylesheet" href="../_nav.css">
 </head>
 <body>
 
 <aside id="sidebar"></aside>
 
-<nav class="dz-strip" aria-label="Coloured copy, prototype chrome">
-  <span class="dz-id">10 Employee check-in, in colour</span>
-  <a href="checkin-entry.html">10.0 Entry</a>
-  <a href="checkin-privacy.html">10.1 Before you answer</a>
-  <a href="checkin-questions.html">10.2 Questions</a>
-  <a href="checkin-questions-loading.html">10.2 Sending</a>
-  <a class="on" href="checkin-complete.html">10.3 Done</a>
-  <a href="checkin-expired.html">10.4 Link expired</a>
-  <a href="checkin-already.html">10.5 Already answered</a>
-  <a href="checkin-submit-error.html">10.6 Submit error</a>
-  <a class="dz-out" href="dashboard.html">4.0 Dashboard</a>
-  <a class="dz-out" href="concept/concept.html">Concept stand</a>
-  <a class="dz-out" href="../wireframes/checkin-complete.html">Grey original</a>
-</nav>
+<nav id="dz-strip"></nav>
 
 <main>
   <div class="wf-screen">
@@ -59,6 +46,7 @@
   window.NAV_ACTIVE = 'design/concept/concept.html';
   window.NAV_ACTIVE_LABEL = 'Check-in 10.3 Done';
 </script>
+<script src="_nav.js"></script>
 <script src="../_nav.js"></script>
 
 </body>

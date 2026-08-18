@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Team (6.0)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kit/kit.css">
+  <link rel="stylesheet" href="../_nav.css">
+</head>
+<body>
+
+<aside id="sidebar"></aside>
+
+<nav id="dz-strip"></nav>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app">
+      <div class="wf-appbar-inner">
+        <span class="wf-brand">Brio</span>
+        <div class="wf-tabs">
+          <a class="wf-tab" href="dashboard.html">Dashboard</a>
+          <a class="wf-tab" href="program-library.html">Programs</a>
+          <a class="wf-tab on" href="team-roster.html" aria-current="page">Team</a>
+          <a class="wf-tab" href="../wireframes/share-owner.html">Owner</a>
+        </div>
+        <span class="sp"></span>
+        <a class="wf-settings" href="../wireframes/settings.html">Settings</a>
+      </div>
+    </nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Team</p>
+        <h1>Your team</h1>
+      </header>
+
+      <div class="wf-grid">
+        <section aria-label="Invite your team">
+          <div class="wf-card">
+            <h2>Invite your team</h2>
+            <div class="wf-field">
+              <span class="k">Join link</span>
+              <div class="wf-copy">
+                <input class="wf-input" value="brio.app/join/steady-otter" readonly aria-label="Join link">
+                <button class="wf-btn" type="button">Copy</button>
+              </div>
+            </div>
+            <p class="wf-micro">Or share the join code: <strong>STEADY-OTTER</strong></p>
+            <div class="wf-field">
+              <span class="k">Invite by email</span>
+              <div class="wf-copy">
+                <input class="wf-input" type="email" placeholder="name@company.com" aria-label="Invite by email">
+                <button class="wf-btn solid" type="button">Send invites</button>
+              </div>
+            </div>
+            <p class="wf-micro">The roster is who you invited. It is never linked to who answered what.</p>
+          </div>
+        </section>
+
+        <aside aria-label="Participation">
+          <div class="wf-card">
+            <h2>Participation</h2>
+            <p class="wf-metric">72% <span>of 18 answered last cycle</span></p>
+            <p class="wf-micro">A share, never who. You never see individual answers.</p>
+          </div>
+        </aside>
+      </div>
+
+      <h2>Members</h2>
+      <div class="wf-list">
+        <div class="wf-list-row"><span class="who">Yemi O. <small>yemi@company.com</small></span><span class="wf-status on">Active</span><a class="wf-rowlink" href="team-roster-manage.html">Manage</a></div>
+        <div class="wf-list-row"><span class="who">Sam K. <small>sam@company.com</small></span><span class="wf-status on">Active</span><a class="wf-rowlink" href="team-roster-manage.html">Manage</a></div>
+        <div class="wf-list-row"><span class="who">Ana R. <small>ana@company.com</small></span><span class="wf-status on">Active</span><a class="wf-rowlink" href="team-roster-manage.html">Manage</a></div>
+        <div class="wf-list-row"><span class="who">Dev P. <small>dev@company.com</small></span><span class="wf-status">Invited</span><a class="wf-rowlink" href="team-roster-manage.html">Resend</a></div>
+        <div class="wf-list-row"><span class="who">14 more team members</span><span class="wf-status on">Active</span><span class="wf-micro">identity used for the invite only</span></div>
+      </div>
+    
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot">
+      <div class="wf-appfoot-inner">
+        <a href="../wireframes/security-privacy.html">Privacy</a>
+        <a href="../wireframes/help.html">Help</a>
+      </div>
+    </footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="program-library.html">Programs</a>
+      <a class="on" href="team-roster.html" aria-current="page">Team</a>
+      <a href="../wireframes/share-owner.html">Owner</a>
+    </nav>
+  </div>
+
+</main>
+
+<script>
+  window.NAV_BASE = '../';
+  window.NAV_ACTIVE = 'design/overview.html';
+  window.NAV_ACTIVE_LABEL = 'Team 6.0';
+</script>
+<script src="_nav.js"></script>
+<script src="../_nav.js"></script>
+
+</body>
+</html>

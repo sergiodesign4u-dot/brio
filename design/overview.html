@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brio - Coloured screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+/* the hub's own chrome, prefixed o- so it cannot be mistaken for a product class */
+body { padding-top: var(--size-rail-bar); }
+@media (min-width: 900px) { body { padding-top: 0; padding-left: var(--size-rail); } }
+.o-page { max-width: 1080px; margin: 0 auto; padding: var(--space-7) var(--space-5) 80px; }
+.o-head h1 { font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+.o-label { font-size: var(--size-tag); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); }
+.o-lede { margin-top: var(--space-3); max-width: 74ch; color: var(--color-muted); }
+.o-sec { padding-top: 48px; }
+.o-sec > h2 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 700; letter-spacing: -.02em; }
+.o-note { margin-top: var(--space-3); font-size: var(--size-micro); color: var(--color-muted); max-width: 78ch; }
+.o-kit { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: var(--space-5); }
+.o-kit a { display: block; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: var(--space-5); text-decoration: none; color: var(--color-ink); }
+.o-kit a:hover { border-color: var(--color-action); }
+.o-kit b { font-family: var(--font-display); font-size: var(--size-ui); display: block; }
+.o-kit span { display: block; margin-top: var(--space-2); font-size: var(--size-micro); color: var(--color-muted); }
+.o-group { margin-top: var(--space-6); }
+.o-group h3 { font-family: var(--font-display); font-size: var(--size-ui); font-weight: 600; display: flex; align-items: baseline; gap: var(--space-3); }
+.o-count { font-size: var(--size-micro); color: var(--color-muted); font-weight: 400; }
+.o-screens { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); margin-top: var(--space-3); }
+.o-screens a, .o-screens span { display: flex; align-items: center; gap: var(--space-2); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-control); padding: var(--space-3); font-size: var(--size-micro); text-decoration: none; color: var(--color-ink); }
+.o-screens a:hover { border-color: var(--color-action); }
+.o-screens span { color: var(--color-muted); background: transparent; border-style: dashed; }
+.o-screens .o-dot { width: 8px; height: 8px; border-radius: var(--radius-pill); background: var(--color-action); flex: none; }
+.o-screens span .o-dot { background: var(--color-line-strong); }
+.o-meter { height: 8px; border-radius: var(--radius-pill); background: var(--color-line); overflow: hidden; margin-top: var(--space-4); }
+.o-meter i { display: block; height: 100%; background: var(--color-action); }
+.o-foot { margin-top: 72px; padding-top: var(--space-5); border-top: 1px solid var(--color-line-strong); font-size: var(--size-micro); color: var(--color-muted); }
+</style>
+<link rel="stylesheet" href="../_nav.css">
+</head>
+<body>
+
+<aside id="sidebar"></aside>
+
+<div class="o-page">
+
+  <header class="o-head">
+    <p class="o-label">Stage 07, UI and Visual</p>
+    <h1>The product in colour</h1>
+    <p class="o-lede">The sample assembled at stage 07: seven screens with their states, built from the component kit rather than drawn. The rest of the product is still grey and waits for the roll-out at stage 12, which is honest work rather than a gap: a screen is built once, when everything it needs already exists.</p>
+    <div class="o-meter" aria-hidden="true"><i style="width:24%"></i></div>
+    <p class="o-note"><b>24 of 99 state pages are in colour</b>, across 13 of 47 screens. The bar above is that number and not a rounding of it.</p>
+  </header>
+
+  <section class="o-sec" id="kit">
+    <p class="o-label">Kit and tokens</p>
+    <h2>Where the language lives</h2>
+    <div class="o-kit">
+      <a href="kit/kit.html"><b>Component kit</b><span>Every component with its states, the whole token block alive, and the inventory read out of all 99 wireframes.</span></a>
+      <a href="kit/shell.html"><b>Shell markup</b><span>The five frames a screen can stand in, as copy-paste source.</span></a>
+      <a href="concept/concept.html"><b>Concept stand</b><span>The visual language and where each decision came from.</span></a>
+      <a href="visuals/README.md"><b>Visuals</b><span>Brio's own imagery, one colour grade, with the generation prompt recorded.</span></a>
+    </div>
+    <p class="o-note">A screen carries no style of its own. Everything visual comes from <code>design/kit/kit.css</code>, and a value written on a page instead of in the kit is the defect this stage exists to prevent.</p>
+  </section>
+
+  <section class="o-sec" id="coverage">
+    <p class="o-label">Coverage</p>
+    <h2>What is coloured, and what is not</h2>
+    <p class="o-lede">Grouped the way the product is grouped. A dashed row is a screen that still exists only in grey; its link goes to the wireframe, because pretending otherwise would hide how much is left.</p>
+
+    <div class="o-group">
+      <h3>Public and acquisition <span class="o-count">5 of 12 state pages in colour</span></h3>
+      <div class="o-screens">
+        <a href="index.html"><i class="o-dot"></i>Home 0.0</a>
+        <a href="signup.html"><i class="o-dot"></i>Sign up 2.0</a>
+        <a href="signup-error.html"><i class="o-dot"></i>Sign up, error</a>
+        <a href="contact.html"><i class="o-dot"></i>Contact 1.3</a>
+        <a href="contact-sent.html"><i class="o-dot"></i>Contact, sent</a>
+        <span><i class="o-dot"></i>Pricing 1.0, in grey</span>
+        <span><i class="o-dot"></i>Security and privacy 1.1, in grey</span>
+        <span><i class="o-dot"></i>Help 1.2, in grey</span>
+        <span><i class="o-dot"></i>About 1.4, in grey</span>
+        <span><i class="o-dot"></i>Log in 2.1 and reset 2.4, in grey</span>
+      </div>
+    </div>
+
+    <div class="o-group">
+      <h3>Operator <span class="o-count">11 of 45 state pages in colour</span></h3>
+      <div class="o-screens">
+        <a href="dashboard.html"><i class="o-dot"></i>Dashboard 4.0</a>
+        <a href="dashboard-open.html"><i class="o-dot"></i>Cycle open</a>
+        <a href="dashboard-empty.html"><i class="o-dot"></i>Pre-minimum-N</a>
+        <a href="dashboard-noprogram.html"><i class="o-dot"></i>No program</a>
+        <a href="dashboard-alert.html"><i class="o-dot"></i>Threshold alert</a>
+        <a href="dashboard-loading.html"><i class="o-dot"></i>Loading</a>
+        <a href="dashboard-error.html"><i class="o-dot"></i>Error</a>
+        <a href="program-library.html"><i class="o-dot"></i>Programs 5.0</a>
+        <a href="program-library-empty.html"><i class="o-dot"></i>Programs, no results</a>
+        <a href="team-roster.html"><i class="o-dot"></i>Team 6.0</a>
+        <a href="team-roster-manage.html"><i class="o-dot"></i>Team, manage</a>
+        <span><i class="o-dot"></i>Onboarding wizard 3.x, in grey</span>
+        <span><i class="o-dot"></i>Team pulse 4.1 and 4.2, in grey</span>
+        <span><i class="o-dot"></i>Program detail 5.1, in grey</span>
+        <span><i class="o-dot"></i>Invites 6.1, in grey</span>
+        <span><i class="o-dot"></i>Owner share and upgrade 7.x, in grey</span>
+        <span><i class="o-dot"></i>Settings 8.x, in grey</span>
+      </div>
+    </div>
+
+    <div class="o-group">
+      <h3>Employee <span class="o-count">8 of 8 state pages in colour</span></h3>
+      <div class="o-screens">
+        <a href="checkin-entry.html"><i class="o-dot"></i>Entry 10.0</a>
+        <a href="checkin-privacy.html"><i class="o-dot"></i>Before you answer 10.1</a>
+        <a href="checkin-questions.html"><i class="o-dot"></i>Questions 10.2</a>
+        <a href="checkin-questions-loading.html"><i class="o-dot"></i>Sending</a>
+        <a href="checkin-complete.html"><i class="o-dot"></i>Done 10.3</a>
+        <a href="checkin-expired.html"><i class="o-dot"></i>Link expired 10.4</a>
+        <a href="checkin-already.html"><i class="o-dot"></i>Already answered 10.5</a>
+        <a href="checkin-submit-error.html"><i class="o-dot"></i>Submit error 10.6</a>
+      </div>
+      <p class="o-note">The only cluster that is complete, and deliberately so: it is where the product makes its argument, and it is the surface a sceptical employee meets first.</p>
+    </div>
+
+    <div class="o-group">
+      <h3>Owner and system <span class="o-count">0 of 9 state pages in colour</span></h3>
+      <div class="o-screens">
+        <span><i class="o-dot"></i>Owner surface 9.x, in grey</span>
+        <span><i class="o-dot"></i>Maintenance and server error 11.x, in grey</span>
+        <span><i class="o-dot"></i>Cookie consent 11.3, in grey</span>
+        <span><i class="o-dot"></i>Toast 11.4, in grey</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="o-sec" id="sample">
+    <p class="o-label">Why these seven</p>
+    <h2>The sample carries the whole tail</h2>
+    <p class="o-lede">A screen that adds no new component was not taken: it proves nothing. What the sample had to cover was all three levels of the component ladder, the heaviest layouts, a form, a list, and an empty or error state.</p>
+    <div class="o-screens" style="grid-template-columns:1fr;margin-top:20px">
+      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Dashboard 4.0 and its six states.</b> The etalon: the operator shell, the pulse card, the trend spark, the privacy strip, and the richest state set in the product, including loading and error.</span>
+      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>The employee check-in, all eight screens.</b> The other shell, the other person, the disclosure that turns the promise into proof, and the outcome badge.</span>
+      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Home 0.0.</b> The public shell, the hero, the four column footer, and the two media slots, which is where attribute A5 finally reaches a product screen.</span>
+      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Programs 5.0 and its empty state.</b> Chips, the program card, a grid that reflows, and an empty state that is not an error.</span>
+      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Team 6.0 and the manage dialog.</b> The list and its rows, status pills, the copy field, and the dialog, which is one component standing in for six.</span>
+      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Sign up 2.0 and its error.</b> The auth shell, a form with several fields, and the error state of a form rather than of a page.</span>
+      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Contact 1.3 and its confirmation.</b> The last form primitive, the textarea, and a confirmation that states the fact without celebrating.</span>
+    </div>
+    <p class="o-note"><b>Saturation.</b> The kit stopped growing on the sixth screen: Sign up and Contact added no new component, only new arrangements of the ones already there. That is the signal the pack asks for, and it is why the sample stops at seven rather than running on.</p>
+  </section>
+
+  <footer class="o-foot">
+    <p><b>Brio, stage 07.</b> The kit: <code>design/kit/</code>. The language: the root <code>DESIGN.md</code>. The grey prototype it all came from: <a href="../wireframes/overview.html">wireframes</a>, still grey, still frozen.</p>
+    <p style="margin-top:6px">Coverage is stated as a number rather than implied by a page that looks finished. 24 of 99.</p>
+  </footer>
+
+</div>
+
+<script>
+  window.NAV_BASE = '../';
+  window.NAV_SECTIONS = [
+    {"id":"kit","label":"Kit and tokens"},
+    {"id":"coverage","label":"Coverage"},
+    {"id":"sample","label":"Why these seven"}
+  ];
+</script>
+<script src="../_nav.js"></script>
+
+</body>
+</html>

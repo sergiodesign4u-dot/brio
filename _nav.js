@@ -48,7 +48,7 @@ window.NAV = [
     ],
   },
 
-  { label: 'UI + Visual', page: 'design/overview.html', done: false },
+  { label: 'UI + Visual', page: 'design/overview.html', done: true, wip: true },
   { label: 'Tokens + Components', page: 'design/kit/overview.html', done: false },
   { label: 'Design System', page: 'design/kit/why.html', done: false },
   { label: 'Responsive', page: null, done: false },
@@ -84,10 +84,12 @@ window.NAV = [
     return hit ? hit.page : null;
   }
 
-  /* Next is counted by STAGE, not by page: the first stage that is not fully done. */
+  /* Next is counted by STAGE, not by page: the first stage that is not fully done.
+     A stage marked wip:true is being built right now, so Next stops there even
+     though its page already exists - otherwise the badge runs ahead of the work. */
   var nextIndex = -1;
   for (var i = 0; i < window.NAV.length; i++) {
-    if (!isDone(window.NAV[i])) { nextIndex = i; break; }
+    if (!isDone(window.NAV[i]) || window.NAV[i].wip) { nextIndex = i; break; }
   }
 
   /* Which stage am I in? Explicit NAV_ACTIVE wins - it is how off-registry pages declare a home. */
@@ -103,8 +105,16 @@ window.NAV = [
     if (text != null) n.textContent = text;
     return n;
   }
+  var BADGE_TEXT = { next: 'Next', soon: 'Soon', wip: 'WIP' };
   function badge(kind) {
-    return el('span', 'nav-badge nav-badge-' + kind, kind === 'next' ? 'Next' : 'Soon');
+    return el('span', 'nav-badge nav-badge-' + kind, BADGE_TEXT[kind] || 'Soon');
+  }
+  /* wip:true says a stage is being built right now: the badge reads WIP instead of
+     Next or Soon, and Next stays here rather than running ahead. Status of the
+     finished stage still lives in README; done:true still tracks the page existing. */
+  function badgeKind(idx) {
+    if (window.NAV[idx] && window.NAV[idx].wip) return 'wip';
+    return idx === nextIndex ? 'next' : 'soon';
   }
 
   /* --- shell --- */
@@ -157,6 +167,7 @@ window.NAV = [
       if (href) {
         row = el('a', 'nav-item' + (isDone(stage) ? ' is-done' : ' is-partial'), stage.label);
         row.href = base + href;
+        if (stage.wip) row.appendChild(badge('wip'));
       } else if (idx === nextIndex) {
         row = el('span', 'nav-item is-next', stage.label);
         row.appendChild(badge('next'));
@@ -185,7 +196,7 @@ window.NAV = [
           row.href = base + child.page;
         } else {
           row = el('span', 'nav-subitem is-soon', child.label);
-          row.appendChild(badge(idx === nextIndex ? 'next' : 'soon'));
+          row.appendChild(badge(badgeKind(idx)));
         }
         sub.appendChild(row);
         if (here) { var s = sectionsBlock(); if (s) sub.appendChild(s); }

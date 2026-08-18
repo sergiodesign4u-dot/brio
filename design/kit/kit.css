@@ -130,7 +130,9 @@ img { display: block; max-width: 100%; }
 .dz-strip a { color: var(--color-muted); text-decoration: none; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); border: 1px solid transparent; }
 .dz-strip a:hover { color: var(--color-ink); border-color: var(--color-line-strong); }
 .dz-strip a.on { color: var(--color-ink); background: var(--color-accent-soft); font-weight: 600; }
-.dz-strip .dz-out { margin-left: auto; border: 1px solid var(--color-line-strong); }
+.dz-strip .dz-group { font-weight: 600; }
+.dz-strip .dz-out { border: 1px solid var(--color-line-strong); }
+.dz-strip .dz-out:first-of-type { margin-left: auto; }
 @media (max-width: 700px) { .dz-strip .dz-out { margin-left: 0; } }
 /* mobile: the roadmap is a fixed 52px bar across the top, so the page starts below it.
    desktop: the roadmap is a 220px left rail, so the page starts to the right of it. */
@@ -337,6 +339,10 @@ a.wf-btn:hover, button.wf-btn:hover { border-color: var(--color-muted); }
   --icon-lock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M2 16C2 13.1716 2 11.7574 2.87868 10.8787C3.75736 10 5.17157 10 8 10H16C18.8284 10 20.2426 10 21.1213 10.8787C22 11.7574 22 13.1716 22 16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H8C5.17157 22 3.75736 22 2.87868 21.1213C2 20.2426 2 18.8284 2 16Z'/%3E%3Cpath stroke-linecap='round' d='M12 14V18'/%3E%3Cpath stroke-linecap='round' d='M6 10V8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8V10'/%3E%3C/svg%3E");
   --icon-cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath stroke-linecap='round' d='M14.5 9.5L9.5 14.5M9.5 9.5L14.5 14.5'/%3E%3C/svg%3E");
   --icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 6L15 12L9 18'/%3E%3C/svg%3E");
+  --icon-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M13.5 15.5C13.5 13.6 13.5 12.7 14.1 12.1C14.7 11.5 15.6 11.5 17.5 11.5C19.4 11.5 20.3 11.5 20.9 12.1C21.5 12.7 21.5 13.6 21.5 15.5V17.5C21.5 19.4 21.5 20.3 20.9 20.9C20.3 21.5 19.4 21.5 17.5 21.5C15.6 21.5 14.7 21.5 14.1 20.9C13.5 20.3 13.5 19.4 13.5 17.5V15.5Z'/%3E%3Cpath d='M2 8.5C2 10.4 2 11.3 2.6 11.9C3.2 12.5 4.1 12.5 6 12.5C7.9 12.5 8.8 12.5 9.4 11.9C10 11.3 10 10.4 10 8.5V6.5C10 4.6 10 3.7 9.4 3.1C8.8 2.5 7.9 2.5 6 2.5C4.1 2.5 3.2 2.5 2.6 3.1C2 3.7 2 4.6 2 6.5V8.5Z'/%3E%3Cpath d='M13.5 5.5C13.5 4.6 13.5 4.1 13.7 3.7C13.9 3.2 14.2 2.9 14.7 2.7C15.1 2.5 15.6 2.5 16.5 2.5H18.5C19.4 2.5 19.9 2.5 20.3 2.7C20.8 2.9 21.1 3.2 21.3 3.7C21.5 4.1 21.5 4.6 21.5 5.5C21.5 6.4 21.5 6.9 21.3 7.3C21.1 7.8 20.8 8.1 20.3 8.3C19.9 8.5 19.4 8.5 18.5 8.5H16.5C15.6 8.5 15.1 8.5 14.7 8.3C14.2 8.1 13.9 7.8 13.7 7.3C13.5 6.9 13.5 6.4 13.5 5.5Z'/%3E%3Cpath d='M2 18.5C2 19.4 2 19.9 2.2 20.3C2.4 20.8 2.7 21.1 3.2 21.3C3.6 21.5 4.1 21.5 5 21.5H7C7.9 21.5 8.4 21.5 8.8 21.3C9.3 21.1 9.6 20.8 9.8 20.3C10 19.9 10 19.4 10 18.5C10 17.6 10 17.1 9.8 16.7C9.6 16.2 9.3 15.9 8.8 15.7C8.4 15.5 7.9 15.5 7 15.5H5C4.1 15.5 3.6 15.5 3.2 15.7C2.7 15.9 2.4 16.2 2.2 16.7C2 17.1 2 17.6 2 18.5Z'/%3E%3C/svg%3E");
+  --icon-chart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3 22H21'/%3E%3Cpath d='M3 11C3 10.1 3 9.6 3.3 9.3C3.6 9 4.1 9 5 9C5.9 9 6.4 9 6.7 9.3C7 9.6 7 10.1 7 11V17C7 17.9 7 18.4 6.7 18.7C6.4 19 5.9 19 5 19C4.1 19 3.6 19 3.3 18.7C3 18.4 3 17.9 3 17V11Z'/%3E%3Cpath d='M10 7C10 6.1 10 5.6 10.3 5.3C10.6 5 11.1 5 12 5C12.9 5 13.4 5 13.7 5.3C14 5.6 14 6.1 14 7V17C14 17.9 14 18.4 13.7 18.7C13.4 19 12.9 19 12 19C11.1 19 10.6 19 10.3 18.7C10 18.4 10 17.9 10 17V7Z'/%3E%3Cpath d='M17 4C17 3.1 17 2.6 17.3 2.3C17.6 2 18.1 2 19 2C19.9 2 20.4 2 20.7 2.3C21 2.6 21 3.1 21 4V17C21 17.9 21 18.4 20.7 18.7C20.4 19 19.9 19 19 19C18.1 19 17.6 19 17.3 18.7C17 18.4 17 17.9 17 17V4Z'/%3E%3C/svg%3E");
+  --icon-team: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Ccircle cx='9' cy='6' r='4'/%3E%3Cpath stroke-linecap='round' d='M15 9C16.66 9 18 7.66 18 6C18 4.34 16.66 3 15 3'/%3E%3Cellipse cx='9' cy='17' rx='7' ry='4'/%3E%3Cpath stroke-linecap='round' d='M18 14C19.75 14.38 21 15.36 21 16.5C21 17.53 19.99 18.42 18.5 18.87'/%3E%3C/svg%3E");
+  --icon-pulse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' d='M2 15h3c0.63 0 0.95 0 1.23 0.12C6.52 15.24 6.74 15.47 7.17 15.93L8.31 17.13C8.7 17.53 8.89 17.73 9.12 17.72C9.36 17.7 9.52 17.48 9.85 17.03L13.48 12.02C13.82 11.55 13.99 11.31 14.23 11.3C14.47 11.29 14.66 11.51 15.04 11.94L16.82 13.98C17.26 14.48 17.48 14.73 17.78 14.87C18.07 15 18.41 15 19.08 15H22'/%3E%3Cpath d='M2 12C2 7.29 2 4.93 3.46 3.46C4.93 2 7.29 2 12 2C16.71 2 19.07 2 20.54 3.46C22 4.93 22 7.29 22 12C22 16.71 22 19.07 20.54 20.54C19.07 22 16.71 22 12 22C7.29 22 4.93 22 3.46 20.54C2 19.07 2 16.71 2 12Z'/%3E%3C/svg%3E");
   --icon-warning: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M5.31171 10.7615C8.23007 5.58716 9.68925 3 12 3C14.3107 3 15.7699 5.58716 18.6883 10.7615L19.0519 11.4063C21.4771 15.7061 22.6897 17.856 21.5937 19.428C20.4978 21 17.7864 21 12.3637 21H11.6363C6.21356 21 3.50217 21 2.40626 19.428C1.31034 17.856 2.52291 15.7061 4.94805 11.4063L5.31171 10.7615Z'/%3E%3Cpath stroke-linecap='round' d='M12 8V13'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 16H12.0001'/%3E%3C/svg%3E");
 }
 
@@ -461,3 +467,195 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
   font-size: var(--size-micro); color: var(--color-ink);
   background: var(--color-accent-soft); border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3);
 }
+
+/* ===================================================================
+   COMPONENTS ADDED AT STAGE 07, STEP 3
+   The values above moved here from design/_theme.css byte for byte and are
+   not touched. What follows are the component classes for the parts of the
+   product that were still grey: structure taken from their wireframe, look
+   taken from DESIGN.md, never from imagination.
+
+   Class names keep the wf- prefix on purpose. Every product screen in design/
+   is a copy whose markup must stay identical to its grey original class for
+   class: that diff is the proof the copy owns the visual layer only. Renaming
+   here would break the proof on every screen at once, so the prefix stays and
+   stage 08 decides whether to rename when it splits the file.
+==================================================================== */
+
+/* ---- values this step needed and the component that needed each ---- */
+:root {
+  --color-overlay: rgba(29, 29, 29, .45);  /* derived from --color-ink, needed by the dialog */
+  --size-media: 260px;      /* the media slot, geometry carried from the wireframe */
+  --size-media-tall: 340px; /* the tall media slot, same origin */
+  --size-dialog: 440px;     /* the dialog panel, geometry carried from the wireframe */
+  --size-switch: 40px;      /* one segment of the document switch, derived from --size-touch */
+  --size-hero: clamp(30px, 5vw, 46px);      /* the marketing display step, needed by the hero. The product interior never uses it */
+  --size-section: clamp(20px, 2.4vw, 26px); /* a marketing section heading, needed by .wf-mkt h2 */
+  --size-card-title: 20px;                  /* the title of a program card, snapped to the state-title step */
+  --size-textarea: 120px;                   /* the resting height of a textarea, needed by the contact form */
+  --size-quote: clamp(18px, 2vw, 22px);     /* the one testimonial, a step between body and state title */
+  --size-logo-w: 104px;                     /* one logo in the social proof strip */
+  --size-logo-h: 34px;
+  --size-avatar: 46px;                      /* the one testimonial avatar */
+}
+
+/* ===================== marketing shell ===================== */
+.wf-navlinks { display: flex; gap: var(--space-5); }
+.wf-navlink { font-size: var(--size-nav); color: var(--color-muted); text-decoration: none; padding: var(--space-3) 0; }
+.wf-navlink:hover { color: var(--color-ink); }
+@media (max-width: 640px) { .wf-navlinks { display: none; } }
+.wf-appbar-inner .wf-btn { padding: var(--space-2) var(--space-4); min-height: 0; }
+
+.wf-pubfoot { border-top: 1px solid var(--color-line); background: var(--color-surface); margin-top: var(--space-5); }
+.wf-pubfoot-inner { max-width: var(--size-content); margin: 0 auto; padding: var(--space-7) var(--space-5); }
+.wf-pubfoot .trust { font-size: var(--size-ui); color: var(--color-muted); margin-bottom: var(--space-6); padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-line); }
+.wf-foot-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); }
+@media (max-width: 720px) { .wf-foot-cols { grid-template-columns: repeat(2, 1fr); gap: var(--space-6) var(--space-4); } }
+.wf-foot-col h3 { font-size: var(--size-eyebrow); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--color-muted); margin-bottom: var(--space-3); }
+.wf-foot-col a { display: block; font-size: var(--size-nav); color: var(--color-muted); text-decoration: none; margin-bottom: var(--space-2); }
+.wf-foot-col a:hover { color: var(--color-ink); }
+
+/* ===================== marketing content ===================== */
+.wf-mkt section { margin-bottom: var(--space-7); }
+.wf-mkt section:last-child { margin-bottom: 0; }
+.wf-mkt h2 { font-family: var(--font-display); font-size: var(--size-section); font-weight: 600; letter-spacing: -.02em; margin-bottom: var(--space-4); }
+.wf-hero { padding: var(--space-3) 0 var(--space-1); }
+.wf-hero h1 { font-size: var(--size-hero); max-width: 18ch; }
+.wf-hero .wf-lead { font-size: var(--size-body); max-width: 62ch; margin-top: var(--space-3); }
+.wf-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--space-7); align-items: center; }
+@media (max-width: 760px) { .wf-hero-grid { grid-template-columns: 1fr; gap: var(--space-6); } }
+.wf-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+@media (max-width: 720px) { .wf-grid3 { grid-template-columns: 1fr; } }
+.wf-grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+@media (max-width: 720px) { .wf-grid4 { grid-template-columns: repeat(2, 1fr); } }
+.wf-tags { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.wf-cta-final { text-align: center; padding: var(--space-2) 0; }
+
+/* ===================== media, where a photograph lands ===================== */
+.wf-media {
+  display: block; width: 100%; min-height: var(--size-media);
+  border-radius: var(--radius-card); overflow: hidden; background: var(--color-bg);
+}
+.wf-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wf-media.tall { min-height: var(--size-media-tall); }
+
+/* ===================== chip and status ===================== */
+.wf-tag {
+  display: inline-flex; align-items: center; font-size: var(--size-tag); font-weight: 600;
+  letter-spacing: .04em; text-transform: uppercase; color: var(--color-muted);
+  border: 1px solid var(--color-line-strong); border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3);
+}
+.wf-tag.on { background: var(--color-accent-soft); border-color: transparent; color: var(--color-ink); }
+button.wf-tag { cursor: pointer; font-family: inherit; background: var(--color-surface); }
+
+.wf-status {
+  display: inline-flex; align-items: center; font-size: var(--size-micro); color: var(--color-muted);
+  border: 1px solid var(--color-line-strong); border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-3); white-space: nowrap;
+}
+.wf-status.on { color: var(--color-ink); border-color: var(--color-action); }
+button.wf-status { background: var(--color-surface); cursor: pointer; font-family: inherit; }
+
+/* ===================== list ===================== */
+.wf-list { border: 1px solid var(--color-line); border-radius: var(--radius-card); overflow: hidden; background: var(--color-surface); }
+.wf-list-row { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--color-line); min-height: var(--size-touch); }
+.wf-list-row:last-child { border-bottom: none; }
+.wf-list-row .who { font-size: var(--size-ui); color: var(--color-ink); flex: 1; min-width: 0; }
+.wf-list-row .who small { display: block; color: var(--color-muted); font-size: var(--size-micro); }
+.wf-rowlink { font-size: var(--size-micro); color: var(--color-ink); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; padding: var(--space-2) 0; }
+.wf-rowlink:hover { text-decoration-thickness: 2px; }
+
+/* ===================== program card ===================== */
+.wf-progcard { border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: var(--space-5); background: var(--color-surface); }
+.wf-progcard .cat { font-size: var(--size-eyebrow); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-muted); margin-bottom: var(--space-2); }
+.wf-progcard .title { font-family: var(--font-display); font-size: var(--size-card-title); font-weight: 600; letter-spacing: -.02em; margin-bottom: var(--space-2); }
+.wf-progcard .meta { font-size: var(--size-micro); color: var(--color-muted); margin-bottom: var(--space-3); }
+.wf-progcard .desc { font-size: var(--size-ui); color: var(--color-muted); }
+
+/* ===================== copy field ===================== */
+.wf-copy { display: flex; gap: var(--space-2); }
+.wf-copy .wf-input { flex: 1; min-width: 0; }
+
+/* ===================== dialog ===================== */
+.wf-overlay { position: fixed; inset: 0; background: var(--color-overlay); display: flex; align-items: center; justify-content: center; padding: var(--space-5); z-index: 60; }
+.wf-dialog { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); max-width: var(--size-dialog); width: 100%; padding: var(--space-6); }
+.wf-dialog h2 { margin-bottom: var(--space-2); }
+.wf-dialog .wf-btns { margin-top: var(--space-5); }
+
+/* ===================== form primitives still grey until now ===================== */
+.wf-textarea {
+  display: block; width: 100%; font: inherit; font-size: var(--size-ui); min-height: var(--size-textarea); resize: vertical;
+  background: var(--color-surface); color: var(--color-ink);
+  border: 1px solid var(--color-line-strong); border-radius: var(--radius-control); padding: var(--space-3);
+}
+.wf-textarea:focus { outline: 2px solid var(--color-action); outline-offset: 1px; border-color: var(--color-action); }
+select.wf-input { appearance: none; background-image: var(--icon-chevron); background-repeat: no-repeat; background-position: right var(--space-3) center; background-size: var(--size-icon-sm); padding-right: var(--space-icon-inset); }
+.wf-err { font-size: var(--size-micro); color: var(--color-alert); margin-top: var(--space-2); }
+
+/* the document switch: one job, several documents */
+.wf-switch { display: flex; gap: var(--space-2); flex-wrap: wrap; margin: var(--space-2) 0 var(--space-4); }
+.wf-switch a { font-size: var(--size-micro); color: var(--color-muted); text-decoration: none; border: 1px solid var(--color-line-strong); border-radius: var(--radius-pill); padding: var(--space-2) var(--space-3); min-width: var(--size-switch); text-align: center; }
+.wf-switch a:hover { color: var(--color-ink); }
+.wf-switch a.on { background: var(--color-accent-soft); border-color: transparent; color: var(--color-ink); font-weight: 600; }
+
+/* ===================== system block (maintenance, server error) ===================== */
+.wf-sys { min-height: 100vh; display: flex; flex-direction: column; background: var(--color-bg); }
+.wf-sys-head { border-bottom: 1px solid var(--color-line); background: var(--color-surface); padding: var(--space-4) var(--space-5); }
+.wf-sys-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: var(--space-7) var(--space-5); }
+.wf-pill { display: inline-block; font-size: var(--size-tag); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-muted); border: 1px solid var(--color-line-strong); border-radius: var(--radius-pill); padding: var(--space-1) var(--space-3); }
+
+/* ---- layout helpers the sample screens need, ported from their wireframes ---- */
+.pg-facets { display: flex; gap: var(--space-2); flex-wrap: wrap; margin: var(--space-5) 0 var(--space-4); }
+.pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-4); }
+.wf-progcard .wf-btns { margin-top: var(--space-4); }
+.wf-progcard .badges { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3); }
+.wf-contact { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-6); align-items: start; }
+@media (max-width: 720px) { .wf-contact { grid-template-columns: 1fr; } }
+
+/* ---- card parts that repeat across the product (36 and 34 occurrences) ---- */
+.wf-card-h { font-family: var(--font-display); font-size: var(--size-ui); font-weight: 600; letter-spacing: -.01em; margin-bottom: var(--space-3); }
+.wf-body { font-size: var(--size-ui); color: var(--color-muted); }
+
+/* ---- the icon slot becomes a real Solar glyph ----
+   The wireframe marks where an icon goes and does not say which one, so the
+   choice is made here, in the order the cards stand. Changing which glyph sits
+   in which card means changing markup, and markup belongs to the wireframe. */
+.wf-ico {
+  display: inline-flex; width: var(--size-badge-box); height: var(--size-badge-box);
+  border-radius: var(--radius-card); background: var(--color-accent-soft);
+  position: relative;
+}
+.wf-ico.round { border-radius: var(--radius-pill); }
+.wf-ico.sm { width: var(--size-control-h); height: var(--size-control-h); border-radius: var(--radius-control); }
+.wf-ico::before {
+  content: ""; position: absolute; inset: 0; margin: auto;
+  width: var(--size-icon-lg); height: var(--size-icon-lg);
+  background-color: var(--color-ink);
+  -webkit-mask: var(--icon-pulse) center / contain no-repeat;
+          mask: var(--icon-pulse) center / contain no-repeat;
+}
+.wf-grid3 .wf-card:nth-child(1) .wf-ico::before { -webkit-mask-image: var(--icon-grid); mask-image: var(--icon-grid); }
+.wf-grid3 .wf-card:nth-child(2) .wf-ico::before { -webkit-mask-image: var(--icon-lock); mask-image: var(--icon-lock); }
+.wf-grid3 .wf-card:nth-child(3) .wf-ico::before { -webkit-mask-image: var(--icon-chart); mask-image: var(--icon-chart); }
+.wf-grid4 .wf-card:nth-child(1) .wf-ico::before { -webkit-mask-image: var(--icon-pulse); mask-image: var(--icon-pulse); }
+.wf-grid4 .wf-card:nth-child(2) .wf-ico::before { -webkit-mask-image: var(--icon-chart); mask-image: var(--icon-chart); }
+.wf-grid4 .wf-card:nth-child(3) .wf-ico::before { -webkit-mask-image: var(--icon-shield); mask-image: var(--icon-shield); }
+.wf-grid4 .wf-card:nth-child(4) .wf-ico::before { -webkit-mask-image: var(--icon-team); mask-image: var(--icon-team); }
+
+/* ===================================================================
+   ONE-OFF STYLES. Each of these appears on exactly one screen and is
+   named in the "One-off" list of design/kit/inventory.md. They live here
+   rather than on the page because a screen carries no style of its own,
+   and they are fenced off so stage 08 can tell them from the system.
+==================================================================== */
+.wf-logos { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
+.wf-logo {
+  display: flex; align-items: center; justify-content: center; width: var(--size-logo-w); height: var(--size-logo-h);
+  border: 1px solid var(--color-line); border-radius: var(--radius-control); background: var(--color-surface);
+  font-size: var(--size-tag); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--color-muted);
+}
+.wf-quote { border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: var(--space-6); background: var(--color-surface); }
+.wf-quote-t { font-family: var(--font-display); font-size: var(--size-quote); font-weight: 500; line-height: 1.45; letter-spacing: -.01em; max-width: 54ch; }
+.wf-quote-by { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-5); font-size: var(--size-ui); color: var(--color-ink); }
+.wf-quote-by small { display: block; font-size: var(--size-micro); color: var(--color-muted); }
+.wf-avatar { width: var(--size-avatar); height: var(--size-avatar); flex: none; border-radius: var(--radius-pill); background: var(--color-accent-soft); }
