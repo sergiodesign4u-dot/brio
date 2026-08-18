@@ -43,8 +43,8 @@ window.NAV = [
   {
     label: 'Concept',
     children: [
-      { label: 'Directions', page: 'design/concept/directions.html', done: false },
-      { label: 'Concept', page: 'design/concept/concept.html', done: false },
+      { label: 'Directions', page: 'design/concept/directions.html', done: true },
+      { label: 'Concept', page: 'design/concept/concept.html', done: true },
     ],
   },
 

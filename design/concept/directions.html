@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Brio - Concept: three layout directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ---------------------------------------------------------------
+   BRAND LAYER - identical in all three directions.
+   Every value comes from DESIGN-artifacts.md, sampled from the
+   pixels of design/concept/assets/brand-plate-a.png.
+   Nothing below this block may differ between directions.
+----------------------------------------------------------------*/
+:root{
+  --bg:#F7F8FC;          /* background, plate A palette swatch 1 */
+  --surface:#FFFFFF;     /* surface, swatch 2 */
+  --ink:#1D1D1D;         /* text and structure, swatch 3 */
+  --accent-soft:#A4BEF3; /* decorative accent, swatch 4 */
+  --action:#346FEC;      /* the only interactive colour, swatch 5 */
+  --muted:#5B6171;       /* secondary text and borders, swatch 6 */
+  --line:rgba(91,97,113,.16);   /* derived from muted, hairline only */
+  --line-strong:rgba(91,97,113,.28);
+  --r-control:8px;       /* plate A, UI component zone */
+  --r-card:16px;         /* plate A, UI component zone */
+  --font-display:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.55;
+  font-feature-settings:"tnum" 1;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{font-family:var(--font-display);letter-spacing:-.02em;margin:0}
+p{margin:0}
+img{display:block;max-width:100%}
+a{color:inherit}
+svg.i{width:20px;height:20px;flex:none;stroke-width:1.5}
+
+/* Controls. Accent text never sits on the page background: measured
+   4.27 against #F7F8FC, which fails AA. White on the accent is 4.53. */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-body);font-size:15px;font-weight:500;line-height:1;
+  padding:12px 18px;border-radius:var(--r-control);
+  border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);
+  text-decoration:none;cursor:pointer;
+}
+.btn.solid{background:var(--action);border-color:var(--action);color:#fff}
+.btn:focus-visible{outline:2px solid var(--action);outline-offset:2px}
+.card{background:var(--surface);border-radius:var(--r-card);border:1px solid var(--line)}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;background:var(--accent-soft);color:var(--ink);
+}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.micro{font-size:13px;line-height:1.5;color:var(--muted)}
+.read{font-family:var(--font-display);font-weight:700;letter-spacing:-.03em;line-height:1}
+.privacy{display:flex;gap:10px;align-items:flex-start}
+.privacy svg{color:var(--action)}
+.privacy a{color:var(--ink);text-underline-offset:3px}
+.spark{display:flex;align-items:flex-end;gap:8px;height:56px}
+.spark span{flex:1;max-width:18px;min-width:10px;background:var(--accent-soft);border-radius:3px 3px 0 0}
+.spark span.hi{background:var(--action)}
+.metric{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em}
+.metric small{font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--muted);letter-spacing:0}
+
+/* ---------------------------------------------------------------
+   PAGE CHROME - the stand itself, not a direction.
+----------------------------------------------------------------*/
+.page{max-width:1180px;margin:0 auto;padding:72px 20px 80px}
+@media (min-width:900px){.page{margin-left:220px;margin-right:0;max-width:1100px;padding:40px 40px 90px}}
+.page-head{max-width:70ch;margin-bottom:14px}
+.page-head h1{font-size:clamp(28px,4vw,40px);line-height:1.1}
+.page-head p{margin-top:14px;color:var(--muted);font-size:16px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--muted)}
+.chip i{width:14px;height:14px;border-radius:4px;display:block;border:1px solid var(--line-strong)}
+.dir{margin-top:56px;border-top:1px solid var(--line-strong);padding-top:28px}
+.dir-head{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:baseline;justify-content:space-between}
+.dir-head h2{font-size:clamp(20px,2.4vw,26px)}
+.dir-no{font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--muted)}
+.dir-why{margin-top:12px;max-width:78ch;font-size:15px;color:var(--muted)}
+.dir-why b{color:var(--ink);font-weight:600}
+.stage{margin-top:24px;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:clamp(16px,3vw,32px);overflow:hidden}
+
+/* ---------------------------------------------------------------
+   DIRECTION 1 - single column, wide air.
+   Only spacing, widths, photo ratio and stacking differ.
+----------------------------------------------------------------*/
+.d1 .col{max-width:620px;margin:0 auto;display:grid;gap:28px}
+.d1 .prog{overflow:hidden}
+.d1 .prog img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.d1 .prog-body{padding:28px}
+.d1 .prog h3{font-size:26px;margin-top:14px}
+.d1 .prog p{margin-top:12px;color:var(--muted)}
+.d1 .prog .btn{margin-top:22px}
+.d1 .pulse{padding:36px 28px;text-align:left}
+.d1 .pulse .read{font-size:56px;margin-top:10px}
+.d1 .pulse .interp{margin-top:14px;font-size:18px;max-width:38ch}
+.d1 .pulse .next{margin-top:28px;padding-top:22px;border-top:1px solid var(--line)}
+.d1 .pulse .btn{margin-top:12px}
+.d1 .facts{padding:28px;display:grid;gap:16px}
+.d1 .metric{font-size:30px}
+.d1 .strip{padding:22px 28px}
+
+/* ---------------------------------------------------------------
+   DIRECTION 2 - working desk, two columns, dense.
+----------------------------------------------------------------*/
+.d2 .grid{display:grid;gap:16px;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}
+.d2 .stackL,.d2 .stackR{display:grid;gap:16px}
+.d2 .pulse{padding:20px}
+.d2 .pulse .read{font-size:36px;margin-top:6px}
+.d2 .pulse .interp{margin-top:8px;font-size:15px;color:var(--muted)}
+.d2 .pulse .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.d2 .pulse .row .eyebrow{margin-right:auto}
+.d2 .prog{display:grid;grid-template-columns:132px minmax(0,1fr);gap:16px;padding:16px}
+.d2 .prog img{width:132px;height:132px;object-fit:cover;border-radius:10px}
+.d2 .prog h3{font-size:18px;margin-top:8px}
+.d2 .prog p{margin-top:6px;font-size:14px;color:var(--muted)}
+.d2 .prog .btn{margin-top:12px;padding:9px 14px;font-size:14px}
+.d2 .facts{padding:18px;display:grid;gap:12px}
+.d2 .metric{font-size:22px}
+.d2 .strip{padding:16px 18px}
+.d2 .kv{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:8px 0;border-top:1px solid var(--line)}
+.d2 .kv span:last-child{font-weight:600}
+
+/* ---------------------------------------------------------------
+   DIRECTION 3 - evidence band, asymmetric, proof always on screen.
+----------------------------------------------------------------*/
+.d3 .band{position:relative;border-radius:var(--r-card);overflow:hidden;margin-bottom:20px}
+.d3 .band img{width:100%;height:clamp(180px,26vw,300px);object-fit:cover}
+.d3 .band .badge{position:absolute;left:16px;top:16px}
+.d3 .grid{display:grid;gap:20px;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:start}
+.d3 .card{border:1px solid var(--line-strong);background:transparent}
+.d3 .card.filled{background:var(--surface)}
+.d3 .pulse{padding:26px}
+.d3 .pulse .read{font-size:44px;margin-top:8px}
+.d3 .pulse .interp{margin-top:12px;font-size:16px;max-width:40ch;color:var(--muted)}
+.d3 .pulse .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.d3 .prog{padding:22px;margin-top:20px}
+.d3 .prog h3{font-size:20px;margin-top:10px}
+.d3 .prog p{margin-top:8px;font-size:15px;color:var(--muted)}
+.d3 .prog .foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
+.d3 .proof{padding:22px}
+.d3 .proof h4{font-family:var(--font-display);font-size:16px;margin:0 0 14px}
+.d3 .proof ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.d3 .proof li{display:flex;gap:10px;font-size:14px;line-height:1.45}
+.d3 .proof li svg{margin-top:2px}
+.d3 .proof li.can svg{color:var(--action)}
+.d3 .proof li.cannot svg{color:var(--muted)}
+.d3 .proof .sep{margin:16px 0 14px;border:0;border-top:1px solid var(--line)}
+.d3 .facts{padding:22px;margin-top:20px;display:grid;gap:14px}
+.d3 .metric{font-size:26px}
+
+/* ---------------------------------------------------------------
+   RESPONSIVE - one shared set of rules, 360px up.
+----------------------------------------------------------------*/
+@media (max-width:860px){
+  .d2 .grid,.d3 .grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){
+  .page{padding:28px 16px 64px}
+  .d1 .col{gap:20px}
+  .d1 .prog-body,.d1 .pulse,.d1 .facts,.d1 .strip{padding:20px}
+  .d1 .pulse .read{font-size:44px}
+  .d2 .prog{grid-template-columns:minmax(0,1fr)}
+  .d2 .prog img{width:100%;height:160px}
+  .d3 .pulse .read{font-size:38px}
+}
+.values{margin-top:64px;border-top:1px solid var(--line-strong);padding-top:22px;font-size:13px;color:var(--muted);max-width:80ch}
+.values h2{font-size:15px;color:var(--ink);margin-bottom:10px}
+.values ul{margin:0;padding-left:18px;display:grid;gap:6px}
+</style>
+<link rel="stylesheet" href="../../_nav.css">
+</head>
+<body>
+
+<aside id="sidebar"></aside>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="ic-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10.4167C3 7.21907 3 5.62028 3.37752 5.08241C3.75503 4.54454 5.25832 4.02996 8.26491 3.00079L8.83772 2.80472C10.405 2.26824 11.1886 2 12 2C12.8114 2 13.595 2.26824 15.1623 2.80472L15.7351 3.00079C18.7417 4.02996 20.245 4.54454 20.6225 5.08241C21 5.62028 21 7.21907 21 10.4167C21 10.8996 21 11.4234 21 11.9914C21 17.6294 16.761 20.3655 14.1014 21.5273C13.38 21.8424 13.0193 22 12 22C10.9807 22 10.62 21.8424 9.89856 21.5273C7.23896 20.3655 3 17.6294 3 11.9914C3 11.4234 3 10.8996 3 10.4167Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12.4L10.9286 14L14.5 10"/></g></symbol>
+<symbol id="ic-cross" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5"/></g></symbol>
+<symbol id="ic-team" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="6" r="4"/><path stroke-linecap="round" d="M15 9C16.6569 9 18 7.65685 18 6C18 4.34315 16.6569 3 15 3"/><ellipse cx="9" cy="17" rx="7" ry="4"/><path stroke-linecap="round" d="M18 14C19.7542 14.3847 21 15.3589 21 16.5C21 17.5293 19.9863 18.4229 18.5 18.8704"/></g></symbol>
+<symbol id="ic-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M8.5 12.5L10.5 14.5L15.5 9.5"/></g></symbol>
+<symbol id="ic-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12H20M14 18L20 12L14 6"/></symbol>
+<symbol id="ic-chart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 22H21"/><path d="M3 11C3 10.0572 3 9.58579 3.29289 9.29289C3.58579 9 4.05719 9 5 9C5.94281 9 6.41421 9 6.70711 9.29289C7 9.58579 7 10.0572 7 11V17C7 17.9428 7 18.4142 6.70711 18.7071C6.41421 19 5.94281 19 5 19C4.05719 19 3.58579 19 3.29289 18.7071C3 18.4142 3 17.9428 3 17V11Z"/><path d="M10 7C10 6.05719 10 5.58579 10.2929 5.29289C10.5858 5 11.0572 5 12 5C12.9428 5 13.4142 5 13.7071 5.29289C14 5.58579 14 6.05719 14 7V17C14 17.9428 14 18.4142 13.7071 18.7071C13.4142 19 12.9428 19 12 19C11.0572 19 10.5858 19 10.2929 18.7071C10 18.4142 10 17.9428 10 17V7Z"/><path d="M17 4C17 3.05719 17 2.58579 17.2929 2.29289C17.5858 2 18.0572 2 19 2C19.9428 2 20.4142 2 20.7071 2.29289C21 2.58579 21 3.05719 21 4V17C21 17.9428 21 18.4142 20.7071 18.7071C20.4142 19 19.9428 19 19 19C18.0572 19 17.5858 19 17.2929 18.7071C17 18.4142 17 17.9428 17 17V4Z"/></g></symbol>
+</defs></svg>
+
+<div class="page">
+
+  <header class="page-head">
+    <p class="eyebrow">Brio concept, step 4</p>
+    <h1>Three layout directions, one brand</h1>
+    <p>The palette, the typefaces and the icon language are identical in all three and come from <code>DESIGN-artifacts.md</code>, sampled from the pixels of brand plate A. Only the composition changes: density, rhythm, how the card is built, how much air, where the badge sits, how large the photograph runs. The content is real product content taken from the wireframes, so the choice is made on the thing itself rather than on filler.</p>
+    <div class="legend">
+      <span class="chip"><i style="background:#F7F8FC"></i>#F7F8FC background</span>
+      <span class="chip"><i style="background:#FFFFFF"></i>#FFFFFF surface</span>
+      <span class="chip"><i style="background:#1D1D1D"></i>#1D1D1D ink</span>
+      <span class="chip"><i style="background:#A4BEF3"></i>#A4BEF3 soft accent</span>
+      <span class="chip"><i style="background:#346FEC"></i>#346FEC action</span>
+      <span class="chip"><i style="background:#5B6171"></i>#5B6171 muted</span>
+      <span class="chip">Inter Tight + Inter</span>
+      <span class="chip">Solar linear icons</span>
+    </div>
+  </header>
+
+  <!-- ============ DIRECTION 1 ============ -->
+  <section class="dir d1" id="dir-01">
+    <div class="dir-head">
+      <h2>Single column, wide air</h2>
+      <span class="dir-no">Direction 01</span>
+    </div>
+    <p class="dir-why"><b>What its layout answers.</b> A1, calm and plain: one narrow column, one thing at a time, nothing competing for the eye, so the surface lowers the guard instead of raising it. A3, restraint expressed as emptiness rather than as decoration. A4 gets the most room here, because the read and the next step can be set large and still sit inside one card. <b>The risk to weigh:</b> Priya lives on this screen daily, and a single column pushes participation and the privacy line below the fold on a laptop.</p>
+
+    <div class="stage">
+      <div class="col">
+
+        <article class="card prog">
+          <img src="https://images.unsplash.com/photo-1630487656049-6db93a53a7e9?auto=format&amp;fit=crop&amp;w=1200&amp;h=675&amp;q=80" alt="Four colleagues around a table, looking at printed pages together" width="1200" height="675">
+          <div class="prog-body">
+            <span class="badge">Recommended for your size</span>
+            <h3>Steady Weeks</h3>
+            <p class="micro" style="margin-top:8px">Weekly check-in, 1 question, runs continuously</p>
+            <p>A gentle weekly pulse on how the team is really doing. You get a plain-language read; no individual answers are ever shown to anyone.</p>
+            <a class="btn" href="#">Select<svg class="i" aria-hidden="true"><use href="#ic-arrow"></use></svg></a>
+          </div>
+        </article>
+
+        <article class="card pulse">
+          <p class="eyebrow">Your team pulse</p>
+          <p class="read">Steady</p>
+          <p class="interp">The team is holding steady this week, in line with last.</p>
+          <div class="next">
+            <p class="eyebrow">Suggested next step</p>
+            <a class="btn solid" href="#">Share with your owner</a>
+          </div>
+        </article>
+
+        <article class="card facts">
+          <p class="eyebrow">This week</p>
+          <div class="spark" aria-hidden="true"><span style="height:40%"></span><span style="height:55%"></span><span style="height:48%"></span><span class="hi" style="height:52%"></span><span class="hi" style="height:50%"></span></div>
+          <p class="metric">72% <small>of the team answered</small></p>
+          <p class="micro">Holding steady over the last five cycles. Aggregate only, never who.</p>
+        </article>
+
+        <article class="card strip">
+          <div class="privacy">
+            <svg class="i" aria-hidden="true"><use href="#ic-shield"></use></svg>
+            <div>
+              <p>Aggregate only. You never see who answered.</p>
+              <p style="margin-top:6px"><a class="micro" href="#">What your owner can and cannot see</a></p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIRECTION 2 ============ -->
+  <section class="dir d2" id="dir-02">
+    <div class="dir-head">
+      <h2>Working desk, two columns</h2>
+      <span class="dir-no" style="color:var(--ink)">Direction 02 - chosen</span>
+    </div>
+    <p class="dir-why" style="color:var(--ink)"><b>Chosen 18 August 2026,</b> and built out as the concept stand on <a href="concept.html">Concept</a>.</p>
+    <p class="dir-why"><b>What its layout answers.</b> The daily reality of the primary persona: the pulse, the participation, the privacy line and the next program are all on one screen without scrolling, which is the operator setup under five minutes and the owner review under two. A4 still holds, because the read and the next step stay inside the pulse card and never split into a bare metric tile. <b>The risk to weigh:</b> density is the shortest path to the clinical, surveillance-flavoured feel that A1 rules out, so every row added to the rail has to earn its place.</p>
+
+    <div class="stage">
+      <div class="grid">
+
+        <div class="stackL">
+          <article class="card pulse">
+            <p class="eyebrow">Your team pulse</p>
+            <p class="read">Steady</p>
+            <p class="interp">The team is holding steady this week, in line with last.</p>
+            <div class="row">
+              <span class="eyebrow">Suggested next step</span>
+              <a class="btn solid" href="#">Share with your owner</a>
+              <a class="btn" href="#">View full pulse</a>
+            </div>
+          </article>
+
+          <article class="card prog">
+            <img src="https://images.unsplash.com/photo-1630487656049-6db93a53a7e9?auto=format&amp;fit=crop&amp;w=400&amp;h=400&amp;q=80" alt="Four colleagues around a table, looking at printed pages together" width="400" height="400">
+            <div>
+              <span class="badge">Recommended</span>
+              <h3>Steady Weeks</h3>
+              <p class="micro" style="margin-top:4px">Weekly check-in, 1 question, runs continuously</p>
+              <p>A gentle weekly pulse on how the team is really doing. You get a plain-language read; no individual answers are ever shown to anyone.</p>
+              <a class="btn" href="#">Select</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="stackR">
+          <article class="card facts">
+            <p class="eyebrow">This week</p>
+            <div class="spark" aria-hidden="true"><span style="height:40%"></span><span style="height:55%"></span><span style="height:48%"></span><span class="hi" style="height:52%"></span><span class="hi" style="height:50%"></span></div>
+            <p class="metric">72% <small>answered</small></p>
+            <div>
+              <div class="kv"><span>Cycle</span><span>Closes Friday</span></div>
+              <div class="kv"><span>Trend</span><span>Steady</span></div>
+              <div class="kv"><span>Team</span><span>24 people</span></div>
+            </div>
+            <p class="micro">Holding steady over the last five cycles. Aggregate only, never who.</p>
+          </article>
+
+          <article class="card strip">
+            <div class="privacy">
+              <svg class="i" aria-hidden="true"><use href="#ic-shield"></use></svg>
+              <div>
+                <p style="font-size:15px">Aggregate only. You never see who answered.</p>
+                <p style="margin-top:6px"><a class="micro" href="#">What your owner can and cannot see</a></p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIRECTION 3 ============ -->
+  <section class="dir d3" id="dir-03">
+    <div class="dir-head">
+      <h2>Evidence band, proof always on screen</h2>
+      <span class="dir-no">Direction 03</span>
+    </div>
+    <p class="dir-why"><b>What its layout answers.</b> A2, proof shown rather than privacy promised: what the owner can and cannot see is a permanent panel on the right, not a link somebody has to go and find. A5 gets its own room, because the photograph runs as a band at real size instead of as a thumbnail, which is where the human register lives. Cards carry a line rather than a fill, so the page reads structural, which is A3. <b>The risk to weigh:</b> the band costs vertical space on a 360px screen, and a permanent proof panel competes with the one main action the wireframe contract allows per screen.</p>
+
+    <div class="stage">
+      <div class="band">
+        <img src="https://images.unsplash.com/photo-1630487656049-6db93a53a7e9?auto=format&amp;fit=crop&amp;w=1800&amp;h=520&amp;q=80" alt="Four colleagues around a table, looking at printed pages together" width="1800" height="520">
+        <span class="badge">Recommended for your size</span>
+      </div>
+
+      <div class="grid">
+        <div>
+          <article class="card filled pulse">
+            <p class="eyebrow">Your team pulse</p>
+            <p class="read">Steady</p>
+            <p class="interp">The team is holding steady this week, in line with last.</p>
+            <div class="btns">
+              <a class="btn solid" href="#">Share with your owner</a>
+              <a class="btn" href="#">View full pulse</a>
+            </div>
+          </article>
+
+          <article class="card prog">
+            <p class="eyebrow">Program</p>
+            <h3>Steady Weeks</h3>
+            <p>A gentle weekly pulse on how the team is really doing. You get a plain-language read; no individual answers are ever shown to anyone.</p>
+            <div class="foot">
+              <a class="btn" href="#">Select</a>
+              <span class="micro">Weekly check-in, 1 question, runs continuously</span>
+            </div>
+          </article>
+
+          <article class="card facts">
+            <p class="eyebrow">This week</p>
+            <div class="spark" aria-hidden="true"><span style="height:40%"></span><span style="height:55%"></span><span style="height:48%"></span><span class="hi" style="height:52%"></span><span class="hi" style="height:50%"></span></div>
+            <p class="metric">72% <small>of the team answered</small></p>
+            <p class="micro">Holding steady over the last five cycles. Aggregate only, never who.</p>
+          </article>
+        </div>
+
+        <aside class="card filled proof">
+          <h4>What your owner can and cannot see</h4>
+          <ul>
+            <li class="can"><svg class="i" aria-hidden="true"><use href="#ic-check"></use></svg><span>The team score and its plain-language read</span></li>
+            <li class="can"><svg class="i" aria-hidden="true"><use href="#ic-chart"></use></svg><span>The trend across cycles</span></li>
+            <li class="can"><svg class="i" aria-hidden="true"><use href="#ic-team"></use></svg><span>How many people answered, after the cycle closes</span></li>
+          </ul>
+          <hr class="sep">
+          <ul>
+            <li class="cannot"><svg class="i" aria-hidden="true"><use href="#ic-cross"></use></svg><span>Any individual answer</span></li>
+            <li class="cannot"><svg class="i" aria-hidden="true"><use href="#ic-cross"></use></svg><span>Who answered, or who did not</span></li>
+            <li class="cannot"><svg class="i" aria-hidden="true"><use href="#ic-cross"></use></svg><span>A score before 5 people have answered</span></li>
+          </ul>
+          <p class="micro" style="margin-top:16px">Aggregate only. There is no live count while a cycle is open.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="values" id="values">
+    <h2>Values used on this page, and where each came from</h2>
+    <ul>
+      <li>Palette: the six values above, taken from the pixels of <code>design/concept/assets/brand-plate-a.png</code>, not from the captions printed on it. Recorded in the root <code>DESIGN-artifacts.md</code>.</li>
+      <li>Accent discipline: <code>#346FEC</code> marks what can be acted on and nothing else. It is never used as text on the page background, where it measures 4.27 and fails AA; white on it measures 4.53 and passes.</li>
+      <li>Typefaces: Inter Tight for display and Inter for body, chosen against the character of plate A, with tabular figures because the score and participation are numbers that carry meaning.</li>
+      <li>Icons: Solar linear, one weight, inline SVG, no icon font and no CDN.</li>
+      <li>Photograph: Unsplash <code>photo-1630487656049-6db93a53a7e9</code>. The same image runs in all three directions on purpose, so the only thing that changes between them is the composition.</li>
+      <li>Copy: taken from the wireframes at nodes 4.0 Dashboard and 5.0 Program library, which are governed by <code>voice/docs/voice.md</code>. Nothing here is written fresh.</li>
+    </ul>
+  </section>
+
+</div>
+
+<script>
+  window.NAV_BASE = '../../';
+  window.NAV_SECTIONS = [
+    {"id":"dir-01","label":"01 Single column"},
+    {"id":"dir-02","label":"02 Working desk"},
+    {"id":"dir-03","label":"03 Evidence band"},
+    {"id":"values","label":"Values used"}
+  ];
+</script>
+<script src="../../_nav.js"></script>
+
+</body>
+</html>

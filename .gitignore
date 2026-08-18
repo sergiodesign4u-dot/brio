@@ -3,3 +3,6 @@
 
 # Playwright MCP scratch output (screenshots, console/page dumps)
 .playwright-mcp/
+
+# Brand plate sources: 64MB of generated PNG. The web-sized JPEGs beside them are what the pages use.
+design/concept/assets/*.png

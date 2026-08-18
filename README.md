@@ -33,7 +33,7 @@ Employee wellbeing SaaS for small businesses with no HR team. Gives the person h
 | Information Architecture (Base + Detail) | Done (Base Layer: flows.html + concept-map.html. Detail Layer: sitemap.html + structure.html + all node specs in ia/docs/pages/ + ia/<node>.html) |
 | Wireframes | Done. Grey clickable prototype of the whole product: overview.html (all-screens hub + coverage map), index.html (product home), 47 of 47 screens, 99 state pages, shared grey _wf.css. Every internal link resolves; greyscale and one-H1 clean; audited in wireframes/docs/critique.md. |
 | Voice | Done. The rules by which Brio speaks, applied to all 99 screens. voice/docs/voice.md (tone, five principles, dictionary, forbidden, microcopy rules), voice/docs/microcopy.md (full text inventory with was/now), voice/voice.html. Only text changed, never markup. |
-| Concept | In progress. References and designer taste recorded (design/concept/docs/), three brand plates generated (design/concept/assets/). Remaining: directions.html, concept.html, DESIGN-artifacts.md, design/_theme.css, two coloured screens. |
+| Concept | In progress. Brand plate A chosen and layout direction 02 chosen. Root DESIGN-artifacts.md holds the brand with an origin on every value: palette sampled from the pixels of the plate, Inter Tight and Inter, icon language, UI tone. design/concept/directions.html shows the three layout directions; design/concept/concept.html is the stand (language live, attributes, palette with measured contrast, typography, shape, photography, icons, brand and references, three components). Remaining: design/_theme.css and the two coloured screens. |
 | UI + Visual | Not started |
 | Tokens + Components | Not started |
 | Design System | Not started |
