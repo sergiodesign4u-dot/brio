@@ -93,6 +93,7 @@
   --space-icon-inset: 42px;      /* icon 20 plus the gutters on both sides */
   --space-icon-inset-sm: 26px;   /* icon 16 plus one gutter */
   --space-icon-stack: 34px;      /* an icon standing above a centred heading */
+  --space-hair: 2px;             /* the smallest optical nudge, an icon against a line of text */
 }
 
 /* Deliberate literals, and the only ones allowed in a rule below: hairlines (1px and
@@ -213,7 +214,13 @@ a.wf-btn:hover, button.wf-btn:hover { border-color: var(--color-muted); }
 .wf-btn:focus-visible { outline: 2px solid var(--color-action); outline-offset: 2px; }
 .wf-btns { display: flex; gap: var(--space-3); flex-wrap: wrap; }
 /* replaces style="margin-top:16px" on the grey original */
-.wf-pulse + .wf-btns { margin-top: var(--space-4); }
+/* a row of actions carries its own top margin wherever it stands, rather than
+   being patched once per container. Three identical context rules were folded
+   into this one at stage 07 step 6. */
+.wf-pulse + .wf-btns,
+.wf-narrow .wf-btns,
+.wf-dialog .wf-btns,
+.wf-progcard .wf-btns { margin-top: var(--space-4); }
 /* replaces style="justify-content:center" inside a state block */
 .wf-state .wf-btns { justify-content: center; }
 
@@ -370,7 +377,6 @@ a.wf-btn:hover, button.wf-btn:hover { border-color: var(--color-muted); }
 .wf-narrow > .wf-strip2 { margin: var(--space-5) 0; }
 .wf-narrow form { margin-top: var(--space-5); }
 .wf-narrow fieldset { border: 0; padding: 0; margin: 0 0 var(--space-2); }
-.wf-narrow .wf-btns { margin-top: var(--space-4); }
 .wf-narrow .wf-skel + p { margin: var(--space-5) 0; }
 .wf-btn.block { display: flex; width: 100%; justify-content: center; text-align: center; }
 .wf-btn:disabled { opacity: .45; cursor: not-allowed; }
@@ -446,6 +452,11 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
 .wf-see .see-body { padding: var(--space-4); background: var(--color-bg); }
 .wf-see .see-body .wf-card { margin-bottom: 0; }
 .wf-see .see-body .wf-micro { margin-bottom: var(--space-3); }
+/* PULSE CARD, EMBEDDED VARIANT. Inside the proof disclosure the pulse card is a
+   quotation of the owner's screen rather than the screen itself, so it stands at
+   control radius and card padding. It is selected by context and not by a class
+   because the markup belongs to wireframes/ and a copy may not add one; the
+   variant is therefore declared here and recorded in inventory.md. */
 .wf-see .see-body .wf-pulse { border-radius: var(--radius-control); padding: var(--space-4); }
 .wf-see .see-body .wf-spark { margin-top: var(--space-4); }
 
@@ -455,7 +466,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
   padding-left: var(--space-icon-inset-sm); margin-top: var(--space-4);
 }
 .wf-cannot::before {
-  content: ""; position: absolute; left: 0; top: 2px; width: var(--size-icon-sm); height: var(--size-icon-sm);
+  content: ""; position: absolute; left: 0; top: var(--space-hair); width: var(--size-icon-sm); height: var(--size-icon-sm);
   background-color: var(--color-muted);
   -webkit-mask: var(--icon-cross) center / contain no-repeat;
           mask: var(--icon-cross) center / contain no-repeat;
@@ -485,7 +496,8 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
 /* ---- values this step needed and the component that needed each ---- */
 :root {
   --color-overlay: rgba(29, 29, 29, .45);  /* derived from --color-ink, needed by the dialog */
-  --size-media: 260px;      /* the media slot, geometry carried from the wireframe */
+  --size-media-sm: 140px;   /* the media slot at its resting size, carried from the wireframe */
+  --size-media: 260px;      /* the media slot when it holds a product screenshot, the .shot modifier */
   --size-media-tall: 340px; /* the tall media slot, same origin */
   --size-dialog: 440px;     /* the dialog panel, geometry carried from the wireframe */
   --size-switch: 40px;      /* one segment of the document switch, derived from --size-touch */
@@ -497,6 +509,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
   --size-logo-w: 104px;                     /* one logo in the social proof strip */
   --size-logo-h: 34px;
   --size-avatar: 46px;                      /* the one testimonial avatar */
+  --size-auth: 960px;                       /* the split auth column pair, carried from the wireframe */
 }
 
 /* ===================== marketing shell ===================== */
@@ -504,7 +517,7 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
 .wf-navlink { font-size: var(--size-nav); color: var(--color-muted); text-decoration: none; padding: var(--space-3) 0; }
 .wf-navlink:hover { color: var(--color-ink); }
 @media (max-width: 640px) { .wf-navlinks { display: none; } }
-.wf-appbar-inner .wf-btn { padding: var(--space-2) var(--space-4); min-height: 0; }
+.wf-btn.compact { padding: var(--space-2) var(--space-4); min-height: 0; }
 
 .wf-pubfoot { border-top: 1px solid var(--color-line); background: var(--color-surface); margin-top: var(--space-5); }
 .wf-pubfoot-inner { max-width: var(--size-content); margin: 0 auto; padding: var(--space-7) var(--space-5); }
@@ -514,6 +527,20 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
 .wf-foot-col h3 { font-size: var(--size-eyebrow); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--color-muted); margin-bottom: var(--space-3); }
 .wf-foot-col a { display: block; font-size: var(--size-nav); color: var(--color-muted); text-decoration: none; margin-bottom: var(--space-2); }
 .wf-foot-col a:hover { color: var(--color-ink); }
+
+/* ===================== split auth (sign up, log in, reset) ===================== */
+.wf-auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); align-items: center; max-width: var(--size-auth); margin: 0 auto; }
+.wf-auth-brand { display: flex; flex-direction: column; gap: var(--space-4); }
+/* the row already carries an icon slot in the markup, so the slot is filled
+   rather than a second icon being drawn beside it */
+.wf-auth-proof { display: flex; align-items: center; gap: var(--space-3); font-size: var(--size-ui); color: var(--color-ink); }
+.wf-auth-proof .wf-ico { background: none; width: var(--size-icon); height: var(--size-icon); }
+.wf-auth-proof .wf-ico::before {
+  width: var(--size-icon); height: var(--size-icon); background-color: var(--color-action);
+  -webkit-mask-image: var(--icon-shield); mask-image: var(--icon-shield);
+}
+/* the brand panel goes away on a narrow screen so signing up stays one fast column */
+@media (max-width: 760px) { .wf-auth-grid { grid-template-columns: 1fr; } .wf-auth-brand { display: none; } }
 
 /* ===================== marketing content ===================== */
 .wf-mkt section { margin-bottom: var(--space-7); }
@@ -533,10 +560,13 @@ input[type="radio"], input[type="checkbox"] { accent-color: var(--color-action);
 
 /* ===================== media, where a photograph lands ===================== */
 .wf-media {
-  display: block; width: 100%; min-height: var(--size-media);
+  display: block; width: 100%; min-height: var(--size-media-sm);
   border-radius: var(--radius-card); overflow: hidden; background: var(--color-bg);
 }
 .wf-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* the modifier names are the wireframe's, not new ones: the markup belongs to
+   wireframes/ and a second name for the same thing is drift, not a variant */
+.wf-media.shot { min-height: var(--size-media); }
 .wf-media.tall { min-height: var(--size-media-tall); }
 
 /* ===================== chip and status ===================== */
@@ -580,7 +610,6 @@ button.wf-status { background: var(--color-surface); cursor: pointer; font-famil
 .wf-overlay { position: fixed; inset: 0; background: var(--color-overlay); display: flex; align-items: center; justify-content: center; padding: var(--space-5); z-index: 60; }
 .wf-dialog { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); max-width: var(--size-dialog); width: 100%; padding: var(--space-6); }
 .wf-dialog h2 { margin-bottom: var(--space-2); }
-.wf-dialog .wf-btns { margin-top: var(--space-5); }
 
 /* ===================== form primitives still grey until now ===================== */
 .wf-textarea {
@@ -606,8 +635,7 @@ select.wf-input { appearance: none; background-image: var(--icon-chevron); backg
 
 /* ---- layout helpers the sample screens need, ported from their wireframes ---- */
 .pg-facets { display: flex; gap: var(--space-2); flex-wrap: wrap; margin: var(--space-5) 0 var(--space-4); }
-.pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-4); }
-.wf-progcard .wf-btns { margin-top: var(--space-4); }
+.pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--size-progcard), 1fr)); gap: var(--space-4); }
 .wf-progcard .badges { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3); }
 .wf-contact { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-6); align-items: start; }
 @media (max-width: 720px) { .wf-contact { grid-template-columns: 1fr; } }

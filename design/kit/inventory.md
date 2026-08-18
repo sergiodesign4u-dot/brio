@@ -18,7 +18,7 @@
 
 | Component | Variants | Screens | States | Photo |
 |---|---|---|---|---|
-| **Button** `.wf-btn` | emphasis: solid / outline. content: label (every occurrence). size: one, set by the container. width: full or auto, which is layout and not a variant | 85 of 99 | default, hover, disabled, plus the pending label ("Sending...", "Saving...") | no |
+| **Button** `.wf-btn` | emphasis: solid / outline. content: label (every occurrence). size: one in the product, plus `compact` in the app bar, declared at stage 07 step 6 so the bar stops bending the component from a context. width: full or auto, which is layout and not a variant | 85 of 99 | default, hover, disabled, plus the pending label ("Sending...", "Saving...") | no |
 | **Chip** `.wf-tag` | emphasis: outline, and solid when selected | 8 | default, selected | no |
 | **Icon slot** `.wf-ico` | size: 42px, 30px small; shape: square, round | 6 | one | no, it becomes a Solar glyph |
 | **Input** `.wf-input` | content: text, email, code | 32 | default, focus, error, disabled | no |
@@ -71,8 +71,10 @@ The privacy strip on 42 of 99 screens is the most repeated component in the prod
 | **Public footer** `.wf-pubfoot` | content: trust line plus four columns | 16 | one | no |
 | **State block** `.wf-state` | content: title, sentence, action; error variant carries a mark | 17 | empty, error, waiting, no program, expired, already done | no |
 | **System block** `.wf-sys` | content: head plus body | 2 | one | no |
-| **Form** (`form` with fields and one action) | content: single field, several fields, field plus radio group | 30 | default, error, submitting | no |
+| **Split auth** `.wf-auth-grid` | content: the form beside a brand panel that carries three proof lines; the panel disappears under 760px so signing up stays one fast column | 2 | one | **yes** |
 | **Dialog** `.wf-overlay` plus `.wf-dialog` | content: title, body, action row. Merged from six: log in, upgrade, end program, delete account, manage roster, cookie consent | 7 | default, danger | no |
+
+**Form is a composition, not a styled component.** It is on 30 screens and it carries no rules of its own: a form in this product is a stack of fields plus one action, and every value in it belongs to the field, the input and the button. It was listed as a level 3 component in the first pass of this inventory and Codex caught the mismatch at step 6, because the kit has no `form` rule to match the row. The row is corrected rather than the kit: adding a rule to satisfy a table would have been the tail wagging the dog.
 
 The dialog row is the merge rule doing its work: six dialogs across the product share one anatomy (overlay, panel, title, body, action row), so they are one component with variants rather than six rows that stage 08 would honestly give six css files and six showcase pages.
 
@@ -85,6 +87,12 @@ Each of these appears on exactly one screen. They stay on their screen until sta
 `.wf-avatar` and `.wf-person` (about), `.wf-quote` and `.wf-quote-by` (one testimonial), `.wf-logos` and `.wf-logo` (one social proof strip), `.wf-plans` and `.wf-plan` (pricing), `.wf-faq`, `.wf-faqrow`, `.wf-faqq`, `.wf-faqa` (help), `.wf-toc`, `.wf-doc`, `.wf-legal`, `.wf-updated` (legal), `.wf-flow` (about), `.wf-team` (about), `.wf-search` (help), `.wf-pill`, `.wf-eta`, `.wf-quick`, `.wf-rec` (single screens), `.wf-show`, `.wf-showrow` (one screen), `.wf-usebar` (settings), `.wf-hyp` (one screen), `.wf-pending` (six occurrences, all on one screen), `.wf-saved`, `.wf-cannot`, `.wf-contact`.
 
 Three of these are worth watching, because they are one-offs today and patterns tomorrow: `.wf-cannot` ("what they never see"), `.wf-saved` ("answers saved") and `.wf-pending`. All three carry the trust argument, and if a second screen picks any of them up, it moves into the kit rather than being copied.
+
+## Layout helpers, in the kit but not components
+
+*Compositions rather than components: they arrange things and carry no identity of their own. They are listed because a selector in the kit that appears in no list is an unrecorded decision, which is how a system grows parts nobody chose.*
+
+`.wf-grid3` and `.wf-grid4` (three and four up card rows on the marketing pages), `.wf-tags` (a row of chips), `.wf-cta-final` (the closing call to action band), `.pg-facets` and `.pg-grid` (the program library filter row and its reflowing grid), `.wf-contact` (the contact page's two column split), `.wf-hero-grid` (copy beside a visual). Each one is layout only: no colour, no type, no radius.
 
 ---
 

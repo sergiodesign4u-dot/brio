@@ -48,7 +48,7 @@ window.NAV = [
     ],
   },
 
-  { label: 'UI + Visual', page: 'design/overview.html', done: true, wip: true },
+  { label: 'UI + Visual', page: 'design/overview.html', done: true },
   { label: 'Tokens + Components', page: 'design/kit/overview.html', done: false },
   { label: 'Design System', page: 'design/kit/why.html', done: false },
   { label: 'Responsive', page: null, done: false },

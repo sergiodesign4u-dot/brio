@@ -44,6 +44,12 @@ table.k-t tr:last-child td { border-bottom: none; }
 .k-type-spec { min-width: 210px; font-size: var(--size-tag); letter-spacing: .04em; text-transform: uppercase; color: var(--color-muted); }
 .k-bar { height: 12px; background: var(--color-action); border-radius: var(--radius-bar); }
 .k-shape { height: 64px; background: var(--color-accent-soft); }
+.k-gap-lg { margin-top: var(--space-7); }
+.k-gap-md { margin-top: var(--space-6); }
+.k-gap-sm { margin-top: var(--space-4); }
+.k-stack { display: grid; gap: var(--space-3); }
+.k-flush { padding: 0; overflow: hidden; margin-top: var(--space-5); }
+.k-shellpad { padding-top: var(--space-5); padding-bottom: var(--space-5); }
 .k-foot { margin-top: 72px; padding-top: var(--space-5); border-top: 1px solid var(--color-line-strong); font-size: var(--size-micro); color: var(--color-muted); }
 </style>
 <link rel="stylesheet" href="../../_nav.css">
@@ -67,7 +73,7 @@ table.k-t tr:last-child td { border-bottom: none; }
     <h2>Tokens</h2>
     <p class="k-lede">The whole <code>:root</code> block, alive. Every value carries the origin it came with, taken from the comment beside the variable rather than restated here.</p>
 
-    <h3 class="k-label" style="margin-top:28px">Colour</h3>
+    <h3 class="k-label k-gap-md">Colour</h3>
     <div class="k-grid k-cols-3">
       <div class="k-tile"><div class="k-chip" style="background:var(--color-bg)"></div><div class="k-meta"><p class="k-val">#F7F8FC</p><p class="k-role">--color-bg, the page canvas</p><span class="k-origin">pixel of plate A</span></div></div>
       <div class="k-tile"><div class="k-chip" style="background:var(--color-surface)"></div><div class="k-meta"><p class="k-val">#FFFFFF</p><p class="k-role">--color-surface, cards and bars</p><span class="k-origin">pixel of plate A</span></div></div>
@@ -81,8 +87,8 @@ table.k-t tr:last-child td { border-bottom: none; }
     </div>
     <p class="k-note">There is no success colour in this palette and that is a decision, not an omission: a confirmation states the fact in ink and the soft accent, and never celebrates (voice P3, decision D-16). The one measured contrast failure is also a rule: the action colour on the page background is 4.27, so accent text sits on white or it is not accent.</p>
 
-    <h3 class="k-label" style="margin-top:36px">Type</h3>
-    <div class="k-stage" style="margin-top:16px">
+    <h3 class="k-label k-gap-lg">Type</h3>
+    <div class="k-stage k-gap-sm">
       <div class="k-type-row"><span class="k-type-spec">--size-hero, marketing only</span><span style="font-family:var(--font-display);font-size:var(--size-hero);font-weight:700;letter-spacing:-.02em">Run wellbeing without HR</span></div>
       <div class="k-type-row"><span class="k-type-spec">--size-display, the page h1</span><span style="font-family:var(--font-display);font-size:var(--size-display);font-weight:700;letter-spacing:-.02em">Your team pulse</span></div>
       <div class="k-type-row"><span class="k-type-spec">--size-read, the pulse read</span><span style="font-family:var(--font-display);font-size:var(--size-read);font-weight:700;letter-spacing:-.03em;line-height:1">Steady</span></div>
@@ -97,21 +103,21 @@ table.k-t tr:last-child td { border-bottom: none; }
     </div>
     <p class="k-note">Inter Tight for display, Inter for body, chosen against the character of the brand plate and approved by the designer. Figures are tabular everywhere, so a score does not shift sideways as it changes.</p>
 
-    <h3 class="k-label" style="margin-top:36px">Shape and rhythm</h3>
+    <h3 class="k-label k-gap-lg">Shape and rhythm</h3>
     <div class="k-grid k-cols-3">
       <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-control)"></div><div class="k-meta"><p class="k-val">8px</p><p class="k-role">--radius-control, buttons, inputs, the privacy strip</p><span class="k-origin">plate A, UI zone</span></div></div>
       <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-card)"></div><div class="k-meta"><p class="k-val">16px</p><p class="k-role">--radius-card, cards and panels</p><span class="k-origin">plate A, UI zone</span></div></div>
       <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-pill)"></div><div class="k-meta"><p class="k-val">999px</p><p class="k-role">--radius-pill, badges and pills, never a button</p><span class="k-origin">attribute A3</span></div></div>
       <div class="k-tile"><div class="k-shape" style="background:var(--color-surface);border:1px solid var(--color-line);border-radius:var(--radius-card)"></div><div class="k-meta"><p class="k-val">1px hairline</p><p class="k-role">the only separator, no shadow exists in this system</p><span class="k-origin">attribute A3</span></div></div>
     </div>
-    <div class="k-stage" style="margin-top:16px;display:grid;gap:10px">
-      <div class="k-row"><i class="k-bar" style="width:4px"></i><span class="k-note" style="margin:0">--space-1, inside a control</span></div>
-      <div class="k-row"><i class="k-bar" style="width:8px"></i><span class="k-note" style="margin:0">--space-2, between related lines</span></div>
-      <div class="k-row"><i class="k-bar" style="width:12px"></i><span class="k-note" style="margin:0">--space-3, inside a card</span></div>
-      <div class="k-row"><i class="k-bar" style="width:16px"></i><span class="k-note" style="margin:0">--space-4, between cards</span></div>
-      <div class="k-row"><i class="k-bar" style="width:20px"></i><span class="k-note" style="margin:0">--space-5, card padding</span></div>
-      <div class="k-row"><i class="k-bar" style="width:28px"></i><span class="k-note" style="margin:0">--space-6, between blocks</span></div>
-      <div class="k-row"><i class="k-bar" style="width:40px"></i><span class="k-note" style="margin:0">--space-7, the page gutter on desktop</span></div>
+    <div class="k-stage k-gap-sm k-stack">
+      <div class="k-row"><i class="k-bar" style="width:var(--space-1)"></i><span class="k-note" style="margin:0">--space-1, inside a control</span></div>
+      <div class="k-row"><i class="k-bar" style="width:var(--space-2)"></i><span class="k-note" style="margin:0">--space-2, between related lines</span></div>
+      <div class="k-row"><i class="k-bar" style="width:var(--space-3)"></i><span class="k-note" style="margin:0">--space-3, inside a card</span></div>
+      <div class="k-row"><i class="k-bar" style="width:var(--space-4)"></i><span class="k-note" style="margin:0">--space-4, between cards</span></div>
+      <div class="k-row"><i class="k-bar" style="width:var(--space-5)"></i><span class="k-note" style="margin:0">--space-5, card padding</span></div>
+      <div class="k-row"><i class="k-bar" style="width:var(--space-6)"></i><span class="k-note" style="margin:0">--space-6, between blocks</span></div>
+      <div class="k-row"><i class="k-bar" style="width:var(--space-7)"></i><span class="k-note" style="margin:0">--space-7, the page gutter on desktop</span></div>
     </div>
   </section>
 
@@ -278,7 +284,7 @@ table.k-t tr:last-child td { border-bottom: none; }
             <p class="title">Steady Weeks</p>
             <p class="meta">Weekly check-in, 1 question, runs continuously</p>
             <p class="desc">A gentle weekly pulse on how the team is really doing. You get a plain-language read; no individual answers are ever shown to anyone.</p>
-            <div class="wf-btns" style="margin-top:14px"><a class="wf-btn" href="#components">Select</a></div>
+            <div class="wf-btns k-gap-sm"><a class="wf-btn" href="#components">Select</a></div>
           </div>
         </div>
       </div>
@@ -355,7 +361,7 @@ table.k-t tr:last-child td { border-bottom: none; }
     <h2>Shell</h2>
     <p class="k-lede">A kit made only of css cannot dress what has no skeleton, so the frame is markup: <a href="shell.html">shell.html</a> holds all five, ready to copy. The operator frame is below, live.</p>
 
-    <div class="k-stage" style="margin-top:20px;padding:0;overflow:hidden">
+    <div class="k-stage k-flush">
       <div class="wf-screen" style="min-height:0">
         <nav class="wf-appbar" aria-label="Brio app">
           <div class="wf-appbar-inner">
@@ -370,7 +376,7 @@ table.k-t tr:last-child td { border-bottom: none; }
             <a class="wf-settings" href="#shell">Settings</a>
           </div>
         </nav>
-        <div class="wf-content" style="padding-top:20px;padding-bottom:20px">
+        <div class="wf-content k-shellpad">
           <p class="wf-eyebrow">Welcome back, Priya</p>
           <p class="wf-lead">The frame only. The screen that goes inside it is assembled from the components above.</p>
         </div>
@@ -384,7 +390,7 @@ table.k-t tr:last-child td { border-bottom: none; }
 
   <footer class="k-foot">
     <p><b>Brio component kit, stage 07.</b> Values: <code>design/kit/kit.css</code>. Inventory: <code>design/kit/inventory.md</code>. The language: the root <code>DESIGN.md</code>. Text: <code>voice/docs/voice.md</code>.</p>
-    <p style="margin-top:6px">Flat on purpose: one <code>:root</code>, no semantic roles yet. Roles are only visible after components have stood on real screens, and naming them earlier makes half of them wrong. The split into two token levels is stage 08.</p>
+    <p class="k-gap-sm">Flat on purpose: one <code>:root</code>, no semantic roles yet. Roles are only visible after components have stood on real screens, and naming them earlier makes half of them wrong. The split into two token levels is stage 08.</p>
   </footer>
 
 </div>

@@ -41,7 +41,8 @@ Strategic line held throughout: Brio looks like a **privacy and trust product**,
 ### A1. Calm and plain, not clinical or surveillance-flavored
 
 - **From the data:** benchmark **C6** (team reporting must feel honest and non-judgmental, "rather than clinical, corporate, or surveillance-flavored"); Yemi **E3/E4** (the first check-in is the trust-forming moment and must feel safe); `voice.md` **P5** (quiet against a loud category).
-- **Technique (`references.md`):** Signal's light, airy split sections and one soft blue on flat backgrounds. No dark data-terminal, no dense clinical grid. The surface itself should lower the guard, not raise it.
+- **Technique (`references.md`):** Signal's light split sections and one soft blue on flat backgrounds. No dark data-terminal, no clinical grid. The surface itself should lower the guard, not raise it.
+- **Amended at stage 07 step 6, decided from the mockups:** the word was "airy", and the product is deliberately not airy. Layout direction 02, the working desk, puts the pulse, the participation, the privacy line and the next program on one screen without scrolling, because that is what the operator needs weekly (D-15). The attribute now reads **light and unhurried at any density**: paper against white, hairlines instead of shadows, one accent, generous line height. Density is allowed; noise is not, and every row added to the rail still has to earn its place.
 
 ### A2. Proof shown, not privacy promised
 
@@ -61,7 +62,8 @@ Strategic line held throughout: Brio looks like a **privacy and trust product**,
 ### A5. Personable and human, not faceless-corporate nor infantile
 
 - **From the data:** Designer's Taste (Signal warmth, monobank character); `research/docs/ux-patterns.md` **B4** ("a knowledgeable peer, not a data terminal"); both anti-references rejected at once (corporate stock-SaaS *and* playful blobs).
-- **Technique (`references.md`):** Signal's human warmth plus monobank's character-in-the-details, rendered with real photography of real small teams (not stock-smiley, not blob illustration) and Linear's disciplined type. The tone is a colleague who has done this before, calm and specific.
+- **Technique (`references.md`):** Signal's human warmth plus monobank's character-in-the-details, rendered with photography of real working teams (not stock-smiley, not blob illustration) and Linear's disciplined type. The tone is a colleague who has done this before, calm and specific.
+- **Amended at stage 07 step 6, decided from the mockups:** photography carries A5 **where the product is being explained**, which is the public surfaces and the sign-up panel, and where a wireframe actually holds a media slot. Inside the operator dashboard and the employee check-in there is no photograph and there should not be one: a picture of strangers on the screen where somebody reports a hard week is decoration, and decoration is what A3 rules out. In the interior the human register is carried by plain wording, by the human scale of the type, and by the soft accent. From stage 07 the imagery is Brio's own, generated in one recorded colour grade, rather than stock (`design/visuals/README.md`).
 
 ---
 
@@ -119,13 +121,13 @@ The named risk, carried forward rather than forgotten: density is the shortest p
 
 ---
 
-## Divergence between the attributes and the mockups, open
+## Divergence between the attributes and the mockups, decided
 
-*Written at stage 07 step 1. From here on the mockups are the living truth and this file follows them, but an attribute is not overwritten silently: it was derived at stage 06 from a line in `personas.md`, and it is what keeps the look tied to data about people. Each row waits for a decision.*
+*Written at stage 07 step 1, decided at step 6. From here on the mockups are the living truth and this file follows them, but an attribute is not overwritten silently: it was derived at stage 06 from a line in `personas.md`, and it is what keeps the look tied to data about people. Both rows below were resolved by amending the attribute rather than the mockup, and both amendments are written into the attributes above so nobody has to read this table to know the rule.*
 
 | Attribute | The line it grew from | What the mockups actually do | The two ways out |
 |---|---|---|---|
 | **A5** Personable and human, technique: "real photography of real small teams" | Designer's taste, and `ux-patterns.md` B4, "a knowledgeable peer, not a data terminal" | Neither coloured product screen carries a photograph. 4.0 Dashboard and the whole check-in have no media placeholder in the grey original, and a copy owns the visual layer only, so there is nowhere to put one. Warmth on these screens comes from the wording, the soft accent and the human scale of the type | **Fix the mockup:** open the IA and the wireframe, add a media slot to a product screen, then colour it. **Amend the attribute:** say that photography carries A5 on the public and marketing surfaces and on the stand, while inside the product the human register is carried by plain wording and by the soft accent, never by stock imagery |
 | **A1** Calm and plain, technique: "Signal's light, airy split sections" | Benchmark C6, reporting must feel honest and non-judgmental rather than clinical; Yemi E3 and E4 | The operator screen is deliberately dense: layout direction 02, the working desk, chosen at stage 06 step 5 so the pulse, the participation, the privacy line and the next program sit on one screen without scrolling. It is light, but it is not airy | **Fix the mockup:** give the dashboard back its air and accept that participation and the privacy line fall below the fold on the screen used weekly. **Amend the attribute:** keep "calm and plain" and replace "airy" with "light and unhurried at any density", recording that D-15 already accepted the density together with the constraint that every row added to the rail has to earn its place |
 
-Until a decision is made, the attributes above stand as written and the mockups stand as built. Both are visible here, which is the point: after this file is aligned to the mockups, nobody would ever see the difference again.
+**Decision on both rows: the attribute was amended, not the mockup.** In each case the mockup turned out to be the more honest reading of the same persona line. A5 grew out of "a knowledgeable peer, not a data terminal", and a peer does not hang photographs of strangers in the room where you report a hard week; it speaks plainly. A1 grew out of "honest and non-judgmental rather than clinical", and what makes a screen non-clinical is tone and hierarchy, not empty space. Neither amendment touches what the attribute claims, only the technique line that said how it would be carried. The reasons stay here because after an attribute is aligned to a mockup, nobody would ever see the difference again.

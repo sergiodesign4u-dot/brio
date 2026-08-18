@@ -161,3 +161,37 @@
 **Why:** voice principle P3, honest signals and never flattering ones. A green success state is the product congratulating itself for a person answering one question about a hard week. The same reasoning removed the coloured bar down the side of the alert banner: a dip is marked by the warning icon and the tag, then described in words.
 
 **Consequence:** the only semantic colour in the palette is the alert red, and it is still a candidate carried from plate D. It is fixed for good at stage 07, where every error state lives.
+
+---
+
+## D-17 - The sample is seven screens, chosen by what they add
+
+**Decided:** stage 07, step 5. The screens coloured are Home, Programs and its empty state, Team and its manage dialog, Sign up and its error, Contact and its confirmation, beside the Dashboard with six states and the whole employee check-in from stage 06. Twenty-four state pages of ninety-nine.
+
+**Why these:** the criterion is not "representative", it is how many different components and how many of the heaviest layouts they cover between them. All three levels of the ladder had to appear, plus the densest screen, a form, a list, and an empty or error state. A screen that adds no new component was not taken, because it proves nothing.
+
+**The signal that stopped it:** the kit stopped growing on the sixth screen. Sign up and Contact added arrangements, not components. That is the saturation signal the pipeline asks for, so the sample stops at seven rather than running on.
+
+**What this costs, stated plainly:** the roll-out at stage 12 will build the other 75 state pages. That is deliberate. A screen is built once, when the system, the responsive rules and the motion already exist, rather than three times.
+
+---
+
+## D-18 - The kit keeps the wireframe class names
+
+**Decided:** stage 07, step 3, against the letter of the stage pack, which says not to carry the `wf-` scaffolding into the kit.
+
+**Why:** every product screen in `design/` is a copy whose markup must match its grey original class for class. That diff is the only proof that a copy owns the visual layer and nothing else, and it is checked on all 24 pairs. Renaming the classes in the kit would break the proof on every screen at once, and would have to be repeated for all 75 screens still to come.
+
+**What it costs:** the kit carries a prefix that says "wireframe" while holding the product's real values. Stage 08 splits the file and may rename then, when a rename can be done once for the whole system rather than screen by screen.
+
+---
+
+## D-19 - Photography explains the product from outside, and stays out of the interior
+
+**Decided:** stage 07, step 6, resolving a divergence between attribute A5 and the mockups.
+
+**Decided:** photographs live on the public surfaces and the sign-up panel, and in any wireframe that holds a media slot. Inside the operator dashboard and the employee check-in there is none.
+
+**Why:** a picture of strangers on the screen where somebody reports a hard week is decoration, and A3 rules decoration out. A5 grew from "a knowledgeable peer, not a data terminal", and a peer speaks plainly rather than decorating the room. Inside, the human register is carried by wording, by the human scale of the type, and by the soft accent.
+
+**Also decided here:** the imagery is Brio's own from now on, generated in one recorded colour grade rather than taken from stock, with the prompts kept in `design/visuals/README.md` so the style is reproducible. The trade is stated in that file: the product gets consistent imagery of its own and gives up any claim that these are real customers.

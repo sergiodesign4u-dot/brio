@@ -31,10 +31,15 @@ body { padding-top: var(--size-rail-bar); }
 .o-screens a, .o-screens span { display: flex; align-items: center; gap: var(--space-2); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-control); padding: var(--space-3); font-size: var(--size-micro); text-decoration: none; color: var(--color-ink); }
 .o-screens a:hover { border-color: var(--color-action); }
 .o-screens span { color: var(--color-muted); background: transparent; border-style: dashed; }
+.o-why { display: grid; gap: var(--space-2); margin-top: var(--space-5); }
+.o-why b { display: block; }
+.o-why p { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-control); padding: var(--space-3); font-size: var(--size-micro); }
 .o-screens .o-dot { width: 8px; height: 8px; border-radius: var(--radius-pill); background: var(--color-action); flex: none; }
 .o-screens span .o-dot { background: var(--color-line-strong); }
 .o-meter { height: 8px; border-radius: var(--radius-pill); background: var(--color-line); overflow: hidden; margin-top: var(--space-4); }
 .o-meter i { display: block; height: 100%; background: var(--color-action); }
+.o-fill { width: 24%; }   /* 24 of 99 state pages, the number and not a rounding of it */
+.o-foot p + p { margin-top: var(--space-2); }
 .o-foot { margin-top: 72px; padding-top: var(--space-5); border-top: 1px solid var(--color-line-strong); font-size: var(--size-micro); color: var(--color-muted); }
 </style>
 <link rel="stylesheet" href="../_nav.css">
@@ -49,7 +54,7 @@ body { padding-top: var(--size-rail-bar); }
     <p class="o-label">Stage 07, UI and Visual</p>
     <h1>The product in colour</h1>
     <p class="o-lede">The sample assembled at stage 07: seven screens with their states, built from the component kit rather than drawn. The rest of the product is still grey and waits for the roll-out at stage 12, which is honest work rather than a gap: a screen is built once, when everything it needs already exists.</p>
-    <div class="o-meter" aria-hidden="true"><i style="width:24%"></i></div>
+    <div class="o-meter" aria-hidden="true"><i class="o-fill"></i></div>
     <p class="o-note"><b>24 of 99 state pages are in colour</b>, across 13 of 47 screens. The bar above is that number and not a rounding of it.</p>
   </header>
 
@@ -139,21 +144,35 @@ body { padding-top: var(--size-rail-bar); }
     <p class="o-label">Why these seven</p>
     <h2>The sample carries the whole tail</h2>
     <p class="o-lede">A screen that adds no new component was not taken: it proves nothing. What the sample had to cover was all three levels of the component ladder, the heaviest layouts, a form, a list, and an empty or error state.</p>
-    <div class="o-screens" style="grid-template-columns:1fr;margin-top:20px">
-      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Dashboard 4.0 and its six states.</b> The etalon: the operator shell, the pulse card, the trend spark, the privacy strip, and the richest state set in the product, including loading and error.</span>
-      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>The employee check-in, all eight screens.</b> The other shell, the other person, the disclosure that turns the promise into proof, and the outcome badge.</span>
-      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Home 0.0.</b> The public shell, the hero, the four column footer, and the two media slots, which is where attribute A5 finally reaches a product screen.</span>
-      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Programs 5.0 and its empty state.</b> Chips, the program card, a grid that reflows, and an empty state that is not an error.</span>
-      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Team 6.0 and the manage dialog.</b> The list and its rows, status pills, the copy field, and the dialog, which is one component standing in for six.</span>
-      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Sign up 2.0 and its error.</b> The auth shell, a form with several fields, and the error state of a form rather than of a page.</span>
-      <span style="display:block;border-style:solid;background:var(--color-surface);color:var(--color-ink)"><b>Contact 1.3 and its confirmation.</b> The last form primitive, the textarea, and a confirmation that states the fact without celebrating.</span>
+    <div class="o-why">
+      <p><b>Dashboard 4.0 and its six states.</b> The etalon: the operator shell, the pulse card, the trend spark, the privacy strip, and the richest state set in the product, including loading and error.</p>
+      <p><b>The employee check-in, all eight screens.</b> The other shell, the other person, the disclosure that turns the promise into proof, and the outcome badge.</p>
+      <p><b>Home 0.0.</b> The public shell, the hero, the four column footer, and the two media slots, which is where attribute A5 finally reaches a product screen.</p>
+      <p><b>Programs 5.0 and its empty state.</b> Chips, the program card, a grid that reflows, and an empty state that is not an error.</p>
+      <p><b>Team 6.0 and the manage dialog.</b> The list and its rows, status pills, the copy field, and the dialog, which is one component standing in for six.</p>
+      <p><b>Sign up 2.0 and its error.</b> The auth shell, a form with several fields, and the error state of a form rather than of a page.</p>
+      <p><b>Contact 1.3 and its confirmation.</b> The last form primitive, the textarea, and a confirmation that states the fact without celebrating.</p>
     </div>
     <p class="o-note"><b>Saturation.</b> The kit stopped growing on the sixth screen: Sign up and Contact added no new component, only new arrangements of the ones already there. That is the signal the pack asks for, and it is why the sample stops at seven rather than running on.</p>
   </section>
 
+  <section class="o-sec" id="critique">
+    <p class="o-label">Critique</p>
+    <h2>Was to now</h2>
+    <p class="o-lede">Three instruments: the mechanical detector over every file, Codex read only over the text of the files, and my own pass in the browser at 360 and 1280. Codex owns the class that is invisible on screen and expensive later, a screen assembled past the kit, and its softer form, the context override that looks like a tidy adjustment and is an undeclared variant.</p>
+    <div class="o-why">
+      <p><b>Clean, confirmed by two instruments.</b> No style on any of the 24 product screens. No structural drift against the wireframes. No contrast pair below AA, measured on every text node against its resolved background. No horizontal scroll at 360, one h1 per page, no broken image.</p>
+      <p><b>Fixed, 12 findings.</b> Three classes were used in markup and declared nowhere, so the sign-up screen had no layout at all. The media slot had two names for one thing. Two context overrides turned out to be variants nobody had named, and both are declared now. Two literals were still sitting in rules. The inventory listed a component the kit has no rule for, and the kit held nine selectors the inventory never mentioned. The proof rows on sign-up drew two icons where the markup already had a slot.</p>
+      <p><b>Disagreed with Codex, three times, and recorded each.</b> It called eight context rules undeclared variants; two of them were, and six change arrangement rather than identity, which is what composition is for. It called the compact button on the shell structural drift; the shell is an allowed difference by the stage 06 contract, and the alternative would be to keep bending the button from a context so the class never appears.</p>
+      <p><b>Two attributes amended rather than the mockups.</b> A5 no longer claims photography carries the human register inside the product: a peer does not hang photographs of strangers in the room where you report a hard week. A1 no longer says "airy": what makes a screen non-clinical is tone and hierarchy, not empty space.</p>
+      <p><b>Withdrawn at verification.</b> The detector reports 34 em-dashes in the showcase. The file contains zero; it is counting plain hyphens. The row stays in the log rather than disappearing.</p>
+    </div>
+    <p class="o-note">The full log, with file and line for every finding and the reasoning on each disagreement, is in <code>design/kit/critique.md</code>.</p>
+  </section>
+
   <footer class="o-foot">
     <p><b>Brio, stage 07.</b> The kit: <code>design/kit/</code>. The language: the root <code>DESIGN.md</code>. The grey prototype it all came from: <a href="../wireframes/overview.html">wireframes</a>, still grey, still frozen.</p>
-    <p style="margin-top:6px">Coverage is stated as a number rather than implied by a page that looks finished. 24 of 99.</p>
+    <p>Coverage is stated as a number rather than implied by a page that looks finished. 24 of 99.</p>
   </footer>
 
 </div>
@@ -163,7 +182,8 @@ body { padding-top: var(--size-rail-bar); }
   window.NAV_SECTIONS = [
     {"id":"kit","label":"Kit and tokens"},
     {"id":"coverage","label":"Coverage"},
-    {"id":"sample","label":"Why these seven"}
+    {"id":"sample","label":"Why these seven"},
+    {"id":"critique","label":"Was to now"}
   ];
 </script>
 <script src="../_nav.js"></script>
