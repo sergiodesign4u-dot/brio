@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Brio - Dashboard (4.0) - No program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_theme.css">
+  <link rel="stylesheet" href="../_nav.css">
+</head>
+<body>
+
+<aside id="sidebar"></aside>
+
+<nav class="dz-strip" aria-label="Coloured copy, prototype chrome">
+  <span class="dz-id">4.0 Dashboard, in colour</span>
+  <a href="dashboard.html">Score ready</a>
+  <a href="dashboard-open.html">Cycle open</a>
+  <a href="dashboard-empty.html">Pre-minimum-N</a>
+  <a class="on" href="dashboard-noprogram.html">No program</a>
+  <a href="dashboard-alert.html">Threshold alert</a>
+  <a href="dashboard-loading.html">Loading</a>
+  <a href="dashboard-error.html">Error</a>
+  <a class="dz-out" href="concept/concept.html">Concept stand</a>
+  <a class="dz-out" href="../wireframes/dashboard-noprogram.html">Grey original</a>
+</nav>
+
+<main>
+  <div class="wf-screen">
+    <nav class="wf-appbar" id="wf-appbar" aria-label="Brio app">
+      <div class="wf-appbar-inner">
+        <span class="wf-brand">Brio</span>
+        <div class="wf-tabs">
+          <a class="wf-tab on" href="dashboard.html" aria-current="page">Dashboard</a>
+          <a class="wf-tab" href="../wireframes/program-library.html">Programs</a>
+          <a class="wf-tab" href="../wireframes/team-roster.html">Team</a>
+          <a class="wf-tab" href="../wireframes/share-owner.html">Owner</a>
+        </div>
+        <span class="sp"></span>
+        <a class="wf-settings" href="../wireframes/settings.html">Settings</a>
+      </div>
+    </nav>
+
+    <div class="wf-content">
+      <header>
+        <p class="wf-eyebrow">Welcome back, Priya</p>
+        <h1>Your team pulse</h1>
+      </header>
+
+      <div class="wf-grid">
+        <section aria-label="No active program yet">
+          <div class="wf-state">
+            <div class="n">No active program yet</div>
+            <p class="sub">Pick a wellbeing program to start your first check-in. Brio recommends one for your team size, so you do not have to decide alone.</p>
+            <a class="wf-btn solid" href="../wireframes/program-library.html">Browse programs</a>
+          </div>
+        </section>
+
+        <aside aria-label="Privacy">
+          <div class="wf-card">
+            <div class="wf-strip2">Aggregate only. You never see who answered.</div>
+            <a class="wf-micro" href="../wireframes/security-privacy.html">What your owner can and cannot see</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="wf-appfoot" id="wf-appfoot">
+      <div class="wf-appfoot-inner">
+        <a href="../wireframes/security-privacy.html">Privacy</a>
+        <a href="../wireframes/help.html">Help</a>
+      </div>
+    </footer>
+    <nav class="wf-tabbar" id="wf-tabbar" aria-label="Brio app tabs">
+      <a class="on" href="dashboard.html" aria-current="page">Dashboard</a>
+      <a href="../wireframes/program-library.html">Programs</a>
+      <a href="../wireframes/team-roster.html">Team</a>
+      <a href="../wireframes/share-owner.html">Owner</a>
+    </nav>
+  </div>
+</main>
+
+<script>
+  window.NAV_BASE = '../';
+  window.NAV_ACTIVE = 'design/concept/concept.html';
+  window.NAV_ACTIVE_LABEL = 'Dashboard 4.0, No program';
+</script>
+<script src="../_nav.js"></script>
+
+</body>
+</html>
