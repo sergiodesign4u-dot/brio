@@ -1,0 +1,94 @@
+/* App bar, level 3.
+ * Roles read: --bg-surface, --glyph-action, --line-action, --line-hairline, --text-hover, --text-primary, --text-secondary
+ * Page: design/kit/appbar.html
+ * Stands on 97 of the 99 screens in the product, 24 of them in colour: checkin-already, checkin-complete, checkin-entry, checkin-expired, checkin-privacy, checkin-questions-loading and 18 more
+ */
+.wf-appbar {
+  border-bottom: var(--line-1) solid var(--line-hairline);
+  background: var(--bg-surface);
+}
+.wf-appbar-inner {
+  max-width: var(--size-content);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+}
+.wf-brand {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-20);
+  letter-spacing: -.03em;
+  color: var(--text-primary);
+}
+.wf-tabs {
+  display: flex;
+  gap: var(--space-5);
+}
+.wf-appbar-inner .sp {
+  margin-left: auto;
+}
+.wf-tab {
+  font-size: var(--text-14);
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: var(--space-3) 0 var(--space-2);
+}
+a.wf-tab:hover {
+  color: var(--text-hover);
+}
+.wf-tab.on {
+  color: var(--text-primary);
+  font-weight: var(--weight-strong);
+  border-bottom: var(--line-2) solid var(--line-action);
+}
+.wf-settings {
+  font-size: var(--text-14);
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: var(--space-3) 0;
+}
+a.wf-settings:hover {
+  color: var(--text-hover);
+}
+@media (max-width: 720px) {
+  .wf-appbar .wf-tabs {
+    display: none;
+  }
+}
+.wf-appbar-inner .wf-step {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-13);
+  color: var(--text-secondary);
+}
+.wf-appbar-inner .wf-step::before {
+  content: "";
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  flex: none;
+  color: var(--glyph-action);
+  background-color: currentColor;
+  -webkit-mask: var(--icon-lock) center / contain no-repeat;
+  mask: var(--icon-lock) center / contain no-repeat;
+}
+.wf-navlinks {
+  display: flex;
+  gap: var(--space-5);
+}
+.wf-navlink {
+  font-size: var(--text-14);
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: var(--space-3) 0;
+}
+.wf-navlink:hover {
+  color: var(--text-hover);
+}
+@media (max-width: 640px) {
+  .wf-navlinks {
+    display: none;
+  }
+}

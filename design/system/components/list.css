@@ -1,0 +1,11 @@
+/* List, level 3.
+ * Roles read: --bg-surface, --line-hairline
+ * Page: design/kit/list.html
+ * Stands on 19 of the 99 screens in the product, 3 of them in colour: index, team-roster-manage, team-roster
+ */
+.wf-list {
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-surface);
+}

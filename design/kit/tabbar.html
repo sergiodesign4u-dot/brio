@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bottom tab bar, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">Bottom tab bar</h1>
+<p class="kit-lede">The sections of the product on a phone, at the bottom of the screen where a thumb reaches.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-tabbar" style="position:static"><a class="on" href="#">Dashboard</a><a href="#">Programs</a><a href="#">Team</a><a href="#">Settings</a></div></div><ul class="kit-legend"><li><code>.wf-tabbar</code><span>the bar: fixed to the bottom, a raised fill with a hairline over it</span></li><li><code>.wf-tabbar a</code><span>one section, at the tab bar step</span></li><li><code>.wf-tabbar a.on</code><span>the current one: primary ink and strong weight</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">State</h3><p class="kit-p">Two, and they answer exactly as the App bar tabs do: 400 to 600 in weight, secondary to primary in ink. One line of text rather than a second set of snapshots.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-tabbar" style="position:static;display:inline-flex"><a href="#">Programs</a></div></div><p class="kit-mark"><b>rest</b><br>another section</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-tabbar" style="position:static;display:inline-flex"><a class="on" href="#">Dashboard</a></div></div><p class="kit-mark"><b>current</b><br>the section being viewed</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no size axis. It exists at exactly one width, under 720px, and the App bar tabs exist at exactly the other. A control census taken at one viewport would have missed one of the two entirely, which is why every walk in this stage is taken twice.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">49 screens, on a phone. It is the operator navigation on the device the operator actually carries.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Four sections at most. Beyond four the labels start truncating, and a truncated navigation label is a guess.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="appbar.html">App bar</a> instead.</b> From 720px up this component is not shown at all. The sections live in the <a href="appbar.html">App bar</a> there, not in a squeezed copy of this one.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">Same answer as the App bar tabs, so no second set of state snapshots is taken. This is the delta rule at work: a group of snapshots has to have a named difference, and there is none here.</p><p class="kit-p"><b>No snapshots here, and that is the rule rather than an omission.</b> The unit of a snapshot is a <i>difference</i>, not an occurrence. This component answers every state exactly as <a href="appbar.html">App bar</a> does, so the answer is written in this line instead of proved again with pictures. A matrix with more snapshots than named differences is a list of occurrences, not documentation.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/tabbar.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --line-hairline, --text-primary, --text-secondary</code></td></tr><tr><th>In the product</th><td>49 of 99 screens</td></tr><tr><th>In colour</th><td>11 screens: <a href="../dashboard-alert.html">dashboard-alert</a>, <a href="../dashboard-empty.html">dashboard-empty</a>, <a href="../dashboard-error.html">dashboard-error</a>, <a href="../dashboard-loading.html">dashboard-loading</a>, <a href="../dashboard-noprogram.html">dashboard-noprogram</a>, <a href="../dashboard-open.html">dashboard-open</a>, <a href="../dashboard.html">dashboard</a>, <a href="../program-library-empty.html">program-library-empty</a>, <a href="../program-library.html">program-library</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-tabbar&quot; style=&quot;position:static&quot;&gt;&lt;a class=&quot;on&quot; href=&quot;#&quot;&gt;Dashboard&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Programs&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Team&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Settings&lt;/a&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

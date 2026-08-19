@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outcome badge, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Outcome badge</h1>
+<p class="kit-lede">A round plate with one glyph in it, at the top of a screen that has one thing to say.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-row"><div class="wf-badge ok">&#10003;</div><div class="wf-badge warn">!</div></div></div><ul class="kit-legend"><li><code>.wf-badge</code><span>the plate: a 56px circle, the glyph centred at the largest type step</span></li><li><code>.wf-badge.ok</code><span>the soft accent fill with primary ink on it</span></li><li><code>.wf-badge.warn</code><span>no fill, the alert colour on the ink and on the border</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Emphasis</h3><p class="kit-p">Two values, and they are the two things an outcome screen can be: it happened, or it did not.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-badge ok">&#10003;</div></div><p class="kit-mark"><b>ok</b><br>the check-in is done, the message was sent</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-badge warn">!</div></div><p class="kit-mark"><b>warn</b><br>the link expired, the answer did not go through</p></div></div>
+<h3 class="kit-h3">Size</h3><p class="kit-p">Set by the viewport, not by importance: under 520px the badge gives back twelve pixels so the action underneath it stays reachable without scrolling.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-badge ok">&#10003;</div></div><p class="kit-mark"><b>default</b><br>56px, from 520px up</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-badge ok" style="width:var(--size-badge-box-sm);height:var(--size-badge-box-sm);font-size:var(--text-22)">&#10003;</div></div><p class="kit-mark"><b>small</b><br>44px, under 520px</p></div></div>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The top of an outcome screen in the employee flow: check-in done, link expired, already answered, could not send. It is the first thing the eye lands on and it says which of the two kinds of screen this is before a single word is read.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> One badge per screen, at the top, above the heading. The screen it stands on has exactly one thing to say.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="state.html">State block</a> instead.</b> Do not put a badge on a screen that continues. A screen with a next step and a state to report is a <a href="state.html">State block</a>, which carries a title, a sentence and an action together.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive: it reports, it does not respond. The responsive step below 520px is a size change and not a state, and it now lives in badge.css rather than in a :root override that used to resize the Icon slot along with it by accident.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/badge.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-accent-soft, --bg-surface, --line-alert, --text-alert, --text-primary</code></td></tr><tr><th>In the product</th><td>8 of 99 screens</td></tr><tr><th>In colour</th><td>4 screens: <a href="../checkin-already.html">checkin-already</a>, <a href="../checkin-complete.html">checkin-complete</a>, <a href="../checkin-expired.html">checkin-expired</a>, <a href="../checkin-submit-error.html">checkin-submit-error</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-row&quot;&gt;&lt;div class=&quot;wf-badge ok&quot;&gt;&amp;#10003;&lt;/div&gt;&lt;div class=&quot;wf-badge warn&quot;&gt;!&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/* System block, level 3.
+ * Roles read: --bg-recessed, --bg-surface, --line-hairline
+ * Page: design/kit/system-block.html
+ * Stands on 2 of the 99 screens in the product, 0 of them in colour: no coloured screen yet
+ */
+.wf-sys {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-recessed);
+}
+.wf-sys-head {
+  border-bottom: var(--line-1) solid var(--line-hairline);
+  background: var(--bg-surface);
+  padding: var(--space-4) var(--space-5);
+}
+.wf-sys-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-7) var(--space-5);
+}

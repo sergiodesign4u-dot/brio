@@ -1,0 +1,159 @@
+/* Stand chrome. Nothing here is the product.
+ *
+ * The pages of the stand load design/system/index.css on purpose, so what they show
+ * is the same css the screens run on and cannot drift from it. That also means the
+ * product frame arrives with it. Where the frame fights the stand, the stand is fixed
+ * HERE, never in base.css: bending the product to make a document look right is how a
+ * system starts documenting something that does not exist.
+ *
+ * The stand is deliberately not written in the voice of the product either. It uses a
+ * heading scale of its own, because a document that reads like the product it
+ * documents is harder to read as a document. Recorded in DESIGN.md.
+ */
+
+.kit-body { display: grid; grid-template-columns: 244px minmax(0, 1fr); min-height: 100vh; }
+@media (max-width: 900px) { .kit-body { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- side panel ---- */
+.kp {
+  position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto;
+  background: var(--bg-surface); border-right: var(--line-1) solid var(--line-hairline);
+  padding: var(--space-5) var(--space-4) var(--space-6);
+  display: flex; flex-direction: column; gap: var(--space-1);
+  min-width: 0;
+}
+@media (max-width: 900px) { .kp { position: static; max-height: none; border-right: 0; border-bottom: var(--line-1) solid var(--line-hairline); } }
+.kp-head { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-4); }
+.kp-back {
+  display: inline-flex; align-items: center; align-self: flex-start;
+  font-size: var(--text-13); color: var(--text-primary); text-decoration: none;
+  border: var(--line-1) solid var(--line-control); border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+}
+.kp-back:hover { border-color: var(--line-hover); }
+.kp-back::before { content: ""; width: var(--size-icon-sm); height: var(--size-icon-sm); margin-right: var(--space-2); color: var(--text-secondary); background-color: currentColor; -webkit-mask: var(--icon-grid) center / contain no-repeat; mask: var(--icon-grid) center / contain no-repeat; }
+.kp-badge { font-size: var(--text-11); font-weight: var(--weight-strong); letter-spacing: .08em; color: var(--text-secondary); }
+.kp-sub { font-size: var(--text-12); color: var(--text-secondary); }
+.kp-group {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  background: none; border: 0; padding: var(--space-2) 0; cursor: pointer;
+  font-family: inherit; font-size: var(--text-12); font-weight: var(--weight-strong);
+  letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary);
+}
+.kp-group::after { content: "+"; font-size: var(--text-14); }
+.kp-group.is-open::after { content: "\2212"; }
+.kp-group:focus-visible, .kp-theme:focus-visible, .kp-item:focus-visible, .kp-back:focus-visible { outline: var(--line-2) solid var(--color-focus); outline-offset: var(--space-hair); }
+.kp-items { display: flex; flex-direction: column; padding-bottom: var(--space-3); }
+.kp-items.is-shut { display: none; }
+.kp-item { font-size: var(--text-13); color: var(--text-secondary); text-decoration: none; padding: var(--space-1) 0 var(--space-1) var(--space-3); border-left: var(--line-2) solid transparent; }
+.kp-item:hover { color: var(--text-hover); }
+.kp-item.is-current { color: var(--text-primary); border-left-color: var(--line-action); font-weight: var(--weight-medium); }
+.kp-foot { margin-top: var(--space-5); padding-top: var(--space-4); border-top: var(--line-1) solid var(--line-hairline); display: flex; flex-direction: column; gap: var(--space-2); }
+.kp-foot a { font-size: var(--text-12); color: var(--text-secondary); }
+.kp-theme {
+  margin-top: var(--space-4); align-self: flex-start; cursor: pointer; font-family: inherit;
+  font-size: var(--text-12); color: var(--text-primary); background: var(--bg-control);
+  border: var(--line-1) solid var(--line-control); border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-3);
+}
+.kp-theme:hover { border-color: var(--line-hover); }
+
+/* ---- page ---- */
+.kit-main { padding: var(--space-7) var(--space-5) var(--space-7); min-width: 0; }
+.kit-wrap { max-width: 900px; margin: 0 auto; min-width: 0; }
+.kit-wrap > * + * { margin-top: var(--space-5); }
+.kit-eyebrow { font-size: var(--text-11); font-weight: var(--weight-strong); letter-spacing: .08em; text-transform: uppercase; color: var(--text-secondary); }
+.kit-h1 { font-family: var(--font-display); font-size: var(--text-display); font-weight: var(--weight-bold); line-height: var(--leading-heading); }
+.kit-lede { font-size: var(--text-16); color: var(--text-secondary); max-width: 62ch; }
+.kit-h2 { font-family: var(--font-display); font-size: var(--text-24); font-weight: var(--weight-strong); margin-top: var(--space-7); padding-top: var(--space-5); border-top: var(--line-1) solid var(--line-hairline); }
+.kit-h3 { font-size: var(--text-15); font-weight: var(--weight-strong); margin-top: var(--space-5); }
+.kit-p { max-width: 72ch; }
+/* a link inside stand prose. Without this the browser default blue arrives, which is
+   unreadable in the dark theme: measured 1.99 on the anti rule links. */
+.kit-wrap a { color: var(--text-primary); text-decoration: underline; text-underline-offset: var(--underline-offset); }
+.kit-wrap a:hover { text-decoration-thickness: var(--underline-thickness); }
+.kit-wrap a:focus-visible { outline: var(--line-2) solid var(--color-focus); outline-offset: var(--space-hair); }
+.kit-card b a { text-decoration: none; }
+.kit-p + .kit-p { margin-top: var(--space-3); }
+.kit-note { font-size: var(--text-13); color: var(--text-secondary); max-width: 72ch; }
+.kit-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--text-12); background: var(--bg-recessed); border: var(--line-1) solid var(--line-hairline); border-radius: var(--radius-sm); padding: 0 var(--space-1); }
+
+/* the scene: a neutral ground the product stands on, so the stand never restyles it */
+.kit-scene { min-width: 0; overflow-x: auto; background: var(--bg-page); border: var(--line-1) solid var(--line-hairline); border-radius: var(--radius-lg); padding: var(--space-5); }
+.kit-scene.on-surface { background: var(--bg-surface); }
+.kit-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: flex-start; min-width: 0; }
+.kit-row.stretch { align-items: stretch; }
+.kit-cell { flex: 1 1 200px; }
+.kit-gap { margin-top: var(--space-4); }
+.kit-pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--text-12); white-space: pre-wrap; }
+.kit-ramp-row { border-bottom: var(--line-1) solid var(--line-hairline); padding: var(--space-3) 0; }
+.kit-space-row { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-1) 0; }
+.kit-icon-tile { display: flex; align-items: center; justify-content: center; gap: var(--space-4); height: 72px; background: var(--bg-surface); }
+.kit-row > * { min-width: 0; }
+.kit-row > * { margin: 0; }
+.kit-stack { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.kit-table { width: 100%; border-collapse: collapse; font-size: var(--text-13); }
+.kit-table th, .kit-table td { text-align: left; vertical-align: top; padding: var(--space-2) var(--space-3); border-bottom: var(--line-1) solid var(--line-hairline); }
+.kit-table th { font-weight: var(--weight-strong); color: var(--text-secondary); font-size: var(--text-12); }
+.kit-scroll { overflow-x: auto; }
+/* safety net: a table that reached a page without its scroll wrapper still scrolls
+   inside itself rather than pushing the page sideways at 360. */
+.kit-wrap > table.kit-table { display: block; overflow-x: auto; }
+
+.kit-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-3); }
+.kit-sw { border: var(--line-1) solid var(--line-hairline); border-radius: var(--radius-md); overflow: hidden; }
+.kit-sw i { display: block; height: 64px; }
+.kit-sw b { display: block; font-size: var(--text-12); font-weight: var(--weight-medium); padding: var(--space-2) var(--space-3) 0; }
+.kit-sw span { display: block; font-size: var(--text-11); color: var(--text-secondary); padding: 0 var(--space-3) var(--space-2); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.kit-pairs { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-3); }
+.kit-pair { border: var(--line-1) solid var(--line-hairline); border-radius: var(--radius-md); overflow: hidden; }
+.kit-pair .two { display: grid; grid-template-columns: 1fr 1fr; }
+.kit-pair .two i { display: block; height: 56px; }
+.kit-pair b { display: block; font-size: var(--text-12); padding: var(--space-2) var(--space-3) 0; }
+.kit-pair span { display: block; font-size: var(--text-11); color: var(--text-secondary); padding: 0 var(--space-3) var(--space-2); }
+
+.kit-shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--space-4); }
+.kit-shot { border: var(--line-1) solid var(--line-hairline); border-radius: var(--radius-md); overflow: hidden; background: var(--bg-surface); }
+.kit-shot img { width: 100%; display: block; }
+.kit-shot b { display: block; font-size: var(--text-12); padding: var(--space-2) var(--space-3) 0; }
+.kit-shot span { display: block; font-size: var(--text-11); color: var(--text-secondary); padding: 0 var(--space-3) var(--space-2); }
+.kit-shot .why { font-family: var(--font-body); font-size: var(--text-12); }
+
+/* anatomy callouts */
+.kit-anat { position: relative; }
+.kit-legend { list-style: none; margin-top: var(--space-4); display: grid; gap: var(--space-2); }
+.kit-legend li { font-size: var(--text-13); display: flex; gap: var(--space-3); }
+.kit-legend code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--text-12); color: var(--text-secondary); flex: none; min-width: 160px; }
+.kit-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; min-width: 120px; }
+
+.kit-do { border-left: var(--line-2) solid var(--line-action); padding-left: var(--space-4); }
+.kit-dont { border-left: var(--line-2) solid var(--line-alert); padding-left: var(--space-4); }
+
+.kit-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-4); }
+.kit-card { position: relative; display: block; text-decoration: none; color: inherit; border: var(--line-1) solid var(--line-hairline); border-radius: var(--radius-lg); background: var(--bg-surface); overflow: hidden; }
+.kit-card:hover { border-color: var(--line-hover); }
+.kit-card .mini { position: relative; display: block; height: 84px; overflow: hidden; background: var(--bg-recessed); border-bottom: var(--line-1) solid var(--line-hairline); }
+.kit-card .mini > .fit { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(.62); transform-origin: center; pointer-events: none; width: max-content; max-width: 420px; }
+.kit-card .mini > .row { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: var(--space-2); }
+.kit-card .mini i { display: block; width: 22px; height: 22px; border-radius: var(--radius-sm); }
+.kit-card b { display: block; font-size: var(--text-15); font-weight: var(--weight-medium); padding: var(--space-3) var(--space-4) 0; }
+.kit-card b a { color: inherit; text-decoration: none; }
+.kit-card b a::after { content: ""; position: absolute; inset: 0; }
+.kit-card:focus-within { border-color: var(--line-action); }
+.kit-card .mini > .fit * { pointer-events: none; }
+/* A thumbnail is a picture of a component, not a copy of it, so the two components
+   that carry an <h1> are rendered here with an <h2> and this rule gives it the same
+   look. Without the swap a documentation page would hold three first level headings,
+   and the aria-hidden on the thumbnail would be hiding the symptom rather than the
+   cause. The copyable markup on the component page still shows the real tag. */
+.kit-card .mini .wf-hero h2, .kit-card .mini .wf-auth-grid h2 {
+  font-family: var(--font-display); font-size: var(--text-hero);
+  font-weight: var(--weight-bold); line-height: var(--leading-heading); letter-spacing: -.02em;
+}
+.kit-card span { display: block; font-size: var(--text-12); color: var(--text-secondary); padding: 0 var(--space-4) var(--space-3); }
+.kit-groupline { font-size: var(--text-12); font-weight: var(--weight-strong); letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary); margin-top: var(--space-6); }
+
+.kit-mark { font-size: var(--text-12); color: var(--text-secondary); }
+.kit-tag { display: inline-block; font-size: var(--text-11); font-weight: var(--weight-strong); letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary); border: var(--line-1) solid var(--line-control); border-radius: var(--radius-sm); padding: 0 var(--space-1); }

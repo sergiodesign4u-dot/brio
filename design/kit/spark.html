@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spark, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Spark</h1>
+<p class="kit-lede">Five bars. The last two are the ones in the action colour, because they are the cycles the operator is being asked about.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-spark"><i class="bar h32"></i><i class="bar h40"></i><i class="bar h48"></i><i class="bar hi h55"></i><i class="bar hi h60"></i></div></div><ul class="kit-legend"><li><code>.wf-spark</code><span>the row: 56px tall, bars aligned to the bottom</span></li><li><code>.bar</code><span>one cycle, 18px wide, the soft accent fill</span></li><li><code>.bar.hi</code><span>an emphasised cycle, the action fill</span></li><li><code>.bar.h32 to .bar.h60</code><span>the height of a bar, which is data and not styling</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One value: five bars, the last two emphasised. The heights are the data, so they are classes rather than inline styles, and there is no second form.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-spark"><i class="bar h32"></i><i class="bar h40"></i><i class="bar h48"></i><i class="bar hi h55"></i><i class="bar hi h60"></i></div></div><p class="kit-mark"><b>five cycles</b><br>every occurrence</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No axis for a different number of cycles. Brio shows five, which is what a trend needs to be a trend and few enough to read without a legend.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Beside the score, on the dashboard and inside the proof disclosure. It is the only chart in the product and it has no axes, no labels and no tooltip: it answers one question, is this going up or down.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Five bars, always. The two in the action colour are the most recent cycles.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="metric.html">Metric</a> instead.</b> If a number needs explaining rather than trending, use a <a href="metric.html">Metric</a> with its unit and a sentence.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive: there is nothing to hover and nothing to open. A tooltip here would be a drill-down, and drill-down is deferred permanently for the MVP because it breaks the privacy model.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/spark.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-accent-soft, --bg-action</code></td></tr><tr><th>In the product</th><td>10 of 99 screens</td></tr><tr><th>In colour</th><td>3 screens: <a href="../checkin-privacy.html">checkin-privacy</a>, <a href="../dashboard-alert.html">dashboard-alert</a>, <a href="../dashboard.html">dashboard</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-spark&quot;&gt;&lt;i class=&quot;bar h32&quot;&gt;&lt;/i&gt;&lt;i class=&quot;bar h40&quot;&gt;&lt;/i&gt;&lt;i class=&quot;bar h48&quot;&gt;&lt;/i&gt;&lt;i class=&quot;bar hi h55&quot;&gt;&lt;/i&gt;&lt;i class=&quot;bar hi h60&quot;&gt;&lt;/i&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

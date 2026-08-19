@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Split auth, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">Split auth</h1>
+<p class="kit-lede">The sign up form beside a panel that carries the promise. The panel disappears under 760px so signing up stays one fast column.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-auth-grid"><div><h1>Create your Brio account</h1><label class="wf-field"><span class="k">Work email</span><input class="wf-input" type="email" placeholder="ada@company.com"></label><div class="wf-btns"><a class="wf-btn solid block" href="#">Start free</a></div></div>
+ <aside class="wf-auth-brand"><div class="wf-media"><img src="../visuals/team-table.jpg" alt="A small team at one table"></div>
+ <div class="wf-auth-proof"><span class="wf-ico"></span><span>A score is a team number. There is no individual view, for anyone.</span></div>
+ <div class="wf-auth-proof"><span class="wf-ico"></span><span>No score appears until at least five people have answered.</span></div></aside></div></div><ul class="kit-legend"><li><code>.wf-auth-grid</code><span>the split: form on the left, panel on the right, one column under 760px</span></li><li><code>.wf-auth-brand</code><span>the panel, which carries the image and the proof lines</span></li><li><code>.wf-auth-proof</code><span>one proof line: an unfilled Icon slot with a shield, and a sentence</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One form, two screens. Sign up and log in share it exactly.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-auth-proof"><span class="wf-ico"></span><span>Nobody sees who answered what.</span></div></div><p class="kit-mark"><b>one form</b><br>sign up, log in</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no size axis.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Sign up and log in. It is the first surface a new operator meets, and the panel beside the form is where the privacy promise is made before a single field is filled in: earn trust before asking for data, which is principle 3.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> The panel goes away first when the screen narrows. On a phone, signing up is one column and nothing competes with it.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="privacy-strip.html">Privacy strip</a> instead.</b> Do not put the promise inside the form as a hint. One sentence in the flow of a screen is a <a href="privacy-strip.html">Privacy strip</a>; this panel is the argument at the moment of the decision.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive itself. The proof row strips the plate off the Icon slot and leaves the glyph; a pair of width and height that also sat in that override was dead in the flat kit and was removed at step 5 rather than allowed to come alive under the new load order.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/auth.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--glyph-action, --text-primary</code></td></tr><tr><th>In the product</th><td>2 of 99 screens</td></tr><tr><th>In colour</th><td>1 screens: <a href="../signup.html">signup</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-auth-grid&quot;&gt;&lt;div&gt;&lt;h1&gt;Create your Brio account&lt;/h1&gt;&lt;label class=&quot;wf-field&quot;&gt;&lt;span class=&quot;k&quot;&gt;Work email&lt;/span&gt;&lt;input class=&quot;wf-input&quot; type=&quot;email&quot; placeholder=&quot;ada@company.com&quot;&gt;&lt;/label&gt;&lt;div class=&quot;wf-btns&quot;&gt;&lt;a class=&quot;wf-btn solid block&quot; href=&quot;#&quot;&gt;Start free&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+ &lt;aside class=&quot;wf-auth-brand&quot;&gt;&lt;div class=&quot;wf-media&quot;&gt;&lt;img src=&quot;../visuals/team-table.jpg&quot; alt=&quot;A small team at one table&quot;&gt;&lt;/div&gt;
+ &lt;div class=&quot;wf-auth-proof&quot;&gt;&lt;span class=&quot;wf-ico&quot;&gt;&lt;/span&gt;&lt;span&gt;A score is a team number. There is no individual view, for anyone.&lt;/span&gt;&lt;/div&gt;
+ &lt;div class=&quot;wf-auth-proof&quot;&gt;&lt;span class=&quot;wf-ico&quot;&gt;&lt;/span&gt;&lt;span&gt;No score appears until at least five people have answered.&lt;/span&gt;&lt;/div&gt;&lt;/aside&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

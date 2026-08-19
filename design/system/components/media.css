@@ -1,0 +1,22 @@
+/* Media slot, level 1.
+ * Roles read: --bg-recessed
+ * Page: design/kit/media.html
+ * Stands on 6 of the 99 screens in the product, 2 of them in colour: index, signup
+ */
+.wf-media {
+  display: block;
+  width: 100%;
+  min-height: var(--size-media-sm);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-recessed);
+}
+.wf-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.wf-media.shot {
+  min-height: var(--size-media);
+}

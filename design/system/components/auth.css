@@ -1,0 +1,54 @@
+/* Split auth, level 3.
+ * Roles read: --glyph-action, --text-primary
+ * Page: design/kit/auth.html
+ * Stands on 2 of the 99 screens in the product, 1 of them in colour: signup
+ */
+.wf-auth-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: center;
+  max-width: var(--size-auth);
+  margin: 0 auto;
+}
+.wf-auth-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.wf-auth-proof {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-15);
+  color: var(--text-primary);
+}
+/* The proof row strips the plate off the icon slot and leaves the glyph. That part
+ * of this override is real and is kept.
+ * What is NOT here any more is the pair of width and height it also declared. Those
+ * two were dead in the flat kit: .wf-ico.sm carries the same specificity and stood
+ * later in the file, so 40px won and 20px never applied. Under the level order of
+ * index.css this file loads after the atoms, and the dead pair would have come alive
+ * and silently shrunk the slot. A rule that only worked by accident of position is
+ * not a decision, so what shipped is what stays. */
+.wf-auth-proof .wf-ico {
+  background: none;
+}
+.wf-auth-proof .wf-ico::before {
+  width: var(--size-icon);
+  height: var(--size-icon);
+  color: var(--glyph-action);
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon-shield);
+  mask-image: var(--icon-shield);
+}
+@media (max-width: 760px) {
+  .wf-auth-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .wf-auth-brand {
+    display: none;
+  }
+}

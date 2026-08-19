@@ -10,7 +10,19 @@
  * screen itself stays comparable to its grey original, class for class.
  *
  * The only manual edit is a row below. Adding a coloured screen means one row.
+ *
+ * Stage 08 added one thing: the theme switch. It sits in this strip, which means it
+ * sits on every coloured screen, and it is here rather than in the root navigator
+ * because the roadmap renders the grey stages too and a theme means nothing there.
  */
+
+/* the theme is applied before the first paint, so a screen never flashes light */
+(function () {
+  try {
+    var t = localStorage.getItem('brio-theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
 
 window.DESIGN_NAV = {
   /* every screen that exists in colour, grouped the way the product is grouped */
@@ -93,6 +105,26 @@ window.DESIGN_NAV = {
     a.href = base + pair[1];
     mount.appendChild(a);
   });
+
+  /* the theme switch. The dark half of every role is written in design/system/tokens.css,
+     so nothing here knows a colour: it flips one attribute on <html>. */
+  var themeBtn = el('button', 'dz-theme');
+  themeBtn.type = 'button';
+  function themeLabel() {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    themeBtn.textContent = dark ? 'Light' : 'Dark';
+    themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    themeBtn.setAttribute('aria-label', dark ? 'Switch to the light theme' : 'Switch to the dark theme');
+  }
+  themeBtn.addEventListener('click', function () {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (dark) document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', 'dark');
+    try { localStorage.setItem('brio-theme', dark ? 'light' : 'dark'); } catch (e) {}
+    themeLabel();
+  });
+  themeLabel();
+  mount.appendChild(themeBtn);
 
   /* one way only: the grey prototype is frozen and never links forward to colour */
   if (current) {

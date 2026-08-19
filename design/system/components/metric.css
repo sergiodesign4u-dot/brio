@@ -1,0 +1,21 @@
+/* Metric, level 1.
+ * Roles read: --text-secondary
+ * Page: design/kit/metric.html
+ * Stands on 17 of the 99 screens in the product, 5 of them in colour: checkin-privacy, dashboard-alert, dashboard, team-roster-manage, team-roster
+ */
+.wf-metric {
+  font-family: var(--font-display);
+  font-size: var(--text-24);
+  font-weight: var(--weight-strong);
+  letter-spacing: -.02em;
+}
+.wf-metric span {
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-14);
+  letter-spacing: 0;
+}
+.wf-card .wf-metric + .wf-micro {
+  margin-top: var(--space-2);
+}

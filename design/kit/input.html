@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Input, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Input</h1>
+<p class="kit-lede">The box a person types into. One anatomy, five content types and a textarea, which is the same box with a resting height.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-stack" style="max-width:340px">
+   <input class="wf-input" type="text" placeholder="Ada Lovelace">
+   <input class="wf-input" type="email" placeholder="ada@company.com">
+   <textarea class="wf-input wf-textarea" placeholder="How can we help?"></textarea>
+ </div></div><ul class="kit-legend"><li><code>.wf-input</code><span>the box: 3:1 boundary, control fill, 8px radius, 12px padding</span></li><li><code>.wf-input::placeholder</code><span>the hint inside the box, in secondary ink</span></li><li><code>.wf-textarea</code><span>the same box with a resting height and vertical resize only</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">The type attribute, not a visual axis: every one of them looks identical and behaves differently. Listed because the census counted them and somebody will ask.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><input class="wf-input" type="text" placeholder="Team name"></div><p class="kit-mark"><b>text</b><br>a name</p></div><div class="kit-cell"><div class="kit-scene on-surface"><input class="wf-input" type="email" placeholder="ada@company.com"></div><p class="kit-mark"><b>email</b><br>an invite</p></div><div class="kit-cell"><div class="kit-scene on-surface"><input class="wf-input" type="password" value="secret"></div><p class="kit-mark"><b>password</b><br>log in and sign up</p></div><div class="kit-cell"><div class="kit-scene on-surface"><textarea class="wf-input wf-textarea" placeholder="How can we help?"></textarea></div><p class="kit-mark"><b>textarea</b><br>the contact form</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">There is no size axis. An input is as tall as its padding and its type step, on every screen, and a smaller field would be a smaller target rather than a denser one.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Everywhere a person gives Brio something: their name at sign up, an email at invite, the message on the contact form. It almost never stands alone: it stands inside a Field, which owns the label, the hint and the error line.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Put the input inside a Field. The label belongs to the field, not to the input, and a field without a label is a control nobody can name out loud.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="copy-field.html">Copy field</a> instead.</b> Do not use an input to show a value that cannot be edited. A read only string is text, and a value the person is meant to copy is a <a href="copy-field.html">Copy field</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">Focus does two things at once here and both are deliberate: the ring appears outside the box and the boundary itself turns to the action colour, so the field is findable both by the ring and by its own edge.</p><p class="kit-p">Two deltas from the family. Everything else answers as the Button does. Each pair is the light theme on the left and the dark theme on the right, captured from the live component on this page, not drawn. They are re-taken by the check at step 9, which fails on a byte shift.</p><div class="kit-shots"><div class="kit-shot"><img src="screens/states/input-focus--light.png" alt="focus, light theme"><img src="screens/states/input-focus--dark.png" alt="focus, dark theme"><b>focus</b><span class="why"><b>The named difference:</b> focus does two things here and one on a button. The ring appears AND the boundary itself turns to <code class="kit-code">--line-action</code>, so an empty field is findable by its own edge as well as by the ring</span></div><div class="kit-shot"><img src="screens/states/input-disabled--light.png" alt="disabled, light theme"><img src="screens/states/input-disabled--dark.png" alt="disabled, dark theme"><b>disabled</b><span class="why">same token as the Button, <code class="kit-code">--opacity-disabled</code></span></div></div><p class="kit-note">Re-take these with <code class="kit-code">node scratchpad/states.js /tmp/jobs.json</code> against a local server on port 8931.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/input.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-control, --color-focus, --line-action, --line-control, --text-primary, --text-secondary</code></td></tr><tr><th>In the product</th><td>32 of 99 screens</td></tr><tr><th>In colour</th><td>7 screens: <a href="../checkin-entry.html">checkin-entry</a>, <a href="../checkin-expired.html">checkin-expired</a>, <a href="../contact.html">contact</a>, <a href="../signup-error.html">signup-error</a>, <a href="../signup.html">signup</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-stack&quot; style=&quot;max-width:340px&quot;&gt;
+   &lt;input class=&quot;wf-input&quot; type=&quot;text&quot; placeholder=&quot;Ada Lovelace&quot;&gt;
+   &lt;input class=&quot;wf-input&quot; type=&quot;email&quot; placeholder=&quot;ada@company.com&quot;&gt;
+   &lt;textarea class=&quot;wf-input wf-textarea&quot; placeholder=&quot;How can we help?&quot;&gt;&lt;/textarea&gt;
+ &lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

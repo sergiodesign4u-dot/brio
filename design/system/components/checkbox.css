@@ -1,0 +1,19 @@
+/* Checkbox, level 1.
+ * Roles read: --bg-action, --color-focus, --opacity-disabled
+ * Page: design/kit/checkbox.html
+ * Stands on 3 of the 99 screens in the product, 0 of them in colour: no coloured screen yet
+ */
+input[type="checkbox"] {
+  accent-color: var(--bg-action);
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  cursor: pointer;
+}
+input[type="checkbox"]:focus-visible {
+  outline: var(--line-2) solid var(--color-focus);
+  outline-offset: var(--space-hair);
+}
+input[type="checkbox"]:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}

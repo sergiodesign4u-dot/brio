@@ -1,0 +1,41 @@
+/* Program card, level 2.
+ * Roles read: --bg-surface, --line-hairline, --text-secondary
+ * Page: design/kit/program-card.html
+ * Stands on 9 of the 99 screens in the product, 2 of them in colour: program-library-empty, program-library
+ */
+.wf-progcard {
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  background: var(--bg-surface);
+}
+.wf-progcard .cat {
+  font-size: var(--text-13);
+  font-weight: var(--weight-strong);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+.wf-progcard .title {
+  font-family: var(--font-display);
+  font-size: var(--text-20);
+  font-weight: var(--weight-strong);
+  letter-spacing: -.02em;
+  margin-bottom: var(--space-2);
+}
+.wf-progcard .meta {
+  font-size: var(--text-13);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+.wf-progcard .desc {
+  font-size: var(--text-15);
+  color: var(--text-secondary);
+}
+.wf-progcard .badges {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}

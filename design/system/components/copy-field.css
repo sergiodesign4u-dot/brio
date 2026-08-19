@@ -1,0 +1,13 @@
+/* Copy field, level 2.
+ * Roles read: none, geometry only
+ * Page: design/kit/copy-field.html
+ * Stands on 11 of the 99 screens in the product, 2 of them in colour: team-roster-manage, team-roster
+ */
+.wf-copy {
+  display: flex;
+  gap: var(--space-2);
+}
+.wf-copy .wf-input {
+  flex: 1;
+  min-width: 0;
+}

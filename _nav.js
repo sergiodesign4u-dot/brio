@@ -49,7 +49,7 @@ window.NAV = [
   },
 
   { label: 'UI + Visual', page: 'design/overview.html', done: true },
-  { label: 'Tokens + Components', page: 'design/kit/overview.html', done: false },
+  { label: 'Tokens + Components', page: 'design/kit/overview.html', done: true },
   { label: 'Design System', page: 'design/kit/why.html', done: false },
   { label: 'Responsive', page: null, done: false },
   { label: 'Animation', page: null, done: false },

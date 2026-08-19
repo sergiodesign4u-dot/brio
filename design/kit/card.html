@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">Card</h1>
+<p class="kit-lede">A white surface with a hairline around it. The most repeated container in the product, on 49 of 99 screens.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-row"><div class="wf-card" style="max-width:320px"><h2 class="wf-card-h">This cycle</h2><p class="wf-micro">Opened Monday, closes Friday.</p></div>
+ <div class="wf-card" style="max-width:320px"><p class="wf-micro">A card without a heading holds one thing and says what it is in the thing itself.</p></div></div></div><ul class="kit-legend"><li><code>.wf-card</code><span>the surface: a raised fill, a hairline boundary, a 16px radius, 20px padding</span></li><li><code>.wf-card-h</code><span>the heading, at the h2 step, when the card holds more than one thing</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">Two: with a heading and without. A card without a heading holds exactly one thing and that thing names itself.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-card" style="max-width:280px"><h2 class="wf-card-h">This cycle</h2><p class="wf-micro">Opened Monday.</p></div></div><p class="kit-mark"><b>with a heading</b><br>several things under one name</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-card" style="max-width:280px"><p class="wf-micro">One thing that names itself.</p></div></div><p class="kit-mark"><b>without</b><br>one thing</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis. A card never changes colour to mean something: the meaning is in what is inside it. That is principle 4 held at the level of a container.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Everywhere the operator reads. The dashboard is cards, the roster is a card holding a list, the library is cards holding programs. It is the unit the content grid arranges.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> One subject per card. If a card needs two headings, it is two cards.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="state.html">State block</a> instead.</b> A card that reports a state and offers a next step is a <a href="state.html">State block</a>, which already has a title, a sentence and an action in the right order.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive. A card is not a link anywhere in this product, so it has no hover: if a whole card were pressable it would need a focus ring and a keyboard role, and neither exists here.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/card.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --line-hairline</code></td></tr><tr><th>In the product</th><td>49 of 99 screens</td></tr><tr><th>In colour</th><td>12 screens: <a href="../checkin-privacy.html">checkin-privacy</a>, <a href="../contact.html">contact</a>, <a href="../dashboard-alert.html">dashboard-alert</a>, <a href="../dashboard-empty.html">dashboard-empty</a>, <a href="../dashboard-error.html">dashboard-error</a>, <a href="../dashboard-loading.html">dashboard-loading</a>, <a href="../dashboard-noprogram.html">dashboard-noprogram</a>, <a href="../dashboard-open.html">dashboard-open</a>, <a href="../dashboard.html">dashboard</a>, <a href="../index.html">index</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-row&quot;&gt;&lt;div class=&quot;wf-card&quot; style=&quot;max-width:320px&quot;&gt;&lt;h2 class=&quot;wf-card-h&quot;&gt;This cycle&lt;/h2&gt;&lt;p class=&quot;wf-micro&quot;&gt;Opened Monday, closes Friday.&lt;/p&gt;&lt;/div&gt;
+ &lt;div class=&quot;wf-card&quot; style=&quot;max-width:320px&quot;&gt;&lt;p class=&quot;wf-micro&quot;&gt;A card without a heading holds one thing and says what it is in the thing itself.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

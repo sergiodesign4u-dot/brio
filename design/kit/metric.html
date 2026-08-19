@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metric, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Metric</h1>
+<p class="kit-lede">A number and the word that says what it is. The smallest thing in the product that carries meaning on its own.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-row"><div class="wf-metric">72<span>% answered</span></div><div class="wf-metric">18<span>people</span></div></div></div><ul class="kit-legend"><li><code>.wf-metric</code><span>the number, in the display family at the metric step</span></li><li><code>.wf-metric span</code><span>the unit beside it, at the label step in secondary ink</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One value. A number with its unit, and the unit is never optional: a number without its interpretation is exactly what principle 1 forbids.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-metric">72<span>% answered</span></div></div><p class="kit-mark"><b>number and unit</b><br>every occurrence</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis, and that is a decision rather than an omission. A metric never turns red or green: honest signals over flattering ones, and a colour on a number is a judgement the operator has not asked for.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Participation on the dashboard, the size of a team on the roster, the length of a program in the library. Seventeen screens.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Always with its unit, and always with a sentence near it that says what it means. Tabular figures are on in base.css so the number does not shift the layout as it changes.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="pulse.html">Pulse card</a> instead.</b> Do not use a metric for the team score. The score comes with an interpretation and a next step, and that whole thing is a <a href="pulse.html">Pulse card</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/metric.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--text-secondary</code></td></tr><tr><th>In the product</th><td>17 of 99 screens</td></tr><tr><th>In colour</th><td>5 screens: <a href="../checkin-privacy.html">checkin-privacy</a>, <a href="../dashboard-alert.html">dashboard-alert</a>, <a href="../dashboard.html">dashboard</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-row&quot;&gt;&lt;div class=&quot;wf-metric&quot;&gt;72&lt;span&gt;% answered&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;wf-metric&quot;&gt;18&lt;span&gt;people&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

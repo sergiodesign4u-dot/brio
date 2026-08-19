@@ -1,0 +1,102 @@
+/* The holding pen. Every rule here stands on exactly ONE screen, which is why none
+ * of them is a component: the entry rule of the kit is two screens. They are not
+ * dead, they are single, and they may not live on a screen because a screen carries
+ * no styles. The moment a second screen picks one up it leaves this file and becomes
+ * a component with the full five: css, page, registry row, inventory row, @import.
+ * Listed on design/kit/architecture.html so that nothing here is invisible.
+ */
+.wf-cannot {
+  position: relative;
+  font-size: var(--text-13);
+  color: var(--text-secondary);
+  padding-left: var(--space-icon-inset-sm);
+  margin-top: var(--space-4);
+}
+.wf-cannot::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--space-hair);
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  color: var(--text-secondary);
+  background-color: currentColor;
+  -webkit-mask: var(--icon-cross) center / contain no-repeat;
+  mask: var(--icon-cross) center / contain no-repeat;
+}
+.wf-saved {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-13);
+  color: var(--text-primary);
+  background: var(--bg-accent-soft);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+}
+.wf-pill {
+  display: inline-block;
+  font-size: var(--text-11);
+  font-weight: var(--weight-strong);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: var(--line-1) solid var(--line-control);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+}
+.wf-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+.wf-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-logo-w);
+  height: var(--size-logo-h);
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  font-size: var(--text-11);
+  font-weight: var(--weight-strong);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.wf-quote {
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  background: var(--bg-surface);
+}
+.wf-quote-t {
+  font-family: var(--font-display);
+  font-size: var(--text-quote);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-quote);
+  letter-spacing: -.01em;
+  max-width: 54ch;
+}
+.wf-quote-by {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  font-size: var(--text-15);
+  color: var(--text-primary);
+}
+.wf-quote-by small {
+  display: block;
+  font-size: var(--text-13);
+  color: var(--text-secondary);
+}
+.wf-avatar {
+  width: var(--size-avatar);
+  height: var(--size-avatar);
+  flex: none;
+  border-radius: var(--radius-full);
+  background: var(--bg-accent-soft);
+}

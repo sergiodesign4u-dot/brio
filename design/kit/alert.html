@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alert banner, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">Alert banner</h1>
+<p class="kit-lede">A tag, a sentence and an action, in one row, when something crossed a threshold.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-alert"><span class="tag">Attention</span><span>Participation fell below 65% this cycle.</span><span class="sp"></span><a class="wf-btn" href="#">See what changed</a></div></div><ul class="kit-legend"><li><code>.wf-alert</code><span>the row: a raised fill, a 3:1 boundary, wrapping under 520px</span></li><li><code>.wf-alert::before</code><span>the warning glyph, in the alert glyph role</span></li><li><code>.wf-alert .tag</code><span>the word that names the kind, in alert ink with a border of the same colour</span></li><li><code>.wf-alert .sp</code><span>the spacer that pushes the action to the end</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One form: tag, sentence, action. All three are always present, because an alert without a next step is a complaint.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-alert"><span class="tag">Attention</span><span>Participation fell below 65%.</span><span class="sp"></span><a class="wf-btn" href="#">See what changed</a></div></div><p class="kit-mark"><b>one form</b><br>three screens</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis: there is one severity in this product. A second level would need a second colour, and the palette has one alert colour on purpose.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The threshold alert on the dashboard: the retention driver of the whole product, the moment Brio tells the operator something before they had to ask. Three screens.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> The action inside the banner is outline, not solid. The banner already carries the urgency in its tag and its glyph, and a solid button here would compete with the action of the card beside it. One solid action per zone, and the banner is its own zone.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="status.html">Status pill</a> instead.</b> Do not use an alert to report the ordinary state of things. A cycle that is simply open is a <a href="status.html">Status pill</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive itself. The button inside it is a Button and carries the states.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/alert.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --glyph-alert, --line-control, --text-alert</code></td></tr><tr><th>In the product</th><td>3 of 99 screens</td></tr><tr><th>In colour</th><td>1 screens: <a href="../dashboard-alert.html">dashboard-alert</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-alert&quot;&gt;&lt;span class=&quot;tag&quot;&gt;Attention&lt;/span&gt;&lt;span&gt;Participation fell below 65% this cycle.&lt;/span&gt;&lt;span class=&quot;sp&quot;&gt;&lt;/span&gt;&lt;a class=&quot;wf-btn&quot; href=&quot;#&quot;&gt;See what changed&lt;/a&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

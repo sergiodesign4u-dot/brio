@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulse card, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">Pulse card</h1>
+<p class="kit-lede">The score, what it means, and what to do next. The one card the whole product is built to produce.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-pulse" style="max-width:420px"><div class="read">74</div><div class="interp">Steady. About the same as last cycle.</div><div class="act-lbl">Next: the cycle closes Friday.</div></div></div><ul class="kit-legend"><li><code>.wf-pulse</code><span>the card: a raised fill, a hairline boundary, a 16px radius</span></li><li><code>.wf-pulse .read</code><span>the score, at the read step in the display family, the largest number in the product</span></li><li><code>.wf-pulse .interp</code><span>the plain language interpretation, which never appears without the number</span></li><li><code>.wf-pulse .act-lbl</code><span>the next step, above a hairline of its own</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">State</h3><p class="kit-p">Three, and they are the three things the read can be: it is here, it is coming, it went down.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-pulse" style="max-width:300px"><div class="read">74</div><div class="interp">Steady.</div></div></div><p class="kit-mark"><b>ready</b><br>a score exists</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-pulse" style="max-width:300px"><div class="wf-skel tall"></div><div class="wf-skel w70"></div></div></div><p class="kit-mark"><b>loading</b><br>the read is being fetched</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-pulse" style="max-width:300px"><div class="read">61</div><div class="interp">Down from 74. Worth a look.</div></div></div><p class="kit-mark"><b>dipping</b><br>the score fell</p></div></div>
+<h3 class="kit-h3">Context</h3><p class="kit-p">Two. Inside the proof disclosure the card sits on a recessed ground and tightens its radius and padding, because it is an example of a card rather than the card itself.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-pulse" style="max-width:300px"><div class="read">74</div><div class="interp">Steady.</div></div></div><p class="kit-mark"><b>default</b><br>the dashboard</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-see" style="max-width:320px"><div class="see-body" style="display:block"><div class="wf-pulse"><div class="read">74</div><div class="interp">Steady.</div></div></div></div></div><p class="kit-mark"><b>embedded</b><br>inside the proof disclosure</p></div></div>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The dashboard, and inside the proof disclosure on the screens that explain what the owner can see. Nine screens. Principle 1 lives here: a number never appears without its interpretation, and the interpretation is in plain language rather than in a scale nobody was taught.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Number, meaning, next step, in that order, always all three. A dip is called a dip: "Down from 74. Worth a look." A rise states the fact and does not celebrate.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="metric.html">Metric</a> instead.</b> A number that needs no interpretation, like the size of a team, is a <a href="metric.html">Metric</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive. The embedded context is declared here rather than added as a class in the markup, because the markup of a coloured copy belongs to the frozen grey original and a copy may not add a class to it.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/pulse.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --line-hairline, --text-secondary</code></td></tr><tr><th>In the product</th><td>9 of 99 screens</td></tr><tr><th>In colour</th><td>4 screens: <a href="../checkin-privacy.html">checkin-privacy</a>, <a href="../dashboard-alert.html">dashboard-alert</a>, <a href="../dashboard-loading.html">dashboard-loading</a>, <a href="../dashboard.html">dashboard</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-pulse&quot; style=&quot;max-width:420px&quot;&gt;&lt;div class=&quot;read&quot;&gt;74&lt;/div&gt;&lt;div class=&quot;interp&quot;&gt;Steady. About the same as last cycle.&lt;/div&gt;&lt;div class=&quot;act-lbl&quot;&gt;Next: the cycle closes Friday.&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

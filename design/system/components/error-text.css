@@ -1,0 +1,10 @@
+/* Error text, level 1.
+ * Roles read: --text-alert
+ * Page: design/kit/error-text.html
+ * Stands on 7 of the 99 screens in the product, 1 of them in colour: signup-error
+ */
+.wf-err {
+  font-size: var(--text-13);
+  color: var(--text-alert);
+  margin-top: var(--space-2);
+}

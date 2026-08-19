@@ -1,0 +1,26 @@
+/* App footer, level 3.
+ * Roles read: --bg-surface, --line-hairline, --text-hover, --text-secondary
+ * Page: design/kit/app-footer.html
+ * Stands on 49 of the 99 screens in the product, 11 of them in colour: dashboard-alert, dashboard-empty, dashboard-error, dashboard-loading, dashboard-noprogram, dashboard-open and 5 more
+ */
+.wf-appfoot {
+  border-top: var(--line-1) solid var(--line-hairline);
+  background: var(--bg-surface);
+}
+.wf-appfoot-inner {
+  max-width: var(--size-content);
+  margin: 0 auto;
+  display: flex;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  padding: var(--space-5);
+  font-size: var(--text-13);
+}
+.wf-appfoot a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.wf-appfoot a:hover {
+  color: var(--text-hover);
+  text-decoration: underline;
+}

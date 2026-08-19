@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proof and audit, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Verification</p>
+<h1 class="kit-h1">Proof and audit</h1>
+<p class="kit-lede">The stage changed the architecture and, in three named places, the look. This page is the evidence: what moved, why it was allowed to move, what was checked and by which instrument.</p>
+<h2 class="kit-h2">The pixel comparison, screen by screen</h2>
+<p class="kit-p">Zero was never the target. This stage legally changed what the product looks like in three places, each one written down in <code class="kit-code">docs/tokens-audit.md</code> under a named list. So the test is not "did nothing change" but <b>can every difference be attributed to a line in one of those lists</b>.</p>
+<p class="kit-p">The comparison was not made by eye and not by comparing pictures. Both versions were walked in a browser, and <b>every element of every screen was compared property by property on its computed style</b>: colour, fill, border, radius, type, weight, leading, every padding and margin, min height, the measured box. That is stricter than a pixel diff and it names the element rather than lighting up a region. <b>554 differences across 24 screens and two viewports, and all 554 fall into three causes.</b> Nothing is unexplained, and no line of the three lists is without a difference to point at.</p>
+<div class="kit-scroll"><table class="kit-table"><tr><th>Screen</th><th>Viewport</th><th>Differences</th><th>What explains them</th></tr><tr><td>checkin-already</td><td>360</td><td>none</td><td>identical, property for property</td></tr><tr><td>checkin-already</td><td>1280</td><td>none</td><td>identical, property for property</td></tr><tr><td>checkin-complete</td><td>360</td><td>none</td><td>identical, property for property</td></tr><tr><td>checkin-complete</td><td>1280</td><td>none</td><td>identical, property for property</td></tr><tr><td>checkin-entry</td><td>360</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>checkin-entry</td><td>1280</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>checkin-expired</td><td>360</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>checkin-expired</td><td>1280</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>checkin-privacy</td><td>360</td><td>none</td><td>identical, property for property</td></tr><tr><td>checkin-privacy</td><td>1280</td><td>none</td><td>identical, property for property</td></tr><tr><td>checkin-questions</td><td>360</td><td>12</td><td>12 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>checkin-questions</td><td>1280</td><td>12</td><td>12 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>checkin-questions-loading</td><td>360</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>checkin-questions-loading</td><td>1280</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>checkin-submit-error</td><td>360</td><td>none</td><td>identical, property for property</td></tr><tr><td>checkin-submit-error</td><td>1280</td><td>none</td><td>identical, property for property</td></tr><tr><td>contact</td><td>360</td><td>12</td><td>12 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>contact</td><td>1280</td><td>12</td><td>12 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>contact-sent</td><td>360</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>contact-sent</td><td>1280</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>dashboard</td><td>360</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>dashboard</td><td>1280</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>dashboard-alert</td><td>360</td><td>16</td><td>16 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>dashboard-alert</td><td>1280</td><td>16</td><td>16 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>dashboard-empty</td><td>360</td><td>none</td><td>identical, property for property</td></tr><tr><td>dashboard-empty</td><td>1280</td><td>none</td><td>identical, property for property</td></tr><tr><td>dashboard-error</td><td>360</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>dashboard-error</td><td>1280</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>dashboard-loading</td><td>360</td><td>none</td><td>identical, property for property</td></tr><tr><td>dashboard-loading</td><td>1280</td><td>none</td><td>identical, property for property</td></tr><tr><td>dashboard-noprogram</td><td>360</td><td>none</td><td>identical, property for property</td></tr><tr><td>dashboard-noprogram</td><td>1280</td><td>none</td><td>identical, property for property</td></tr><tr><td>dashboard-open</td><td>360</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>dashboard-open</td><td>1280</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>index</td><td>360</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>index</td><td>1280</td><td>4</td><td>4 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>program-library</td><td>360</td><td>36</td><td>32 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review; 4 &times; the selected chip given a 3:1 boundary, foundation review</td></tr><tr><td>program-library</td><td>1280</td><td>97</td><td>32 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review; 4 &times; the selected chip given a 3:1 boundary, foundation review; 61 &times; the program grid now lays out, --size-progcard was referenced and never declared</td></tr><tr><td>program-library-empty</td><td>360</td><td>36</td><td>32 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review; 4 &times; the selected chip given a 3:1 boundary, foundation review</td></tr><tr><td>program-library-empty</td><td>1280</td><td>97</td><td>32 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review; 4 &times; the selected chip given a 3:1 boundary, foundation review; 61 &times; the program grid now lays out, --size-progcard was referenced and never declared</td></tr><tr><td>signup</td><td>360</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>signup</td><td>1280</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>signup-error</td><td>360</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>signup-error</td><td>1280</td><td>8</td><td>8 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>team-roster</td><td>360</td><td>16</td><td>16 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>team-roster</td><td>1280</td><td>16</td><td>16 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>team-roster-manage</td><td>360</td><td>28</td><td>28 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr><tr><td>team-roster-manage</td><td>1280</td><td>28</td><td>28 &times; the control boundary raised from 1.5:1 to 3.19:1, foundation review</td></tr></table></div>
+<p class="kit-note"><b>Every one of the 48 pairs was compared.</b> 14 of them came out identical property for property, which is what a screen with no control boundary on it looks like. No screen is unverified.</p>
+<h2 class="kit-h2">Before and after, on the three screens where it shows</h2>
+<p class="kit-p">The full set of 48 before and 48 after captures is in <code class="kit-code">design/kit/screens/</code>. Shown here are the three differences themselves, at the width where each is clearest.</p>
+<h3 class="kit-h3">dashboard, 1280px</h3><p class="kit-p">the control boundary raised from 1.5:1 to 3.19:1, foundation review</p><div class="kit-shots"><div class="kit-shot"><img src="screens/before/dashboard--1280.png" alt="dashboard before"><b>before</b><span class="why">stage 07, the flat kit</span></div><div class="kit-shot"><img src="screens/after/dashboard--1280.png" alt="dashboard after"><b>after</b><span class="why">stage 08, on the system</span></div></div>
+<h3 class="kit-h3">program-library, 1280px</h3><p class="kit-p">the program grid now lays out, --size-progcard was referenced and never declared</p><div class="kit-shots"><div class="kit-shot"><img src="screens/before/program-library--1280.png" alt="program-library before"><b>before</b><span class="why">stage 07, the flat kit</span></div><div class="kit-shot"><img src="screens/after/program-library--1280.png" alt="program-library after"><b>after</b><span class="why">stage 08, on the system</span></div></div>
+<h3 class="kit-h3">program-library-empty, 360px</h3><p class="kit-p">the program grid now lays out, --size-progcard was referenced and never declared</p><div class="kit-shots"><div class="kit-shot"><img src="screens/before/program-library-empty--360.png" alt="program-library-empty before"><b>before</b><span class="why">stage 07, the flat kit</span></div><div class="kit-shot"><img src="screens/after/program-library-empty--360.png" alt="program-library-empty after"><b>after</b><span class="why">stage 08, on the system</span></div></div>
+<h2 class="kit-h2">The audit of the tokens, in numbers</h2>
+<table class="kit-table">
+<tr><th></th><th>Before, the flat kit</th><th>After, the system</th></tr>
+<tr><td>Variables declared</td><td>83</td><td>129</td></tr>
+<tr><td>of which raw values with no role</td><td>83, all of them</td><td>106 primitives, 9 of them icons</td></tr>
+<tr><td>of which colour roles</td><td>0</td><td><b>23</b>, each on one surface, each with a pair in the dark theme</td></tr>
+<tr><td>Distinct raw values behind them</td><td>62</td><td>85, the 23 added are the dark ramp</td></tr>
+<tr><td>Variables with an origin recorded</td><td>82 of 83</td><td><b>all of them</b></td></tr>
+<tr><td>Value from nowhere</td><td>1, <code class="kit-code">--size-logo-h</code></td><td>0, its origin was recovered</td></tr>
+<tr><td>Orphan variables</td><td>0</td><td>0</td></tr>
+<tr><td>Variables used and never declared</td><td><b>1</b>, <code class="kit-code">--size-progcard</code>, which silently killed a grid</td><td>0</td></tr>
+<tr><td>Drift of values consolidated</td><td></td><td><b>0</b>. There was none to consolidate</td></tr>
+<tr><td>Names folded into a scale, no value moving</td><td>16 type names, 4 radius names</td><td>10 type steps, 5 radius steps</td></tr>
+<tr><td>Values written past a variable</td><td>0 on screens, 10 reported inside the kit</td><td>0. Nine of the ten were withdrawn as declared literals; the tenth became <code class="kit-code">--line-2</code></td></tr>
+<tr><td><code class="kit-code">:root</code> blocks the values were spread across</td><td>4</td><td>3, and each one is labelled</td></tr>
+<tr><td>css files</td><td>1 of 690 lines</td><td>41: tokens, base, layout, one-offs, index and 37 components, 1327 lines of component css</td></tr>
+</table>
+<h2 class="kit-h2">Consolidation, in numbers</h2>
+<table class="kit-table">
+<tr><th></th><th>Before step 2</th><th>After</th></tr>
+<tr><td>Rows in the inventory</td><td>37</td><td>37</td></tr>
+<tr><td>Merged into another row</td><td></td><td>1, Textarea into Input</td></tr>
+<tr><td>Added</td><td></td><td>1, Error code, found on two screens in the one-off list</td></tr>
+<tr><td>Renamed</td><td></td><td>1, Switch to Document switch, and the exception it entered under withdrawn</td></tr>
+<tr><td>Rows in the rename map</td><td></td><td>4, all executed at step 6</td></tr>
+<tr><td>Classes deleted as dead</td><td></td><td>1, <code class="kit-code">.wf-media.tall</code> with its token</td></tr>
+<tr><td>Components with a css file, a page, a registry row, an inventory row and an import</td><td>0</td><td><b>37 of 37</b></td></tr>
+</table>
+<p class="kit-note"><b>37 to 37 is the honest result.</b> Consolidation usually removes rows; here it removed one and added one, because the merging work was already done at stage 07: six dialogs were one row before this stage started. What step 2 found instead was two rows that were <i>wrong</i> rather than duplicated. Reporting a reduction would have meant inventing one.</p>
+<h2 class="kit-h2">The control census, both measurements</h2>
+<p class="kit-p">This reads as the opposite proof to the one above. The pixel comparison says nothing changed by accident; the census says the set of forms is closed on purpose.</p>
+<table class="kit-table">
+<tr><th></th><th>Before the system, step 1</th><th>After it, step 6</th></tr>
+<tr><td>Controls walked</td><td>459</td><td>459</td></tr>
+<tr><td>Families after folding</td><td>17</td><td>17</td></tr>
+<tr><td>Distinct forms</td><td>23</td><td>23</td></tr>
+<tr><td>Border colours across every bordered control</td><td>2</td><td>2</td></tr>
+<tr><td>Families existing at exactly one viewport</td><td>2</td><td>2</td></tr>
+<tr><td>Labels carried by more than one form</td><td>5 in the sample, 20 across the grey product</td><td>closed by one rule: one solid action per zone</td></tr>
+<tr><td>Rows of "control without a form"</td><td>11</td><td>0 open. 4 components and 6 states built, 1 class deleted</td></tr>
+</table>
+<h2 class="kit-h2">The theme, and it was caught by three different instruments</h2>
+<table class="kit-table">
+<tr><th>Instrument</th><th>What it found</th></tr>
+<tr><td>The stress test on the full showcase, step 7</td><td><b>1 neighbourhood finding.</b> <code class="kit-code">--line-hover</code> had been set to a primitive that met <code class="kit-code">--text-primary</code> in the dark theme. Fixed in the dark half of the pair, never in a component</td></tr>
+<tr><td>The mechanical comparison of the two theme blocks</td><td><b>1 more pair meeting in the dark</b>, <code class="kit-code">--text-on-action</code> against <code class="kit-code">--bg-page</code>. Verified as harmless: they paint different surfaces and never sit next to each other</td></tr>
+<tr><td>The second walk, on the product screens themselves, step 8</td><td><b>0.</b> Every screen was walked in both themes at both viewports, and every text node was measured against its resolved background</td></tr>
+<tr><td>Components that had to be edited for the theme</td><td><b>0.</b> That is the harvest of this step rather than a boast: had any component needed an edit, it would have meant the component was reading a primitive directly or carrying a value of its own</td></tr>
+<tr><td>Escapees from step 5, a component reading a primitive colour</td><td><b>0</b>, confirmed independently by Codex over all 37 files</td></tr>
+</table>
+<h2 class="kit-h2">The dry run over the still grey product</h2>
+<p class="kit-p">The roll-out moved to stage 12, and with it the main test of whether the system is complete. This is the cheap paper substitute, and it earned its place on the first run.</p>
+<table class="kit-table">
+<tr><th>What</th><th>Number</th></tr>
+<tr><td>Screens read against the inventory by hand</td><td>4, the densest with no coloured copy</td></tr>
+<tr><td>Screens swept mechanically</td><td>75, all that are still grey</td></tr>
+<tr><td>Classes standing on two or more grey screens that the system does not have</td><td><b>5</b></td></tr>
+<tr><td>Classes standing on exactly one screen, correctly absent</td><td>70</td></tr>
+<tr><td>Holes built here</td><td>0, which is the rule for this instrument</td></tr>
+<tr><td>Holes written into the backlog with a reason and a closer</td><td>5</td></tr>
+</table>
+<p class="kit-p">All five are <b>variant questions rather than missing components</b>: in each case the system already has the family, and what is unknown is whether the grey screen shows a new value on an existing axis or a new anatomy. That is answered by colouring the screen. Stage 12 now starts with these five instead of a blank sheet.</p>
+<p class="kit-note"><b>One class looked like the largest hole in the product and is not one.</b> <code class="kit-code">.wf-panel</code> stands on 97 of 99 grey screens and is absent from the system, because it is the grey prototype's own navigator panel. The coloured screens replace it with <code class="kit-code">.dz-strip</code>. Recorded because 97 of 99 looks alarming until somebody opens the file.</p>
+<h2 class="kit-h2">The critique, by class</h2>
+<p class="kit-p">Two instruments plus the mechanical detector, and a third pass that reads the contract of the stage rather than its artefacts. The full log with file and line for every finding is <code class="kit-code">design/kit/docs/verification.md</code>.</p>
+<table class="kit-table">
+<tr><th>Class</th><th>Found</th><th>Who found</th><th>Fixed</th><th>Withdrawn</th><th>Deferred</th></tr>
+<tr><td>Variable used and never declared</td><td>1</td><td>Claude</td><td>1</td><td></td><td></td></tr>
+<tr><td>Dead rule the new load order would wake</td><td>1</td><td>Claude</td><td>1</td><td></td><td></td></tr>
+<tr><td>Contrast on a non text surface</td><td>2</td><td>Claude</td><td>2</td><td></td><td></td></tr>
+<tr><td>Two roles meeting in the dark</td><td>2</td><td>Claude, Codex</td><td>1</td><td>1</td><td></td></tr>
+<tr><td>Role comment without a count or an origin</td><td>9</td><td>Codex</td><td>9</td><td></td><td></td></tr>
+<tr><td>Role comment contradicting the code</td><td>1</td><td>Codex</td><td>1</td><td></td><td></td></tr>
+<tr><td>One token doing two jobs</td><td>1</td><td>Codex</td><td></td><td>1, decided and recorded</td><td></td></tr>
+<tr><td><code class="kit-code">:focus</code> where <code class="kit-code">:focus-visible</code> is meant</td><td>1</td><td>Codex</td><td>1</td><td></td><td></td></tr>
+<tr><td>Registry entry with no file</td><td>1</td><td>Codex</td><td>1</td><td></td><td></td></tr>
+<tr><td>Token on no foundation page</td><td>2</td><td>Codex</td><td>2</td><td></td><td></td></tr>
+<tr><td>Structural divergence from the grey original</td><td>5</td><td>Codex</td><td>5</td><td>2, declared as allowed</td><td></td></tr>
+<tr><td>Rename map not executed</td><td>1</td><td>Codex</td><td></td><td>1</td><td></td></tr>
+<tr><td>Present tense about a deleted file</td><td>2</td><td>Codex</td><td>2</td><td></td><td></td></tr>
+<tr><td>Stand carrying inline styles</td><td>236</td><td>Claude, detector</td><td>236</td><td></td><td></td></tr>
+<tr><td>Stand breaking at 360</td><td>36 pages</td><td>Claude</td><td>36</td><td></td><td></td></tr>
+<tr><td>Stand link unreadable in the dark</td><td>2</td><td>Claude</td><td>2</td><td></td><td></td></tr>
+<tr><td>Em dash saturation</td><td>14 files</td><td>detector</td><td></td><td>14, it counts the <code class="kit-code">--</code> of a custom property</td><td></td></tr>
+<tr><td>Overused font</td><td>117 files</td><td>detector</td><td></td><td></td><td>117, the user's decision at stage 06</td></tr>
+<tr><td>Type or radius off the ramp</td><td>41</td><td>detector</td><td></td><td>41, all on stand pages declared in DESIGN.md</td><td></td></tr>
+<tr><td>Holes in the still grey product</td><td>5</td><td>Claude, dry run</td><td></td><td></td><td>5, in the backlog for stage 12</td></tr>
+<tr><td>Token without a pair, import order, folder mixing, component reading a primitive, surface of a role, changes in wireframes/</td><td><b>0</b></td><td>Codex + Claude</td><td></td><td></td><td></td></tr>
+</table>
+<p class="kit-note"><b>The "who found" column is not bookkeeping.</b> Read down it: Codex found every class that is proved by comparing two pieces of text, and found nothing that needs a browser. Claude found every class that needs a resolved value or a judgement, and would not have found the missing origins, the wrong comment or the SEO divergence by reading its own work. Neither pass is a subset of the other, and the two most expensive findings of the stage, the undeclared variable and the dead rule, came from a third thing entirely: comparing the running product with itself, before and after.</p>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,29 @@
+/* Bottom tab bar, level 3.
+ * Roles read: --bg-surface, --line-hairline, --text-primary, --text-secondary
+ * Page: design/kit/tabbar.html
+ * Stands on 49 of the 99 screens in the product, 11 of them in colour: dashboard-alert, dashboard-empty, dashboard-error, dashboard-loading, dashboard-noprogram, dashboard-open and 5 more
+ */
+.wf-tabbar {
+  display: none;
+}
+.wf-tabbar a {
+  flex: 1;
+  text-align: center;
+  padding: var(--space-3) var(--space-1);
+  font-size: var(--text-12);
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.wf-tabbar a.on {
+  color: var(--text-primary);
+  font-weight: var(--weight-strong);
+}
+@media (max-width: 720px) {
+  .wf-tabbar {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    background: var(--bg-surface);
+    border-top: var(--line-1) solid var(--line-hairline);
+  }
+}

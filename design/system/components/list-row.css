@@ -1,0 +1,38 @@
+/* List row, level 2.
+ * Roles read: --line-hairline, --text-primary, --text-secondary
+ * Page: design/kit/list-row.html
+ * Stands on 19 of the 99 screens in the product, 3 of them in colour: index, team-roster-manage, team-roster
+ */
+.wf-list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--line-1) solid var(--line-hairline);
+  min-height: var(--size-touch);
+}
+.wf-list-row:last-child {
+  border-bottom: none;
+}
+.wf-list-row .who {
+  font-size: var(--text-15);
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+}
+.wf-list-row .who small {
+  display: block;
+  color: var(--text-secondary);
+  font-size: var(--text-13);
+}
+.wf-rowlink {
+  font-size: var(--text-13);
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
+  white-space: nowrap;
+  padding: var(--space-2) 0;
+}
+.wf-rowlink:hover {
+  text-decoration-thickness: var(--underline-thickness);
+}

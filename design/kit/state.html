@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State block, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">State block</h1>
+<p class="kit-lede">A title, a sentence and an action, for a screen where the thing a person came for is not there.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-state" style="max-width:420px"><div class="n">Waiting for five answers</div><div class="sub">A score appears once at least five people have answered. Nobody sees the count until then.</div><div class="wf-btns"><a class="wf-btn" href="#">Nudge the team</a></div></div></div><ul class="kit-legend"><li><code>.wf-state</code><span>the block: a raised fill, a hairline boundary, centred</span></li><li><code>.wf-state .n</code><span>the title, at the state title step</span></li><li><code>.wf-state .sub</code><span>the sentence, in secondary ink</span></li><li><code>.wf-btns</code><span>the action row, one action</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Emphasis</h3><p class="kit-p">Two: plain and error. The error variant adds a mark above the title, in the alert glyph role, and nothing else changes.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-state" style="max-width:300px"><div class="n">Waiting for five answers</div><div class="sub">A score appears once five people have answered.</div></div></div><p class="kit-mark"><b>default</b><br>empty, waiting, no program</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div aria-label="Could not load" style="max-width:300px"><div class="wf-state"><div class="n">Could not load the pulse</div><div class="sub">The read did not come back. Try again.</div></div></div></div><p class="kit-mark"><b>error</b><br>something failed</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No size axis: it is as wide as the column it stands in.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Seventeen screens, and six named states: empty, error, waiting, no programme, link expired, already answered. It is the component that carries principle 2 more than any other: every one of these screens says what happened, why, and what to do next.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Always all three parts. A title without a next step leaves the operator exactly where they were, which is the feeling the product exists to remove.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="badge.html">Outcome badge</a> instead.</b> A screen that has one thing to report and nothing to do next is an <a href="badge.html">Outcome badge</a> with a heading, not a state block.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive: the button inside it is a Button. The error mark is drawn from the aria-label of the surrounding region rather than from a class, because the coloured copy may not add a class to markup that belongs to the grey original.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/state.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --glyph-alert, --line-hairline, --text-secondary</code></td></tr><tr><th>In the product</th><td>17 of 99 screens</td></tr><tr><th>In colour</th><td>6 screens: <a href="../contact-sent.html">contact-sent</a>, <a href="../dashboard-empty.html">dashboard-empty</a>, <a href="../dashboard-error.html">dashboard-error</a>, <a href="../dashboard-noprogram.html">dashboard-noprogram</a>, <a href="../dashboard-open.html">dashboard-open</a>, <a href="../program-library-empty.html">program-library-empty</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-state&quot; style=&quot;max-width:420px&quot;&gt;&lt;div class=&quot;n&quot;&gt;Waiting for five answers&lt;/div&gt;&lt;div class=&quot;sub&quot;&gt;A score appears once at least five people have answered. Nobody sees the count until then.&lt;/div&gt;&lt;div class=&quot;wf-btns&quot;&gt;&lt;a class=&quot;wf-btn&quot; href=&quot;#&quot;&gt;Nudge the team&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

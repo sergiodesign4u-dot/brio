@@ -1,0 +1,69 @@
+/* Proof disclosure, level 3.
+ * Roles read: --bg-recessed, --bg-surface, --color-focus, --glyph-action, --line-hairline
+ * Page: design/kit/disclosure.html
+ * Stands on 4 of the 99 screens in the product, 1 of them in colour: checkin-privacy
+ */
+.wf-see {
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  margin-bottom: var(--space-5);
+}
+.wf-see > summary {
+  cursor: pointer;
+  padding: var(--space-4);
+  font-size: var(--text-15);
+  font-weight: var(--weight-strong);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.wf-see > summary::before {
+  content: "";
+  flex: none;
+  width: var(--size-icon);
+  height: var(--size-icon);
+  color: var(--glyph-action);
+  background-color: currentColor;
+  -webkit-mask: var(--icon-chevron) center / contain no-repeat;
+  mask: var(--icon-chevron) center / contain no-repeat;
+  transform: rotate(0deg);
+  transition: transform .15s ease;
+}
+.wf-see[open] > summary::before {
+  transform: rotate(90deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wf-see > summary::before {
+    transition: none;
+  }
+}
+.wf-see > summary::-webkit-details-marker {
+  display: none;
+}
+.wf-see > summary:focus-visible {
+  outline: var(--line-2) solid var(--color-focus);
+  outline-offset: var(--space-hair);
+  border-radius: var(--radius-lg);
+}
+.wf-see[open] > summary {
+  border-bottom: var(--line-1) solid var(--line-hairline);
+}
+.wf-see .see-body {
+  padding: var(--space-4);
+  background: var(--bg-recessed);
+}
+.wf-see .see-body .wf-card {
+  margin-bottom: 0;
+}
+.wf-see .see-body .wf-micro {
+  margin-bottom: var(--space-3);
+}
+.wf-see .see-body .wf-pulse {
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+.wf-see .see-body .wf-spark {
+  margin-top: var(--space-4);
+}

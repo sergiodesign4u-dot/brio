@@ -7,40 +7,42 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="system/index.css">
+  <link rel="stylesheet" href="_proto.css">
 <style>
 /* the hub's own chrome, prefixed o- so it cannot be mistaken for a product class */
 body { padding-top: var(--size-rail-bar); }
 @media (min-width: 900px) { body { padding-top: 0; padding-left: var(--size-rail); } }
 .o-page { max-width: 1080px; margin: 0 auto; padding: var(--space-7) var(--space-5) 80px; }
 .o-head h1 { font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
-.o-label { font-size: var(--size-tag); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); }
-.o-lede { margin-top: var(--space-3); max-width: 74ch; color: var(--color-muted); }
+.o-label { font-size: var(--text-11); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); }
+.o-lede { margin-top: var(--space-3); max-width: 74ch; color: var(--text-secondary); }
 .o-sec { padding-top: 48px; }
+.o-page a { color: var(--text-primary); }   /* without this the browser default blue arrives, and it measures 1.99 in the dark theme */
 .o-sec > h2 { font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-weight: 700; letter-spacing: -.02em; }
-.o-note { margin-top: var(--space-3); font-size: var(--size-micro); color: var(--color-muted); max-width: 78ch; }
+.o-note { margin-top: var(--space-3); font-size: var(--text-13); color: var(--text-secondary); max-width: 78ch; }
 .o-kit { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: var(--space-5); }
-.o-kit a { display: block; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: var(--space-5); text-decoration: none; color: var(--color-ink); }
-.o-kit a:hover { border-color: var(--color-action); }
-.o-kit b { font-family: var(--font-display); font-size: var(--size-ui); display: block; }
-.o-kit span { display: block; margin-top: var(--space-2); font-size: var(--size-micro); color: var(--color-muted); }
+.o-kit a { display: block; background: var(--bg-surface); border: 1px solid var(--line-hairline); border-radius: var(--radius-lg); padding: var(--space-5); text-decoration: none; color: var(--text-primary); }
+.o-kit a:hover { border-color: var(--bg-action); }
+.o-kit b { font-family: var(--font-display); font-size: var(--text-15); display: block; }
+.o-kit span { display: block; margin-top: var(--space-2); font-size: var(--text-13); color: var(--text-secondary); }
 .o-group { margin-top: var(--space-6); }
-.o-group h3 { font-family: var(--font-display); font-size: var(--size-ui); font-weight: 600; display: flex; align-items: baseline; gap: var(--space-3); }
-.o-count { font-size: var(--size-micro); color: var(--color-muted); font-weight: 400; }
+.o-group h3 { font-family: var(--font-display); font-size: var(--text-15); font-weight: 600; display: flex; align-items: baseline; gap: var(--space-3); }
+.o-count { font-size: var(--text-13); color: var(--text-secondary); font-weight: 400; }
 .o-screens { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); margin-top: var(--space-3); }
-.o-screens a, .o-screens span { display: flex; align-items: center; gap: var(--space-2); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-control); padding: var(--space-3); font-size: var(--size-micro); text-decoration: none; color: var(--color-ink); }
-.o-screens a:hover { border-color: var(--color-action); }
-.o-screens span { color: var(--color-muted); background: transparent; border-style: dashed; }
+.o-screens a, .o-screens span { display: flex; align-items: center; gap: var(--space-2); background: var(--bg-surface); border: 1px solid var(--line-hairline); border-radius: var(--radius-md); padding: var(--space-3); font-size: var(--text-13); text-decoration: none; color: var(--text-primary); }
+.o-screens a:hover { border-color: var(--bg-action); }
+.o-screens span { color: var(--text-secondary); background: transparent; border-style: dashed; }
 .o-why { display: grid; gap: var(--space-2); margin-top: var(--space-5); }
 .o-why b { display: block; }
-.o-why p { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-control); padding: var(--space-3); font-size: var(--size-micro); }
-.o-screens .o-dot { width: 8px; height: 8px; border-radius: var(--radius-pill); background: var(--color-action); flex: none; }
-.o-screens span .o-dot { background: var(--color-line-strong); }
-.o-meter { height: 8px; border-radius: var(--radius-pill); background: var(--color-line); overflow: hidden; margin-top: var(--space-4); }
-.o-meter i { display: block; height: 100%; background: var(--color-action); }
+.o-why p { background: var(--bg-surface); border: 1px solid var(--line-hairline); border-radius: var(--radius-md); padding: var(--space-3); font-size: var(--text-13); }
+.o-screens .o-dot { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--bg-action); flex: none; }
+.o-screens span .o-dot { background: var(--line-control); }
+.o-meter { height: 8px; border-radius: var(--radius-full); background: var(--line-hairline); overflow: hidden; margin-top: var(--space-4); }
+.o-meter i { display: block; height: 100%; background: var(--bg-action); }
 .o-fill { width: 24%; }   /* 24 of 99 state pages, the number and not a rounding of it */
 .o-foot p + p { margin-top: var(--space-2); }
-.o-foot { margin-top: 72px; padding-top: var(--space-5); border-top: 1px solid var(--color-line-strong); font-size: var(--size-micro); color: var(--color-muted); }
+.o-foot { margin-top: 72px; padding-top: var(--space-5); border-top: 1px solid var(--line-control); font-size: var(--text-13); color: var(--text-secondary); }
 </style>
 <link rel="stylesheet" href="../_nav.css">
 </head>
@@ -62,12 +64,14 @@ body { padding-top: var(--size-rail-bar); }
     <p class="o-label">Kit and tokens</p>
     <h2>Where the language lives</h2>
     <div class="o-kit">
-      <a href="kit/kit.html"><b>Component kit</b><span>Every component with its states, the whole token block alive, and the inventory read out of all 99 wireframes.</span></a>
+      <a href="kit/overview.html"><b>The design system</b><span>Two levels of token in both themes, five foundation pages and one page per component. This is where the values now live and where an edit goes.</span></a>
+      <a href="kit/pixel-proof.html"><b>Proof and audit</b><span>What changed at stage 08, why it was allowed to, and what every instrument found.</span></a>
+      <a href="kit/kit.html"><b>Component kit, stage 07</b><span>The flat kit's showcase, kept frozen as a smoke test and now running on the system.</span></a>
       <a href="kit/shell.html"><b>Shell markup</b><span>The five frames a screen can stand in, as copy-paste source.</span></a>
       <a href="concept/concept.html"><b>Concept stand</b><span>The visual language and where each decision came from.</span></a>
       <a href="visuals/README.md"><b>Visuals</b><span>Brio's own imagery, one colour grade, with the generation prompt recorded.</span></a>
     </div>
-    <p class="o-note">A screen carries no style of its own. Everything visual comes from <code>design/kit/kit.css</code>, and a value written on a page instead of in the kit is the defect this stage exists to prevent.</p>
+    <p class="o-note">A screen carries no style of its own. Everything visual comes from <code>design/system/index.css</code>, and a value written on a page instead of in the system is the defect this stage exists to prevent. At stage 08 the flat kit was split into two levels of token and one file per component; the screens changed one link and nothing else.</p>
   </section>
 
   <section class="o-sec" id="coverage">
@@ -167,12 +171,14 @@ body { padding-top: var(--size-rail-bar); }
       <p><b>Two attributes amended rather than the mockups.</b> A5 no longer claims photography carries the human register inside the product: a peer does not hang photographs of strangers in the room where you report a hard week. A1 no longer says "airy": what makes a screen non-clinical is tone and hierarchy, not empty space.</p>
       <p><b>Withdrawn at verification.</b> The detector reports 34 em-dashes in the showcase. The file contains zero; it is counting plain hyphens. The row stays in the log rather than disappearing.</p>
     </div>
-    <p class="o-note">The full log, with file and line for every finding and the reasoning on each disagreement, is in <code>design/kit/critique.md</code>.</p>
+    <p class="o-note">The full log, with file and line for every finding and the reasoning on each disagreement, is in <code>design/kit/docs/critique.md</code>.</p>
   </section>
 
   <footer class="o-foot">
     <p><b>Brio, stage 07.</b> The kit: <code>design/kit/</code>. The language: the root <code>DESIGN.md</code>. The grey prototype it all came from: <a href="../wireframes/overview.html">wireframes</a>, still grey, still frozen.</p>
     <p>Coverage is stated as a number rather than implied by a page that looks finished. 24 of 99.</p>
+    <h3 style="margin-top:28px">And what stage 08 did to all of it</h3>
+    <p>The flat kit became <a href="kit/overview.html">a system</a>: two levels of token, a dark theme paired role by role, and 37 component files loaded by level. The screens changed one stylesheet link and nothing else. Three things do look different, and each one is written down: the boundary of a control was raised from 1.5:1 to 3.19:1, the selected chip was given a boundary of its own, and the program library finally lays out because a variable it read had never been declared. <b>554 measured differences across these 24 screens in two viewports, every one of them attributable to one of those three.</b> The evidence is on <a href="kit/pixel-proof.html">the proof page</a>.</p>
   </footer>
 
 </div>

@@ -1,0 +1,56 @@
+/* Layout helpers. Compositions, not components: they arrange things and carry no
+ * identity of their own, so they have no page and no variants. Listed in
+ * design/kit/docs/inventory.md and shown on geometry.html, because a selector in
+ * the system that appears in no list is a decision nobody made.
+ */
+.wf-grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+@media (max-width: 720px) {
+  .wf-grid3 {
+    grid-template-columns: 1fr;
+  }
+}
+.wf-grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+@media (max-width: 720px) {
+  .wf-grid4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.wf-tags {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.wf-cta-final {
+  text-align: center;
+  padding: var(--space-2) 0;
+}
+.pg-facets {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin: var(--space-5) 0 var(--space-4);
+}
+.pg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--size-progcard), 1fr));
+  gap: var(--space-4);
+}
+.wf-contact {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .wf-contact {
+    grid-template-columns: 1fr;
+  }
+}

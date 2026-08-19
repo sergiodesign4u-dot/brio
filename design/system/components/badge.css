@@ -1,0 +1,54 @@
+/* Outcome badge, level 1.
+ * Roles read: --bg-accent-soft, --bg-surface, --line-alert, --text-alert, --text-primary
+ * Page: design/kit/badge.html
+ * Stands on 8 of the 99 screens in the product, 4 of them in colour: checkin-already, checkin-complete, checkin-expired, checkin-submit-error
+ */
+@media (max-width: 520px) {
+  .wf-badge {
+    margin-bottom: var(--space-3);
+  }
+}
+@media (max-width: 520px) {
+  .wf-narrow:has(> .wf-badge) > .wf-lead {
+    margin-bottom: var(--space-3);
+  }
+}
+.wf-narrow:has(> .wf-badge) h1,
+.wf-narrow:has(> .wf-badge) > .wf-lead,
+.wf-narrow:has(> .wf-badge) > .wf-micro,
+.wf-narrow:has(> .wf-badge) > p:has(> .wf-saved) {
+  text-align: center;
+}
+.wf-badge {
+  width: var(--size-badge-box);
+  height: var(--size-badge-box);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-26);
+  line-height: var(--leading-tight);
+  margin: 0 auto var(--space-5);
+}
+.wf-badge.ok {
+  background: var(--bg-accent-soft);
+  color: var(--text-primary);
+}
+.wf-badge.warn {
+  background: var(--bg-surface);
+  color: var(--text-alert);
+  border: var(--line-1) solid var(--line-alert);
+}
+
+/* Under 520px an outcome screen has to keep its action reachable without
+ * scrolling, so the badge gives back what it can afford. At stage 07 this was a
+ * :root override inside a media query, which quietly resized the icon slot too,
+ * because the icon slot was reading the badge's variable. The step now belongs
+ * to the component that owns it. Same values, one less surprise. */
+@media (max-width: 520px) {
+  .wf-badge {
+    width: var(--size-badge-box-sm);
+    height: var(--size-badge-box-sm);
+    font-size: var(--text-22);
+  }
+}

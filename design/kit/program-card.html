@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Program card, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">Program card</h1>
+<p class="kit-lede">One programme in the library: what it is about, what it is called, how long it runs, and the one action.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><article class="wf-progcard" style="max-width:320px"><div class="cat">Stress</div><div class="title">Four weeks of small resets</div><div class="meta">4 weeks &middot; 10 minutes a week</div><p class="desc">A short weekly practice the team runs together, with nothing to install.</p><div class="wf-btns"><a class="wf-btn solid" href="#">Select</a></div></article></div><ul class="kit-legend"><li><code>.wf-progcard</code><span>the card: a raised fill, a hairline boundary, the zones stacked in a fixed order</span></li><li><code>.cat</code><span>the theme, at the eyebrow step in secondary ink</span></li><li><code>.title</code><span>the name, at the title step in the display family</span></li><li><code>.meta</code><span>length and effort, the two things the operator actually compares on</span></li><li><code>.desc</code><span>one sentence about what the team does</span></li><li><code>.badges</code><span>the optional row of chips</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">Two: with the badge row and without. The badges say what a programme is suitable for and appear where the library has enough programmes to need narrowing.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><article class="wf-progcard" style="max-width:280px"><div class="cat">Sleep</div><div class="title">Winding down</div><div class="meta">3 weeks</div></article></div><p class="kit-mark"><b>plain</b><br>most cards</p></div><div class="kit-cell"><div class="kit-scene on-surface"><article class="wf-progcard" style="max-width:280px"><div class="cat">Focus</div><div class="title">One thing at a time</div><div class="meta">2 weeks</div><div class="badges"><span class="wf-tag">Remote</span><span class="wf-tag">Small team</span></div></article></div><p class="kit-mark"><b>with badges</b><br>the library grid</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis: no programme is highlighted over another. A recommended programme is said in words, not by making its card louder.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The library, where the operator picks what to run. Nine screens. It is where the main job is done: a person with no HR training is told what to run and when, and the card carries exactly the four things needed to choose.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Length and effort always visible. That is what an operator with no methodology compares on, and hiding it behind a click is what makes the choice feel like a guess.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="pulse.html">Pulse card</a> instead.</b> A programme that is already running is not a card in a grid. It is the state on the dashboard, in a <a href="pulse.html">Pulse card</a> and a Status pill.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive: the action inside it is a Button. The grid it sits in reflows at 240px per column, and that width is a token, --size-progcard. It was referenced and never declared in the stage 07 kit, so the whole grid declaration was invalid and the cards stacked full width. Declaring it is one of the three named changes of this stage.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/program-card.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --line-hairline, --text-secondary</code></td></tr><tr><th>In the product</th><td>9 of 99 screens</td></tr><tr><th>In colour</th><td>2 screens: <a href="../program-library-empty.html">program-library-empty</a>, <a href="../program-library.html">program-library</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;article class=&quot;wf-progcard&quot; style=&quot;max-width:320px&quot;&gt;&lt;div class=&quot;cat&quot;&gt;Stress&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Four weeks of small resets&lt;/div&gt;&lt;div class=&quot;meta&quot;&gt;4 weeks &amp;middot; 10 minutes a week&lt;/div&gt;&lt;p class=&quot;desc&quot;&gt;A short weekly practice the team runs together, with nothing to install.&lt;/p&gt;&lt;div class=&quot;wf-btns&quot;&gt;&lt;a class=&quot;wf-btn solid&quot; href=&quot;#&quot;&gt;Select&lt;/a&gt;&lt;/div&gt;&lt;/article&gt;</pre>
+</div>
+</main>
+</body>
+</html>

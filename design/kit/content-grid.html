@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content grid, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">Content grid</h1>
+<p class="kit-lede">The main column and its rail. The only organism that holds other organisms, which is why it loads last.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-grid"><div class="wf-card"><h2 class="wf-card-h">This cycle</h2><p class="wf-micro">Opened Monday, closes Friday.</p></div><div class="wf-card"><h2 class="wf-card-h">Next</h2><p class="wf-micro">The read arrives once five people have answered.</p></div></div></div><ul class="kit-legend"><li><code>.wf-grid</code><span>the split: main column and rail from 720px up, one column below</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Layout</h3><p class="kit-p">Two, and the viewport decides, not the content.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-grid"><div class="wf-card"><p class="wf-micro">Main</p></div><div class="wf-card"><p class="wf-micro">Rail</p></div></div></div><p class="kit-mark"><b>two columns</b><br>from 720px</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div style="max-width:320px"><div class="wf-grid"><div class="wf-card"><p class="wf-micro">Main</p></div><div class="wf-card"><p class="wf-micro">Rail</p></div></div></div></div><p class="kit-mark"><b>one column</b><br>under 720px</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis. It arranges and carries no identity, which is also why it is the only organism with a single rule in its file.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">33 screens: the dashboard, the roster, the library. It is the frame the operator reads inside.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> The rail carries context, never the action the screen exists for. On a phone the rail goes below the main column, and anything essential in it would fall under the fold.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="card.html">Card</a> instead.</b> A row of equal cards on a marketing page is not this component. Those are layout helpers, wf-grid3 and wf-grid4, and they are listed on the geometry page.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive. It loads last in index.css because it holds Lists, State blocks and Pulse cards, and a container loaded above its contents wins the cascade over them.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/content-grid.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">none, geometry only</code></td></tr><tr><th>In the product</th><td>33 of 99 screens</td></tr><tr><th>In colour</th><td>10 screens: <a href="../dashboard-alert.html">dashboard-alert</a>, <a href="../dashboard-empty.html">dashboard-empty</a>, <a href="../dashboard-error.html">dashboard-error</a>, <a href="../dashboard-loading.html">dashboard-loading</a>, <a href="../dashboard-noprogram.html">dashboard-noprogram</a>, <a href="../dashboard-open.html">dashboard-open</a>, <a href="../dashboard.html">dashboard</a>, <a href="../index.html">index</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-grid&quot;&gt;&lt;div class=&quot;wf-card&quot;&gt;&lt;h2 class=&quot;wf-card-h&quot;&gt;This cycle&lt;/h2&gt;&lt;p class=&quot;wf-micro&quot;&gt;Opened Monday, closes Friday.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;wf-card&quot;&gt;&lt;h2 class=&quot;wf-card-h&quot;&gt;Next&lt;/h2&gt;&lt;p class=&quot;wf-micro&quot;&gt;The read arrives once five people have answered.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

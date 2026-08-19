@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">Hero</h1>
+<p class="kit-lede">The first thing on a public page: a heading, a sentence, an action, and sometimes an image beside them.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-hero"><h1>Wellbeing that actually runs</h1><p class="wf-lead">Brio tells you what to run and when, and shows the team you already have, without ever showing you a single person’s answer.</p><div class="wf-btns"><a class="wf-btn solid" href="#">Start free</a><a class="wf-btn" href="#">See how it works</a></div></div></div><ul class="kit-legend"><li><code>.wf-hero</code><span>the block, with the marketing display step on its heading</span></li><li><code>.wf-hero h1</code><span>the heading, at the hero step, which the product interior never uses</span></li><li><code>.wf-hero .wf-lead</code><span>the sentence under it</span></li><li><code>.wf-hero-grid</code><span>the two column composition, copy beside a visual</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">Two: copy alone, or copy beside a visual. The visual appears where the page has to show what the product is, not only say it.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-hero"><h2 style="font-size:var(--text-section);font-family:var(--font-display);font-weight:var(--weight-bold)">Pricing</h2><p class="wf-lead">Free up to ten people.</p></div></div><p class="kit-mark"><b>copy only</b><br>a secondary public page</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-hero"><div class="wf-hero-grid"><div><h2 style="font-size:var(--text-section);font-family:var(--font-display);font-weight:var(--weight-bold)">Wellbeing that actually runs</h2><p class="wf-lead">Nobody sees who answered what.</p></div><div class="wf-media shot"><img src="../visuals/product-dashboard.jpg" alt="The Brio dashboard"></div></div></div></div><p class="kit-mark"><b>copy and visual</b><br>the home page</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis. There is one hero per page and nothing to compare it against.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Twelve public screens. It is where the product is explained, which is also the only zone where photography is allowed: attribute A5 is carried on the outside, and the operator and employee interior stays free of it.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> One heading, one sentence, at most two actions, and the first of them is the solid one.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="card.html">Card</a> instead.</b> Inside the product, the top of a screen is not a hero. An operator screen opens with its own h1 from base.css and goes straight to a <a href="card.html">Card</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive: the buttons inside it are Buttons. Under 760px the grid collapses to one column and the visual goes below the copy.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/hero.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">none, geometry only</code></td></tr><tr><th>In the product</th><td>12 of 99 screens</td></tr><tr><th>In colour</th><td>2 screens: <a href="../contact.html">contact</a>, <a href="../index.html">index</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-hero&quot;&gt;&lt;h1&gt;Wellbeing that actually runs&lt;/h1&gt;&lt;p class=&quot;wf-lead&quot;&gt;Brio tells you what to run and when, and shows the team you already have, without ever showing you a single person’s answer.&lt;/p&gt;&lt;div class=&quot;wf-btns&quot;&gt;&lt;a class=&quot;wf-btn solid&quot; href=&quot;#&quot;&gt;Start free&lt;/a&gt;&lt;a class=&quot;wf-btn&quot; href=&quot;#&quot;&gt;See how it works&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

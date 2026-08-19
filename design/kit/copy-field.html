@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copy field, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">Copy field</h1>
+<p class="kit-lede">A value the person is meant to take away, with the button that takes it, in one row.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div style="max-width:420px"><div class="wf-copy"><input class="wf-input" value="brio.example/c/8fk2" readonly><button class="wf-btn" type="button">Copy link</button></div></div></div><ul class="kit-legend"><li><code>.wf-copy</code><span>the row: the input takes the space, the button takes what it needs</span></li><li><code>.wf-copy .wf-input</code><span>the value, read only, flexed to fill</span></li><li><code>.wf-btn</code><span>the outline button, because the copy is not the action the screen exists for</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">State</h3><p class="kit-p">Two: before and after. The label of the button is what changes, not its form.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-copy" style="max-width:380px"><input class="wf-input" value="brio.example/c/8fk2" readonly><button class="wf-btn" type="button">Copy link</button></div></div><p class="kit-mark"><b>rest</b><br>before</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-copy" style="max-width:380px"><input class="wf-input" value="brio.example/c/8fk2" readonly><button class="wf-btn" type="button">Copied</button></div></div><p class="kit-mark"><b>copied</b><br>after</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No size axis. It is as wide as its container on every screen.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The roster, where the operator takes the check-in link to paste into Slack, and the invite screens. Eleven screens. It is the moment the product leaves Brio and goes where the team already is.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Keep the value visible and selectable. A person who does not trust a copy button will select the text by hand, and they should be able to.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="field.html">Field</a> instead.</b> Do not use it for a value nobody needs to take away. A value that is only read is text, and a value that is edited is a <a href="field.html">Field</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">The states are the button's and are documented there. The row itself has none: the flex rule that makes the input fill the row is composition, and it lives in copy-field.css rather than in the input.</p><p class="kit-p"><b>No snapshots here, and that is the rule rather than an omission.</b> The unit of a snapshot is a <i>difference</i>, not an occurrence. This component answers every state exactly as <a href="button.html">Button</a> does, so the answer is written in this line instead of proved again with pictures. A matrix with more snapshots than named differences is a list of occurrences, not documentation.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/copy-field.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">none, geometry only</code></td></tr><tr><th>In the product</th><td>11 of 99 screens</td></tr><tr><th>In colour</th><td>2 screens: <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div style=&quot;max-width:420px&quot;&gt;&lt;div class=&quot;wf-copy&quot;&gt;&lt;input class=&quot;wf-input&quot; value=&quot;brio.example/c/8fk2&quot; readonly&gt;&lt;button class=&quot;wf-btn&quot; type=&quot;button&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

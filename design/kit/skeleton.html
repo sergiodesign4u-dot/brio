@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skeleton, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Skeleton</h1>
+<p class="kit-lede">A grey bar standing in for content that has not arrived. It is a state of a screen made visible, not a decoration.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-stack" style="max-width:360px"><div class="wf-skel tall"></div><div class="wf-skel w70"></div><div class="wf-skel w50"></div><div class="wf-skel act"></div></div></div><ul class="kit-legend"><li><code>.wf-skel</code><span>one line, 14px tall, the skeleton fill</span></li><li><code>.wf-skel.tall</code><span>a block, 52px, standing in for a card</span></li><li><code>.wf-skel.act</code><span>the shape of a button, 190 by 40</span></li><li><code>.wf-skel.w70 / .w50 / .w44</code><span>the width of a line, which is what makes it look like text</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Size</h3><p class="kit-p">Three, and each one is the shape of the thing that is coming: a line of text, a block, an action.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-skel w70"></div></div><p class="kit-mark"><b>line</b><br>a paragraph</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-skel tall"></div></div><p class="kit-mark"><b>block</b><br>a card</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-skel act"></div></div><p class="kit-mark"><b>action</b><br>a button</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no animation. A pulsing skeleton is stage 11 and would be motion added before the system had a motion token.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The two loading screens: the dashboard while the score is being read, and the check-in while the answer is being sent. It holds the space the content will take, so nothing jumps when it arrives.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Match the shape of what is loading. Three lines of different widths read as a paragraph; one block reads as a card.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="state.html">State block</a> instead.</b> Do not use a skeleton where nothing is coming. An empty list is a <a href="state.html">State block</a> with a sentence and a next step.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive: it is itself a state. Its fill is measured at 1.2 against the surface and accepted, because it stands in for content rather than conveying any.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/skeleton.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-skeleton</code></td></tr><tr><th>In the product</th><td>9 of 99 screens</td></tr><tr><th>In colour</th><td>2 screens: <a href="../checkin-questions-loading.html">checkin-questions-loading</a>, <a href="../dashboard-loading.html">dashboard-loading</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-stack&quot; style=&quot;max-width:360px&quot;&gt;&lt;div class=&quot;wf-skel tall&quot;&gt;&lt;/div&gt;&lt;div class=&quot;wf-skel w70&quot;&gt;&lt;/div&gt;&lt;div class=&quot;wf-skel w50&quot;&gt;&lt;/div&gt;&lt;div class=&quot;wf-skel act&quot;&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

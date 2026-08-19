@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dialog, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">Dialog</h1>
+<p class="kit-lede">A panel on a dimmed ground, for a decision that has to be made before anything else happens. Six dialogs in the product, one component.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div style="position:relative;min-height:260px;border-radius:var(--radius-lg);overflow:hidden"><div class="wf-overlay" style="position:absolute;inset:0"><div class="wf-dialog"><h2>End this program?</h2><p class="wf-micro">The cycle stops now. The reads already collected stay, and the team is not notified.</p><div class="wf-btns"><a class="wf-btn solid" href="#">End program</a><a class="wf-btn" href="#">Keep it running</a></div></div></div></div></div><ul class="kit-legend"><li><code>.wf-overlay</code><span>the dimmed ground, at 45% ink in the light theme and 60% black in the dark</span></li><li><code>.wf-dialog</code><span>the panel: 440px, a raised fill, a 16px radius</span></li><li><code>.wf-dialog h2</code><span>the question, at the state title step</span></li><li><code>.wf-btns</code><span>the action row, with one solid action</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Emphasis</h3><p class="kit-p">Two: an ordinary decision and a destructive one. The difference is in the words and in which button is solid, not in a red panel.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-dialog" style="position:static"><h2>How this works</h2><p class="wf-micro">A score appears once five people have answered.</p><div class="wf-btns"><a class="wf-btn solid" href="#">Got it</a></div></div></div><p class="kit-mark"><b>default</b><br>log in, upgrade, explain</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-dialog" style="position:static"><h2>Delete your account?</h2><p class="wf-micro">Everything is removed and cannot be brought back.</p><div class="wf-btns"><a class="wf-btn solid" href="#">Delete account</a><a class="wf-btn" href="#">Keep my account</a></div></div></div><p class="kit-mark"><b>danger</b><br>delete, end programme</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No size axis: one panel width for every dialog, because a decision that needs more room than this is a screen.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Six places: log in, upgrade, end programme, delete account, manage roster, cookie consent. They were six rows in the first inventory and are one component: same zones, same order, different words. That merge is the reason stage 08 writes one css file and one page here instead of six of each.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Two answers at most, and the one that continues is solid. Name the destructive action with the verb it performs ("Delete account"), never with "Yes".</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="alert.html">Alert banner</a> instead.</b> A message that needs no decision does not need a dialog. Something that just happened is an <a href="alert.html">Alert banner</a> or a State block, and both leave the person in control of the screen.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive as a container: the buttons inside it are Buttons. It has one coloured instance in the sample and seven in the grey product, so most of its variants wait for the roll-out.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/dialog.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-overlay, --bg-surface, --line-hairline</code></td></tr><tr><th>In the product</th><td>7 of 99 screens</td></tr><tr><th>In colour</th><td>1 screens: <a href="../team-roster-manage.html">team-roster-manage</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div style=&quot;position:relative;min-height:260px;border-radius:var(--radius-lg);overflow:hidden&quot;&gt;&lt;div class=&quot;wf-overlay&quot; style=&quot;position:absolute;inset:0&quot;&gt;&lt;div class=&quot;wf-dialog&quot;&gt;&lt;h2&gt;End this program?&lt;/h2&gt;&lt;p class=&quot;wf-micro&quot;&gt;The cycle stops now. The reads already collected stay, and the team is not notified.&lt;/p&gt;&lt;div class=&quot;wf-btns&quot;&gt;&lt;a class=&quot;wf-btn solid&quot; href=&quot;#&quot;&gt;End program&lt;/a&gt;&lt;a class=&quot;wf-btn&quot; href=&quot;#&quot;&gt;Keep it running&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

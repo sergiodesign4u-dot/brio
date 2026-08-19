@@ -1,0 +1,82 @@
+/* Prototype chrome, and deliberately NOT part of design/system/.
+ * The coloured screens carry a design-only navigator strip outside .wf-screen, and
+ * the roadmap rail pushes the page over on wide viewports. Neither is the product.
+ * Shipping them inside the system package would hand anyone who took the package
+ * the prototype furniture along with it, so they live here, beside the screens that
+ * carry them, and design/*.html loads this file next to system/index.css.
+ */
+.dz-strip {
+  position: sticky;
+  top: var(--size-rail-bar);
+  z-index: 40;   /* the shared roadmap bar is fixed above it on mobile */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-surface);
+  border-bottom: var(--line-1) solid var(--line-control);
+  font-size: var(--text-12);
+}
+.dz-strip .dz-id {
+  font-family: var(--font-display);
+  font-weight: var(--weight-strong);
+  letter-spacing: -.01em;
+  margin-right: var(--space-2);
+}
+.dz-strip a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: var(--line-1) solid transparent;
+}
+.dz-strip a:hover {
+  color: var(--text-hover);
+  border-color: var(--line-control);
+}
+.dz-strip a.on {
+  color: var(--text-primary);
+  background: var(--bg-accent-soft);
+  font-weight: var(--weight-strong);
+}
+.dz-strip .dz-group {
+  font-weight: var(--weight-strong);
+}
+.dz-strip .dz-out {
+  border: var(--line-1) solid var(--line-control);
+}
+.dz-strip .dz-out:first-of-type {
+  margin-left: auto;
+}
+@media (max-width: 700px) {
+  .dz-strip .dz-out {
+    margin-left: 0;
+  }
+}
+body {
+  padding-top: var(--size-rail-bar);
+}
+@media (min-width: 900px) {
+  body {
+    padding-top: 0;
+    padding-left: var(--size-rail);
+  }
+}
+@media (min-width: 900px) {
+  .dz-strip {
+    top: 0;
+  }
+}
+
+/* the theme switch of the prototype strip (stage 08). Prototype chrome: the product
+   itself has no such control, the switch exists so the dark half of every role can be
+   walked on real screens rather than only on the stand. */
+.dz-strip .dz-theme {
+  margin-left: auto; cursor: pointer; font-family: inherit;
+  font-size: var(--text-12); color: var(--text-primary); background: var(--bg-control);
+  border: var(--line-1) solid var(--line-control); border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+}
+.dz-strip .dz-theme:hover { border-color: var(--line-hover); }
+.dz-strip .dz-theme:focus-visible { outline: var(--line-2) solid var(--color-focus); outline-offset: var(--space-hair); }

@@ -1,0 +1,39 @@
+/* Privacy strip, level 2.
+ * Roles read: --bg-recessed, --glyph-action, --line-hairline, --text-primary
+ * Page: design/kit/privacy-strip.html
+ * Stands on 42 of the 99 screens in the product, 16 of them in colour: checkin-already, checkin-complete, checkin-entry, checkin-expired, checkin-questions, checkin-submit-error and 10 more
+ */
+.wf-strip2 {
+  position: relative;
+  font-size: var(--text-15);
+  color: var(--text-primary);
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-icon-inset);
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-md);
+  background: var(--bg-recessed);
+}
+.wf-strip2::before {
+  content: "";
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--size-icon);
+  height: var(--size-icon);
+  color: var(--glyph-action);
+  background-color: currentColor;
+  -webkit-mask: var(--icon-shield) center / contain no-repeat;
+  mask: var(--icon-shield) center / contain no-repeat;
+}
+.wf-card .wf-strip2 + .wf-micro {
+  display: inline-block;
+  margin-top: var(--space-3);
+}
+@media (max-width: 520px) {
+  .wf-narrow > .wf-strip2 {
+    margin: var(--space-3) 0;
+  }
+}
+.wf-narrow > .wf-strip2 {
+  margin: var(--space-5) 0;
+}

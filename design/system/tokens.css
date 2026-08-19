@@ -1,0 +1,281 @@
+/* Brio design system - tokens (stage 08, step 3).
+ *
+ * Two levels, and they answer two different questions.
+ *   PRIMITIVE  what the value is. Raw colour, spacing, radius, type step, size.
+ *              No opinion about purpose. This is where the chain from the brand
+ *              plate ends: the origin comment beside a value is the last link,
+ *              and it is not recoverable from anywhere else.
+ *   SEMANTIC   why this colour is here. A role points at a primitive through
+ *              var() and says which surface it paints.
+ *
+ * Geometry gets no semantic level, and not because it matters less: a radius and
+ * a spacing step have nothing to override. Colour has a theme and a rebrand
+ * standing behind it, so colour goes through a role and geometry is read from
+ * primitive directly. A component that reads a primitive colour is the hole the
+ * first theme finds.
+ *
+ * SURFACE. Every role declares what it paints, and the threshold follows from it:
+ *   ink    text                                4.5:1  (large text, 24px or 19px bold, 3:1)
+ *   glyph  an icon drawn through a mask        3:1    (WCAG 1.4.11, graphical object)
+ *   fill   page, card, bar, plate              3:1    where it identifies a control or a state
+ *   line   border, divider, focus ring         3:1    (WCAG 1.4.11, non text contrast)
+ * A role paints one surface. Two purposes on one value are two roles even when the
+ * value is the same today, because the question is whether they can ever diverge.
+ *
+ * A GLYPH IS MEASURED AT 3:1, NOT 4.5:1, AND THAT IS A DECISION.
+ * The pipeline groups an icon glyph with ink. WCAG does not: an icon is a graphical
+ * object under 1.4.11 and its threshold is 3:1. The one role this changes is
+ * --glyph-action, which measures 4.27 against the page. It passes as a glyph and
+ * would fail as text, so the number is written beside it rather than rounded away.
+ * The same blue is deliberately never used for text anywhere in the product.
+ *
+ * THEMES COME IN PAIRS AND THE PAIR IS NOT A MIRROR. Contrast is measured against
+ * the opposite ground, so the dark half takes a different step of the ramp, not the
+ * same primitive. A recessed surface is DARKER than its card in the light theme and
+ * LIGHTER than its card in the dark one. A role without a pair does not exist.
+ *
+ * State tokens (--bg-hover, --color-focus, --opacity-disabled) are not here. They
+ * arrive at step 5 with the first component that actually wears them, in both
+ * themes at once. Naming them before anything reads them makes half of them wrong.
+ */
+
+/* ==================================================================
+   PRIMITIVE. Raw values. No roles, no purpose.
+   ================================================================== */
+:root {
+  /* ---- colour, light ramp: sampled from the pixels of design/concept/assets/brand-plate-a.png ---- */
+  --white:      #FFFFFF;   /* pixel of plate A, swatch 2 */
+  --mist-50:    #F7F8FC;   /* pixel of plate A, swatch 1 */
+  --ink-900:    #1D1D1D;   /* pixel of plate A, swatch 3 */
+  --slate-600:  #5B6171;   /* pixel of plate A, swatch 6 */
+  --blue-600:   #346FEC;   /* pixel of plate A, swatch 5, the one interactive colour */
+  --blue-300:   #A4BEF3;   /* pixel of plate A, swatch 4, decorative only */
+  --red-700:    #B92928;   /* pixel of plate D, alert swatch, fixed at stage 07 */
+
+  /* ---- colour, dark ramp: added at stage 08 step 3 for the dark pair.
+         Hue carried from --slate-600 so the dark theme is the same material
+         at another lightness, not a second palette. ---- */
+  --slate-950:  #101218;   /* derived from --slate-600, the dark page */
+  --slate-900:  #191C24;   /* derived from --slate-600, the dark card */
+  --slate-850:  #21242D;   /* derived from --slate-600, the dark recessed surface */
+  --slate-400:  #A0A7B8;   /* derived from --slate-600, dark secondary text */
+  --slate-200:  #E4E6EC;   /* derived from --slate-600, dark primary text */
+  --blue-400:   #8FB2F7;   /* derived from --blue-600, lighter step for the dark theme */
+  --blue-900:   #32456B;   /* derived from --blue-600, the soft accent plate on dark */
+  --red-600:    #C93B39;   /* derived from --red-700, the alert fill on dark */
+  --red-300:    #F5908E;   /* derived from --red-700, alert ink and line on dark */
+
+  /* ---- colour, alpha steps of one slate. An alpha is used where the same line
+         has to sit on two different grounds and stay one value. ---- */
+  --slate-a13:  rgba(91, 97, 113, .13);   /* derived from --slate-600, loading only */
+  --slate-a16:  rgba(91, 97, 113, .16);   /* derived from --slate-600, hairline */
+  --slate-a70:  rgba(91, 97, 113, .70);   /* derived from --slate-600, control boundary. Raised from .28 at step 4, see tokens-audit.md */
+  --ink-a45:    rgba(29, 29, 29, .45);    /* derived from --ink-900, the dialog ground */
+  --dslate-a14: rgba(160, 167, 184, .14); /* derived from --slate-400, loading only, dark */
+  --dslate-a20: rgba(160, 167, 184, .20); /* derived from --slate-400, hairline, dark */
+  --dslate-a55: rgba(160, 167, 184, .55); /* derived from --slate-400, control boundary, dark */
+  --black-a60:  rgba(0, 0, 0, .60);       /* the dialog ground on dark */
+
+  /* ---- space: 4px step, attribute A3, restraint carried by rhythm ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 28px;
+  --space-7: 40px;
+  --space-hair: 2px;             /* the smallest optical nudge, an icon against a line of text */
+  --space-icon-inset: 42px;      /* icon 20 plus the gutters on both sides */
+  --space-icon-inset-sm: 26px;   /* icon 16 plus one gutter */
+  --space-icon-stack: 34px;      /* an icon standing above a centred heading */
+
+  /* ---- radius: plate A, UI component zone, measured on the shape ---- */
+  --radius-xs:   3px;    /* one spark bar, the smallest shape in the language */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-full: 999px;
+
+  /* ---- line width: hairline and the focus ring. Named at step 3 because the
+         focus ring stops being a literal at step 5. ---- */
+  --line-1: 1px;
+  --line-2: 2px;
+
+  /* ---- type: fonts, decision of the user, chosen against the character of plate A ---- */
+  --font-display: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* ---- type: one scale, the steps published on the concept stand. At stage 07
+         the same ten values carried sixteen purposeful names (--size-micro beside
+         --size-eyebrow, --size-h2 beside --size-ui). The purpose now lives in the
+         class that reads the step, which is where it belongs; the value moved
+         nowhere, so nothing changed by a pixel. ---- */
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;
+  --text-20: 20px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-26: 26px;
+  --text-display: clamp(26px, 3.4vw, 34px);   /* the scale published on the concept stand */
+  --text-read:    clamp(30px, 4vw, 40px);     /* the score, the one number a screen exists for */
+  --text-hero:    clamp(30px, 5vw, 46px);     /* the marketing display step. The product interior never uses it */
+  --text-section: clamp(20px, 2.4vw, 26px);   /* a marketing section heading */
+  --text-quote:   clamp(18px, 2vw, 22px);     /* the one testimonial, a step between body and state title */
+  --text-code:    clamp(56px, 12vw, 96px);    /* the error code on 404 and 500, carried from the wireframe */
+
+  /* ---- weight and rhythm ---- */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-strong:  600;
+  --weight-bold:    700;      /* the wordmark, the page heading and the score, the three places the product raises its voice */
+  --leading-tight:   1;       /* a control label and a number, where the box is the line */
+  --leading-heading: 1.12;    /* a page heading */
+  --leading-quote:   1.45;    /* the one testimonial */
+  --leading-lead:    1.5;     /* the lead paragraph under a heading */
+  --leading-body:    1.55;    /* running text */
+  --underline-offset:    3px; /* a link under its own text */
+  --underline-thickness: 2px; /* the same link on hover */
+
+  /* ---- geometry: shapes rather than spacing, measured on the plate or on the wireframe ---- */
+  --size-icon:        20px;   /* the icon square in a strip or a banner */
+  --size-icon-sm:     16px;   /* the icon square in a micro line */
+  --size-icon-lg:     24px;   /* the Solar drawing grid */
+  --size-badge-box:   56px;   /* outcome badge, carried from the wireframe */
+  --size-badge-box-sm: 44px;  /* the same badge under 520px, where the action has to stay reachable */
+  --size-spark:       56px;   /* the trend spark, five cycles */
+  --size-bar:         18px;   /* one bar of the spark */
+  --size-skel-line:   14px;   /* a line of loading skeleton */
+  --size-skel-block:  52px;   /* a block of loading skeleton */
+  --size-skel-act:   190px;   /* the skeleton standing in for a button */
+  --size-control-h:   40px;   /* the height a control occupies while loading */
+  --size-touch:       44px;   /* the smallest comfortable pointer target, WCAG 2.5.5 */
+  --size-media-sm:   140px;   /* the media slot at its resting size, carried from the wireframe */
+  --size-media:      260px;   /* the media slot when it holds a product screenshot, the shot modifier */
+  --size-dialog:     440px;   /* the dialog panel, geometry carried from the wireframe */
+  --size-switch:      40px;   /* one segment of the document switch, derived from --size-touch */
+  --size-textarea:   120px;   /* the resting height of a textarea, needed by the contact form */
+  --size-logo-w:     104px;   /* one logo placeholder in the social proof strip */
+  --size-logo-h:      34px;   /* the same placeholder, its height. Origin recovered at stage 08 step 1: it is the pair of --size-logo-w and had lost its comment */
+  --size-avatar:      46px;   /* the one testimonial avatar */
+  --size-content:   1140px;   /* the product content column */
+  --size-narrow:     480px;   /* the focused single column, employee check-in */
+  --size-auth:       960px;   /* the split auth column pair, carried from the wireframe */
+  --size-progcard:   240px;   /* the smallest a program card may be before the grid reflows */
+  --size-rail:       220px;   /* the shared roadmap rail on desktop. Prototype chrome, not the product */
+  --size-rail-bar:    52px;   /* the shared roadmap bar on mobile. Prototype chrome, not the product */
+}
+
+
+/* ==================================================================
+   PRIMITIVE, icons. One Solar linear glyph each, stroke 1.5 on the 24px grid,
+   inlined as a data URI and painted through a CSS mask, so a glyph takes the
+   ink of its context instead of carrying a colour of its own. Origin: the Solar
+   icon set, recorded in DESIGN-artifacts.md. Shown on design/kit/icons.html.
+   ================================================================== */
+:root {--icon-shield: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M3 10.4167C3 7.21907 3 5.62028 3.37752 5.08241C3.75503 4.54454 5.25832 4.02996 8.26491 3.00079L8.83772 2.80472C10.405 2.26824 11.1886 2 12 2C12.8114 2 13.595 2.26824 15.1623 2.80472L15.7351 3.00079C18.7417 4.02996 20.245 4.54454 20.6225 5.08241C21 5.62028 21 7.21907 21 10.4167C21 10.8996 21 11.4234 21 11.9914C21 17.6294 16.761 20.3655 14.1014 21.5273C13.38 21.8424 13.0193 22 12 22C10.9807 22 10.62 21.8424 9.89856 21.5273C7.23896 20.3655 3 17.6294 3 11.9914C3 11.4234 3 10.8996 3 10.4167Z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9.5 12.4L10.9286 14L14.5 10'/%3E%3C/svg%3E");
+  /* Each icon is one Solar linear glyph, stroke 1.5 on the 24px grid, inlined as data.
+     Origin of every icon variable in this block, --icon-shield above included: the Solar
+     icon set, which is the icon language recorded in DESIGN-artifacts.md. --icon-chevron
+     was added at stage 06 step 8, so the proof disclosure looks openable. */
+  --icon-lock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M2 16C2 13.1716 2 11.7574 2.87868 10.8787C3.75736 10 5.17157 10 8 10H16C18.8284 10 20.2426 10 21.1213 10.8787C22 11.7574 22 13.1716 22 16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H8C5.17157 22 3.75736 22 2.87868 21.1213C2 20.2426 2 18.8284 2 16Z'/%3E%3Cpath stroke-linecap='round' d='M12 14V18'/%3E%3Cpath stroke-linecap='round' d='M6 10V8C6 4.68629 8.68629 2 12 2C15.3137 2 18 4.68629 18 8V10'/%3E%3C/svg%3E");
+  --icon-cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath stroke-linecap='round' d='M14.5 9.5L9.5 14.5M9.5 9.5L14.5 14.5'/%3E%3C/svg%3E");
+  --icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 6L15 12L9 18'/%3E%3C/svg%3E");
+  --icon-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M13.5 15.5C13.5 13.6 13.5 12.7 14.1 12.1C14.7 11.5 15.6 11.5 17.5 11.5C19.4 11.5 20.3 11.5 20.9 12.1C21.5 12.7 21.5 13.6 21.5 15.5V17.5C21.5 19.4 21.5 20.3 20.9 20.9C20.3 21.5 19.4 21.5 17.5 21.5C15.6 21.5 14.7 21.5 14.1 20.9C13.5 20.3 13.5 19.4 13.5 17.5V15.5Z'/%3E%3Cpath d='M2 8.5C2 10.4 2 11.3 2.6 11.9C3.2 12.5 4.1 12.5 6 12.5C7.9 12.5 8.8 12.5 9.4 11.9C10 11.3 10 10.4 10 8.5V6.5C10 4.6 10 3.7 9.4 3.1C8.8 2.5 7.9 2.5 6 2.5C4.1 2.5 3.2 2.5 2.6 3.1C2 3.7 2 4.6 2 6.5V8.5Z'/%3E%3Cpath d='M13.5 5.5C13.5 4.6 13.5 4.1 13.7 3.7C13.9 3.2 14.2 2.9 14.7 2.7C15.1 2.5 15.6 2.5 16.5 2.5H18.5C19.4 2.5 19.9 2.5 20.3 2.7C20.8 2.9 21.1 3.2 21.3 3.7C21.5 4.1 21.5 4.6 21.5 5.5C21.5 6.4 21.5 6.9 21.3 7.3C21.1 7.8 20.8 8.1 20.3 8.3C19.9 8.5 19.4 8.5 18.5 8.5H16.5C15.6 8.5 15.1 8.5 14.7 8.3C14.2 8.1 13.9 7.8 13.7 7.3C13.5 6.9 13.5 6.4 13.5 5.5Z'/%3E%3Cpath d='M2 18.5C2 19.4 2 19.9 2.2 20.3C2.4 20.8 2.7 21.1 3.2 21.3C3.6 21.5 4.1 21.5 5 21.5H7C7.9 21.5 8.4 21.5 8.8 21.3C9.3 21.1 9.6 20.8 9.8 20.3C10 19.9 10 19.4 10 18.5C10 17.6 10 17.1 9.8 16.7C9.6 16.2 9.3 15.9 8.8 15.7C8.4 15.5 7.9 15.5 7 15.5H5C4.1 15.5 3.6 15.5 3.2 15.7C2.7 15.9 2.4 16.2 2.2 16.7C2 17.1 2 17.6 2 18.5Z'/%3E%3C/svg%3E");
+  --icon-chart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3 22H21'/%3E%3Cpath d='M3 11C3 10.1 3 9.6 3.3 9.3C3.6 9 4.1 9 5 9C5.9 9 6.4 9 6.7 9.3C7 9.6 7 10.1 7 11V17C7 17.9 7 18.4 6.7 18.7C6.4 19 5.9 19 5 19C4.1 19 3.6 19 3.3 18.7C3 18.4 3 17.9 3 17V11Z'/%3E%3Cpath d='M10 7C10 6.1 10 5.6 10.3 5.3C10.6 5 11.1 5 12 5C12.9 5 13.4 5 13.7 5.3C14 5.6 14 6.1 14 7V17C14 17.9 14 18.4 13.7 18.7C13.4 19 12.9 19 12 19C11.1 19 10.6 19 10.3 18.7C10 18.4 10 17.9 10 17V7Z'/%3E%3Cpath d='M17 4C17 3.1 17 2.6 17.3 2.3C17.6 2 18.1 2 19 2C19.9 2 20.4 2 20.7 2.3C21 2.6 21 3.1 21 4V17C21 17.9 21 18.4 20.7 18.7C20.4 19 19.9 19 19 19C18.1 19 17.6 19 17.3 18.7C17 18.4 17 17.9 17 17V4Z'/%3E%3C/svg%3E");
+  --icon-team: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Ccircle cx='9' cy='6' r='4'/%3E%3Cpath stroke-linecap='round' d='M15 9C16.66 9 18 7.66 18 6C18 4.34 16.66 3 15 3'/%3E%3Cellipse cx='9' cy='17' rx='7' ry='4'/%3E%3Cpath stroke-linecap='round' d='M18 14C19.75 14.38 21 15.36 21 16.5C21 17.53 19.99 18.42 18.5 18.87'/%3E%3C/svg%3E");
+  --icon-pulse: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' d='M2 15h3c0.63 0 0.95 0 1.23 0.12C6.52 15.24 6.74 15.47 7.17 15.93L8.31 17.13C8.7 17.53 8.89 17.73 9.12 17.72C9.36 17.7 9.52 17.48 9.85 17.03L13.48 12.02C13.82 11.55 13.99 11.31 14.23 11.3C14.47 11.29 14.66 11.51 15.04 11.94L16.82 13.98C17.26 14.48 17.48 14.73 17.78 14.87C18.07 15 18.41 15 19.08 15H22'/%3E%3Cpath d='M2 12C2 7.29 2 4.93 3.46 3.46C4.93 2 7.29 2 12 2C16.71 2 19.07 2 20.54 3.46C22 4.93 22 7.29 22 12C22 16.71 22 19.07 20.54 20.54C19.07 22 16.71 22 12 22C7.29 22 4.93 22 3.46 20.54C2 19.07 2 16.71 2 12Z'/%3E%3C/svg%3E");
+  --icon-warning: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5'%3E%3Cpath d='M5.31171 10.7615C8.23007 5.58716 9.68925 3 12 3C14.3107 3 15.7699 5.58716 18.6883 10.7615L19.0519 11.4063C21.4771 15.7061 22.6897 17.856 21.5937 19.428C20.4978 21 17.7864 21 12.3637 21H11.6363C6.21356 21 3.50217 21 2.40626 19.428C1.31034 17.856 2.52291 15.7061 4.94805 11.4063L5.31171 10.7615Z'/%3E%3Cpath stroke-linecap='round' d='M12 8V13'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 16H12.0001'/%3E%3C/svg%3E");
+}
+
+/* ==================================================================
+   SEMANTIC. Roles. Every one points at a primitive, declares its surface,
+   names how many places it grew out of, and carries its measured contrast
+   for BOTH themes. A role with one single use is not here: it stays a
+   primitive until a second place proves it is a role.
+   ================================================================== */
+:root {
+  /* ---- ink: text. Threshold 4.5:1, or 3:1 for text from 24px, or 19px bold ---- */
+  --text-primary:   var(--ink-900);    /* body, every heading, the wordmark, the current tab: all 24 screens. Origin: pixel of plate A. Contrast 16.86 on surface, 15.88 on page / dark 13.65, 15.00 */
+  --text-secondary: var(--slate-600);  /* the interpretation line, eyebrows, micro copy, inactive tabs, placeholders: 30 declarations across 22 screens. Origin: pixel of plate A. Contrast 6.19 on surface, 5.83 on page / dark 7.07, 7.77 */
+  --text-on-action: var(--white);      /* the label sitting on the action fill: every solid button, 20 screens. Origin: measured, this is the pair that made white the only legible ink on the blue. Contrast 4.53 / dark 8.81 */
+  --text-alert:     var(--red-700);    /* the alert tag, the warn badge, the error line: 8 screens. Origin: pixel of plate D. Contrast 6.16 on surface / dark 7.51 */
+
+  /* ---- glyph: an icon painted through a mask. Threshold 3:1, WCAG 1.4.11 ---- */
+  --glyph-strong: var(--ink-900);    /* the icon inside an icon slot: 6 screens (home, security, about). Origin: pixel of plate A. Contrast 16.86 / dark 13.65 */
+  --glyph-action: var(--blue-600);   /* the shield on the privacy strip and the wizard step mark: 42 screens, the most repeated glyph in the product. Origin: pixel of plate A. Contrast 4.27 on page, 4.53 on surface / dark 8.01. Threshold 3:1 as a graphical object, and this blue is deliberately never used as text */
+  --glyph-alert:  var(--red-700);    /* the mark on the alert banner and on the error state: 8 screens. Origin: pixel of plate D. Contrast 6.16 / dark 7.51 */
+
+  /* ---- fill: page, card, plate, bar. Threshold 3:1 where the fill identifies
+         a control or a state rather than decorating one ---- */
+  --bg-page:        var(--mist-50);   /* the ground behind everything: all 24 screens. Origin: pixel of plate A */
+  --bg-surface:     var(--white);     /* card, app bar, footer, tab bar, dialog panel, pulse card: 24 screens. Origin: pixel of plate A. Separation from the page 1.04 / dark 1.10 */
+  --bg-recessed:    var(--mist-50);   /* fill. A surface sunk INSIDE a card: the privacy strip, the opened proof body, the media slot, the system block. 21 screens. Origin: pixel of plate A. Same value as the page today and a different role: a strip inside a white card is not the ground behind the page, and the dark pair already proves it, where recessed is LIGHTER than its card and the page is darker */
+  --bg-control:     var(--white);     /* fill. The resting fill of an outline button, an input, a radio option, a chip: 4 components, 21 screens. Origin: pixel of plate A. Same value as the surface today, and the day a control gets a tinted rest fill every card would have followed it */
+  --bg-action:      var(--blue-600);  /* fill. The solid button on 20 screens, and the two emphasised bars of the spark on 10. Origin: pixel of plate A. Contrast against the surface 4.53 / dark 8.01.
+                                         Kept as one role although the chart is arguably a second job: the emphasised bars mean "these are the cycles you are being asked about", which is the same act of pointing as a solid button, and the spark is the only chart in the product, so a data role would have exactly one consumer. Recorded rather than split, and the day a second chart arrives this is the line to reread */
+  --bg-accent-soft: var(--blue-300);  /* the ok badge, the selected chip, the current document switch, the icon slot, the resting spark bars: 12 screens. Origin: pixel of plate A. Contrast against the surface 1.87 / dark 1.78, which is BELOW 3:1 and is accepted with a reason: this fill never identifies a state on its own, the selected chip is identified by its action coloured border and the badge by its glyph at 9.02 */
+  --bg-skeleton:    var(--slate-a13); /* fill. The loading placeholder: 2 screens. Origin: derived from --slate-600, a pixel of plate A. Decorative by definition, it stands in for content that is not there */
+  --bg-overlay:     var(--ink-a45);   /* fill. The ground a dialog sits on: 7 screens in the grey product, 1 in colour. Origin: derived from --ink-900, a pixel of plate A */
+
+  /* ---- line: border, divider, focus ring. Threshold 3:1, WCAG 1.4.11 ---- */
+  --line-hairline: var(--slate-a16);  /* line. The divider that separates without enclosing: card edge, app bar underline, list rule, footer top: 21 declarations across 24 screens. Origin: derived from --slate-600, a pixel of plate A. Contrast 1.25 / dark 1.45, decorative and not required to identify anything */
+  --line-control:  var(--slate-a70);  /* line. The whole visible boundary of an outline button, an input, a radio option, a chip and a status pill: 5 components, 21 screens. Origin: derived from --slate-600, a pixel of plate A. Contrast 3.19 on surface, 3.08 on page / dark 3.06, 3.16. Raised from rgba(.28) at step 4, where it measured 1.5 */
+  --line-action:   var(--blue-600);   /* line. The checked radio ring, the focused input border, the current tab underline, the selected chip: 4 components, 21 screens. NOT the keyboard focus ring, which is --color-focus and may take a hue of its own. Origin: pixel of plate A. Contrast 4.53 on surface / dark 8.01 */
+  --line-alert:    var(--red-700);    /* line. The border of the warn badge and of the alert tag: 2 components, 4 screens. Origin: pixel of plate D. Contrast 6.16 / dark 7.51 */
+
+  /* ---- state. Born at step 5 with the button, the first component that wears
+         them, and born paired. A state is a token, never a value written into a
+         class: otherwise the theme costs forty edits instead of four lines, and
+         twenty components each get a hover of their own.
+         This product has no hover FILL anywhere, so there is no --bg-hover: its
+         hover language is a link that darkens its ink and a bordered control that
+         darkens its line. Naming a fill role nobody reads is the empty role trap. ---- */
+  --text-hover:       var(--ink-900);    /* ink. A link under the pointer: tabs, settings, nav links, both footers, the document switch. 6 components, 24 screens. Origin: pixel of plate A. Same value as --text-primary today, different role: a link may want its own hover ink the day the body text moves */
+  --line-hover:       var(--slate-600);  /* line. The border of a bordered control under the pointer: button and radio option, 2 components, 22 screens. Origin: pixel of plate A. Contrast 6.19 on surface / dark 13.65. It has to stay darker than --line-control, which is why it is not the same token */
+  --color-focus:      var(--blue-600);   /* line. The keyboard ring on every focusable thing: 8 components, 24 screens. Origin: pixel of plate A. Contrast 4.53 on surface, 4.27 on page / dark 8.01, 8.81. Threshold 3:1, WCAG 1.4.11. Separate from --line-action because a focus ring may need a hue the product does not otherwise use */
+  --opacity-disabled: .45;               /* a control that cannot be pressed: button, input, checkbox, 3 components, 12 screens in the grey product. Origin: technical decision, muting by opacity so a disabled control keeps its own colours and needs no second palette */
+}
+
+/* ==================================================================
+   DARK PAIR. Only semantic is redefined, never primitive. A component
+   knows nothing about the theme: it read a role once, and the role
+   changed underneath it.
+   ================================================================== */
+[data-theme="dark"] {
+  /* ink */
+  --text-primary:   var(--slate-200);
+  --text-secondary: var(--slate-400);
+  --text-on-action: var(--slate-950);   /* not a mirror: the dark action fill is LIGHT, so its ink goes dark */
+  --text-alert:     var(--red-300);
+
+  /* glyph */
+  --glyph-strong: var(--slate-200);
+  --glyph-action: var(--blue-400);
+  --glyph-alert:  var(--red-300);
+
+  /* fill */
+  --bg-page:        var(--slate-950);
+  --bg-surface:     var(--slate-900);
+  --bg-recessed:    var(--slate-850);   /* not a mirror: recessed is DARKER than its card in the light theme and LIGHTER here, because sinking a surface means moving it away from the ground and the ground moved */
+  --bg-control:     var(--slate-900);
+  --bg-action:      var(--blue-400);
+  --bg-accent-soft: var(--blue-900);
+  --bg-skeleton:    var(--dslate-a14);
+  --bg-overlay:     var(--black-a60);   /* not a mirror: an ink alpha over a dark page would be invisible, so the ground goes to black and deeper */
+
+  /* line */
+  --line-hairline: var(--dslate-a20);
+  --line-control:  var(--dslate-a55);   /* not a mirror: .70 of a dark slate on a dark card would be a black line. The dark pair lightens instead */
+  --line-action:   var(--blue-400);
+  --line-alert:    var(--red-300);
+
+  /* state */
+  --text-hover:       var(--slate-200);
+  --line-hover:       var(--slate-400);  /* not a mirror: hover has to move AWAY from the control line, and on a dark ground that means lighter. Set to --slate-200 at step 5 and moved down one step at step 7: at 200 it met --text-primary, and a hover border as bright as the body text is louder than the light theme's own answer. At 400 it measures 7.07 against a rest line of 3.06, the same size of step the light theme makes from 3.19 to 6.19 */
+  --color-focus:      var(--blue-400);   /* not a mirror: the ring takes a LIGHTER step of the blue ramp, because it is measured against a dark ground */
+  --opacity-disabled: .5;                /* not a mirror: .45 on a dark ground sinks further than it does on a light one, so the dark half keeps a little more presence */
+}

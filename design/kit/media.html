@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media slot, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Media slot</h1>
+<p class="kit-lede">A framed box that holds a photograph or a product screenshot, and holds its space before the image arrives.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div style="max-width:420px"><div class="wf-media"><img src="../visuals/team-table.jpg" alt="A small team at one table"></div></div></div><ul class="kit-legend"><li><code>.wf-media</code><span>the frame: a recessed fill, a 16px radius, a minimum height so the layout does not jump</span></li><li><code>.wf-media img</code><span>the image itself, cropped to fill rather than letterboxed</span></li><li><code>.wf-media.shot</code><span>the taller step, for a product screenshot which needs to be legible</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Size</h3><p class="kit-p">Two. The resting size holds a photograph; the taller one holds a screenshot of the product, which has text in it and cannot be small.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div style="max-width:260px"><div class="wf-media"><img src="../visuals/check-in-desk.jpg" alt="A phone on a desk"></div></div></div><p class="kit-mark"><b>default</b><br>a photograph</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div style="max-width:260px"><div class="wf-media shot"><img src="../visuals/product-dashboard.jpg" alt="The Brio dashboard"></div></div></div><p class="kit-mark"><b>shot</b><br>a product screenshot</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">A third size, tall, was declared in the kit at stage 07 and worn by no screen in either the coloured sample or the grey product. It was deleted at step 2 rather than kept as a variant waiting for a use.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The home page and the sign up panel. Photography carries attribute A5 where the product is explained, and it deliberately does not go inside the operator or employee interior: a photograph of strangers on the screen where a person reports a hard week is decoration, and decoration is what attribute A3 forbids.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> One image per slot, always with alt text that says what is in it. The generation prompt and the colour grade for every own image are in design/visuals/README.md, so the style is reproducible.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="icon-slot.html">Icon slot</a> instead.</b> Do not put an icon in a media slot. A glyph on a plate is an <a href="icon-slot.html">Icon slot</a> and has a fill of its own.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/media.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-recessed</code></td></tr><tr><th>In the product</th><td>6 of 99 screens</td></tr><tr><th>In colour</th><td>2 screens: <a href="../index.html">index</a>, <a href="../signup.html">signup</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div style=&quot;max-width:420px&quot;&gt;&lt;div class=&quot;wf-media&quot;&gt;&lt;img src=&quot;../visuals/team-table.jpg&quot; alt=&quot;A small team at one table&quot;&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

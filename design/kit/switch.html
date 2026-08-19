@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document switch, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Document switch</h1>
+<p class="kit-lede">A row of pill links that moves between the three legal documents. Segmented navigation, not a toggle.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><nav class="wf-switch" aria-label="Legal documents"><a class="on" href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></nav></div><ul class="kit-legend"><li><code>.wf-switch</code><span>the row, wrapping on a narrow screen</span></li><li><code>.wf-switch a</code><span>one document: a pill with a 3:1 boundary</span></li><li><code>.wf-switch a.on</code><span>the document being read, with the soft accent fill</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">State</h3><p class="kit-p">Two: the current document and the others. Exactly one is current at a time.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><nav class="wf-switch"><a href="#">Terms</a></nav></div><p class="kit-mark"><b>rest</b><br>another document</p></div><div class="kit-cell"><div class="kit-scene on-surface"><nav class="wf-switch"><a class="on" href="#">Privacy</a></nav></div><p class="kit-mark"><b>current</b><br>the one being read</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No size axis and no emphasis axis.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The legal page, and only there. It is one screen, and it is in the system anyway because it is interactive with a state of its own: left on the screen, its states would be invented again at the roll-out, differently.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Use it when a person is moving between documents that are peers. Every option stays visible, so the person can see the whole set.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="appbar.html">App bar</a> instead.</b> Do not use it to switch a view inside one page. Moving between the sections of the product is the <a href="appbar.html">App bar</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">This component was called Switch in the stage 07 inventory and listed as a form control with the states on and off. The product has no toggle switch anywhere. It was renamed at step 2 and the form control exception that let it in was withdrawn, because it does not apply to a navigation.</p><p class="kit-p">One delta from the family. Each pair is the light theme on the left and the dark theme on the right, captured from the live component on this page, not drawn. They are re-taken by the check at step 9, which fails on a byte shift.</p><div class="kit-shots"><div class="kit-shot"><img src="screens/states/switch-current--light.png" alt="current, light theme"><img src="screens/states/switch-current--dark.png" alt="current, dark theme"><b>current</b><span class="why"><b>The named difference:</b> the current document takes the soft accent fill and a strong weight, the same answer the Chip gives, because both are saying "this one" inside a row of peers</span></div></div><p class="kit-note">Re-take these with <code class="kit-code">node scratchpad/states.js /tmp/jobs.json</code> against a local server on port 8931.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/switch.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-accent-soft, --line-control, --text-hover, --text-primary, --text-secondary</code></td></tr><tr><th>In the product</th><td>1 of 99 screens</td></tr><tr><th>In colour</th><td>0 screens: none yet, it waits for the roll-out at stage 12</td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;nav class=&quot;wf-switch&quot; aria-label=&quot;Legal documents&quot;&gt;&lt;a class=&quot;on&quot; href=&quot;#&quot;&gt;Privacy&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Terms&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;&lt;/nav&gt;</pre>
+</div>
+</main>
+</body>
+</html>

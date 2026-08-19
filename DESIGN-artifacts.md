@@ -135,3 +135,5 @@ At stage 06 there is exactly one file that holds a value: **`design/_theme.css`*
 - `design/concept/assets/brand-plate-a.png` - the chosen plate, every pixel value above sampled from it.
 - `docs/decisions.md` D-11 and D-13 - route with no existing brand, and Brio looking like a privacy product rather than a wellness brand.
 - `voice/docs/voice.md` - the text on any surface is governed here, not by the plate.
+
+> **Where the file went.** This document is the stage 06 record and its sentences describe stage 06. `design/_theme.css` moved to `design/kit/kit.css` at stage 07 and was split into `design/system/tokens.css` at stage 08, both times by `git mv` with the values untouched. The names below are still the names in the file; the chain from the pixel of the plate to the token is unbroken, and `DESIGN.md` carries its current shape.

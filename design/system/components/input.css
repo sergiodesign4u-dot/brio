@@ -1,0 +1,42 @@
+/* Input, level 1.
+ * Roles read: --bg-control, --color-focus, --line-action, --line-control, --text-primary, --text-secondary
+ * Page: design/kit/input.html
+ * Stands on 32 of the 99 screens in the product, 7 of them in colour: checkin-entry, checkin-expired, contact, signup-error, signup, team-roster-manage and 1 more
+ */
+.wf-input {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: var(--text-15);
+  background: var(--bg-control);
+  color: var(--text-primary);
+  border: var(--line-1) solid var(--line-control);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-3);
+}
+.wf-input::placeholder {
+  color: var(--text-secondary);
+}
+.wf-input:focus-visible {
+  outline: var(--line-2) solid var(--color-focus);
+  outline-offset: var(--space-hair);
+  border-color: var(--line-action);
+}
+.wf-textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: var(--text-15);
+  min-height: var(--size-textarea);
+  resize: vertical;
+  background: var(--bg-control);
+  color: var(--text-primary);
+  border: var(--line-1) solid var(--line-control);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+.wf-textarea:focus-visible {
+  outline: var(--line-2) solid var(--color-focus);
+  outline-offset: var(--space-hair);
+  border-color: var(--line-action);
+}

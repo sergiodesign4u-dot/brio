@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">Field</h1>
+<p class="kit-lede">A label, a control and, when it is needed, a hint or an error. The unit a form is actually made of.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-stack" style="max-width:360px">
+  <label class="wf-field"><span class="k">Work email</span><input class="wf-input" type="email" placeholder="ada@company.com"></label>
+  <label class="wf-field"><span class="k">Team name</span><input class="wf-input" type="text" value="Operations"><span class="wf-micro">People see this at the top of their check-in.</span></label>
+ </div></div><ul class="kit-legend"><li><code>.wf-field</code><span>the stack: label above control, 8px between them</span></li><li><code>.wf-field > .k</code><span>the label, at the label step in secondary ink</span></li><li><code>.wf-micro</code><span>the hint under the control, when the label is not enough</span></li><li><code>.wf-err</code><span>the error line, in place of the hint</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">Three, and they are additive: label plus control, plus a hint, or plus an error. A field never carries a hint and an error at the same time, because the error is the thing to read.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><label class="wf-field"><span class="k">Work email</span><input class="wf-input" type="email"></label></div><p class="kit-mark"><b>label and control</b><br>most fields</p></div><div class="kit-cell"><div class="kit-scene on-surface"><label class="wf-field"><span class="k">Team name</span><input class="wf-input" type="text"><span class="wf-micro">People see this at the top of their check-in.</span></label></div><p class="kit-mark"><b>with a hint</b><br>where the label needs a consequence</p></div><div class="kit-cell"><div class="kit-scene on-surface"><label class="wf-field"><span class="k">Work email</span><input class="wf-input" type="email" value="ada@"><span class="wf-err">Enter a valid email so the invite reaches your owner.</span></label></div><p class="kit-mark"><b>with an error</b><br>after a failed check</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no size axis. A field is as wide as the form it is in.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Thirty screens. Every place the operator sets something up and every place a person signs in. It is a composition rather than a styled thing: the label belongs to the field, the box belongs to the Input, and neither owns the other.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Always a visible label. A placeholder is a hint, not a label: it disappears the moment a person starts typing, which is exactly when they need to remember what the box was for.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="copy-field.html">Copy field</a> instead.</b> Do not stack two controls in one field. Two answers are two fields, and a value with a button beside it is a <a href="copy-field.html">Copy field</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">The states belong to the control inside it and are inherited rather than redeclared. The field itself has nothing to hover.</p><p class="kit-p"><b>No snapshots here, and that is the rule rather than an omission.</b> The unit of a snapshot is a <i>difference</i>, not an occurrence. This component answers every state exactly as <a href="input.html">Input</a> does, so the answer is written in this line instead of proved again with pictures. A matrix with more snapshots than named differences is a list of occurrences, not documentation.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/field.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--text-primary</code></td></tr><tr><th>In the product</th><td>30 of 99 screens</td></tr><tr><th>In colour</th><td>7 screens: <a href="../checkin-entry.html">checkin-entry</a>, <a href="../checkin-expired.html">checkin-expired</a>, <a href="../contact.html">contact</a>, <a href="../signup-error.html">signup-error</a>, <a href="../signup.html">signup</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-stack&quot; style=&quot;max-width:360px&quot;&gt;
+  &lt;label class=&quot;wf-field&quot;&gt;&lt;span class=&quot;k&quot;&gt;Work email&lt;/span&gt;&lt;input class=&quot;wf-input&quot; type=&quot;email&quot; placeholder=&quot;ada@company.com&quot;&gt;&lt;/label&gt;
+  &lt;label class=&quot;wf-field&quot;&gt;&lt;span class=&quot;k&quot;&gt;Team name&lt;/span&gt;&lt;input class=&quot;wf-input&quot; type=&quot;text&quot; value=&quot;Operations&quot;&gt;&lt;span class=&quot;wf-micro&quot;&gt;People see this at the top of their check-in.&lt;/span&gt;&lt;/label&gt;
+ &lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

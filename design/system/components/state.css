@@ -1,0 +1,42 @@
+/* State block, level 3.
+ * Roles read: --bg-surface, --glyph-alert, --line-hairline, --text-secondary
+ * Page: design/kit/state.html
+ * Stands on 17 of the 99 screens in the product, 6 of them in colour: contact-sent, dashboard-empty, dashboard-error, dashboard-noprogram, dashboard-open, program-library-empty
+ */
+.wf-state {
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-7) var(--space-5);
+  text-align: center;
+  background: var(--bg-surface);
+}
+.wf-state .n {
+  font-family: var(--font-display);
+  font-size: var(--text-20);
+  font-weight: var(--weight-strong);
+  letter-spacing: -.02em;
+  margin-bottom: var(--space-2);
+}
+.wf-state .sub {
+  color: var(--text-secondary);
+  font-size: var(--text-15);
+  margin: var(--space-2) auto var(--space-5);
+  max-width: 46ch;
+}
+[aria-label^="Could not load"] .wf-state .n {
+  position: relative;
+  padding-top: var(--space-icon-stack);
+}
+[aria-label^="Could not load"] .wf-state .n::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  color: var(--glyph-alert);
+  background-color: currentColor;
+  -webkit-mask: var(--icon-warning) center / contain no-repeat;
+  mask: var(--icon-warning) center / contain no-repeat;
+}

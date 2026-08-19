@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proof disclosure, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">Proof disclosure</h1>
+<p class="kit-lede">A closed row that says "see exactly what your owner sees", and opens to show it.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><details class="wf-see" style="max-width:460px"><summary>See exactly what your manager sees</summary><div class="see-body"><div class="wf-pulse"><div class="read">74</div><div class="interp">Steady. About the same as last cycle.</div></div><p class="wf-micro">That is the whole view. No names, no individual answers, no count while the cycle is open.</p></div></details></div><ul class="kit-legend"><li><code>.wf-see</code><span>the disclosure, a native details element</span></li><li><code>.wf-see > summary</code><span>the row that opens it, with a chevron in the action glyph role</span></li><li><code>.wf-see[open] > summary::before</code><span>the chevron rotated, the one rotation in the product</span></li><li><code>.see-body</code><span>the opened ground, recessed, holding the real components</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">State</h3><p class="kit-p">Two: closed and open. Both are the component; neither is a variant of the other.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><details class="wf-see" style="max-width:340px"><summary>See exactly what your manager sees</summary><div class="see-body"><span class="wf-micro">The view.</span></div></details></div><p class="kit-mark"><b>closed</b><br>at rest</p></div><div class="kit-cell"><div class="kit-scene on-surface"><details class="wf-see" open style="max-width:340px"><summary>See exactly what your manager sees</summary><div class="see-body"><span class="wf-micro">The view.</span></div></details></div><p class="kit-mark"><b>open</b><br>after a press</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis. It is a promise being kept, not a call to action.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Before an employee answers, and on the public page that explains the model. Four screens. It is the strongest single move the product makes on the strategic dimension: instead of telling the employee what the manager can see, it shows them the actual view.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Show the real components inside it, not a picture of them. What is behind this row has to be the same Pulse card the operator gets, or the promise is a mock-up.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="privacy-strip.html">Privacy strip</a> instead.</b> Do not use a disclosure to hide something long and ordinary. A person who has to open something to understand the screen is a screen that failed. This is for proof, not for tidying.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">Native details, so keyboard behaviour comes free. The chevron does not animate under prefers-reduced-motion. Focus sits on the summary with the ring pulled inside the card radius.</p><p class="kit-p">One delta from the family. Each pair is the light theme on the left and the dark theme on the right, captured from the live component on this page, not drawn. They are re-taken by the check at step 9, which fails on a byte shift.</p><div class="kit-shots"><div class="kit-shot"><img src="screens/states/disclosure-open--light.png" alt="open, light theme"><img src="screens/states/disclosure-open--dark.png" alt="open, dark theme"><b>open</b><span class="why"><b>The named difference:</b> the chevron rotates by 90 degrees, the only rotation in the product, and the recessed body appears holding the real Pulse card. Under <code class="kit-code">prefers-reduced-motion</code> the rotation is instant</span></div></div><p class="kit-note">Re-take these with <code class="kit-code">node scratchpad/states.js /tmp/jobs.json</code> against a local server on port 8931.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/disclosure.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-recessed, --bg-surface, --color-focus, --glyph-action, --line-hairline</code></td></tr><tr><th>In the product</th><td>4 of 99 screens</td></tr><tr><th>In colour</th><td>1 screens: <a href="../checkin-privacy.html">checkin-privacy</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;details class=&quot;wf-see&quot; style=&quot;max-width:460px&quot;&gt;&lt;summary&gt;See exactly what your manager sees&lt;/summary&gt;&lt;div class=&quot;see-body&quot;&gt;&lt;div class=&quot;wf-pulse&quot;&gt;&lt;div class=&quot;read&quot;&gt;74&lt;/div&gt;&lt;div class=&quot;interp&quot;&gt;Steady. About the same as last cycle.&lt;/div&gt;&lt;/div&gt;&lt;p class=&quot;wf-micro&quot;&gt;That is the whole view. No names, no individual answers, no count while the cycle is open.&lt;/p&gt;&lt;/div&gt;&lt;/details&gt;</pre>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+/* Content grid, level 3.
+ * Roles read: none, geometry only
+ * Page: design/kit/content-grid.html
+ * Stands on 33 of the 99 screens in the product, 10 of them in colour: dashboard-alert, dashboard-empty, dashboard-error, dashboard-loading, dashboard-noprogram, dashboard-open and 4 more
+ */
+.wf-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+  margin-top: var(--space-5);
+}
+@media (max-width: 720px) {
+  .wf-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}

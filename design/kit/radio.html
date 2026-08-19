@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radio option, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Radio option</h1>
+<p class="kit-lede">A bordered row holding a native radio and its label. The whole row is the target, not the twelve pixel circle.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-stack" style="max-width:360px">
+  <label class="wf-radio"><input type="radio" name="d" checked> Steady</label>
+  <label class="wf-radio"><input type="radio" name="d"> Under pressure</label>
+  <label class="wf-radio"><input type="radio" name="d"> Hard week</label>
+ </div></div><ul class="kit-legend"><li><code>.wf-radio</code><span>the row: a bordered box with a 3:1 boundary and 16px padding, the whole of it clickable</span></li><li><code>input[type=radio]</code><span>the native circle, in the action colour</span></li><li><code>:has(input:checked)</code><span>the chosen row, which takes the action colour on its border and an inset ring</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">State</h3><p class="kit-p">Chosen or not. The chosen option carries the one interactive colour and nothing else changes: no fill, no weight, no size.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><label class="wf-radio"><input type="radio" name="x"> Steady</label></div><p class="kit-mark"><b>rest</b><br>not chosen</p></div><div class="kit-cell"><div class="kit-scene on-surface"><label class="wf-radio"><input type="radio" name="y" checked> Steady</label></div><p class="kit-mark"><b>checked</b><br>chosen</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no size axis: every radio option in the product is one full width row, because the employee answering it is on a phone and has thirty seconds.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The employee check-in, and only there. Three answers, one tap, no scrolling. It is the single most important control in the product for the riskiest assumption: if it is awkward, participation drops and there is no signal at all.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Give the whole row to the label, so a thumb hits an option rather than a circle. Show every alternative at once: three is the number this product uses.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="checkbox.html">Checkbox</a> instead.</b> Do not use it for something that can be on and off independently. That is a <a href="checkbox.html">Checkbox</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">Focus is on the row, through focus-within, because the thing a person moves between is the row and not the hidden circle inside it.</p><p class="kit-p">One delta from the family. Each pair is the light theme on the left and the dark theme on the right, captured from the live component on this page, not drawn. They are re-taken by the check at step 9, which fails on a byte shift.</p><div class="kit-shots"><div class="kit-shot"><img src="screens/states/radio-checked--light.png" alt="checked, light theme"><img src="screens/states/radio-checked--dark.png" alt="checked, dark theme"><b>checked</b><span class="why"><b>The named difference:</b> checked is not a fill. The row takes <code class="kit-code">--line-action</code> on its border and an inset ring of the same colour, so the chosen option reads at 4.53 without a second background colour entering the language</span></div></div><p class="kit-note">Re-take these with <code class="kit-code">node scratchpad/states.js /tmp/jobs.json</code> against a local server on port 8931.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/radio.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-action, --bg-control, --color-focus, --line-action, --line-control, --line-hover</code></td></tr><tr><th>In the product</th><td>6 of 99 screens</td></tr><tr><th>In colour</th><td>1 screens: <a href="../checkin-questions.html">checkin-questions</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-stack&quot; style=&quot;max-width:360px&quot;&gt;
+  &lt;label class=&quot;wf-radio&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;d&quot; checked&gt; Steady&lt;/label&gt;
+  &lt;label class=&quot;wf-radio&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;d&quot;&gt; Under pressure&lt;/label&gt;
+  &lt;label class=&quot;wf-radio&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;d&quot;&gt; Hard week&lt;/label&gt;
+ &lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

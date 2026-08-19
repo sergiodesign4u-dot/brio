@@ -1,0 +1,12 @@
+/* Error code, level 1.
+ * Roles read: --text-primary
+ * Page: design/kit/error-code.html
+ * Stands on 2 of the 99 screens in the product, 0 of them in colour: no coloured screen yet
+ */
+.wf-errcode {
+  font-size: var(--text-code);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}

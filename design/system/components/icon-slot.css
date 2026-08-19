@@ -1,0 +1,69 @@
+/* Icon slot, level 1.
+ * Roles read: --bg-accent-soft, --glyph-strong
+ * Page: design/kit/icon-slot.html
+ * Stands on 6 of the 99 screens in the product, 2 of them in colour: index, signup
+ */
+.wf-ico {
+  display: inline-flex;
+  width: var(--size-badge-box);
+  height: var(--size-badge-box);
+  border-radius: var(--radius-lg);
+  background: var(--bg-accent-soft);
+  position: relative;
+}
+.wf-ico.round {
+  border-radius: var(--radius-full);
+}
+.wf-ico.sm {
+  width: var(--size-control-h);
+  height: var(--size-control-h);
+  border-radius: var(--radius-md);
+}
+.wf-ico::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  color: var(--glyph-strong);
+  background-color: currentColor;
+  -webkit-mask: var(--icon-pulse) center / contain no-repeat;
+  mask: var(--icon-pulse) center / contain no-repeat;
+}
+.wf-grid3 .wf-card:nth-child(1) .wf-ico::before {
+  -webkit-mask-image: var(--icon-grid);
+  mask-image: var(--icon-grid);
+}
+.wf-grid3 .wf-card:nth-child(2) .wf-ico::before {
+  -webkit-mask-image: var(--icon-lock);
+  mask-image: var(--icon-lock);
+}
+.wf-grid3 .wf-card:nth-child(3) .wf-ico::before {
+  -webkit-mask-image: var(--icon-chart);
+  mask-image: var(--icon-chart);
+}
+.wf-grid4 .wf-card:nth-child(1) .wf-ico::before {
+  -webkit-mask-image: var(--icon-pulse);
+  mask-image: var(--icon-pulse);
+}
+.wf-grid4 .wf-card:nth-child(2) .wf-ico::before {
+  -webkit-mask-image: var(--icon-chart);
+  mask-image: var(--icon-chart);
+}
+.wf-grid4 .wf-card:nth-child(3) .wf-ico::before {
+  -webkit-mask-image: var(--icon-shield);
+  mask-image: var(--icon-shield);
+}
+.wf-grid4 .wf-card:nth-child(4) .wf-ico::before {
+  -webkit-mask-image: var(--icon-team);
+  mask-image: var(--icon-team);
+}
+
+/* The same step as the badge, and now written where it can be seen. */
+@media (max-width: 520px) {
+  .wf-ico {
+    width: var(--size-badge-box-sm);
+    height: var(--size-badge-box-sm);
+  }
+}

@@ -195,3 +195,45 @@
 **Why:** a picture of strangers on the screen where somebody reports a hard week is decoration, and A3 rules decoration out. A5 grew from "a knowledgeable peer, not a data terminal", and a peer speaks plainly rather than decorating the room. Inside, the human register is carried by wording, by the human scale of the type, and by the soft accent.
 
 **Also decided here:** the imagery is Brio's own from now on, generated in one recorded colour grade rather than taken from stock, with the prompts kept in `design/visuals/README.md` so the style is reproducible. The trade is stated in that file: the product gets consistent imagery of its own and gives up any claim that these are real customers.
+
+---
+
+## D-20 - Two levels of token, and the class names stay
+
+**Decided:** stage 08, steps 2 and 3.
+
+**Decided:** `design/system/tokens.css` has exactly two levels, primitive and semantic. Colour is read only through a semantic role; geometry is read from primitive directly. A component token is created point by point, only where a state lands on no existing role, and this stage produced **zero** of them, because every state landed.
+
+**Why not three:** a blanket component level is a third set of names to rename through and buys nothing. Changing the colour of a button would mean opening three files instead of one.
+
+**Why colour and geometry differ:** what a role exists for is being overridden. A theme and a rebrand override colour. A radius and a spacing step have nothing to override, they simply repeat.
+
+**D-18 is extended rather than overturned.** The system keeps the `wf-` class names. Stage 07 kept them so that a normalised diff of each coloured copy against its grey original could prove that the copy owns the visual layer alone; that proof is worth more than a tidier prefix, and it will be worth more again at stage 12, when 75 more screens are built from the same grey markup. The rename map of step 2 therefore has four rows, and three of them change no markup at all: what they change is which file a rule lives in.
+
+---
+
+## D-21 - The three changes of look, and the rule that made them findable
+
+**Decided:** stage 08, step 4.
+
+**Decided:** three things look different after this stage, and nothing else does.
+
+1. `--line-control` went from `rgba(91,97,113,.28)` to `.70`. It is the whole visible boundary of five controls and it measured **1.5:1** where WCAG 1.4.11 asks 3:1.
+2. The selected chip's border went from transparent to the action colour. Its soft accent fill measures 1.87, and a state signalled by one fill below 3:1 is not signalled.
+3. The program library's grid lays out, because `--size-progcard` was referenced at `kit.css:638` and declared nowhere, which made the whole `grid-template-columns` declaration invalid.
+
+**Why they were invisible until now:** stage 07 measured contrast and reported none failing, and that report was honest for what it measured, **every text node against its resolved background**. A border is not a text node. The third axis of stage 08, ink against fill against line, is what put the question to it, and each surface brought its own threshold.
+
+**What is not in this list, deliberately:** `--line-hover` was re-pitched in the dark theme at step 7. The pixel comparison runs in the light theme, where that value did not move, so it is counted in the theme line of the proof page instead of in the three named lists.
+
+---
+
+## D-22 - The dry run finds holes and builds nothing
+
+**Decided:** stage 08, step 9.
+
+**Decided:** the paper pass over the still grey product found five classes standing on two or more grey screens that the system does not have, and **none of them was built**. Every one went to `design/kit/docs/backlog.md` with a reason and stage 12 named as the closer.
+
+**Why not build them:** all five are **variant questions rather than missing components**. In each case the system already holds the family and what is unknown is whether the grey screen shows a new value on an existing axis or a new anatomy, and that is answered by colouring the screen. Building five components to be safe would put five rows in the registry that the roll-out then has to merge back, and a merge costs more than a gap that is written down.
+
+**What it buys:** stage 12 starts from a list of five known questions instead of a blank sheet, and the first act on each is a decision recorded in the inventory before any css is written.

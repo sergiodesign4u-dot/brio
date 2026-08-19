@@ -7,50 +7,51 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="kit.css">
+<link rel="stylesheet" href="../system/index.css">
 <style>
 /* page chrome of the showcase itself, prefixed k- so it can never be mistaken
-   for a product class. The product classes on this page all come from kit.css. */
+   for a product class. The product classes on this page all come from design/system/. */
 body { padding-top: var(--size-rail-bar); }
 @media (min-width: 900px) { body { padding-top: 0; padding-left: var(--size-rail); } }
 .k-page { max-width: 1080px; margin: 0 auto; padding: var(--space-7) var(--space-5) 80px; }
 .k-head h1 { font-family: var(--font-display); font-size: clamp(30px, 4vw, 42px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
-.k-lede { margin-top: var(--space-3); max-width: 74ch; color: var(--color-muted); }
+.k-lede { margin-top: var(--space-3); max-width: 74ch; color: var(--text-secondary); }
 .k-sec { padding-top: 56px; }
 .k-sec > h2 { font-family: var(--font-display); font-size: clamp(22px, 3vw, 30px); font-weight: 700; letter-spacing: -.02em; }
-.k-label { font-size: var(--size-tag); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); }
-.k-note { margin-top: var(--space-3); font-size: var(--size-micro); color: var(--color-muted); max-width: 76ch; }
+.k-label { font-size: var(--text-11); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-secondary); }
+.k-page a, .k-wrap a, .k-note a, body a:not(.wf-btn):not(.wf-tab):not(.wf-navlink) { color: var(--text-primary); }
+    .k-note { margin-top: var(--space-3); font-size: var(--text-13); color: var(--text-secondary); max-width: 76ch; }
 .k-grid { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
 .k-cols-3 { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
 .k-cols-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-.k-tile { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); overflow: hidden; }
-.k-tile .k-chip { height: 76px; border-bottom: 1px solid var(--color-line); }
+.k-tile { background: var(--bg-surface); border: 1px solid var(--line-hairline); border-radius: var(--radius-lg); overflow: hidden; }
+.k-tile .k-chip { height: 76px; border-bottom: 1px solid var(--line-hairline); }
 .k-tile .k-meta { padding: var(--space-3) var(--space-4); }
-.k-tile .k-val { font-family: var(--font-display); font-weight: 600; font-size: var(--size-ui); }
-.k-tile .k-role { font-size: var(--size-micro); color: var(--color-muted); margin-top: 2px; }
-.k-tile .k-origin { display: inline-block; margin-top: var(--space-2); font-size: var(--size-tag); color: var(--color-muted); border: 1px dashed var(--color-line-strong); border-radius: var(--radius-pill); padding: 2px 8px; }
-.k-demo { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: var(--space-5); }
-.k-demo h3 { font-family: var(--font-display); font-size: var(--size-ui); font-weight: 600; }
+.k-tile .k-val { font-family: var(--font-display); font-weight: 600; font-size: var(--text-15); }
+.k-tile .k-role { font-size: var(--text-13); color: var(--text-secondary); margin-top: 2px; }
+.k-tile .k-origin { display: inline-block; margin-top: var(--space-2); font-size: var(--text-11); color: var(--text-secondary); border: 1px dashed var(--line-control); border-radius: var(--radius-full); padding: 2px 8px; }
+.k-demo { background: var(--bg-surface); border: 1px solid var(--line-hairline); border-radius: var(--radius-lg); padding: var(--space-5); }
+.k-demo h3 { font-family: var(--font-display); font-size: var(--text-15); font-weight: 600; }
 .k-demo .k-body { margin-top: var(--space-4); display: grid; gap: var(--space-3); }
 .k-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
-.k-stage { background: var(--color-bg); border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: var(--space-4); }
+.k-stage { background: var(--bg-page); border: 1px solid var(--line-hairline); border-radius: var(--radius-lg); padding: var(--space-4); }
 .k-scroll { overflow-x: auto; }
-table.k-t { width: 100%; border-collapse: collapse; margin-top: var(--space-5); font-size: var(--size-micro); background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); overflow: hidden; }
-table.k-t th, table.k-t td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--color-line); vertical-align: top; }
-table.k-t th { font-family: var(--font-display); font-size: var(--size-tag); letter-spacing: .06em; text-transform: uppercase; color: var(--color-muted); font-weight: 600; }
+table.k-t { width: 100%; border-collapse: collapse; margin-top: var(--space-5); font-size: var(--text-13); background: var(--bg-surface); border: 1px solid var(--line-hairline); border-radius: var(--radius-lg); overflow: hidden; }
+table.k-t th, table.k-t td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-hairline); vertical-align: top; }
+table.k-t th { font-family: var(--font-display); font-size: var(--text-11); letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary); font-weight: 600; }
 table.k-t tr:last-child td { border-bottom: none; }
-.k-type-row { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); align-items: baseline; padding: var(--space-3) 0; border-bottom: 1px solid var(--color-line); }
+.k-type-row { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); align-items: baseline; padding: var(--space-3) 0; border-bottom: 1px solid var(--line-hairline); }
 .k-type-row:last-child { border-bottom: none; }
-.k-type-spec { min-width: 210px; font-size: var(--size-tag); letter-spacing: .04em; text-transform: uppercase; color: var(--color-muted); }
-.k-bar { height: 12px; background: var(--color-action); border-radius: var(--radius-bar); }
-.k-shape { height: 64px; background: var(--color-accent-soft); }
+.k-type-spec { min-width: 210px; font-size: var(--text-11); letter-spacing: .04em; text-transform: uppercase; color: var(--text-secondary); }
+.k-bar { height: 12px; background: var(--bg-action); border-radius: var(--radius-xs); }
+.k-shape { height: 64px; background: var(--bg-accent-soft); }
 .k-gap-lg { margin-top: var(--space-7); }
 .k-gap-md { margin-top: var(--space-6); }
 .k-gap-sm { margin-top: var(--space-4); }
 .k-stack { display: grid; gap: var(--space-3); }
 .k-flush { padding: 0; overflow: hidden; margin-top: var(--space-5); }
 .k-shellpad { padding-top: var(--space-5); padding-bottom: var(--space-5); }
-.k-foot { margin-top: 72px; padding-top: var(--space-5); border-top: 1px solid var(--color-line-strong); font-size: var(--size-micro); color: var(--color-muted); }
+.k-foot { margin-top: 72px; padding-top: var(--space-5); border-top: 1px solid var(--line-control); font-size: var(--text-13); color: var(--text-secondary); }
 </style>
 <link rel="stylesheet" href="../../_nav.css">
 </head>
@@ -63,8 +64,8 @@ table.k-t tr:last-child td { border-bottom: none; }
   <header class="k-head">
     <p class="k-label">Stage 07, UI and Visual</p>
     <h1>Component kit</h1>
-    <p class="k-lede">A screen in this product is not drawn, it is assembled from the classes below. Nothing on a screen carries a style of its own: a value written on a page is a second copy of that value, and drift starts there. Missing a detail means adding it here first, in <code>kit.css</code>, on this page, and in the inventory, and only then on the screen.</p>
-    <p class="k-note">The values arrived here from <code>design/_theme.css</code> by a file move, byte for byte, so the chain from the pixel of the brand plate to the token is unbroken: <code>plate pixel</code> then <code>DESIGN-artifacts.md</code> then <code>kit.css</code> then, at stage 08, the token file. Nothing was re-derived.</p>
+    <p class="k-lede">A screen in this product is not drawn, it is assembled from the classes below. Nothing on a screen carries a style of its own: a value written on a page is a second copy of that value, and drift starts there. Missing a detail means adding it to the system first: a css file, a page, a registry row, an inventory row and an import, and only then on the screen.</p>
+    <p class="k-note"><b>Frozen at stage 07, and now running on the system.</b> This page is kept as a smoke test: it is the showcase of the flat kit, and the only thing that changed at stage 08 is the stylesheet it loads. It now reads <code>design/system/index.css</code>, and if a component here still looks right, the split into two token levels and thirty seven files did not move anything. The living documentation is one page per component, from <a href="overview.html">the hub</a>. The chain from the pixel of the brand plate is unbroken through the move: <code>plate pixel</code>, <code>DESIGN-artifacts.md</code>, <code>kit.css</code>, and now <code>design/system/tokens.css</code>.</p>
   </header>
 
   <!-- ========================= TOKENS ========================= -->
@@ -75,40 +76,40 @@ table.k-t tr:last-child td { border-bottom: none; }
 
     <h3 class="k-label k-gap-md">Colour</h3>
     <div class="k-grid k-cols-3">
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-bg)"></div><div class="k-meta"><p class="k-val">#F7F8FC</p><p class="k-role">--color-bg, the page canvas</p><span class="k-origin">pixel of plate A</span></div></div>
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-surface)"></div><div class="k-meta"><p class="k-val">#FFFFFF</p><p class="k-role">--color-surface, cards and bars</p><span class="k-origin">pixel of plate A</span></div></div>
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-ink)"></div><div class="k-meta"><p class="k-val">#1D1D1D</p><p class="k-role">--color-ink, text and structure</p><span class="k-origin">pixel of plate A</span></div></div>
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-action)"></div><div class="k-meta"><p class="k-val">#346FEC</p><p class="k-role">--color-action, the only interactive colour</p><span class="k-origin">pixel of plate A</span></div></div>
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-accent-soft)"></div><div class="k-meta"><p class="k-val">#A4BEF3</p><p class="k-role">--color-accent-soft, decorative only</p><span class="k-origin">pixel of plate A</span></div></div>
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-muted)"></div><div class="k-meta"><p class="k-val">#5B6171</p><p class="k-role">--color-muted, secondary text and borders</p><span class="k-origin">pixel of plate A</span></div></div>
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-alert)"></div><div class="k-meta"><p class="k-val">#B92928</p><p class="k-role">--color-alert, error and threshold</p><span class="k-origin">pixel of plate D</span></div></div>
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-line-strong)"></div><div class="k-meta"><p class="k-val">rgba(91,97,113,.28)</p><p class="k-role">--color-line-strong, control border</p><span class="k-origin">derived from muted</span></div></div>
-      <div class="k-tile"><div class="k-chip" style="background:var(--color-overlay)"></div><div class="k-meta"><p class="k-val">rgba(29,29,29,.45)</p><p class="k-role">--color-overlay, behind a dialog</p><span class="k-origin">added at stage 07, derived from ink</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--bg-page)"></div><div class="k-meta"><p class="k-val">#F7F8FC</p><p class="k-role">--color-bg, the page canvas</p><span class="k-origin">pixel of plate A</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--bg-surface)"></div><div class="k-meta"><p class="k-val">#FFFFFF</p><p class="k-role">--color-surface, cards and bars</p><span class="k-origin">pixel of plate A</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--text-primary)"></div><div class="k-meta"><p class="k-val">#1D1D1D</p><p class="k-role">--color-ink, text and structure</p><span class="k-origin">pixel of plate A</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--bg-action)"></div><div class="k-meta"><p class="k-val">#346FEC</p><p class="k-role">--color-action, the only interactive colour</p><span class="k-origin">pixel of plate A</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--bg-accent-soft)"></div><div class="k-meta"><p class="k-val">#A4BEF3</p><p class="k-role">--color-accent-soft, decorative only</p><span class="k-origin">pixel of plate A</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--text-secondary)"></div><div class="k-meta"><p class="k-val">#5B6171</p><p class="k-role">--color-muted, secondary text and borders</p><span class="k-origin">pixel of plate A</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--text-alert)"></div><div class="k-meta"><p class="k-val">#B92928</p><p class="k-role">--color-alert, error and threshold</p><span class="k-origin">pixel of plate D</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--line-control)"></div><div class="k-meta"><p class="k-val">rgba(91,97,113,.28)</p><p class="k-role">--color-line-strong, control border</p><span class="k-origin">derived from muted</span></div></div>
+      <div class="k-tile"><div class="k-chip" style="background:var(--bg-overlay)"></div><div class="k-meta"><p class="k-val">rgba(29,29,29,.45)</p><p class="k-role">--color-overlay, behind a dialog</p><span class="k-origin">added at stage 07, derived from ink</span></div></div>
     </div>
     <p class="k-note">There is no success colour in this palette and that is a decision, not an omission: a confirmation states the fact in ink and the soft accent, and never celebrates (voice P3, decision D-16). The one measured contrast failure is also a rule: the action colour on the page background is 4.27, so accent text sits on white or it is not accent.</p>
 
     <h3 class="k-label k-gap-lg">Type</h3>
     <div class="k-stage k-gap-sm">
-      <div class="k-type-row"><span class="k-type-spec">--size-hero, marketing only</span><span style="font-family:var(--font-display);font-size:var(--size-hero);font-weight:700;letter-spacing:-.02em">Run wellbeing without HR</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-display, the page h1</span><span style="font-family:var(--font-display);font-size:var(--size-display);font-weight:700;letter-spacing:-.02em">Your team pulse</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-read, the pulse read</span><span style="font-family:var(--font-display);font-size:var(--size-read);font-weight:700;letter-spacing:-.03em;line-height:1">Steady</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-metric, tabular</span><span style="font-family:var(--font-display);font-size:var(--size-metric);font-weight:600;letter-spacing:-.02em">72% <span style="font-family:var(--font-body);font-size:var(--size-label);font-weight:400;color:var(--color-muted)">of the team answered</span></span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-state-title / --size-brand</span><span style="font-family:var(--font-display);font-size:var(--size-state-title);font-weight:600;letter-spacing:-.02em">Waiting for at least 5 responses</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-body</span><span style="font-size:var(--size-body)">The team is holding steady this week, in line with last.</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-ui / --size-h2</span><span style="font-size:var(--size-ui)">Aggregate only. You never see who answered.</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-nav / --size-label</span><span style="font-size:var(--size-nav)">Dashboard &nbsp; Programs &nbsp; Team &nbsp; Owner</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-micro / --size-eyebrow</span><span style="font-size:var(--size-micro);color:var(--color-muted)">Holding steady over the last five cycles. Aggregate only, never who.</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-tabbar</span><span style="font-size:var(--size-tabbar);color:var(--color-muted)">The mobile bottom bar</span></div>
-      <div class="k-type-row"><span class="k-type-spec">--size-tag</span><span style="font-size:var(--size-tag);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-muted)">Alert</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-hero, marketing only</span><span style="font-family:var(--font-display);font-size:var(--text-hero);font-weight:700;letter-spacing:-.02em">Run wellbeing without HR</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-display, the page h1</span><span style="font-family:var(--font-display);font-size:var(--text-display);font-weight:700;letter-spacing:-.02em">Your team pulse</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-read, the pulse read</span><span style="font-family:var(--font-display);font-size:var(--text-read);font-weight:700;letter-spacing:-.03em;line-height:1">Steady</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-metric, tabular</span><span style="font-family:var(--font-display);font-size:var(--text-24);font-weight:600;letter-spacing:-.02em">72% <span style="font-family:var(--font-body);font-size:var(--text-14);font-weight:400;color:var(--text-secondary)">of the team answered</span></span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-state-title / --size-brand</span><span style="font-family:var(--font-display);font-size:var(--text-20);font-weight:600;letter-spacing:-.02em">Waiting for at least 5 responses</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-body</span><span style="font-size:var(--text-16)">The team is holding steady this week, in line with last.</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-ui / --size-h2</span><span style="font-size:var(--text-15)">Aggregate only. You never see who answered.</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-nav / --size-label</span><span style="font-size:var(--text-14)">Dashboard &nbsp; Programs &nbsp; Team &nbsp; Owner</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-micro / --size-eyebrow</span><span style="font-size:var(--text-13);color:var(--text-secondary)">Holding steady over the last five cycles. Aggregate only, never who.</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-tabbar</span><span style="font-size:var(--text-12);color:var(--text-secondary)">The mobile bottom bar</span></div>
+      <div class="k-type-row"><span class="k-type-spec">--size-tag</span><span style="font-size:var(--text-11);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-secondary)">Alert</span></div>
     </div>
     <p class="k-note">Inter Tight for display, Inter for body, chosen against the character of the brand plate and approved by the designer. Figures are tabular everywhere, so a score does not shift sideways as it changes.</p>
 
     <h3 class="k-label k-gap-lg">Shape and rhythm</h3>
     <div class="k-grid k-cols-3">
-      <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-control)"></div><div class="k-meta"><p class="k-val">8px</p><p class="k-role">--radius-control, buttons, inputs, the privacy strip</p><span class="k-origin">plate A, UI zone</span></div></div>
-      <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-card)"></div><div class="k-meta"><p class="k-val">16px</p><p class="k-role">--radius-card, cards and panels</p><span class="k-origin">plate A, UI zone</span></div></div>
-      <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-pill)"></div><div class="k-meta"><p class="k-val">999px</p><p class="k-role">--radius-pill, badges and pills, never a button</p><span class="k-origin">attribute A3</span></div></div>
-      <div class="k-tile"><div class="k-shape" style="background:var(--color-surface);border:1px solid var(--color-line);border-radius:var(--radius-card)"></div><div class="k-meta"><p class="k-val">1px hairline</p><p class="k-role">the only separator, no shadow exists in this system</p><span class="k-origin">attribute A3</span></div></div>
+      <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-md)"></div><div class="k-meta"><p class="k-val">8px</p><p class="k-role">--radius-control, buttons, inputs, the privacy strip</p><span class="k-origin">plate A, UI zone</span></div></div>
+      <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-lg)"></div><div class="k-meta"><p class="k-val">16px</p><p class="k-role">--radius-card, cards and panels</p><span class="k-origin">plate A, UI zone</span></div></div>
+      <div class="k-tile"><div class="k-shape" style="border-radius:var(--radius-full)"></div><div class="k-meta"><p class="k-val">999px</p><p class="k-role">--radius-pill, badges and pills, never a button</p><span class="k-origin">attribute A3</span></div></div>
+      <div class="k-tile"><div class="k-shape" style="background:var(--bg-surface);border:1px solid var(--line-hairline);border-radius:var(--radius-lg)"></div><div class="k-meta"><p class="k-val">1px hairline</p><p class="k-role">the only separator, no shadow exists in this system</p><span class="k-origin">attribute A3</span></div></div>
     </div>
     <div class="k-stage k-gap-sm k-stack">
       <div class="k-row"><i class="k-bar" style="width:var(--space-1)"></i><span class="k-note" style="margin:0">--space-1, inside a control</span></div>
@@ -138,7 +139,7 @@ table.k-t tr:last-child td { border-bottom: none; }
         <tr><td>Radio option</td><td>1</td><td>outline, selected takes the action colour</td><td>6</td><td>default, selected</td><td>no</td></tr>
         <tr><td>Status pill</td><td>1</td><td>default, active</td><td>16</td><td>two</td><td>no</td></tr>
         <tr><td>Outcome badge</td><td>1</td><td>ok, warn</td><td>8</td><td>two</td><td>no</td></tr>
-        <tr><td>Metric, spark, skeleton, error text, icon slot</td><td>1</td><td>see kit.css</td><td>6 to 17</td><td>one each, the skeleton is itself a state</td><td>no</td></tr>
+        <tr><td>Metric, spark, skeleton, error text, icon slot</td><td>1</td><td>see the component pages</td><td>6 to 17</td><td>one each, the skeleton is itself a state</td><td>no</td></tr>
         <tr><td><b>Media slot</b></td><td>1</td><td>default, tall</td><td>6</td><td>one</td><td><b>yes</b></td></tr>
         <tr><td><b>Card</b></td><td>2</td><td>with heading, without</td><td>49</td><td>one</td><td>no</td></tr>
         <tr><td><b>Privacy strip</b></td><td>2</td><td>sentence, sentence plus link</td><td>42</td><td>one</td><td>no</td></tr>
@@ -163,7 +164,7 @@ table.k-t tr:last-child td { border-bottom: none; }
       </tbody>
     </table>
     </div>
-    <p class="k-note"><b>One-off, not in the kit:</b> avatar, testimonial quote, logo strip, pricing plan, FAQ row, legal table of contents, about flow and team blocks, help search, maintenance pill and ETA, the settings usage bar, the "answers saved" pill, "what they never see", and the pending row. Each appears on exactly one screen. Three of them carry the trust argument and move into the kit the moment a second screen picks them up. The full table, with both counter-lists of the control census, is in <code>design/kit/inventory.md</code>.</p>
+    <p class="k-note"><b>One-off, not in the kit:</b> avatar, testimonial quote, logo strip, pricing plan, FAQ row, legal table of contents, about flow and team blocks, help search, maintenance pill and ETA, the settings usage bar, the "answers saved" pill, "what they never see", and the pending row. Each appears on exactly one screen. Three of them carry the trust argument and move into the kit the moment a second screen picks them up. The full table, with both counter-lists of the control census, is in <code>design/kit/docs/inventory.md</code>.</p>
     <p class="k-note"><b>One job, several forms.</b> The census found twenty action labels carried by more than one form: "Try again" appears solid, solid full width and outline; "View full pulse", "Edit check-in" and "End program" each appear in three. The voice already fixed one action, one label. This is the visual half of the same rule, and it is the brief for the roll-out.</p>
   </section>
 
@@ -171,7 +172,7 @@ table.k-t tr:last-child td { border-bottom: none; }
   <section class="k-sec" id="components">
     <p class="k-label">03</p>
     <h2>Components</h2>
-    <p class="k-lede">Every component below is the real class from <code>kit.css</code> with real product text from <code>voice/docs/microcopy.md</code>. If something here looks wrong, it is fixed here and it reaches every screen by itself.</p>
+    <p class="k-lede">Every component below is the real class from <code>design/system/</code> with real product text from <code>voice/docs/microcopy.md</code>. If something here looks wrong, it is fixed in the component file and it reaches every screen by itself.</p>
 
     <div class="k-grid k-cols-2">
 
@@ -389,7 +390,7 @@ table.k-t tr:last-child td { border-bottom: none; }
   </section>
 
   <footer class="k-foot">
-    <p><b>Brio component kit, stage 07.</b> Values: <code>design/kit/kit.css</code>. Inventory: <code>design/kit/inventory.md</code>. The language: the root <code>DESIGN.md</code>. Text: <code>voice/docs/voice.md</code>.</p>
+    <p><b>Brio component kit, stage 07.</b> Values: <code>design/system/tokens.css</code>. Inventory: <code>design/kit/docs/inventory.md</code>. The language: the root <code>DESIGN.md</code>. Text: <code>voice/docs/voice.md</code>.</p>
     <p class="k-gap-sm">Flat on purpose: one <code>:root</code>, no semantic roles yet. Roles are only visible after components have stood on real screens, and naming them earlier makes half of them wrong. The split into two token levels is stage 08.</p>
   </footer>
 

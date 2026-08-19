@@ -1,0 +1,71 @@
+/* Button, level 1.
+ * Roles read: --bg-action, --bg-control, --color-focus, --line-action, --line-control, --line-hover, --opacity-disabled, --text-on-action, --text-primary
+ * Page: design/kit/button.html
+ * Stands on 85 of the 99 screens in the product, 21 of them in colour: checkin-entry, checkin-expired, checkin-privacy, checkin-questions-loading, checkin-questions, checkin-submit-error and 15 more
+ */
+.wf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: var(--line-1) solid var(--line-control);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  min-height: var(--size-touch);
+  font-size: var(--text-15);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  background: var(--bg-control);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+}
+a.wf-btn:hover, button.wf-btn:hover {
+  border-color: var(--line-hover);
+}
+.wf-btn.solid {
+  background: var(--bg-action);
+  color: var(--text-on-action);
+  border-color: var(--line-action);
+  font-weight: var(--weight-medium);
+}
+.wf-btn.solid:hover {
+  color: var(--text-on-action);
+}
+.wf-btn:focus-visible {
+  outline: var(--line-2) solid var(--color-focus);
+  outline-offset: var(--space-hair);
+}
+.wf-btns {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.wf-pulse + .wf-btns,
+.wf-narrow .wf-btns,
+.wf-dialog .wf-btns,
+.wf-progcard .wf-btns {
+  margin-top: var(--space-4);
+}
+.wf-state .wf-btns {
+  justify-content: center;
+}
+.wf-btn.block {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+.wf-btn:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+.wf-btn.block + .wf-micro {
+  display: block;
+  text-align: center;
+  margin: var(--space-4) 0;
+}
+.wf-btn.compact {
+  padding: var(--space-2) var(--space-4);
+  min-height: 0;
+}

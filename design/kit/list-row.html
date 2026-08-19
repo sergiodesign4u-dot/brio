@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>List row, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">List row</h1>
+<p class="kit-lede">One person in the roster: their name, their state, and sometimes a way in.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div style="max-width:420px">
+ <div class="wf-list-row"><span class="who">Ada Lovelace<small>ada@company.com</small></span><span class="wf-status on">Answered</span></div>
+ <div class="wf-list-row"><span class="who">Grace Hopper<small>grace@company.com</small></span><span class="wf-status">Not answered</span></div></div></div><ul class="kit-legend"><li><code>.wf-list-row</code><span>the row: name on the left, state on the right, a hairline underneath</span></li><li><code>.who</code><span>the name</span></li><li><code>.who small</code><span>the second line, an email or a role, in secondary ink</span></li><li><code>.wf-rowlink</code><span>the optional way in, an underlined micro link</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">Two: name and state, or name and state and a way in. The link appears where there is a screen behind the row.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-list-row"><span class="who">Ada Lovelace</span><span class="wf-status on">Answered</span></div></div><p class="kit-mark"><b>name and state</b><br>the roster</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-list-row"><span class="who">Ada Lovelace</span><a class="wf-rowlink" href="#">Manage</a></div></div><p class="kit-mark"><b>with a row link</b><br>the manage view</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis. A row never turns red for a person who has not answered: that would be exactly the individual judgement the privacy model exists to prevent.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The roster, on 19 screens. It says who is on the team and whether the cycle reached them. It does not say what anybody answered, and there is no drill-down into a row, permanently, because that breaks the aggregate-only promise.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> The state on a row is about delivery, not about content: answered or not answered, never how. That distinction is the whole product.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="card.html">Card</a> instead.</b> A row that opens something is not a card. If a row needs a heading and a body, the thing you want is a <a href="card.html">Card</a>.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive as a row. The row link inside it is a text link and takes its states from base.css.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/list-row.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--line-hairline, --text-primary, --text-secondary</code></td></tr><tr><th>In the product</th><td>19 of 99 screens</td></tr><tr><th>In colour</th><td>3 screens: <a href="../index.html">index</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div style=&quot;max-width:420px&quot;&gt;
+ &lt;div class=&quot;wf-list-row&quot;&gt;&lt;span class=&quot;who&quot;&gt;Ada Lovelace&lt;small&gt;ada@company.com&lt;/small&gt;&lt;/span&gt;&lt;span class=&quot;wf-status on&quot;&gt;Answered&lt;/span&gt;&lt;/div&gt;
+ &lt;div class=&quot;wf-list-row&quot;&gt;&lt;span class=&quot;who&quot;&gt;Grace Hopper&lt;small&gt;grace@company.com&lt;/small&gt;&lt;/span&gt;&lt;span class=&quot;wf-status&quot;&gt;Not answered&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

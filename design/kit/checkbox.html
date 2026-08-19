@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkbox, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Checkbox</h1>
+<p class="kit-lede">The native control, given the action colour and a focus ring, and otherwise left alone.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-row"><label style="display:flex;gap:var(--space-2);align-items:center"><input type="checkbox" checked> Question one</label>
+ <label style="display:flex;gap:var(--space-2);align-items:center"><input type="checkbox"> Question two</label></div></div><ul class="kit-legend"><li><code>input[type=checkbox]</code><span>the native box, sized to the small icon step</span></li><li><code>accent-color</code><span>the action role, which paints the fill and the tick together</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">State</h3><p class="kit-p">Checked or not. There is no third value and no indeterminate anywhere in the product.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><input type="checkbox"></div><p class="kit-mark"><b>unchecked</b><br>off</p></div><div class="kit-cell"><div class="kit-scene on-surface"><input type="checkbox" checked></div><p class="kit-mark"><b>checked</b><br>on</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis and no size axis. Repainting a native checkbox by hand buys a shape and loses the platform behaviour that comes free with it, and this product has three checkboxes.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">On check-in setup, where the operator turns individual questions on and off, and on the cookie consent screen. It is a switch for a thing that already exists, not a choice between alternatives.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Use it for an independent yes or no. Three questions that can each be on or off are three checkboxes.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="radio.html">Radio option</a> instead.</b> For one choice out of several, use a <a href="radio.html">Radio option</a>, which makes the alternatives visible and mutually exclusive.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">The tick and the fill both come from accent-color, which is why the computed color property reports the user agent black: the visible colour is not on that property. Worth knowing before trying to consolidate a value nobody set.</p><p class="kit-p">One delta, and it is a platform behaviour rather than a rule of ours. Each pair is the light theme on the left and the dark theme on the right, captured from the live component on this page, not drawn. They are re-taken by the check at step 9, which fails on a byte shift.</p><div class="kit-shots"><div class="kit-shot"><img src="screens/states/checkbox-checked--light.png" alt="checked, light theme"><img src="screens/states/checkbox-checked--dark.png" alt="checked, dark theme"><b>checked</b><span class="why"><b>The named difference:</b> the fill and the tick both come from <code class="kit-code">accent-color</code>, which is why the computed <code class="kit-code">color</code> property still reports the user agent black</span></div></div><p class="kit-note">Re-take these with <code class="kit-code">node scratchpad/states.js /tmp/jobs.json</code> against a local server on port 8931.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/checkbox.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-action, --color-focus, --opacity-disabled</code></td></tr><tr><th>In the product</th><td>3 of 99 screens</td></tr><tr><th>In colour</th><td>0 screens: none yet, it waits for the roll-out at stage 12</td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-row&quot;&gt;&lt;label style=&quot;display:flex;gap:var(--space-2);align-items:center&quot;&gt;&lt;input type=&quot;checkbox&quot; checked&gt; Question one&lt;/label&gt;
+ &lt;label style=&quot;display:flex;gap:var(--space-2);align-items:center&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt; Question two&lt;/label&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

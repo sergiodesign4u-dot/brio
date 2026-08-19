@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Select, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Select</h1>
+<p class="kit-lede">The input box with a chevron. A second component rather than a variant, because it has a zone the input does not.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div style="max-width:340px"><select class="wf-input"><option>Emoji</option><option>Slider</option></select></div></div><ul class="kit-legend"><li><code>select.wf-input</code><span>the same box as the input, with the native arrow removed</span></li><li><code>background-image</code><span>the chevron, a Solar glyph placed by the mask mechanism</span></li><li><code>padding-right</code><span>the room the chevron needs, from --space-icon-inset</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One value. The product uses a select in exactly one place, the answer type of a check-in question.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><select class="wf-input"><option>Emoji</option><option>Slider</option></select></div><p class="kit-mark"><b>one form</b><br>check in setup</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no size axis: a select is a field control and takes the geometry of the field it sits in.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">On check-in setup, where the operator chooses how a question is answered. It is in the system on one appearance under the form control exception, because a control that lives on a screen instead of in the system drifts with the next screen that needs it.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Use it when the choice is one of a closed list and the list is longer than three. Two or three visible choices are Radio options, which show all the answers at once.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="chip.html">Chip</a> instead.</b> Do not use a select to filter a list. The program library filters with <a href="chip.html">Chip</a>s, which stay visible after they are chosen.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">The chevron does not rotate on open: the native popup already tells the person it is open, and rotating it would be a second answer to the same question.</p><p class="kit-p"><b>No snapshots here, and that is the rule rather than an omission.</b> The unit of a snapshot is a <i>difference</i>, not an occurrence. This component answers every state exactly as <a href="input.html">Input</a> does, so the answer is written in this line instead of proved again with pictures. A matrix with more snapshots than named differences is a list of occurrences, not documentation.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/select.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">none, geometry only</code></td></tr><tr><th>In the product</th><td>2 of 99 screens</td></tr><tr><th>In colour</th><td>0 screens: none yet, it waits for the roll-out at stage 12</td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div style=&quot;max-width:340px&quot;&gt;&lt;select class=&quot;wf-input&quot;&gt;&lt;option&gt;Emoji&lt;/option&gt;&lt;option&gt;Slider&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

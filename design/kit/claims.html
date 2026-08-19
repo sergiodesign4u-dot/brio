@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims list, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">Claims list</h1>
+<p class="kit-lede">Five rows, each a short lead and a sentence under it. What the product does and does not do, said once.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><ul class="wf-claims" style="max-width:520px">
+ <li><span class="c-lead">Aggregate only</span><span class="c-body">A score is a team number. There is no individual view, for anyone.</span></li>
+ <li><span class="c-lead">A minimum of five</span><span class="c-body">No score appears until at least five people have answered.</span></li>
+ <li><span class="c-lead">No live count</span><span class="c-body">Nobody sees answers arriving while a cycle is open.</span></li></ul></div><ul class="kit-legend"><li><code>.wf-claims</code><span>the list, with a hairline between rows</span></li><li><code>.c-lead</code><span>the claim, at the ui step in medium weight</span></li><li><code>.c-body</code><span>the sentence under it, in secondary ink</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One form: five rows, lead plus body. The number is not a coincidence, it is the five things the privacy model actually promises.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><ul class="wf-claims"><li><span class="c-lead">Aggregate only</span><span class="c-body">A score is a team number.</span></li></ul></div><p class="kit-mark"><b>one form</b><br>two screens</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis, no size axis.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The security and privacy page and the sign up flow. It is the long form of what the Privacy strip says in one line, and it is where the trust argument is made in full.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Each row is a mechanism, not a value. "A minimum of five" is a mechanism; "we take privacy seriously" is a value and is forbidden by the voice rules.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="privacy-strip.html">Privacy strip</a> instead.</b> One sentence in the flow of a screen is a <a href="privacy-strip.html">Privacy strip</a>. This component is for the place where the whole model is laid out.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/claims.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --line-hairline, --text-secondary</code></td></tr><tr><th>In the product</th><td>2 of 99 screens</td></tr><tr><th>In colour</th><td>1 screens: <a href="../checkin-privacy.html">checkin-privacy</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;ul class=&quot;wf-claims&quot; style=&quot;max-width:520px&quot;&gt;
+ &lt;li&gt;&lt;span class=&quot;c-lead&quot;&gt;Aggregate only&lt;/span&gt;&lt;span class=&quot;c-body&quot;&gt;A score is a team number. There is no individual view, for anyone.&lt;/span&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;span class=&quot;c-lead&quot;&gt;A minimum of five&lt;/span&gt;&lt;span class=&quot;c-body&quot;&gt;No score appears until at least five people have answered.&lt;/span&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;span class=&quot;c-lead&quot;&gt;No live count&lt;/span&gt;&lt;span class=&quot;c-body&quot;&gt;Nobody sees answers arriving while a cycle is open.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</pre>
+</div>
+</main>
+</body>
+</html>

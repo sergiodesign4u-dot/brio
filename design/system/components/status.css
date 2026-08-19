@@ -1,0 +1,24 @@
+/* Status pill, level 1.
+ * Roles read: --bg-control, --line-action, --line-control, --text-primary, --text-secondary
+ * Page: design/kit/status.html
+ * Stands on 16 of the 99 screens in the product, 3 of them in colour: program-library, team-roster-manage, team-roster
+ */
+.wf-status {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-13);
+  color: var(--text-secondary);
+  border: var(--line-1) solid var(--line-control);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-3);
+  white-space: nowrap;
+}
+.wf-status.on {
+  color: var(--text-primary);
+  border-color: var(--line-action);
+}
+button.wf-status {
+  background: var(--bg-control);
+  cursor: pointer;
+  font-family: inherit;
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Icon slot, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Icon slot</h1>
+<p class="kit-lede">A soft accent plate with a Solar glyph centred in it. The only place in the product where an icon gets a background.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-row"><span class="wf-ico"></span><span class="wf-ico round"></span><span class="wf-ico sm"></span></div></div><ul class="kit-legend"><li><code>.wf-ico</code><span>the plate: 56px, a 16px radius, the soft accent fill</span></li><li><code>.wf-ico.round</code><span>the same plate as a circle</span></li><li><code>.wf-ico.sm</code><span>the small step, 40px with an 8px radius</span></li><li><code>.wf-ico::before</code><span>the glyph, 24px, painted through a mask in strong ink</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Size</h3><p class="kit-p">Two, and the container decides: a card in a three up row takes the default, a proof line beside text takes the small one.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><span class="wf-ico"></span></div><p class="kit-mark"><b>default</b><br>a card on a marketing page</p></div><div class="kit-cell"><div class="kit-scene on-surface"><span class="wf-ico sm"></span></div><p class="kit-mark"><b>small</b><br>a proof line</p></div></div>
+<h3 class="kit-h3">Shape</h3><p class="kit-p">Two, and it is the only shape axis in the system. The round form is used where the row is about people rather than about features.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><span class="wf-ico"></span></div><p class="kit-mark"><b>square</b><br>a feature card</p></div><div class="kit-cell"><div class="kit-scene on-surface"><span class="wf-ico round"></span></div><p class="kit-mark"><b>round</b><br>a four up row about the product</p></div></div>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The marketing pages, where three or four cards each need a mark that says what they are about, and the sign up panel, where three proof lines carry the privacy promise.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Take the glyph from the icons page rather than from another screen. The plate colour is fixed and the glyph reads at 9.02 on it.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="media.html">Media slot</a> instead.</b> Do not use an icon slot to show a photograph or a screenshot. That is a <a href="media.html">Media slot</a>, which has a different radius and no fill of its own.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive. Under 520px it takes the same smaller step as the Outcome badge, and that rule now lives here rather than in a shared variable, because the shared variable was resizing this component by accident.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/icon-slot.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-accent-soft, --glyph-strong</code></td></tr><tr><th>In the product</th><td>6 of 99 screens</td></tr><tr><th>In colour</th><td>2 screens: <a href="../index.html">index</a>, <a href="../signup.html">signup</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-row&quot;&gt;&lt;span class=&quot;wf-ico&quot;&gt;&lt;/span&gt;&lt;span class=&quot;wf-ico round&quot;&gt;&lt;/span&gt;&lt;span class=&quot;wf-ico sm&quot;&gt;&lt;/span&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

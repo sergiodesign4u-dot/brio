@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>List, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">List</h1>
+<p class="kit-lede">The container the roster rows stand in, and the place the empty case is handled.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-list" style="max-width:420px">
+ <div class="wf-list-row"><span class="who">Ada Lovelace</span><span class="wf-status on">Answered</span></div>
+ <div class="wf-list-row"><span class="who">Grace Hopper</span><span class="wf-status">Not answered</span></div>
+ <div class="wf-list-row"><span class="who">Alan Turing</span><span class="wf-status on">Answered</span></div></div></div><ul class="kit-legend"><li><code>.wf-list</code><span>the container, which owns the rules between rows and nothing else</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">State</h3><p class="kit-p">Two: rows, or nothing yet. An empty list is not an empty container, it is a State block standing in its place.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-list" style="max-width:320px"><div class="wf-list-row"><span class="who">Ada Lovelace</span><span class="wf-status on">Answered</span></div></div></div><p class="kit-mark"><b>with rows</b><br>a team exists</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-state" style="max-width:320px"><div class="n">Nobody on the team yet</div><div class="sub">Send the first invites and they appear here.</div></div></div><p class="kit-mark"><b>empty</b><br>before the first invite</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no size axis: it is a container.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The roster, 19 screens. It holds List rows and it is the only place in the product with a repeating set of people.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Give the empty case a State block with a sentence and an action, not a blank container. A person who has just signed up sees the empty case first.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="program-card.html">Program card</a> instead.</b> A set of things a person chooses between is not a list. That is a grid of <a href="program-card.html">Program card</a>s.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/list.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --line-hairline</code></td></tr><tr><th>In the product</th><td>19 of 99 screens</td></tr><tr><th>In colour</th><td>3 screens: <a href="../index.html">index</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-list&quot; style=&quot;max-width:420px&quot;&gt;
+ &lt;div class=&quot;wf-list-row&quot;&gt;&lt;span class=&quot;who&quot;&gt;Ada Lovelace&lt;/span&gt;&lt;span class=&quot;wf-status on&quot;&gt;Answered&lt;/span&gt;&lt;/div&gt;
+ &lt;div class=&quot;wf-list-row&quot;&gt;&lt;span class=&quot;who&quot;&gt;Grace Hopper&lt;/span&gt;&lt;span class=&quot;wf-status&quot;&gt;Not answered&lt;/span&gt;&lt;/div&gt;
+ &lt;div class=&quot;wf-list-row&quot;&gt;&lt;span class=&quot;who&quot;&gt;Alan Turing&lt;/span&gt;&lt;span class=&quot;wf-status on&quot;&gt;Answered&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

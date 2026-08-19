@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy strip, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Molecule</p>
+<h1 class="kit-h1">Privacy strip</h1>
+<p class="kit-lede">One sentence with a shield beside it. On 42 of 99 screens, which makes it the most repeated component in the product after the button and the card.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-strip2">Answers are shown as a team score only. Nobody sees who answered what.</div>
+ <div class="wf-strip2">A score appears once at least five people have answered. <a href="#">How this works</a></div></div><ul class="kit-legend"><li><code>.wf-strip2</code><span>the strip: a recessed fill, a hairline boundary, room on the left for the glyph</span></li><li><code>.wf-strip2::before</code><span>the shield, 20px, in the action glyph role</span></li><li><code>a inside</code><span>the optional link to the explanation, and never to a policy page</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">Two: the sentence alone, or the sentence with a link to the explanation. The link appears where a person is about to give data for the first time.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-strip2">Nobody sees who answered what.</div></div><p class="kit-mark"><b>sentence</b><br>a reminder</p></div><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-strip2">A score appears once at least five people have answered. <a href="#">How this works</a></div></div><p class="kit-mark"><b>sentence and link</b><br>before a person answers</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis, and that is the point. The strip never shouts and never changes colour: it is a mechanism being stated, not a warning.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">This is the product. The privacy boundary is the differentiator, and it is made visible in the interface rather than promised in a policy. It stands before every check-in, on every operator screen that shows a score, and on the public pages that explain the model.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> One specific sentence, from the voice rules: aggregate only, a minimum of five, no live count. Never a vague reassurance and never a link to a policy in place of the sentence.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="alert.html">Alert banner</a> instead.</b> Do not use it to warn about something going wrong. That is an <a href="alert.html">Alert banner</a>, which carries a tag and an action.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive, except for the optional link inside it, which is a text link and takes its states from base.css.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>2, molecule</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/privacy-strip.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-recessed, --glyph-action, --line-hairline, --text-primary</code></td></tr><tr><th>In the product</th><td>42 of 99 screens</td></tr><tr><th>In colour</th><td>16 screens: <a href="../checkin-already.html">checkin-already</a>, <a href="../checkin-complete.html">checkin-complete</a>, <a href="../checkin-entry.html">checkin-entry</a>, <a href="../checkin-expired.html">checkin-expired</a>, <a href="../checkin-questions.html">checkin-questions</a>, <a href="../checkin-submit-error.html">checkin-submit-error</a>, <a href="../contact.html">contact</a>, <a href="../dashboard-alert.html">dashboard-alert</a>, <a href="../dashboard-empty.html">dashboard-empty</a>, <a href="../dashboard-error.html">dashboard-error</a>, <a href="../dashboard-noprogram.html">dashboard-noprogram</a>, <a href="../dashboard-open.html">dashboard-open</a>, <a href="../dashboard.html">dashboard</a>, <a href="../index.html">index</a>, <a href="../signup-error.html">signup-error</a>, <a href="../signup.html">signup</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-strip2&quot;&gt;Answers are shown as a team score only. Nobody sees who answered what.&lt;/div&gt;
+ &lt;div class=&quot;wf-strip2&quot;&gt;A score appears once at least five people have answered. &lt;a href=&quot;#&quot;&gt;How this works&lt;/a&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

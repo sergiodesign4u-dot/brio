@@ -1,0 +1,26 @@
+/* Dialog, level 3.
+ * Roles read: --bg-overlay, --bg-surface, --line-hairline
+ * Page: design/kit/dialog.html
+ * Stands on 7 of the 99 screens in the product, 1 of them in colour: team-roster-manage
+ */
+.wf-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  z-index: 60;
+}
+.wf-dialog {
+  background: var(--bg-surface);
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-lg);
+  max-width: var(--size-dialog);
+  width: 100%;
+  padding: var(--space-6);
+}
+.wf-dialog h2 {
+  margin-bottom: var(--space-2);
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Error text, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Error text</h1>
+<p class="kit-lede">One line in the alert colour that says what did not work and what to do about it.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><p class="wf-err">Could not send. Try again, or email us directly at support@brio.example.</p></div><ul class="kit-legend"><li><code>.wf-err</code><span>the line: alert ink at the micro step</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One form. The words change and the shape does not.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><p class="wf-err">Enter a valid email so the invite reaches your owner.</p></div><p class="kit-mark"><b>one form</b><br>every occurrence</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no icon. The alert colour and the position are the signal; adding a mark beside it would repeat the same thing twice.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Under a field that failed validation, and at the top of a form that failed to save. Seven screens. It always names the next step, because principle 4 says an honest signal still leaves the person with something to do.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Say what happened and what to try, in that order, and keep it to one sentence. Never "successfully" and never an exclamation, both are forbidden by the voice rules.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="state.html">State block</a> instead.</b> If the whole screen failed rather than one field, use a <a href="state.html">State block</a> with the error variant: it carries a title, a sentence and an action together.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive. It reads at 6.16 against the surface in the light theme and 7.51 in the dark.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/error-text.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--text-alert</code></td></tr><tr><th>In the product</th><td>7 of 99 screens</td></tr><tr><th>In colour</th><td>1 screens: <a href="../signup-error.html">signup-error</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;p class=&quot;wf-err&quot;&gt;Could not send. Try again, or email us directly at support@brio.example.&lt;/p&gt;</pre>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+/* Document switch, level 1.
+ * Roles read: --bg-accent-soft, --line-control, --text-hover, --text-primary, --text-secondary
+ * Page: design/kit/switch.html
+ * Stands on 1 of the 99 screens in the product, 0 of them in colour: no coloured screen yet
+ */
+.wf-switch {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin: var(--space-2) 0 var(--space-4);
+}
+.wf-switch a {
+  font-size: var(--text-13);
+  color: var(--text-secondary);
+  text-decoration: none;
+  border: var(--line-1) solid var(--line-control);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-3);
+  min-width: var(--size-switch);
+  text-align: center;
+}
+.wf-switch a:hover {
+  color: var(--text-hover);
+}
+.wf-switch a.on {
+  background: var(--bg-accent-soft);
+  border-color: transparent;
+  color: var(--text-primary);
+  font-weight: var(--weight-strong);
+}

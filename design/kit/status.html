@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Status pill, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Status pill</h1>
+<p class="kit-lede">A small pill that says what state something is in. It looks like a Chip and never responds to a press.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-row"><span class="wf-status on">Open</span><span class="wf-status">Closed</span><span class="wf-status">Not answered</span></div></div><ul class="kit-legend"><li><code>.wf-status</code><span>the pill: micro type, secondary ink, a 3:1 boundary</span></li><li><code>.wf-status.on</code><span>the live one, which takes primary ink and an action coloured border</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Emphasis</h3><p class="kit-p">Two values, and the second one means "this is the one happening now": an open cycle, the current program.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><span class="wf-status">Closed</span></div><p class="kit-mark"><b>default</b><br>a state that is over or not started</p></div><div class="kit-cell"><div class="kit-scene on-surface"><span class="wf-status on">Open</span></div><p class="kit-mark"><b>active</b><br>the one happening now</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No size axis and no content axis. A status pill is a word, and the word is fixed by the voice dictionary.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">On the dashboard beside a cycle, in the roster beside a person, on a program card. It answers "what is the state of this" without the operator opening anything, which is half of the two minute review the owner is promised.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Use it for a state the system knows. The words come from the dictionary in voice.md: open, closed, answered, not answered.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="chip.html">Chip</a> instead.</b> Do not make it pressable. The moment a person can click it, it is a <a href="chip.html">Chip</a> and has to look and behave like one.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive: no hover, no focus, no disabled. A hover on a status pill would be an invented state, and focus-visible would not fire on it at all.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/status.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-control, --line-action, --line-control, --text-primary, --text-secondary</code></td></tr><tr><th>In the product</th><td>16 of 99 screens</td></tr><tr><th>In colour</th><td>3 screens: <a href="../program-library.html">program-library</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-row&quot;&gt;&lt;span class=&quot;wf-status on&quot;&gt;Open&lt;/span&gt;&lt;span class=&quot;wf-status&quot;&gt;Closed&lt;/span&gt;&lt;span class=&quot;wf-status&quot;&gt;Not answered&lt;/span&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

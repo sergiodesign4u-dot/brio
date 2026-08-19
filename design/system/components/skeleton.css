@@ -1,0 +1,35 @@
+/* Skeleton, level 1.
+ * Roles read: --bg-skeleton
+ * Page: design/kit/skeleton.html
+ * Stands on 9 of the 99 screens in the product, 2 of them in colour: checkin-questions-loading, dashboard-loading
+ */
+.wf-skel {
+  background: var(--bg-skeleton);
+  border-radius: var(--radius-sm);
+  height: var(--size-skel-line);
+  margin: var(--space-2) 0;
+}
+.wf-skel.w70 {
+  width: 70%;
+}
+.wf-skel.w50 {
+  width: 50%;
+}
+.wf-skel.w44 {
+  width: 44%;
+}
+.wf-skel.tall {
+  height: var(--size-skel-block);
+}
+.wf-pulse .wf-skel.tall + .wf-skel {
+  margin-top: var(--space-4);
+}
+.wf-skel.act {
+  width: var(--size-skel-act);
+  height: var(--size-control-h);
+  margin-top: var(--space-5);
+  border-radius: var(--radius-md);
+}
+.wf-narrow .wf-skel + p {
+  margin: var(--space-5) 0;
+}

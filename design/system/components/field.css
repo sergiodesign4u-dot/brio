@@ -1,0 +1,16 @@
+/* Field, level 2.
+ * Roles read: --text-primary
+ * Page: design/kit/field.html
+ * Stands on 30 of the 99 screens in the product, 7 of them in colour: checkin-entry, checkin-expired, contact, signup-error, signup, team-roster-manage and 1 more
+ */
+.wf-field {
+  display: block;
+  margin-bottom: var(--space-4);
+}
+.wf-field > .k {
+  display: block;
+  font-size: var(--text-14);
+  font-weight: var(--weight-strong);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}

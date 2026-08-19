@@ -1,0 +1,59 @@
+/* Brio design system, the one entry point.
+ *
+ * Order is not alphabetical and that is the whole point. @import runs in the order
+ * written, so a composite loaded before its parts wins the cascade over them and the
+ * next context fix gets treated with !important. The order below is the level column
+ * of design/kit/docs/inventory.md: atoms, then molecules, then organisms, and inside
+ * the organisms the one that holds other organisms comes last.
+ *
+ * Adding a component means five things and this file is one of them: put the @import
+ * in the group of ITS OWN LEVEL, never at the end of the file.
+ */
+
+@import url('tokens.css');
+@import url('base.css');
+@import url('layout.css');
+@import url('oneoff.css');
+
+/* ---- LEVEL 1, atoms: contain no other component ---- */
+@import url('components/button.css');   /* Button */
+@import url('components/input.css');   /* Input */
+@import url('components/select.css');   /* Select */
+@import url('components/checkbox.css');   /* Checkbox */
+@import url('components/radio.css');   /* Radio option */
+@import url('components/chip.css');   /* Chip */
+@import url('components/status.css');   /* Status pill */
+@import url('components/badge.css');   /* Outcome badge */
+@import url('components/metric.css');   /* Metric */
+@import url('components/spark.css');   /* Spark */
+@import url('components/skeleton.css');   /* Skeleton */
+@import url('components/icon-slot.css');   /* Icon slot */
+@import url('components/media.css');   /* Media slot */
+@import url('components/error-text.css');   /* Error text */
+@import url('components/error-code.css');   /* Error code */
+@import url('components/switch.css');   /* Document switch */
+
+/* ---- LEVEL 2, molecules: contain atoms ---- */
+@import url('components/field.css');   /* Field */
+@import url('components/copy-field.css');   /* Copy field */
+@import url('components/card.css');   /* Card */
+@import url('components/privacy-strip.css');   /* Privacy strip */
+@import url('components/alert.css');   /* Alert banner */
+@import url('components/pulse.css');   /* Pulse card */
+@import url('components/program-card.css');   /* Program card */
+@import url('components/list-row.css');   /* List row */
+@import url('components/claims.css');   /* Claims list */
+
+/* ---- LEVEL 3, organisms: contain molecules, or are the frame a screen stands in ---- */
+@import url('components/list.css');   /* List */
+@import url('components/state.css');   /* State block */
+@import url('components/system-block.css');   /* System block */
+@import url('components/disclosure.css');   /* Proof disclosure */
+@import url('components/dialog.css');   /* Dialog */
+@import url('components/hero.css');   /* Hero */
+@import url('components/auth.css');   /* Split auth */
+@import url('components/appbar.css');   /* App bar */
+@import url('components/tabbar.css');   /* Bottom tab bar */
+@import url('components/app-footer.css');   /* App footer */
+@import url('components/public-footer.css');   /* Public footer */
+@import url('components/content-grid.css');   /* Content grid */

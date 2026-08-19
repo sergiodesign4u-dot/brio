@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System block, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">System block</h1>
+<p class="kit-lede">A full height frame with a small head and a centred body, for the two screens that are not the product: maintenance and server error.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-sys" style="min-height:220px"><div class="wf-sys-head"><b>Brio</b></div><div class="wf-sys-body"><div class="wf-state"><div class="n">Brio is back shortly</div><div class="sub">We are running a short update. Nothing you have entered is lost.</div></div></div></div></div><ul class="kit-legend"><li><code>.wf-sys</code><span>the frame: full viewport height, a page fill</span></li><li><code>.wf-sys-head</code><span>the head: the wordmark on a raised surface with a hairline under it</span></li><li><code>.wf-sys-body</code><span>the body, which centres whatever it holds</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One form. Two screens, one shape.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-sys" style="min-height:160px"><div class="wf-sys-head"><b>Brio</b></div><div class="wf-sys-body"><span class="wf-micro">A centred message</span></div></div></div><p class="kit-mark"><b>one form</b><br>maintenance, server error</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no size axis.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Maintenance and the 500 page. It deliberately does not carry the App bar: on these two screens the product is not available, and showing navigation that leads nowhere is worse than showing none.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> One message, centred, with the wordmark above it so the person knows they are still in the right place.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="error-code.html">Error code</a> instead.</b> A page that is missing rather than broken keeps the normal frame and shows an <a href="error-code.html">Error code</a> with a State block.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive. It has no coloured instance in the sample: it is built from the rule that already existed in the flat kit, not invented here.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/system-block.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-recessed, --bg-surface, --line-hairline</code></td></tr><tr><th>In the product</th><td>2 of 99 screens</td></tr><tr><th>In colour</th><td>0 screens: none yet, it waits for the roll-out at stage 12</td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-sys&quot; style=&quot;min-height:220px&quot;&gt;&lt;div class=&quot;wf-sys-head&quot;&gt;&lt;b&gt;Brio&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;wf-sys-body&quot;&gt;&lt;div class=&quot;wf-state&quot;&gt;&lt;div class=&quot;n&quot;&gt;Brio is back shortly&lt;/div&gt;&lt;div class=&quot;sub&quot;&gt;We are running a short update. Nothing you have entered is lost.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

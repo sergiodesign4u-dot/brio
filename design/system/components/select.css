@@ -1,0 +1,13 @@
+/* Select, level 1.
+ * Roles read: none, geometry only
+ * Page: design/kit/select.html
+ * Stands on 2 of the 99 screens in the product, 0 of them in colour: no coloured screen yet
+ */
+select.wf-input {
+  appearance: none;
+  background-image: var(--icon-chevron);
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  background-size: var(--size-icon-sm);
+  padding-right: var(--space-icon-inset);
+}

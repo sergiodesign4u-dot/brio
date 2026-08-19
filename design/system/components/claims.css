@@ -1,0 +1,32 @@
+/* Claims list, level 2.
+ * Roles read: --bg-surface, --line-hairline, --text-secondary
+ * Page: design/kit/claims.html
+ * Stands on 2 of the 99 screens in the product, 1 of them in colour: checkin-privacy
+ */
+.wf-claims {
+  list-style: none;
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: var(--space-5) 0;
+  background: var(--bg-surface);
+}
+.wf-claims li {
+  padding: var(--space-4);
+  border-bottom: var(--line-1) solid var(--line-hairline);
+}
+.wf-claims li:last-child {
+  border-bottom: none;
+}
+.wf-claims .c-lead {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: var(--weight-strong);
+  font-size: var(--text-15);
+  letter-spacing: -.01em;
+  margin-bottom: var(--space-1);
+}
+.wf-claims .c-body {
+  color: var(--text-secondary);
+  font-size: var(--text-13);
+}

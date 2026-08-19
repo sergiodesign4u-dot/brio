@@ -1,0 +1,29 @@
+/* Hero, level 3.
+ * Roles read: none, geometry only
+ * Page: design/kit/hero.html
+ * Stands on 12 of the 99 screens in the product, 2 of them in colour: contact, index
+ */
+.wf-hero {
+  padding: var(--space-3) 0 var(--space-1);
+}
+.wf-hero h1 {
+  font-size: var(--text-hero);
+  max-width: 18ch;
+}
+.wf-hero .wf-lead {
+  font-size: var(--text-16);
+  max-width: 62ch;
+  margin-top: var(--space-3);
+}
+.wf-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .wf-hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

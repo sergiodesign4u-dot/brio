@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App footer, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Organism</p>
+<h1 class="kit-h1">App footer</h1>
+<p class="kit-lede">One quiet line at the bottom of a product screen: the privacy sentence and two links.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="wf-appfoot"><div class="wf-appfoot-inner"><span>Answers are shown as a team score only.</span><a href="#">Privacy</a><a href="#">Help</a></div></div></div><ul class="kit-legend"><li><code>.wf-appfoot</code><span>the strip, with a hairline over it</span></li><li><code>.wf-appfoot-inner</code><span>the content column, capped at the content width</span></li><li><code>a</code><span>a link at the micro step in secondary ink</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">One form, on 49 screens.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><div class="wf-appfoot"><div class="wf-appfoot-inner"><span>Answers are shown as a team score only.</span><a href="#">Privacy</a></div></div></div><p class="kit-mark"><b>one form</b><br>every product screen</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No emphasis axis and no size axis.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">Every operator screen. It repeats the privacy sentence one more time, quietly, at the bottom, which is the third principle applied to a place nobody reads by accident but everybody can check.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Two links at most. This is not the place to put the product map.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="public-footer.html">Public footer</a> instead.</b> The public pages carry a <a href="public-footer.html">Public footer</a> instead, with four columns and a trust line, because a visitor is looking for things and an operator is not.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">The links darken their ink on hover, the same answer as every other text link. No separate snapshots.</p><p class="kit-p"><b>No snapshots here, and that is the rule rather than an omission.</b> The unit of a snapshot is a <i>difference</i>, not an occurrence. This component answers every state exactly as <a href="appbar.html">App bar</a> does, so the answer is written in this line instead of proved again with pictures. A matrix with more snapshots than named differences is a list of occurrences, not documentation.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>3, organism</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/app-footer.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-surface, --line-hairline, --text-hover, --text-secondary</code></td></tr><tr><th>In the product</th><td>49 of 99 screens</td></tr><tr><th>In colour</th><td>11 screens: <a href="../dashboard-alert.html">dashboard-alert</a>, <a href="../dashboard-empty.html">dashboard-empty</a>, <a href="../dashboard-error.html">dashboard-error</a>, <a href="../dashboard-loading.html">dashboard-loading</a>, <a href="../dashboard-noprogram.html">dashboard-noprogram</a>, <a href="../dashboard-open.html">dashboard-open</a>, <a href="../dashboard.html">dashboard</a>, <a href="../program-library-empty.html">program-library-empty</a>, <a href="../program-library.html">program-library</a>, <a href="../team-roster-manage.html">team-roster-manage</a>, <a href="../team-roster.html">team-roster</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;wf-appfoot&quot;&gt;&lt;div class=&quot;wf-appfoot-inner&quot;&gt;&lt;span&gt;Answers are shown as a team score only.&lt;/span&gt;&lt;a href=&quot;#&quot;&gt;Privacy&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Help&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

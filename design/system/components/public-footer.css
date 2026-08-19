@@ -1,0 +1,51 @@
+/* Public footer, level 3.
+ * Roles read: --bg-surface, --line-hairline, --text-hover, --text-secondary
+ * Page: design/kit/public-footer.html
+ * Stands on 16 of the 99 screens in the product, 3 of them in colour: contact-sent, contact, index
+ */
+.wf-pubfoot {
+  border-top: var(--line-1) solid var(--line-hairline);
+  background: var(--bg-surface);
+  margin-top: var(--space-5);
+}
+.wf-pubfoot-inner {
+  max-width: var(--size-content);
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-5);
+}
+.wf-pubfoot .trust {
+  font-size: var(--text-15);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: var(--line-1) solid var(--line-hairline);
+}
+.wf-foot-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+@media (max-width: 720px) {
+  .wf-foot-cols {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-4);
+  }
+}
+.wf-foot-col h3 {
+  font-size: var(--text-13);
+  font-weight: var(--weight-strong);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+}
+.wf-foot-col a {
+  display: block;
+  font-size: var(--text-14);
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-bottom: var(--space-2);
+}
+.wf-foot-col a:hover {
+  color: var(--text-hover);
+}

@@ -1,0 +1,41 @@
+/* Spark, level 1.
+ * Roles read: --bg-accent-soft, --bg-action
+ * Page: design/kit/spark.html
+ * Stands on 10 of the 99 screens in the product, 3 of them in colour: checkin-privacy, dashboard-alert, dashboard
+ */
+.wf-spark {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  height: var(--size-spark);
+  margin-bottom: var(--space-3);
+}
+.wf-spark .bar {
+  width: var(--size-bar);
+  background: var(--bg-accent-soft);
+  border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+}
+.wf-spark .bar.hi {
+  background: var(--bg-action);
+}
+.wf-spark .bar.h32 {
+  height: 32%;
+}
+.wf-spark .bar.h40 {
+  height: 40%;
+}
+.wf-spark .bar.h48 {
+  height: 48%;
+}
+.wf-spark .bar.h50 {
+  height: 50%;
+}
+.wf-spark .bar.h52 {
+  height: 52%;
+}
+.wf-spark .bar.h55 {
+  height: 55%;
+}
+.wf-spark .bar.h60 {
+  height: 60%;
+}

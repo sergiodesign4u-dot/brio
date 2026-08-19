@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chip, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Chip</h1>
+<p class="kit-lede">A small pill that filters a list and stays visible after it is pressed.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><div class="kit-row"><button class="wf-tag on">All</button><button class="wf-tag">Stress</button><button class="wf-tag">Sleep</button><button class="wf-tag">Focus</button></div></div><ul class="kit-legend"><li><code>.wf-tag</code><span>the pill: uppercase at the smallest type step, a 3:1 boundary, a pill radius</span></li><li><code>.wf-tag.on</code><span>the selected one: the soft accent fill AND the action coloured border</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Emphasis</h3><p class="kit-p">Two values. Selected takes a fill and a border of the action colour at the same time, and both are needed.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><button class="wf-tag">Sleep</button></div><p class="kit-mark"><b>rest</b><br>not selected</p></div><div class="kit-cell"><div class="kit-scene on-surface"><button class="wf-tag on">Sleep</button></div><p class="kit-mark"><b>selected</b><br>selected</p></div></div>
+<h3 class="kit-h3">The empty cells, and why they are empty</h3><p class="kit-p">No size axis: a chip is one size everywhere, and a smaller one would fall under the touch target.</p>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The program library, where the operator narrows a list of programs by theme. Chips stay on screen after they are chosen, which is what separates them from a Select: the person can see what they filtered by without opening anything.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Use chips when the filters are few and worth showing all at once. Keep one chip selected at all times, including the one that means everything.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="status.html">Status pill</a> instead.</b> Do not use a chip as a label that says something about a thing. A non interactive label is a <a href="status.html">Status pill</a>, and it never responds to a press.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p">The selected fill measures 1.87 against the surface, below the 3:1 an identifying fill needs. That is why the selected chip also takes an action coloured border at 4.53, and why the border was changed at step 4 from transparent: the fill alone was not allowed to be the only sign.</p><p class="kit-p">One delta from the family. Each pair is the light theme on the left and the dark theme on the right, captured from the live component on this page, not drawn. They are re-taken by the check at step 9, which fails on a byte shift.</p><div class="kit-shots"><div class="kit-shot"><img src="screens/states/chip-selected--light.png" alt="selected, light theme"><img src="screens/states/chip-selected--dark.png" alt="selected, dark theme"><b>selected</b><span class="why"><b>The named difference:</b> two things move at once, the fill AND the border. The fill alone measures 1.87 and may not be the only sign of a state, so the border carries the 3:1. Before step 4 the border went transparent here</span></div></div><p class="kit-note">Re-take these with <code class="kit-code">node scratchpad/states.js /tmp/jobs.json</code> against a local server on port 8931.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/chip.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--bg-accent-soft, --bg-control, --line-action, --line-control, --text-primary, --text-secondary</code></td></tr><tr><th>In the product</th><td>8 of 99 screens</td></tr><tr><th>In colour</th><td>2 screens: <a href="../program-library-empty.html">program-library-empty</a>, <a href="../program-library.html">program-library</a></td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;div class=&quot;kit-row&quot;&gt;&lt;button class=&quot;wf-tag on&quot;&gt;All&lt;/button&gt;&lt;button class=&quot;wf-tag&quot;&gt;Stress&lt;/button&gt;&lt;button class=&quot;wf-tag&quot;&gt;Sleep&lt;/button&gt;&lt;button class=&quot;wf-tag&quot;&gt;Focus&lt;/button&gt;&lt;/div&gt;</pre>
+</div>
+</main>
+</body>
+</html>

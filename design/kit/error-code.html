@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Error code, Brio design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../system/index.css">
+<link rel="stylesheet" href="_page.css">
+<script src="_nav.js"></script>
+</head>
+<body class="kit-body">
+<aside id="kit-panel"></aside>
+<main class="kit-main">
+<div class="kit-wrap">
+<p class="kit-eyebrow">Atom</p>
+<h1 class="kit-h1">Error code</h1>
+<p class="kit-lede">The number on a 404 or a 500. The largest type in the product, and the only place it is used.</p>
+<h2 class="kit-h2">Anatomy</h2>
+<div class="kit-scene on-surface kit-anat"><p class="wf-errcode" aria-hidden="true">404</p></div><ul class="kit-legend"><li><code>.wf-errcode</code><span>the number: the display family at the code step, bold, tight leading</span></li></ul>
+<h2 class="kit-h2">Variants and sizes</h2>
+<h3 class="kit-h3">Content</h3><p class="kit-p">Two occurrences, two numbers, one form.</p>
+<div class="kit-row stretch"><div class="kit-cell"><div class="kit-scene on-surface"><p class="wf-errcode">404</p></div><p class="kit-mark"><b>404</b><br>page not found</p></div><div class="kit-cell"><div class="kit-scene on-surface"><p class="wf-errcode">500</p></div><p class="kit-mark"><b>500</b><br>server error</p></div></div>
+<h2 class="kit-h2">When to use it</h2>
+<p class="kit-p">The two error pages, and nowhere else. It is decorative in the strict sense and carries aria-hidden, because the sentence below it is what a screen reader should read.</p>
+<h2 class="kit-h2">The rule, and the anti rule</h2>
+<div class="kit-do"><p class="kit-p"><b>Do this.</b> Always with a State block underneath that says what happened in words and offers a way back. The number alone tells nobody anything.</p></div><div class="kit-dont kit-gap"><p class="kit-p"><b>Not this, use <a href="state.html">State block</a> instead.</b> Do not use this step of the scale anywhere else. A page heading is --text-display and a score is --text-read.</p></div>
+<h2 class="kit-h2">States</h2>
+<p class="kit-p"><b>No states: this component is not interactive.</b> Not interactive. Added to the system at step 2: it stands on two screens, which is the entry rule, and stage 07 had it in the one-off list by a miscount. Its weight was 800 on the grey screens and joins the coloured scale at 700 rather than reintroducing a weight the system does not have.</p>
+<h2 class="kit-h2">Technical</h2>
+<table class="kit-table"><tr><th>Level</th><td>1, atom</td></tr><tr><th>File</th><td><code class="kit-code">design/system/components/error-code.css</code></td></tr><tr><th>Roles it reads</th><td><code class="kit-code">--text-primary</code></td></tr><tr><th>In the product</th><td>2 of 99 screens</td></tr><tr><th>In colour</th><td>0 screens: none yet, it waits for the roll-out at stage 12</td></tr></table><h3 class="kit-h3">Markup to copy</h3><pre class="kit-scene on-surface kit-pre">&lt;p class=&quot;wf-errcode&quot; aria-hidden=&quot;true&quot;&gt;404&lt;/p&gt;</pre>
+</div>
+</main>
+</body>
+</html>

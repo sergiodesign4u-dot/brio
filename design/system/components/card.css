@@ -1,0 +1,22 @@
+/* Card, level 2.
+ * Roles read: --bg-surface, --line-hairline
+ * Page: design/kit/card.html
+ * Stands on 49 of the 99 screens in the product, 12 of them in colour: checkin-privacy, contact, dashboard-alert, dashboard-empty, dashboard-error, dashboard-loading and 6 more
+ */
+.wf-card {
+  border: var(--line-1) solid var(--line-hairline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  margin-bottom: var(--space-4);
+}
+.wf-card:last-child {
+  margin-bottom: 0;
+}
+.wf-card-h {
+  font-family: var(--font-display);
+  font-size: var(--text-15);
+  font-weight: var(--weight-strong);
+  letter-spacing: -.01em;
+  margin-bottom: var(--space-3);
+}
